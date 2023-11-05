@@ -1,10 +1,14 @@
 import { Route, Routes } from 'react-router-dom'
-import './App.css'
+import './App.css';
+import { HomePage } from './pages/HomePage/HomePage';
 
 function App() {
 
 
   return (
+    <>
+      <HomePage />
+    </>
     // <div className={styles.page+}>
     //   <Header />
     //   <MainWrapper>
