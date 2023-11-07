@@ -6,7 +6,8 @@ export enum InputTypes {
 	text = 'text',
 	date = 'date',
 	INN ='INN',
-	orgName='orgName'
+	orgName='orgName',
+	checkBox='checkbox'
 }
 
 export enum InputColors {

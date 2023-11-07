@@ -1,24 +1,18 @@
 import { Route, Routes } from 'react-router-dom'
-import { FC, useEffect, useState } from 'react';
 import './App.css';
-import { PopupForAuth } from './components/Popup/PopupForAuth';
-import Providers from './utils/provider';
-import { useDispatch, useSelector } from 'react-redux';
-import { openLoginPopup } from './components/Popup/AuthSlise';
+import { PopupForAuth } from './components/AuthPopup/PopupForAuth';
+import { useSelector } from 'react-redux';
 import { RootState } from './services/redux/store';
-import { PopupForReg } from './components/Popup/PopupForReg';
+import { PopupForReg } from './components/RegPopup/PopupForReg';
 
 
 
 function App() {
-  const dispatch = useDispatch();
   return (
    <>
-        <button onClick={()=>dispatch(openLoginPopup(true))}></button>
-        {useSelector((state: RootState) => state.registerPopup.value) && (
-				<PopupForReg />
-			)}
-			{useSelector((state: RootState) => state.loginPopup.value) && <PopupForAuth />}
+        {useSelector((state: RootState) => state.toggleBtn.value) ? (
+				<PopupForReg />) : (<PopupForAuth />)
+			}
 </>
     // <div className={styles.page+}>
     //   <Header />

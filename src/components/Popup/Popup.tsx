@@ -1,11 +1,10 @@
-import { FC, useEffect, ChangeEvent, useCallback } from 'react';
+import { FC } from 'react';
 import styles from './Popup.module.scss';
 import { IPopup } from './PopupTypes';
 import {AiOutlineClose} from 'react-icons/ai';
 
 
-export const Popup: FC<IPopup> = ({ children, setIsOpened, closePopup }) => {
-
+export const Popup: FC<IPopup> = ({ children}) => {
 
 	return (
 		<div className={styles.popup}>

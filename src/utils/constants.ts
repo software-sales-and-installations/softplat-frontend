@@ -139,3 +139,9 @@ export const ORGNAME_VALIDATION_CONFIG = {
 		message: VALIDATION_SETTINGS.orgName.messages.tooLong,
 	},
 }
+ export const AGREE_VALIDATION_CONFIG ={
+	required: {
+		value: true,
+		message: 'Необходимо согласиться с условиями пользовательского соглашения'
+	}
+ }

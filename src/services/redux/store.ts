@@ -1,10 +1,8 @@
-import { reducer as registerPopupReducer } from '../../components/Popup/RegSlise';
-import { reducer as loginPopupReducer } from '../../components/Popup/AuthSlise';
+import {reducer as toggleBtnReducer} from '../../components/UI/ToggleButton/ToggleButtonSlice';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 const reducers = combineReducers({
-	registerPopup: registerPopupReducer,
-	loginPopup: loginPopupReducer,
+	toggleBtn: toggleBtnReducer,
 });
 
 export const store = configureStore({

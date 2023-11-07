@@ -1,18 +1,15 @@
 
 import { FC, useEffect, useState } from 'react';
-import { Popup } from './Popup';
+import { Popup } from '../Popup/Popup';
 import { ButtonForAuth } from '../UI/ButtonForAuth/ButtonForAuth';
 import { Checkbox } from '../UI/Checkbox/Checkbox';
 import { TEXT_FOR_AUTH_CHECKBOX } from '../../utils/constants';
 import { Input } from '../UI/Input/Input';
 import { InputTypes } from '../UI/Input/InputTypes';
-import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG, INN_VALIDATION_CONFIG, ORGNAME_VALIDATION_CONFIG, VALIDATION_SETTINGS } from '../../utils/constants';
+import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG, INN_VALIDATION_CONFIG, ORGNAME_VALIDATION_CONFIG, VALIDATION_SETTINGS, AGREE_VALIDATION_CONFIG } from '../../utils/constants';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { ISignInData, ISignInFields, ISignUpFields } from './PopupForAuthTypes';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../services/redux/store';
-import { IShippingFields } from './PopupForAuthTypes';
-import { openRegisterPopup } from './RegSlise';
+import {  ISignUpFields } from '../AuthPopup/PopupForAuthTypes';
+import { IShippingFields } from '../AuthPopup/PopupForAuthTypes';
 import { ToggleButton } from '../UI/ToggleButton/ToggleButton';
 
 
@@ -33,17 +30,14 @@ export const PopupForReg: FC = ({
 		watch,
 		formState: { errors, isDirty, isValid },
 		getValues,
-	} = useForm<ISignUpFields>({ mode: 'onChange' });
+	} = useForm<ISignUpFields>({ mode: 'onChange', defaultValues:{agree: []} });
 
 	const onSubmit: SubmitHandler<IShippingFields> = (data) => {
 		console.log(data);
-		reset();
+		reset;
 	};
 
-	const dispatch = useDispatch();
-	const openedRegPopup = useSelector(
-		(state: RootState) => state.registerPopup.value
-	);
+
 
 	// useEffect(() => {
 	// 	reset();
@@ -51,8 +45,6 @@ export const PopupForReg: FC = ({
 	// }, []);
 	return (
 		<Popup
-		setIsOpened={openedRegPopup}
-		closePopup={(param: boolean) => dispatch(openRegisterPopup(param))}
 		>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
@@ -86,7 +78,7 @@ export const PopupForReg: FC = ({
 					<Input
 						inputType={InputTypes.password}
 						labelText="Придумайте пароль"
-						showPasswordButton={true}
+						// showPasswordButton={true}
 						validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
 						error={errors?.password?.message}
 					/>
@@ -102,6 +94,13 @@ export const PopupForReg: FC = ({
 								}}
 								error={errors?.repeatPassword?.message}
 							/>
+							{/* <Input
+								inputType={InputTypes.checkBox}
+								labelText={'Согласен'}
+								validation={{...register('agree', {required: true})}}
+								value='agree'
+								error={errors?.agree?.message}
+							/> */}
 					{authError ? (
 								<p className="auth__form-error auth__form-error_type_login">
 									Почта уже зарегистрирована.
@@ -109,7 +108,7 @@ export const PopupForReg: FC = ({
 							) : null}
 					{/* {TEXT_FOR_AUTH_CHECKBOX.map((i)=>{
 				return (
-				<Checkbox label={i.text} key={i.id} selected={false}/>
+				<Checkbox label={i.text} key={i.id}/>
 				)
 			})} */}
 			<ButtonForAuth isValid={isValid} title='Зарегистрироваться'/>

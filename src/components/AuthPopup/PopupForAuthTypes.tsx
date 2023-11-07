@@ -11,6 +11,7 @@ export interface ISignUpFields extends ISignInFields {
 	repeatPassword: string;
 	INN: number;
 	orgName: string;
+	agree: any;
 }
 
 export interface IResetPasswordFields {
