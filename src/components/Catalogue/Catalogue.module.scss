@@ -1,0 +1,42 @@
+.catalogue {
+  margin-top: 50px;
+
+  &__title {
+    text-align: start;
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    list-style: none;
+    padding: 0;
+  }
+
+  &__item {
+    position: relative;
+    width: 410px;
+    height: 268px;
+    border: 1px solid red;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  &__itemText {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  & img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    object-fit: cover;
+  }
+}
