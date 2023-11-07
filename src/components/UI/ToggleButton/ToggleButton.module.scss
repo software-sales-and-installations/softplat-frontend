@@ -1,0 +1,47 @@
+.wrapper {
+	--thumb-size: 20px;
+	--track-size: calc(var(--thumb-size) * 4);
+	--thumb-position: 0%;
+	display: inline-flex;
+	gap: 16px;
+	align-items: center;
+	user-select: none;
+
+	.toggle {
+		appearance: none;
+		border: none;
+		box-sizing: content-box;
+		padding: 2px;
+		background: grey;
+		height: var(--thumb-size);
+		width: var(--track-size);
+		border-radius: var(--track-size);
+		transition: all 0.4s ease;
+		cursor: pointer;
+
+		&::before {
+			content: "Вход";
+			display: block;
+			background:blue;
+			border-radius: 10px;
+			transform: translateX(var(--thumb-position));
+			height: var(--thumb-size);
+			width: calc(var(--thumb-size) * 2);
+			transition: all 0.4s ease;
+		}
+        &:checked::before{
+            content: 'Регистрация';
+        }
+		&:checked {
+			--thumb-position: calc(var(--track-size) - 100%);
+			background: green 
+		}
+    }
+}
+
+.label {
+	font-weight: 400;
+	line-height: 20px;
+	color: black;
+	user-select: none;
+}

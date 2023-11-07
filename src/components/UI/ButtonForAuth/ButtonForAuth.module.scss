@@ -1,0 +1,25 @@
+.popup {
+	&__submit_button {
+		cursor: pointer;
+		background-color: var(--button-main-color);
+		color: var(--white-text-color);
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+		border: none;
+		border-radius: 5px;
+		line-height: 100%;
+		padding: 16px 98px 16px 98px;
+		margin: 29px 0 0 0;
+		font-family: inherit;
+	}
+
+	&__submit_button_inactive {
+		opacity: 0.5;
+		cursor: default;
+	}
+
+	&__submit_button_login {
+		margin: 16px 0 0 0;
+	}
+}
