@@ -7,7 +7,8 @@ export enum InputTypes {
 	date = 'date',
 	INN ='INN',
 	orgName='orgName',
-	checkBox='checkbox'
+	checkbox='checkbox',
+	personName = 'personName',
 }
 
 export enum InputColors {
@@ -19,7 +20,7 @@ export enum InputColors {
 export interface IInput {
 	inputType: InputTypes;
 	readOnly?: boolean;
-	value?: string;
+	value?: any;
 	labelText?: string;
 	showPasswordButton?: boolean;
 	color?: InputColors;

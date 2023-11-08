@@ -61,6 +61,23 @@ export const VALIDATION_SETTINGS = {
 			noorgName: 'Необходимо ввести название организации',
 		}
 	},
+	personName: {
+		pattern: /^[a-zа-яё\s]+$/iu,
+		minLength: 2,
+		maxLength: 12,
+		messages: {
+			tooShort: 'Слишком короткое имя',
+			tooLong: 'Слишком длинное имя',
+			invalid: 'Только кириллица или латинские буквы',
+			noName: 'Необходимо ввести имя',
+		}
+	},
+	// agree: {
+	// 	pattern: 'agree',
+	// 	messages: {
+	// 		invalid: 'Необходимо согласиться'
+	// 	}
+	// }
 	// nickname: {
 	// 	pattern: /^[a-zа-яё\s]+$/iu,
 	// 	maxLength: 32,
@@ -139,9 +156,25 @@ export const ORGNAME_VALIDATION_CONFIG = {
 		message: VALIDATION_SETTINGS.orgName.messages.tooLong,
 	},
 }
- export const AGREE_VALIDATION_CONFIG ={
+export const NAME_VALIDATION_CONFIG = {
 	required: {
 		value: true,
-		message: 'Необходимо согласиться с условиями пользовательского соглашения'
-	}
- }
+		message: VALIDATION_SETTINGS.personName.messages.noName,
+	},
+	pattern: {
+		value: VALIDATION_SETTINGS.personName.pattern,
+		message: VALIDATION_SETTINGS.personName.messages.invalid,
+	},
+	minLength: {
+		value: VALIDATION_SETTINGS.personName.minLength,
+		message: VALIDATION_SETTINGS.personName.messages.tooShort,
+	},
+	maxLength: {
+		value: VALIDATION_SETTINGS.personName.maxLength,
+		message: VALIDATION_SETTINGS.personName.messages.tooLong,
+	},
+}
+export const CHOOSE_ROLE: {
+    id: number;
+    title: string
+} []= [{id: 1, title: 'Я покупатель'}, {id: 2, title: 'Я продавец'}, {id: 3, title: 'Забыли пароль?'}]

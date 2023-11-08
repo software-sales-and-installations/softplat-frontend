@@ -1,15 +1,45 @@
-import { FC } from 'react';
-import {useState} from 'react';
+import { FC, useState } from 'react';
 
-interface ICheckbox {
-    label: string;
-}
+import { ICheckbox } from './CheckboxTypes';
+import { useLocation } from 'react-router';
 
-export const Checkbox : FC<ICheckbox> = ({ label }) => {
-  const [selected, setSelected] = useState (false)
-  return(
-    <div>
-      <input type="checkbox" checked={selected} onChange={()=>setSelected(!selected)}/>
-      <label>{label}</label>
-    </div>
-  )};
+export const Checkbox: FC<ICheckbox> = ({
+	id,
+	text,
+	color = 'white',
+	checked,
+	onChange,
+	readOnly = false,
+	defaultChecked,
+}) => {
+	const [isChecked, setIsChecked] = useState(checked || false);
+
+	const handleChange = () => {
+		if (onChange) {
+			const newChecked = !isChecked;
+			setIsChecked(newChecked);
+			onChange(id, newChecked);
+		} else {
+			setIsChecked(!isChecked);
+		}
+	};
+
+	return (
+		<label>
+			<input
+				type="checkbox"
+				checked={checked || isChecked}
+				onChange={handleChange}
+				value={id}
+				readOnly={readOnly}
+				// defaultChecked={defaultChecked}
+			/>
+
+			<span
+			>ttt
+			</span>
+		</label>
+	);
+};
+
+

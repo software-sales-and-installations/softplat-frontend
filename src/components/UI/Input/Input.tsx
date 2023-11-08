@@ -46,11 +46,8 @@ export const Input: FC<IInput> = ({
 					</div>
 					<input
 						{...validation}
-						onChange={
-							onChange
-								? onChange
-								: (e) => {
-										validation.onChange(e);
+						onChange={ onChange ? onChange: (e) => {
+										validation.onChange(e) 
 								  }
 						}
 						className={styles.input__field}

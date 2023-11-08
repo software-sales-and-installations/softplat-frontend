@@ -4,14 +4,18 @@ import { PopupForAuth } from './components/AuthPopup/PopupForAuth';
 import { useSelector } from 'react-redux';
 import { RootState } from './services/redux/store';
 import { PopupForReg } from './components/RegPopup/PopupForReg';
+import { RecoverPasswordPopup } from './components/RecoverPasswordPopup/RecoverPasswordPopup';
 
 
 
 function App() {
+  const MyRole = useSelector((state: RootState) => state.chooseRole.title);
   return (
    <>
-        {useSelector((state: RootState) => state.toggleBtn.value) ? (
-				<PopupForReg />) : (<PopupForAuth />)
+        {useSelector((state: RootState) => state.toggleBtn.value) ? ((MyRole !=='Забыли пароль?' ? (<PopupForReg />) : <RecoverPasswordPopup/>)
+				) : 
+
+        (MyRole !=='Забыли пароль?' ? (<PopupForAuth />) : <RecoverPasswordPopup/>)
 			}
 </>
     // <div className={styles.page+}>

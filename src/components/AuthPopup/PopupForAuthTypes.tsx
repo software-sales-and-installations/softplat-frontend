@@ -12,6 +12,7 @@ export interface ISignUpFields extends ISignInFields {
 	INN: number;
 	orgName: string;
 	agree: any;
+	personName: string;
 }
 
 export interface IResetPasswordFields {
@@ -40,27 +41,27 @@ export interface IAvatar {
 	avatar: number;
 }
 
-export interface IUser {
-	email: string;
-	fav_genres: number[];
-	token: string;
-	nickname?: string;
-	dateOfBirth?: string;
-	sex?: 0 | 1;
-	avatar: number;
-}
+// export interface IUser {
+// 	email: string;
+// 	fav_genres: number[];
+// 	token: string;
+// 	nickname?: string;
+// 	dateOfBirth?: string;
+// 	sex?: 0 | 1;
+// 	avatar: number;
+// }
 
 export interface IResetPasswordData {
 	token: string;
 	new_password: string;
 }
 
-export interface IEditProfileData {
-	username: string | undefined;
-	date_of_birth: string | undefined;
-	sex: number | null;
-	// avatar: number;
-}
+// export interface IEditProfileData {
+// 	username: string | undefined;
+// 	date_of_birth: string | undefined;
+// 	sex: number | null;
+// 	// avatar: number;
+// }
 export interface ILoginState {
 	value: boolean;
 }
@@ -70,4 +71,8 @@ export interface IRegisterState {
 export interface IShippingFields {
 	email: string;
 	password: string;
+}
+
+export interface ISignUpData extends ISignInData {
+	fav_genres: number[];
 }
