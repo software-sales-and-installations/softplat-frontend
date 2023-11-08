@@ -1,26 +1,19 @@
 import React from 'react';
 import styles from './Catalogue.module.scss'
+import { CATALOGUE_NAMES } from '../../utils/constants';
 
-const catalogue = [
-  'Офисные приложения',
-  'Офисные приложения',
-  'Офисные приложения',
-  'Офисные приложения',
-  'Офисные приложения',
-  'Офисные приложения',
-];
 
 type Props = {};
 
-const Catalogue = (props: Props) => {
+const Catalogue: React.FC = (props: Props) => {
   return (
     <section className={styles.catalogue}>
       <h2 className={styles.catalogue__title}>Каталог ПО</h2>
       <ul className={styles.catalogue__list}>
-        {catalogue.map(i => (
+        {CATALOGUE_NAMES.map(i => (
           <li className={styles.catalogue__item}>
             <p className={styles.catalogue__itemText}>{i}</p>
-            <img src="" alt="" />
+            <img src="" alt="Изображение раздела каталога" />
           </li>
         ))}
       </ul>

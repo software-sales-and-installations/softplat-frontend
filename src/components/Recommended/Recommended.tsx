@@ -1,7 +1,7 @@
 import ProductCard from '../ProductCard/ProductCard';
 import styles from './Recommended.module.scss';
 
-const productItems = [
+const productItems: { name: string; price: number; img: string }[] = [
   {
     name: 'Название программного обеспечения',
     price: 19898,
@@ -18,9 +18,9 @@ const productItems = [
     img: '',
   },
   {
-    name: 'Название программного обеспечения',
+    name: 'Adobe Photoshop 2023',
     price: 19898,
-    img: '',
+    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
   },
   {
     name: 'Название программного обеспечения',
@@ -37,9 +37,14 @@ const Recommended: React.FC = (props: Props) => {
       <h2 className={styles.recommended__title}>Рекомендуем к покупке</h2>
       <ul className={styles.recommended__list}>
         {productItems.map(i => (
-            <li className={styles.recommended__item}>
-              <ProductCard name={i.name} price={i.price} img={i.img} isLiked={true} />
-            </li>
+          <li className={styles.recommended__item}>
+            <ProductCard
+              name={i.name}
+              price={i.price}
+              img={i.img}
+              isLiked={false}
+            />
+          </li>
         ))}
       </ul>
     </section>

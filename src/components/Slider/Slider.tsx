@@ -12,7 +12,7 @@ type Slider = {
   img: string;
 }[];
 
-const sliders: Slider = [
+const slides: Slider = [
   {
     text: 'Slide 1',
     url: 'https://github.com/',
@@ -37,15 +37,12 @@ const Slider = (props: Props) => {
     <Swiper
       spaceBetween={40}
       slidesPerView={'auto'}
-      loop={true}
-      autoplay={{ delay: 5000 }}
       mousewheel={true}
-      grabCursor={true}
       modules={[Navigation]}
       navigation
       className={styles.swiper}
     >
-      {sliders.map(i => (
+      {slides.map(i => (
         <SwiperSlide className={styles['swiper-slide']}>
           <a
             className={styles['swiper-slide__content']}
