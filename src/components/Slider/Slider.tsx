@@ -1,4 +1,3 @@
-import { BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs';
 import styles from './Slider.module.scss';
 
 import 'swiper/scss';
