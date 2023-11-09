@@ -1,4 +1,3 @@
-
 .footer {
   height: 166px;
   background-color: #55505c;
@@ -6,11 +5,10 @@
   font-weight: 700;
   // font-size: ;
   padding: 30px 80px 0;
-  
+
   &__content {
     display: flex;
     justify-content: space-between;
-    max-width: 1000px;
   }
 
   &__logo {
@@ -33,16 +31,17 @@
   &__link {
     text-decoration: none;
     color: white;
-
   }
-
 
   &__socialMedia {
+    margin: 0;
+    margin-right: 20px;
   }
 
-
-  &__socialIcons {
+  &__socialBLock {
     display: flex;
+    align-items: center;
+    color: white;
   }
 
   &__socialIcon {
@@ -52,8 +51,16 @@
     height: 35px;
   }
 
-  &__item {
-    // margin-bottom: 20px;
-    // margin-right: 150px;
+  &__socialIcons {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 8px;
+    margin: 0;
+    align-items: center;
+  }
+
+  &__socialIcon:hover {
+    color: black;
   }
 }

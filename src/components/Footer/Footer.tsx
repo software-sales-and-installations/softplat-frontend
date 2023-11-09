@@ -3,60 +3,50 @@ import { FC } from 'react';
 
 import style from './Footer.module.scss';
 
-
-import {BsTelegram} from 'react-icons/bs'
-import {SlSocialVkontakte} from 'react-icons/sl'
+import { BsTelegram } from 'react-icons/bs';
+import { SlSocialVkontakte } from 'react-icons/sl';
+import { FOOTER_LINKS } from '../../utils/constants';
 
 export const Footer: FC = () => {
   return (
     <footer className={style.footer}>
       <div className={style.footer__content}>
-        <div className={style.footer__logo}>
-          <div className={style.footer__logo}></div>
-        </div>
+        <div className={style.footer__logo}>{/* */}</div>
+
         <ul className={style.footer__column}>
-          <li className={style.footer__item}>
-            <a href="#" className={style.footer__link}>
-              Каталог
-            </a>
-          </li>
-          <li className={style.footer__item}>
-            <a href="#" className={style.footer__link}>
-              Производители
-            </a>
-          </li>
-          <li className={style.footer__item}>
-            <a href="#" className={style.footer__link}>
-              FAQ
-            </a>
-          </li>
-          <li className={style.footer__item}>
-            <a href="#" className={style.footer__link}>
-              Контакты
-            </a>
-          </li>
+          {FOOTER_LINKS.slice(0, 4).map(link => (
+            <li className={style.footer__item} key={link.id}>
+              <a href="#" className={style.footer__link}>
+                {link.text}
+              </a>
+            </li>
+          ))}
         </ul>
+
         <ul className={style.footer__column}>
-          <li className={style.footer__item}>
-            <a href="условия.html" className={style.footer__link}>
-              Условия пользования
-            </a>
-          </li>
-          <li className={style.footer__item}>
-            <a href="политика.html" className={style.footer__link}>
-              Политика конфиденциальности
-            </a>
-          </li>
+          {FOOTER_LINKS.slice(4, 6).map(link => (
+            <li className={style.footer__item} key={link.id}>
+              <a href="#" className={style.footer__link}>
+                {link.text}
+              </a>
+            </li>
+          ))}
         </ul>
         <div className={style.footer__column}>
-          <div className={style.footer__socialIcons}>
-            <p className={style.footer__socialMedia}>Мы в социальных сетях</p>
-            <a href="#">
-            <BsTelegram className={style.footer__socialIcon}/>
-            </a>
-            <a href="#">
-              <SlSocialVkontakte className={style.footer__socialIcon}/>
-            </a>
+          <div className={style.footer__socialBLock}>
+            <p className={style.footer__socialMedia}>Мы в соцсетях:</p>
+            <ul className={style.footer__socialIcons}>
+              <li>
+                <a href="#">
+                  <BsTelegram className={style.footer__socialIcon} />
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <SlSocialVkontakte className={style.footer__socialIcon} />
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

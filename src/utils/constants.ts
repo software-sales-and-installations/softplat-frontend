@@ -45,3 +45,21 @@ export const CATEGORIZED_TEXT: {
     {id: 10,
     text: 'Корпоративные системы'}
 ]
+
+export const FOOTER_LINKS: {
+    id: number;
+    text: string;
+}[]= [
+    {id: 1,
+    text: 'Каталог'}, 
+    {id: 2,
+    text: 'Производители'},
+    {id: 3,
+    text: 'FAQ'},
+    {id: 4,
+    text: 'Контакты'},
+    {id: 5,
+    text: 'Условия пользования'},
+    {id: 6,
+    text: 'Политика конфиденциальности'}
+]
