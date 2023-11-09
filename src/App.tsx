@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css';
+import { HomePage } from './pages/HomePage/HomePage';;
 import { PopupForAuth } from './components/AuthPopup/PopupForAuth';
 import { useSelector } from 'react-redux';
 import { RootState } from './services/redux/store';
@@ -11,13 +12,6 @@ import { RecoverPasswordPopup } from './components/RecoverPasswordPopup/RecoverP
 function App() {
   const MyRole = useSelector((state: RootState) => state.chooseRole.title);
   return (
-   <>
-        {useSelector((state: RootState) => state.toggleBtn.value) ? ((MyRole !=='Забыли пароль?' ? (<PopupForReg />) : <RecoverPasswordPopup/>)
-				) : 
-
-        (MyRole !=='Забыли пароль?' ? (<PopupForAuth />) : <RecoverPasswordPopup/>)
-			}
-</>
     // <div className={styles.page+}>
     //   <Header />
     //   <MainWrapper>
