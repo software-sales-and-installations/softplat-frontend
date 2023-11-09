@@ -1,13 +1,38 @@
 .popup{
-    margin: 0;
-    padding: 0;
-    position: relative;
-    display: flex;
-    width: 80%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    background-color: rgba(43, 47, 51, 0.4);
+	width: 100vw;
+	min-height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	z-index: 10;
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0.3s, opacity ease 0.3s;
+	overflow: auto;
 
+    &_opened{
+        visibility: visible;
+	    opacity: 1;
+	    overflow-y: scroll;
+    }
+    &__container{
+        max-width: 620px;
+	    box-sizing: border-box;
+	    width: 100%;
+	    margin: 50px auto 100px;
+	    padding: 40px;
+	    border-radius: 30px;
+	    background-color: #fff;
+	    display: flex;
+	    flex-direction: column;
+	    overflow: hidden;
+	    position: relative;
+    }
     &__closebtn{
         margin: 0;
         padding: 0;

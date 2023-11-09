@@ -2,16 +2,21 @@ import { Route, Routes } from 'react-router-dom'
 import './App.css';
 import { HomePage } from './pages/HomePage/HomePage';;
 import { PopupForAuth } from './components/AuthPopup/PopupForAuth';
-import { useSelector } from 'react-redux';
-import { RootState } from './services/redux/store';
+
 import { PopupForReg } from './components/RegPopup/PopupForReg';
 import { RecoverPasswordPopup } from './components/RecoverPasswordPopup/RecoverPasswordPopup';
+import { Header } from './components/Header/Header';
+import { Categories } from './components/Categories/Categories';
 
 
 
 function App() {
-  const MyRole = useSelector((state: RootState) => state.chooseRole.title);
+  
   return (
+    <>
+      <Header loggedIn={false}/>
+      <Categories/>
+    </>
     // <div className={styles.page+}>
     //   <Header />
     //   <MainWrapper>

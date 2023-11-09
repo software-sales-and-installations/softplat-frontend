@@ -98,7 +98,7 @@ export const RegPopupBuyer: FC = ({
 							) : null}
 	
 
-			<ButtonForAuth isValid={true} title='Зарегистрироваться'/>
+			<ButtonForAuth isValid={isValid} title='Зарегистрироваться'/>
 			</form>
 		</Popup>
 	);
