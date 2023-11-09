@@ -38,6 +38,7 @@ const Slider = (props: Props) => {
       slidesPerView={'auto'}
       mousewheel={true}
       modules={[Navigation]}
+      loop={true}
       navigation
       className={styles.swiper}
     >
