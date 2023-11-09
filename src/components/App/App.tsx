@@ -16,7 +16,7 @@ function App() {
       <MainWrapper>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/game" element={<ProductPage />} />
+          <Route path="/product" element={<ProductPage />} />
           {/* <Route path="/personal" element={<Personal />} />
           <Route path="/catalog" element={<Сatalog />} />
           <Route path="/productcard" element={<ProductCard />} />
