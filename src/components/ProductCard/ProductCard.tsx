@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './ProductCard.module.scss';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 type ProductCardProps = {
   name: string;
@@ -59,9 +60,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
           )}
         </button>
       </div>
-      <p title={name} className={styles.card__name}>
+      <Link to={`/productcard/${name}`} title={name} className={styles.card__name}>
         {name}
-      </p>
+      </Link>
       <div className={styles.card__priceContainer}>
         <p className={styles.card__price}>{addSpace(price)} ₽</p>
         <div className={styles.card__installPrice}>

@@ -25,12 +25,17 @@
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0px 4px 20px 0px rgba(57, 57, 57, 0.15);
-  }
 
+    & a {
+      text-decoration: none;
+    }
+  }
+  
   &__itemText {
     font-size: 28px;
     font-weight: 700;
     margin: 0;
+    color: black;
   }
 
   & img {
