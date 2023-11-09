@@ -4,9 +4,9 @@
   background-color: #55505c;
 
   font-weight: 700;
-
+  // font-size: ;
   padding: 30px 80px 0;
-
+  
   &__content {
     display: flex;
     justify-content: space-between;
@@ -33,6 +33,23 @@
   &__link {
     text-decoration: none;
     color: white;
+
+  }
+
+
+  &__socialMedia {
+  }
+
+
+  &__socialIcons {
+    display: flex;
+  }
+
+  &__socialIcon {
+    color: white;
+    text-decoration: none;
+    width: 35px;
+    height: 35px;
   }
 
   &__item {
