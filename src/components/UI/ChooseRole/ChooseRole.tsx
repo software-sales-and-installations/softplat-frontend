@@ -2,6 +2,7 @@ import {FC} from 'react';
 import { IChooseRole } from './ChooseRoleTypes';
 import { chooseRoleState } from './ChooseRoleSlice';
 import { useDispatch } from 'react-redux';
+import styles from './ChooseRole.module.scss';
 
 
 export const ChooseRole: FC<IChooseRole> = ({title}) =>{
@@ -10,6 +11,6 @@ export const ChooseRole: FC<IChooseRole> = ({title}) =>{
         dispatch(chooseRoleState(title))
     }
 return (
-    <button onClick={()=>handleRoleClick(title)}>{title}</button>
+    <button className={styles.button} onClick={()=>handleRoleClick(title)}>{title}</button>
 )
 }

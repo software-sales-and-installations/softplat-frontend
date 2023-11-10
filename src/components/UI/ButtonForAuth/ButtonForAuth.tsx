@@ -16,8 +16,7 @@ export const ButtonForAuth: FC<IButtonForAuth> = ({isValid,
 			type="submit"
 			className={classNames(
 				styles.popup__submit_button,
-				isValid ? '' : styles.popup__submit_button_inactive,
-				itsLoginPopup ? styles.popup__submit_button_login : ''
+				isValid ? '' : styles.popup__submit_button_inactive
 			)}
 			disabled={!isValid}
 		>
