@@ -17,11 +17,11 @@ export const ToggleButton: FC<IToggleButton> = () => {
 
 	return (
 		<div className={styles.wrapper}>
-		<input type="checkbox" className={styles.toggle} id="toggleSwitch" checked={checked} onChange={()=>handleClick()}/>
-		<label className={styles.textlabel} htmlFor="toggleSwitch" >
-				<p className={styles.text}>erfg</p>
-				<p className={styles.text}>erfg</p>
-		</label>
+			<input type="checkbox" className={styles.toggle} id="toggleSwitch" checked={checked} onChange={()=>handleClick()}/>
+			<label className={styles.textlabel} htmlFor="toggleSwitch" >
+				<p className={styles.text}>Вход</p>
+				<p className={styles.text}>Регистрация</p>
+			</label>
 		</div>
 	);
 };

@@ -1,6 +1,6 @@
 .wrapper {
-	--thumb-size: 20px;
-	--track-size: calc(var(--thumb-size) * 4);
+	--thumb-size: 55px;
+	--track-size: 350px;
 	--thumb-position: 0%;
 	display: inline-flex;
 	gap: 16px;
@@ -8,28 +8,32 @@
 	user-select: none;
 	position: relative;
 	transition: all .4s ease;
-	width: auto;
+	width: 350px;
 
 	.textlabel{
 		width: 100%;
 		position: absolute;
 		top: 0;
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
 	}
 	.text{
 		margin: 0;
 		padding: 0;
+		width: 50%;
 	}
 	.toggle {
+		margin: 0;
 		appearance: none;
 		border: none;
 		box-sizing: content-box;
 		padding: 2px;
-		background: grey;
+		background: #E8ECED;
 		height: var(--thumb-size);
 		width: var(--track-size);
-		border-radius: var(--track-size);
+		border-radius: 20px;
 		cursor: pointer;
 		display: flex;
 		transition: all .4s ease;
@@ -38,12 +42,12 @@
 			content: "";
 			display: block;
 			transform: translateX(var(--thumb-position));
-			height: var(--thumb-size);
-			width: calc(var(--thumb-size) * 2);
+			height: calc(var(--thumb-size) - 6px);
+			width: calc(var(--track-size) / 2 - 15px);
 			transition: transform .4s ease;
-			background-color:blue;
-
-			border-radius: 10px;
+			background-color:White;
+			border-radius: 20px;
+			border: 3px solid #E8ECED;
 		}
 		&:checked{
 			--thumb-position: calc(var(--track-size) - 100%);
