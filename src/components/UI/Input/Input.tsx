@@ -60,7 +60,7 @@ export const Input: FC<IInput> = ({
 						maxLength={inputTextType === 'date' ? 8 : undefined}
 						value={readOnly && value ? value : undefined}
 					/>
-					{error ? <span className={styles.input__error}>{error}</span> : null}
+					<span className={styles.input__error}>{error ? error : ''}</span>
 					{/* {showPasswordButton ? (
 						<button
 							className={styles.input__button}

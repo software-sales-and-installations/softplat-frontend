@@ -12,6 +12,7 @@ import {  ISignUpFields} from '../AuthPopup/AuthPopupTypes';
 import { IShippingFields } from '../AuthPopup/AuthPopupTypes';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../services/redux/store';
+import styles from '../Popup/Popup.module.scss';
 
 export const RegPopupSeller: FC = () => {
 	const [authError, setAuthError] = useState(false);
@@ -33,15 +34,9 @@ export const RegPopupSeller: FC = () => {
 		setAuthError(false);
 	}, []);
 	return (
-		<Popup
-		>
-			<form
-				onSubmit={handleSubmit(onSubmit)}
-			>
-
-			
-				
-			<Input
+		<Popup>
+			<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>	
+				<Input
 						inputType={InputTypes.INN}
 						labelText='ИНН'
 						validation={{

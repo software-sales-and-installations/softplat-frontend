@@ -15,9 +15,10 @@
 		position: absolute;
 		top: 0;
 		display: flex;
-		justify-content: center;
+		justify-content: space-between;
 		align-items: center;
 		height: 100%;
+		cursor: pointer;
 	}
 	.text{
 		margin: 0;
@@ -43,7 +44,7 @@
 			display: block;
 			transform: translateX(var(--thumb-position));
 			height: calc(var(--thumb-size) - 6px);
-			width: calc(var(--track-size) / 2 - 15px);
+			width: calc(var(--track-size) / 2);
 			transition: transform .4s ease;
 			background-color:White;
 			border-radius: 20px;

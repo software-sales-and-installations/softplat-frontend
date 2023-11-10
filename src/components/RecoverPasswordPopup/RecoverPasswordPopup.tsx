@@ -7,6 +7,7 @@ import { IShippingFields } from '../AuthPopup/AuthPopupTypes';
 import { ButtonForAuth } from '../UI/ButtonForAuth/ButtonForAuth';
 import { EMAIL_VALIDATION_CONFIG } from '../../utils/constants';
 import { Popup } from '../Popup/Popup';
+import styles from '../Popup/Popup.module.scss';
 
 export const RecoverPasswordPopup : FC =()=>{
 	const {
@@ -23,7 +24,7 @@ export const RecoverPasswordPopup : FC =()=>{
 	};
     return(
     <Popup>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 			<Input
 				inputType={InputTypes.email}
 				labelText="Электронная почта"

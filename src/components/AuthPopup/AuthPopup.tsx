@@ -8,6 +8,7 @@ import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG } from '../../utils
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ISignInFields } from './AuthPopupTypes';
 import { IShippingFields } from './AuthPopupTypes';
+import styles from '../Popup/Popup.module.scss';
 
 export const PopupForAuth: FC = () => {
 	const [authError, setAuthError] = useState(false);
@@ -25,7 +26,7 @@ export const PopupForAuth: FC = () => {
 	};
 	return (
 		<Popup>
-			<form onSubmit={handleSubmit(onSubmit)}>
+			<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 				<Input
 						inputType={InputTypes.email}
 						labelText='e-mail'

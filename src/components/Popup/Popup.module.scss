@@ -32,6 +32,7 @@
 	    flex-direction: column;
 	    overflow: hidden;
 	    position: relative;
+		align-items: center;
     }
     &__closebtn{
         margin: 0;
@@ -48,4 +49,7 @@
         top: 20px;
         right: 20px;
     }
+}
+.form{
+	width: 90%;
 }

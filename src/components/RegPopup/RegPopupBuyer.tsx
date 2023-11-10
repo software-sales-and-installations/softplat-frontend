@@ -8,6 +8,7 @@ import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG, INN_VALIDATION_CON
 import { SubmitHandler, useForm } from 'react-hook-form';
 import {  ISignUpFields } from '../AuthPopup/AuthPopupTypes';
 import { IShippingFields } from '../AuthPopup/AuthPopupTypes';
+import styles from '../Popup/Popup.module.scss';
 
 export const RegPopupBuyer: FC = () => {
 	const [authError, setAuthError] = useState(false);
@@ -32,9 +33,7 @@ export const RegPopupBuyer: FC = () => {
 	return (
 		<Popup
 		>
-			<form
-				onSubmit={handleSubmit(onSubmit)}
-			>
+			<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 						<Input
 						inputType={InputTypes.personName}
 						labelText='Ваше имя'
