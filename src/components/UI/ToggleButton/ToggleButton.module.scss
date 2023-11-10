@@ -6,7 +6,21 @@
 	gap: 16px;
 	align-items: center;
 	user-select: none;
+	position: relative;
+	transition: all .4s ease;
+	width: auto;
 
+	.textlabel{
+		width: 100%;
+		position: absolute;
+		top: 0;
+		display: flex;
+		justify-content: space-between;
+	}
+	.text{
+		margin: 0;
+		padding: 0;
+	}
 	.toggle {
 		appearance: none;
 		border: none;
@@ -16,32 +30,25 @@
 		height: var(--thumb-size);
 		width: var(--track-size);
 		border-radius: var(--track-size);
-		transition: all 0.4s ease;
 		cursor: pointer;
+		display: flex;
+		transition: all .4s ease;
 
-		&::before {
-			content: "Вход";
+		&::before{
+			content: "";
 			display: block;
-			background:blue;
-			border-radius: 10px;
 			transform: translateX(var(--thumb-position));
 			height: var(--thumb-size);
 			width: calc(var(--thumb-size) * 2);
-			transition: all 0.4s ease;
-		}
-        &:checked::before{
-            content: 'Регистрация';
-        }
-		&:checked {
-			--thumb-position: calc(var(--track-size) - 100%);
-			background: green 
-		}
-    }
-}
+			transition: transform .4s ease;
+			background-color:blue;
 
-.label {
-	font-weight: 400;
-	line-height: 20px;
-	color: black;
-	user-select: none;
+			border-radius: 10px;
+		}
+		&:checked{
+			--thumb-position: calc(var(--track-size) - 100%);
+			
+		}
+	
+	}
 }

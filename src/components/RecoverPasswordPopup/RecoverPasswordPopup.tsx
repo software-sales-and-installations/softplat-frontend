@@ -1,15 +1,14 @@
-import { FC, useState } from 'react';
+import { FC} from 'react';
 import { Input } from '../UI/Input/Input';
 import { InputTypes } from '../UI/Input/InputTypes';
-import {  ISignUpFields, ISignUpData } from '../AuthPopup/PopupForAuthTypes';
+import {  ISignUpFields } from '../AuthPopup/AuthPopupTypes';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { IShippingFields } from '../AuthPopup/PopupForAuthTypes';
+import { IShippingFields } from '../AuthPopup/AuthPopupTypes';
 import { ButtonForAuth } from '../UI/ButtonForAuth/ButtonForAuth';
 import { EMAIL_VALIDATION_CONFIG } from '../../utils/constants';
 import { Popup } from '../Popup/Popup';
 
 export const RecoverPasswordPopup : FC =()=>{
-    const [authError, setAuthError] = useState(false);
 	const {
 		register,
 		handleSubmit,
@@ -25,19 +24,19 @@ export const RecoverPasswordPopup : FC =()=>{
     return(
     <Popup>
         <form onSubmit={handleSubmit(onSubmit)}>
-							<Input
-								inputType={InputTypes.email}
-								labelText="Электронная почта"
-								validation={{
-									...register('email', EMAIL_VALIDATION_CONFIG),
-								}}
-								error={errors?.email?.message?.toString()}
-							/>
-							<ButtonForAuth
-								title={'Восстановить'}
-								isValid={isValid}
-							/>
-						</form>
-                        </Popup>
+			<Input
+				inputType={InputTypes.email}
+				labelText="Электронная почта"
+				validation={{
+					...register('email', EMAIL_VALIDATION_CONFIG),
+				}}
+				error={errors?.email?.message?.toString()}
+			/>
+			<ButtonForAuth
+				title={'Восстановить'}
+				isValid={isValid}
+			/>
+		</form>
+    </Popup>
     )
 }

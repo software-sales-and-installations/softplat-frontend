@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css';
 import { HomePage } from './pages/HomePage/HomePage';;
-import { PopupForAuth } from './components/AuthPopup/PopupForAuth';
+import { PopupForAuth } from './components/AuthPopup/AuthPopup';
 
-import { PopupForReg } from './components/RegPopup/PopupForReg';
+import { PopupForReg } from './components/RegPopup/RegPopup';
 import { RecoverPasswordPopup } from './components/RecoverPasswordPopup/RecoverPasswordPopup';
 import { Header } from './components/Header/Header';
 import { Categories } from './components/Categories/Categories';

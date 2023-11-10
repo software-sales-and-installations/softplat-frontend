@@ -1,29 +1,15 @@
 
-import { FC, useEffect, useState, ChangeEvent } from 'react';
+import { FC, useEffect, useState} from 'react';
 import { Popup } from '../Popup/Popup';
 import { ButtonForAuth } from '../UI/ButtonForAuth/ButtonForAuth';
-import { Checkbox } from '../UI/Checkbox/Checkbox';
-import { TEXT_FOR_AUTH_CHECKBOX } from '../../utils/constants';
 import { Input } from '../UI/Input/Input';
 import { InputTypes } from '../UI/Input/InputTypes';
 import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG, INN_VALIDATION_CONFIG, ORGNAME_VALIDATION_CONFIG, VALIDATION_SETTINGS, NAME_VALIDATION_CONFIG } from '../../utils/constants';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import {  ISignUpFields, ISignUpData } from '../AuthPopup/PopupForAuthTypes';
-import { IShippingFields } from '../AuthPopup/PopupForAuthTypes';
-import { ToggleButton } from '../UI/ToggleButton/ToggleButton';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../services/redux/store';
+import {  ISignUpFields } from '../AuthPopup/AuthPopupTypes';
+import { IShippingFields } from '../AuthPopup/AuthPopupTypes';
 
-
-// interface IPopupForAuth {
-// 	isOpened: boolean;
-// 	// setIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
-// }
-
-export const RegPopupBuyer: FC = ({
-	// isOpened,
-	// setIsOpened,
-}) => {
+export const RegPopupBuyer: FC = () => {
 	const [authError, setAuthError] = useState(false);
 	const {
 		register,
@@ -38,8 +24,6 @@ export const RegPopupBuyer: FC = ({
 		console.log(data);
 		reset;
 	};
-	const MyRole = useSelector((state: RootState) => state.chooseRole.title);
-	// {useSelector((state: RootState) => state.chooseRole.title) ==='Я покупатель' ? <p>lkjh</p> : <p>qwerty</p>}
 
 	useEffect(() => {
 		reset();
@@ -51,7 +35,6 @@ export const RegPopupBuyer: FC = ({
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 			>
-            <ToggleButton/>
 						<Input
 						inputType={InputTypes.personName}
 						labelText='Ваше имя'

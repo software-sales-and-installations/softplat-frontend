@@ -8,22 +8,12 @@ import { Input } from '../UI/Input/Input';
 import { InputTypes } from '../UI/Input/InputTypes';
 import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG, INN_VALIDATION_CONFIG, ORGNAME_VALIDATION_CONFIG, VALIDATION_SETTINGS, NAME_VALIDATION_CONFIG } from '../../utils/constants';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import {  ISignUpFields, ISignUpData } from '../AuthPopup/PopupForAuthTypes';
-import { IShippingFields } from '../AuthPopup/PopupForAuthTypes';
-import { ToggleButton } from '../UI/ToggleButton/ToggleButton';
+import {  ISignUpFields} from '../AuthPopup/AuthPopupTypes';
+import { IShippingFields } from '../AuthPopup/AuthPopupTypes';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../services/redux/store';
 
-
-// interface IPopupForAuth {
-// 	isOpened: boolean;
-// 	// setIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
-// }
-
-export const RegPopupSeller: FC = ({
-	// isOpened,
-	// setIsOpened,
-}) => {
+export const RegPopupSeller: FC = () => {
 	const [authError, setAuthError] = useState(false);
 	const {
 		register,
@@ -38,9 +28,6 @@ export const RegPopupSeller: FC = ({
 		console.log(data);
 		reset;
 	};
-	const MyRole = useSelector((state: RootState) => state.chooseRole.title);
-	// {useSelector((state: RootState) => state.chooseRole.title) ==='Я покупатель' ? <p>lkjh</p> : <p>qwerty</p>}
-
 	useEffect(() => {
 		reset();
 		setAuthError(false);
@@ -51,7 +38,7 @@ export const RegPopupSeller: FC = ({
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 			>
-            <ToggleButton/>
+
 			
 				
 			<Input
