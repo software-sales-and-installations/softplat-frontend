@@ -15,7 +15,7 @@ export const ProductPage: FC = ({}) => {
       <div className={style.product__imageContainer}>
         <img
           src="https://isradar.com/upload/no-image.jpg"
-          alt=""
+          alt="Фотография товара"
           className={style.product__image}
         />
         <button className={style.product__likeButton} onClick={handleLike}>
