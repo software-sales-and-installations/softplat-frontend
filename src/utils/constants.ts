@@ -241,3 +241,14 @@ export const CHOOSE_ROLE: {
     id: number;
     title: string
 } []= [{id: 1, title: 'Я покупатель'}, {id: 2, title: 'Я продавец'}, {id: 3, title: 'Забыли пароль?'}, {id: 4, title:'Я админ'}]
+
+export const CATALOGUE_NAMES:{name: string; img: string}[] = [
+  {name: 'Офисные приложения', img: ''},
+  {name: 'Системное ПО', img: ''},
+  {name: 'Мультимедиа', img: ''},
+  {name: 'Конвекторы', img: ''},
+  {name: 'Архиваторы', img: ''},
+  {name: 'Безопасность', img: ''},
+  {name: 'Интернет', img: ''},
+  {name: 'ERP & CRM', img: ''},
+];
