@@ -65,13 +65,14 @@ export const RegPopupSeller: FC = () => {
 					<Input
 						inputType={InputTypes.password}
 						labelText="Придумайте пароль"
-						// showPasswordButton={true}
+						showPasswordButton={true}
 						validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
 						error={errors?.password?.message}
 					/>
 					<Input
 								inputType={InputTypes.repeatPassword}
 								labelText={'Повторите пароль'}
+								showPasswordButton={true}
 								validation={{
 									...register('repeatPassword', {
 										validate: (value) =>

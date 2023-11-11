@@ -9,6 +9,7 @@ export enum InputTypes {
 	orgName='orgName',
 	checkbox='checkbox',
 	personName = 'personName',
+	telephone = 'telephone'
 }
 
 export enum InputColors {

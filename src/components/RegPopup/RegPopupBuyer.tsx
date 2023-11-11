@@ -4,7 +4,7 @@ import { Popup } from '../UI/Popup/Popup';
 import { ButtonForAuth } from '../UI/ButtonForAuth/ButtonForAuth';
 import { Input } from '../UI/Input/Input';
 import { InputTypes } from '../UI/Input/InputTypes';
-import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG, INN_VALIDATION_CONFIG, ORGNAME_VALIDATION_CONFIG, VALIDATION_SETTINGS, NAME_VALIDATION_CONFIG } from '../../utils/constants';
+import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG, VALIDATION_SETTINGS, NAME_VALIDATION_CONFIG, TELEPHONE_VALIDATION_CONFIG } from '../../utils/constants';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import {  ISignUpFields } from '../UI/Popup/PopupTypes';
 import { IShippingFields } from '../UI/Popup/PopupTypes';
@@ -26,7 +26,6 @@ export const RegPopupBuyer: FC = () => {
 		console.log(data);
 		reset;
 	};
-	const [checked, setChecked] = useState(false)
 	useEffect(() => {
 		reset();
 		setAuthError(false);
@@ -52,6 +51,12 @@ export const RegPopupBuyer: FC = () => {
 						}}
 						error={errors?.email?.message}
 					/>
+				<Input
+						inputType={InputTypes.telephone}
+						labelText="Телефон"
+						validation={{ ...register('telephone', TELEPHONE_VALIDATION_CONFIG) }}
+						error={errors?.telephone?.message}
+					/>
 
 					<Input
 						inputType={InputTypes.password}
@@ -63,6 +68,7 @@ export const RegPopupBuyer: FC = () => {
 					<Input
 								inputType={InputTypes.repeatPassword}
 								labelText={'Повторите пароль'}
+								showPasswordButton={true}
 								validation={{
 									...register('repeatPassword', {
 										validate: (value) =>

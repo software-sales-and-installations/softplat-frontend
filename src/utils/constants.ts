@@ -119,20 +119,18 @@ export const VALIDATION_SETTINGS = {
 			noName: 'Необходимо ввести имя',
 		}
 	},
-	// agree: {
-	// 	pattern: 'agree',
-	// 	messages: {
-	// 		invalid: 'Необходимо согласиться'
-	// 	}
-	// }
-	// nickname: {
-	// 	pattern: /^[a-zа-яё\s]+$/iu,
-	// 	maxLength: 32,
-	// 	messages: {
-	// 		invalid: 'Только кириллица или латинские буквы',
-	// 		tooLong: 'Слишком длинный никнейм',
-	// 	},
-	// },
+	telephone: {
+		pattern: /[0-9]/,
+		minLength: 11,
+		maxLength: 11,
+		messages: {
+			tooShort: 'Слишком короткий номер',
+			tooLong: 'Слишком длинный номер',
+			invalid: 'Введите только цифры',
+			noName: 'Необходимо ввести номер телефона',
+		}
+	},
+
 };
 export const EMAIL_VALIDATION_CONFIG = {
 	required: {
@@ -219,6 +217,24 @@ export const NAME_VALIDATION_CONFIG = {
 	maxLength: {
 		value: VALIDATION_SETTINGS.personName.maxLength,
 		message: VALIDATION_SETTINGS.personName.messages.tooLong,
+	},
+}
+export const TELEPHONE_VALIDATION_CONFIG = {
+	required: {
+		value: true,
+		message: VALIDATION_SETTINGS.telephone.messages.noName,
+	},
+	pattern: {
+		value: VALIDATION_SETTINGS.telephone.pattern,
+		message: VALIDATION_SETTINGS.telephone.messages.invalid,
+	},
+	minLength: {
+		value: VALIDATION_SETTINGS.telephone.minLength,
+		message: VALIDATION_SETTINGS.telephone.messages.tooShort,
+	},
+	maxLength: {
+		value: VALIDATION_SETTINGS.telephone.maxLength,
+		message: VALIDATION_SETTINGS.telephone.messages.tooLong,
 	},
 }
 export const CHOOSE_ROLE: {

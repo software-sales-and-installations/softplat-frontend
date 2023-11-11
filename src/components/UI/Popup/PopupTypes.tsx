@@ -14,6 +14,7 @@ export interface ISignUpFields extends ISignInFields {
 	orgName: string;
 	agree?: any;
 	personName: string;
+	telephone?: string;
 }
 
 export interface IShippingFields {
