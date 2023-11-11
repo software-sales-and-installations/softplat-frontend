@@ -8,9 +8,7 @@ interface IButtonForAuth {
 	itsLoginPopup?: boolean;
 }
 
-export const ButtonForAuth: FC<IButtonForAuth> = ({isValid,
-	title,
-	itsLoginPopup,}) => {
+export const ButtonForAuth: FC<IButtonForAuth> = ({isValid, title}) => {
     return (
         <button
 			type="submit"

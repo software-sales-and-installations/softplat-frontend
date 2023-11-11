@@ -1,4 +1,3 @@
-
 import { FC, useState } from 'react';
 import { Popup } from '../UI/Popup/Popup';
 import { ButtonForAuth } from '../UI/ButtonForAuth/ButtonForAuth';
@@ -28,25 +27,25 @@ export const PopupForAuth: FC = () => {
 		<Popup>
 			<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 				<Input
-						inputType={InputTypes.email}
-						labelText='e-mail'
-						validation={{
-							...register('email', EMAIL_VALIDATION_CONFIG),
-						}}
-						error={errors?.email?.message}
-					/>
-					<Input
-						inputType={InputTypes.password}
-						labelText="Пароль"
-						showPasswordButton={true}
-						validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
-						error={errors?.password?.message}
-					/>
-					{authError ? (
-						<p>
-							Неверный логин или пароль.
-						</p>
-					) : null}
+					inputType={InputTypes.email}
+					labelText='e-mail'
+					validation={{
+						...register('email', EMAIL_VALIDATION_CONFIG),
+					}}
+					error={errors?.email?.message}
+				/>
+				<Input
+					inputType={InputTypes.password}
+					labelText="Пароль"
+					showPasswordButton={true}
+					validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
+					error={errors?.password?.message}
+				/>
+				{authError ? (
+					<p>
+						Неверный логин или пароль.
+					</p>
+				) : null}
 				<ButtonForAuth isValid={isValid} itsLoginPopup={true} title='Войти'/>
 			</form>
 		</Popup>

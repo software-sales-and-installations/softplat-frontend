@@ -1,4 +1,3 @@
-
 import { FC, useEffect, useState} from 'react';
 import { Popup } from '../UI/Popup/Popup';
 import { ButtonForAuth } from '../UI/ButtonForAuth/ButtonForAuth';
@@ -9,7 +8,6 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import {  ISignUpFields } from '../UI/Popup/PopupTypes';
 import { IShippingFields } from '../UI/Popup/PopupTypes';
 import styles from '../UI/Popup/Popup.module.scss';
-import { Checkbox } from '../UI/Checkbox/Checkbox';
 
 export const RegPopupBuyer: FC = () => {
 	const [authError, setAuthError] = useState(false);
@@ -31,63 +29,56 @@ export const RegPopupBuyer: FC = () => {
 		setAuthError(false);
 	}, []);
 	return (
-		<Popup
-		>
+		<Popup>
 			<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-						<Input
-						inputType={InputTypes.personName}
-						labelText='Ваше имя'
-						validation={{
-							...register('personName', NAME_VALIDATION_CONFIG),
-						}}
-						error={errors?.personName?.message}
-					/>
-					
-            <Input
-						inputType={InputTypes.email}
-						labelText='e-mail'
-						validation={{
-							...register('email', EMAIL_VALIDATION_CONFIG),
-						}}
-						error={errors?.email?.message}
-					/>
 				<Input
-						inputType={InputTypes.telephone}
-						labelText="Телефон"
-						validation={{ ...register('telephone', TELEPHONE_VALIDATION_CONFIG) }}
-						error={errors?.telephone?.message}
-					/>
-
-					<Input
-						inputType={InputTypes.password}
-						labelText="Придумайте пароль"
-						showPasswordButton={true}
-						validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
-						error={errors?.password?.message}
-					/>
-					<Input
-								inputType={InputTypes.repeatPassword}
-								labelText={'Повторите пароль'}
-								showPasswordButton={true}
-								validation={{
-									...register('repeatPassword', {
-										validate: (value) =>
-											value === watch('password') ||
-											VALIDATION_SETTINGS.password.messages.noMatch,
-									}),
-								}}
-								error={errors?.repeatPassword?.message}
-							/>
-							
-							{/* <Checkbox {...register('agree')} labelText='Я согласна' checked={checked} onChange={()=>setChecked(!checked)}/> */}
-					{authError ? (
-								<p className="auth__form-error auth__form-error_type_login">
-									Почта уже зарегистрирована.
-								</p>
-							) : null}
-	
-
-			<ButtonForAuth isValid={isValid} title='Зарегистрироваться'/>
+					inputType={InputTypes.personName}
+					labelText='Ваше имя'
+					validation={{
+						...register('personName', NAME_VALIDATION_CONFIG),
+					}}
+					error={errors?.personName?.message}
+				/>	
+            	<Input
+					inputType={InputTypes.email}
+					labelText='e-mail'
+					validation={{
+						...register('email', EMAIL_VALIDATION_CONFIG),
+					}}
+					error={errors?.email?.message}
+				/>
+				<Input
+					inputType={InputTypes.telephone}
+					labelText="Телефон"
+					validation={{ ...register('telephone', TELEPHONE_VALIDATION_CONFIG) }}
+					error={errors?.telephone?.message}
+				/>
+				<Input
+					inputType={InputTypes.password}
+					labelText="Придумайте пароль"
+					showPasswordButton={true}
+					validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
+					error={errors?.password?.message}
+				/>
+				<Input
+					inputType={InputTypes.repeatPassword}
+					labelText={'Повторите пароль'}
+					showPasswordButton={true}
+					validation={{
+						...register('repeatPassword', {
+							validate: (value) =>
+							value === watch('password') ||
+							VALIDATION_SETTINGS.password.messages.noMatch,
+						}),
+					}}
+					error={errors?.repeatPassword?.message}
+				/>					
+				{authError ? (
+					<p className="auth__form-error auth__form-error_type_login">
+						Почта уже зарегистрирована.
+					</p>
+				) : null}
+				<ButtonForAuth isValid={isValid} title='Зарегистрироваться'/>
 			</form>
 		</Popup>
 	);
