@@ -1,5 +1,5 @@
 .wrapper {
-	--thumb-size: 55px;
+	--thumb-size: 50px;
 	--track-size: 350px;
 	--thumb-position: 0%;
 	display: inline-flex;
@@ -43,7 +43,7 @@
 			content: "";
 			display: block;
 			transform: translateX(var(--thumb-position));
-			height: calc(var(--thumb-size) - 6px);
+			height: calc(var(--thumb-size));
 			width: calc(var(--track-size) / 2);
 			transition: transform .4s ease;
 			background-color:White;

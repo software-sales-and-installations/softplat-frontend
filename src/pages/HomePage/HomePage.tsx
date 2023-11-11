@@ -8,7 +8,7 @@ import Recommended from '../../components/Recommended/Recommended';
 export const HomePage: FC = () => {
     return (
         <>
-        <Header loggedIn={true}/>
+        <Header loggedIn={false}/>
         <Categories />
         <Slider />
         <Catalogue />
