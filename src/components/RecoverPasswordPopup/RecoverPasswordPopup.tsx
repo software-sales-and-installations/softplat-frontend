@@ -1,13 +1,13 @@
 import { FC} from 'react';
 import { Input } from '../UI/Input/Input';
 import { InputTypes } from '../UI/Input/InputTypes';
-import {  ISignUpFields } from '../AuthPopup/AuthPopupTypes';
+import {  ISignUpFields } from '../UI/Popup/PopupTypes';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { IShippingFields } from '../AuthPopup/AuthPopupTypes';
+import { IShippingFields } from '../UI/Popup/PopupTypes';
 import { ButtonForAuth } from '../UI/ButtonForAuth/ButtonForAuth';
 import { EMAIL_VALIDATION_CONFIG } from '../../utils/constants';
-import { Popup } from '../Popup/Popup';
-import styles from '../Popup/Popup.module.scss';
+import { Popup } from '../UI/Popup/Popup';
+import styles from '../UI/Popup/Popup.module.scss';
 
 export const RecoverPasswordPopup : FC =()=>{
 	const {

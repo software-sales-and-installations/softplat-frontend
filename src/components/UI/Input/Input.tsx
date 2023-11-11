@@ -1,6 +1,6 @@
 import styles from './Input.module.scss';
 import { IInput } from './InputTypes';
-
+import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
 
 export const Input: FC<IInput> = ({
@@ -21,9 +21,9 @@ export const Input: FC<IInput> = ({
 		setIsPasswordHidden(true);
 	}, []);
 
-	// function togglePassword() {
-	// 	setIsPasswordHidden(!isPasswordHidden);
-	// }
+	function togglePassword() {
+		setIsPasswordHidden(!isPasswordHidden);
+	}
 	const inputTextType =
 		inputType === 'password' && isPasswordHidden === false
 			? 'text'
@@ -61,13 +61,13 @@ export const Input: FC<IInput> = ({
 						value={readOnly && value ? value : undefined}
 					/>
 					<span className={styles.input__error}>{error ? error : ''}</span>
-					{/* {showPasswordButton ? (
+					{showPasswordButton ? (
 						<button
-							className={styles.input__button}
+						className={classNames(styles.input__button, !isPasswordHidden ? styles.input__button_clicked : '')}
 							type="button"
 							onClick={togglePassword}
 						/>
-					) : null} */}
+					) : null}
 		</div>
 	);
 };

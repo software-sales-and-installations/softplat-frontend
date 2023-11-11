@@ -1,6 +1,6 @@
 
 import { FC, useEffect, useState, ChangeEvent } from 'react';
-import { Popup } from '../Popup/Popup';
+import { Popup } from '../UI/Popup/Popup';
 import { ButtonForAuth } from '../UI/ButtonForAuth/ButtonForAuth';
 import { Checkbox } from '../UI/Checkbox/Checkbox';
 import { TEXT_FOR_AUTH_CHECKBOX } from '../../utils/constants';
@@ -8,8 +8,6 @@ import { Input } from '../UI/Input/Input';
 import { InputTypes } from '../UI/Input/InputTypes';
 import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG, INN_VALIDATION_CONFIG, ORGNAME_VALIDATION_CONFIG, VALIDATION_SETTINGS, NAME_VALIDATION_CONFIG } from '../../utils/constants';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import {  ISignUpFields, ISignUpData } from '../AuthPopup/AuthPopupTypes';
-import { IShippingFields } from '../AuthPopup/AuthPopupTypes';
 import { ToggleButton } from '../UI/ToggleButton/ToggleButton';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../services/redux/store';

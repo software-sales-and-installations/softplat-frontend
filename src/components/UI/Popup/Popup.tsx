@@ -2,13 +2,13 @@ import { FC } from 'react';
 import styles from './Popup.module.scss';
 import { IPopup } from './PopupTypes';
 import {AiOutlineClose} from 'react-icons/ai';
-import { ChooseRole } from '../UI/ChooseRole/ChooseRole';
-import { CHOOSE_ROLE } from '../../utils/constants';
+import { ChooseRole } from '../ChooseRole/ChooseRole';
+import { CHOOSE_ROLE } from '../../../utils/constants';
 import { useDispatch } from 'react-redux';
 import { popupState } from './PopupSlice';
-import { chooseRoleState } from '../UI/ChooseRole/ChooseRoleSlice';
+import { chooseRoleState } from '../ChooseRole/ChooseRoleSlice';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../services/redux/store';
+import { RootState } from '../../../services/redux/store';
 
 export const Popup: FC<IPopup> = ({ children}) => {
 	const dispatch = useDispatch();

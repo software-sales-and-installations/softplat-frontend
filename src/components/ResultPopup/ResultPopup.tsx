@@ -1,11 +1,11 @@
 import {FC} from 'react';
 import { ToggleButton } from '../UI/ToggleButton/ToggleButton';
-import styles from './Popup.module.scss';
+import styles from '../UI/Popup/Popup.module.scss';
 import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../services/redux/store';
-import { popupState } from './PopupSlice';
+import { popupState } from '../UI/Popup/PopupSlice';
 import { chooseRoleState } from '../UI/ChooseRole/ChooseRoleSlice';
 import { PopupForAuth } from '../AuthPopup/AuthPopup';
 import { RecoverPasswordPopup } from '../RecoverPasswordPopup/RecoverPasswordPopup';
@@ -27,7 +27,9 @@ export const ResultPopup : FC = () =>{
         <div onClick={handleOverlayClick} className={classNames(styles.popup, isOpened ? styles.popup_opened : '')}>
             <div className={styles.popup__container}>
                 <ToggleButton/>
-                {!toggleState ? (MyRole==='Забыли пароль?' ? <RecoverPasswordPopup/>: <PopupForAuth/>) : (MyRole==='Забыли пароль?' ? <RecoverPasswordPopup/>: <PopupForReg/>)}
+                {!toggleState ? 
+                    (MyRole==='Забыли пароль?' ? <RecoverPasswordPopup/>: <PopupForAuth/>) : 
+                    (MyRole==='Забыли пароль?' ? <RecoverPasswordPopup/>: <PopupForReg/>)}
             </div>
         </div>
     )

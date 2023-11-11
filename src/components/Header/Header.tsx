@@ -5,9 +5,9 @@ import { HeaderNavbar } from "../HeaderNavBar/HeaderNavBar";
 import { HeaderSearchForm } from "../HeaderSearchForm/HeaderSearchForm";
 import {FaRegUser, FaRegHeart} from 'react-icons/fa';
 import {AiOutlineShoppingCart} from 'react-icons/ai';
-import { popupState } from "../Popup/PopupSlice";
+import { popupState } from "../UI/Popup/PopupSlice";
 import { useDispatch } from 'react-redux';
-import { ResultPopup } from "../Popup/ResultPopup";
+import { ResultPopup } from "../ResultPopup/ResultPopup";
 
 export const Header: FC<IHeader> = ({ loggedIn }) => {
     const dispatch = useDispatch();

@@ -1,14 +1,15 @@
 
 import { FC, useEffect, useState} from 'react';
-import { Popup } from '../Popup/Popup';
+import { Popup } from '../UI/Popup/Popup';
 import { ButtonForAuth } from '../UI/ButtonForAuth/ButtonForAuth';
 import { Input } from '../UI/Input/Input';
 import { InputTypes } from '../UI/Input/InputTypes';
 import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG, INN_VALIDATION_CONFIG, ORGNAME_VALIDATION_CONFIG, VALIDATION_SETTINGS, NAME_VALIDATION_CONFIG } from '../../utils/constants';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import {  ISignUpFields } from '../AuthPopup/AuthPopupTypes';
-import { IShippingFields } from '../AuthPopup/AuthPopupTypes';
-import styles from '../Popup/Popup.module.scss';
+import {  ISignUpFields } from '../UI/Popup/PopupTypes';
+import { IShippingFields } from '../UI/Popup/PopupTypes';
+import styles from '../UI/Popup/Popup.module.scss';
+import { Checkbox } from '../UI/Checkbox/Checkbox';
 
 export const RegPopupBuyer: FC = () => {
 	const [authError, setAuthError] = useState(false);
@@ -25,7 +26,7 @@ export const RegPopupBuyer: FC = () => {
 		console.log(data);
 		reset;
 	};
-
+	const [checked, setChecked] = useState(false)
 	useEffect(() => {
 		reset();
 		setAuthError(false);
@@ -55,7 +56,7 @@ export const RegPopupBuyer: FC = () => {
 					<Input
 						inputType={InputTypes.password}
 						labelText="Придумайте пароль"
-						// showPasswordButton={true}
+						showPasswordButton={true}
 						validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
 						error={errors?.password?.message}
 					/>
@@ -72,7 +73,7 @@ export const RegPopupBuyer: FC = () => {
 								error={errors?.repeatPassword?.message}
 							/>
 							
-
+							{/* <Checkbox {...register('agree')} labelText='Я согласна' checked={checked} onChange={()=>setChecked(!checked)}/> */}
 					{authError ? (
 								<p className="auth__form-error auth__form-error_type_login">
 									Почта уже зарегистрирована.
