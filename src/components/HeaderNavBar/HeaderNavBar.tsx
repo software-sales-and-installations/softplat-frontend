@@ -1,16 +1,24 @@
 import { FC } from 'react';
 import styles from './HeaderNavBar.module.scss';
-import { HEADER_BTNS } from '../../utils/constants';
+import { Link } from 'react-router-dom';
+
 
 export const HeaderNavbar: FC = () => {
     return (
         <nav>
             <ul className={styles.list}>
-                {HEADER_BTNS.map((btn)=>{
-                    return (<li key={btn.id} className={styles.item}>
-                        <button type='button' className={styles.button}>{btn.title}</button>
-                    </li>)
-                })}
+                <li className={styles.item}>
+                    <button type='button' className={styles.button}>Каталог</button>
+                </li>
+                <li className={styles.item}>
+                    <button type='button' className={styles.button}>Производители</button>
+                </li>
+                <li className={styles.item}>
+                    <Link to='/faq' className={styles.link}>FAQ</Link>
+                </li>
+                <li className={styles.item}>
+                    <Link to='/contacts' className={styles.link}>Контакты</Link>
+                </li>
             </ul>
         </nav>
     )
