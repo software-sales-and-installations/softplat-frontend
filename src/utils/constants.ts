@@ -49,19 +49,20 @@ export const CATEGORIZED_TEXT: {
 export const FOOTER_LINKS: {
     id: number;
     text: string;
+    link: string;
 }[]= [
     {id: 1,
-    text: 'Каталог'}, 
+    text: 'Каталог', link: '/catalog'}, 
     {id: 2,
-    text: 'Производители'},
+    text: 'Производители', link: '/manufacturers'},
     {id: 3,
-    text: 'FAQ'},
+    text: 'FAQ', link: '/faq'},
     {id: 4,
-    text: 'Контакты'},
+    text: 'Контакты', link: '/contacts'},
     {id: 5,
-    text: 'Условия пользования'},
+    text: 'Условия пользования', link: '/terms-of-use'},
     {id: 6,
-    text: 'Политика конфиденциальности'}
+    text: 'Политика конфиденциальности', link: '/privacy-policy'}
 ]
 export const CATALOGUE_NAMES:{name: string; img: string}[] = [
   {name: 'Офисные приложения', img: ''},

@@ -1,18 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
-import { HomePage } from '../../pages/HomePage/HomePage';
-import { Header } from '../Header/Header';
-import { Categories } from '../Categories/Categories';
-import { MainWrapper } from '../MainWrapper/MainWrapper';
-import { Footer } from '../Footer/Footer';
+import { HomePage } from './pages/HomePage/HomePage';
+import { Header } from './components/Header/Header';
+import { Categories } from './components/Categories/Categories';
+import { MainWrapper } from './components/MainWrapper/MainWrapper';
+import { Footer } from './components/Footer/Footer';
 
-import style from './App.module.scss';
-import { ProductPage } from '../../pages/ProductPage/ProductPage';
+import { ProductPage } from './pages/ProductPage/ProductPage';
 
 function App() {
   return (
-    <div className={style.app}>
+    <>
       <Header loggedIn={true} />
-      <Categories />
       <MainWrapper>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -34,7 +32,7 @@ function App() {
         </Routes>
       </MainWrapper>
       <Footer />
-    </div>
+    </>
   );
 }
 

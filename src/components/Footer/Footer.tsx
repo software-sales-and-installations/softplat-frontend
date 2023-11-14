@@ -1,5 +1,6 @@
 import React from 'react';
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import style from './Footer.module.scss';
 
@@ -11,14 +12,14 @@ export const Footer: FC = () => {
   return (
     <footer className={style.footer}>
       <div className={style.footer__content}>
-        <div className={style.footer__logo}>{/* */}</div>
+        <img className={style.footer__logo} />
 
         <ul className={style.footer__column}>
           {FOOTER_LINKS.slice(0, 4).map(link => (
             <li className={style.footer__item} key={link.id}>
-              <a href="#" className={style.footer__link}>
+              <Link to={link.link} className={style.footer__link}>
                 {link.text}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -26,29 +27,28 @@ export const Footer: FC = () => {
         <ul className={style.footer__column}>
           {FOOTER_LINKS.slice(4, 6).map(link => (
             <li className={style.footer__item} key={link.id}>
-              <a href="#" className={style.footer__link}>
+              <Link to={link.link} className={style.footer__link}>
                 {link.text}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
-        <div className={style.footer__column}>
           <div className={style.footer__socialBLock}>
             <p className={style.footer__socialMedia}>Мы в соцсетях:</p>
             <ul className={style.footer__socialIcons}>
               <li>
-                <a href="#">
+                <Link to={''}>
                   <BsTelegram className={style.footer__socialIcon} />
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to={''}>
                   <SlSocialVkontakte className={style.footer__socialIcon} />
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
-        </div>
+    
       </div>
     </footer>
   );
