@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import styles from './Popup.module.scss';
 import { IPopup } from './PopupTypes';
-import {AiOutlineClose} from 'react-icons/ai';
 import { ChooseRole } from '../ChooseRole/ChooseRole';
 import { CHOOSE_ROLE } from '../../../utils/constants';
 import { useDispatch } from 'react-redux';
@@ -19,7 +18,7 @@ export const Popup: FC<IPopup> = ({ children}) => {
 	const MyRole = useSelector((state: RootState) => state.chooseRole.title);
 	return (
 		<>
-			<button onClick={()=>handlePopupClose()} className={styles.popup__closebtn}><AiOutlineClose className={styles.popup__closeicon}/></button>
+			<button onClick={()=>handlePopupClose()} className={styles.popup__closebtn}/>
 			{children}
 			<div className={styles.popup__btncontainer}>
 			{CHOOSE_ROLE.map((i)=>{

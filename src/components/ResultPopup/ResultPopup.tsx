@@ -26,6 +26,7 @@ export const ResultPopup : FC = () =>{
     return (
         <div onClick={handleOverlayClick} className={classNames(styles.popup, isOpened ? styles.popup_opened : '')}>
             <div className={styles.popup__container}>
+                <h2 className={styles.popup__role}>{MyRole}</h2>
                 <ToggleButton/>
                 {!toggleState ? 
                     (MyRole==='Забыли пароль?' ? <RecoverPasswordPopup/>: <PopupForAuth/>) : 
