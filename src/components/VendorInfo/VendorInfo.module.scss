@@ -1,0 +1,48 @@
+.vendorInfo {
+  min-width: 165px;
+  width: max-content;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+
+  &__img {
+    width: 205px;
+    height: 180px;
+    object-fit: contain;
+  }
+
+  &__infoContainer {
+    width: 1160px;
+    margin-bottom: 20px;
+    text-align: start;
+  }
+
+  &__title {
+    color: #000;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 60px;
+  }
+
+  &__description {
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 35px;
+  }
+
+  &__showMoreBtn {
+    color: #55505C;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+  }
+}
