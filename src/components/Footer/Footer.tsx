@@ -12,7 +12,8 @@ export const Footer: FC = () => {
   return (
     <footer className={style.footer}>
       <div className={style.footer__content}>
-        <img className={style.footer__logo} />
+        <Link to='/'>  <img className={style.footer__logo} /></Link>
+      
 
         <ul className={style.footer__column}>
           {FOOTER_LINKS.slice(0, 4).map(link => (

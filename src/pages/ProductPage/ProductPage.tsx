@@ -3,28 +3,27 @@ import style from './ProductPage.module.scss';
 import { BsHeartFill, BsHeart } from 'react-icons/bs';
 import { Button } from '../../UI/Button/Button';
 import { Checkbox } from '../../UI/Checkbox/Checkbox';
+import { Tooltip } from '../../components/Tooltip/Tooltip';
 
 export const ProductPage: FC = ({}) => {
   const [isInstallationSelected, setIsInstallationSelected] = useState(false);
   const [totalPrice, setTotalPrice] = useState(19000);
-
+  const [tooltipText, setTooltipText] = useState('');
 
   const setChecked = () => {};
 
   const handleAddToCart = () => {};
 
-
-
   const handleCheckboxChange = () => {
-    setIsInstallationSelected((prev) => !prev);
+    setIsInstallationSelected(prev => !prev);
     updateTotalPrice(isInstallationSelected);
   };
 
   const updateTotalPrice = (wasInstallationSelected: boolean) => {
-    setTotalPrice((prev) => (wasInstallationSelected  ? prev - 2000 : prev + 2000));
+    setTotalPrice(prev =>
+      wasInstallationSelected ? prev - 2000 : prev + 2000,
+    );
   };
-
-
 
   return (
     <section className={style.product}>
@@ -52,7 +51,7 @@ export const ProductPage: FC = ({}) => {
         <div className={style.product__details}>
           <p className={style.product__price}>{totalPrice} ₽</p>
           <p className={style.product__seller}>Продавец</p>
-            <Button mode="secondary">Скачать демо</Button>
+          <Button mode="secondary">Скачать демо</Button>
         </div>
         <p className={style.product__description}>
           От публикаций в соцсетях до ретуши фотографий, от баннеров до красивых
@@ -61,12 +60,27 @@ export const ProductPage: FC = ({}) => {
           пополняется новыми возможностями, становясь ещё более быстрым,
           продуманным и интересным для всех пользователей.
         </p>
-      <label className={style.product__checkboxContainer}>
-        <Checkbox label={'Добавить установку 2 000 ₽'} onCheck={handleCheckboxChange} />
-      </label>
-      <Button mode="primary" onClick={handleAddToCart}>
-        Добавить в корзину
-      </Button>
+        <div className={style.product__checkboxContainer}>
+          <Checkbox
+            label={'Добавить установку 2 000 ₽'}
+            onCheck={handleCheckboxChange}
+          />
+          <div
+            className={style.product__question}
+            onMouseEnter={() =>
+              setTooltipText(
+                'Наш специалист установит ПО на ваше устройство в удобное время',
+              )
+            }
+            onMouseLeave={() => setTooltipText('')}
+          >
+            ?
+          </div>
+          {tooltipText && <Tooltip text={tooltipText} />}
+        </div>
+        <Button mode="primary" onClick={handleAddToCart}>
+          Добавить в корзину
+        </Button>
       </div>
     </section>
   );
