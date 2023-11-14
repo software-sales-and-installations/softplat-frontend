@@ -14,7 +14,12 @@
   max-width: 1460px;
   height: 100%;
   overflow: hidden;
-  background-color: black;
+  background: linear-gradient(
+      105deg,
+      rgba(0, 0, 0, 0.5) 27.13%,
+      rgba(0, 0, 0, 0) 71.88%
+    ),
+    #c4c4c4;
 }
 
 .swiper-slide__content {
@@ -46,7 +51,7 @@
   margin: 0;
   color: $white-standart;
   text-align: start;
-  @include font-h2-simibold
+  @include font-h2-simibold;
 }
 
 .swiper-pagination {
@@ -56,4 +61,3 @@
 .swiper-pagination-bullet-active {
   background-color: $dark-grey !important;
 }
-
