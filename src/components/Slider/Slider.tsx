@@ -37,10 +37,9 @@ const Slider = (props: Props) => {
     <Swiper
       spaceBetween={40}
       slidesPerView={'auto'}
-      // mousewheel={true}
       modules={[Pagination]}
       loop={true}
-      // navigation
+      grabCursor={true}
       pagination={{clickable: true}}
       className='swiper'
     >
