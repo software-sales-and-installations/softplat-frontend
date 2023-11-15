@@ -1,3 +1,5 @@
+@import '../../../styles/abstract/constants.scss';
+@import '../../../styles/abstract/mixins.scss';
 .wrapper {
 	--thumb-size: 50px;
 	--track-size: 350px;
@@ -24,6 +26,7 @@
 		margin: 0;
 		padding: 0;
 		width: 50%;
+		@include font-CTAbody-regular;
 	}
 	.toggle {
 		margin: 0;
@@ -31,7 +34,7 @@
 		border: none;
 		box-sizing: content-box;
 		padding: 2px;
-		background: #E8ECED;
+		background:  $light-grey;
 		height: var(--thumb-size);
 		width: var(--track-size);
 		border-radius: 20px;
@@ -43,12 +46,12 @@
 			content: "";
 			display: block;
 			transform: translateX(var(--thumb-position));
-			height: calc(var(--thumb-size));
+			height: calc(var(--thumb-size) - 3px);
 			width: calc(var(--track-size) / 2);
 			transition: transform .4s ease;
-			background-color:White;
+			background-color: $white-standart;
 			border-radius: 20px;
-			border: 3px solid #E8ECED;
+			border: 2px solid  $light-grey;
 		}
 		&:checked{
 			--thumb-position: calc(var(--track-size) - 100%);

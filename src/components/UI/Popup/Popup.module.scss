@@ -1,6 +1,7 @@
-
+@import '../../../styles/abstract/mixins.scss';
+@import '../../../styles/abstract/constants.scss';
 .popup{
-    background-color: rgba(43, 47, 51, 0.4);
+    background-color: rgba($dark-grey, 0.7);
 	width: 100vw;
 	min-height: 100vh;
 	position: fixed;
@@ -27,7 +28,7 @@
 	    margin: 0 auto;
 	    padding: 40px;
 	    border-radius: 20px;
-	    background-color: #fff;
+	    background-color: $white-standart;
 	    display: flex;
 	    flex-direction: column;
 	    overflow: auto;
@@ -38,7 +39,8 @@
 		align-items: center;
     }
 	&__role{
-		padding: 50px 0 0;
+		padding: 22px 0 0;
+		@include font-h3-regular;
 	}
     &__closebtn{
         margin: 0;
