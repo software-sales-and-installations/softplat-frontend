@@ -6,7 +6,7 @@ export const HeaderSearchForm: FC = () => {
     return(
         <form className={styles.form}>
             <input type='text' className={styles.input}></input>
-            <button type='submit' className={styles.button}><GrSearch/></button>
+            <button type='submit' className={styles.button}><GrSearch className={styles.button__search}/></button>
         </form>
     )
 }

@@ -1,18 +1,25 @@
 @import './../../styles/abstract/constants.scss';
+@import './../../styles/abstract/mixins.scss';
 
 .header{
     margin: 0;
-    padding: 0;
+    padding: 30px 80px;
     display: flex;
-    width: 100%;
-    justify-content: space-between;
     align-items: center;
+    border-bottom: 2px solid $light-grey;
+    &__logo{
+        width: 260px;
+        height: 80px;
+        border-radius: 10px;
+        background-color: $accent-lime-button;
+    }
 }
 .btncontainer{
-    margin: 0;
+    margin: 0 0 0 40px;
     padding: 0;
     display: flex;
-    gap: 60px;
+    gap: 40px;
+    align-items: center;
 
     &__profile{
         margin: 0;
@@ -34,10 +41,9 @@
         background-color: transparent;
         border: none;
         cursor: pointer;
-    }
-    &__likeicon{
-        width: 25px;
-        height: 25px;
+        background-image: url('../../images/heart.svg');
+        width: 35px;
+        height: 36px;
     }
     &__shopbtn{
         margin: 0;
@@ -45,15 +51,23 @@
         border: none;
         background-color: transparent;
         cursor: pointer;
-    }
-    &__shopicon{
-        width: 25px;
-        height: 25px;
+        object-fit: cover;
+        width: 35px;
+        height: 35px;
+        background-image: url('../../images/shopping-cart.svg');
     }
     &__profileenter{
-        border-radius: 14px;
+        border-radius: 20px;
         border: none;
         background-color: $accent-lime-button;
-        padding: 10px;
+        padding: 10px 27px;
+        color: $black-standart-text;
+        @include font-body-card;
+        transition: all .4s;
+        &:hover{
+            box-shadow: 0px 4px 20px 0px rgba(85, 80, 92, 0.50);
+            cursor: pointer;
+            ;
+        }
     }
 }
