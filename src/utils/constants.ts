@@ -218,7 +218,7 @@ export const TELEPHONE_VALIDATION_CONFIG = {
 export const CHOOSE_ROLE: {
     id: number;
     title: string
-} []= [{id: 1, title: 'Я покупатель'}, {id: 2, title: 'Я продавец'}, {id: 3, title: 'Забыли пароль?'}, {id: 4, title:'Я админ'}]
+} []= [{id: 1, title: 'Я покупатель'}, {id: 2, title: 'Я продавец'}, {id: 3, title:'Я админ'}]
 
 export const FOOTER_LINKS: {
     id: number;

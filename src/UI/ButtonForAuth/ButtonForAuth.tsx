@@ -5,7 +5,6 @@ import classNames from 'classnames';
 interface IButtonForAuth {
     isValid: boolean;
 	title: string;
-	itsLoginPopup?: boolean;
 }
 
 export const ButtonForAuth: FC<IButtonForAuth> = ({isValid, title}) => {

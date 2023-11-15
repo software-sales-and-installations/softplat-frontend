@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { IToggleButton } from './ToggleButtonTypes';
 import { checkBoxState } from './ToggleButtonSlice';
 import {  useSelector } from 'react-redux';
-import { RootState } from '../../../services/redux/store';
+import { RootState } from '../../services/redux/store';
 
 export const ToggleButton: FC<IToggleButton> = () => {
 		const dispatch = useDispatch();

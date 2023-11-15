@@ -1,6 +1,6 @@
-import {reducer as toggleBtnReducer} from '../../components/UI/ToggleButton/ToggleButtonSlice';
-import {reducer as chooseRoleReducer} from '../../components/UI/ChooseRole/ChooseRoleSlice';
-import {reducer as popupStateReducer} from '../../components/UI/Popup/PopupSlice';
+import {reducer as toggleBtnReducer} from '../../UI/ToggleButton/ToggleButtonSlice';
+import {reducer as chooseRoleReducer} from '../../UI/ChooseRole/ChooseRoleSlice';
+import {reducer as popupStateReducer} from '../../UI/Popup/PopupSlice';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 const reducers = combineReducers({

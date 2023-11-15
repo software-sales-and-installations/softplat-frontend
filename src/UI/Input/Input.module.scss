@@ -1,8 +1,13 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
 .input__container {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	position: relative;
+	&:first-child{
+		margin-top: 35px;
+	}
 }
 
 .input__hints {
@@ -14,36 +19,33 @@
 .input__label {
 	width: 100%;
 	padding-left: 12px;
-	font-size: 20px;
-    color: #55505C;
+	@include font-CTAbody-regular;
+    color: $dark-grey;
 	text-align: left;
 	padding-bottom: 10px;
 }
 
 .input__error {
 	padding-left: 12px;
-	color: #ea4335;
-	font-size: 16px;
-	font-weight: 500;
+	color: $red-alert-system;
+	@include font-body-filters;
 	display: block;
-	height: 20px;
+	height: 40px;
 	text-align: left;
 }
 
 .input__field {
 	box-sizing: border-box;
-	font-size: 20px;
-	line-height: 25px;
+	@include font-CTAbody-regular;
 	padding: 10px 12px;
 	border-radius: 20px;
-	border: 1px solid #C1C2C2;
-    color: #55505C;
-	background-color: #E8ECED;
+	border: 1px solid $border-input;
+    color: $dark-grey;
+	background-color: $light-grey;
 }
 
 .input__field:focus {
 	outline: none;
-	// border: 0.5px solid #0c0c0c;
 }
 
 .input__field:read-only:focus {
@@ -51,7 +53,7 @@
 }
 
 .input__button {
-	background-image: url('../../../images/eye.svg');
+	background-image: url('../../images/eye.svg');
 	position: absolute;
 	top: 45px;
 	right: 15px;

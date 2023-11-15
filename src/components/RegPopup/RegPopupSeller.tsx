@@ -1,13 +1,13 @@
 import { FC, useEffect, useState } from 'react';
-import { Popup } from '../UI/Popup/Popup';
-import { ButtonForAuth } from '../UI/ButtonForAuth/ButtonForAuth';
-import { Input } from '../UI/Input/Input';
-import { InputTypes } from '../UI/Input/InputTypes';
+import { Popup } from '../../UI/Popup/Popup';
+import { ButtonForAuth } from '../../UI/ButtonForAuth/ButtonForAuth';
+import { Input } from '../../UI/Input/Input';
+import { InputTypes } from '../../UI/Input/InputTypes';
 import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG, INN_VALIDATION_CONFIG, ORGNAME_VALIDATION_CONFIG, VALIDATION_SETTINGS, NAME_VALIDATION_CONFIG } from '../../utils/constants';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import {  ISignUpFields} from '../UI/Popup/PopupTypes';
-import { IShippingFields } from '../UI/Popup/PopupTypes';
-import styles from '../UI/Popup/Popup.module.scss';
+import {  ISignUpFields} from '../../UI/Popup/PopupTypes';
+import { IShippingFields } from '../../UI/Popup/PopupTypes';
+import styles from '../../UI/Popup/Popup.module.scss';
 
 export const RegPopupSeller: FC = () => {
 	const [authError, setAuthError] = useState(false);
@@ -74,7 +74,15 @@ export const RegPopupSeller: FC = () => {
 						}),
 					}}
 					error={errors?.repeatPassword?.message}
-				/>	
+				/>
+				<div className={styles.checkboxRemember}>
+					<input id='agreement' {...register("remember")} type="checkbox" value="remember"/>
+					<label htmlFor='agreement'>Запомнить меня</label>
+				</div>
+				<div className={styles.checkboxAgree}>
+					<input id='agreement' {...register("agree", { required: true })} type="checkbox" value="agree"/>
+					<label htmlFor='agreement'>Я соглашаюсь с политикой обработки персональных данных</label>
+				</div>
 				{authError ? (
 					<p className="auth__form-error auth__form-error_type_login">
 						Почта уже зарегистрирована.

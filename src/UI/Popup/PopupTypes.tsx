@@ -6,6 +6,7 @@ export interface IPopup {
 export interface ISignInFields {
 	email: string;
 	password: string;
+	remember?: any;
 }
 
 export interface ISignUpFields extends ISignInFields {

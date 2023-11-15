@@ -1,12 +1,12 @@
 import {FC} from 'react';
-import { ToggleButton } from '../UI/ToggleButton/ToggleButton';
-import styles from '../UI/Popup/Popup.module.scss';
+import { ToggleButton } from '../../UI/ToggleButton/ToggleButton';
+import styles from '../../UI/Popup/Popup.module.scss';
 import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../services/redux/store';
-import { popupState } from '../UI/Popup/PopupSlice';
-import { chooseRoleState } from '../UI/ChooseRole/ChooseRoleSlice';
+import { popupState } from '../../UI/Popup/PopupSlice';
+import { chooseRoleState } from '../../UI/ChooseRole/ChooseRoleSlice';
 import { PopupForAuth } from '../AuthPopup/AuthPopup';
 import { RecoverPasswordPopup } from '../RecoverPasswordPopup/RecoverPasswordPopup';
 import { PopupForReg } from '../RegPopup/RegPopup';
@@ -26,8 +26,8 @@ export const ResultPopup : FC = () =>{
     return (
         <div onClick={handleOverlayClick} className={classNames(styles.popup, isOpened ? styles.popup_opened : '')}>
             <div className={styles.popup__container}>
-                <h2 className={styles.popup__role}>{MyRole}</h2>
-                <ToggleButton/>
+                <h2 className={styles.popup__role}>{MyRole==='Я покупатель'? 'Покупатель': (MyRole==='Я продавец'? 'Продавец': (MyRole==='Забыли пароль?'? 'Восстановление пароля' : 'Администратор'))}</h2>
+                {MyRole==='Забыли пароль?'|| MyRole==='Я админ'? null : <ToggleButton/>}
                 {!toggleState ? 
                     (MyRole==='Забыли пароль?' ? <RecoverPasswordPopup/>: <PopupForAuth/>) : 
                     (MyRole==='Забыли пароль?' ? <RecoverPasswordPopup/>: <PopupForReg/>)}

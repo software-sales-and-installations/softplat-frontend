@@ -7,7 +7,7 @@ export enum InputTypes {
 	date = 'date',
 	INN ='INN',
 	orgName='orgName',
-	checkbox='checkbox',
+	remember='checkbox',
 	personName = 'personName',
 	telephone = 'telephone'
 }
@@ -30,5 +30,5 @@ export interface IInput {
 	error?: string;
 	onChange?: any;
 	max?: string;
-	defaultValue?: string;
+	defaultValue?: any;
 }
