@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './ProductCard.module.scss';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import { Button } from '../../UI/Button/Button';
 
 type ProductCardProps = {
   name: string;
@@ -86,9 +87,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </span>
         </div>
       </div>
-      <button className={styles.card__addBtn} type="button" onClick={() => {}}>
+      {/* <button className={styles.card__addBtn} type="button" onClick={() => {}}>
         Добавить в корзину
-      </button>
+      </button> */}
+      <Button mode='primary' >Добавить в корзину</Button>
     </div>
   );
 };
