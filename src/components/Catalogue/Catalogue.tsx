@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Catalogue.module.scss'
 import { CATALOGUE_NAMES } from '../../utils/constants';
 import { Link } from 'react-router-dom';
+import itemImg from '../../images/catalogue-img.png'
 
 
 type Props = {};
@@ -15,7 +16,7 @@ const Catalogue: React.FC = (props: Props) => {
           <li className={styles.catalogue__item}>
             <Link to={`/catalogue/${i.name}`}>
             <p className={styles.catalogue__itemText}>{i.name}</p>
-            <img src={i.img} alt="Изображение раздела каталога" />
+            <img src={itemImg} alt="Изображение раздела каталога" />
             </Link>
           </li>
         ))}

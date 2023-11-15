@@ -8,9 +8,9 @@ export const HomePage: FC = () => {
     return (
         <>
         <Categories />
-        {/* <Slider />
+        <Slider />
         <Catalogue />
-        <Recommended /> */}
+        <Recommended />
         </>
     )
 }
