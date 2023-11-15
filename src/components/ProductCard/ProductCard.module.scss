@@ -41,6 +41,15 @@
       background-color: transparent;
       cursor: pointer;
     }
+    
+    &__likeBtn svg {
+      opacity: 0.5;
+      transition: opacity 0.2s ease;
+    }
+
+    &__likeBtn svg:hover {
+      opacity: 1;
+    }
   
     &__name {
       text-align: start;
