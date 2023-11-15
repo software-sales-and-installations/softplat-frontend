@@ -7,10 +7,10 @@ import { Categories } from '../../components/Categories/Categories';
 export const HomePage: FC = () => {
     return (
         <>
-        <Categories/>
-        <Slider />
+        <Categories />
+        {/* <Slider />
         <Catalogue />
-        <Recommended />
+        <Recommended /> */}
         </>
     )
 }

@@ -10,7 +10,7 @@ import { ProductPage } from './pages/ProductPage/ProductPage';
 function App() {
   return (
     <>
-      <Header loggedIn={true} />
+      <Header loggedIn={false} />
       <MainWrapper>
         <Routes>
           <Route path="/" element={<HomePage />} />

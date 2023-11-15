@@ -1,25 +1,3 @@
-export const HEADER_BTNS: {
-    id: number;
-    title: string;
-}[] = [
-{
-    id: 1,
-    title: 'Каталог',
-},
-{
-    id: 2,
-    title: 'Производители',
-},
-{
-    id: 3,
-    title: 'FAQ',
-},
-{
-    id: 4,
-    title: 'Контакты',
-},
-]
-
 export const CATEGORIZED_TEXT: {
     id: number;
     text: string;
@@ -31,19 +9,19 @@ export const CATEGORIZED_TEXT: {
     {id: 3,
     text: 'Инструментальное ПО'},
     {id: 4,
-    text: 'Windows'},
+    text: 'Системное ПО'},
     {id: 5,
-    text: 'Adobe'},
+    text: 'Системное ПО'},
     {id: 6,
-    text: 'Антивирусы'},
+    text: 'Windows'},
     {id: 7,
-    text: 'Утилиты'},
+    text: 'Adobe'},
     {id: 8,
-    text: 'Корпоративные системы'},
+    text: 'Антивирусы'},
     {id: 9,
-    text: 'Корпоративные системы'},
+    text: 'Утилиты'},
     {id: 10,
-    text: 'Корпоративные системы'}
+    text: 'Корпоративные системы'},
 ]
 
 export const FOOTER_LINKS: {

@@ -6,18 +6,19 @@ import { HeaderSearchForm } from "../HeaderSearchForm/HeaderSearchForm";
 import {FaRegUser} from 'react-icons/fa';
 import {FaRegHeart} from 'react-icons/fa';
 import {AiOutlineShoppingCart} from 'react-icons/ai';
+import { Link } from "react-router-dom";
 
 
 
 export const Header: FC<IHeader> = ({ loggedIn }) => {
     return (
         <header className={styles.header}>
-            <img src="#" alt="Логотип"/>
+            <Link to='/' className={styles.header__logo}>Logo</Link>
             <HeaderNavbar/>
             <HeaderSearchForm/>
             <div className={styles.btncontainer}>
-                <button type='button' className={styles.btncontainer__likebtn}><FaRegHeart className={styles.btncontainer__likeicon}/></button>
-                <button type='button' className={styles.btncontainer__shopbtn}><AiOutlineShoppingCart className={styles.btncontainer__shopicon} /></button>
+                <button type='button' className={styles.btncontainer__likebtn}/>
+                <button type='button' className={styles.btncontainer__shopbtn}/>
                 {loggedIn? (
                     <button type='button' className={styles.btncontainer__profile}><FaRegUser className={styles.btncontainer__profileicon}/></button>
                 ) : (
