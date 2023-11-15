@@ -1,25 +1,3 @@
-export const HEADER_BTNS: {
-    id: number;
-    title: string;
-}[] = [
-{
-    id: 1,
-    title: 'Каталог',
-},
-{
-    id: 2,
-    title: 'Производители',
-},
-{
-    id: 3,
-    title: 'FAQ',
-},
-{
-    id: 4,
-    title: 'Контакты',
-},
-]
-
 export const CATEGORIZED_TEXT: {
     id: number;
     text: string;
@@ -31,19 +9,19 @@ export const CATEGORIZED_TEXT: {
     {id: 3,
     text: 'Инструментальное ПО'},
     {id: 4,
-    text: 'Windows'},
+    text: 'Системное ПО'},
     {id: 5,
-    text: 'Adobe'},
+    text: 'Системное ПО'},
     {id: 6,
-    text: 'Антивирусы'},
+    text: 'Windows'},
     {id: 7,
-    text: 'Утилиты'},
+    text: 'Adobe'},
     {id: 8,
-    text: 'Корпоративные системы'},
+    text: 'Антивирусы'},
     {id: 9,
-    text: 'Корпоративные системы'},
+    text: 'Утилиты'},
     {id: 10,
-    text: 'Корпоративные системы'}
+    text: 'Корпоративные системы'},
 ]
 export const TEXT_FOR_AUTH_CHECKBOX: {
     id: number;
@@ -242,6 +220,24 @@ export const CHOOSE_ROLE: {
     title: string
 } []= [{id: 1, title: 'Я покупатель'}, {id: 2, title: 'Я продавец'}, {id: 3, title: 'Забыли пароль?'}, {id: 4, title:'Я админ'}]
 
+export const FOOTER_LINKS: {
+    id: number;
+    text: string;
+    link: string;
+}[]= [
+    {id: 1,
+    text: 'Каталог', link: '/catalog'}, 
+    {id: 2,
+    text: 'Производители', link: '/manufacturers'},
+    {id: 3,
+    text: 'FAQ', link: '/faq'},
+    {id: 4,
+    text: 'Контакты', link: '/contacts'},
+    {id: 5,
+    text: 'Условия пользования', link: '/terms-of-use'},
+    {id: 6,
+    text: 'Политика конфиденциальности', link: '/privacy-policy'}
+]
 export const CATALOGUE_NAMES:{name: string; img: string}[] = [
   {name: 'Офисные приложения', img: ''},
   {name: 'Системное ПО', img: ''},
@@ -252,3 +248,18 @@ export const CATALOGUE_NAMES:{name: string; img: string}[] = [
   {name: 'Интернет', img: ''},
   {name: 'ERP & CRM', img: ''},
 ];
+export const FAQ_INFO: {
+    id: number;
+    question: string;
+    answer: string[];
+}[] = [
+    {id: 1, question: 'Где найти свой оплаченный заказ?', answer: ['Посетите личный кабинет, раздел Мои покупки.']},
+    {id: 2, question: 'Как с вами связаться?', answer: ['Все доступные способы связи на странице Контакты.']},
+    {id: 3, question: 'Правила обмена и возврата', answer: ['По действующему российскому законодательству, покупатель может в течение 14 календарных дней вернуть любой товар без каких‑либо причин. В такой ситуации главное, чтобы продукция не была ни разу использована и сохранила свой первоначальный вид.', 'Стоит отметить, что программное обеспечение, различные приложения и операционные системы не подпадают под действие данного закона. Однако наши клиенты все равно могут воспользоваться таким правом в течение 14 дней со дня покупки. Нужно помнить, что вернуть можно лишь физические носители — диски. Ключи активации, полученные по электронной почте, не обладают такой гарантией.', 'Такой подход не прихоть, а мера безопасности от взлома компьютеров, хакерских атак и разработки вредоносных программ.']}
+]
+
+export const TITLE_FOR_BREADCRUMBS:  {
+    id: number;
+    title: string;
+    url: string;
+}[] = [{id: 1, title: 'Главная', url:''}, {id: 2, title: 'FAQ', url: 'faq'}]
