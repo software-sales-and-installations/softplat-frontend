@@ -1,0 +1,44 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.container{
+    width: 90%;
+    max-width: 1010px;
+    background-color: $light-grey;
+    border-radius: 20px;
+    .button{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 20px;
+        padding: 20px 35px;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+
+        &__question{
+            margin: 0;
+            @include font-h3-regular;
+        }
+        &__down{
+            width: 32px;
+            height: 32px;
+        }
+    }
+    .answer{
+        text-align: start;
+        margin: 0;
+        padding: 0 35px 0 35px;
+        display: none;
+        @include font-body-regular;
+        &:last-child{
+            padding-bottom: 25px;
+        }
+        
+        &_opened{
+            display: block;
+
+        }
+    }
+}

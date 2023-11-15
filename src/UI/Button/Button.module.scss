@@ -1,0 +1,43 @@
+@import './../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.button {
+  cursor: pointer;
+  border-radius: 32px;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+.primary {
+  background-color: $accent-lime-button;
+  transition: box-shadow 0.3s ease-out;
+  @include font-CTAbody-regular;
+  max-width: 290px;
+  width: 100%;
+  height: 55px;
+}
+
+.primary:hover {
+  box-shadow: 0 4px 20px 0 rgba(85, 80, 92, 0.5);
+}
+
+.primary:active {
+  background-color: $dark-grey;
+  color: $white-standart;
+}
+
+.secondary {
+  background-color: transparent;
+  border: 1px #c1c2c2 solid;
+  color: $dark-grey;
+  transition: background-color 0.3s ease-out;
+  @include font-body-filters;
+  max-width: 150px;
+  width: 100%;
+  height: 35px;
+}
+
+.secondary:hover {
+  background-color: $light-grey;
+}

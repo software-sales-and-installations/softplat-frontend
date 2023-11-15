@@ -1,16 +1,27 @@
+@import './../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
 .categories{
-    margin: 35px 0 0 0;
+    margin: 12px 80px 0 80px;
     padding: 0;
     list-style: none;
     display: flex;
-    gap: 25px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 10px;
 }
 .btn{
-    margin: 0;
-    padding: 10px;
+    margin: 0 5px;
+    padding: 5px 20px;
     border-radius: 20px;
     border: none;
-    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    background-color: $dark-grey;
+    color: $white-standart;
     cursor: pointer;
-
+    @include font-body-filters;
+    transition: all .4s;
+    &:hover{
+        background-color: $accent-lime-button;
+        color: $black-standart-text;
+    }
 }
