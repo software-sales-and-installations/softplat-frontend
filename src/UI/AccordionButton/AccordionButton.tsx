@@ -1,7 +1,7 @@
 import styles from './AccordionButton.module.scss';
 import {FC, useState} from 'react';
 import { IAccordionButton } from './AccordionButtonTypes';
-import {SlArrowUp} from 'react-icons/sl';
+import {SlArrowDown} from 'react-icons/sl';
 import classNames from 'classnames';
 
 export const AccordionButton: FC<IAccordionButton> =({question, answer}) =>{
@@ -9,10 +9,14 @@ export const AccordionButton: FC<IAccordionButton> =({question, answer}) =>{
     return (
         <div className={styles.container}>
             <button onClick={()=>setIsClicked(!isClicked)} type='button' className={styles.button}>
-                <h2 className={styles.button__text}>{question}</h2>
-                <SlArrowUp/>
+                <h3 className={styles.button__question}>{question}</h3>
+                <SlArrowDown className={styles.button__down}/>
             </button>
-            <p className={classNames(styles.answer, isClicked ? styles.answer_opened : '')}>{answer}</p>
+            {answer.map((i)=>{
+                return(
+                <p className={classNames(styles.answer, isClicked ? styles.answer_opened : '')}>{i}</p>
+            )})}
+            
         </div>
     )
 }

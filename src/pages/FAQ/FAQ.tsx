@@ -1,16 +1,13 @@
-import { AccordionButton } from "../../components/UI/AccordionButton/AccordionButton";
-import {FC, useState, useEffect} from 'react';
+import { AccordionButton } from "../../UI/AccordionButton/AccordionButton";
+import {FC} from 'react';
 import { FAQ_INFO } from "../../utils/constants";
 import styles from './FAQ.module.scss';
-import SectionTitle from "../../components/UI/SectionTitle/SectionTitle";
-import { useLocation, useNavigate } from "react-router-dom";
 
 export const FAQ: FC =() =>{
-
     return (
         
         <>
-            <SectionTitle title='FAQ' />
+            <h1 className={styles.title}>FAQ</h1>
             <ul className={styles.list}>
             {FAQ_INFO.map((i)=>{
                 return(
