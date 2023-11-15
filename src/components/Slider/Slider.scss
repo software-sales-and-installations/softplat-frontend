@@ -2,8 +2,8 @@
 @import '../../styles/abstract/mixins.scss';
 
 .swiper {
-  margin-top: 50px;
-  width: 100%;
+  margin-top: 74px;
+  padding: 0 80px !important;
   height: 460px;
   overflow-x: clip !important;
   overflow-y: unset !important;
@@ -55,7 +55,12 @@
 }
 
 .swiper-pagination {
-  bottom: -25px !important;
+  bottom: -33px !important;
+}
+
+.swiper-pagination-bullet {
+  width: 10px !important;
+  height: 10px !important;
 }
 
 .swiper-pagination-bullet-active {
