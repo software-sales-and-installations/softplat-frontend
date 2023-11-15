@@ -7,7 +7,7 @@ import { Categories } from '../../components/Categories/Categories';
 export const HomePage: FC = () => {
     return (
         <>
-        <Categories/>
+        <Categories />
         <Slider />
         <Catalogue />
         <Recommended />
