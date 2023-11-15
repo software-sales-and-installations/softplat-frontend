@@ -11,7 +11,6 @@ export const Categories: FC = () => {
                         <button className={styles.btn}>{btn.text}</button>
                     </li>
                 )
-
             })}
         </ul>
     )
