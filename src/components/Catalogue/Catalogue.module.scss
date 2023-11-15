@@ -1,3 +1,6 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
 .catalogue {
     margin-top: 50px;
   
@@ -6,6 +9,7 @@
       font-size: 48px;
       font-weight: 700;
       margin: 0 0 20px 0;
+      @include font-h1-bold
     }
   
     &__list {
@@ -19,9 +23,9 @@
   
     &__item {
       position: relative;
-      width: 410px;
+      width: 390px;
       padding: 40px 10px;
-      height: 268px;
+      height: 190px;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0px 4px 20px 0px rgba(57, 57, 57, 0.15);
@@ -35,15 +39,13 @@
       font-size: 28px;
       font-weight: 700;
       margin: 0;
-      color: black;
+      color: $black-standart-text;
     }
   
     & img {
       position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      bottom: 10px;
+      right: 10px;
       object-fit: cover;
     }
   }
