@@ -24,7 +24,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
     <div className={styles.card}>
       <div className={styles.card__img}>
         <img src={img} alt="Изображение продукта" />
-        <button className={styles.card__likeBtn} type="button" onClick={() => {}}>
+        <button
+          className={styles.card__likeBtn}
+          type="button"
+          onClick={() => {}}
+        >
           {isLiked ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -60,17 +64,26 @@ const ProductCard: React.FC<ProductCardProps> = ({
           )}
         </button>
       </div>
-      <Link to={`/productcard/${name}`} title={name} className={styles.card__name}>
+      <Link
+        to={`/productcard/${name}`}
+        title={name}
+        className={styles.card__name}
+      >
         {name}
       </Link>
       <div className={styles.card__priceContainer}>
         <p className={styles.card__price}>{addSpace(price)} ₽</p>
         <div className={styles.card__installPrice}>
           <span>с установкой </span>
-          <span>
-            {addSpace(price + 3000)} ₽
+          <span>{addSpace(price + 3000)} ₽</span>
+          <span className={styles.card__tooltip}>
+            <button className={styles.card__tooltipBtn}>
+              <BsFillQuestionCircleFill size={12}/>
+            </button>
+            <span className={styles.card__tooltipText}>
+              Наш специалист установит ПО на ваше устройство в удобное время
+            </span>
           </span>
-          <BsFillQuestionCircleFill />
         </div>
       </div>
       <button className={styles.card__addBtn} type="button" onClick={() => {}}>
