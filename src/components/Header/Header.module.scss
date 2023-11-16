@@ -1,0 +1,75 @@
+@import './../../styles/abstract/constants.scss';
+@import './../../styles/abstract/mixins.scss';
+
+.header{
+    margin: 0;
+    padding: 30px 80px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid $light-grey;
+    &__logo{
+        width: 260px;
+        height: 80px;
+        border-radius: 10px;
+        background-color: $accent-lime-button;
+    }
+}
+.btncontainer{
+    margin: 0 0 0 40px;
+    padding: 0;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: flex-end;
+    
+    &__profile{
+        margin: 0;
+        padding: 0;
+        width: 48px;
+        border: none;
+        background-color: $accent-lime-button;
+        height: 48px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    &__profileicon{
+        width: 20px;
+        height: 20px;
+    }
+    &__likebtn{
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        background-image: url('../../images/heart.svg');
+        width: 35px;
+        height: 36px;
+    }
+    &__shopbtn{
+        margin: 0;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        object-fit: cover;
+        width: 35px;
+        height: 35px;
+        background-image: url('../../images/shopping-cart.svg');
+    }
+    &__profileenter{
+        border-radius: 20px;
+        border: none;
+        background-color: $accent-lime-button;
+        padding: 10px 27px;
+        color: $black-standart-text;
+        @include font-body-card;
+        transition: all .4s;
+        &:hover{
+            box-shadow: 0px 4px 20px 0px rgba(85, 80, 92, 0.50);
+            cursor: pointer;
+            ;
+        }
+    }
+}
