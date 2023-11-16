@@ -13,11 +13,14 @@
   background-color: $accent-lime-button;
   transition: box-shadow 0.3s ease-out;
   @include font-CTAbody-regular;
-  max-width: 290px;
   width: 100%;
   height: 55px;
+  &_inactive{
+    background-color: $light-grey;
+		cursor: default;
+    pointer-events: none;
+  }
 }
-
 .primary:hover {
   box-shadow: 0 4px 20px 0 rgba(85, 80, 92, 0.5);
 }
@@ -33,9 +36,12 @@
   color: $dark-grey;
   transition: background-color 0.3s ease-out;
   @include font-body-filters;
-  max-width: 150px;
   width: 100%;
-  height: 35px;
+  height: 55px;
+  &_inactive{
+    background-color: $light-grey;
+		cursor: default;
+  }
 }
 
 .secondary:hover {
