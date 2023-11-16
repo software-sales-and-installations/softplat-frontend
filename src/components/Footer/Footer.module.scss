@@ -4,13 +4,13 @@
 .footer {
   height: 166px;
   background-color: $dark-grey;
-  padding: 30px 80px 0;
+  padding: 30px 80px 20px;
   @include font-body-regular;
   color: $white-standart;
 
   &__content {
     display: grid;
-    grid-template-columns: 110px 245px 375px 410px;
+    grid-template-columns: 110px 260px 400px 410px;
     justify-content: space-between;
   }
 
@@ -27,8 +27,7 @@
     text-align: left;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    margin-top: 18px;
+    margin-left: 16px;
   }
 
   &__link {
@@ -66,4 +65,8 @@
   &__socialIcon:hover {
     color: $black-standart-text;
   }
+
+  // &__item {
+  //   margin-left: 16px;
+  // }
 }
