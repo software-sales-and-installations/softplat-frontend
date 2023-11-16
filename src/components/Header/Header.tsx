@@ -21,7 +21,7 @@ export const Header: FC<IHeader> = ({ loggedIn }) => {
             <HeaderNavbar/>
             <HeaderSearchForm/>
             <div className={styles.btncontainer}>
-                <button type='button' className={styles.btncontainer__likebtn}/>
+            {loggedIn? (<button type='button' className={styles.btncontainer__likebtn}/>) : null}
                 <button type='button' className={styles.btncontainer__shopbtn}/>
                 {loggedIn? (
                     <button type='button' className={styles.btncontainer__profile}><FaRegUser className={styles.btncontainer__profileicon}/></button>
