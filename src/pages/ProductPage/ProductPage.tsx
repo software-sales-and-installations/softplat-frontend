@@ -1,6 +1,6 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import style from './ProductPage.module.scss';
-import { BsHeartFill, BsHeart } from 'react-icons/bs';
+// import { BsHeartFill, BsHeart } from 'react-icons/bs';
 import { Button } from '../../UI/Button/Button';
 import { Checkbox } from '../../UI/Checkbox/Checkbox';
 import { Tooltip } from '../../components/Tooltip/Tooltip';
@@ -10,7 +10,6 @@ export const ProductPage: FC = ({}) => {
   const [totalPrice, setTotalPrice] = useState(19000);
   const [tooltipText, setTooltipText] = useState('');
 
-  const setChecked = () => {};
 
   const handleAddToCart = () => {};
 
