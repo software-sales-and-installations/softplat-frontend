@@ -27,10 +27,12 @@ export const ResultPopup : FC = () =>{
         <div onClick={handleOverlayClick} className={classNames(styles.popup, isOpened ? styles.popup_opened : '')}>
             <div className={styles.popup__container}>
                 <h2 className={styles.popup__role}>{MyRole==='Я покупатель'? 'Покупатель': (MyRole==='Я продавец'? 'Продавец': (MyRole==='Забыли пароль?'? 'Восстановление пароля' : 'Администратор'))}</h2>
-                {MyRole==='Забыли пароль?'|| MyRole==='Я админ'? null : <ToggleButton/>}
+                {MyRole==='Забыли пароль?'|| MyRole==='Я админ'? (
+                    <p className={styles.adminBtn}>Вход</p>
+                ) : <ToggleButton/>}
                 {!toggleState ? 
                     (MyRole==='Забыли пароль?' ? <RecoverPasswordPopup/>: <PopupForAuth/>) : 
-                    (MyRole==='Забыли пароль?' ? <RecoverPasswordPopup/>: <PopupForReg/>)}
+                    (MyRole==='Забыли пароль?' ? <RecoverPasswordPopup/>: (MyRole==='Я админ'? <PopupForAuth/> : <PopupForReg/>))}
             </div>
         </div>
     )

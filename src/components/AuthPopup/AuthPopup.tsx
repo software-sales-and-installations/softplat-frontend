@@ -1,6 +1,5 @@
 import { FC, useState } from 'react';
 import { Popup } from '../../UI/Popup/Popup';
-import { ButtonForAuth } from '../../UI/ButtonForAuth/ButtonForAuth';
 import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';
 import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG } from '../../utils/constants';
@@ -51,17 +50,17 @@ export const PopupForAuth: FC = () => {
 					validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
 					error={errors?.password?.message}
 				/>
-				<div className={styles.checkboxRemember}>
-					<input className={styles.checkboxRemember__input} id='agreement' {...register("remember")} type="checkbox" value="remember"/>
-					<label htmlFor='agreement'>Запомнить меня</label>
+				<div className={styles.checkboxcontainer}>
+					<input className={styles.checkboxcontainer__input} id='agreement' {...register("remember")} type="checkbox" value="remember"/>
+					<label className={styles.checkboxcontainer__label} htmlFor='agreement'>Запомнить меня</label>
 				</div>
 				{authError ? (
 					<p>
 						Неверный логин или пароль.
 					</p>
 				) : null}
-				<div className={styles.button__container}>
-					<ButtonForAuth isValid={isValid} title='Войти'/>
+				<div className={styles.btncontainer}>
+					<Button isDisabled={!isValid} mode='primary'>Войти</Button>
 					<Button type='button' mode='secondary' onClick={handlePasswordPopup}>Забыли пароль?</Button>
 				</div>
 			</form>

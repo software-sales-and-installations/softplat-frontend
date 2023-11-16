@@ -8,13 +8,16 @@ import { RootState } from '../../services/redux/store';
 
 export const ToggleButton: FC<IToggleButton> = () => {
 		const dispatch = useDispatch();
-		const [checked, setChecked] = useState((useSelector((state: RootState) => state.toggleBtn.value)));
+		const toggleBtn = useSelector((state: RootState) => state.toggleBtn.value)
+		const [checked, setChecked] = useState(toggleBtn);
 		function handleClick(){
 			console.log(!checked)
 			dispatch(checkBoxState(!checked))
 			setChecked(!checked)
 		}
-
+		useEffect(()=>{
+			setChecked(toggleBtn)
+		}, [toggleBtn])
 	return (
 		<div className={styles.wrapper}>
 			<input type="checkbox" className={styles.toggle} id="toggleSwitch" checked={checked} onChange={()=>handleClick()}/>

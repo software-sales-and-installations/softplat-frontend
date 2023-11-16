@@ -7,10 +7,6 @@
   border: none;
   width: 100%;
   height: 100%;
-  &_inactive{
-    background-color: #E8ECED;
-		cursor: default;
-  }
 }
 
 .primary {
@@ -19,8 +15,12 @@
   @include font-CTAbody-regular;
   width: 100%;
   height: 55px;
+  &_inactive{
+    background-color: $light-grey;
+		cursor: default;
+    pointer-events: none;
+  }
 }
-
 .primary:hover {
   box-shadow: 0 4px 20px 0 rgba(85, 80, 92, 0.5);
 }
@@ -33,6 +33,10 @@
   @include font-body-filters;
   width: 100%;
   height: 55px;
+  &_inactive{
+    background-color: $light-grey;
+		cursor: default;
+  }
 }
 
 .secondary:hover {
