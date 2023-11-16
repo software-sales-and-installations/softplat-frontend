@@ -1,15 +1,17 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
 .recommended {
-  margin-top: 65px;
+  //   margin-top: 65px;
+  padding: 110px 80px 0;
   &__title {
     margin: 0;
-    font-size: 36px;
-    font-weight: 700;
-    line-height: 110%;
     text-align: start;
+    @include font-h1-bold
   }
 
   &__list {
-    margin-top: 50px;
+    margin-top: 65px;
     list-style: none;
     display: grid;
     grid-template-columns: repeat(5, 320px);
