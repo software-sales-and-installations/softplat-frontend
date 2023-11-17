@@ -5,6 +5,7 @@ import { MainWrapper } from './components/MainWrapper/MainWrapper';
 import { Footer } from './components/Footer/Footer';
 import { ProductPage } from './pages/ProductPage/ProductPage';
 import {FAQ} from './pages/FAQ/FAQ';
+import VendorPage from './pages/VendorPage/VendorPage';
 import Contacts from './pages/Contacts/contacts.tsx';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/product" element={<ProductPage />} />
           <Route path='/faq' element={<FAQ/>} />
+          <Route path='/vendor' element={<VendorPage />} />
           <Route path="/contacts" element={<Contacts />} />
           {/* <Route path="/personal" element={<Personal />} />
           <Route path="/catalog" element={<Сatalog />} />
