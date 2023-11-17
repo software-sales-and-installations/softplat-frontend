@@ -1,0 +1,44 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.vendorPage {
+  padding: 0 80px;
+
+  &__categories {
+    margin-top: 71px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  &__categoriesBtn {
+    margin: 0 5px;
+    padding: 5px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: $dark-grey;
+    color: $white-standart;
+    cursor: pointer;
+    @include font-body-filters;
+    transition: all 0.4s;
+    &:hover {
+      background-color: $accent-lime-button;
+      color: $black-standart-text;
+    }
+  }
+
+  &__products {
+    margin-top: 45px;
+  }
+
+  &__list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(5, 320px);
+    justify-content: space-between;
+    gap: 40px;
+    padding: 0;
+  }
+}

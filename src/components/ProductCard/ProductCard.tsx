@@ -79,7 +79,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <span>{addSpace(price + 3000)} ₽</span>
           <span className={styles.card__tooltip}>
             <button className={styles.card__tooltipBtn}>
-              <BsFillQuestionCircleFill size={12}/>
+              <BsFillQuestionCircleFill size={12} />
             </button>
             <span className={styles.card__tooltipText}>
               Наш специалист установит ПО на ваше устройство в удобное время
@@ -87,10 +87,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </span>
         </div>
       </div>
-      {/* <button className={styles.card__addBtn} type="button" onClick={() => {}}>
-        Добавить в корзину
-      </button> */}
-      <Button mode='primary' >Добавить в корзину</Button>
+      <Button mode="primary">Добавить в корзину</Button>
     </div>
   );
 };

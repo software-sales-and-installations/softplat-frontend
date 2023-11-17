@@ -6,7 +6,7 @@ import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 const VendorInfo: FC<VendorInfoProps> = ({ title, description, img }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const resultText = isExpanded
-    ? description.slice(0, 200).concat('...')
+    ? description.slice(0, 280).concat('...')
     : description;
   const btnText = isExpanded ? 'показать' : 'скрыть';
   const btnIcon = isExpanded ? <BsChevronDown /> : <BsChevronUp />;

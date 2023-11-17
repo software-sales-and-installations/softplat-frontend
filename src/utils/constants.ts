@@ -67,3 +67,43 @@ export const TITLE_FOR_BREADCRUMBS:  {
     title: string;
     url: string;
 }[] = [{id: 1, title: 'Главная', url:''}, {id: 2, title: 'FAQ', url: 'faq'}]
+
+export const CATEGORIZED_TEXT_VENDOR: {
+    id: number;
+    text: string;
+}[]= [
+    {id: 1,
+    text: 'Фоторедактор'}, 
+    {id: 2,
+    text: 'Видеоредактор'},
+    {id: 3,
+    text: 'Векторная графика'},
+    {id: 4,
+    text: 'Дизайн'},
+    {id: 5,
+    text: 'Анимирование'},
+    {id: 6,
+    text: 'Web-разработка'},
+    {id: 7,
+    text: 'Adobe'},
+    {id: 8,
+    text: 'Аудиоредактор'},
+]
+
+export const SELECT_OPTIONS: {
+    label: string;
+    value: string;
+}[] = [
+    {
+      value: 'popularity',
+      label: 'По популярности',
+    },
+    {
+      value: 'recency',
+      label: 'По новизне',
+    },
+    {
+      value: 'price',
+      label: 'По цене',
+    },
+  ];

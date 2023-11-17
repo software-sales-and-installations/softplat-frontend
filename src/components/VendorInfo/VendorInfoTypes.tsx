@@ -1,5 +1,5 @@
 export type VendorInfoProps = {
-    title: string;
-    description: string;
-    img: string;
-  };
+  title: string;
+  description: string;
+  img: string;
+};

@@ -37,7 +37,7 @@ const Recommended: React.FC = (props: Props) => {
       <h2 className={styles.recommended__title}>Рекомендуем к покупке</h2>
       <ul className={styles.recommended__list}>
         {productItems.map(i => (
-          <li className={styles.recommended__item}>
+          <li className={styles.recommended__item} key={i.name}>
             <ProductCard
               name={i.name}
               price={i.price}
