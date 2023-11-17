@@ -16,8 +16,8 @@ const MuiBreadcrumbs = () => {
           Личный кабинет
         </Link>
         <Routes>
-          <Route path="/personal/purchases" element={<p>Мои покупки</p>} />
-          <Route path="/personal/favorites" element={<p>Избранное</p>} />
+          <Route path="/purchases" element={<p>Мои покупки</p>} />
+          <Route path="/favorites" element={<p>Избранное</p>} />
         </Routes>
       </Breadcrumbs>
     </Box>

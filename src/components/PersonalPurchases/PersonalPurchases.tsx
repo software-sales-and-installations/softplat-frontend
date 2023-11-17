@@ -31,9 +31,7 @@ const productItems: {
   },
 ];
 
-type Props = {};
-
-const PersonalPurchases: React.FC = (props: Props) => {
+const PersonalPurchases: React.FC = () => {
   return (
     <section className={styles.personalPurchases}>
       <h2 className={styles.personalPurchases__title}>Мои покупки</h2>

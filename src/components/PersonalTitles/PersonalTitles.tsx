@@ -1,19 +1,17 @@
 import styles from './PersonalTitles.module.scss';
 import { Link } from 'react-router-dom';
 
-type Props = {};
-
-const PersonalTitles: React.FC = (props: Props) => {
+const PersonalTitles: React.FC = () => {
   return (
     <>
       <nav className={styles.personalTitles}>
         <Link
-          to="/personal/purchases"
+          to="purchases"
           className={styles.personalTitles__titles}
         >
           Мои покупки
         </Link>
-        <Link to="/personal/favorites" className={styles.personalTitles__titles}>
+        <Link to="favorites" className={styles.personalTitles__titles}>
           Избранное
         </Link>
         <Link to="settings" className={styles.personalTitles__titles}>

@@ -1,0 +1,54 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.catalogue {
+  // margin-top: 50px;
+  padding: 110px 80px 0;
+
+  &__title {
+    text-align: start;
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0 0 65px 0;
+    @include font-h1-bold;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(4, 410px);
+    justify-content: space-between;
+    row-gap: 60px;
+    column-gap: 40px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__item {
+    position: relative;
+    width: 390px;
+    padding: 40px 10px;
+    height: 190px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0px 4px 20px 0px rgba(57, 57, 57, 0.15);
+
+    & a {
+      text-decoration: none;
+    }
+  }
+
+  &__itemText {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+    color: $black-standart-text;
+  }
+
+  & img {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    object-fit: cover;
+  }
+}

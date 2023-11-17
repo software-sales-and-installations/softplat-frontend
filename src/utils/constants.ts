@@ -23,6 +23,202 @@ export const CATEGORIZED_TEXT: {
     {id: 10,
     text: 'Корпоративные системы'},
 ]
+export const TEXT_FOR_AUTH_CHECKBOX: {
+    id: number;
+    text: string
+} []=[
+    {id: 1,
+    text: 'Запомнить меня'}
+];
+
+export const TEXT_FOR_REG_CHECKBOX: {
+    id: number;
+    text: string
+} []=[
+    {id: 1,
+    text: 'Запомнить меня'},
+    {id: 2,
+    text: 'Я соглашаюсь с политикой обработки персональных данных'}
+];
+export const VALIDATION_SETTINGS = {
+	email: {
+		pattern:
+			/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+		maxLength: 64,
+		messages: {
+			noEmail: 'Необходимо ввести email',
+			invalid: 'Необходимо ввести email в правильном формате',
+			tooLong: 'Слишком длинный email',
+		},
+	},
+	password: {
+		pattern: /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]+$/,
+		minLength: 8,
+		maxLength: 32,
+		messages: {
+			noPassword: 'Необходимо ввести пароль',
+			noRepeatPassword: 'Необходимо повторно ввести пароль',
+			invalid: 'Необходимо ввести пароль в правильном формате',
+			tooShort: 'Слишком короткий пароль',
+			tooLong: 'Слишком длинный пароль',
+			noMatch: 'Пароли не совпадают',
+		},
+	},
+	INN: {
+		pattern: /[0-9]/,
+		minLength: 10,
+		maxLength: 12,
+		messages: {
+			tooShort: 'Слишком короткий ИНН',
+			tooLong: 'Слишком длинный ИНН',
+			invalid: 'Необходимо ввести ИНН в правильном формате',
+			noINN: 'Необходимо ввести ИНН',
+		}
+	},
+	orgName: {
+		pattern: /^[a-zа-яё\s]+$/iu,
+		minLength: 2,
+		maxLength: 32,
+		messages: {
+			tooShort: 'Слишком короткое название',
+			tooLong: 'Слишком длинное название',
+			invalid: 'Только кириллица или латинские буквы',
+			noorgName: 'Необходимо ввести название организации',
+		}
+	},
+	personName: {
+		pattern: /^[a-zа-яё\s]+$/iu,
+		minLength: 2,
+		maxLength: 12,
+		messages: {
+			tooShort: 'Слишком короткое имя',
+			tooLong: 'Слишком длинное имя',
+			invalid: 'Только кириллица или латинские буквы',
+			noName: 'Необходимо ввести имя',
+		}
+	},
+	telephone: {
+		pattern: /[0-9]/,
+		minLength: 11,
+		maxLength: 11,
+		messages: {
+			tooShort: 'Слишком короткий номер',
+			tooLong: 'Слишком длинный номер',
+			invalid: 'Введите только цифры',
+			noName: 'Необходимо ввести номер телефона',
+		}
+	},
+
+};
+export const EMAIL_VALIDATION_CONFIG = {
+	required: {
+		value: true,
+		message: VALIDATION_SETTINGS.email.messages.noEmail,
+	},
+	pattern: {
+		value: VALIDATION_SETTINGS.email.pattern,
+		message: VALIDATION_SETTINGS.email.messages.invalid,
+	},
+	maxLength: {
+		value: VALIDATION_SETTINGS.email.maxLength,
+		message: VALIDATION_SETTINGS.email.messages.tooLong,
+	},
+};
+
+export const PASSWORD_VALIDATION_CONFIG = {
+	required: {
+		value: true,
+		message: VALIDATION_SETTINGS.password.messages.noPassword,
+	},
+	pattern: {
+		value: VALIDATION_SETTINGS.password.pattern,
+		message: VALIDATION_SETTINGS.password.messages.invalid,
+	},
+	minLength: {
+		value: VALIDATION_SETTINGS.password.minLength,
+		message: VALIDATION_SETTINGS.password.messages.tooShort,
+	},
+	maxLength: {
+		value: VALIDATION_SETTINGS.password.maxLength,
+		message: VALIDATION_SETTINGS.password.messages.tooLong,
+	},
+};
+export const INN_VALIDATION_CONFIG = {
+	required: {
+		value: true,
+		message: VALIDATION_SETTINGS.INN.messages.noINN,
+	},
+	pattern: {
+		value: VALIDATION_SETTINGS.INN.pattern,
+		message: VALIDATION_SETTINGS.INN.messages.invalid,
+	},
+	minLength: {
+		value: VALIDATION_SETTINGS.INN.minLength,
+		message: VALIDATION_SETTINGS.INN.messages.tooShort,
+	},
+	maxLength: {
+		value: VALIDATION_SETTINGS.INN.maxLength,
+		message: VALIDATION_SETTINGS.INN.messages.tooLong,
+	},
+}
+export const ORGNAME_VALIDATION_CONFIG = {
+	required: {
+		value: true,
+		message: VALIDATION_SETTINGS.orgName.messages.noorgName,
+	},
+	pattern: {
+		value: VALIDATION_SETTINGS.orgName.pattern,
+		message: VALIDATION_SETTINGS.orgName.messages.invalid,
+	},
+	minLength: {
+		value: VALIDATION_SETTINGS.orgName.minLength,
+		message: VALIDATION_SETTINGS.orgName.messages.tooShort,
+	},
+	maxLength: {
+		value: VALIDATION_SETTINGS.orgName.maxLength,
+		message: VALIDATION_SETTINGS.orgName.messages.tooLong,
+	},
+}
+export const NAME_VALIDATION_CONFIG = {
+	required: {
+		value: true,
+		message: VALIDATION_SETTINGS.personName.messages.noName,
+	},
+	pattern: {
+		value: VALIDATION_SETTINGS.personName.pattern,
+		message: VALIDATION_SETTINGS.personName.messages.invalid,
+	},
+	minLength: {
+		value: VALIDATION_SETTINGS.personName.minLength,
+		message: VALIDATION_SETTINGS.personName.messages.tooShort,
+	},
+	maxLength: {
+		value: VALIDATION_SETTINGS.personName.maxLength,
+		message: VALIDATION_SETTINGS.personName.messages.tooLong,
+	},
+}
+export const TELEPHONE_VALIDATION_CONFIG = {
+	required: {
+		value: true,
+		message: VALIDATION_SETTINGS.telephone.messages.noName,
+	},
+	pattern: {
+		value: VALIDATION_SETTINGS.telephone.pattern,
+		message: VALIDATION_SETTINGS.telephone.messages.invalid,
+	},
+	minLength: {
+		value: VALIDATION_SETTINGS.telephone.minLength,
+		message: VALIDATION_SETTINGS.telephone.messages.tooShort,
+	},
+	maxLength: {
+		value: VALIDATION_SETTINGS.telephone.maxLength,
+		message: VALIDATION_SETTINGS.telephone.messages.tooLong,
+	},
+}
+export const CHOOSE_ROLE: {
+    id: number;
+    title: string
+} []= [{id: 1, title: 'Я покупатель'}, {id: 2, title: 'Я продавец'}, {id: 3, title:'Я админ'}]
 
 export const FOOTER_LINKS: {
     id: number;
@@ -52,3 +248,18 @@ export const CATALOGUE_NAMES:{name: string; img: string}[] = [
   {name: 'Интернет', img: ''},
   {name: 'ERP & CRM', img: ''},
 ];
+export const FAQ_INFO: {
+    id: number;
+    question: string;
+    answer: string[];
+}[] = [
+    {id: 1, question: 'Где найти свой оплаченный заказ?', answer: ['Посетите личный кабинет, раздел Мои покупки.']},
+    {id: 2, question: 'Как с вами связаться?', answer: ['Все доступные способы связи на странице Контакты.']},
+    {id: 3, question: 'Правила обмена и возврата', answer: ['По действующему российскому законодательству, покупатель может в течение 14 календарных дней вернуть любой товар без каких‑либо причин. В такой ситуации главное, чтобы продукция не была ни разу использована и сохранила свой первоначальный вид.', 'Стоит отметить, что программное обеспечение, различные приложения и операционные системы не подпадают под действие данного закона. Однако наши клиенты все равно могут воспользоваться таким правом в течение 14 дней со дня покупки. Нужно помнить, что вернуть можно лишь физические носители — диски. Ключи активации, полученные по электронной почте, не обладают такой гарантией.', 'Такой подход не прихоть, а мера безопасности от взлома компьютеров, хакерских атак и разработки вредоносных программ.']}
+]
+
+export const TITLE_FOR_BREADCRUMBS:  {
+    id: number;
+    title: string;
+    url: string;
+}[] = [{id: 1, title: 'Главная', url:''}, {id: 2, title: 'FAQ', url: 'faq'}]

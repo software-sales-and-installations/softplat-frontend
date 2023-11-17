@@ -19,9 +19,7 @@ const productItems: { name: string; price: number; img: string }[] = [
   },
 ];
 
-type Props = {};``
-
-const PersonalFavorites: React.FC = (props: Props) => {
+const PersonalFavorites: React.FC = () => {
   return (
     <>
       <section className={styles.personalFavorites}>
