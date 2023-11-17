@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import styles from './ProductCard.module.scss';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
@@ -21,10 +21,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   return (
-    <div className={styles.card}>
-      <div className={styles.card__img}>
+    <div className={styles.productCard}>
+      <div className={styles.productCard__img}>
         <img src={img} alt="Изображение продукта" />
-        <button className={styles.card__likeBtn} type="button" onClick={() => {}}>
+        <button
+          className={styles.productCard__likeBtn}
+          type="button"
+          onClick={() => {}}
+        >
           {isLiked ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -60,20 +64,26 @@ const ProductCard: React.FC<ProductCardProps> = ({
           )}
         </button>
       </div>
-      <Link to={`/productcard/${name}`} title={name} className={styles.card__name}>
+      <Link
+        to={`/productcard/${name}`}
+        title={name}
+        className={styles.productCard__name}
+      >
         {name}
       </Link>
-      <div className={styles.card__priceContainer}>
-        <p className={styles.card__price}>{addSpace(price)} ₽</p>
-        <div className={styles.card__installPrice}>
-          <span>с установкой </span>
-          <span>
-            {addSpace(price + 3000)} ₽
-          </span>
+      <div className={styles.productCard__priceContainer}>
+        <p className={styles.productCard__price}>{addSpace(price)} ₽</p>
+        <div className={styles.productCard__installPrice}>
+          <span>с установкой</span>
+          <span>{addSpace(price + 3000)} ₽</span>
           <BsFillQuestionCircleFill />
         </div>
       </div>
-      <button className={styles.card__addBtn} type="button" onClick={() => {}}>
+      <button
+        className={styles.productCard__addBtn}
+        type="button"
+        onClick={() => {}}
+      >
         Добавить в корзину
       </button>
     </div>
