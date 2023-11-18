@@ -28,9 +28,9 @@ const slides: Slider = [
   },
 ];
 
-type Props = {};
+// type Props = {};
 
-const Slider = (props: Props) => {
+const Slider = () => {
 
   return (
 
@@ -44,7 +44,7 @@ const Slider = (props: Props) => {
       className='swiper'
     >
       {slides.map(i => (
-        <SwiperSlide className='swiper-slide'>
+        <SwiperSlide className='swiper-slide' key={i.text}>
           <div
             className='swiper-slide__content'
           >
