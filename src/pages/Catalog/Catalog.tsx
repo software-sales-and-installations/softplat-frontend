@@ -5,9 +5,9 @@ import SelectForm from '../../components/SelectForm/SelectForm';
 import CardsGrid from '../../components/CardsGrid/CardsGrid';
 import { PRODUCT_ITEMS } from '../../utils/constants';
 
-type Props = {};
+// type Props = {};
 
-const Catalog: FC = (props: Props) => {
+const Catalog: FC = () => {
   return (
     <section className={styles.catalog}>
       <h2 className={styles.catalog__title}>Каталог</h2>

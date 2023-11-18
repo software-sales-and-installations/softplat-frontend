@@ -13,9 +13,9 @@ const vendorInfo: VendorInfoProps = {
   img: 'https://xakep.ru/wp-content/uploads/2015/01/Adobe-Logo.jpg',
 };
 
-type Props = {};
+// type Props = {};
 
-const VendorPage: FC = (props: Props) => {
+const VendorPage: FC = () => {
   return (
     <section className={styles.vendorPage}>
       <VendorInfo

@@ -2,9 +2,9 @@ import { PRODUCT_ITEMS } from '../../utils/constants';
 import ProductCard from '../ProductCard/ProductCard';
 import styles from './Recommended.module.scss';
 
-type Props = {};
+// type Props = {};
 
-const Recommended: React.FC = (props: Props) => {
+const Recommended: React.FC = () => {
   return (
     <section className={styles.recommended}>
       <h2 className={styles.recommended__title}>Рекомендуем к покупке</h2>

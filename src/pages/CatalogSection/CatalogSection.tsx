@@ -6,9 +6,9 @@ import { PRODUCT_ITEMS } from '../../utils/constants';
 import SelectForm from '../../components/SelectForm/SelectForm';
 import { Categories } from '../../components/Categories/Categories';
 
-type Props = {};
+// type Props = {};
 
-const CatalogSection: FC = (props: Props) => {
+const CatalogSection: FC = () => {
   const { section } = useParams();
   return (
     <section className={styles.catalogSection}>
