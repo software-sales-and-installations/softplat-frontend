@@ -1,0 +1,25 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.catalogSection {
+  &__title {
+    padding: 0 80px;
+    margin: 75px 0 0;
+    text-align: start;
+    @include font-h1-bold;
+  }
+
+  &__categories {
+    margin-top: 75px;
+  }
+
+  &__selectForm {
+    padding: 0 80px;
+    margin-top: 35px;
+  }
+
+  &__items {
+    padding: 0 80px;
+    margin-top: 40px;
+  }
+}

@@ -13,7 +13,7 @@ const Catalogue: React.FC = (props: Props) => {
       <ul className={styles.catalogue__list}>
         {CATALOGUE_NAMES.map(i => (
           <li className={styles.catalogue__item} key={i.name}>
-            <Link to={`/catalogue/${i.name}`}>
+            <Link to={`/catalog/${i.name}`}>
               <p className={styles.catalogue__itemText}>{i.name}</p>
               <img src={itemImg} alt="Изображение раздела каталога" />
             </Link>

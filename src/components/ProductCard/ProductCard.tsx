@@ -3,13 +3,7 @@ import styles from './ProductCard.module.scss';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { Button } from '../../UI/Button/Button';
-
-type ProductCardProps = {
-  name: string;
-  price: number;
-  img: string;
-  isLiked: boolean;
-};
+import { ProductCardProps } from './ProductCardTypes';
 
 const ProductCard: React.FC<ProductCardProps> = ({
   name,
