@@ -303,3 +303,31 @@ export const SELECT_OPTIONS: {
       label: 'По цене',
     },
   ];
+
+ export const PRODUCT_ITEMS: { name: string; price: number; img: string }[] = [
+	{
+	  name: 'Adobe Photoshop 2023',
+	  price: 19898,
+	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	},
+	{
+	  name: 'Adobe Photoshop 2023',
+	  price: 19898,
+	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	},
+	{
+	  name: 'Adobe Photoshop 2023',
+	  price: 19898,
+	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	},
+	{
+	  name: 'Adobe Photoshop 2023',
+	  price: 19898,
+	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	},
+	{
+	  name: 'Adobe Photoshop 2023',
+	  price: 19898,
+	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	},
+  ];

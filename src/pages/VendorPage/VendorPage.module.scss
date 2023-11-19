@@ -4,6 +4,10 @@
 .vendorPage {
   padding: 0 80px;
 
+  &:first-child {
+    margin-top: 75px;
+  }
+
   &__categories {
     margin-top: 71px;
     padding: 0;
@@ -13,6 +17,7 @@
     flex-wrap: wrap;
     gap: 15px;
   }
+
   &__categoriesBtn {
     margin: 0 5px;
     padding: 5px 20px;
@@ -30,6 +35,10 @@
   }
 
   &__products {
+    margin-top: 45px;
+  }
+
+  &__selectForm {
     margin-top: 45px;
   }
 
