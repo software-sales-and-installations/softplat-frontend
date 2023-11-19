@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { checkBoxState } from '../../UI/ToggleButton/ToggleButtonSlice';
 import { Button } from '../../UI/Button/Button';
 import classNames from 'classnames';
+import { chooseRoleState } from '../../UI/ChooseRole/ChooseRoleSlice';
 
 export const RecoverPasswordPopup : FC =()=>{
 	const {
@@ -27,7 +28,7 @@ export const RecoverPasswordPopup : FC =()=>{
 	};
 	const dispatch = useDispatch();
 	function handleExitClick(){
-		dispatch(checkBoxState(false))
+		dispatch(chooseRoleState('Я покупатель'))
 	}
     return(
     <Popup>
