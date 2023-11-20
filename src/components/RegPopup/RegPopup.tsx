@@ -10,9 +10,12 @@ import styles from '../../UI/Popup/Popup.module.scss';
 import { Button } from '../../UI/Button/Button';
 import { useDispatch } from 'react-redux';
 import { checkBoxState } from '../../UI/ToggleButton/ToggleButtonSlice';
+import { checkEmail, signUpUser } from '../../services/redux/slices/user/user';
+import { ISignUpData } from '../../UI/Popup/PopupTypes';
+import { useAppDispatch } from '../../services/redux/store';
 
 export const PopupForReg: FC = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const [authError, setAuthError] = useState(false);
 	const {
 		register,
@@ -23,10 +26,10 @@ export const PopupForReg: FC = () => {
 		getValues,
 	} = useForm<ISignUpFields>({ mode: 'onChange'});
 
-	const onSubmit: SubmitHandler<IShippingFields> = (data) => {
-		console.log(data);
-		reset;
-	};
+	// const onSubmit: SubmitHandler<IShippingFields> = (data) => {
+	// 	console.log(data);
+	// 	reset;
+	// };
 	useEffect(() => {
 		reset();
 		setAuthError(false);
@@ -34,9 +37,39 @@ export const PopupForReg: FC = () => {
 	function handleExitClick(){
 		dispatch(checkBoxState(false))
 	}
+	const [userData, setUserData] = useState<ISignUpData>({
+		email: '',
+		password: '',
+		personName: '',
+		telephone: '',
+		repeatPassword: '',
+	});
+
+	const onSubmitResData: SubmitHandler<ISignUpFields> = () => {
+		console.log('kj')
+		const userEmail = getValues('email');
+		const userPassword = getValues('password');
+		dispatch(signUpUser(userData))
+			.unwrap()
+			.then(() => {
+				setUserData({
+					email: userEmail,
+					password: userPassword,
+					personName: '',
+		telephone: '',
+		repeatPassword: ''
+				
+				});
+				
+			})
+			.catch((err: any) => {
+				console.log(' dispatch(checkEmail(userEmail)) res', err);
+				setAuthError(true);
+			});
+	};
 	return (
 		<Popup>
-			<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+			<form className={styles.form} onSubmit={handleSubmit(onSubmitResData)}>
 				<Input
 					inputType={InputTypes.personName}
 					labelText='Ваше имя'
@@ -93,7 +126,7 @@ export const PopupForReg: FC = () => {
 					</p>
 				) : null}
 				<div className={styles.btncontainer}>
-					<Button isDisabled={!isValid} mode='primary'>Зарегистрироваться</Button>
+					<Button isDisabled={!isValid} type='submit' mode='primary'>Зарегистрироваться</Button>
 					<Button onClick={handleExitClick} mode='secondary' type='button'>Отмена</Button>
 				</div>
 			</form>

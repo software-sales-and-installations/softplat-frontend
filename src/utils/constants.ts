@@ -1,3 +1,5 @@
+export const API_BASE_URL = '//softplat.acceleratorpracticum.ru'
+
 export const CATEGORIZED_TEXT: {
     id: number;
     text: string;
