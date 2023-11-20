@@ -23,8 +23,8 @@
     color: $dark-grey;
     text-decoration: none;
     @include font-body-regular;
-}
-.link{
-    color: #55505C;
-    text-decoration: none;
+    &_active {
+        color: $black-standart-text;
+        font-weight: 700; 
+    }
 }

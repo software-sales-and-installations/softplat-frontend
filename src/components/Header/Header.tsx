@@ -17,7 +17,7 @@ export const Header: FC<IHeader> = ({ loggedIn }) => {
     const dispatch = useDispatch();
     return (
         <header className={styles.header}>
-            <Link to='/' className={styles.header__logo}>Logo</Link>
+            <Link to='/catalog' className={styles.header__logo}>Logo</Link>
             <HeaderNavbar/>
             <HeaderSearchForm/>
             <div className={styles.btncontainer}>
