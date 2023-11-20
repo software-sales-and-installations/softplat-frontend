@@ -9,6 +9,7 @@ import VendorPage from './pages/VendorPage/VendorPage';
 import Contacts from './pages/Contacts/contacts.tsx';
 import Catalog from './pages/Catalog/Catalog.tsx';
 import CatalogSection from './pages/CatalogSection/CatalogSection.tsx';
+import Personal from './pages/Personal/Personal.tsx';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/catalog/:section" element={<CatalogSection />} />
+          <Route path="/personal/*" element={<Personal />} />
           {/* <Route path="/personal" element={<Personal />} />
           <Route path="/productcard" element={<ProductCard />} />
           <Route path="/cart" element={<Cart />} />

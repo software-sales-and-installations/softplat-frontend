@@ -1,0 +1,24 @@
+.personalPurchases {
+    margin-top: 65px;
+    margin-left: 150px;
+    &__title {
+        margin: 0;
+        font-size: 36px;
+        font-weight: 600;
+        line-height: 50px;
+        text-align: start;
+    }
+
+    &__list {
+        margin-top: 35px;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 0;
+    }
+
+    &__item {
+      background-color: white;
+    }
+}
