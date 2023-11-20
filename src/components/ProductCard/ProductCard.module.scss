@@ -1,21 +1,24 @@
-.productCard {
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.card {
   display: flex;
   flex-direction: column;
-  width: 320px;
-  height: 498px;
+  width: 290px;
+  height: 460px;
+  padding: 15px 15px 25px 15px;
   border-radius: 20px;
   box-shadow: 0px 4px 20px 0px rgba(57, 57, 57, 0.15);
-  transition: box-shadow 0.3s ease;
-  padding: 16px;
+  transition: box-shadow 0.15s ease;
 
   &:hover {
-    box-shadow: 0px 4px 20px 0px #c9fa4c;
+    box-shadow: 0px 4px 20px 0px $dark-grey;
   }
 
   &__img {
     width: 100%;
-    height: 293px;
-    background-color: bisque;
+    min-height: 295px;
+    background-color: $light-grey;
     position: relative;
     object-fit: cover;
   }
@@ -29,6 +32,7 @@
   &__likeBtn {
     width: 35px;
     height: 35px;
+    padding: 0;
     position: absolute;
     top: 0;
     left: 0;
@@ -38,26 +42,32 @@
     cursor: pointer;
   }
 
+  &__likeBtn svg {
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+  }
+
+  &__likeBtn svg:hover {
+    opacity: 1;
+  }
+
   &__name {
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 120%;
     text-align: start;
-    margin: 12px 0 0 0;
+    margin: 13px 0 0 0;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     text-decoration: none;
-    color: black;
-        padding: 0 16px;
+    color: $black-standart-text;
+    @include font-body-bold;
   }
 
   &__priceContainer {
+    height: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 25px 0 0 0;
+    margin: 24px 0;
   }
 
   &__price {
@@ -66,54 +76,86 @@
     font-weight: 700;
     line-height: 20px;
     text-wrap: nowrap;
-    
   }
 
   &__installPrice {
     height: 24px;
     padding: 4px 8px;
     border-radius: 16px;
-    background-color: #55505c;
-    color: white;
+    background-color: $dark-grey;
+    color: $white-standart;
     display: flex;
     align-items: center;
     gap: 8px;
-    
   }
 
   &__installPrice span {
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 10px;
+    @include font-body-signature;
   }
 
-  &__installPrice span:last-of-type {
+  &__installPrice span:nth-of-type(2) {
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
     line-height: 10px;
   }
 
+  &__tooltip {
+    position: relative;
+  }
+
+  &__tooltipBtn {
+    width: 12px;
+    height: 12px;
+    border: none;
+    padding: 0;
+    outline: none;
+    background-color: transparent;
+  }
+
+  &__tooltipBtn svg {
+    fill: $light-grey;
+
+    &:hover {
+      fill: $white-standart;
+    }
+  }
+
+  &__tooltipBtn:hover + .card__tooltipText,
+  &__tooltipBtn:focus + .card__tooltipText {
+    display: block;
+  }
+
+  &__tooltipText {
+    display: none;
+    width: 138px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: $light-grey;
+    color: $dark-grey;
+    position: absolute;
+    bottom: 15px;
+    left: -128px;
+    z-index: 5;
+    text-align: start;
+    @include font-body-signature;
+  }
+
   &__addBtn {
     width: 100%;
     height: 55px;
-    margin-top: 26px;
+    margin-top: 24px;
     border-radius: 32px;
     outline: none;
     border: none;
-    background-color: #c5f44c;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 25px;
+    background-color: $accent-lime-button;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    @include font-CTAbody-regular;
   }
 
   &__addBtn:hover {
-    background-color: #55505c;
-    color: white;
+    background-color: $dark-grey;
+    color: $white-standart;
   }
-
 }

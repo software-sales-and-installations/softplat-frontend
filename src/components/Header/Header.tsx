@@ -9,6 +9,7 @@ import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { popupState } from '../../UI/Popup/PopupSlice';
 import { useDispatch } from 'react-redux';
+import { ResultPopup } from '../ResultPopup/ResultPopup';
 
 export const Header: FC<IHeader> = ({ loggedIn }) => {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ export const Header: FC<IHeader> = ({ loggedIn }) => {
           </button>
         )}
       </div>
+      <ResultPopup />
     </header>
   );
 };

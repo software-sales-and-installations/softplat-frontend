@@ -30,4 +30,3 @@ export const HeaderNavbar: FC = () => {
     </nav>
   );
 };
-

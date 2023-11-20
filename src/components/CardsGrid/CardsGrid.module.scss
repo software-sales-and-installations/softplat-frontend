@@ -1,0 +1,8 @@
+.list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, 320px);
+  justify-content: space-between;
+  gap: 40px;
+  padding: 0;
+}

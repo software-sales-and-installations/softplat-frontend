@@ -1,14 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import styles from './ProductCard.module.scss';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-
-type ProductCardProps = {
-  name: string;
-  price: number;
-  img: string;
-  isLiked: boolean;
-};
+import { Button } from '../../UI/Button/Button';
+import { ProductCardProps } from './ProductCardTypes';
 
 const ProductCard: React.FC<ProductCardProps> = ({
   name,
@@ -21,11 +16,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   return (
-    <div className={styles.productCard}>
-      <div className={styles.productCard__img}>
+    <div className={styles.card}>
+      <div className={styles.card__img}>
         <img src={img} alt="Изображение продукта" />
         <button
-          className={styles.productCard__likeBtn}
+          className={styles.card__likeBtn}
           type="button"
           onClick={() => {}}
         >
@@ -67,25 +62,26 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <Link
         to={`/productcard/${name}`}
         title={name}
-        className={styles.productCard__name}
+        className={styles.card__name}
       >
         {name}
       </Link>
-      <div className={styles.productCard__priceContainer}>
-        <p className={styles.productCard__price}>{addSpace(price)} ₽</p>
-        <div className={styles.productCard__installPrice}>
-          <span>с установкой</span>
+      <div className={styles.card__priceContainer}>
+        <p className={styles.card__price}>{addSpace(price)} ₽</p>
+        <div className={styles.card__installPrice}>
+          <span>с установкой </span>
           <span>{addSpace(price + 3000)} ₽</span>
-          <BsFillQuestionCircleFill />
+          <span className={styles.card__tooltip}>
+            <button className={styles.card__tooltipBtn}>
+              <BsFillQuestionCircleFill size={12} />
+            </button>
+            <span className={styles.card__tooltipText}>
+              Наш специалист установит ПО на ваше устройство в удобное время
+            </span>
+          </span>
         </div>
       </div>
-      <button
-        className={styles.productCard__addBtn}
-        type="button"
-        onClick={() => {}}
-      >
-        Добавить в корзину
-      </button>
+      <Button mode="primary">Добавить в корзину</Button>
     </div>
   );
 };
