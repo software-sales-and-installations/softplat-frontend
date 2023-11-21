@@ -1,0 +1,10 @@
+@import '../../styles/abstract/constants.scss';
+
+.personalSettingsData {
+    &__btncontainer {
+        display: flex;
+        justify-content: space-between;
+        gap: 40px;
+        max-width: 750px;
+    }
+}

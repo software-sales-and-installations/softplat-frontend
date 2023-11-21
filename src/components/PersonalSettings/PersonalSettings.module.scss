@@ -1,0 +1,39 @@
+.personalSettings {
+  margin-top: 65px;
+  margin-left: 160px;
+  max-width: 750px;
+  width: 100%;
+  &__title {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 50px;
+    text-align: start;
+  }
+  &__subtitle {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 35px;
+    text-align: start;
+    margin-top: 9px;
+  }
+  &__titles {
+    margin-top: 53px;
+    text-align: start;
+  }
+  &__data {
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 35px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    padding: 5px 15px;
+  }
+  &__data:focus,
+  &__data:hover {
+    background-color: rgba(201, 250, 76, 1);
+    border-bottom: 2px solid #55505c;
+  }
+}
