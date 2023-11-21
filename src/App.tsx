@@ -11,6 +11,7 @@ import Contacts from './pages/Contacts/contacts.tsx';
 import CatalogSection from './pages/CatalogSection/CatalogSection.tsx';
 import Personal from './pages/Personal/Personal.tsx';
 import { Producers } from './pages/Producers/Producers.tsx';
+import { ShoppingCart } from './pages/ShoppingCart/ShoppingCart.tsx';
 
 function App() {
   return (
@@ -29,9 +30,10 @@ function App() {
           <Route path="/personal/*" element={<Personal />} />
           <Route path='/producers' element ={<Producers/>}/>
           <Route path='/producers/:vendor' element={<VendorPage/>}/>
+          <Route path="/cart" element={<ShoppingCart />} />
+
           {/* <Route path="/personal" element={<Personal />} />
           <Route path="/productcard" element={<ProductCard />} />
-          <Route path="/cart" element={<Cart />} />
           <Route path="/payments" element={<Payments />} />
           <Route path="/successfulpurchase" element={<SuccessfulPurchase />} />
           <Route path="error" element={<Error />} />
