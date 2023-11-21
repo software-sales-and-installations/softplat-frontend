@@ -1,4 +1,4 @@
 export interface ICheckboxProps {
-    onCheck: () => void;
-    label: string;
-  }
+  onCheck: (isChecked: boolean) => void;
+  label: string;
+}
