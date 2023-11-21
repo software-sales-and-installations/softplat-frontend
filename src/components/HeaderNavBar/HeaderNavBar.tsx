@@ -13,7 +13,7 @@ export const HeaderNavbar: FC = () => {
                     <Link to='/catalog' className={classNames(styles.link, location.pathname==='/catalog' ? styles.link_active : '')}>Каталог</Link>
                 </li>
                 <li className={styles.item}>
-                    <button type='button' className={styles.button}>Производители</button>
+                    <Link to='/producers' className={classNames(styles.link, location.pathname==='/producers' ? styles.link_active : '')}>Производители</Link>
                 </li>
                 <li className={styles.item}>
                     <Link to='/faq' className={classNames(styles.link, location.pathname==='/faq' ? styles.link_active : '')}>FAQ</Link>
