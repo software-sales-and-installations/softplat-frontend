@@ -14,7 +14,7 @@ export const AccordionButton: FC<IAccordionButton> =({question, answer}) =>{
             </button>
             {answer.map((i)=>{
                 return(
-                <p className={classNames(styles.answer, isClicked ? styles.answer_opened : '')}>{i}</p>
+                <p key={i.id} className={classNames(styles.answer, isClicked ? styles.answer_opened : '')}>{i.text}</p>
             )})}
             
         </div>

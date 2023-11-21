@@ -4,15 +4,9 @@
   display: flex;
   justify-content: space-between;
   border-radius: 20px;
-  box-shadow: 0px 4px 20px 0px rgba(57, 57, 57, 0.15);
   transition: box-shadow 0.3s ease;
   padding: 16px;
   margin-bottom: 5px;
-
-
-  &:hover {
-    box-shadow: 0px 4px 20px 0px #c9fa4c;
-  }
 
   &__img {
     width: 110px;

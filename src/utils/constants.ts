@@ -250,24 +250,24 @@ export const FOOTER_LINKS: {
     {id: 6,
     text: 'Политика конфиденциальности', link: '/privacy-policy'}
 ]
-export const CATALOGUE_NAMES:{name: string; img: string}[] = [
-  {name: 'Офисные приложения', img: ''},
-  {name: 'Системное ПО', img: ''},
-  {name: 'Мультимедиа', img: ''},
-  {name: 'Конвекторы', img: ''},
-  {name: 'Архиваторы', img: ''},
-  {name: 'Безопасность', img: ''},
-  {name: 'Интернет', img: ''},
-  {name: 'ERP & CRM', img: ''},
+export const CATALOGUE_NAMES:{name: string; img: string; pathName: string}[] = [
+  {name: 'Офисные приложения', img: '', pathName: 'office-apps'},
+  {name: 'Системное ПО', img: '', pathName: 'system-apps'},
+  {name: 'Мультимедиа', img: '', pathName: 'media-apps'},
+  {name: 'Конвекторы', img: '', pathName: 'convectors'},
+  {name: 'Архиваторы', img: '', pathName: 'archivers'},
+  {name: 'Безопасность', img: '', pathName: 'security'},
+  {name: 'Интернет', img: '', pathName: 'internet'},
+  {name: 'ERP & CRM', img: '', pathName: 'erp-crm'},
 ];
 export const FAQ_INFO: {
     id: number;
     question: string;
-    answer: string[];
+    answer: {id: number, text: string}[]
 }[] = [
-    {id: 1, question: 'Где найти свой оплаченный заказ?', answer: ['Посетите личный кабинет, раздел Мои покупки.']},
-    {id: 2, question: 'Как с вами связаться?', answer: ['Все доступные способы связи на странице Контакты.']},
-    {id: 3, question: 'Правила обмена и возврата', answer: ['По действующему российскому законодательству, покупатель может в течение 14 календарных дней вернуть любой товар без каких‑либо причин. В такой ситуации главное, чтобы продукция не была ни разу использована и сохранила свой первоначальный вид.', 'Стоит отметить, что программное обеспечение, различные приложения и операционные системы не подпадают под действие данного закона. Однако наши клиенты все равно могут воспользоваться таким правом в течение 14 дней со дня покупки. Нужно помнить, что вернуть можно лишь физические носители — диски. Ключи активации, полученные по электронной почте, не обладают такой гарантией.', 'Такой подход не прихоть, а мера безопасности от взлома компьютеров, хакерских атак и разработки вредоносных программ.']}
+    {id: 1, question: 'Где найти свой оплаченный заказ?', answer: [{id: 1, text: 'Посетите личный кабинет, раздел Мои покупки.'}]},
+    {id: 2, question: 'Как с вами связаться?', answer: [{id: 1, text: 'Все доступные способы связи на странице Контакты.'}]},
+    {id: 3, question: 'Правила обмена и возврата', answer: [{id: 1, text: 'По действующему российскому законодательству, покупатель может в течение 14 календарных дней вернуть любой товар без каких‑либо причин. В такой ситуации главное, чтобы продукция не была ни разу использована и сохранила свой первоначальный вид.'},{id: 2, text: 'Стоит отметить, что программное обеспечение, различные приложения и операционные системы не подпадают под действие данного закона. Однако наши клиенты все равно могут воспользоваться таким правом в течение 14 дней со дня покупки. Нужно помнить, что вернуть можно лишь физические носители — диски. Ключи активации, полученные по электронной почте, не обладают такой гарантией.'}, {id: 3, text: 'Такой подход не прихоть, а мера безопасности от взлома компьютеров, хакерских атак и разработки вредоносных программ.'}]}
 ]
 
 export const TITLE_FOR_BREADCRUMBS:  {
@@ -316,28 +316,33 @@ export const SELECT_OPTIONS: {
     },
   ];
 
- export const PRODUCT_ITEMS: { name: string; price: number; img: string }[] = [
+ export const PRODUCT_ITEMS: { id: number; name: string; price: number; img: string }[] = [
 	{
+	  id: 1,
 	  name: 'Adobe Photoshop 2023',
 	  price: 19898,
 	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
 	},
 	{
+	  id: 2,
 	  name: 'Adobe Photoshop 2023',
 	  price: 19898,
 	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
 	},
 	{
+	  id: 3,
 	  name: 'Adobe Photoshop 2023',
 	  price: 19898,
 	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
 	},
 	{
+	  id: 4,
 	  name: 'Adobe Photoshop 2023',
 	  price: 19898,
 	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
 	},
 	{
+	  id: 5,
 	  name: 'Adobe Photoshop 2023',
 	  price: 19898,
 	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
@@ -355,3 +360,61 @@ export const SELECT_OPTIONS: {
 	{id: 7, label: PayPAlImg, title: "PayPal", description: 'Компания Adobe — ведущий мировой разработчик революционных программных продуктов для любого вида данных, включая текстовую информацию, графические изображения, видео и web-контент. Adobe Systems является правообладателями формата PDF и TIFF. В сентябре 2022 года Adobe объявила о покупке сервиса Figma за 20 млн $. В феврале 2023 года Еврокомиссия озвучила намерение проверить эту сделку из-за повышенной опасности снижения конкуренции на рынке ПО для интерактивного дизайна. В марте 2023 года Adobe представила собственный ИИ-сервис для генерации изображений по описаниям на естественном языке. В сентябре 2023 года компания завершила процесс бета-тестирования продукта и открыла его широкой публике на коммерческой основе.'},
 	{id: 8, label: MicrosoftImg, title: 'Microsoft', description: 'Компания Adobe — ведущий мировой разработчик революционных программных продуктов для любого вида данных, включая текстовую информацию, графические изображения, видео и web-контент. Adobe Systems является правообладателями формата PDF и TIFF. В сентябре 2022 года Adobe объявила о покупке сервиса Figma за 20 млн $. В феврале 2023 года Еврокомиссия озвучила намерение проверить эту сделку из-за повышенной опасности снижения конкуренции на рынке ПО для интерактивного дизайна. В марте 2023 года Adobe представила собственный ИИ-сервис для генерации изображений по описаниям на естественном языке. В сентябре 2023 года компания завершила процесс бета-тестирования продукта и открыла его широкой публике на коммерческой основе.'}
   ]
+
+  
+export const PURCHASES_ITEMS_CABINET: {
+	id: number;
+	img: string;
+	name: string;
+	brand: string;
+	describe: string;
+	data: string;
+  }[] = [
+	{
+	  id: 1,
+	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	  name: 'Название программного обеспечения',
+	  brand: 'Бренд',
+	  describe: 'Описание',
+	  data: '01/10/2023',
+	},
+	{
+	  id: 2,
+	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	  name: 'Название программного обеспечения',
+	  brand: 'Бренд',
+	  describe: 'Описание',
+	  data: '01/10/2023',
+	},
+	{
+	  id: 3,
+	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	  name: 'Название программного обеспечения',
+	  brand: 'Бренд',
+	  describe: 'Описание',
+	  data: '01/10/2023',
+	},
+  ];
+
+  
+export const PRODUCT_ITEMS_LIKED: { id: number; name: string; price: number; img: string }[] = [
+	{
+	  id: 1,
+	  name: 'Название программного обеспечения',
+	  price: 19898,
+	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	},
+	{
+	  id: 2,
+	  name: 'Название программного обеспечения',
+	  price: 19898,
+	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	},
+	{
+	  id: 3,
+	  name: 'Название программного обеспечения',
+	  price: 19898,
+	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	},
+  ];
+  
