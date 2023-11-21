@@ -12,19 +12,12 @@
     margin: 0;
     padding: 0;
 }
-.button{
-    border: none;
-    background-color: transparent;
-    color: $dark-grey;
-    cursor: pointer;
-    @include font-body-regular;
-}
 .link{
     color: $dark-grey;
     text-decoration: none;
     @include font-body-regular;
-}
-.link{
-    color: #55505C;
-    text-decoration: none;
+    &_active {
+        color: $black-standart-text;
+        font-weight: 700; 
+    }
 }
