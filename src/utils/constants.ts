@@ -248,15 +248,15 @@ export const FOOTER_LINKS: {
     {id: 6,
     text: 'Политика конфиденциальности', link: '/privacy-policy'}
 ]
-export const CATALOGUE_NAMES:{name: string; img: string}[] = [
-  {name: 'Офисные приложения', img: ''},
-  {name: 'Системное ПО', img: ''},
-  {name: 'Мультимедиа', img: ''},
-  {name: 'Конвекторы', img: ''},
-  {name: 'Архиваторы', img: ''},
-  {name: 'Безопасность', img: ''},
-  {name: 'Интернет', img: ''},
-  {name: 'ERP & CRM', img: ''},
+export const CATALOGUE_NAMES:{name: string; img: string; pathName: string}[] = [
+  {name: 'Офисные приложения', img: '', pathName: 'office-apps'},
+  {name: 'Системное ПО', img: '', pathName: 'system-apps'},
+  {name: 'Мультимедиа', img: '', pathName: 'media-apps'},
+  {name: 'Конвекторы', img: '', pathName: 'convectors'},
+  {name: 'Архиваторы', img: '', pathName: 'archivers'},
+  {name: 'Безопасность', img: '', pathName: 'security'},
+  {name: 'Интернет', img: '', pathName: 'internet'},
+  {name: 'ERP & CRM', img: '', pathName: 'erp-crm'},
 ];
 export const FAQ_INFO: {
     id: number;
