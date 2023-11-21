@@ -2,7 +2,7 @@ import { FC } from 'react';
 import styles from './CatalogSection.module.scss';
 import { useParams } from 'react-router-dom';
 import CardsGrid from '../../components/CardsGrid/CardsGrid';
-import { PRODUCT_ITEMS } from '../../utils/constants';
+import { CATALOGUE_NAMES, PRODUCT_ITEMS } from '../../utils/constants';
 import SelectForm from '../../components/SelectForm/SelectForm';
 import { Categories } from '../../components/Categories/Categories';
 
@@ -10,9 +10,11 @@ import { Categories } from '../../components/Categories/Categories';
 
 const CatalogSection: FC = () => {
   const { section } = useParams();
+
+  const catalogName = CATALOGUE_NAMES.find(item => item.pathName === section);
   return (
     <section className={styles.catalogSection}>
-      <h2 className={styles.catalogSection__title}>{section}</h2>
+      <h2 className={styles.catalogSection__title}>{catalogName?.name}</h2>
       <div className={styles.catalogSection__categories}>
         <Categories />
       </div>
