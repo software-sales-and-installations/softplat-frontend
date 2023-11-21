@@ -35,9 +35,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
               <path
                 d="M6.29711 9.2141C3.7343 11.7769 3.7343 15.9321 6.29711 18.4949L17.5001 29.6978L28.7029 18.4949C31.2657 15.9321 31.2657 11.7769 28.7029 9.2141C26.1401 6.65129 21.9849 6.65129 19.4221 9.21411L17.5001 11.1363L15.5779 9.2141C13.0151 6.65129 8.85993 6.65129 6.29711 9.2141Z"
                 stroke="#55505C"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           ) : (
@@ -51,9 +51,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
               <path
                 d="M6.29711 9.2141C3.7343 11.7769 3.7343 15.9321 6.29711 18.4949L17.5001 29.6978L28.7029 18.4949C31.2657 15.9321 31.2657 11.7769 28.7029 9.2141C26.1401 6.65129 21.9849 6.65129 19.4221 9.21411L17.5001 11.1363L15.5779 9.2141C13.0151 6.65129 8.85993 6.65129 6.29711 9.2141Z"
                 stroke="#55505C"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           )}
