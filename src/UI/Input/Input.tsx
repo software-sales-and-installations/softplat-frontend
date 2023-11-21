@@ -2,12 +2,12 @@ import styles from './Input.module.scss';
 import { IInput } from './InputTypes';
 import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
+import { PatternFormat } from 'react-number-format';
 
 export const Input: FC<IInput> = ({
 	inputType,
 	labelText,
 	value,
-	color = 'white',
 	readOnly = false,
 	showPasswordButton = false,
 	validation,
@@ -27,7 +27,7 @@ export const Input: FC<IInput> = ({
 	const inputTextType =
 		inputType === 'password' && isPasswordHidden === false
 			? 'text'
-			: inputType === 'repeatPassword'
+			: inputType === 'confirmPassword'
 			? 'password'
 			: inputType;
 
@@ -44,6 +44,22 @@ export const Input: FC<IInput> = ({
 						) : null}
 						
 					</div>
+					{/* {inputType==='telephone'?
+					<PatternFormat
+						onChange={ onChange ? onChange: (e) => {
+										validation.onChange(e)
+								  }
+						}
+						className={styles.input__field}
+						type='tel'
+						name='telephone'
+						id='telephone'
+						readOnly={readOnly}
+						value={value}
+    					format='+7 ### ### ## ##'
+    					allowEmptyFormatting
+    					
+  					/>: ( */}
 					<input
 						{...validation}
 						onChange={ onChange ? onChange: (e) => {
@@ -60,6 +76,7 @@ export const Input: FC<IInput> = ({
 						maxLength={inputTextType === 'date' ? 8 : undefined}
 						value={readOnly && value ? value : undefined}
 					/>
+					{/* )} */}
 					<span className={styles.input__error}>{error ? error : (inputType === 'password'? 
 						<p className={styles.input__help}>Пароль может содержать буквы, цифры и знаки препинания</p>
 						: '')}

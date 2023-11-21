@@ -1,23 +1,12 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
 	fetchCheckEmail,
-	// fetchDeleteUser,
-	// fetchEditAvatar,
-	// fetchEditFavGenres,
-	// fetchEditUserInfo,
-	// fetchGetRecomendations,
-	// fetchGetUserInfo,
-	// fetchPasswordRecovery,
-	// fetchResetPassword,
-	// fetchSignIn,
 	fetchSignUp,
 } from './userApi';
 import {
 	IUser,
 	ISignInData,
 	ISignUpData,
-	// IResetPasswordData,
-	// IEditProfileData,
 } from '../../../../UI/Popup/PopupTypes';
 
 export interface IUserState {
@@ -25,19 +14,6 @@ export interface IUserState {
 	error: unknown;
 	user: IUser;
 }
-
-// export const signInUser = createAsyncThunk(
-// 	'@@user/signIn',
-// 	async (data: ISignInData, { fulfillWithValue, rejectWithValue }) => {
-// 		try {
-// 			const response = await fetchSignIn(data);
-// 			const json = await response.json();
-// 			return fulfillWithValue(json.access);
-// 		} catch (error: unknown) {
-// 			return rejectWithValue(error);
-// 		}
-// 	}
-// );
 
 export const checkEmail = createAsyncThunk(
 	'@@user/checkEmail',
@@ -64,125 +40,6 @@ export const signUpUser = createAsyncThunk(
 	}
 );
 
-// export const recoverPassword = createAsyncThunk(
-// 	'@@user/recoverPassword',
-// 	async (data: string, { fulfillWithValue, rejectWithValue }) => {
-// 		try {
-// 			const response = await fetchPasswordRecovery(data);
-// 			const responseData = { status: response.status, ok: response.ok };
-// 			return fulfillWithValue(responseData);
-// 		} catch (error: unknown) {
-// 			return rejectWithValue(error);
-// 		}
-// 	}
-// );
-
-// export const resetPassword = createAsyncThunk(
-// 	'@@user/resetPassword',
-// 	async (data: IResetPasswordData, { fulfillWithValue, rejectWithValue }) => {
-// 		try {
-// 			const response = await fetchResetPassword(data);
-// 			const responseData = { status: response.status, ok: response.ok };
-// 			return fulfillWithValue(responseData);
-// 		} catch (error: unknown) {
-// 			return rejectWithValue(error);
-// 		}
-// 	}
-// );
-
-// export const getUserInfo = createAsyncThunk(
-// 	'@@user/getUserInfo',
-// 	async (token: string, { fulfillWithValue, rejectWithValue }) => {
-// 		try {
-// 			const response = await fetchGetUserInfo(token);
-// 			const json = await response.json();
-// 			return fulfillWithValue(json);
-// 		} catch (error: unknown) {
-// 			return rejectWithValue(error);
-// 		}
-// 	}
-// );
-
-// export const getRecomendations = createAsyncThunk(
-// 	'@@user/getRecomendations',
-// 	async (token: string, { fulfillWithValue, rejectWithValue }) => {
-// 		try {
-// 			const response = await fetchGetRecomendations(token);
-// 			const json = await response.json();
-// 			return fulfillWithValue(json);
-// 		} catch (error: unknown) {
-// 			return rejectWithValue(error);
-// 		}
-// 	}
-// );
-
-// export const editUserInfo = createAsyncThunk(
-// 	'@@user/editUserInfo',
-// 	async (
-// 		arg: {
-// 			data: IEditProfileData;
-// 			token: string;
-// 		},
-// 		{ fulfillWithValue, rejectWithValue }
-// 	) => {
-// 		const { data, token } = arg;
-// 		try {
-// 			const response = await fetchEditUserInfo(data, token);
-// 			const json = await response.json();
-// 			return fulfillWithValue(json);
-// 		} catch (error: unknown) {
-// 			return rejectWithValue(error);
-// 		}
-// 	}
-// );
-
-// export const editFavGenres = createAsyncThunk(
-// 	'@@user/editFavGenres',
-// 	async (
-// 		arg: { data: { fav_genres: number[] }; token: string },
-// 		{ fulfillWithValue, rejectWithValue }
-// 	) => {
-// 		const { data, token } = arg;
-// 		try {
-// 			const response = await fetchEditFavGenres(data, token);
-// 			const json = await response.json();
-// 			return fulfillWithValue(json);
-// 		} catch (error: unknown) {
-// 			return rejectWithValue(error);
-// 		}
-// 	}
-// );
-
-// export const editAvatars = createAsyncThunk(
-// 	'@@user/editAvatars',
-// 	async (
-// 		arg: { data: { avatar: number }; token: string },
-// 		{ fulfillWithValue, rejectWithValue }
-// 	) => {
-// 		const { data, token } = arg;
-// 		try {
-// 			const response = await fetchEditAvatar(data, token);
-// 			const json = await response.json();
-// 			return fulfillWithValue(json);
-// 		} catch (error: unknown) {
-// 			return rejectWithValue(error);
-// 		}
-// 	}
-// );
-
-// export const deleteUser = createAsyncThunk(
-// 	'@@user/deleteUser',
-// 	async (token: string, { fulfillWithValue, rejectWithValue }) => {
-// 		try {
-// 			const response = await fetchDeleteUser(token);
-// 			const responseData = { status: response.status, ok: response.ok };
-// 			return fulfillWithValue(responseData);
-// 		} catch (error: unknown) {
-// 			return rejectWithValue(error);
-// 		}
-// 	}
-// );
-
 const initialState: IUserState = {
 	status: 'idle',
 	error: null,
@@ -190,9 +47,9 @@ const initialState: IUserState = {
         token: '',
         email: '',
 		password: '',
-		personName: '',
-		telephone: '',
-		repeatPassword: ''
+		name: '',
+		phone: '',
+		confirmPassword: ''
 	},
 };
 
@@ -207,49 +64,12 @@ const userSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			// .addCase(signInUser.fulfilled, (state, action: PayloadAction<string>) => {
-			// 	state.status = 'success';
-			// 	state.user.token = action.payload;
-			// })
 			.addCase(checkEmail.fulfilled, (state) => {
 				state.status = 'success';
 			})
 			.addCase(signUpUser.fulfilled, (state) => {
 				state.status = 'success';
 			})
-			// .addCase(recoverPassword.fulfilled, (state) => {
-			// 	state.status = 'success';
-			// })
-			// .addCase(resetPassword.fulfilled, (state) => {
-			// 	state.status = 'success';
-			// })
-			// .addCase(getUserInfo.fulfilled, (state, action) => {
-			// 	state.status = 'success';
-			// 	state.user.nickname = action.payload.username;
-			// 	state.user.dateOfBirth = action.payload.date_of_birth;
-			// 	state.user.sex = action.payload.sex;
-			// 	state.user.fav_genres = action.payload.fav_genres;
-			// 	state.user.avatar = action.payload.avatar;
-			// })
-			// .addCase(getRecomendations.fulfilled, (state, action) => {
-			// 	state.status = 'success';
-			// 	state.user.recomendations = action.payload.recomendations;
-			// })
-			// .addCase(editUserInfo.fulfilled, (state, action) => {
-			// 	state.status = 'success';
-			// 	state.user.nickname = action.payload.username;
-			// 	state.user.dateOfBirth = action.payload.date_of_birth;
-			// 	state.user.sex = action.payload.sex;
-			// })
-			// .addCase(editFavGenres.fulfilled, (state, action) => {
-			// 	state.status = 'success';
-			// 	state.user.fav_genres = action.payload.fav_genres;
-			// })
-			// .addCase(editAvatars.fulfilled, (state, action) => {
-			// 	state.status = 'success';
-			// 	state.user.avatar = action.payload.avatar;
-			// })
-			// .addCase(deleteUser.fulfilled, () => initialState)
 			.addMatcher(
 				(action) => action.type.endsWith('/pending'),
 				(state) => {
