@@ -24,8 +24,7 @@ export const HeaderNavbar: FC = () => {
           <Link
             to="/producers"
             className={classNames(
- 
-             styles.link,
+              styles.link,
               location.pathname === '/producers' ? styles.link_active : '',
             )}
           >
@@ -58,3 +57,4 @@ export const HeaderNavbar: FC = () => {
     </nav>
   );
 };
+

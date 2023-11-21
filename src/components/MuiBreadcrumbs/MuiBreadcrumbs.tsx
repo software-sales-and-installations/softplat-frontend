@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 
 const MuiBreadcrumbs = () => {
   return (
-    <Box m={2}>
+    <Box>
       <Breadcrumbs
         aria-label="breadcrumb"
         separator={<NavigateNextIcon fontSize="small" />}
@@ -18,7 +18,6 @@ const MuiBreadcrumbs = () => {
         <Routes>
           <Route path="/purchases" element={<p>Мои покупки</p>} />
           <Route path="/favorites" element={<p>Избранное</p>} />
-          <Route path="/settings/*" element={<p>Настройки</p>} />
         </Routes>
       </Breadcrumbs>
     </Box>
