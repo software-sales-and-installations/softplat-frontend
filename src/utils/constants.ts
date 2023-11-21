@@ -358,3 +358,61 @@ export const SELECT_OPTIONS: {
 	{id: 7, label: PayPAlImg, title: "PayPal", description: 'Компания Adobe — ведущий мировой разработчик революционных программных продуктов для любого вида данных, включая текстовую информацию, графические изображения, видео и web-контент. Adobe Systems является правообладателями формата PDF и TIFF. В сентябре 2022 года Adobe объявила о покупке сервиса Figma за 20 млн $. В феврале 2023 года Еврокомиссия озвучила намерение проверить эту сделку из-за повышенной опасности снижения конкуренции на рынке ПО для интерактивного дизайна. В марте 2023 года Adobe представила собственный ИИ-сервис для генерации изображений по описаниям на естественном языке. В сентябре 2023 года компания завершила процесс бета-тестирования продукта и открыла его широкой публике на коммерческой основе.'},
 	{id: 8, label: MicrosoftImg, title: 'Microsoft', description: 'Компания Adobe — ведущий мировой разработчик революционных программных продуктов для любого вида данных, включая текстовую информацию, графические изображения, видео и web-контент. Adobe Systems является правообладателями формата PDF и TIFF. В сентябре 2022 года Adobe объявила о покупке сервиса Figma за 20 млн $. В феврале 2023 года Еврокомиссия озвучила намерение проверить эту сделку из-за повышенной опасности снижения конкуренции на рынке ПО для интерактивного дизайна. В марте 2023 года Adobe представила собственный ИИ-сервис для генерации изображений по описаниям на естественном языке. В сентябре 2023 года компания завершила процесс бета-тестирования продукта и открыла его широкой публике на коммерческой основе.'}
   ]
+
+  
+export const PURCHASES_ITEMS_CABINET: {
+	id: number;
+	img: string;
+	name: string;
+	brand: string;
+	describe: string;
+	data: string;
+  }[] = [
+	{
+	  id: 1,
+	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	  name: 'Название программного обеспечения',
+	  brand: 'Бренд',
+	  describe: 'Описание',
+	  data: '01/10/2023',
+	},
+	{
+	  id: 2,
+	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	  name: 'Название программного обеспечения',
+	  brand: 'Бренд',
+	  describe: 'Описание',
+	  data: '01/10/2023',
+	},
+	{
+	  id: 3,
+	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	  name: 'Название программного обеспечения',
+	  brand: 'Бренд',
+	  describe: 'Описание',
+	  data: '01/10/2023',
+	},
+  ];
+
+  
+export const PRODUCT_ITEMS_LIKED: { id: number; name: string; price: number; img: string }[] = [
+	{
+	  id: 1,
+	  name: 'Название программного обеспечения',
+	  price: 19898,
+	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	},
+	{
+	  id: 2,
+	  name: 'Название программного обеспечения',
+	  price: 19898,
+	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	},
+	{
+	  id: 3,
+	  name: 'Название программного обеспечения',
+	  price: 19898,
+	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	},
+  ];
+  

@@ -27,6 +27,7 @@ function App() {
           {/* <Route path="/catalog" element={<Catalog />} /> */}
           <Route path="/catalog/:section" element={<CatalogSection />} />
           <Route path="/personal/*" element={<Personal />} />
+          <Route path="/personal" element={<Navigate to='/personal/purchases' />} />
           <Route path='/producers' element ={<Producers/>}/>
           <Route path='/producers/:vendor' element={<VendorPage/>}/>
           {/* <Route path="/personal" element={<Personal />} />
