@@ -10,16 +10,34 @@ export interface ISignInFields {
 }
 
 export interface ISignUpFields extends ISignInFields {
-	repeatPassword: string;
-	INN: number;
-	orgName: string;
+	confirmPassword: string;
+	INN?: number;
+	orgName?: string;
 	agree?: any;
-	personName: string;
-	telephone?: string;
+	name: string;
+	phone?: string;
 }
 
 export interface IShippingFields {
 	email: string;
 	password: string;
 	agree?: any;
+}
+export interface ISignInData {
+	email: string;
+	password: string;
+}
+export interface ISignUpData extends ISignInData {
+	name: string;
+	phone?: string;
+	confirmPassword: string;
+	role: string;
+}
+export interface IUser {
+	name: string;
+	email: string;
+	phone?: string;
+	token: string;
+	password?: string;
+	confirmPassword?: string;
 }
