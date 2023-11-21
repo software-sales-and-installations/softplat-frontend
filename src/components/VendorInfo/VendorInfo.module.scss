@@ -1,0 +1,45 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.vendorInfo {
+  min-width: 165px;
+  width: max-content;
+  display: flex;
+  gap: 97px;
+  align-items: flex-start;
+
+  &__img {
+    width: 205px;
+    height: 180px;
+    object-fit: contain;
+  }
+
+  &__infoContainer {
+    width: 1160px;
+    margin-bottom: 20px;
+    text-align: start;
+  }
+
+  &__title {
+    color: #000;
+    font-feature-settings: 'clig' off, 'liga' off;
+    margin: 0;
+    @include font-h1-bold;
+  }
+
+  &__description {
+    @include font-body-regular;
+  }
+
+  &__showMoreBtn {
+    color: #55505c;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 0;
+    outline: 0;
+    @include font-body-filters;
+  }
+}

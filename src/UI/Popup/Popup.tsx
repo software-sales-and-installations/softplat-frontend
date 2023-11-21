@@ -20,13 +20,14 @@ export const Popup: FC<IPopup> = ({ children}) => {
 		<>
 			<button onClick={()=>handlePopupClose()} className={styles.popup__closebtn}/>
 			{children}
+			{MyRole==='Забыли пароль?'? null :
 			<div className={styles.popup__btncontainer}>
 			{CHOOSE_ROLE.map((i)=>{
 				return(
 					MyRole===i.title ? null : <ChooseRole key={i.id} title={i.title}/>
 				)
 			})}
-			</div>
+			</div>}
 		</>
 	);
 };
