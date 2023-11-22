@@ -39,11 +39,6 @@ export const fetchSignIn = (data: ISignInData): Promise<Response> => {
 		checkRes(res)
 	);
 };
-export const fetchCheckEmail = (data: string): Promise<Response> => {
-	return fetchData(`${API_REG_URL}/verify-email/`, 'POST', {
-		email: data,
-	}).then((res) => checkRes(res));
-};
 
 export const fetchSignUp = (data: ISignUpData): Promise<Response> => {
 	return fetchData(`${API_REG_URL}`, 'POST', data).then(

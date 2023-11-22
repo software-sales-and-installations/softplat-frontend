@@ -8,7 +8,7 @@ import {  ISignUpFields } from '../../UI/Popup/PopupTypes';
 import styles from '../../UI/Popup/Popup.module.scss';
 import { Button } from '../../UI/Button/Button';
 import { checkBoxState } from '../../UI/ToggleButton/ToggleButtonSlice';
-import { signUpUser, signInUser } from '../../services/redux/slices/user/user';
+import { signUpUser, signInUser, setUser } from '../../services/redux/slices/user/user';
 import { ISignUpData } from '../../UI/Popup/PopupTypes';
 import { useAppDispatch } from '../../services/redux/store';
 import { useSelector } from 'react-redux';
@@ -40,8 +40,18 @@ export const PopupForReg: FC = () => {
 		const {email, name, password, confirmPassword, phone} = getValues();
 		dispatch(signUpUser({email, name, password, confirmPassword, role: roleForReg, phone: phone? phone.slice(2): ''} as ISignUpData))
 			.unwrap()
-			.then(()=>dispatch(signInUser({email, password})))
 			.then(()=>{
+				dispatch(signInUser({email, password}))
+				.unwrap()
+				.then((res)=>{
+					console.log(res)
+					dispatch(setUser({email: email, token: res.token}))
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+			})
+			.then((res)=>{
 				dispatch(popupState(false))
 				reset
 			})

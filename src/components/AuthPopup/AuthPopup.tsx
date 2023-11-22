@@ -11,6 +11,8 @@ import { useAppDispatch } from '../../services/redux/store';
 import { signInUser } from '../../services/redux/slices/user/user';
 import { popupState } from '../../UI/Popup/PopupSlice';
 import { Button } from '../../UI/Button/Button';
+import { setUser } from '../../services/redux/slices/user/user';
+import { ISignInData } from '../../UI/Popup/PopupTypes';
 
 export const PopupForAuth: FC = () => {
 	const dispatch = useAppDispatch();
@@ -24,19 +26,21 @@ export const PopupForAuth: FC = () => {
 	} = useForm<ISignInFields>({ mode: 'onChange' });
 
 	const onSubmitResData: SubmitHandler<ISignInFields> = () => {
-		const {email, password} = getValues();
-		dispatch(signInUser({email, password}))
+		const formValue = getValues();
+		dispatch(signInUser(formValue as ISignInData))
+
 			.unwrap()
-			.then(()=>{
+			.then((res)=>{
+				console.log(res)
+				dispatch(setUser({ email: res.email, token: res.token }));
 				dispatch(popupState(false))
 				reset
 			})
 			.catch((err) => {
 				console.log(err);
 			});
-		}
+	}
 	function handlePasswordPopup(){
-		console.log('kjh')
 		dispatch(chooseRoleState('Забыли пароль?'))
 		
 	}

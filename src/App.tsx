@@ -16,7 +16,7 @@ import { ShoppingCart } from './pages/ShoppingCart/ShoppingCart.tsx';
 function App() {
   return (
     <>
-      <Header loggedIn={false} />
+      <Header />
       <MainWrapper>
         <Routes>
           <Route path='/' element={<Navigate to='/catalog'/>}/>
