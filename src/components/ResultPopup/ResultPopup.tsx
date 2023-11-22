@@ -10,7 +10,7 @@ import { chooseRoleState } from '../../UI/ChooseRole/ChooseRoleSlice';
 import { PopupForAuth } from '../AuthPopup/AuthPopup';
 import { RecoverPasswordPopup } from '../RecoverPasswordPopup/RecoverPasswordPopup';
 import { PopupForReg } from '../RegPopup/RegPopup';
-import { ExitPopup } from '../ExitPopup/ExitPopup';
+import { SignOutPopup } from '../SignOutPopup/SignOutPopup';
 import { selectUser } from '../../services/redux/slices/user/user';
 import { useAppSelector } from '../../services/redux/store';
 
@@ -30,7 +30,7 @@ export const ResultPopup : FC = () =>{
     return (
         <div onClick={handleOverlayClick} className={classNames(styles.popup, isOpened ? styles.popup_opened : '')}>
             <div className={styles.popup__container}>
-                {user.token? <ExitPopup/> : (
+                {user.token? <SignOutPopup/> : (
                 <>
                     <h2 className={styles.popup__role}>{MyRole==='Я покупатель'? 'Покупатель': (MyRole==='Я продавец'? 'Продавец': (MyRole==='Забыли пароль?'? 'Восстановление пароля' : 'Администратор'))}</h2>
                     {MyRole==='Я админ'? (
