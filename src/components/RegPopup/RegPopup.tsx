@@ -37,7 +37,7 @@ export const PopupForReg: FC = () => {
 	}
 	const onSubmitResData: SubmitHandler<ISignUpFields> = () => {
 		const {email, name, password, confirmPassword, phone} = getValues();
-		dispatch(signUpUser({email, name, password, confirmPassword, role: roleForReg, phone: phone? phone.slice(1): ''} as ISignUpData))
+		dispatch(signUpUser({email, name, password, confirmPassword, role: roleForReg, phone: phone? phone.slice(2): ''} as ISignUpData))
 			.unwrap()
 			.catch((err) => {
 				console.log(err);
@@ -66,6 +66,7 @@ export const PopupForReg: FC = () => {
 					inputType={InputTypes.phone}
 					labelText="Телефон"
 					validation={{ ...register('phone', PHONE_VALIDATION_CONFIG) }}
+					defaultValue={'+7'}
 					error={errors?.phone?.message}
 				/>
 				<Input

@@ -88,13 +88,13 @@ export const VALIDATION_SETTINGS = {
 		}
 	},
 	phone: {
-		pattern: /^\d+$/,
-		minLength: 11,
-		maxLength: 11,
+		pattern: /\+{1}[7]{1}\d/,
+		minLength: 12,
+		maxLength: 12,
 		messages: {
 			tooShort: 'Слишком короткий номер',
 			tooLong: 'Слишком длинный номер',
-			invalid: 'Введите только цифры',
+			invalid: 'Ваш номер должен начинаться с +7',
 			noName: 'Необходимо ввести номер телефона',
 		}
 	},
