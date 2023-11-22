@@ -15,10 +15,24 @@ export const fetchCards = createAsyncThunk(
     const sort = `sort=${params}`;
 
     try {
-      const { data } = await axios.get(`${API_BASE_URL}/product/search/?${sort}`);
+      const { data } = await axios.get(
+        `${API_BASE_URL}/product/search/?${sort}`,
+      );
       return fulfillWithValue(data);
     } catch (error: unknown) {
       rejectWithValue(error);
+    }
+  },
+);
+
+export const fetchSingleCard = createAsyncThunk(
+  'cards/fetchSingleCard',
+  async (id: number, { rejectWithValue, fulfillWithValue}) => {
+    try {
+        const { data } = await axios.get(`${API_BASE_URL}/product/${id}`);
+        return fulfillWithValue(data)
+    } catch (error) {
+        rejectWithValue(error)
     }
   },
 );

@@ -4,6 +4,7 @@ import { BsFillQuestionCircleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { Button } from '../../UI/Button/Button';
 import { IProductCard } from './ProductCardTypes';
+import { ProductPage } from '../../pages/ProductPage/ProductPage';
 
 const ProductCard: React.FC<IProductCard> = ({
   name,
@@ -11,6 +12,7 @@ const ProductCard: React.FC<IProductCard> = ({
   installationPrice,
   image,
   isLiked,
+  id
 }) => {
   const addSpace = (price: number): string => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
@@ -61,9 +63,10 @@ const ProductCard: React.FC<IProductCard> = ({
         </button>
       </div>
       <Link
-        to={`/productcard/${name}`}
+        to={`productId-${id}`}
         title={name}
         className={styles.card__name}
+        // id={`${id}`}
       >
         {name}
       </Link>

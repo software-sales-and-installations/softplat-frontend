@@ -1,7 +1,7 @@
-import { ProductCardProps } from "../ProductCard/ProductCardTypes";
+import { IProductCard } from "../ProductCard/ProductCardTypes";
 
 export interface CardsGridProps {
-    cards: ProductCardProps[]
+    cards: IProductCard[]
   };
 
 // export interface ProductCard {

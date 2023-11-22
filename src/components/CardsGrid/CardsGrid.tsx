@@ -14,6 +14,7 @@ const CardsGrid: FC<CardsGridProps> = ({cards}) => {
             installationPrice={i.installationPrice}
             image={i.image}
             isLiked={false}
+            id={i.id}
           />
         </li>
       ))}
