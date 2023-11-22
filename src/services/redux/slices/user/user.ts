@@ -1,6 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
 	fetchCheckEmail,
+	fetchSignIn,
 	fetchSignUp,
 } from './userApi';
 import {
@@ -14,7 +15,18 @@ export interface IUserState {
 	error: unknown;
 	user: IUser;
 }
-
+export const signInUser = createAsyncThunk(
+	'@@user/signIn',
+	async (data: ISignInData, { fulfillWithValue, rejectWithValue }) => {
+		try {
+			const response = await fetchSignIn(data);
+			const json = await response.json();
+			return fulfillWithValue(json.access);
+		} catch (error: unknown) {
+			return rejectWithValue(error);
+		}
+	}
+);
 export const checkEmail = createAsyncThunk(
 	'@@user/checkEmail',
 	async (data: string, { fulfillWithValue, rejectWithValue }) => {

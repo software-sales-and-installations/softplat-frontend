@@ -5,14 +5,15 @@ import { InputTypes } from '../../UI/Input/InputTypes';
 import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG } from '../../utils/constants';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ISignInFields } from '../../UI/Popup/PopupTypes';
-import { IShippingFields } from '../../UI/Popup/PopupTypes';
 import styles from '../../UI/Popup/Popup.module.scss';
-import { Button } from '../../UI/Button/Button';
-import { useDispatch } from 'react-redux';
 import { chooseRoleState } from '../../UI/ChooseRole/ChooseRoleSlice';
+import { useAppDispatch } from '../../services/redux/store';
+import { signInUser } from '../../services/redux/slices/user/user';
+import { popupState } from '../../UI/Popup/PopupSlice';
+import { Button } from '../../UI/Button/Button';
 
 export const PopupForAuth: FC = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const [authError, setAuthError] = useState(false);
 	const {
 		register,
@@ -22,10 +23,18 @@ export const PopupForAuth: FC = () => {
 		getValues,
 	} = useForm<ISignInFields>({ mode: 'onChange' });
 
-	const onSubmit: SubmitHandler<IShippingFields> = (data) => {
-		console.log(data);
-		// reset();
-	};
+	const onSubmitResData: SubmitHandler<ISignInFields> = () => {
+		const {email, password} = getValues();
+		dispatch(signInUser({email, password}))
+			.unwrap()
+			.then(()=>{
+				dispatch(popupState(false))
+				reset
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+		}
 	function handlePasswordPopup(){
 		console.log('kjh')
 		dispatch(chooseRoleState('Забыли пароль?'))
@@ -34,7 +43,7 @@ export const PopupForAuth: FC = () => {
 
 	return (
 		<Popup>
-			<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+			<form className={styles.form} onSubmit={handleSubmit(onSubmitResData)}>
 				<Input
 					inputType={InputTypes.email}
 					labelText='e-mail'
@@ -60,7 +69,7 @@ export const PopupForAuth: FC = () => {
 					</p>
 				) : null}
 				<div className={styles.btncontainer}>
-					<Button isDisabled={!isValid} mode='primary'>Войти</Button>
+					<Button isDisabled={!isValid} type='submit' mode='primary'>Войти</Button>
 					<Button type='button' mode='secondary' onClick={handlePasswordPopup}>Забыли пароль?</Button>
 				</div>
 			</form>
