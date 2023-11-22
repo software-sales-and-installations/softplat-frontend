@@ -24,8 +24,8 @@ export const Header: FC = () => {
             <HeaderNavbar/>
             <HeaderSearchForm/>
             <div className={styles.btncontainer}>
-            {user.token? (<button type='button' className={styles.btncontainer__likebtn}/>) : null}
-                <button type='button' className={styles.btncontainer__shopbtn}/>
+            {user.token? (<Link to='personal/favorites' className={styles.btncontainer__likebtn}/>) : null}
+                <Link to='/cart' className={styles.btncontainer__shopbtn}/>
                 {user.token? (
                     <Link to='/personal' className={styles.btncontainer__profile}><FaRegUser className={styles.btncontainer__profileicon}/></Link>
                 ) : (
