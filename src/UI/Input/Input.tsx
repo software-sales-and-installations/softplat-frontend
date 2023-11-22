@@ -2,7 +2,6 @@ import styles from './Input.module.scss';
 import { IInput } from './InputTypes';
 import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
-import { PatternFormat } from 'react-number-format';
 
 export const Input: FC<IInput> = ({
 	inputType,
@@ -44,22 +43,6 @@ export const Input: FC<IInput> = ({
 						) : null}
 						
 					</div>
-					{/* {inputType==='telephone'?
-					<PatternFormat
-						onChange={ onChange ? onChange: (e) => {
-										validation.onChange(e)
-								  }
-						}
-						className={styles.input__field}
-						type='tel'
-						name='telephone'
-						id='telephone'
-						readOnly={readOnly}
-						value={value}
-    					format='+7 ### ### ## ##'
-    					allowEmptyFormatting
-    					
-  					/>: ( */}
 					<input
 						{...validation}
 						onChange={ onChange ? onChange: (e) => {
