@@ -2,9 +2,12 @@ import styles from './PersonalTitles.module.scss';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import classNames from 'classnames';
+import { useAppDispatch } from '../../services/redux/store';
+import { popupState } from '../../UI/Popup/PopupSlice';
 
 const PersonalTitles: React.FC = () => {
   const location = useLocation();
+  const dispatch = useAppDispatch();
   return (
     <>
       <nav className={styles.personalTitles}>
@@ -30,12 +33,25 @@ const PersonalTitles: React.FC = () => {
         >
           Избранное
         </Link>
-        <Link to="settings/changeData" className={styles.personalTitles__titles}>
+        <Link
+
+          to="settings"
+          className={classNames(
+            styles.personalTitles__titles,
+            location.pathname === '/personal/settings'
+              ? styles.personalTitles__titles_active
+              : '',
+          )}
+        >
           Настройки
         </Link>
-        <Link to="sign-out" className={styles.personalTitles__titles}>
+        <button
+          type="button"
+          onClick={() => dispatch(popupState(true))}
+          className={styles.personalTitles__btn}
+        >
           Выйти из профиля
-        </Link>
+        </button>
       </nav>
     </>
   );

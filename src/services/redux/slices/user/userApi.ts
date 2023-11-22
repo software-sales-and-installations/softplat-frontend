@@ -2,6 +2,7 @@ import { API_BASE_URL } from '../../../../utils/constants';
 import { ISignInData, ISignUpData } from '../../../../UI/Popup/PopupTypes';
 
 const API_REG_URL = `${API_BASE_URL}/registration`;
+const API_AUTH_URL = `${API_BASE_URL}/auth/login`;
 
 const checkRes = (res: Response) => {
   if (res.ok) {
@@ -26,11 +27,8 @@ export const fetchData = (
     ...(!!data && { body: JSON.stringify(data) }),
   }).then(res => checkRes(res));
 };
-
-export const fetchCheckEmail = (data: string): Promise<Response> => {
-  return fetchData(`${API_REG_URL}/verify-email/`, 'POST', {
-    email: data,
-  }).then(res => checkRes(res));
+export const fetchSignIn = (data: ISignInData): Promise<Response> => {
+  return fetchData(`${API_AUTH_URL}`, 'POST', data).then(res => checkRes(res));
 };
 
 export const fetchSignUp = (data: ISignUpData): Promise<Response> => {

@@ -59,7 +59,6 @@ export const Input: FC<IInput> = ({
         value={readOnly && value ? value : undefined}
       />
       {/* )} */}
-      
       <span className={styles.input__error}>
         {error ? (
           error
@@ -71,7 +70,6 @@ export const Input: FC<IInput> = ({
           ''
         )}
       </span>
-
       {showPasswordButton ? (
         <button
           className={classNames(
