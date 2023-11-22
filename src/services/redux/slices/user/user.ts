@@ -1,6 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
-	fetchCheckEmail,
 	fetchSignIn,
 	fetchSignUp,
 } from './userApi';
@@ -21,18 +20,7 @@ export const signInUser = createAsyncThunk(
 		try {
 			const response = await fetchSignIn(data);
 			const json = await response.json();
-			return fulfillWithValue(json.access);
-		} catch (error: unknown) {
-			return rejectWithValue(error);
-		}
-	}
-);
-export const checkEmail = createAsyncThunk(
-	'@@user/checkEmail',
-	async (data: string, { fulfillWithValue, rejectWithValue }) => {
-		try {
-			const response = await fetchCheckEmail(data);
-			return fulfillWithValue(response);
+			return fulfillWithValue(json);
 		} catch (error: unknown) {
 			return rejectWithValue(error);
 		}
@@ -61,7 +49,6 @@ const initialState: IUserState = {
 		password: '',
 		name: '',
 		phone: '',
-		confirmPassword: ''
 	},
 };
 
@@ -76,8 +63,9 @@ const userSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(checkEmail.fulfilled, (state) => {
+			.addCase(signInUser.fulfilled, (state, action: PayloadAction<string>) => {
 				state.status = 'success';
+				state.user.token = action.payload;
 			})
 			.addCase(signUpUser.fulfilled, (state) => {
 				state.status = 'success';

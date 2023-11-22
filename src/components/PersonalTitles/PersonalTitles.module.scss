@@ -24,4 +24,18 @@
   &__titles:hover {
     background-color: $light-grey;
   }
+  &__btn{
+    border: none;
+    color: $black-standart-text;
+    background-color: transparent;
+    @include font-body-regular;
+    text-align: left;
+    border-radius: 30px;
+    margin-bottom: 15px;
+    padding: 15px 30px;
+    cursor: pointer;
+    &:hover{
+      background-color: $light-grey;
+    }
+  }
 }
