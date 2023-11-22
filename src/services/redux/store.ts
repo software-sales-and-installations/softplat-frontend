@@ -2,11 +2,13 @@ import {reducer as toggleBtnReducer} from '../../UI/ToggleButton/ToggleButtonSli
 import {reducer as chooseRoleReducer} from '../../UI/ChooseRole/ChooseRoleSlice';
 import {reducer as popupStateReducer} from '../../UI/Popup/PopupSlice';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import cardsSlice from '../../pages/Catalog/CatalogSlice'
 
 const reducers = combineReducers({
 	toggleBtn: toggleBtnReducer,
 	chooseRole: chooseRoleReducer,
-	popupOpen: popupStateReducer
+	popupOpen: popupStateReducer,
+	cards: cardsSlice
 });
 
 export const store = configureStore({

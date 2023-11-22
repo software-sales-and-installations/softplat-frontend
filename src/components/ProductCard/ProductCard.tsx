@@ -8,7 +8,8 @@ import { ProductCardProps } from './ProductCardTypes';
 const ProductCard: React.FC<ProductCardProps> = ({
   name,
   price,
-  img,
+  installationPrice,
+  image,
   isLiked,
 }) => {
   const addSpace = (price: number): string => {
@@ -18,7 +19,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <div className={styles.card}>
       <div className={styles.card__img}>
-        <img src={img} alt="Изображение продукта" />
+        <img src={image.url} alt="Изображение продукта" />
         <button
           className={styles.card__likeBtn}
           type="button"
@@ -70,7 +71,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <p className={styles.card__price}>{addSpace(price)} ₽</p>
         <div className={styles.card__installPrice}>
           <span>с установкой </span>
-          <span>{addSpace(price + 3000)} ₽</span>
+          <span>{addSpace(price + installationPrice)} ₽</span>
           <span className={styles.card__tooltip}>
             <button className={styles.card__tooltipBtn}>
               <BsFillQuestionCircleFill size={12} />

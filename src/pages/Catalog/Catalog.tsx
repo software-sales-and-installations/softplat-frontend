@@ -4,17 +4,20 @@ import { Categories } from '../../components/Categories/Categories';
 import SelectForm from '../../components/SelectForm/SelectForm';
 import CardsGrid from '../../components/CardsGrid/CardsGrid';
 import { PRODUCT_ITEMS } from '../../utils/constants';
-import { useDispatch } from 'react-redux';
-import { fetchAllCards } from './CatalogSlice';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { fetchAllCards } from './CatalogSlice';
+// import { AppDispatch, RootState } from '../../services/redux/store';
 
 // type Props = {};
 
 const Catalog: FC = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch<AppDispatch>();
+  // const cards = useSelector((state: RootState) => state.cards.cards)
+  // console.log(cards)
 
-  useEffect(() => {
-    dispatch(fetchAllCards())
-  }, [])
+  // useEffect(() => {
+  //   dispatch(fetchAllCards())
+  // }, [])
 
   return (
     <section className={styles.catalog}>

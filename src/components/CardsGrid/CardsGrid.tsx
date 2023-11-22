@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import styles from './CardsGrid.module.scss';
 import ProductCard from '../ProductCard/ProductCard';
+import { CardsGridProps } from './CardsGridTypes';
 
 const CardsGrid: FC<CardsGridProps> = ({cards}) => {
   return (
@@ -10,7 +11,8 @@ const CardsGrid: FC<CardsGridProps> = ({cards}) => {
           <ProductCard
             name={i.name}
             price={i.price}
-            img={i.img}
+            installationPrice={i.installationPrice}
+            image={i.image}
             isLiked={false}
           />
         </li>

@@ -300,16 +300,16 @@ export const SELECT_OPTIONS: {
     label: string;
     value: string;
 }[] = [
+    // {
+    //   value: 'popularity',
+    //   label: 'По популярности',
+    // },
     {
-      value: 'popularity',
-      label: 'По популярности',
-    },
-    {
-      value: 'recency',
+      value: 'NEWEST',
       label: 'По новизне',
     },
     {
-      value: 'price',
+      value: 'BY_PRICE',
       label: 'По цене',
     },
   ];
