@@ -1,9 +1,12 @@
 import { FC, useState } from 'react';
 import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';
-import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG } from '../../utils/constants';
+import {
+  VALIDATION_SETTINGS,
+  PASSWORD_VALIDATION_CONFIG,
+} from '../../utils/constants';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { ISignInFields } from '../../UI/Popup/PopupTypes';
+import { ISignUpFields } from '../../UI/Popup/PopupTypes';
 import { IShippingFields } from '../../UI/Popup/PopupTypes';
 import styles from './personalSettingsPassword.module.scss';
 import { Button } from '../../UI/Button/Button';
@@ -17,43 +20,56 @@ const PersonalSettingsPassword: FC = () => {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isDirty, isValid },
     getValues,
-  } = useForm<ISignInFields>({ mode: 'onChange' });
+  } = useForm<ISignUpFields>({ mode: 'onChange' });
 
   const onSubmit: SubmitHandler<IShippingFields> = data => {
     console.log(data);
     // reset();
   };
-  function handlePasswordPopup() {
-    console.log('kjh');
-    dispatch(chooseRoleState('Забыли пароль?'));
-  }
 
   return (
     <form
       className={styles.personalSettingsPassword}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Input
-        inputType={InputTypes.password}
-        labelText="Старый пароль"
-
-        error={errors?.password?.message}
-      />
-      <Input
-        inputType={InputTypes.password}
-        labelText="Новый пароль"
-        validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
-        error={errors?.password?.message}
-      />
-      <Input
-        inputType={InputTypes.password}
-        labelText="Повторите пароль"
-        validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
-        error={errors?.password?.message}
-      />
-      {authError ? <p>Неверный логин или пароль.</p> : null}
+      <div className={styles.personalSettingsPassword__inputs}>
+        <Input
+          inputType={InputTypes.password}
+          labelText="Старый пароль"
+          showPasswordButton={true}
+          validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
+          error={errors?.password?.message}
+        />
+        <Input
+          inputType={InputTypes.confirmPassword}
+          labelText={'Новый пароль'}
+          showPasswordButton={true}
+          validation={{
+            ...register('confirmPassword', {
+              validate: value =>
+                value === watch('password') ||
+                VALIDATION_SETTINGS.password.messages.noMatch,
+            }),
+          }}
+          error={errors?.confirmPassword?.message}
+        />
+        <Input
+          inputType={InputTypes.confirmPassword}
+          labelText={'Повторите пароль'}
+          showPasswordButton={true}
+          validation={{
+            ...register('confirmPassword', {
+              validate: value =>
+                value === watch('password') ||
+                VALIDATION_SETTINGS.password.messages.noMatch,
+            }),
+          }}
+          error={errors?.confirmPassword?.message}
+        />
+      </div>
       <div className={styles.personalSettingsPassword__btncontainer}>
         <Button isDisabled={!isValid} mode="primary">
           Сохранить

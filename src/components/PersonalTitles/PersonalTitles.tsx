@@ -29,17 +29,8 @@ const PersonalTitles: React.FC = () => {
           )}
         >
           Избранное
-
         </Link>
-        <Link
-          to="settings"
-          className={classNames(
-            styles.personalTitles__titles,
-            location.pathname === '/personal/settings'
-              ? styles.personalTitles__titles_active
-              : '',
-          )}
-        >
+        <Link to="settings/changeData" className={styles.personalTitles__titles}>
           Настройки
         </Link>
         <Link to="sign-out" className={styles.personalTitles__titles}>

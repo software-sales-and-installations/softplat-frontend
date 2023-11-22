@@ -7,7 +7,6 @@ export const Input: FC<IInput> = ({
   inputType,
   labelText,
   value,
-  color = 'white',
   readOnly = false,
   showPasswordButton = false,
   validation,
@@ -27,7 +26,7 @@ export const Input: FC<IInput> = ({
   const inputTextType =
     inputType === 'password' && isPasswordHidden === false
       ? 'text'
-      : inputType === 'repeatPassword'
+      : inputType === 'confirmPassword'
       ? 'password'
       : inputType;
 
@@ -59,6 +58,8 @@ export const Input: FC<IInput> = ({
         maxLength={inputTextType === 'date' ? 8 : undefined}
         value={readOnly && value ? value : undefined}
       />
+      {/* )} */}
+      
       <span className={styles.input__error}>
         {error ? (
           error
@@ -70,6 +71,7 @@ export const Input: FC<IInput> = ({
           ''
         )}
       </span>
+
       {showPasswordButton ? (
         <button
           className={classNames(

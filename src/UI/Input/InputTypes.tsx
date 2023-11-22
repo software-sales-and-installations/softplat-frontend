@@ -1,15 +1,15 @@
 export enum InputTypes {
 	email = 'email',
 	password = 'password',
-	repeatPassword = 'repeatPassword',
+	confirmPassword = 'confirmPassword',
 	enteredEmail = 'enteredEmail',
 	text = 'text',
 	date = 'date',
 	INN ='INN',
 	orgName='orgName',
 	remember='checkbox',
-	personName = 'personName',
-	telephone = 'telephone'
+	name = 'name',
+	phone = 'phone'
 }
 
 export enum InputColors {

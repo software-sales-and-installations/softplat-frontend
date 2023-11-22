@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import PersonalSettingsData from '../PersonalSettingsData/PersonalSettingsData';
 import PersonalSettingsPassword from '../PersonalSettingsPassword/PersonalSettingsPassword';
+import classNames from 'classnames';
+import { useLocation } from 'react-router-dom';
 
 const PersonalSettings: React.FC = () => {
+  const location = useLocation();
   return (
     <>
       <section className={styles.personalSettings}>
@@ -13,10 +16,26 @@ const PersonalSettings: React.FC = () => {
           Заполните данные профиля
         </p>
         <nav className={styles.personalSettings__titles}>
-          <Link to="changeData" className={styles.personalSettings__data}>
+          <Link
+            to="changeData"
+            className={classNames(
+              styles.personalSettings__data,
+              location.pathname === '/personal/settings/changeData'
+                ? styles.personalSettings__data_aktive
+                : '',
+            )}
+          >
             Данные профиля
           </Link>
-          <Link to="changePassword" className={styles.personalSettings__data}>
+          <Link
+            to="changePassword"
+            className={classNames(
+              styles.personalSettings__data,
+              location.pathname === '/personal/settings/changePassword'
+                ? styles.personalSettings__data_aktive
+                : '',
+            )}
+          >
             Смена пароля
           </Link>
         </nav>

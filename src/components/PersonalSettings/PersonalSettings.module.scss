@@ -1,7 +1,7 @@
 .personalSettings {
   margin-top: 65px;
   margin-left: 160px;
-  max-width: 750px;
+  max-width: 560px;
   width: 100%;
   &__title {
     margin: 0;
@@ -30,6 +30,10 @@
     text-decoration: none;
     color: black;
     padding: 5px 15px;
+    &_aktive {
+      background-color: rgba(201, 250, 76, 1);
+      border-bottom: 2px solid #55505c;
+    }
   }
   &__data:focus,
   &__data:hover {

@@ -1,7 +1,11 @@
 import { FC, useState } from 'react';
 import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';
-import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG } from '../../utils/constants';
+import {
+  EMAIL_VALIDATION_CONFIG,
+  PHONE_VALIDATION_CONFIG,
+  NAME_VALIDATION_CONFIG,
+} from '../../utils/constants';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ISignInFields } from '../../UI/Popup/PopupTypes';
 import { IShippingFields } from '../../UI/Popup/PopupTypes';
@@ -28,17 +32,32 @@ const PersonalSettingsData: FC = () => {
       className={styles.personalSettingsData}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Input inputType={InputTypes.personName} labelText="Ваше имя" />
-      <Input
-        inputType={InputTypes.email}
-        labelText="e-mail"
-        validation={{
-          ...register('email', EMAIL_VALIDATION_CONFIG),
-        }}
-        error={errors?.email?.message}
-      />
-      <Input labelText="Телефон" inputType={InputTypes.telephone} />
-      {authError ? <p>Неверный логин или пароль.</p> : null}
+      <div className={styles.personalSettingsData__inputs}>
+        <Input
+          inputType={InputTypes.name}
+          labelText="Ваше имя"
+          validation={{
+            ...register('name', NAME_VALIDATION_CONFIG),
+          }}
+          error={errors?.name?.message}
+        />
+        <Input
+          inputType={InputTypes.email}
+          labelText="e-mail"
+          validation={{
+            ...register('email', EMAIL_VALIDATION_CONFIG),
+          }}
+          error={errors?.email?.message}
+        />
+        <Input
+          inputType={InputTypes.phone}
+          labelText="Телефон"
+          validation={{ ...register('phone', PHONE_VALIDATION_CONFIG) }}
+          defaultValue={'+7'}
+          error={errors?.phone?.message}
+        />
+        {authError ? <p>Неверный логин или пароль.</p> : null}
+      </div>
       <div className={styles.personalSettingsData__btncontainer}>
         <Button isDisabled={!isValid} mode="primary">
           Сохранить
