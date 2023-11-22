@@ -10,9 +10,7 @@ const onChoose = () => {};
 const SelectForm: FC = () => {
   return (
     <div className={styles.form}>
-      <DropDown options={SELECT_OPTIONS} onChoose={onChoose} />
-      <DropDown options={SELECT_OPTIONS} onChoose={onChoose} />
-      <DropDown options={SELECT_OPTIONS} onChoose={onChoose} />
+      <DropDown options={SELECT_OPTIONS} />
     </div>
   );
 };

@@ -3,9 +3,9 @@ import styles from './ProductCard.module.scss';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { Button } from '../../UI/Button/Button';
-import { ProductCardProps } from './ProductCardTypes';
+import { IProductCard } from './ProductCardTypes';
 
-const ProductCard: React.FC<ProductCardProps> = ({
+const ProductCard: React.FC<IProductCard> = ({
   name,
   price,
   installationPrice,
@@ -19,7 +19,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <div className={styles.card}>
       <div className={styles.card__img}>
-        <img src={image.url} alt="Изображение продукта" />
+        <img src={image?.url} alt="Изображение продукта" />
         <button
           className={styles.card__likeBtn}
           type="button"

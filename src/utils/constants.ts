@@ -193,15 +193,15 @@ export const FOOTER_LINKS: {
     {id: 6,
     text: 'Политика конфиденциальности', link: '/privacy-policy'}
 ]
-export const CATALOGUE_NAMES:{name: string; img: string; pathName: string}[] = [
-  {name: 'Офисные приложения', img: '', pathName: 'office-apps'},
-  {name: 'Системное ПО', img: '', pathName: 'system-apps'},
-  {name: 'Мультимедиа', img: '', pathName: 'media-apps'},
-  {name: 'Конвекторы', img: '', pathName: 'convectors'},
-  {name: 'Архиваторы', img: '', pathName: 'archivers'},
-  {name: 'Безопасность', img: '', pathName: 'security'},
-  {name: 'Интернет', img: '', pathName: 'internet'},
-  {name: 'ERP & CRM', img: '', pathName: 'erp-crm'},
+export const CATALOGUE_NAMES:{name: string; img: string; pathName: string, id: number}[] = [
+  {name: 'Офисные приложения', img: '', pathName: 'office-apps', id: 1},
+  {name: 'Системное ПО', img: '', pathName: 'system-apps', id: 2},
+  {name: 'Мультимедиа', img: '', pathName: 'media-apps', id: 3},
+  {name: 'Конвекторы', img: '', pathName: 'convectors', id: 4},
+  {name: 'Архиваторы', img: '', pathName: 'archivers', id: 5},
+  {name: 'Безопасность', img: '', pathName: 'security', id: 6},
+  {name: 'Интернет', img: '', pathName: 'internet', id: 7},
+  {name: 'ERP & CRM', img: '', pathName: 'erp-crm', id: 8},
 ];
 export const FAQ_INFO: {
     id: number;
@@ -259,37 +259,42 @@ export const SELECT_OPTIONS: {
     },
   ];
 
- export const PRODUCT_ITEMS: { id: number; name: string; price: number; img: string }[] = [
+ export const PRODUCT_ITEMS = [
 	{
 	  id: 1,
 	  name: 'Adobe Photoshop 2023',
 	  price: 19898,
-	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+	  installationPrice: 2000,
+	  image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
 	},
 	{
-	  id: 2,
-	  name: 'Adobe Photoshop 2023',
-	  price: 19898,
-	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-	},
-	{
-	  id: 3,
-	  name: 'Adobe Photoshop 2023',
-	  price: 19898,
-	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-	},
-	{
-	  id: 4,
-	  name: 'Adobe Photoshop 2023',
-	  price: 19898,
-	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-	},
-	{
-	  id: 5,
-	  name: 'Adobe Photoshop 2023',
-	  price: 19898,
-	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-	},
+		id: 2,
+		name: 'Adobe Photoshop 2023',
+		price: 19898,
+		installationPrice: 2000,
+		image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
+	  },
+	  {
+		id: 3,
+		name: 'Adobe Photoshop 2023',
+		price: 19898,
+		installationPrice: 2000,
+		image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
+	  },
+	  {
+		id: 4,
+		name: 'Adobe Photoshop 2023',
+		price: 19898,
+		installationPrice: 2000,
+		image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
+	  },
+	  {
+		id: 5,
+		name: 'Adobe Photoshop 2023',
+		price: 19898,
+		installationPrice: 2000,
+		image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
+	  },
   ];
 
 

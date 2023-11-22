@@ -1,11 +1,11 @@
-export type ProductCardProps = {
+export interface IProductCard {
   name: string;
   price: number;
-  id?: number;
+  image?: ProductCardImage;
   installationPrice: number;
+  id?: number;
   category?: ProductCardCategory;
   description?: string;
-  image: ProductCardImage;
   installation?: boolean;
   license?: string;
   productAvailability?: boolean;
@@ -16,8 +16,6 @@ export type ProductCardProps = {
   vendor?: ProductCardVendor;
   version?: string;
   isLiked?: boolean;
-  // img: string;
-  // isLiked: boolean;
 };
 
 type ProductCardCategory = {
@@ -26,10 +24,10 @@ type ProductCardCategory = {
 }
 
 type ProductCardImage = {
-  contentType: string;
-  id: number;
-  name: string;
-  size: number;
+  contentType?: string;
+  id?: number;
+  name?: string;
+  size?: number;
   url: string;
 }
 

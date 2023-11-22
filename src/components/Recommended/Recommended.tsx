@@ -1,24 +1,18 @@
-import { PRODUCT_ITEMS } from '../../utils/constants';
-import ProductCard from '../ProductCard/ProductCard';
+import { FC } from 'react';
+import CardsGrid from '../CardsGrid/CardsGrid';
 import styles from './Recommended.module.scss';
+import { useAppSelector } from '../../services/redux/store';
 
 // type Props = {};
 
-const Recommended: React.FC = () => {
+const Recommended: FC = () => {
+  const cards = useAppSelector(state => state.cards.cards);
+
   return (
     <section className={styles.recommended}>
       <h2 className={styles.recommended__title}>Рекомендуем к покупке</h2>
       <ul className={styles.recommended__list}>
-        {PRODUCT_ITEMS.map(i => (
-          <li className={styles.recommended__item} key={i.id}>
-            <ProductCard
-              name={i.name}
-              price={i.price}
-              img={i.img}
-              isLiked={false}
-            />
-          </li>
-        ))}
+        <CardsGrid cards={cards} />
       </ul>
     </section>
   );
