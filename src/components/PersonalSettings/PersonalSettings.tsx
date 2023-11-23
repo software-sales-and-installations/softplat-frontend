@@ -1,13 +1,11 @@
 import styles from './PersonalSettings.module.scss';
-import { Link } from 'react-router-dom';
-import { Routes, Route } from 'react-router-dom';
+import {useState} from 'react';
+import classNames from 'classnames';
 import PersonalSettingsData from '../PersonalSettingsData/PersonalSettingsData';
 import PersonalSettingsPassword from '../PersonalSettingsPassword/PersonalSettingsPassword';
-import classNames from 'classnames';
-import { useLocation } from 'react-router-dom';
 
 const PersonalSettings: React.FC = () => {
-  const location = useLocation();
+  const [activeBtn, setActiveBtn] = useState('data')
   return (
     <>
       <section className={styles.personalSettings}>
@@ -16,36 +14,32 @@ const PersonalSettings: React.FC = () => {
           Заполните данные профиля
         </p>
         <nav className={styles.personalSettings__titles}>
-          <Link
-            to="changeData"
+          <button
+            type='button'
+            onClick={()=>setActiveBtn('data')}
             className={classNames(
               styles.personalSettings__data,
-              location.pathname === '/personal/settings/changeData'
+              activeBtn === 'data'
                 ? styles.personalSettings__data_aktive
                 : '',
             )}
           >
             Данные профиля
-          </Link>
-          <Link
-            to="changePassword"
+          </button>
+          <button
+            onClick={()=>setActiveBtn('password')}
+            type='button'
             className={classNames(
               styles.personalSettings__data,
-              location.pathname === '/personal/settings/changePassword'
+              activeBtn === 'password'
                 ? styles.personalSettings__data_aktive
                 : '',
             )}
           >
             Смена пароля
-          </Link>
+          </button>
         </nav>
-        <Routes>
-          <Route path="/changeData" element={<PersonalSettingsData />} />
-          <Route
-            path="/changePassword"
-            element={<PersonalSettingsPassword />}
-          />
-        </Routes>
+        {activeBtn==='data' ? <PersonalSettingsData /> : <PersonalSettingsPassword />}
       </section>
     </>
   );

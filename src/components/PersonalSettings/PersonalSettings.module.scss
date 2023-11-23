@@ -1,43 +1,42 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
 .personalSettings {
-  margin-top: 65px;
-  margin-left: 160px;
-  max-width: 560px;
-  width: 100%;
-  &__title {
-    margin: 0;
-    font-size: 36px;
-    font-weight: 600;
-    line-height: 50px;
-    text-align: start;
-  }
-  &__subtitle {
-    margin: 0;
-    font-size: 22px;
-    font-weight: 400;
-    line-height: 35px;
-    text-align: start;
-    margin-top: 9px;
-  }
-  &__titles {
-    margin-top: 53px;
-    text-align: start;
-  }
-  &__data {
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 35px;
-    text-align: center;
-    text-decoration: none;
-    color: black;
-    padding: 5px 15px;
-    &_aktive {
-      background-color: rgba(201, 250, 76, 1);
-      border-bottom: 2px solid #55505c;
+    margin-top: 70px;
+    margin-left: 115px;
+    max-width: 560px;
+    width: 100%;
+
+    &__title {
+      margin: 0;
+      @include font-h2-simibold;
+      text-align: start;
+    }
+    &__subtitle {
+      margin: 25px 0 0 0;
+      @include font-body-regular;
+      text-align: start;
+    }
+    &__titles {
+      margin-top:45px;
+      text-align: start;
+    }
+    &__data {
+      @include font-body-regular;
+      text-align: center;
+      text-decoration: none;
+      color: $black-standart-text;
+      width: 270px;
+      padding: 5px 25px;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      &_aktive {
+        background-color:  $accent-lime-button;
+        border-bottom: 2px solid $dark-grey;
+      }
+    }
+    &__data:hover {
+      border-bottom: 2px solid $dark-grey;
     }
   }
-  &__data:focus,
-  &__data:hover {
-    background-color: rgba(201, 250, 76, 1);
-    border-bottom: 2px solid #55505c;
-  }
-}

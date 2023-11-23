@@ -16,7 +16,7 @@ const Personal: React.FC = () => {
       <Routes>
         <Route path="/purchases" element={<PersonalPurchases />} />
         <Route path="/favorites" element={<PersonalFavorites />} />
-        <Route path="/settings/*" element={<PersonalSettings />} />
+        <Route path="/settings" element={<PersonalSettings />} />
       </Routes>
     </section>
   );

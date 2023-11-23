@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';
 import {
@@ -6,26 +6,19 @@ import {
   PASSWORD_VALIDATION_CONFIG,
 } from '../../utils/constants';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { ISignUpFields } from '../../UI/Popup/PopupTypes';
-import { IShippingFields } from '../../UI/Popup/PopupTypes';
 import styles from './personalSettingsPassword.module.scss';
 import { Button } from '../../UI/Button/Button';
-import { useDispatch } from 'react-redux';
-import { chooseRoleState } from '../../UI/ChooseRole/ChooseRoleSlice';
+import { ISettingPassword } from './PersonalSettingsTypes';
 
 const PersonalSettingsPassword: FC = () => {
-  const dispatch = useDispatch();
-  const [authError, setAuthError] = useState(false);
   const {
     register,
     handleSubmit,
-    reset,
     watch,
-    formState: { errors, isDirty, isValid },
-    getValues,
-  } = useForm<ISignUpFields>({ mode: 'onChange' });
+    formState: { errors, isValid },
+  } = useForm<ISettingPassword>({ mode: 'onChange' });
 
-  const onSubmit: SubmitHandler<IShippingFields> = data => {
+  const onSubmit: SubmitHandler<ISettingPassword> = data => {
     console.log(data);
     // reset();
   };
@@ -48,7 +41,7 @@ const PersonalSettingsPassword: FC = () => {
           labelText={'Новый пароль'}
           showPasswordButton={true}
           validation={{
-            ...register('confirmPassword', {
+            ...register('newPassword', {
               validate: value =>
                 value === watch('password') ||
                 VALIDATION_SETTINGS.password.messages.noMatch,
@@ -83,3 +76,4 @@ const PersonalSettingsPassword: FC = () => {
 };
 
 export default PersonalSettingsPassword;
+

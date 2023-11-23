@@ -6,7 +6,7 @@ import { useAppDispatch } from '../../services/redux/store';
 import { popupState } from '../../UI/Popup/PopupSlice';
 import { signOut } from '../../services/redux/slices/user/user';
 
-export const ExitPopup: FC = () => {
+export const SignOutPopup: FC = () => {
     const dispatch = useAppDispatch();
     function handlePopupClose(){
 		dispatch(popupState(false));

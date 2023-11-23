@@ -1,4 +1,5 @@
-import { FC, useState } from 'react';
+
+import { FC } from 'react';
 import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';
 import {
@@ -7,22 +8,18 @@ import {
   NAME_VALIDATION_CONFIG,
 } from '../../utils/constants';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { ISignInFields } from '../../UI/Popup/PopupTypes';
-import { IShippingFields } from '../../UI/Popup/PopupTypes';
 import styles from './PersonalSettingsData.module.scss';
 import { Button } from '../../UI/Button/Button';
+import { IEditProfileFields } from './PersonalSettingsTypes';
 
 const PersonalSettingsData: FC = () => {
-  const [authError, setAuthError] = useState(false);
   const {
     register,
     handleSubmit,
-    reset,
-    formState: { errors, isDirty, isValid },
-    getValues,
-  } = useForm<ISignInFields>({ mode: 'onChange' });
+    formState: { errors, isValid },
+  } = useForm<IEditProfileFields>({ mode: 'onChange' });
 
-  const onSubmit: SubmitHandler<IShippingFields> = data => {
+  const onSubmit: SubmitHandler<IEditProfileFields> = data => {
     console.log(data);
     // reset();
   };
@@ -56,7 +53,6 @@ const PersonalSettingsData: FC = () => {
           defaultValue={'+7'}
           error={errors?.phone?.message}
         />
-        {authError ? <p>Неверный логин или пароль.</p> : null}
       </div>
       <div className={styles.personalSettingsData__btncontainer}>
         <Button isDisabled={!isValid} mode="primary">
