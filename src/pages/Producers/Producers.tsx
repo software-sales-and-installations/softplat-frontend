@@ -6,12 +6,11 @@ import {PRODUCERS_LIST} from '../../utils/constants';
 import { Link } from 'react-router-dom';
 
 export const Producers: FC =() =>{
-    const onChoose = () => {};
     return (
         <>
         <h1 className={styles.title}>Производители</h1>
         <div className={styles.ddcontainer}>
-            <DropDown options={SELECT_OPTIONS} onChoose={onChoose}/>
+            <DropDown options={SELECT_OPTIONS} />
         </div>
         <div className={styles.container}>
         {PRODUCERS_LIST.map((vendor)=>{

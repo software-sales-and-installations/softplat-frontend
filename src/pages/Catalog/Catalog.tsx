@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import styles from './Catalog.module.scss';
 import { Categories } from '../../components/Categories/Categories';
 import SelectForm from '../../components/SelectForm/SelectForm';

@@ -1,5 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IOption } from './DropDownTypes';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   option: {

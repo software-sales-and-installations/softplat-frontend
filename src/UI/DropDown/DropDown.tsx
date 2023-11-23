@@ -3,7 +3,7 @@ import Select from 'react-select';
 
 import './DropDown.scss';
 import { IDropDowmProps } from './DropDownTypes';
-import { useAppDispatch, useAppSelector } from '../../services/redux/store';
+import { useAppDispatch } from '../../services/redux/store';
 import { changeOption } from './DropDownSlice';
 
 const DropDown: FC<IDropDowmProps> = ({ options }) => {
