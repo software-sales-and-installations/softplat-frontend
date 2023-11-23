@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC} from 'react';
 import { Popup } from '../../UI/Popup/Popup';
 import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';
