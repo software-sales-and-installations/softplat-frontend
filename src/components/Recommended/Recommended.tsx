@@ -1,11 +1,16 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import CardsGrid from '../CardsGrid/CardsGrid';
 import styles from './Recommended.module.scss';
-import { useAppSelector } from '../../services/redux/store';
+import { useAppDispatch, useAppSelector } from '../../services/redux/store';
+import { fetchCards } from '../../services/redux/slices/cards/cards';
 
 // type Props = {};
 
 const Recommended: FC = () => {
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(fetchCards('NEWEST'))
+  }, [])
   const cards = useAppSelector(state => state.cards.cards);
 
   return (
