@@ -8,7 +8,6 @@ import { EMAIL_VALIDATION_CONFIG } from '../../utils/constants';
 import { Popup } from '../../UI/Popup/Popup';
 import styles from '../../UI/Popup/Popup.module.scss';
 import { useDispatch } from 'react-redux';
-import { checkBoxState } from '../../UI/ToggleButton/ToggleButtonSlice';
 import { Button } from '../../UI/Button/Button';
 import classNames from 'classnames';
 import { chooseRoleState } from '../../UI/ChooseRole/ChooseRoleSlice';
@@ -18,9 +17,7 @@ export const RecoverPasswordPopup : FC =()=>{
 		register,
 		handleSubmit,
 		reset,
-		watch,
-		formState: { errors, isDirty, isValid },
-		getValues,
+		formState: { errors, isValid },
 	} = useForm<ISignUpFields>({ mode: 'onChange'});
     const onSubmit: SubmitHandler<IShippingFields> = (data) => {
 		console.log(data);

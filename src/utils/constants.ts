@@ -1,4 +1,4 @@
-export const API_BASE_URL = '//softplat.acceleratorpracticum.ru'
+export const API_BASE_URL = 'http://softplat.acceleratorpracticum.ru'
 
 import AdobeImg from '../images/producers/Adobe.png';
 import AutodeskImg from '../images/producers/autodesk.png';
