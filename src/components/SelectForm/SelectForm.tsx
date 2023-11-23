@@ -3,7 +3,6 @@ import styles from './Selectform.module.scss';
 import DropDown from '../../UI/DropDown/DropDown';
 import { SELECT_OPTIONS } from '../../utils/constants';
 
-const onChoose = () => {};
 
 // type Props = {};
 
