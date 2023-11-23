@@ -21,7 +21,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Navigate to='/catalog'/>}/>
           <Route path="/catalog" element={<HomePage />} />
-          <Route path="*/:productId" element={<ProductPage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
           <Route path='/faq' element={<FAQ/>} />
           {/* <Route path='/vendor' element={<VendorPage />} /> */}
           <Route path="/contacts" element={<Contacts />} />

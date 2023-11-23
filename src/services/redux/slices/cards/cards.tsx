@@ -7,6 +7,7 @@ interface ICardsState {
   status: 'idle' | 'success' | 'loading' | 'failed';
   error: unknown;
   cards: IProductCard[];
+  card: IProductCard;
 }
 
 export const fetchCards = createAsyncThunk(
@@ -27,12 +28,12 @@ export const fetchCards = createAsyncThunk(
 
 export const fetchSingleCard = createAsyncThunk(
   'cards/fetchSingleCard',
-  async (id: number, { rejectWithValue, fulfillWithValue}) => {
+  async (id: number, { rejectWithValue, fulfillWithValue }) => {
     try {
-        const { data } = await axios.get(`${API_BASE_URL}/product/${id}`);
-        return fulfillWithValue(data)
+      const { data } = await axios.get(`${API_BASE_URL}/product/${id}`);
+      return fulfillWithValue(data);
     } catch (error) {
-        rejectWithValue(error)
+      rejectWithValue(error);
     }
   },
 );
@@ -41,6 +42,12 @@ const initialState: ICardsState = {
   status: 'idle',
   error: null,
   cards: [],
+  card: {
+    name: '',
+    price: 0,
+    installationPrice: 0,
+    image: { url: '' },
+  },
 };
 
 const cardsSlice = createSlice({
@@ -57,6 +64,9 @@ const cardsSlice = createSlice({
       })
       .addCase(fetchCards.rejected, (state, action) => {
         state.status = 'failed';
+      })
+      .addCase(fetchSingleCard.fulfilled, (state, action) => {
+        state.card = action.payload;
       });
   },
 });

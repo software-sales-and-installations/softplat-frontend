@@ -4,7 +4,6 @@ import { BsFillQuestionCircleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { Button } from '../../UI/Button/Button';
 import { IProductCard } from './ProductCardTypes';
-import { ProductPage } from '../../pages/ProductPage/ProductPage';
 
 const ProductCard: React.FC<IProductCard> = ({
   name,
@@ -63,7 +62,7 @@ const ProductCard: React.FC<IProductCard> = ({
         </button>
       </div>
       <Link
-        to={`productId-${id}`}
+        to={`/product/${id}`}
         title={name}
         className={styles.card__name}
         // id={`${id}`}
