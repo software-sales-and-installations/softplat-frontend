@@ -1,7 +1,5 @@
 # Frontend
 
-TEST
-
 Прежде всего установите все зависимости:
 
     npm i --force
@@ -26,3 +24,23 @@ TEST
 Для сообщений коммитов используем [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). На данном этапе дополнительный scope можно не указывать, сообщение коммита должно выглядеть следующим образом:
 
     feat: краткое описание выполненной работы
+
+### Команда
+
+Евгений Evgenii959
+Калинин Кирилл KiryhaUdmurt
+Дук Юлия YuliaDuk
+Меначо-Пахес Юлия YuliaMP
+Конаков Илья WhiteWat3r
+
+### Стек
+
+- HTML 5
+- SCSS
+- React
+- Redux Toolkit
+- TypeScript
+- Axios
+- Storybook
+- Vite
+
