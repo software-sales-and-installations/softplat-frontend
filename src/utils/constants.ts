@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'http://softplat.acceleratorpracticum.ru';
+export const API_BASE_URL = 'http://api.softplat.acceleratorpracticum.ru';
 
 import AdobeImg from '../images/producers/Adobe.png';
 import AutodeskImg from '../images/producers/autodesk.png';
@@ -163,32 +163,31 @@ export const CHOOSE_ROLE: {
 ];
 
 export const FOOTER_LINKS: {
-    id: number;
-    text: string;
-    link: string;
-}[]= [
-    {id: 1,
-    text: 'Каталог', link: '/catalog'}, 
-    {id: 2,
-    text: 'Производители', link: '/producers'},
-    {id: 3,
-    text: 'FAQ', link: '/faq'},
-    {id: 4,
-    text: 'Контакты', link: '/contacts'},
-    {id: 5,
-    text: 'Условия пользования', link: '/terms-of-use'},
-    {id: 6,
-    text: 'Политика конфиденциальности', link: '/privacy-policy'}
-]
-export const CATALOGUE_NAMES:{name: string; img: string; pathName: string, id: number}[] = [
-  {name: 'Офисные приложения', img: '', pathName: 'office-apps', id: 1},
-  {name: 'Системное ПО', img: '', pathName: 'system-apps', id: 2},
-  {name: 'Мультимедиа', img: '', pathName: 'media-apps', id: 3},
-  {name: 'Конвекторы', img: '', pathName: 'convectors', id: 4},
-  {name: 'Архиваторы', img: '', pathName: 'archivers', id: 5},
-  {name: 'Безопасность', img: '', pathName: 'security', id: 6},
-  {name: 'Интернет', img: '', pathName: 'internet', id: 7},
-  {name: 'ERP & CRM', img: '', pathName: 'erp-crm', id: 8},
+  id: number;
+  text: string;
+  link: string;
+}[] = [
+  { id: 1, text: 'Каталог', link: '/catalog' },
+  { id: 2, text: 'Производители', link: '/producers' },
+  { id: 3, text: 'FAQ', link: '/faq' },
+  { id: 4, text: 'Контакты', link: '/contacts' },
+  { id: 5, text: 'Условия пользования', link: '/terms-of-use' },
+  { id: 6, text: 'Политика конфиденциальности', link: '/privacy-policy' },
+];
+export const CATALOGUE_NAMES: {
+  name: string;
+  img: string;
+  pathName: string;
+  id: number;
+}[] = [
+  { name: 'Офисные приложения', img: '', pathName: 'office-apps', id: 1 },
+  { name: 'Системное ПО', img: '', pathName: 'system-apps', id: 2 },
+  { name: 'Мультимедиа', img: '', pathName: 'media-apps', id: 3 },
+  { name: 'Конвекторы', img: '', pathName: 'convectors', id: 4 },
+  { name: 'Архиваторы', img: '', pathName: 'archivers', id: 5 },
+  { name: 'Безопасность', img: '', pathName: 'security', id: 6 },
+  { name: 'Интернет', img: '', pathName: 'internet', id: 7 },
+  { name: 'ERP & CRM', img: '', pathName: 'erp-crm', id: 8 },
 ];
 export const FAQ_INFO: {
   id: number;
@@ -254,57 +253,67 @@ export const SELECT_OPTIONS: {
   label: string;
   value: string;
 }[] = [
-    // {
-    //   value: 'popularity',
-    //   label: 'По популярности',
-    // },
-    {
-      value: 'NEWEST',
-      label: 'По новизне',
-    },
-    {
-      value: 'BY_PRICE',
-      label: 'По цене',
-    },
-  ];
+  // {
+  //   value: 'popularity',
+  //   label: 'По популярности',
+  // },
+  {
+    value: 'NEWEST',
+    label: 'По новизне',
+  },
+  {
+    value: 'BY_PRICE',
+    label: 'По цене',
+  },
+];
 
- export const PRODUCT_ITEMS = [
-	{
-	  id: 1,
-	  name: 'Adobe Photoshop 2023',
-	  price: 19898,
-	  installationPrice: 2000,
-	  image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
-	},
-	{
-		id: 2,
-		name: 'Adobe Photoshop 2023',
-		price: 19898,
-		installationPrice: 2000,
-		image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
-	  },
-	  {
-		id: 3,
-		name: 'Adobe Photoshop 2023',
-		price: 19898,
-		installationPrice: 2000,
-		image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
-	  },
-	  {
-		id: 4,
-		name: 'Adobe Photoshop 2023',
-		price: 19898,
-		installationPrice: 2000,
-		image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
-	  },
-	  {
-		id: 5,
-		name: 'Adobe Photoshop 2023',
-		price: 19898,
-		installationPrice: 2000,
-		image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
-	  },
-  ];
+export const PRODUCT_ITEMS = [
+  {
+    id: 1,
+    name: 'Adobe Photoshop 2023',
+    price: 19898,
+    installationPrice: 2000,
+    image: {
+      url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+    },
+  },
+  {
+    id: 2,
+    name: 'Adobe Photoshop 2023',
+    price: 19898,
+    installationPrice: 2000,
+    image: {
+      url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+    },
+  },
+  {
+    id: 3,
+    name: 'Adobe Photoshop 2023',
+    price: 19898,
+    installationPrice: 2000,
+    image: {
+      url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+    },
+  },
+  {
+    id: 4,
+    name: 'Adobe Photoshop 2023',
+    price: 19898,
+    installationPrice: 2000,
+    image: {
+      url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+    },
+  },
+  {
+    id: 5,
+    name: 'Adobe Photoshop 2023',
+    price: 19898,
+    installationPrice: 2000,
+    image: {
+      url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+    },
+  },
+];
 
 export const PRODUCERS_LIST = [
   {
@@ -365,32 +374,6 @@ export const PRODUCERS_LIST = [
   },
 ];
 
-export const PRODUCT_ITEMS_LIKED: {
-  id: number;
-  name: string;
-  price: number;
-  img: string;
-}[] = [
-  {
-    id: 1,
-    name: 'Название программного обеспечения',
-    price: 19898,
-    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-  },
-  {
-    id: 2,
-    name: 'Название программного обеспечения',
-    price: 19898,
-    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-  },
-  {
-    id: 3,
-    name: 'Название программного обеспечения',
-    price: 19898,
-    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-  },
-];
-
 export const PURCHASES_ITEMS_CABINET: {
   id: number;
   img: string;
@@ -425,44 +408,28 @@ export const PURCHASES_ITEMS_CABINET: {
   },
 ];
 
-export const PRODUCT_CREATED_SELLER: {
+export const PRODUCT_ITEMS_LIKED: {
   id: number;
-  img: string;
   name: string;
-  vendor: string;
-  category: string;
-  code: string;
-  describe: string;
-  data: string;
+  price: number;
+  img: string;
 }[] = [
   {
     id: 1,
-    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
     name: 'Название программного обеспечения',
-    vendor: 'Adobe',
-    category: 'Мультимедия',
-    code: '123456789',
-    describe: 'Многофункциональный растровый графический ...',
-    data: '01/10/2023',
+    price: 19898,
+    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
   },
   {
     id: 2,
-    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
     name: 'Название программного обеспечения',
-    vendor: 'Adobe',
-    category: 'Мультимедия',
-    code: '123456789',
-    describe: 'Многофункциональный растровый графический ...',
-    data: '01/10/2023',
+    price: 19898,
+    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
   },
   {
     id: 3,
-    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
     name: 'Название программного обеспечения',
-    vendor: 'Adobe',
-    category: 'Мультимедия',
-    code: '123456789',
-    describe: 'Многофункциональный растровый графический ...',
-    data: '01/10/2023',
+    price: 19898,
+    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
   },
 ];
