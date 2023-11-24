@@ -1,15 +1,24 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import style from './ProductPage.module.scss';
 // import { BsHeartFill, BsHeart } from 'react-icons/bs';
 import { Button } from '../../UI/Button/Button';
 import { Checkbox } from '../../UI/Checkbox/Checkbox';
 import { Tooltip } from '../../components/Tooltip/Tooltip';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../services/redux/store';
+import { fetchSingleCard } from '../../services/redux/slices/cards/cards';
 
 export const ProductPage: FC = ({}) => {
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const cardData = useAppSelector(state => state.cards.card);
   const [isInstallationSelected, setIsInstallationSelected] = useState(false);
-  const [totalPrice, setTotalPrice] = useState(19000);
+  const [totalPrice, setTotalPrice] = useState(cardData.price);
   const [tooltipText, setTooltipText] = useState('');
 
+  useEffect(() => {
+    dispatch(fetchSingleCard(Number(id)));
+  }, [id]);
 
   const handleAddToCart = () => {};
 
@@ -20,7 +29,9 @@ export const ProductPage: FC = ({}) => {
 
   const updateTotalPrice = (wasInstallationSelected: boolean) => {
     setTotalPrice(prev =>
-      wasInstallationSelected ? prev - 2000 : prev + 2000,
+      wasInstallationSelected
+        ? prev - cardData.installationPrice
+        : prev + cardData.installationPrice,
     );
   };
 
@@ -28,7 +39,7 @@ export const ProductPage: FC = ({}) => {
     <section className={style.product}>
       <div className={style.product__imageContainer}>
         <img
-          src="https://isradar.com/upload/no-image.jpg"
+          src={cardData.image?.url}
           alt="Фотография товара"
           className={style.product__image}
         />
@@ -42,26 +53,22 @@ export const ProductPage: FC = ({}) => {
       </div>
 
       <div className={style.product__info}>
-        <span className={style.product__category}>Мультимедиа</span>
+        <span className={style.product__category}>
+          {cardData.category?.name}
+        </span>
 
-        <h2 className={style.product__name}>Adobe Photoshop</h2>
-        <span className={style.product__vendor}>Adobe</span>
-        <span className={style.product__number}>1234567</span>
+        <h2 className={style.product__name}>{cardData.name}</h2>
+        <span className={style.product__vendor}>{cardData.vendor?.name}</span>
+        <span className={style.product__number}>{cardData.id}</span>
         <div className={style.product__details}>
           <p className={style.product__price}>{totalPrice} ₽</p>
           <p className={style.product__seller}>Продавец</p>
           <Button mode="secondary">Скачать демо</Button>
         </div>
-        <p className={style.product__description}>
-          От публикаций в соцсетях до ретуши фотографий, от баннеров до красивых
-          веб-сайтов, от повседневных изображений до полного преображения — все,
-          о чем вы мечтаете, доступно с помощью Photoshop. Photoshop постоянно
-          пополняется новыми возможностями, становясь ещё более быстрым,
-          продуманным и интересным для всех пользователей.
-        </p>
+        <p className={style.product__description}>{cardData.description}</p>
         <div className={style.product__checkboxContainer}>
           <Checkbox
-            label={'Добавить установку 2 000 ₽'}
+            label={`Добавить установку ${cardData.installationPrice} ₽`}
             onCheck={handleCheckboxChange}
           />
           <div

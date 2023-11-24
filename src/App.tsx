@@ -4,7 +4,7 @@ import { Header } from './components/Header/Header';
 import { MainWrapper } from './components/MainWrapper/MainWrapper';
 import { Footer } from './components/Footer/Footer';
 import { ProductPage } from './pages/ProductPage/ProductPage';
-import {FAQ} from './pages/FAQ/FAQ';
+import { FAQ } from './pages/FAQ/FAQ';
 import VendorPage from './pages/VendorPage/VendorPage';
 import Contacts from './pages/Contacts/contacts.tsx';
 // import Catalog from './pages/Catalog/Catalog.tsx';
@@ -22,7 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/catalog" />} />
           <Route path="/catalog" element={<HomePage />} />
-          <Route path="/product" element={<ProductPage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/faq" element={<FAQ />} />
           {/* <Route path='/vendor' element={<VendorPage />} /> */}
           <Route path="/contacts" element={<Contacts />} />

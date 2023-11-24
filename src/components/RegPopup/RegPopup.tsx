@@ -1,4 +1,4 @@
-import { FC, useEffect, useState} from 'react';
+import { FC, useEffect} from 'react';
 import { Popup } from '../../UI/Popup/Popup';
 import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';
@@ -26,7 +26,7 @@ export const PopupForReg: FC = () => {
 		handleSubmit,
 		reset,
 		watch,
-		formState: { errors, isDirty, isValid },
+		formState: { errors, isValid },
 		getValues,
 	} = useForm<ISignUpFields>({ mode: 'onChange'});
 
@@ -51,7 +51,7 @@ export const PopupForReg: FC = () => {
 					console.log(err);
 				});
 			})
-			.then((res)=>{
+			.then(()=>{
 				dispatch(popupState(false))
 				reset
 			})

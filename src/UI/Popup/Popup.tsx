@@ -3,7 +3,6 @@ import styles from './Popup.module.scss';
 import { IPopup } from './PopupTypes';
 import { ChooseRole } from '../ChooseRole/ChooseRole';
 import { CHOOSE_ROLE } from '../../utils/constants';
-import { useDispatch } from 'react-redux';
 import { popupState } from './PopupSlice';
 import { chooseRoleState } from '../ChooseRole/ChooseRoleSlice';
 import { useSelector } from 'react-redux';

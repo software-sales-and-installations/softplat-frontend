@@ -8,29 +8,26 @@ import { EMAIL_VALIDATION_CONFIG } from '../../utils/constants';
 import { Popup } from '../../UI/Popup/Popup';
 import styles from '../../UI/Popup/Popup.module.scss';
 import { useDispatch } from 'react-redux';
-import { checkBoxState } from '../../UI/ToggleButton/ToggleButtonSlice';
 import { Button } from '../../UI/Button/Button';
 import classNames from 'classnames';
 import { chooseRoleState } from '../../UI/ChooseRole/ChooseRoleSlice';
 
-export const RecoverPasswordPopup: FC = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    watch,
-    formState: { errors, isDirty, isValid },
-    getValues,
-  } = useForm<ISignUpFields>({ mode: 'onChange' });
-  const onSubmit: SubmitHandler<IShippingFields> = data => {
-    console.log(data);
-    reset;
-  };
-  const dispatch = useDispatch();
-  function handleExitClick() {
-    dispatch(chooseRoleState('Я покупатель'));
-  }
-  return (
+export const RecoverPasswordPopup : FC =()=>{
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors, isValid },
+	} = useForm<ISignUpFields>({ mode: 'onChange'});
+    const onSubmit: SubmitHandler<IShippingFields> = (data) => {
+		console.log(data);
+		reset;
+	};
+	const dispatch = useDispatch();
+	function handleExitClick(){
+		dispatch(chooseRoleState('Я покупатель'))
+	}
+    return(
     <Popup>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Input

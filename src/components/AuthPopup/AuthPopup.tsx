@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC} from 'react';
 import { Popup } from '../../UI/Popup/Popup';
 import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';
@@ -16,12 +16,11 @@ import { ISignInData } from '../../UI/Popup/PopupTypes';
 
 export const PopupForAuth: FC = () => {
 	const dispatch = useAppDispatch();
-	const [authError, setAuthError] = useState(false);
 	const {
 		register,
 		handleSubmit,
 		reset,
-		formState: { errors, isDirty, isValid },
+		formState: { errors, isValid },
 		getValues,
 	} = useForm<ISignInFields>({ mode: 'onChange' });
 
@@ -67,11 +66,6 @@ export const PopupForAuth: FC = () => {
 					<input className={styles.checkboxcontainer__input} id='agreement' {...register("remember")} type="checkbox" value="remember"/>
 					<label className={styles.checkboxcontainer__label} htmlFor='agreement'>Запомнить меня</label>
 				</div>
-				{authError ? (
-					<p>
-						Неверный логин или пароль.
-					</p>
-				) : null}
 				<div className={styles.btncontainer}>
 					<Button isDisabled={!isValid} type='submit' mode='primary'>Войти</Button>
 					<Button type='button' mode='secondary' onClick={handlePasswordPopup}>Забыли пароль?</Button>

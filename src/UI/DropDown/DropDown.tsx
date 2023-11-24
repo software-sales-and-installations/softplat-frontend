@@ -3,11 +3,13 @@ import Select from 'react-select';
 
 import './DropDown.scss';
 import { IDropDowmProps } from './DropDownTypes';
+import { useAppDispatch } from '../../services/redux/store';
+import { changeOption } from './DropDownSlice';
 
-const DropDown: FC<IDropDowmProps> = ({ options, onChoose }) => {
-  const handleChange = () => {
-    onChoose();
-  };
+const DropDown: FC<IDropDowmProps> = ({ options }) => {
+  const dispatch = useAppDispatch();
+
+
 
   return (
     <Select
@@ -15,7 +17,7 @@ const DropDown: FC<IDropDowmProps> = ({ options, onChoose }) => {
       options={options}
       closeMenuOnSelect={false}
       defaultValue={options[0]}
-      onChange={handleChange}
+      onChange={(e) => dispatch(changeOption(e))}
       isSearchable={false}
     />
   );
