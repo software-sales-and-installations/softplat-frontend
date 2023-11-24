@@ -43,7 +43,7 @@ const Slider = () => {
       pagination={{clickable: true}}
       className='swiper'
     >
-      {slides.map(i => (
+      {slides?.map(i => (
         <SwiperSlide className='swiper-slide' key={i.text}>
           <div
             className='swiper-slide__content'
