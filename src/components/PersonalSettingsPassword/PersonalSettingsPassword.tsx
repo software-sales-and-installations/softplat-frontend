@@ -6,7 +6,7 @@ import {
   PASSWORD_VALIDATION_CONFIG,
 } from '../../utils/constants';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import styles from './personalSettingsPassword.module.scss';
+import styles from './PersonalSettingsPassword.module.scss';
 import { Button } from '../../UI/Button/Button';
 import { ISettingPassword } from './PersonalSettingsTypes';
 
