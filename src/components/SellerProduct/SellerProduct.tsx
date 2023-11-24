@@ -59,7 +59,7 @@ const SellerProduct: React.FC = () => {
         </button>
       </nav>
       <div className={styles.sellerProduct__subheadings}>
-        <p className={styles.sellerProduct__subheading}>Лого</p>
+        <p className={styles.sellerProduct__subheading}>Логотип</p>
         <p className={styles.sellerProduct__subheading}>Название</p>
         <p className={styles.sellerProduct__subheading}>Вендор</p>
         <p className={styles.sellerProduct__subheading}>Категория</p>
