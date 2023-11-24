@@ -363,6 +363,32 @@ export const PRODUCERS_LIST = [
   },
 ];
 
+export const PRODUCT_ITEMS_LIKED: {
+  id: number;
+  name: string;
+  price: number;
+  img: string;
+}[] = [
+  {
+    id: 1,
+    name: 'Название программного обеспечения',
+    price: 19898,
+    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+  },
+  {
+    id: 2,
+    name: 'Название программного обеспечения',
+    price: 19898,
+    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+  },
+  {
+    id: 3,
+    name: 'Название программного обеспечения',
+    price: 19898,
+    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+  },
+];
+
 export const PURCHASES_ITEMS_CABINET: {
   id: number;
   img: string;
@@ -397,28 +423,44 @@ export const PURCHASES_ITEMS_CABINET: {
   },
 ];
 
-export const PRODUCT_ITEMS_LIKED: {
+export const PRODUCT_CREATED_SELLER: {
   id: number;
-  name: string;
-  price: number;
   img: string;
+  name: string;
+  vendor: string;
+  category: string;
+  code: string;
+  describe: string;
+  data: string;
 }[] = [
   {
     id: 1,
-    name: 'Название программного обеспечения',
-    price: 19898,
     img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+    name: 'Название программного обеспечения',
+    vendor: 'Adobe',
+    category: 'Мультимедия',
+    code: '123456789',
+    describe: 'Многофункциональный растровый графический ...',
+    data: '01/10/2023',
   },
   {
     id: 2,
-    name: 'Название программного обеспечения',
-    price: 19898,
     img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+    name: 'Название программного обеспечения',
+    vendor: 'Adobe',
+    category: 'Мультимедия',
+    code: '123456789',
+    describe: 'Многофункциональный растровый графический ...',
+    data: '01/10/2023',
   },
   {
     id: 3,
-    name: 'Название программного обеспечения',
-    price: 19898,
     img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+    name: 'Название программного обеспечения',
+    vendor: 'Adobe',
+    category: 'Мультимедия',
+    code: '123456789',
+    describe: 'Многофункциональный растровый графический ...',
+    data: '01/10/2023',
   },
 ];

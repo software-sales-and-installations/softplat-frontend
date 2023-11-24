@@ -2,25 +2,24 @@
 @import '../../styles/abstract/mixins.scss';
 
 .personalPurchases {
-    margin-top: 65px;
-    margin-left: 100px;
-    &__title {
-        margin: 0;
-        @include font-h2-simibold;
-        text-align: start;
-    }
+  margin-top: 65px;
+  margin-left: 100px;
+  &__title {
+    margin: 0;
+    @include font-h2-simibold;
+    text-align: start;
+  }
 
-    &__list {
-        margin-top: 35px;
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding: 0;
-    }
+  &__list {
+    margin-top: 35px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+  }
 
-    &__item {
-      background-color: $white-standart;
-    }
-   
+  &__item {
+    background-color: $white-standart;
+  }
 }

@@ -1,0 +1,44 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.sellerCreatedCards {
+  display: flex;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 20px;
+  transition: box-shadow 0.3s ease;
+  margin-bottom: 5px;
+  border-radius: 20px;
+  max-width: 1300px;
+
+  &__img {
+    width: 60px;
+    height: 60px;
+    background-color: bisque;
+    position: relative;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    margin: auto 0;
+  }
+  &__name {
+    @include font-body-description;
+    text-decoration: none;
+    color: $black-standart-text;
+    max-width: 130px;
+    display: flex;
+    align-items: center;
+    text-align: start
+  }
+  &__title {
+    @include font-body-description;
+    max-width: 230px;
+    display: flex;
+    align-items: center;
+    text-align: start
+  }
+  &__title:last-child {
+    margin-right: 20px;
+  }
+}
