@@ -10,7 +10,7 @@ interface ICardsState {
   card: IProductCard;
 }
 
-export const fecthAllCards = createAsyncThunk(
+export const fetchAllCards = createAsyncThunk<IProductCard[], undefined>(
   'cards/fetchAllCards',
   async (_, { rejectWithValue, fulfillWithValue }) => {
     try {
@@ -79,6 +79,9 @@ const cardsSlice = createSlice({
       })
       .addCase(fetchSingleCard.fulfilled, (state, action) => {
         state.card = action.payload;
+      })
+      .addCase(fetchAllCards.fulfilled, (state, action) => {
+        state.cards = action.payload;
       });
   },
 });
