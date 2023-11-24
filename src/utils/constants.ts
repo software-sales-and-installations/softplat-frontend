@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'http://softplat.acceleratorpracticum.ru'
+export const API_BASE_URL = 'http://api.softplat.acceleratorpracticum.ru'
 
 import AdobeImg from '../images/producers/Adobe.png';
 import AutodeskImg from '../images/producers/autodesk.png';
@@ -15,7 +15,7 @@ export const CATEGORIZED_TEXT: {
     text: string;
 }[]= [
     {id: 1,
-    text: 'Системное ПО'}, 
+    text: 'Системное ПО'},
     {id: 2,
     text: 'Прикладное ПО'},
     {id: 3,
@@ -181,7 +181,7 @@ export const FOOTER_LINKS: {
     link: string;
 }[]= [
     {id: 1,
-    text: 'Каталог', link: '/catalog'}, 
+    text: 'Каталог', link: '/catalog'},
     {id: 2,
     text: 'Производители', link: '/producers'},
     {id: 3,
@@ -224,7 +224,7 @@ export const CATEGORIZED_TEXT_VENDOR: {
     text: string;
 }[]= [
     {id: 1,
-    text: 'Фоторедактор'}, 
+    text: 'Фоторедактор'},
     {id: 2,
     text: 'Видеоредактор'},
     {id: 3,
@@ -309,7 +309,7 @@ export const SELECT_OPTIONS: {
 	{id: 8, label: MicrosoftImg, title: 'Microsoft', description: 'Компания Adobe — ведущий мировой разработчик революционных программных продуктов для любого вида данных, включая текстовую информацию, графические изображения, видео и web-контент. Adobe Systems является правообладателями формата PDF и TIFF. В сентябре 2022 года Adobe объявила о покупке сервиса Figma за 20 млн $. В феврале 2023 года Еврокомиссия озвучила намерение проверить эту сделку из-за повышенной опасности снижения конкуренции на рынке ПО для интерактивного дизайна. В марте 2023 года Adobe представила собственный ИИ-сервис для генерации изображений по описаниям на естественном языке. В сентябре 2023 года компания завершила процесс бета-тестирования продукта и открыла его широкой публике на коммерческой основе.'}
   ]
 
-  
+
 export const PURCHASES_ITEMS_CABINET: {
 	id: number;
 	img: string;
@@ -344,7 +344,7 @@ export const PURCHASES_ITEMS_CABINET: {
 	},
   ];
 
-  
+
 export const PRODUCT_ITEMS_LIKED: { id: number; name: string; price: number; img: string }[] = [
 	{
 	  id: 1,
@@ -365,4 +365,3 @@ export const PRODUCT_ITEMS_LIKED: { id: number; name: string; price: number; img
 	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
 	},
   ];
-  
