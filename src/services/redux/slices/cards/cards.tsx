@@ -13,7 +13,7 @@ interface ICardsState {
   card: IProductCard;
 }
 
-export const fetchAllCards = createAsyncThunk<IProductCard[], undefined>(
+export const fetchAllCards = createAsyncThunk<ICard, undefined>(
   'cards/fetchAllCards',
   async (_, { rejectWithValue, fulfillWithValue }) => {
     try {

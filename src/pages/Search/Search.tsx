@@ -10,7 +10,7 @@ import { useLocation } from 'react-router-dom';
 const Search: FC = () => {
   const { state } = useLocation();
   const cards = useAppSelector(state => state.cards.cards);
-  const searchedCountries = PRODUCT_ITEMS.filter(card => {
+  const searchedCountries = cards.products.filter(card => {
     return card.name.toLowerCase().includes(state.toLowerCase());
   });
   return (
@@ -23,7 +23,7 @@ const Search: FC = () => {
       )}
       <div className={styles.search__items}>
         <CardsGrid
-          cards={searchedCountries.length !== 0 ? searchedCountries : cards}
+          cards={searchedCountries.length !== 0 ? {products: searchedCountries} : cards}
         />
       </div>
     </section>
