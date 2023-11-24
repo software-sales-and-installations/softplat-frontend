@@ -14,7 +14,7 @@ const CatalogSection: FC = () => {
   const { section } = useParams();
   const dispatch = useAppDispatch();
   const selectState = useAppSelector(state => state.dropdown.option.value);
-  const cards = useAppSelector(store => store.cards.cards);
+  const cards = useAppSelector(store => store.cards.cards) || [];
 
   useEffect(() => {
     dispatch(fetchCards(selectState));
@@ -23,7 +23,7 @@ const CatalogSection: FC = () => {
   const currentCatalog = CATALOGUE_NAMES.find(
     item => item.pathName === section,
   );
-  const categorizedCards = cards?.filter(
+  const categorizedCards = cards.filter(
     card => card.category?.id === currentCatalog?.id,
   );
 
