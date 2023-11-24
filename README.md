@@ -28,16 +28,26 @@
 
     feat: краткое описание выполненной работы
 
+### Команда
+
+Евгений Evgenii959
+Калинин Кирилл KiryhaUdmurt
+Дук Юлия YuliaDuk
+Меначо-Пахес Юлия YuliaMP
+Конаков Илья WhiteWat3r
+Анатолий 
+
+### Стек
+
+- HTML 5
+- SCSS
+- React
+- Redux Toolkit
+- TypeScript
+- Axios
+- Storybook
+- Vite
+
 ### Pull Request
 
 После выполнения своей задачи создаем пул реквест в **ВЕТКУ dev**
-
-### Ссылка на Фигму
-
-Вкладка to dev
-
-https://www.figma.com/file/Gh6EUEXQEBeVnNui5B8ZCc/Платформа-для-ПО%2FАкселератор?type=design&node-id=0-1&mode=design&t=zS8Ym5SReInPBGM6-0
-
-### Свагер
-
-http://softplat.acceleratorpracticum.ru/swagger-ui/#/
