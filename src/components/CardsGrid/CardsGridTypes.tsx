@@ -1,7 +1,9 @@
 import { IProductCard } from "../ProductCard/ProductCardTypes";
-
+interface ICards{
+  products: IProductCard[]
+}
 export interface CardsGridProps {
-    cards: IProductCard[]
+    cards: ICards;
   };
 
 // export interface ProductCard {

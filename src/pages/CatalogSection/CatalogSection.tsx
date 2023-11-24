@@ -14,7 +14,7 @@ const CatalogSection: FC = () => {
   const { section } = useParams();
   const dispatch = useAppDispatch();
   const selectState = useAppSelector(state => state.dropdown.option.value);
-  const cards = useAppSelector(store => store.cards.cards);
+  const cards = useAppSelector(store => store.cards.cards) || [];
 
   useEffect(() => {
     dispatch(fetchSortedCards(selectState));
@@ -23,9 +23,10 @@ const CatalogSection: FC = () => {
   const currentCatalog = CATALOGUE_NAMES.find(
     item => item.pathName === section,
   );
-  const categorizedCards = cards?.filter(
+  const categorizedCards = cards.products.filter(
     card => card.category?.id === currentCatalog?.id,
   );
+  const productsCards = {products: categorizedCards}
 
   return (
     <section className={styles.catalogSection}>
@@ -37,7 +38,7 @@ const CatalogSection: FC = () => {
         <SelectForm />
       </div>
       <div className={styles.catalogSection__items}>
-        <CardsGrid cards={categorizedCards} />
+        <CardsGrid cards={productsCards} />
       </div>
     </section>
   );
