@@ -433,3 +433,45 @@ export const PRODUCT_ITEMS_LIKED: {
     img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
   },
 ];
+
+export const PRODUCT_CREATED_SELLER: {
+  id: number;
+  img: string;
+  name: string;
+  vendor: string;
+  category: string;
+  code: string;
+  describe: string;
+  data: string;
+}[] = [
+  {
+    id: 1,
+    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+    name: 'Название программного обеспечения',
+    vendor: 'Adobe',
+    category: 'Мультимедиа',
+    code: '12345',
+    describe: 'Многофункциональный растровый графический .',
+    data: '01/10/2023',
+  },
+  {
+    id: 2,
+    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+    name: 'Название программного обеспечения',
+    vendor: 'Adobe',
+    category: 'Мультимедиа',
+    code: '12345',
+    describe: 'Многофункциональный растровый графический .',
+    data: '01/10/2023',
+  },
+  {
+    id: 3,
+    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+    name: 'Название программного обеспечения',
+    vendor: 'Adobe',
+    category: 'Мультимедиа',
+    code: '12345',
+    describe: 'Многофункциональный растровый графический .',
+    data: '01/10/2023',
+  },
+];

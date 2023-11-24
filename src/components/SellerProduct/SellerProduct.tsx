@@ -1,6 +1,5 @@
 import styles from './SellerProduct.module.scss';
-import SellerCreatedCards from '../SellerCreatedCards/SellerCreatedCards';
-import { PRODUCT_CREATED_SELLER } from '../../utils/constants';
+import CardCreated from '../CardCreated/CardCreated';
 import { useState } from 'react';
 import classNames from 'classnames';
 
@@ -68,21 +67,7 @@ const SellerProduct: React.FC = () => {
         <p className={styles.sellerProduct__subheading}>Дата</p>
         <p className={styles.sellerProduct__subheading}>Ред</p>
       </div>
-      <ul className={styles.sellerProduct__list}>
-        {PRODUCT_CREATED_SELLER.map(i => (
-          <li key={i.id} className={styles.sellerProduct__item}>
-            <SellerCreatedCards
-              img={i.img}
-              name={i.name}
-              vendor={i.vendor}
-              category={i.category}
-              code={i.code}
-              describe={i.describe}
-              data={i.data}
-            />
-          </li>
-        ))}
-      </ul>
+      <CardCreated />
     </section>
   );
 };
