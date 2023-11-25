@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import CardsGrid from '../CardsGrid/CardsGrid';
 import styles from './Recommended.module.scss';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
-import { fetchSortedCards } from '../../services/redux/slices/cards/cards';
+import { fetchAllCards, fetchSortedCards } from '../../services/redux/slices/cards/cards';
 
 // type Props = {};
 
@@ -10,6 +10,8 @@ const Recommended: FC = () => {
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(fetchSortedCards('NEWEST'))
+    dispatch(fetchAllCards())
+
   }, [])
   const cards = useAppSelector(state => state.cards.cards);
 
