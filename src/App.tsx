@@ -12,6 +12,7 @@ import CatalogSection from './pages/CatalogSection/CatalogSection.tsx';
 import Personal from './pages/Personal/Personal.tsx';
 import { Producers } from './pages/Producers/Producers.tsx';
 import { ShoppingCart } from './pages/ShoppingCart/ShoppingCart.tsx';
+import Search from './pages/Search/Search.tsx';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path='/producers' element ={<Producers/>}/>
           <Route path='/producers/:vendor' element={<VendorPage/>}/>
           <Route path="/cart" element={<ShoppingCart />} />
+          <Route path="/search" element={<Search />} />
 
           {/* <Route path="/personal" element={<Personal />} />
           <Route path="/productcard" element={<ProductCard />} />
