@@ -23,7 +23,7 @@ const CatalogSection: FC = () => {
   const currentCatalog = CATALOGUE_NAMES.find(
     item => item.pathName === section,
   );
-  const categorizedCards = cards.products.filter(
+  const categorizedCards = cards?.products?.filter(
     card => card.category?.id === currentCatalog?.id,
   );
   const productsCards = {products: categorizedCards}

@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import styles from './Search.module.scss';
 import CardsGrid from '../../components/CardsGrid/CardsGrid';
-import { PRODUCT_ITEMS } from '../../utils/constants';
 import { useAppSelector } from '../../services/redux/store';
 import { useLocation } from 'react-router-dom';
 
