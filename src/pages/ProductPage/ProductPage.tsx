@@ -7,6 +7,7 @@ import { Tooltip } from '../../components/Tooltip/Tooltip';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { fetchSingleCard } from '../../services/redux/slices/cards/cards';
+import { addItem } from '../../services/redux/slices/cart/cart';
 
 export const ProductPage: FC = ({}) => {
   const { id } = useParams();
@@ -20,7 +21,9 @@ export const ProductPage: FC = ({}) => {
     dispatch(fetchSingleCard(Number(id)));
   }, [id]);
 
-  const handleAddToCart = () => {};
+  const handleAddToCart = () => {
+    dispatch(addItem(cardData));
+  };
 
   const handleCheckboxChange = () => {
     setIsInstallationSelected(prev => !prev);

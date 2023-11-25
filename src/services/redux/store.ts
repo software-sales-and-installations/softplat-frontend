@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userReducer } from './slices/user/user';
 import type { TypedUseSelectorHook } from 'react-redux';
 import { dropDownReducer } from '../../UI/DropDown/DropDownSlice';
+import { cartReducer } from './slices/cart/cart';
 
 const reducers = combineReducers({
 	user: userReducer,
@@ -14,7 +15,8 @@ const reducers = combineReducers({
 	chooseRole: chooseRoleReducer,
 	popupOpen: popupStateReducer,
 	dropdown: dropDownReducer,
-	cards: cardsReducer
+	cards: cardsReducer,
+	cart: cartReducer
 });
 
 export const store = configureStore({
