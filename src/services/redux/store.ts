@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userReducer } from './slices/user/user';
 import type { TypedUseSelectorHook } from 'react-redux';
 import { dropDownReducer } from '../../UI/DropDown/DropDownSlice';
+import { sellerApi } from '../../utils/api/sellerApi.tsx';
 
 const reducers = combineReducers({
 	user: userReducer,
@@ -14,11 +15,13 @@ const reducers = combineReducers({
 	chooseRole: chooseRoleReducer,
 	popupOpen: popupStateReducer,
 	dropdown: dropDownReducer,
-	cards: cardsReducer
+	cards: cardsReducer,
+  [sellerApi.reducerPath]: sellerApi.reducer,
 });
 
 export const store = configureStore({
 	reducer: reducers,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sellerApi.middleware)
 });
 
 export type RootState = ReturnType<typeof store.getState>;
