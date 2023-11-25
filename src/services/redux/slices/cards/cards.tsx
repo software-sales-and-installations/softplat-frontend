@@ -3,14 +3,29 @@ import axios from 'axios';
 import { API_BASE_URL } from '../../../../utils/constants';
 import { IProductCard } from '../../../../components/ProductCard/ProductCardTypes';
 
+interface ICard{
+  products: IProductCard[]
+}
 interface ICardsState {
   status: 'idle' | 'success' | 'loading' | 'failed';
   error: unknown;
-  cards: IProductCard[];
+  cards: ICard;
   card: IProductCard;
 }
 
-export const fetchCards = createAsyncThunk(
+export const fetchAllCards = createAsyncThunk<ICard, undefined>(
+  'cards/fetchAllCards',
+  async (_, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await axios.get(`${API_BASE_URL}/product/search`);
+      return fulfillWithValue(data);
+    } catch (error) {
+      rejectWithValue(error);
+    }
+  },
+);
+
+export const fetchSortedCards = createAsyncThunk(
   'cards/fetchCards',
   async (params: string = 'NEWEST', { rejectWithValue, fulfillWithValue }) => {
     const sort = `sort=${params}`;
@@ -41,7 +56,7 @@ export const fetchSingleCard = createAsyncThunk(
 const initialState: ICardsState = {
   status: 'idle',
   error: null,
-  cards: [],
+  cards: {products:[]},
   card: {
     name: '',
     price: 0,
@@ -56,17 +71,20 @@ const cardsSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(fetchCards.pending, (state) => {
+      .addCase(fetchSortedCards.pending, state => {
         state.status = 'loading';
       })
-      .addCase(fetchCards.fulfilled, (state, action) => {
+      .addCase(fetchSortedCards.fulfilled, (state, action) => {
         state.cards = action.payload;
       })
-      .addCase(fetchCards.rejected, (state) => {
+      .addCase(fetchSortedCards.rejected, state => {
         state.status = 'failed';
       })
       .addCase(fetchSingleCard.fulfilled, (state, action) => {
         state.card = action.payload;
+      })
+      .addCase(fetchAllCards.fulfilled, (state, action) => {
+        state.cards = action.payload;
       });
   },
 });

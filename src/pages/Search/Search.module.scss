@@ -1,0 +1,20 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.search {
+     &__title {
+        margin-top: 75px;
+        text-align: start;
+        @include font-h1-bold
+     }
+
+     &__notFound {
+        margin-top: 15px;
+        text-align: start;
+        @include font-body-regular
+     }
+
+     &__items {
+        margin-top: 75px;
+     }
+}

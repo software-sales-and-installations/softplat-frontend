@@ -5,7 +5,7 @@ import CardsGrid from '../../components/CardsGrid/CardsGrid';
 import { CATALOGUE_NAMES } from '../../utils/constants';
 import SelectForm from '../../components/SelectForm/SelectForm';
 import { Categories } from '../../components/Categories/Categories';
-import { fetchCards } from '../../services/redux/slices/cards/cards';
+import { fetchSortedCards } from '../../services/redux/slices/cards/cards';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 
 // type Props = {};
@@ -17,15 +17,16 @@ const CatalogSection: FC = () => {
   const cards = useAppSelector(store => store.cards.cards) || [];
 
   useEffect(() => {
-    dispatch(fetchCards(selectState));
+    dispatch(fetchSortedCards(selectState));
   }, [selectState]);
 
   const currentCatalog = CATALOGUE_NAMES.find(
     item => item.pathName === section,
   );
-  const categorizedCards = cards.filter(
+  const categorizedCards = cards.products.filter(
     card => card.category?.id === currentCatalog?.id,
   );
+  const productsCards = {products: categorizedCards}
 
   return (
     <section className={styles.catalogSection}>
@@ -37,7 +38,7 @@ const CatalogSection: FC = () => {
         <SelectForm />
       </div>
       <div className={styles.catalogSection__items}>
-        <CardsGrid cards={categorizedCards} />
+        <CardsGrid cards={productsCards} />
       </div>
     </section>
   );
