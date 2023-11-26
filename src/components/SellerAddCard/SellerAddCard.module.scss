@@ -1,0 +1,69 @@
+@import '../../styles/abstract/mixins.scss';
+@import '../../styles/abstract/constants.scss';
+
+.sellerAddCard {
+  &__inputs {
+    max-width: 590px;
+  }
+  &__select {
+    width: 590px;
+    box-sizing: border-box;
+    @include font-CTAbody-regular;
+    padding: 10px 12px;
+    border-radius: 20px;
+    border: 1px solid $border-input;
+    color: $dark-grey;
+    background-color: $light-grey;
+    border-right: 16px solid transparent;
+    cursor: pointer;
+  }
+  &__title {
+    width: 100%;
+    padding-left: 12px;
+    @include font-CTAbody-regular;
+    color: $dark-grey;
+    text-align: left;
+    padding-bottom: 10px;
+    &_first {
+      width: 100%;
+      padding-left: 12px;
+      @include font-CTAbody-regular;
+      color: $dark-grey;
+      text-align: left;
+      padding-bottom: 10px;
+      margin: 0;
+    }
+  }
+  &__loadImg {
+    display: none;
+  }
+  &__load {
+    width: 590px;
+    box-sizing: border-box;
+    @include font-CTAbody-regular;
+    padding: 10px 12px;
+    border-radius: 20px;
+    border: 1px solid $border-input;
+    color: $dark-grey;
+    background-color: $light-grey;
+    border-right: 16px solid transparent;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 119px;
+    &_logo {
+      display: flex;
+    }
+  }
+  &__label {
+    display: flex;
+  }
+  &__btncontainer {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    max-width: 580px;
+  }
+}

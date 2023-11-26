@@ -15,24 +15,12 @@ export enum InputTypes {
   priceInstall = 'priceInstall',
   description = 'description',
 }
-
-export enum InputColors {
-	black = 'black',
-	white = 'white',
-	grey = 'grey',
-}
-
-export interface IInput {
-	inputType: InputTypes;
-	readOnly?: boolean;
-	value?: any;
-	labelText?: string;
-	showPasswordButton?: boolean;
-	color?: InputColors;
-	validation?: any;
-	rules?: any;
-	error?: string;
-	onChange?: any;
-	max?: string;
-	defaultValue?: any;
+export interface ICreateProductFields {
+  inputType: InputTypes;
+  name?: string;
+  link?: string;
+  description?: string;
+  price?: number;
+  priceInstall?: number;
+  error?: string;
 }

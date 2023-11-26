@@ -1,5 +1,6 @@
 import styles from './SellerProduct.module.scss';
 import CardCreated from '../CardCreated/CardCreated';
+import SellerAddCard from '../SellerAddCard/SellerAddCard';
 import { useState } from 'react';
 import classNames from 'classnames';
 
@@ -57,17 +58,7 @@ const SellerProduct: React.FC = () => {
           Ожидают доработки
         </button>
       </nav>
-      <div className={styles.sellerProduct__subheadings}>
-        <p className={styles.sellerProduct__subheading}>Логотип</p>
-        <p className={styles.sellerProduct__subheading}>Название</p>
-        <p className={styles.sellerProduct__subheading}>Вендор</p>
-        <p className={styles.sellerProduct__subheading}>Категория</p>
-        <p className={styles.sellerProduct__subheading}>Артикул</p>
-        <p className={styles.sellerProduct__subheading_description}>Описание</p>
-        <p className={styles.sellerProduct__subheading}>Дата</p>
-        <p className={styles.sellerProduct__subheading}>Ред</p>
-      </div>
-      <CardCreated />
+      {activeBtn === 'cards' ? <CardCreated /> : <SellerAddCard />}
     </section>
   );
 };

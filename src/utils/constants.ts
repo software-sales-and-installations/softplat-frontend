@@ -24,6 +24,24 @@ export const CATEGORIZED_TEXT: {
   { id: 9, text: 'Утилиты' },
   { id: 10, text: 'Корпоративные системы' },
 ];
+export const SELLER_CATEGORIZED_TEXT: {
+  id: number;
+  text: string;
+}[] = [
+  { id: 1, text: 'Фоторедактор' },
+  { id: 2, text: 'Векторная графика' },
+  { id: 3, text: 'Дизайн' },
+  { id: 4, text: 'Видеоредактор' },
+  { id: 5, text: 'Анимирование' },
+  { id: 6, text: 'Web-разработка' },
+  { id: 7, text: 'Аудиоредактор' },
+  { id: 8, text: 'Системное ПО' },
+  { id: 9, text: 'Прикладное ПО' },
+  { id: 10, text: 'Инструментальное ПО' },
+  { id: 11, text: 'Антивирусы' },
+  { id: 12, text: 'Утилиты' },
+  { id: 13, text: 'Корпоративные системы' },
+];
 export const TEXT_FOR_AUTH_CHECKBOX: {
   id: number;
   text: string;
@@ -81,6 +99,61 @@ export const VALIDATION_SETTINGS = {
       invalid: 'Ваш номер должен начинаться с +7',
       noName: 'Необходимо ввести номер телефона',
     },
+  },
+  link: {
+    pattern:
+      /http[s]?:\/(?:\/[^\/]+){1,}(?:\/[А-Яа-яёЁ\w ]+\.[a-z]{3,5}(?![\/]|[\wА-Яа-яёЁ]))/,
+    messages: {
+      invalid: 'Введите ссылку в правильном формате',
+    },
+  },
+  description: {
+    pattern: /^[a-zа-яё\s]+$/iu,
+    messages: {
+      minLength: 10,
+      invalid: 'Введите описание продукта',
+      tooShort: 'Слишком короткое описание',
+    },
+  },
+  price: {
+    pattern: /[0-9]+(\\.[0-9][0-9]?)?/,
+    messages: {
+      invalid: 'Введите стоимость продукта',
+    },
+  },
+  priceInstall: {
+    pattern: /[0-9]+(\\.[0-9][0-9]?)?/,
+    messages: {
+      invalid: 'Введите стоимость установки',
+    },
+  },
+};
+export const PRICE_VALIDATION_CONFIG = {
+  pattern: {
+    value: VALIDATION_SETTINGS.price.pattern,
+    message: VALIDATION_SETTINGS.price.messages.invalid,
+  },
+};
+export const PRICE_INSTALL_VALIDATION_CONFIG = {
+  pattern: {
+    value: VALIDATION_SETTINGS.priceInstall.pattern,
+    message: VALIDATION_SETTINGS.priceInstall.messages.invalid,
+  },
+};
+export const DESCRIPTION_VALIDATION_CONFIG = {
+  pattern: {
+    value: VALIDATION_SETTINGS.description.pattern,
+    message: VALIDATION_SETTINGS.description.messages.invalid,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.description.messages.minLength,
+    message: VALIDATION_SETTINGS.description.messages.tooShort,
+  },
+};
+export const LINK_VALIDATION_CONFIG = {
+  pattern: {
+    value: VALIDATION_SETTINGS.link.pattern,
+    message: VALIDATION_SETTINGS.link.messages.invalid,
   },
 };
 export const EMAIL_VALIDATION_CONFIG = {

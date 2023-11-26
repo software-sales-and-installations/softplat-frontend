@@ -4,6 +4,7 @@
 .sellerProduct {
   margin-top: 65px;
   margin-left: 60px;
+  max-width: 1310px;
   &__title {
     margin: 0;
     @include font-h2-simibold;
@@ -52,11 +53,21 @@
     margin-top: 45px;
   }
   &__subheading {
-    margin-right: 80px;
+    margin-right: 50px;
     @include font-CTAbody-regular;
     &_description {
-      max-width: 230px;
-      margin-right: 195px;
+      max-width: 10px;
+      margin-right: 280px;
+      @include font-CTAbody-regular;
+    }
+    &_data {
+      max-width: 10px;
+      margin-right: 120px;
+      @include font-CTAbody-regular;
+    }
+    &_edit {
+      max-width: 10px;
+      margin: auto 0;
       @include font-CTAbody-regular;
     }
   }

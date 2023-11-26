@@ -1,4 +1,3 @@
-
 import { FC } from 'react';
 import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';

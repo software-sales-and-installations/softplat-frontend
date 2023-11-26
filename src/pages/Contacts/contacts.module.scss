@@ -14,6 +14,7 @@
   gap: 65px;
   text-align: left;
   list-style: none;
+    max-width: 537px;
 }
 
 .contacts__title {
@@ -45,20 +46,20 @@
 
 .contacts__text {
   margin: 0;
-  color: var(--Dark_grey, #55505C);
+    color: rgba(159, 164, 175, 1);
   font-feature-settings: 'clig' off, 'liga' off;
   /* Body */
   font-family: Inter;
-  font-size: 22px;
+  font-size: 24px;
   font-style: normal;
   font-weight: 400;
-  line-height: 35px; /* 159.091% */
+  line-height: 28px; /* 159.091% */
 }
 
 .contacts__item {
   display: flex;
   flex-direction: column;
-  gap:25px;
+  gap: 25px;
   margin: 0;
 }
 
