@@ -32,6 +32,9 @@
   padding: 0;
   border: none;
   background-color: transparent;
+  color: $dark-grey;
+  display: flex;
+  place-content: center;
   cursor: pointer;
 
   &__search {
