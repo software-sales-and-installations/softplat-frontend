@@ -157,7 +157,7 @@ const SellerAddCard: FC<ICreateProductFields> = ({ inputType, error = '' }) => {
           </svg>
         </label>
       </div>
-      <p className={styles.sellerAddCard__title}>Добавьте описание"</p>
+      <p className={styles.sellerAddCard__title}>Добавьте описание</p>
       <Input
         inputType={InputTypes.description}
         validation={{
