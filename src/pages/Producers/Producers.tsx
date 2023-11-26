@@ -1,27 +1,39 @@
 import { FC, useEffect } from 'react';
 import styles from './Producers.module.scss';
 import DropDown from '../../UI/DropDown/DropDown';
-import { SELECT_OPTIONS } from '../../utils/constants';
+import { SELECT_COUNTRIES_OPTIONS } from '../../utils/constants';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { fetchAllVendors } from '../../services/redux/slices/vendors/vendors';
+import { SelectorType } from '../../UI/DropDown/DropDownTypes';
+import { changeCountryOption } from '../../UI/DropDown/DropDownSlice';
 
 export const Producers: FC = () => {
   const dispatch = useAppDispatch();
+  const countryOption = useAppSelector(state => state.dropdown.countryOption);
 
   useEffect(() => {
     dispatch(fetchAllVendors());
   }, []);
 
   const vendors = useAppSelector(state => state.vendors.vendors.vendors);
+
+  console.log(countryOption);
+
+  const filteredVendors = vendors.filter(
+    vendor => vendor.country === countryOption.value,
+  );
   return (
     <>
       <h1 className={styles.title}>Производители</h1>
       <div className={styles.ddcontainer}>
-        <DropDown options={SELECT_OPTIONS} />
+        <DropDown
+          type={SelectorType.COUNTRY}
+          options={SELECT_COUNTRIES_OPTIONS}
+        />
       </div>
       <div className={styles.container}>
-        {vendors.map(vendor => {
+        {filteredVendors.map(vendor => {
           return (
             <Link
               key={vendor.id}
