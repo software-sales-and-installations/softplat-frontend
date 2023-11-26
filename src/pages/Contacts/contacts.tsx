@@ -1,9 +1,6 @@
 import Slider from '../../components/Slider/Slider.tsx';
 import styles from './contacts.module.scss';
-import contactsMap from '../../images/contactsMap.svg';
 import { Link } from 'react-router-dom';
-import { BsTelegram } from 'react-icons/bs';
-import { SlSocialVkontakte } from 'react-icons/sl';
 
 const Contacts = () => {
   return (
@@ -83,11 +80,15 @@ const Contacts = () => {
             </div>
           </li>
         </ul>
-        <img
-          className={styles.contcats__map}
-          src={contactsMap}
-          alt="Карта с адресом"
-        />
+        <div className={styles.contacts__map}>
+          <iframe
+            className={styles.contacts__frame}
+            src="https://yandex.ru/map-widget/v1/?um=constructor%3A50cb035aa350e601dea4586ad7eed4abc5b2e25af022307b5b0ff17e0d16bc63&amp;source=constructor"
+            width="1008"
+            height="545"
+            frameBorder="0"
+          ></iframe>
+        </div>
       </div>
     </section>
   );
