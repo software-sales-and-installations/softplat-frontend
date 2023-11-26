@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'http://api.softplat.acceleratorpracticum.ru'
+export const API_BASE_URL = 'https://api.softplat.ru'
 
 import AdobeImg from '../images/producers/Adobe.png';
 import AutodeskImg from '../images/producers/autodesk.png';
@@ -259,14 +259,15 @@ export const SELECT_OPTIONS: {
     },
   ];
 
- export const PRODUCT_ITEMS = [
-	{
-	  id: 1,
-	  name: 'Adobe Photoshop 2023',
-	  price: 19898,
-	  installationPrice: 2000,
-	  image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
-	},
+ export const PRODUCT_ITEMS = {
+   products: [
+       {
+         id: 1,
+         name: 'Adobe Photoshop 2023',
+         price: 19898,
+         installationPrice: 2000,
+         image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
+       },
 	{
 		id: 2,
 		name: 'FL Studio',
@@ -295,10 +296,12 @@ export const SELECT_OPTIONS: {
 		installationPrice: 2000,
 		image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
 	  },
-  ];
+  ],
+   };
 
 
-  export const PRODUCERS_LIST = [
+
+export const PRODUCERS_LIST = [
 	{id: 1, label: AdobeImg, title: 'Adobe', description:'Компания Adobe — ведущий мировой разработчик революционных программных продуктов для любого вида данных, включая текстовую информацию, графические изображения, видео и web-контент. Adobe Systems является правообладателями формата PDF и TIFF. В сентябре 2022 года Adobe объявила о покупке сервиса Figma за 20 млн $. В феврале 2023 года Еврокомиссия озвучила намерение проверить эту сделку из-за повышенной опасности снижения конкуренции на рынке ПО для интерактивного дизайна. В марте 2023 года Adobe представила собственный ИИ-сервис для генерации изображений по описаниям на естественном языке. В сентябре 2023 года компания завершила процесс бета-тестирования продукта и открыла его широкой публике на коммерческой основе.'},
 	{id: 2, label: AutodeskImg, title: 'Autodesk', description: 'Компания Adobe — ведущий мировой разработчик революционных программных продуктов для любого вида данных, включая текстовую информацию, графические изображения, видео и web-контент. Adobe Systems является правообладателями формата PDF и TIFF. В сентябре 2022 года Adobe объявила о покупке сервиса Figma за 20 млн $. В феврале 2023 года Еврокомиссия озвучила намерение проверить эту сделку из-за повышенной опасности снижения конкуренции на рынке ПО для интерактивного дизайна. В марте 2023 года Adobe представила собственный ИИ-сервис для генерации изображений по описаниям на естественном языке. В сентябре 2023 года компания завершила процесс бета-тестирования продукта и открыла его широкой публике на коммерческой основе.'},
 	{id: 3, label: AlludoImg, title: 'Alludo', descriprion: 'Компания Adobe — ведущий мировой разработчик революционных программных продуктов для любого вида данных, включая текстовую информацию, графические изображения, видео и web-контент. Adobe Systems является правообладателями формата PDF и TIFF. В сентябре 2022 года Adobe объявила о покупке сервиса Figma за 20 млн $. В феврале 2023 года Еврокомиссия озвучила намерение проверить эту сделку из-за повышенной опасности снижения конкуренции на рынке ПО для интерактивного дизайна. В марте 2023 года Adobe представила собственный ИИ-сервис для генерации изображений по описаниям на естественном языке. В сентябре 2023 года компания завершила процесс бета-тестирования продукта и открыла его широкой публике на коммерческой основе.'},
@@ -343,7 +346,6 @@ export const PURCHASES_ITEMS_CABINET: {
 	  data: '01/10/2023',
 	},
   ];
-
 
 export const PRODUCT_ITEMS_LIKED: { id: number; name: string; price: number; img: string }[] = [
 	{
