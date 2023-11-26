@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import style from './Footer.module.scss';
 
-import { BsTelegram } from 'react-icons/bs';
 import { FOOTER_LINKS } from '../../utils/constants';
 
 export const Footer: FC = () => {
@@ -37,12 +36,28 @@ export const Footer: FC = () => {
         <div className={style.footer__socialBLock}>
           <p className={style.footer__socialMedia}>Мы в соцсетях:</p>
           <ul className={style.footer__socialIcons}>
-            <li>
+            <li className={style.footer__socialItem}>
               <Link to={''}>
-                <BsTelegram className={style.footer__socialIcon} />
+                <svg
+                  className={style.footer__socialIcon}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="36"
+                  height="36"
+                  viewBox="0 0 36 36"
+                  fill="white"
+                >
+                  <g clip-path="url(#clip0_547_4057)">
+                    <path d="M17.7083 0C7.93333 0 0 7.93333 0 17.7083C0 27.4833 7.93333 35.4167 17.7083 35.4167C27.4833 35.4167 35.4167 27.4833 35.4167 17.7083C35.4167 7.93333 27.4833 0 17.7083 0ZM25.925 12.0417C25.6594 14.8396 24.5083 21.6396 23.924 24.774C23.676 26.1021 23.1802 26.5448 22.7198 26.5979C21.6927 26.6865 20.9135 25.925 19.9219 25.2698C18.3635 24.2427 17.4781 23.6052 15.9729 22.6135C14.2198 21.4625 15.3531 20.825 16.3625 19.7979C16.6281 19.5323 21.1615 15.4062 21.25 15.0344C21.2623 14.9781 21.2607 14.9196 21.2452 14.864C21.2298 14.8085 21.201 14.7575 21.1615 14.7156C21.0552 14.6271 20.9135 14.6625 20.7896 14.6802C20.6302 14.7156 18.151 16.3625 13.3167 19.6208C12.6083 20.099 11.9708 20.3469 11.4042 20.3292C10.7667 20.3115 9.5625 19.975 8.65938 19.674C7.54375 19.3198 6.67604 19.125 6.74688 18.5052C6.78229 18.1865 7.225 17.8677 8.05729 17.5312C13.2281 15.2823 16.6635 13.7948 18.3813 13.0865C23.3042 11.0323 24.3135 10.6781 24.9865 10.6781C25.1281 10.6781 25.4646 10.7135 25.6771 10.8906C25.8542 11.0323 25.9073 11.2271 25.925 11.3688C25.9073 11.475 25.9427 11.7938 25.925 12.0417Z" />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_547_4057">
+                      <rect width="35.4167" height="35.4167" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
               </Link>
             </li>
-            <li>
+            <li className={style.footer__socialItem}>
               <Link to={''}>
                 <svg
                   className={style.footer__socialIcon}

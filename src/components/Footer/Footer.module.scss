@@ -46,20 +46,24 @@
     align-self: self-start;
   }
 
-  &__socialIcon {
-    color: $white-standart;
-    text-decoration: none;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-  }
-
   &__socialIcons {
     padding: 0;
     list-style: none;
     display: flex;
     gap: 8px;
     margin: 0;
+  }
+
+  &__socialItem {
+    height: 35px;
+  }
+
+  &__socialIcon {
+    color: $white-standart;
+    text-decoration: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
   }
 
   &__socialIcon:hover {
