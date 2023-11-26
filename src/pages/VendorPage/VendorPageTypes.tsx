@@ -3,7 +3,7 @@ interface IVendor {
   description: string;
   id: number;
   country: string;
-  image: VendorImage;
+  image?: VendorImage;
 }
 
 type VendorImage = {

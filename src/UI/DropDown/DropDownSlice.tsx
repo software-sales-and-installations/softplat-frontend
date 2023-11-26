@@ -5,6 +5,10 @@ const initialState = {
     value: 'NEWEST',
     label: 'По новизне',
   },
+  countryOption: {
+    value: '',
+    label: '',
+  }
 };
 
 const dropDownSlice = createSlice({

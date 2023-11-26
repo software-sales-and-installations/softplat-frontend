@@ -2,18 +2,34 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { API_BASE_URL } from '../../../../utils/constants';
 
+interface IVendors {
+  vendors: IVendor[];
+}
+
 interface IVendorState {
   status: 'idle' | 'success' | 'loading' | 'failed';
   error: unknown;
   vendor: IVendor;
-  vendors: IVendor[];
+  vendors: IVendors;
 }
 
-const fetchAllVendors = createAsyncThunk<IVendor[], undefined>(
+export const fetchAllVendors = createAsyncThunk<IVendors, undefined>(
   'vendors/fetchAllVendors',
   async (_, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await axios.get(`${API_BASE_URL}/vendors/search`);
+      const { data } = await axios.get(`${API_BASE_URL}/vendor/search`);
+      return fulfillWithValue(data);
+    } catch (error) {
+      rejectWithValue(error);
+    }
+  },
+);
+
+export const fetchSingleVendor = createAsyncThunk<IVendor, number>(
+  'vendors/fetchSingleVendor',
+  async (id, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await axios.get(`${API_BASE_URL}/vendor${id}`);
       return fulfillWithValue(data);
     } catch (error) {
       rejectWithValue(error);
@@ -37,7 +53,7 @@ const initialState: IVendorState = {
       contentType: '',
     },
   },
-  vendors: [],
+  vendors: { vendors: [] },
 };
 
 const vendorsSlice = createSlice({
@@ -45,10 +61,14 @@ const vendorsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(fetchAllVendors.fulfilled, (state, action) => {
-      state.vendors = action.payload;
-    })
-  }
+    builder
+      .addCase(fetchAllVendors.fulfilled, (state, action) => {
+        state.vendors = action.payload;
+      })
+      .addCase(fetchSingleVendor.fulfilled, (state, action) => {
+        state.vendor = action.payload;
+      });
+  },
 });
 
 export default vendorsSlice.reducer;
