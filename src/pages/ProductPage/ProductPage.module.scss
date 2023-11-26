@@ -23,7 +23,6 @@
     border-radius: 20px;
     border: 1px solid $light-grey;
     background-color: $white-standart;
-    
   }
 
   &__category {
@@ -85,6 +84,23 @@
     margin: 0;
     @include font-body-filters;
     margin-right: 50px;
+  }
+
+  &__btn {
+    margin: 0 5px;
+    padding: 3.5px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: $dark-grey;
+    color: $white-standart;
+    cursor: pointer;
+    @include font-body-filters;
+    transition: all 0.4s;
+
+    &:hover {
+      background-color: $accent-lime-button;
+      color: $black-standart-text;
+    }
   }
 
   &__description {
