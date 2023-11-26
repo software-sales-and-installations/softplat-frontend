@@ -35,7 +35,7 @@ const VendorPage: FC = () => {
         <SelectForm />
       </div>
       <div className={styles.vendorPage__products}>
-        <CardsGrid cards={PRODUCT_ITEMS} />
+        <CardsGrid cards={{products: PRODUCT_ITEMS}} />
       </div>
     </section>
   );
