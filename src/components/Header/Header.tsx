@@ -24,7 +24,7 @@ export const Header: FC = () => {
             {user.token? (<Link to='personal/favorites' className={styles.btncontainer__likebtn}/>) : null}
                 <Link to='/cart' className={styles.btncontainer__shopbtn}/>
                 {user.token? (
-                    <Link to='/personal' className={styles.btncontainer__profile}><FaRegUser className={styles.btncontainer__profileicon}/></Link>
+                    <Link to={user.role==='BUYER'? '/personal' : '/seller'} className={styles.btncontainer__profile}><FaRegUser className={styles.btncontainer__profileicon}/></Link>
                 ) : (
                     <button type='button' onClick={()=>{
                         dispatch(popupState(true))

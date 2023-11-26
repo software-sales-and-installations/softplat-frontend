@@ -31,7 +31,7 @@ export const PopupForAuth: FC = () => {
 			.unwrap()
 			.then((res)=>{
 				console.log(res)
-				dispatch(setUser({ email: res.email, token: res.token }));
+				dispatch(setUser({ email: res.email, token: res.token, role: res.role }));
 				dispatch(popupState(false))
 				reset
 			})

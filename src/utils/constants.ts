@@ -9,6 +9,10 @@ import SAP from '../images/producers/SAP.png';
 import PayPAlImg from '../images/producers/PayPal.png';
 import MicrosoftImg from '../images/producers/Microsoft.png';
 
+import PhotoShopImg from '../images/seller/Photoshop.png';
+import Acrobat from '../images/seller/Acrobat.png';
+import Illustrator from '../images/seller/Illustrator.png';
+
 
 export const CATEGORIZED_TEXT: {
     id: number;
@@ -367,3 +371,9 @@ export const PRODUCT_ITEMS_LIKED: { id: number; name: string; price: number; img
 	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
 	},
   ];
+
+  export const SellerExistingCard = [
+	{id: 1, logo: PhotoShopImg, name: 'Adobe Photoshop', vendor: 'Adobe', category: 'Мультимедиа', art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023'},
+	{id: 1, logo: Acrobat, name: 'Adobe Acrobat', vendor: 'Adobe', category: 'Мультимедиа', art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023'},
+	{id: 1, logo: Illustrator, name: 'Adobe Illustrator', vendor: 'Adobe', category: 'Мультимедиа', art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023'}
+  ]
