@@ -1,16 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IProductCard } from '../../../../components/ProductCard/ProductCardTypes';
 
-
-
 interface ICartState {
-   items: IProductCard[];
+  items: IProductCard[];
+  itemsToRemove: IProductCard[];
 }
 
 const initialCartState: ICartState = {
-    items: [],
-  };
-
+  items: [],
+  itemsToRemove: [],
+};
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -22,12 +21,47 @@ const cartSlice = createSlice({
     removeItem: (state, action) => {
       state.items = state.items.filter(item => item.id !== action.payload.id);
     },
-    clearCart: (state) => {
+    clearCart: state => {
       state.items = [];
+    },
+    updateCartItem: (state, action) => {
+      const index = state.items.findIndex(
+        item => item.id === action.payload.id,
+      );
+      if (index !== -1) {
+        state.items[index] = action.payload;
+      }
+    },
+    addToRemovalList: (state, action) => {
+      state.itemsToRemove.push(action.payload);
+    },
+    removeFromRemovalList: (state, action) => {
+      state.itemsToRemove = state.itemsToRemove.filter(
+        item => item.id !== action.payload.id,
+      );
+    },
+    clearRemovalList: state => {
+      state.itemsToRemove = [];
+    },
+    removeSelectedItems: state => {
+      state.items = state.items.filter(
+        item =>
+          !state.itemsToRemove.some(removeItem => removeItem.id === item.id),
+      );
+      state.itemsToRemove = [];
     },
   },
 });
 
-export const { addItem, removeItem, clearCart } = cartSlice.actions;
+export const {
+  addItem,
+  removeItem,
+  clearCart,
+  updateCartItem,
+  addToRemovalList,
+  removeFromRemovalList,
+  clearRemovalList,
+  removeSelectedItems,
+} = cartSlice.actions;
 
 export const cartReducer = cartSlice.reducer;

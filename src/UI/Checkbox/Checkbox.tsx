@@ -3,6 +3,7 @@ import { ICheckboxProps } from './CheckboxTypes';
 import style from './Checkbox.module.scss';
 
 export const Checkbox: FC<ICheckboxProps> = ({ onCheck, label }) => {
+  
   const [isChecked, setIsChecked] = useState(false);
 
   const handleChange = () => {
@@ -11,10 +12,17 @@ export const Checkbox: FC<ICheckboxProps> = ({ onCheck, label }) => {
   };
 
   return (
-    <label className={`${style.checkbox} ${isChecked ? style.checkbox_checked : ''}`}>
-      <input type={'checkbox'} onChange={handleChange} checked={isChecked} className={style.checkbox__input} />
+    <label
+      className={`${style.checkbox} ${isChecked ? style.checkbox_checked : ''}`}
+    >
+      <input
+        type={'checkbox'}
+        onChange={handleChange}
+        checked={isChecked}
+        className={style.checkbox__input}
+      />
       <span className={style.checkbox__custom}>{isChecked ? '✔' : ''}</span>
-      {label}
+      <span className={style.checkbox__text}> {label}</span>
     </label>
   );
 };

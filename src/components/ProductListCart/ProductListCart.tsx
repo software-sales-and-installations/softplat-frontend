@@ -1,44 +1,37 @@
 import { FC } from 'react';
 import style from './ProductListCart.module.scss';
 import { CartItem } from '../CartItem/CartItem';
-
-const productItems: { name: string; price: number; img: string }[] = [
-  {
-    name: 'Название программного обеспечения',
-    price: 12000,
-    img: 'https://pixy.org/src2/575/5753334.jpg',
-  },
-  {
-    name: 'Название программного обеспечения',
-    price: 12000,
-    img: 'https://pixy.org/src2/575/5753334.jpg',
-  },
-  {
-    name: 'Название программного обеспечения',
-    price: 12000,
-    img: 'https://pixy.org/src2/575/5753334.jpg',
-  },
-  {
-    name: 'Название программного обеспечения',
-    price: 10000,
-    img: 'https://pixy.org/src2/575/5753334.jpg',
-  },
-  {
-    name: 'Название программного обеспечения',
-    price: 10000,
-    img: 'https://pixy.org/src2/575/5753334.jpg',
-  },
-];
+import { useAppDispatch, useAppSelector } from '../../services/redux/store';
+import {
+  clearRemovalList,
+  removeSelectedItems,
+} from '../../services/redux/slices/cart/cart';
 
 export const ProductListCart: FC = () => {
+  const cartItems = useAppSelector(store => store.cart.items);
+  const dispatch = useAppDispatch();
+
+  const handleRemoveSelectedItems = () => {
+    dispatch(removeSelectedItems());
+    dispatch(clearRemovalList());
+  };
+
   return (
     <div className={style.productList}>
-    <button className={style.productList__cleanCart}>Очистить корзину</button>
-    <ul className={style.list}>
-      {productItems.map((product, index) => (
-        <CartItem product={product} key={index}/>
-      ))}
-    </ul>
+      {cartItems.length > 0 && (
+        <button
+          className={style.productList__cleanCart}
+          onClick={handleRemoveSelectedItems}
+        >
+          Очистить корзину
+        </button>
+      )}
+
+      <ul className={style.list}>
+        {cartItems?.map(product => (
+          <CartItem product={product} key={product.id} />
+        ))}
+      </ul>
     </div>
   );
 };
