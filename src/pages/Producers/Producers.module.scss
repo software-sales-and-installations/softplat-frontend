@@ -30,4 +30,9 @@
         object-fit: contain;
         border-radius: 20px;
     }
+    &__title{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
 }
