@@ -1,20 +1,27 @@
 import { FC, useEffect, useState } from 'react';
 import style from './ProductPage.module.scss';
-// import { BsHeartFill, BsHeart } from 'react-icons/bs';
 import { Button } from '../../UI/Button/Button';
 import { Checkbox } from '../../UI/Checkbox/Checkbox';
 import { Tooltip } from '../../components/Tooltip/Tooltip';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { fetchSingleCard } from '../../services/redux/slices/cards/cards';
+import { addItem } from '../../services/redux/slices/cart/cart';
 
-export const ProductPage: FC = ({}) => {
+export const ProductPage: FC = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const cardData = useAppSelector(state => state.cards.card);
   const [isInstallationSelected, setIsInstallationSelected] = useState(false);
   const [totalPrice, setTotalPrice] = useState(cardData.price);
   const [tooltipText, setTooltipText] = useState('');
+
+  const cart = useAppSelector(store => store.cart);
+
+  const navigate = useNavigate();
+
+  const isItemInCart = cart.items.some(item => item.id === cardData.id);
+  console.log(isItemInCart);
 
   useEffect(() => {
     dispatch(fetchSingleCard(Number(id)));
@@ -24,7 +31,13 @@ export const ProductPage: FC = ({}) => {
     setTotalPrice(cardData.price);
   }, [cardData.price]);
 
-  const handleAddToCart = () => {};
+  const handleAddToCart = () => {
+    dispatch(addItem(cardData));
+  };
+
+  const handleLinkToCart = () => {
+    navigate('/cart');
+  };
 
   const handleCheckboxChange = () => {
     setIsInstallationSelected(prev => !prev);
@@ -47,13 +60,6 @@ export const ProductPage: FC = ({}) => {
           alt="Фотография товара"
           className={style.product__image}
         />
-        {/* <button className={style.product__likeButton} onClick={handleLike}>
-          {liked ? (
-            <BsHeartFill size={40} color="#9FA4AF" />
-          ) : (
-            <BsHeart size={40} color="#9FA4AF" />
-          )}
-        </button> */}
       </div>
 
       <div className={style.product__info}>
@@ -67,6 +73,7 @@ export const ProductPage: FC = ({}) => {
         <div className={style.product__details}>
           <p className={style.product__price}>{totalPrice} ₽</p>
           <p className={style.product__seller}>Продавец</p>
+
           <button className={style.product__btn}>Скачать демо</button>
         </div>
         <p className={style.product__description}>{cardData.description}</p>
@@ -88,9 +95,17 @@ export const ProductPage: FC = ({}) => {
           </div>
           {tooltipText && <Tooltip text={tooltipText} />}
         </div>
-        <Button mode="primary" onClick={handleAddToCart}>
-          Добавить в корзину
-        </Button>
+        <div className={style.product__buyButtonBlock}>
+          {isItemInCart ? (
+            <Button mode="primary" onClick={handleLinkToCart}>
+              Уже в корзине
+            </Button>
+          ) : (
+            <Button mode="primary" onClick={handleAddToCart}>
+              Добавить в корзину
+            </Button>
+          )}
+        </div>
       </div>
     </section>
   );
