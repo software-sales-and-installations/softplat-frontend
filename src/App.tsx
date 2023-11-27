@@ -14,6 +14,7 @@ import { Producers } from './pages/Producers/Producers.tsx';
 import { ShoppingCart } from './pages/ShoppingCart/ShoppingCart.tsx';
 import Search from './pages/Search/Search.tsx';
 import { DemoApi } from './utils/api/DEMOAPI.tsx';
+import { Seller } from './pages/Seller/Seller.tsx';
 
 function App() {
   return (
@@ -35,6 +36,8 @@ function App() {
           <Route path='/producers/:vendor' element={<VendorPage/>}/>
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/seller/*" element={<Seller />} />
+          <Route path="/seller" element={<Navigate to="/seller/products" />} />
           <Route path="/demoapi" element={<DemoApi />} />
 
           {/* <Route path="/personal" element={<Personal />} />
@@ -49,6 +52,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/all-broken" element={<AllBroken />} />
           <Route path="/cookies" element={<Cookies />} /> */}
+
         </Routes>
       </MainWrapper>
       <Footer />

@@ -63,7 +63,7 @@ export const ProductPage: FC = ({}) => {
         <div className={style.product__details}>
           <p className={style.product__price}>{totalPrice} ₽</p>
           <p className={style.product__seller}>Продавец</p>
-          <Button mode="secondary">Скачать демо</Button>
+          <button className={style.product__btn}>Скачать демо</button>
         </div>
         <p className={style.product__description}>{cardData.description}</p>
         <div className={style.product__checkboxContainer}>
