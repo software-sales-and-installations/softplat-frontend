@@ -23,9 +23,10 @@ export const authApi = createApi({
     //   "password": "string"
     // }
     authLogin: build.mutation({
-      query: () => ({
+      query: (body) => ({
         url: '/auth/login/',
         method: 'POST',
+        body,
         // providesTags: ['Auth'],
       }),
     }),

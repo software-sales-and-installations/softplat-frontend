@@ -14,7 +14,7 @@ export const adminApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Admin'],
+  // tagTypes: ['Admin'],
   endpoints: (build) => ({
     // Получение информации об админе - просмотр своего ЛК
     adminInfo: build.query({
