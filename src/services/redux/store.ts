@@ -2,7 +2,8 @@ import {reducer as toggleBtnReducer} from '../../UI/ToggleButton/ToggleButtonSli
 import {reducer as chooseRoleReducer} from '../../UI/ChooseRole/ChooseRoleSlice';
 import {reducer as popupStateReducer} from '../../UI/Popup/PopupSlice';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import cardsReducer from './slices/cards/cards'
+import cardsReducer from './slices/cards/cards';
+import vendorsReducer from './slices/vendors/vendors'
 import { useDispatch, useSelector } from 'react-redux';
 import { userReducer } from './slices/user/user';
 import type { TypedUseSelectorHook } from 'react-redux';
@@ -14,7 +15,8 @@ const reducers = combineReducers({
 	chooseRole: chooseRoleReducer,
 	popupOpen: popupStateReducer,
 	dropdown: dropDownReducer,
-	cards: cardsReducer
+	cards: cardsReducer,
+	vendors: vendorsReducer
 });
 
 export const store = configureStore({
