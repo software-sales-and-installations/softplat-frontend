@@ -2,11 +2,12 @@
 @import '../../styles/abstract/mixins.scss';
 
 .cartItem {
-  display: flex;
+  display: grid;
+  grid-template-columns: 30px 100px 487px 140px 90px;
   height: 114px;
-  gap: 40px;
   color: $black-standart-text;
   align-items: center;
+  justify-content: space-between;
 
 width: 1010px;
   &__img {
@@ -23,7 +24,7 @@ width: 1010px;
     text-align: start;
     display: flex;
     flex-direction: column;
-    gap: 10px
+    gap: 10px;
   }
 
   &__type {
@@ -36,7 +37,7 @@ width: 1010px;
     display: flex;
     align-items: center;
     position: relative;
-    gap: 10px
+    gap: 10px;
   }
 
   &__question {
@@ -60,8 +61,11 @@ width: 1010px;
 
   &__price {
     @include font-body-card;
-    margin-left: 100px;
-    width: 100px;
+    text-wrap: nowrap;
+    text-align: end;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   &__buttons {
@@ -79,13 +83,12 @@ width: 1010px;
   }
 
   &__quantity {
-    width: 89px;
     display: flex;
     justify-content: space-between ;
     color: $black-standart-text;
     @include font-body-card;
     align-items: center;
-    margin-left: 13px;
+
   }
 
   &__quantityButton {

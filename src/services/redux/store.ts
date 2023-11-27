@@ -19,6 +19,7 @@ import { imageApi } from '../../utils/api/imageApi.tsx';
 import { publicProductApi } from '../../utils/api/publicProductApi.tsx';
 import { userProductApi } from '../../utils/api/userProductApi.tsx';
 import { vendorApi } from '../../utils/api/vendorApi.tsx';
+import { cartReducer } from './slices/cart/cart';
 
 const reducers = combineReducers({
 	user: userReducer,
@@ -28,7 +29,8 @@ const reducers = combineReducers({
 	dropdown: dropDownReducer,
 	cards: cardsReducer,
 	vendors: vendorsReducer,
-  [adminApi.reducerPath]: adminApi.reducer,
+	cart: cartReducer,
+	[adminApi.reducerPath]: adminApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [buyerBasketApi.reducerPath]: buyerBasketApi.reducer,
   [buyerApi.reducerPath]: buyerApi.reducer,

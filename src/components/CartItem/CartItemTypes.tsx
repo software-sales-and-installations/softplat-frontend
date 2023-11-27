@@ -1,3 +1,5 @@
-interface ICartItem {
-    product: { name: string; price: number; img: string }
+import { IProductCard } from "../ProductCard/ProductCardTypes";
+
+export interface ICartItemProps {
+  product: IProductCard;
 }

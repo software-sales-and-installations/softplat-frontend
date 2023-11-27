@@ -37,7 +37,7 @@
   transition: background-color 0.3s ease-out;
   @include font-body-filters;
   width: 100%;
-  height: 55px;
+  height: 100%;
   &_inactive{
     background-color: $light-grey;
 		cursor: default;

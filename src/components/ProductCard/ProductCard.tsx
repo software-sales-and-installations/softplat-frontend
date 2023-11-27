@@ -1,32 +1,43 @@
 import React from 'react';
 import styles from './ProductCard.module.scss';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../../UI/Button/Button';
-import { IProductCard } from './ProductCardTypes';
+import { IProductCardProps } from './ProductCardTypes';
+import { useAppSelector } from '../../services/redux/store';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../../services/redux/slices/cart/cart';
 
-const ProductCard: React.FC<IProductCard> = ({
-  name,
-  price,
-  installationPrice,
-  image,
-  isLiked,
-  id
-}) => {
+const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const addSpace = (price: number): string => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  };
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const cart = useAppSelector(store => store.cart);
+
+  const isItemInCart = cart?.items.some(item => item.id === card.id);
+
+  const handleAddToCart = () => {
+    dispatch(addItem(card));
+  };
+
+  const handleLinkToCart = () => {
+    navigate('/cart');
   };
 
   return (
     <div className={styles.card}>
       <div className={styles.card__img}>
-        <img src={image?.url} alt="Изображение продукта" />
+        <img src={card.image?.url} alt="Изображение продукта" />
         <button
           className={styles.card__likeBtn}
           type="button"
           onClick={() => {}}
         >
-          {isLiked ? (
+          {card.isLiked ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="35"
@@ -62,18 +73,18 @@ const ProductCard: React.FC<IProductCard> = ({
         </button>
       </div>
       <Link
-        to={`/product/${id}`}
-        title={name}
+        to={`/product/${card.id}`}
+        title={card.name}
         className={styles.card__name}
         // id={`${id}`}
       >
-        {name}
+        {card.name}
       </Link>
       <div className={styles.card__priceContainer}>
-        <p className={styles.card__price}>{addSpace(price)} ₽</p>
+        <p className={styles.card__price}>{addSpace(card.price)} ₽</p>
         <div className={styles.card__installPrice}>
           <span>с установкой </span>
-          <span>{addSpace(price + installationPrice)} ₽</span>
+          <span>{addSpace(card.price + card.installationPrice)} ₽</span>
           <span className={styles.card__tooltip}>
             <button className={styles.card__tooltipBtn}>
               <BsFillQuestionCircleFill size={12} />
@@ -84,7 +95,15 @@ const ProductCard: React.FC<IProductCard> = ({
           </span>
         </div>
       </div>
-      <Button mode="primary">Добавить в корзину</Button>
+      {isItemInCart ? (
+        <Button mode="primary" onClick={handleLinkToCart}>
+          Уже в корзине
+        </Button>
+      ) : (
+        <Button mode="primary" onClick={handleAddToCart}>
+          Добавить в корзину
+        </Button>
+      )}
     </div>
   );
 };
