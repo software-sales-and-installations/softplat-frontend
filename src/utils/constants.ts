@@ -267,6 +267,14 @@ export const SELECT_OPTIONS: {
   },
 ];
 
+  export const SELECT_COUNTRIES_OPTIONS: {label: string; value: string}[] = [
+	{value: 'RUSSIA', label: 'Россия'},
+	{value: 'CHINA', label: 'Китай'},
+	{value: 'INDIA', label: 'Индия'},
+	{value: 'UK', label: 'Великобритания'},
+	{value: 'USA', label: 'США'},
+  ]
+
 export const PRODUCT_ITEMS = {
   products: [
     {
