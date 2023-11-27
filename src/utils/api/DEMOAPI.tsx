@@ -63,6 +63,8 @@ import {
 
 
 export const DemoApi = () => {
+  const adminToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjJAYWRtaW4ucnUiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MDA0OTQ4OTcsImV4cCI6MTcwMDQ5NjY5N30.ekPYxpoKrRE4YdcV9eIealLsSLpHllEjUgU7ZtxDULg'
+  localStorage.setItem('token', adminToken)
 
 //Admin
 // @ts-ignore
