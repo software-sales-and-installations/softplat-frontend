@@ -62,8 +62,7 @@
 
   &__details {
     display: flex;
-    justify-content: space-between;
-    width: 455px;
+    max-width: 455px;
     align-items: center;
     margin-bottom: 30px;
     align-items: center;
@@ -78,6 +77,7 @@
     @include font-h3-regular;
     margin: 0;
     color: $black-standart-text;
+    min-width: 124px;
   }
 
   &__seller {
@@ -143,4 +143,15 @@
     background-color: $dark-grey;
     color: $white-standart;
   }
+
+  &__buyButtonBlock {
+    width: 290px;
+  }
+
+  &__loadDemoButton {
+    width: 150px;
+    height: 35px;
+  }
+
+  
 }

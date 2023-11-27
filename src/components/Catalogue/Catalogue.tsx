@@ -4,8 +4,6 @@ import { CATALOGUE_NAMES } from '../../utils/constants';
 import { Link } from 'react-router-dom';
 import itemImg from '../../images/catalogue-img.png';
 
-// type Props = {};
-
 const Catalogue: React.FC = () => {
   return (
     <section className={styles.catalogue}>
