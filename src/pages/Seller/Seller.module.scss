@@ -1,0 +1,10 @@
+.seller {
+    display: flex;
+    background-repeat: no-repeat;
+    margin: 0 0 150px 80px;
+    gap: 130px;
+
+    &__titles {
+        margin-top: 50px;
+    }
+}
