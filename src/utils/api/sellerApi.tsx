@@ -16,52 +16,73 @@ export const sellerApi = createApi({
   }),
   tagTypes: ['Seller'],
   endpoints: (build) => ({
+    // Список продавцов
+    // pageSize def 20
     sellerAllMembers: build.query({
       query: () => '/seller/',
       // providesTags: ['Seller'],
     }),
-    sellerChangeData: build.mutation( {
+    // Обновление данных о себе продавцом
+    // body {
+    //   "email": "string",
+    //   "name": "string",
+    //   "phone": "string"
+    // }
+        sellerChangeData: build.mutation( {
       query: () => ({
-        url: '/seller',
+        url: '/seller/',
         method: 'PATCH',
       }),
     }),
+    // Удаление изображения профиля продавца админом
     sellerDeletePhotoByAdmin: build.mutation( {
       query: (sellerId) => ({
-        url: `/seller/${sellerId}/image`,
+        url: `/seller/${sellerId}/image/`,
         method: 'DELETE',
       }),
     }),
+    // Получение продавца по Id
     sellerInfo: build.query( {
-      query: (userId) => `/seller/${userId}`,
+      query: (userId) => `/seller/${userId}/`,
     }),
+    // Добавление/обновление изображения своего профиля продавцом
+    // body {
+    //   "image": "string",
+    // }
     sellerAddPhoto: build.mutation({
       query: () => ({
-        url: '/seller/account/image',
+        url: '/seller/account/image/',
         method: 'POST',
       }),
     }),
+    // Удаление изображения своего профиля продавцом
     sellerDeletePhoto: build.mutation({
       query: () => ({
-        url: '/seller/account/image',
+        url: '/seller/account/image/',
         method: 'DELETE',
       }),
     }),
+    // Удаление своих банковских реквизитов продавцом
     sellerDeleteBank: build.mutation({
       query: () => ({
-        url: '/seller/bank',
+        url: '/seller/bank/',
         method: 'DELETE',
       }),
     }),
+    // Добавление своих банковских реквизитов продавцом
+    // body {
+    //   "account": "string"
+    // }
     sellerChangeBank: build.mutation({
       query: () => ({
-        url: '/seller/bank',
+        url: '/seller/bank/',
         method: 'PATCH',
       }),
     }),
+    // Получение банковских реквизитов продавцов по id продавца
     sellerGetBank: build.query({
       query: (userId) => ({
-        url: `/seller/bank/${userId}`,
+        url: `/seller/bank/${userId}/`,
       }),
     }),
   }),
