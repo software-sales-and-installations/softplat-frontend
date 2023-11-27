@@ -49,6 +49,7 @@ const initialState: IUserState = {
 		password: '',
 		name: '',
 		phone: '',
+		role: ''
 	},
 };
 
