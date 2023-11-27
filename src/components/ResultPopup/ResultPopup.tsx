@@ -28,7 +28,7 @@ export const ResultPopup : FC = () =>{
 	};
     
     return (
-        <div onClick={handleOverlayClick} className={classNames(styles.popup, isOpened ? styles.popup_opened : '')}>
+        <div onMouseDown={handleOverlayClick} className={classNames(styles.popup, isOpened ? styles.popup_opened : '')}>
             <div className={styles.popup__container}>
                 {user.token? <SignOutPopup/> : (
                 <>
