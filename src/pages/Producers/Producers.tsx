@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { fetchAllVendors } from '../../services/redux/slices/vendors/vendors';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
-import { changeCountryOption } from '../../UI/DropDown/DropDownSlice';
 
 export const Producers: FC = () => {
   const dispatch = useAppDispatch();
@@ -17,8 +16,6 @@ export const Producers: FC = () => {
   }, []);
 
   const vendors = useAppSelector(state => state.vendors.vendors.vendors);
-
-  console.log(countryOption);
 
   const filteredVendors = vendors.filter(
     vendor => vendor.country === countryOption.value,
