@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import styles from './VendorPage.module.scss';
 import VendorInfo from '../../components/VendorInfo/VendorInfo';
 import { CATEGORIZED_TEXT_VENDOR, SELECT_OPTIONS } from '../../utils/constants';
