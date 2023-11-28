@@ -31,4 +31,5 @@ export interface IInput {
 	onChange?: any;
 	max?: string;
 	defaultValue?: any;
+	helpText?: string;
 }
