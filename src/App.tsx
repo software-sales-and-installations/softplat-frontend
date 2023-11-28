@@ -42,7 +42,7 @@ function App() {
               // </ProtectedRouteForBuyer>
             } />
           <Route path='/producers' element ={<Producers/>}/>
-          <Route path='/producers/:vendor' element={<VendorPage/>}/>
+          <Route path='/producers/:id' element={<VendorPage/>}/>
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/search" element={<Search />} />
           <Route 

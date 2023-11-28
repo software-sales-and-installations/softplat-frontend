@@ -8,35 +8,38 @@ import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { fetchSortedCards } from '../../services/redux/slices/cards/cards';
 import DropDown from '../../UI/DropDown/DropDown';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
+import { ProductStatus } from '../../components/ProductCard/ProductCardTypes';
+import { fetchSingleVendor } from '../../services/redux/slices/vendors/vendors';
 
 // type Props = {};
 
 const VendorPage: FC = () => {
   const dispatch = useAppDispatch();
-  const {vendor} = useParams();
-  console.log(vendor)
-  const { state } = useLocation();
+  const {id} = useParams();
   const selectState = useAppSelector(state => state.dropdown.option.value);
   const cards = useAppSelector(store => store.cards.cards) || [];
-
+  const currentVendor = useAppSelector(store => store.vendors.vendor)
+  
+  console.log(currentVendor)
+  
   useEffect(() => {
-
-  })
+    dispatch(fetchSingleVendor(Number(id)))
+  }, [id])
 
   useEffect(() => {
     dispatch(fetchSortedCards(selectState));
   }, [selectState]);
 
   const vendorCards = cards?.products?.filter(
-    card => card.vendor?.id === state.id,
+    card => card.vendor?.id === currentVendor.id && card.productStatus === ProductStatus.PUBLISHED,
   );
 
   return (
     <section className={styles.vendorPage}>
       <VendorInfo
-        title={state.name}
-        description={state.description || ''}
-        img={state.image?.url}
+        title={currentVendor.name}
+        description={currentVendor.description || ''}
+        img={currentVendor.image?.url || ''}
       />
       <ul className={styles.vendorPage__categories}>
         {CATEGORIZED_TEXT_VENDOR.map(btn => {

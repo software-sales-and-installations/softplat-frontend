@@ -34,9 +34,8 @@ export const Producers: FC = () => {
           return (
             <Link
               key={vendor.id}
-              to={`/producers/${vendor.name.toLowerCase()}`}
+              to={`/producers/${vendor.id}`}
               className={styles.container__link}
-              state={vendor}
             >
               <img
                 className={styles.container__img}

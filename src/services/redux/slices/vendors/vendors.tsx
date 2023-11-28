@@ -29,7 +29,7 @@ export const fetchSingleVendor = createAsyncThunk<IVendor, number>(
   'vendors/fetchSingleVendor',
   async (id, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await axios.get(`${API_BASE_URL}/vendor${id}`);
+      const { data } = await axios.get(`${API_BASE_URL}/vendor/${id}`);
       return fulfillWithValue(data);
     } catch (error) {
       rejectWithValue(error);
