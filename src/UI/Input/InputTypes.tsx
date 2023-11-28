@@ -9,7 +9,11 @@ export enum InputTypes {
 	orgName='orgName',
 	remember='checkbox',
 	name = 'name',
-	phone = 'phone'
+	phone = 'phone',
+    link = 'link',
+    price = 'price',
+    priceInstall = 'priceInstall',
+    description = 'description',
 }
 
 export enum InputColors {
@@ -31,4 +35,5 @@ export interface IInput {
 	onChange?: any;
 	max?: string;
 	defaultValue?: any;
+	helpText?: string;
 }

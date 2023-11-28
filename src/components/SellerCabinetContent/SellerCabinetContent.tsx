@@ -3,6 +3,8 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import styles from './SellerCabinetContent.module.scss';
 import { SellerExistingCardTable } from '../SellerExistingCardTable/SellerExistingCardTable';
+import { SellerAddCard } from '../SellerAddCard/SellerAddCard';
+import { SellerModerationCard } from '../SellerModerationCard/SellerModerationCard';
 
 const SellerProduct: React.FC = () => {
   const [activeBtn, setActiveBtn] = useState('existingCards');
@@ -43,7 +45,7 @@ const SellerProduct: React.FC = () => {
           На модерации
         </button>
       </nav>
-      {activeBtn==='existingCards'? <SellerExistingCardTable/> : null}
+      {activeBtn==='existingCards'? <SellerExistingCardTable/> : ((activeBtn==='addCard')? <SellerAddCard/>: (activeBtn==='moderationCard'? <SellerModerationCard/>: null))}
     </section>
   );
 };

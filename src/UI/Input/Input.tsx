@@ -13,7 +13,8 @@ export const Input: FC<IInput> = ({
 	error = '',
 	onChange,
 	max,
-	defaultValue
+	defaultValue,
+	helpText
 }) => {
 	const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 	useEffect(() => {
@@ -59,10 +60,9 @@ export const Input: FC<IInput> = ({
 						maxLength={inputTextType === 'date' ? 8 : undefined}
 						value={readOnly && value ? value : undefined}
 					/>
-					{/* )} */}
-					<span className={styles.input__error}>{error ? error : (inputType === 'password'? 
-						<p className={styles.input__help}>Пароль может содержать буквы, цифры и знаки препинания</p>
-						: '')}
+					<span className={styles.input__error}>{error ? error :  
+						<p className={styles.input__help}>{helpText}</p>
+					}
 					</span>
 					{showPasswordButton ? (
 						<button
