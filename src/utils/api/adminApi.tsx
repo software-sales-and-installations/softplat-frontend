@@ -16,7 +16,7 @@ export const adminApi = createApi({
   }),
   // tagTypes: ['Admin'],
   endpoints: (build) => ({
-    // Получение информации об админе - просмотр своего ЛК
+    // Получение информации об админе - просмотр своего ЛК. Для админа
     adminInfo: build.query({
       query: () => '/admin/',
       // providesTags: ['Admin'],

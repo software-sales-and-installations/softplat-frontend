@@ -60,21 +60,114 @@ import {
   useVendorDeleteImageMutation,
   useVendorListQuery,
 } from './vendorApi.tsx';
+import React from 'react';
 
 
 export const DemoApi = () => {
-  const adminToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjJAYWRtaW4ucnUiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MDExMTU4MTYsImV4cCI6MTcwMTExNzYxNn0.DemxDkTqrIqxMMSemaGHvqoC_gM7tA4oDijWRENgyVU'
-  localStorage.setItem('token', adminToken)
+  // const adminToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjJAYWRtaW4ucnUiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MDExNjkxOTEsImV4cCI6MTcwMTE3MDk5MX0.5BeZaPioZ09Jq4fJxIZtBiMb3UnL7Fo4MEBTxu0pP0M'
+  // localStorage.setItem('token', adminToken)
+  // const buyerToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJidXllckBidXllci5ydSIsInJvbGUiOiJCVVlFUiIsImlhdCI6MTcwMTE3MDk4MiwiZXhwIjoxNzAxMTcyNzgyfQ.nAqy5BNOhXoodmYgJZhB5pc78UwrW6XHXxSuOn1AkqE'
+  // localStorage.setItem('token', buyerToken)
 
-//Admin
+
+/////////////////////////Admin
 // @ts-ignore
-  const { data: adminData, error, isLoading } = useAdminInfoQuery();
+  const { data: adminData, isFetching,isLoading, error } = useAdminInfoQuery();
 
-//Auth
-  const {} = useAuthLoginMutation();
-  const {} = useAuthLogoutMutation();
-  const {} = useAuthChangePasswordMutation();
-  const {} = useAuthRegisterMutation();
+//////////////////////////Auth
+  const loginData = {
+    confirmPassword: "Pupa123!",
+    email: "pupa@pupa.ru",
+    password: "Pupa123!",
+  }
+  const [authLogin, {
+    // isFetching, isLoading, isError
+  }] = useAuthLoginMutation();
+  const handleSubmitLogin = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    authLogin(loginData).unwrap()
+    .then((userData) => {
+      localStorage.setItem('token', userData.token);
+      console.log(userData)
+    })
+      .catch((error) => {
+      console.log(error);
+    })
+      .finally()
+    };
+
+
+  const [ authLogout,{
+    // isFetching, isLoading, isError
+  }] = useAuthLogoutMutation();
+  const handleSubmitLogout = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+ // @ts-ignore
+    authLogout().unwrap()
+      .then((userData) => {
+      localStorage.removeItem('token');
+      console.log(userData)
+    })
+      .catch((error) => {
+      console.log(error);
+    })
+      .finally()
+  };
+
+  const changePassData = {
+    confirmPassword: "Pupa321!",
+    email: "pupa@pupa.ru",
+    password: "Pupa321!",
+  }
+  const [authChangePass, {
+    // isFetching, isLoading, isError
+  }] = useAuthChangePasswordMutation();
+  const handleSubmitChangePass = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    authChangePass(changePassData).unwrap()
+      .then((userData) => {
+        console.log(userData)
+    })
+      .catch((error) => {
+      console.log(error);
+    })
+  .finally()
+  };
+
+  const registerData = {
+    "confirmPassword": "Buy54321!",
+    "email": "buy12345@buy.ru",
+    "name": "buyer",
+    "password": "Buy54321!",
+    "phone": "1234554321",
+    "role": "BUYER",
+    "status": "ACTIVE",
+  }
+  const [authRegister, {
+    // isFetching, isLoading, isError
+  }] = useAuthRegisterMutation();
+  const handleSubmitRegister = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+   authRegister(registerData).unwrap()
+     .then((res) => {
+      authLogin({
+        confirmPassword: registerData['password'],
+        email: res.email,
+        password: registerData['password'],
+      }).unwrap()
+        .then((userData) => {
+      localStorage.setItem('token', userData.token);
+      console.log(userData)
+    })
+        .catch((error) => {
+          console.log(error);
+        })
+     })
+     .catch((error) => {
+      console.log(error);
+    })
+.finally()
+  };
 
 //Buyer
 // @ts-ignore
@@ -157,20 +250,33 @@ export const DemoApi = () => {
   // @ts-ignore
   const { data: vendorListData } = useVendorListQuery();
 
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    // handleSubmitLogin(e);
+    // handleSubmitRegister(e);
+    // handleSubmitLogout(e);
+    // handleSubmitChangePass(e);
+
+
+   }
   return (
   <div>
     <h1>DEMO API</h1>
+    <h2>Admin Request</h2>
     {error ? (
       <>Oh no, there was an error</>
     ) : isLoading ? (
       <>Loading...</>
+    ) : isFetching ? (
+      <>Fetching...use me to block submit button</>
     ) : adminData ? (
-      <ol>AdminData
+      <ol>
         <li>id {adminData.id}</li>
       <li>email {adminData.email}</li>
       <li>name {adminData.name}</li>
       </ol>
       ) : null}
+    <button onClick={handleClick}>Try</button>
   </div>
   )
 }

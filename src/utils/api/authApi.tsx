@@ -14,7 +14,7 @@ export const authApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Auth'],
+  // tagTypes: ['Auth'],
   endpoints: (build) => ({
     // Авторизация
     // Body {
@@ -24,16 +24,15 @@ export const authApi = createApi({
     // }
     authLogin: build.mutation({
       query: (body) => ({
-        url: '/auth/login/',
+        url: '/auth/login',
         method: 'POST',
         body,
-        // providesTags: ['Auth'],
-      }),
+       }),
     }),
     // Выход
     authLogout: build.mutation({
       query: () => ({
-        url: '/auth/logout/',
+        url: '/auth/logout',
         method: 'POST',
       }),
     }),
@@ -44,9 +43,10 @@ export const authApi = createApi({
     //   "password": "string"
     // }
     authChangePassword: build.mutation({
-      query: () => ({
-        url: '/change/pass/',
+      query: (body) => ({
+        url: '/change/pass',
         method: 'POST',
+        body,
       }),
     }),
     // Регистрация
@@ -60,9 +60,10 @@ export const authApi = createApi({
     //   "status": "ACTIVE"
     // }
     authRegister: build.mutation({
-      query: () => ({
-        url: '/registration/',
+      query: (body) => ({
+        url: '/registration',
         method: 'POST',
+        body,
       }),
     }),
   }),
