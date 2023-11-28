@@ -13,7 +13,7 @@ import { Producers } from './pages/Producers/Producers.tsx';
 import { ShoppingCart } from './pages/ShoppingCart/ShoppingCart.tsx';
 import Search from './pages/Search/Search.tsx';
 import { Seller } from './pages/Seller/Seller.tsx';
-import { ProtectedRouteForAdmin, ProtectedRouteForBuyer, ProtectedRouteForSeller } from './components/ProtectedRoute/ProtectedRoute.tsx';
+// import { ProtectedRouteForAdmin, ProtectedRouteForBuyer, ProtectedRouteForSeller } from './components/ProtectedRoute/ProtectedRoute.tsx';
 
 function App() {
   return (
@@ -30,16 +30,16 @@ function App() {
           <Route 
             path="/personal/*" 
             element={
-              <ProtectedRouteForBuyer>
+              //<ProtectedRouteForBuyer>
                 <Personal />
-              </ProtectedRouteForBuyer>
+              //</ProtectedRouteForBuyer>
               } />
           <Route 
             path="/personal" 
             element={
-              <ProtectedRouteForBuyer>
+              //<ProtectedRouteForBuyer>
                 <Navigate to='/personal/purchases' />
-              </ProtectedRouteForBuyer>
+              // </ProtectedRouteForBuyer>
             } />
           <Route path='/producers' element ={<Producers/>}/>
           <Route path='/producers/:vendor' element={<VendorPage/>}/>
@@ -48,30 +48,30 @@ function App() {
           <Route 
             path="/seller/*" 
             element={
-              <ProtectedRouteForSeller>
+              // <ProtectedRouteForSeller>
                 <Seller />
-              </ProtectedRouteForSeller>
+              // </ProtectedRouteForSeller> 
             } />
           <Route 
             path="/seller" 
             element={
-              <ProtectedRouteForSeller>
+              //<ProtectedRouteForSeller>
                 <Navigate to="/seller/products" />
-              </ProtectedRouteForSeller>
+              //</ProtectedRouteForSeller>
             } />
           <Route 
             path="/admin/*" 
             element={
-              <ProtectedRouteForAdmin>
+              //<ProtectedRouteForAdmin>
                 <></>
-              </ProtectedRouteForAdmin>
+              //</ProtectedRouteForAdmin>
             } />
           <Route 
             path="/admin" 
             element={
-              <ProtectedRouteForAdmin>
+              //<ProtectedRouteForAdmin>
                 <Navigate to="/admin/product-cards" />
-              </ProtectedRouteForAdmin>
+              //</ProtectedRouteForAdmin>
             } />
         </Routes>
       </MainWrapper>
