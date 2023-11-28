@@ -40,4 +40,5 @@ export interface IUser {
 	token: string;
 	password?: string;
 	confirmPassword?: string;
+	role: string;
 }

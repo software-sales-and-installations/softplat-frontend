@@ -13,9 +13,11 @@
     margin-top: 75px;
   }
 
-  &__selectForm {
+  &__selectContainer {
     padding: 0 80px;
     margin-top: 35px;
+    display: flex;
+    gap: 40px;
   }
 
   &__items {

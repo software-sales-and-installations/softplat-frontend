@@ -3,8 +3,8 @@ import axios from 'axios';
 import { API_BASE_URL } from '../../../../utils/constants';
 import { IProductCard } from '../../../../components/ProductCard/ProductCardTypes';
 
-interface ICard{
-  products: IProductCard[]
+interface ICard {
+  products: IProductCard[];
 }
 interface ICardsState {
   status: 'idle' | 'success' | 'loading' | 'failed';
@@ -56,8 +56,9 @@ export const fetchSingleCard = createAsyncThunk(
 const initialState: ICardsState = {
   status: 'idle',
   error: null,
-  cards: {products:[]},
+  cards: { products: [] },
   card: {
+    id: 0,
     name: '',
     price: 0,
     installationPrice: 0,

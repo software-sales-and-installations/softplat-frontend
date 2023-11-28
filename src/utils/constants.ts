@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'https://api.softplat.ru'
+export const API_BASE_URL = 'https://api.softplat.ru';
 
 import AdobeImg from '../images/producers/Adobe.png';
 import AutodeskImg from '../images/producers/autodesk.png';
@@ -8,6 +8,9 @@ import OracleImg from '../images/producers/oracle.png';
 import SAP from '../images/producers/SAP.png';
 import PayPAlImg from '../images/producers/PayPal.png';
 import MicrosoftImg from '../images/producers/Microsoft.png';
+import PhotoShopImg from '../images/seller/Photoshop.png';
+import Acrobat from '../images/seller/Acrobat.png';
+import Illustrator from '../images/seller/Illustrator.png';
 
 export const CATEGORIZED_TEXT: {
   id: number;
@@ -24,24 +27,7 @@ export const CATEGORIZED_TEXT: {
   { id: 9, text: 'Утилиты' },
   { id: 10, text: 'Корпоративные системы' },
 ];
-export const SELLER_CATEGORIZED_TEXT: {
-  id: number;
-  text: string;
-}[] = [
-  { id: 1, text: 'Фоторедактор' },
-  { id: 2, text: 'Векторная графика' },
-  { id: 3, text: 'Дизайн' },
-  { id: 4, text: 'Видеоредактор' },
-  { id: 5, text: 'Анимирование' },
-  { id: 6, text: 'Web-разработка' },
-  { id: 7, text: 'Аудиоредактор' },
-  { id: 8, text: 'Системное ПО' },
-  { id: 9, text: 'Прикладное ПО' },
-  { id: 10, text: 'Инструментальное ПО' },
-  { id: 11, text: 'Антивирусы' },
-  { id: 12, text: 'Утилиты' },
-  { id: 13, text: 'Корпоративные системы' },
-];
+
 export const TEXT_FOR_AUTH_CHECKBOX: {
   id: number;
   text: string;
@@ -244,7 +230,7 @@ export const FOOTER_LINKS: {
   { id: 2, text: 'Производители', link: '/producers' },
   { id: 3, text: 'FAQ', link: '/faq' },
   { id: 4, text: 'Контакты', link: '/contacts' },
-  { id: 5, text: 'Условия пользования', link: '/terms-of-use' },
+  { id: 5, text: 'Условия использования', link: '/terms-of-use' },
   { id: 6, text: 'Политика конфиденциальности', link: '/privacy-policy' },
 ];
 export const CATALOGUE_NAMES: {
@@ -340,46 +326,63 @@ export const SELECT_OPTIONS: {
   },
 ];
 
- export const PRODUCT_ITEMS = {
-   products: [
-       {
-         id: 1,
-         name: 'Adobe Photoshop 2023',
-         price: 19898,
-         installationPrice: 2000,
-         image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
-       },
-	{
-		id: 2,
-		name: 'FL Studio',
-		price: 19898,
-		installationPrice: 2000,
-		image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
-	  },
-	  {
-		id: 3,
-		name: 'Stop Motion Studio Pro',
-		price: 19898,
-		installationPrice: 2000,
-		image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
-	  },
-	  {
-		id: 4,
-		name: 'PDF Reader Pro',
-		price: 19898,
-		installationPrice: 2000,
-		image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
-	  },
-	  {
-		id: 5,
-		name: '3D SportEditor Desktop',
-		price: 19898,
-		installationPrice: 2000,
-		image: {url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg'},
-	  },
-  ],
-   };
+  export const SELECT_COUNTRIES_OPTIONS: {label: string; value: string}[] = [
+	{value: 'RUSSIA', label: 'Россия'},
+	{value: 'CHINA', label: 'Китай'},
+	{value: 'INDIA', label: 'Индия'},
+	{value: 'UK', label: 'Великобритания'},
+	{value: 'USA', label: 'США'},
+  ]
 
+export const PRODUCT_ITEMS = {
+  products: [
+    {
+      id: 1,
+      name: 'Adobe Photoshop 2023',
+      price: 19898,
+      installationPrice: 2000,
+      image: {
+        url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+      },
+    },
+    {
+      id: 2,
+      name: 'FL Studio',
+      price: 19898,
+      installationPrice: 2000,
+      image: {
+        url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+      },
+    },
+    {
+      id: 3,
+      name: 'Stop Motion Studio Pro',
+      price: 19898,
+      installationPrice: 2000,
+      image: {
+        url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+      },
+    },
+    {
+      id: 4,
+      name: 'PDF Reader Pro',
+      price: 19898,
+      installationPrice: 2000,
+      image: {
+        url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+      },
+    },
+    {
+      id: 5,
+      name: '3D SportEditor Desktop',
+      price: 19898,
+      installationPrice: 2000,
+      image: {
+        url: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+      },
+    },
+  ],
+};
 
 export const PRODUCERS_LIST = [
   {
@@ -474,64 +477,38 @@ export const PURCHASES_ITEMS_CABINET: {
   },
 ];
 
-export const PRODUCT_ITEMS_LIKED: { id: number; name: string; price: number; img: string }[] = [
-	{
-	  id: 1,
-	  name: 'Название программного обеспечения',
-	  price: 19898,
-	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-	},
-	{
-	  id: 2,
-	  name: 'Название программного обеспечения',
-	  price: 19898,
-	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-	},
-	{
-	  id: 3,
-	  name: 'Название программного обеспечения',
-	  price: 19898,
-	  img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-	},
-  ];
-export const PRODUCT_CREATED_SELLER: {
+export const PRODUCT_ITEMS_LIKED: {
   id: number;
-  img: string;
   name: string;
-  vendor: string;
-  category: string;
-  code: string;
-  describe: string;
-  data: string;
+  price: number;
+  img: string;
+  installationPrice: number;
 }[] = [
   {
     id: 1,
-    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
     name: 'Название программного обеспечения',
-    vendor: 'Adobe',
-    category: 'Мультимедиа',
-    code: '12345',
-    describe: 'Многофункциональный растровый графический .',
-    data: '01/10/2023',
+    price: 19898,
+    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+    installationPrice:0
   },
   {
     id: 2,
-    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
     name: 'Название программного обеспечения',
-    vendor: 'Adobe',
-    category: 'Мультимедиа',
-    code: '12345',
-    describe: 'Многофункциональный растровый графический .',
-    data: '01/10/2023',
+    price: 19898,
+    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+    installationPrice: 0
   },
   {
     id: 3,
-    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
     name: 'Название программного обеспечения',
-    vendor: 'Adobe',
-    category: 'Мультимедиа',
-    code: '12345',
-    describe: 'Многофункциональный растровый графический .',
-    data: '01/10/2023',
+    price: 19898,
+    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+    installationPrice: 0
   },
 ];
+
+  export const SellerExistingCard = [
+	{id: 1, logo: PhotoShopImg, name: 'Adobe Photoshop', vendor: 'Adobe', category: 'Мультимедиа', art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023'},
+	{id: 2, logo: Acrobat, name: 'Adobe Acrobat', vendor: 'Adobe', category: 'Мультимедиа', art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023'},
+	{id: 3, logo: Illustrator, name: 'Adobe Illustrator', vendor: 'Adobe', category: 'Мультимедиа', art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023'}
+  ]

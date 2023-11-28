@@ -10,13 +10,7 @@ const PersonalFavorites: React.FC = () => {
         <ul className={styles.personalFavorites__list}>
           {PRODUCT_ITEMS_LIKED.map(i => (
             <li key={i.id} className={styles.personalFavorites__item}>
-              <ProductCard
-                installationPrice={0}
-                name={i.name}
-                price={i.price}
-                image={i.img}
-                isLiked={false}
-              />
+              <ProductCard card={i}/>
             </li>
           ))}
         </ul>

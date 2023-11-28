@@ -3,7 +3,7 @@ export interface IProductCard {
   price: number;
   image?: any;
   installationPrice: number;
-  id?: number;
+  id: number;
   category?: ProductCardCategory;
   description?: string;
   installation?: boolean;
@@ -16,7 +16,13 @@ export interface IProductCard {
   vendor?: ProductCardVendor;
   version?: string;
   isLiked?: boolean;
+  cartQuantity?: number;
 };
+
+export interface IProductCardProps {
+  card: IProductCard
+}
+
 
 type ProductCardCategory = {
   id: number;

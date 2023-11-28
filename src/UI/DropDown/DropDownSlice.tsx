@@ -5,6 +5,10 @@ const initialState = {
     value: 'NEWEST',
     label: 'По новизне',
   },
+  countryOption: {
+    value: 'RUSSIA',
+    label: 'Россия',
+  },
 };
 
 const dropDownSlice = createSlice({
@@ -14,8 +18,11 @@ const dropDownSlice = createSlice({
     changeOption: (state, action) => {
       state.option = action.payload;
     },
+    changeCountryOption: (state, action) => {
+      state.countryOption = action.payload
+    }
   },
 });
 
-export const { changeOption } = dropDownSlice.actions;
+export const { changeOption, changeCountryOption } = dropDownSlice.actions;
 export const dropDownReducer = dropDownSlice.reducer;
