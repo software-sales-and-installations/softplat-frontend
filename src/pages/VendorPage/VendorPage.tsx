@@ -3,7 +3,7 @@ import styles from './VendorPage.module.scss';
 import VendorInfo from '../../components/VendorInfo/VendorInfo';
 import { CATEGORIZED_TEXT_VENDOR, SELECT_OPTIONS } from '../../utils/constants';
 import CardsGrid from '../../components/CardsGrid/CardsGrid';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { fetchSortedCards } from '../../services/redux/slices/cards/cards';
 import DropDown from '../../UI/DropDown/DropDown';
@@ -13,9 +13,15 @@ import { SelectorType } from '../../UI/DropDown/DropDownTypes';
 
 const VendorPage: FC = () => {
   const dispatch = useAppDispatch();
+  const {vendor} = useParams();
+  console.log(vendor)
   const { state } = useLocation();
   const selectState = useAppSelector(state => state.dropdown.option.value);
   const cards = useAppSelector(store => store.cards.cards) || [];
+
+  useEffect(() => {
+
+  })
 
   useEffect(() => {
     dispatch(fetchSortedCards(selectState));

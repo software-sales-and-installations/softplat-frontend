@@ -12,6 +12,7 @@ import { fetchSortedCards } from '../../services/redux/slices/cards/cards';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import DropDown from '../../UI/DropDown/DropDown';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
+import { ProductStatus } from '../../components/ProductCard/ProductCardTypes';
 
 const CatalogSection: FC = () => {
   const { section } = useParams();
@@ -32,7 +33,8 @@ const CatalogSection: FC = () => {
   const categorizedCards = cards?.products?.filter(
     card =>
       card.category?.id === currentCatalog?.id &&
-      card.vendor?.country === countryOption,
+      card.vendor?.country === countryOption &&
+      card.productStatus === ProductStatus.PUBLISHED,
   );
   const productsCards = { products: categorizedCards };
 
