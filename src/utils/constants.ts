@@ -427,24 +427,28 @@ export const PRODUCT_ITEMS_LIKED: {
   name: string;
   price: number;
   img: string;
+  installationPrice: number;
 }[] = [
   {
     id: 1,
     name: 'Название программного обеспечения',
     price: 19898,
     img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+    installationPrice:0
   },
   {
     id: 2,
     name: 'Название программного обеспечения',
     price: 19898,
     img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+    installationPrice: 0
   },
   {
     id: 3,
     name: 'Название программного обеспечения',
     price: 19898,
     img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
+    installationPrice: 0
   },
 ];
 
