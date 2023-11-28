@@ -52,6 +52,9 @@ export const PopupForAuth: FC = () => {
 		if (authError===401){
 			setErrorText('Неправильный email или пароль')
 		}
+		if(authError===400){
+			setErrorText('Некорректно заполнены поля email или password')
+		}
 	}, [authError])
 	return (
 		<Popup>

@@ -14,10 +14,12 @@ import { useAppDispatch } from '../../services/redux/store';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../services/redux/store';
 import { popupState } from '../../UI/Popup/PopupSlice';
+import { useState } from 'react';
 
 
 export const PopupForReg: FC = () => {
-	
+	const [errorStatus, setErrorStatus] = useState(0);
+	const [textError, setTextError] = useState('')
 	const dispatch = useAppDispatch();
 	const MyRole = useSelector((state: RootState) => state.chooseRole.title);
 	const roleForReg = MyRole==='Я покупатель'? 'BUYER' : (MyRole==='Я продавец'? 'SELLER': null)
@@ -57,8 +59,17 @@ export const PopupForReg: FC = () => {
 			})
 			.catch((err) => {
 				console.log(err);
+				setErrorStatus(err.status)
 			});
 	};
+	useEffect(()=>{
+		if(errorStatus===400){
+			setTextError('Некорректно заполнены поля')
+		}
+		if(errorStatus===409){
+			setTextError('Такой пользователь уже существует')
+		}
+	}, [errorStatus])
 	return (
 		<Popup>
 			<form className={styles.form} onSubmit={handleSubmit(onSubmitResData)}>
@@ -112,7 +123,10 @@ export const PopupForReg: FC = () => {
 				<div className={styles.checkboxcontainer}>
 					<input id='agreement' className={styles.checkboxcontainer__input} {...register("agree", { required: true })} type="checkbox" value="agree"/>
 					<label className={styles.checkboxcontainer__label} htmlFor='agreement'>Я соглашаюсь с политикой обработки персональных данных</label>
-				</div>				
+				</div>
+				<div className={styles.errorContainer}>
+					<p className={styles.errorContainer__error}>{textError}</p>
+				</div>		
 				<div className={styles.btncontainer}>
 					<Button isDisabled={!isValid} type='submit' mode='primary'>Зарегистрироваться</Button>
 					<Button onClick={handleExitClick} mode='secondary' type='button'>Отмена</Button>
