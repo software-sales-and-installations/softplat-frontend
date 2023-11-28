@@ -1,23 +1,6 @@
 import ProductCard from '../ProductCard/ProductCard';
 import styles from './PersonalFavorites.module.scss';
-
-const productItems: { name: string; price: number; img: string }[] = [
-  {
-    name: 'Название программного обеспечения',
-    price: 19898,
-    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-  },
-  {
-    name: 'Название программного обеспечения',
-    price: 19898,
-    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-  },
-  {
-    name: 'Название программного обеспечения',
-    price: 19898,
-    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-  },
-];
+import { PRODUCT_ITEMS_LIKED } from '../../utils/constants';
 
 const PersonalFavorites: React.FC = () => {
   return (
@@ -25,14 +8,9 @@ const PersonalFavorites: React.FC = () => {
       <section className={styles.personalFavorites}>
         <h2 className={styles.personalFavorites__title}>Избранное</h2>
         <ul className={styles.personalFavorites__list}>
-          {productItems.map(i => (
-            <li className={styles.personalFavorites__item}>
-              <ProductCard
-                name={i.name}
-                price={i.price}
-                img={i.img}
-                isLiked={false}
-              />
+          {PRODUCT_ITEMS_LIKED.map(i => (
+            <li key={i.id} className={styles.personalFavorites__item}>
+              <ProductCard card={i}/>
             </li>
           ))}
         </ul>

@@ -1,0 +1,23 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.productList {
+    max-width: 1050px;
+    text-align: end;
+
+    &__cleanCart {
+        border: none;
+        text-decoration: underline;
+        color: #9E9E9E;
+        cursor: pointer;
+        @include font-body-link;
+        background-color: transparent;
+    }
+}
+
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

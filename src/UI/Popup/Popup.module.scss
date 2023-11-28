@@ -62,6 +62,16 @@
 		justify-content: space-between;
 		@include font-body-link;
 	}
+	&__exitcontainerbtn{
+		display: flex;
+		margin-top: 50px;
+		gap: 30px;
+		width: 80%;
+	}
+	&__exittext{
+		color: $dark-grey;
+		@include font-CTAbody-regular;
+	}
 }
 .form{
 	width: 97%;

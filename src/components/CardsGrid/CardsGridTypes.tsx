@@ -1,9 +1,14 @@
-interface CardsGridProps {
-    cards: ProductCard[]
+import { IProductCard } from "../ProductCard/ProductCardTypes";
+interface ICards{
+  products: IProductCard[]
+}
+export interface CardsGridProps {
+    cards: ICards;
   };
 
-interface ProductCard {
-    name: string;
-    price: number;
-    img: string;
-}
+// export interface ProductCard {
+//     id?: number;
+//     title: string;
+//     price?: number;
+//     url: string;
+// }

@@ -1,9 +1,15 @@
-export interface Ioption {
+export interface IOption {
   value: string;
   label: string;
 }
 
+export enum SelectorType {
+  BASE = 'base',
+  COUNTRY = 'country',
+  VENDOR = 'vendor'
+}
+
 export interface IDropDowmProps {
-  options: Ioption[];
-  onChoose: () => void;
+  options: IOption[];
+  type?: SelectorType;
 }

@@ -10,8 +10,12 @@ import { chooseRoleState } from '../../UI/ChooseRole/ChooseRoleSlice';
 import { PopupForAuth } from '../AuthPopup/AuthPopup';
 import { RecoverPasswordPopup } from '../RecoverPasswordPopup/RecoverPasswordPopup';
 import { PopupForReg } from '../RegPopup/RegPopup';
+import { SignOutPopup } from '../SignOutPopup/SignOutPopup';
+import { selectUser } from '../../services/redux/slices/user/user';
+import { useAppSelector } from '../../services/redux/store';
 
 export const ResultPopup : FC = () =>{
+    const user = useAppSelector(selectUser);
     const toggleState = useSelector((state: RootState) => state.toggleBtn.value);
     const MyRole = useSelector((state: RootState) => state.chooseRole.title);
     const dispatch = useDispatch();
@@ -24,15 +28,18 @@ export const ResultPopup : FC = () =>{
 	};
     
     return (
-        <div onClick={handleOverlayClick} className={classNames(styles.popup, isOpened ? styles.popup_opened : '')}>
+        <div onMouseDown={handleOverlayClick} className={classNames(styles.popup, isOpened ? styles.popup_opened : '')}>
             <div className={styles.popup__container}>
-                <h2 className={styles.popup__role}>{MyRole==='Я покупатель'? 'Покупатель': (MyRole==='Я продавец'? 'Продавец': (MyRole==='Забыли пароль?'? 'Восстановление пароля' : 'Администратор'))}</h2>
-                {MyRole==='Я админ'? (
+                {user.token? <SignOutPopup/> : (
+                <>
+                    <h2 className={styles.popup__role}>{MyRole==='Я покупатель'? 'Покупатель': (MyRole==='Я продавец'? 'Продавец': (MyRole==='Забыли пароль?'? 'Восстановление пароля' : 'Администратор'))}</h2>
+                    {MyRole==='Я админ'? (
                     <p className={styles.adminBtn}>Вход</p>
-                ) : (MyRole==='Забыли пароль?'? null : <ToggleButton/>) }
+                ) : (MyRole==='Забыли пароль?'? null : <ToggleButton/>)}
                 {!toggleState ? 
                     (MyRole==='Забыли пароль?' ? <RecoverPasswordPopup/>: <PopupForAuth/>) : 
                     (MyRole==='Забыли пароль?' ? <RecoverPasswordPopup/>: (MyRole==='Я админ'? <PopupForAuth/> : <PopupForReg/>))}
+                    </>)}
             </div>
         </div>
     )

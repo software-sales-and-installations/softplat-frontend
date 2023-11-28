@@ -1,12 +1,24 @@
 import { FC } from 'react';
-import Select from 'react-select';
+import Select, { SingleValue } from 'react-select';
 
 import './DropDown.scss';
-import { IDropDowmProps } from './DropDownTypes';
+import { IDropDowmProps, IOption, SelectorType } from './DropDownTypes';
+import { useAppDispatch, useAppSelector } from '../../services/redux/store';
+import { changeCountryOption, changeOption } from './DropDownSlice';
 
-const DropDown: FC<IDropDowmProps> = ({ options, onChoose }) => {
-  const handleChange = () => {
-    onChoose();
+const DropDown: FC<IDropDowmProps> = ({ options, type }) => {
+  const dispatch = useAppDispatch();
+  const currentCountry = useAppSelector(state => state.dropdown.countryOption);
+  const currentBase = useAppSelector(state => state.dropdown.option);
+  const defaultValue =
+    type === SelectorType.BASE ? currentBase : currentCountry;
+
+  const handleChange = (e: SingleValue<IOption>): void => {
+    if (type === SelectorType.BASE) {
+      dispatch(changeOption(e));
+    } else if (type === SelectorType.COUNTRY) {
+      dispatch(changeCountryOption(e));
+    }
   };
 
   return (
@@ -14,8 +26,8 @@ const DropDown: FC<IDropDowmProps> = ({ options, onChoose }) => {
       classNamePrefix="custom-select"
       options={options}
       closeMenuOnSelect={false}
-      defaultValue={options[0]}
-      onChange={handleChange}
+      defaultValue={defaultValue}
+      onChange={e => handleChange(e)}
       isSearchable={false}
     />
   );

@@ -1,0 +1,38 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.title{
+    color: $black-standart-text;
+    @include font-h1-bold;
+    text-align: start;
+    margin: 75px 0 0 80px;
+}
+.ddcontainer{
+    margin: 75px 0 63px 80px;
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 323px);
+    column-gap: 75px;
+    row-gap: 55px;
+    max-width: 1520px;
+    margin: 0 0 126px 80px;
+    &__link{
+        display: flex;
+        gap: 50px;
+        align-items: center;
+        text-decoration: none;
+        color: $dark-grey;
+    }
+    &__img{
+        width: 98px;
+        height: 98px;
+        object-fit: contain;
+        border-radius: 20px;
+    }
+    &__title{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+}

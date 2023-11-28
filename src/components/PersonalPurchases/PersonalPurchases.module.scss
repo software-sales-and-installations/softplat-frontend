@@ -1,11 +1,12 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
 .personalPurchases {
     margin-top: 65px;
-    margin-left: 150px;
+    margin-left: 100px;
     &__title {
         margin: 0;
-        font-size: 36px;
-        font-weight: 600;
-        line-height: 50px;
+        @include font-h2-simibold;
         text-align: start;
     }
 
@@ -19,6 +20,6 @@
     }
 
     &__item {
-      background-color: white;
+      background-color: $white-standart;
     }
 }
