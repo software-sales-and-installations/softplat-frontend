@@ -9,12 +9,11 @@ export const vendorApi = createApi({
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token');
       if (token) {
-        headers.set('authorization', `Bearer ${token}`);
+        headers.set('authorization', `${token}`);
       }
       return headers;
     },
   }),
-  tagTypes: ['Vendor'],
   endpoints: (build) => ({
     // Добавление вендора. Для админа
     // body {

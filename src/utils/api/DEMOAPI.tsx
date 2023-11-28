@@ -292,9 +292,12 @@ export const DemoApi = () => {
   const {  } = useSellerDeletePhotoByAdminMutation();
 
 
-  // @ts-ignore
-  // const { data: orderAll, isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllErr } = useSellerInfoQuery();
-
+  const sellerId = 1
+  const { data: sellerInfo,
+    // isFetching,isLoading, error
+  } = useSellerInfoQuery(sellerId);
+  console.log('sellerInfo:')
+  console.log(sellerInfo)
 
   const {  } = useSellerAddPhotoMutation();
   const {  } = useSellerDeletePhotoMutation();
@@ -302,8 +305,13 @@ export const DemoApi = () => {
   const {  } = useSellerChangeBankMutation();
 
 
-  // @ts-ignore
-  // const { data: orderAll, isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllErr} = useSellerGetBankQuery();
+  const sellerBankId = 1
+  const { data: sellerBank,
+    // isFetching,isLoading, error
+  } = useSellerGetBankQuery(sellerBankId);
+  console.log('sellerBank:')
+  console.log(sellerBank)
+
 
 /////////////////////////////////////////UserProduct
   const {  } = useProductCreateMutation();
@@ -326,9 +334,12 @@ export const DemoApi = () => {
   const {  } = useVendorAddMutation();
 
 
-  // @ts-ignore
-  // const { data: orderAll, isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllErr } = useVendorQuery();
-
+  const vendorId = 1
+  const { data: vendor,
+    // isFetching,isLoading, error
+  } = useVendorQuery(vendorId);
+  console.log('vendor:')
+  console.log(vendor)
 
   const {  } = useVendorDeleteMutation();
   const {  } = useVendorChangeMutation();
