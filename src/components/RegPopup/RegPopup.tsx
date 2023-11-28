@@ -45,7 +45,7 @@ export const PopupForReg: FC = () => {
 				.unwrap()
 				.then((res)=>{
 					console.log(res)
-					dispatch(setUser({email: email, token: res.token}))
+					dispatch(setUser({email: email, token: res.token, role:res.role}))
 				})
 				.catch((err) => {
 					console.log(err);

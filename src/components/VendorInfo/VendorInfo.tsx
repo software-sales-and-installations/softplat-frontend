@@ -4,8 +4,9 @@ import { VendorInfoProps } from './VendorInfoTypes';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 
 const VendorInfo: FC<VendorInfoProps> = ({ title, description, img }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const resultText = isExpanded
+  const [isExpanded, setIsExpanded] = useState(true);
+  const isShortText = description.length < 280 ? true : false;
+  const resultText = isExpanded && !isShortText
     ? description?.slice(0, 280).concat('...')
     : description;
   const btnText = isExpanded ? 'показать' : 'скрыть';
@@ -25,7 +26,9 @@ const VendorInfo: FC<VendorInfoProps> = ({ title, description, img }) => {
           type="button"
           onClick={() => setIsExpanded(!isExpanded)}
         >
-          {btnText} {btnIcon}
+          {/* {btnText} {btnIcon} */}
+          {!isShortText && btnText}
+          {!isShortText && btnIcon}
         </button>
       </div>
     </div>
