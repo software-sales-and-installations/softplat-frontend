@@ -9,7 +9,7 @@ export const buyerApi = createApi({
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token');
       if (token) {
-        headers.set('authorization', `Bearer ${token}`);
+        headers.set('authorization', `${token}`);
       }
       return headers;
     },
@@ -41,7 +41,7 @@ export const buyerApi = createApi({
     buyerInfo: build.query({
       query: (userId) => `/buyer/${userId}/`,
     }),
-    // Просмотр избранных товаров
+    // Просмотр избранных товаров. Покупатель
     buyerFavorites: build.query({
       query: () => '/buyer/favorites/',
     }),

@@ -9,17 +9,15 @@ export const publicProductApi = createApi({
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token');
       if (token) {
-        headers.set('authorization', `Bearer ${token}`);
+        headers.set('authorization', `${token}`);
       }
       return headers;
     },
   }),
-  tagTypes: ['Image'],
   endpoints: (build) => ({
     // Получение продукта по id
     publicProduct: build.query({
       query: (productId) => `/product/${productId}`,
-      // providesTags: ['Product'],
     }),
     // Получение списка продуктов/поиск/фильтрация
     publicProductList: build.query({

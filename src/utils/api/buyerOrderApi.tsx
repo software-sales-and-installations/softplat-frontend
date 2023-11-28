@@ -9,14 +9,14 @@ export const buyerOrderApi = createApi({
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token');
       if (token) {
-        headers.set('authorization', `Bearer ${token}`);
+        headers.set('authorization', `${token}`);
       }
       return headers;
     },
   }),
   tagTypes: ['BuyerOrder'],
   endpoints: (build) => ({
-    // Список: мои покупки
+    // Список: мои покупки.Покупатель
     orderAll: build.query({
       query: () => '/orders',
       // providesTags: ['BuyerOrder'],
@@ -33,7 +33,7 @@ export const buyerOrderApi = createApi({
         method: 'POST',
       }),
     }),
-    // Получение конкретной покупки
+    // Получение конкретной покупкиюПокупатель
     orderInfo: build.query( {
       query: (userId) => `/order/${userId}`,
     }),

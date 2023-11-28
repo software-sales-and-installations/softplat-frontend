@@ -9,15 +9,15 @@ export const buyerBasketApi = createApi({
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token');
       if (token) {
-        headers.set('authorization', `Bearer ${token}`);
+        headers.set('authorization', `${token}`);
       }
       return headers;
     },
   }),
   tagTypes: ['BuyerBasket'],
   endpoints: (build) => ({
-                           // Просмотр своей корзины
-                           buyerBasketInfo: build.query({
+  // Просмотр своей корзины
+  buyerBasketInfo: build.query({
   query: () => '/buyer/basket/',
   // providesTags: ['BuyerBasket'],
 }),

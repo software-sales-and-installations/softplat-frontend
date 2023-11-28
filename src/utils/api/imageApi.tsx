@@ -9,7 +9,7 @@ export const imageApi = createApi({
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token');
       if (token) {
-        headers.set('authorization', `Bearer ${token}`);
+        headers.set('authorization', `${token}`);
       }
       return headers;
     },
@@ -19,7 +19,6 @@ export const imageApi = createApi({
     // Получение изображения по id
     image: build.query({
       query: (id) => `/image/${id}`,
-      // providesTags: ['Image'],
     }),
   }),
 });

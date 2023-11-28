@@ -9,7 +9,7 @@ export const categoryApi = createApi({
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token');
       if (token) {
-        headers.set('authorization', `Bearer ${token}`);
+        headers.set('authorization', `${token}`);
       }
       return headers;
     },
@@ -19,7 +19,6 @@ export const categoryApi = createApi({
     //Получение списка категорий, доступ для админа
     categoryList: build.query({
       query: () => '/category/',
-      // providesTags: ['Category'],
     }),
     // Создание категорий
     // body {

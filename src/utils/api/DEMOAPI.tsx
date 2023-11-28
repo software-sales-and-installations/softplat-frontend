@@ -64,21 +64,21 @@ import React from 'react';
 
 
 export const DemoApi = () => {
-  // const adminToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjJAYWRtaW4ucnUiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MDExNjkxOTEsImV4cCI6MTcwMTE3MDk5MX0.5BeZaPioZ09Jq4fJxIZtBiMb3UnL7Fo4MEBTxu0pP0M'
-  // localStorage.setItem('token', adminToken)
+  const adminToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjJAYWRtaW4ucnUiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MDEyMDAzNDUsImV4cCI6MTcwMTIwMjE0NX0.YuvHQ_8iNaii_jd6rOP1z_mBWbrTCfhQO83spME8v0A"
+  localStorage.setItem('token', adminToken)
   // const buyerToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJidXllckBidXllci5ydSIsInJvbGUiOiJCVVlFUiIsImlhdCI6MTcwMTE3MDk4MiwiZXhwIjoxNzAxMTcyNzgyfQ.nAqy5BNOhXoodmYgJZhB5pc78UwrW6XHXxSuOn1AkqE'
   // localStorage.setItem('token', buyerToken)
 
 
 /////////////////////////Admin
 // @ts-ignore
-  const { data: adminData, isFetching,isLoading, error } = useAdminInfoQuery();
+  const { data: adminData, isFetching: isAdminFetching,isLoading: isAdminLoading, error: adminError } = useAdminInfoQuery();
 
 //////////////////////////Auth
   const loginData = {
-    confirmPassword: "Pupa123!",
+    confirmPassword: "Pupa321!",
     email: "pupa@pupa.ru",
-    password: "Pupa123!",
+    password: "Pupa321!",
   }
   const [authLogin, {
     // isFetching, isLoading, isError
@@ -169,64 +169,143 @@ export const DemoApi = () => {
 .finally()
   };
 
-//Buyer
+///////////////////////////////////Buyer
 // @ts-ignore
-  const {} = useBuyerAllMembersQuery();
+  const { data: buyerAllData, isFetching: isBuyerAllFetching,isLoading: isBuyerAllLoading, error: buyerAllError } = useBuyerAllMembersQuery();
+  console.log('buyerAllData:')
+  console.log(buyerAllData)
+
   const {} = useBuyerChangeInfoMutation();
+
+  const id = 1
+  const {data: buyerInfo,
+    // isFetching: isBuyerInfoFetching,isLoading: isBuyerInfoLoading, error: buyerInfoError
+  } = useBuyerInfoQuery(id);
+  console.log('buyerInfo:')
+  console.log(buyerInfo)
+
 // @ts-ignore
-  const {} = useBuyerInfoQuery();
-// @ts-ignore
-  const {} = useBuyerFavoritesQuery();
+  const {data: buyerFavourite, isFetching: isBuyerFavouriteFetching,isLoading: isBuyerFavouriteLoading, error: buyerFavouriteError} = useBuyerFavoritesQuery();
+  console.log('buyerFavourite:')
+  console.log(buyerFavourite)
+
   const {} = useBuyerAddFavoritesMutation();
+
   const {} = useBuyerDeleteFavoritesMutation();
 
-//BuyerBasket
+//////////////////////////////////////BuyerBasket
 // @ts-ignore
-  const {} = useBuyerBasketInfoQuery();
+  const {data: buyerBasketInfo, isFetching: isBuyerBasketInfoFetching,isLoading: isBuyerBasketInfoLoading, error: buyerBuyerBasketInfoError} = useBuyerBasketInfoQuery();
+  console.log('buyerBasketInfo:')
+  console.log(buyerBasketInfo)
+
+
   const {} = useBuyerBasketAddItemMutation();
+
+
   const {} = useBuyerBasketDeleteItemMutation();
 
-//BuyerOrder
+//////////////////////////////////////BuyerOrder
 // @ts-ignore
-  const {} = useOrderAllQuery();
-  const {} = useOrderMakeMutation();
-// @ts-ignore
-  const {} = useOrderInfoQuery();
+  const {data: orderAll, isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllError} = useOrderAllQuery();
+  console.log('orderAll:')
+  console.log(orderAll)
 
-//Category
+  const basket = {
+    "basketPositionIds": [
+      0
+    ]
+  }
+  const [orderMake, {
+    // isFetching, isLoading, isError
+  }] = useOrderMakeMutation();
+  const handleOrderMake = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    orderMake(basket).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
+
+  const idOrderInfo = 1
+  const {data: orderInfo,
+    // isFetching: isOrderInfoFetching,isLoading: isOrderInfoLoading, error: orderInfoError
+  } = useOrderInfoQuery(idOrderInfo);
+  console.log('orderInfo:')
+  console.log(orderInfo)
+
+/////////////////////////////////////////Category
 // @ts-ignore
-  const {} = useCategoryListQuery();
+  const {data: categoryList, isFetching: isCategoryListFetching,isLoading: isCategoryListLoading, error: categoryListErr} = useCategoryListQuery();
+  console.log('categoryList:')
+  console.log(categoryList)
+
   const {} = useCategoryAddMutation();
-// @ts-ignore
-  const {} = useCategoryQuery();
+
+
+ const catId = 1
+  const {data: categoryQuery,
+    // isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllErr
+  } = useCategoryQuery(catId);
+  console.log('categoryQuery:')
+  console.log(categoryQuery)
+
   const {} = useCategoryDeleteMutation();
+
+
   const {} = useCategoryChangeMutation();
 
 //Image
-// @ts-ignore
-  const { data: imageData } = useImageQuery();
+  const imageId = 1
+  const { data: image,
+    // isFetching,isLoading, error
+  } = useImageQuery(imageId);
+  console.log('image:')
+  console.log(image)
 
-//PublicProduct
-  // @ts-ignore
-  const { data: publicProductData } = usePublicProductQuery();
-  // @ts-ignore
-  const { data: publicProductListData } = usePublicProductListQuery();
 
-//Seller
+/////////////////////////////////////PublicProduct
+  const productId = 1
+  const { data: product,
+    // isFetching,isLoading, error
+  } = usePublicProductQuery(productId);
+  console.log('product:')
+  console.log(product)
+
   // @ts-ignore
-  const { data: sellerAllMembersData } = useSellerAllMembersQuery();
+  const { data: productList, isFetching: isProductListFetching,isLoading: isProductListLoading, error: productListErr } = usePublicProductListQuery();
+  console.log('productList:')
+  console.log(productList)
+
+///////////////////////////////////////////////////Seller
+  // @ts-ignore
+  // const { data: orderAll, isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllErr } = useSellerAllMembersQuery();
+
+
   const {  } = useSellerChangeDataMutation();
+
+
   const {  } = useSellerDeletePhotoByAdminMutation();
+
+
   // @ts-ignore
-  const { data: sellerInfoData } = useSellerInfoQuery();
+  // const { data: orderAll, isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllErr } = useSellerInfoQuery();
+
+
   const {  } = useSellerAddPhotoMutation();
   const {  } = useSellerDeletePhotoMutation();
   const {  } = useSellerDeleteBankMutation();
   const {  } = useSellerChangeBankMutation();
-  // @ts-ignore
-  const { data: sellerBankData} = useSellerGetBankQuery();
 
-//UserProduct
+
+  // @ts-ignore
+  // const { data: orderAll, isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllErr} = useSellerGetBankQuery();
+
+/////////////////////////////////////////UserProduct
   const {  } = useProductCreateMutation();
   const {  } = useProductDeleteMutation();
   const {  } = useProductDeleteImageMutation();
@@ -236,19 +315,29 @@ export const DemoApi = () => {
   const {  } = useProductUpdateMutation();
   const {  } = useProductDeleteOwnCardMutation();
   const {  } = useProductDeleteOwnCardImageMutation();
-  // @ts-ignore
-  const { data: productListData } = useProductListQuery();
 
-//Vendor
-  const {  } = useVendorAddMutation();
+
   // @ts-ignore
-  const { data: vendorData } = useVendorQuery();
+  // const { data: orderAll, isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllErr } = useProductListQuery();
+
+
+
+/////////////////////////////////////////////Vendor
+  const {  } = useVendorAddMutation();
+
+
+  // @ts-ignore
+  // const { data: orderAll, isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllErr } = useVendorQuery();
+
+
   const {  } = useVendorDeleteMutation();
   const {  } = useVendorChangeMutation();
   const {  } = useVendorAddImageMutation();
   const {  } = useVendorDeleteImageMutation();
+
+
   // @ts-ignore
-  const { data: vendorListData } = useVendorListQuery();
+  // const { data: orderAll, isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllErr } = useVendorListQuery();
 
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -256,18 +345,18 @@ export const DemoApi = () => {
     // handleSubmitRegister(e);
     // handleSubmitLogout(e);
     // handleSubmitChangePass(e);
-
+    handleOrderMake(e);
 
    }
   return (
   <div>
     <h1>DEMO API</h1>
     <h2>Admin Request</h2>
-    {error ? (
+    {adminError ? (
       <>Oh no, there was an error</>
-    ) : isLoading ? (
+    ) : isAdminLoading ? (
       <>Loading...</>
-    ) : isFetching ? (
+    ) : isAdminFetching ? (
       <>Fetching...use me to block submit button</>
     ) : adminData ? (
       <ol>
@@ -276,6 +365,7 @@ export const DemoApi = () => {
       <li>name {adminData.name}</li>
       </ol>
       ) : null}
+    <br/>
     <button onClick={handleClick}>Try</button>
   </div>
   )
