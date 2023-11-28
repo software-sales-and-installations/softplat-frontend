@@ -2,8 +2,11 @@ import { FC } from 'react';
 import style from './CartSummary.module.scss';
 import { Button } from '../../UI/Button/Button';
 import { useAppSelector } from '../../services/redux/store';
+import { popupState } from '../../UI/Popup/PopupSlice';
+import { useDispatch } from 'react-redux';
 
 export const CartSummary: FC = () => {
+  const dispatch = useDispatch();
   const cartItems = useAppSelector(store => store.cart.items);
 
   const totalAmount = cartItems.reduce((total, item) => {
@@ -17,6 +20,10 @@ export const CartSummary: FC = () => {
     return total + cartQuantity;
   }, 0);
 
+  function handleClick(){
+    dispatch(popupState(true));
+  }
+
   return (
     <div className={style.cartSummary}>
       <div className={style.cartSummary__result}>
@@ -28,7 +35,7 @@ export const CartSummary: FC = () => {
           Товары {`(${totalItems})`}
         </span>
         <div className={style.cartSummary__ButtonBlock}>
-          <Button mode={'primary'} isDisabled={cartItems.length < 1 && true}>
+          <Button onClick={handleClick} mode={'primary'} isDisabled={cartItems.length < 1 && true}>
             Оформить заказ
           </Button>
         </div>

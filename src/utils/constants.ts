@@ -86,6 +86,18 @@ export const VALIDATION_SETTINGS = {
       noName: 'Необходимо ввести номер телефона',
     },
   },
+  cardNumber: {
+    pattern: /\d{4}\s{1}\d{4}\s{1}\d{4}\s{1}\d{4}/,
+    minLength: 19,
+    maxLength: 19,
+    messages: {
+      tooShort: 'Введите еще цифры',
+      tooLong: 'Слишком много цифр',
+      invalid: 'Некорректный номер карты',
+      noCardNumber: 'Введите номер карты'
+    }
+
+  }
 };
 export const EMAIL_VALIDATION_CONFIG = {
   required: {
@@ -155,6 +167,20 @@ export const PHONE_VALIDATION_CONFIG = {
   maxLength: {
     value: VALIDATION_SETTINGS.phone.maxLength,
     message: VALIDATION_SETTINGS.phone.messages.tooLong,
+  },
+};
+export const CARDNUMBER_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.cardNumber.messages.noCardNumber,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.cardNumber.pattern,
+    message: VALIDATION_SETTINGS.cardNumber.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.cardNumber.maxLength,
+    message: VALIDATION_SETTINGS.cardNumber.messages.tooLong,
   },
 };
 export const CHOOSE_ROLE: {

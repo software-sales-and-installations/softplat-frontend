@@ -42,3 +42,11 @@ export interface IUser {
 	confirmPassword?: string;
 	role: string;
 }
+
+export interface IPayFields{
+	cardNumber: string;
+	validDate: string;
+	cvv: number;
+	name: string;
+
+}
