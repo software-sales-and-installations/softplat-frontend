@@ -66,7 +66,10 @@ const vendorsSlice = createSlice({
         state.vendors = action.payload;
       })
       .addCase(fetchSingleVendor.fulfilled, (state, action) => {
+        state.status = 'success';
         state.vendor = action.payload;
+      }).addCase(fetchSingleVendor.pending, (state) => {
+        state.status = 'loading';
       });
   },
 });

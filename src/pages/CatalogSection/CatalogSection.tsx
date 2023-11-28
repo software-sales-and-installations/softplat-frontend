@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import DropDown from '../../UI/DropDown/DropDown';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
 import { ProductStatus } from '../../components/ProductCard/ProductCardTypes';
+import Preloader from '../../components/Preloader/Preloader';
 
 const CatalogSection: FC = () => {
   const { section } = useParams();
@@ -21,7 +22,7 @@ const CatalogSection: FC = () => {
   const countryOption = useAppSelector(
     state => state.dropdown.countryOption.value,
   );
-  const cards = useAppSelector(store => store.cards.cards) || [];
+  const { cards, status } = useAppSelector(store => store.cards);
 
   useEffect(() => {
     dispatch(fetchSortedCards(selectState));
@@ -52,7 +53,11 @@ const CatalogSection: FC = () => {
         />
       </div>
       <div className={styles.catalogSection__items}>
-        <CardsGrid cards={productsCards} />
+        {status === 'loading' ? (
+          <Preloader />
+        ) : (
+          <CardsGrid cards={productsCards} />
+        )}
       </div>
     </section>
   );

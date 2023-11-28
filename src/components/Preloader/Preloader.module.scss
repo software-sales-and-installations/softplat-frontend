@@ -1,0 +1,6 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.preloader {
+    @include font-body-bold
+}
