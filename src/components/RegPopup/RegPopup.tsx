@@ -106,8 +106,8 @@ export const PopupForReg: FC = () => {
 					error={errors?.confirmPassword?.message}
 				/>
 				<div className={styles.checkboxcontainer}>
-					<input className={styles.checkboxcontainer__input}  id='agreement' {...register("remember")} type="checkbox" value="remember"/>
-					<label className={styles.checkboxcontainer__label} htmlFor='agreement'>Запомнить меня</label>
+					<input className={styles.checkboxcontainer__input}  id='remember' {...register("remember")} type="checkbox" value="remember"/>
+					<label className={styles.checkboxcontainer__label} htmlFor='remember'>Запомнить меня</label>
 				</div>
 				<div className={styles.checkboxcontainer}>
 					<input id='agreement' className={styles.checkboxcontainer__input} {...register("agree", { required: true })} type="checkbox" value="agree"/>
