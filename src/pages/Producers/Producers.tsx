@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { fetchAllVendors } from '../../services/redux/slices/vendors/vendors';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
 
-
 export const Producers: FC = () => {
   const dispatch = useAppDispatch();
   const countryOption = useAppSelector(state => state.dropdown.countryOption);
@@ -17,8 +16,6 @@ export const Producers: FC = () => {
   }, []);
 
   const vendors = useAppSelector(state => state.vendors.vendors.vendors);
-
-  console.log(countryOption);
 
   const filteredVendors = vendors.filter(
     vendor => vendor.country === countryOption.value,

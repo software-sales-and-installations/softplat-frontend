@@ -27,6 +27,10 @@ export const ProductPage: FC = () => {
     dispatch(fetchSingleCard(Number(id)));
   }, [id]);
 
+  useEffect(() => {
+    setTotalPrice(cardData.price);
+  }, [cardData.price]);
+
   const handleAddToCart = () => {
     dispatch(addItem(cardData));
   };
