@@ -73,6 +73,7 @@ export const PopupForAuth: FC = () => {
 					showPasswordButton={true}
 					validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
 					error={errors?.password?.message}
+					helpText='Пароль может содержать буквы, цифры и знаки препинания'
 				/>
 				<div className={styles.checkboxcontainer}>
 					<input className={styles.checkboxcontainer__input} id='agreement' {...register("remember")} type="checkbox" value="remember"/>
