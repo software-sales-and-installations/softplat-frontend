@@ -6,7 +6,7 @@ import SellerCabinetContent from '../../components/SellerCabinetContent/SellerCa
 
 export const Seller: FC = () =>{
     return (
-        <section className={styles.seller}>
+      <section className={styles.seller}>
         <div className={styles.seller__titles}>
           <CabinetMenu />
         </div>
@@ -14,5 +14,5 @@ export const Seller: FC = () =>{
           <Route path="/products" element={<SellerCabinetContent />} />
         </Routes>
       </section>
-    )
+    );
 }

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import styles from './SellerCabinetContent.module.scss';
 import { SellerExistingCardTable } from '../SellerExistingCardTable/SellerExistingCardTable';
+import SellerAddCard from '../SellerAddCard/SellerAddCard'
 
 const SellerProduct: React.FC = () => {
   const [activeBtn, setActiveBtn] = useState('existingCards');
@@ -10,14 +11,19 @@ const SellerProduct: React.FC = () => {
   return (
     <section className={styles.sellerProduct}>
       <h2 className={styles.sellerProduct__title}>Мои товары</h2>
-      <p className={styles.sellerProduct__subtitle}>Здесь вы можете посмотреть список ваших товаров, добавить новый товар и отредактировать карточку существующего товара</p>
+      <p className={styles.sellerProduct__subtitle}>
+        Здесь вы можете посмотреть список ваших товаров, добавить новый товар и
+        отредактировать карточку существующего товара
+      </p>
       <nav className={styles.sellerProduct__titles}>
         <button
           type="button"
           onClick={() => setActiveBtn('existingCards')}
           className={classNames(
             styles.sellerProduct__data,
-            activeBtn === 'existingCards' ? styles.sellerProduct__data_aktive : '',
+            activeBtn === 'existingCards'
+              ? styles.sellerProduct__data_aktive
+              : '',
           )}
         >
           Созданные карточки
@@ -37,13 +43,16 @@ const SellerProduct: React.FC = () => {
           type="button"
           className={classNames(
             styles.sellerProduct__data,
-            activeBtn === 'moderationCard' ? styles.sellerProduct__data_aktive : '',
+            activeBtn === 'moderationCard'
+              ? styles.sellerProduct__data_aktive
+              : '',
           )}
         >
           На модерации
         </button>
       </nav>
-      {activeBtn==='existingCards'? <SellerExistingCardTable/> : null}
+      {activeBtn === 'existingCards' ? <SellerExistingCardTable /> : null}
+      {activeBtn === 'addCard' ? <SellerAddCard /> : null}
     </section>
   );
 };

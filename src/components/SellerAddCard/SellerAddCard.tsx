@@ -36,18 +36,8 @@ const SellerAddCard: FC<ICreateProductFields> = ({ inputType, error = '' }) => {
             ...register('name', NAME_VALIDATION_CONFIG),
           }}
           error={errors?.name?.message}
+          helpText="В рублях"
         />
-        <span className={styles.input__error}>
-          {error ? (
-            error
-          ) : inputType === 'name' ? (
-            <p className={styles.sellerAddCard__label}>
-              Полное название в соответствии лицензией
-            </p>
-          ) : (
-            ''
-          )}
-        </span>
         <div>
           <p className={styles.sellerAddCard__title_first}>
             Выберите производителя
@@ -108,7 +98,7 @@ const SellerAddCard: FC<ICreateProductFields> = ({ inputType, error = '' }) => {
         </label>
       </div>
       <p className={styles.sellerAddCard__title}>
-        или вы можете указать ссылку на файл для качивания
+        Или вы можете указать ссылку на файл для качивания
       </p>
       <Input
         inputType={InputTypes.link}
@@ -117,6 +107,15 @@ const SellerAddCard: FC<ICreateProductFields> = ({ inputType, error = '' }) => {
         }}
         error={errors?.link?.message}
       />
+      <span className={styles.input__error}>
+        {error ? (
+          error
+        ) : inputType === 'link' ? (
+          <p className={styles.sellerAddCard__label}>Ссылка на файл</p>
+        ) : (
+          ''
+        )}
+      </span>
       <div>
         <p className={styles.sellerAddCard__title}>Загрузите логотип ПО</p>
         <label className={styles.sellerAddCard__load_logo}>
@@ -167,12 +166,21 @@ const SellerAddCard: FC<ICreateProductFields> = ({ inputType, error = '' }) => {
       />
       <Input
         inputType={InputTypes.price}
-        labelText="Введите стоимость"
+        labelText="Введите стоимость ПО"
         validation={{
           ...register('price', PRICE_VALIDATION_CONFIG),
         }}
         error={errors?.price?.message}
       />
+      <span className={styles.input__error}>
+        {error ? (
+          error
+        ) : inputType === 'price' ? (
+          <p className={styles.sellerAddCard__label}>В рублях</p>
+        ) : (
+          ''
+        )}
+      </span>
       <Input
         inputType={InputTypes.priceInstall}
         labelText="Стоимость установки"
@@ -181,6 +189,15 @@ const SellerAddCard: FC<ICreateProductFields> = ({ inputType, error = '' }) => {
         }}
         error={errors?.priceInstall?.message}
       />
+      <span className={styles.input__error}>
+        {error ? (
+          error
+        ) : inputType === 'priceInstall' ? (
+          <p className={styles.sellerAddCard__label}>В рублях</p>
+        ) : (
+          ''
+        )}
+      </span>
       <p className={styles.sellerAddCard__title}>
         Выберите ключевые слова для поиска
       </p>

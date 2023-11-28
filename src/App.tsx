@@ -9,7 +9,6 @@ import VendorPage from './pages/VendorPage/VendorPage';
 import Contacts from './pages/Contacts/contacts.tsx';
 import CatalogSection from './pages/CatalogSection/CatalogSection.tsx';
 import Personal from './pages/Personal/Personal.tsx';
-import Seller from './pages/Seller/Seller.tsx';
 import { Producers } from './pages/Producers/Producers.tsx';
 import { ShoppingCart } from './pages/ShoppingCart/ShoppingCart.tsx';
 import Search from './pages/Search/Search.tsx';
