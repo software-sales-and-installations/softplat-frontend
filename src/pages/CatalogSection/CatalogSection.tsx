@@ -12,6 +12,8 @@ import { fetchSortedCards } from '../../services/redux/slices/cards/cards';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import DropDown from '../../UI/DropDown/DropDown';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
+import { ProductStatus } from '../../components/ProductCard/ProductCardTypes';
+import Preloader from '../../components/Preloader/Preloader';
 
 const CatalogSection: FC = () => {
   const { section } = useParams();
@@ -20,7 +22,7 @@ const CatalogSection: FC = () => {
   const countryOption = useAppSelector(
     state => state.dropdown.countryOption.value,
   );
-  const cards = useAppSelector(store => store.cards.cards) || [];
+  const { cards, status } = useAppSelector(store => store.cards);
 
   useEffect(() => {
     dispatch(fetchSortedCards(selectState));
@@ -32,7 +34,8 @@ const CatalogSection: FC = () => {
   const categorizedCards = cards?.products?.filter(
     card =>
       card.category?.id === currentCatalog?.id &&
-      card.vendor?.country === countryOption,
+      card.vendor?.country === countryOption &&
+      card.productStatus === ProductStatus.PUBLISHED,
   );
   const productsCards = { products: categorizedCards };
 
@@ -50,7 +53,11 @@ const CatalogSection: FC = () => {
         />
       </div>
       <div className={styles.catalogSection__items}>
-        <CardsGrid cards={productsCards} />
+        {status === 'loading' ? (
+          <Preloader />
+        ) : (
+          <CardsGrid cards={productsCards} />
+        )}
       </div>
     </section>
   );

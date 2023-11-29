@@ -9,7 +9,7 @@ export interface IProductCard {
   installation?: boolean;
   license?: string;
   productAvailability?: boolean;
-  productStatus?: string;
+  productStatus?: ProductStatus;
   productionTime?: Date;
   quantity?: number;
   seller?: ProductCardSeller;
@@ -17,17 +17,16 @@ export interface IProductCard {
   version?: string;
   isLiked?: boolean;
   cartQuantity?: number;
-};
-
-export interface IProductCardProps {
-  card: IProductCard
 }
 
+export interface IProductCardProps {
+  card: IProductCard;
+}
 
 type ProductCardCategory = {
   id: number;
   name: string;
-}
+};
 
 type ProductCardImage = {
   contentType?: string;
@@ -35,7 +34,7 @@ type ProductCardImage = {
   name?: string;
   size?: number;
   url: string;
-}
+};
 
 type ProductCardSeller = {
   description: string;
@@ -49,7 +48,7 @@ type ProductCardSeller = {
     account: string;
     id: number;
   };
-}
+};
 
 type ProductCardVendor = {
   country: string;
@@ -57,4 +56,11 @@ type ProductCardVendor = {
   id: number;
   image: ProductCardImage;
   name: string;
+};
+
+export enum ProductStatus {
+  DRAFT = 'DRAFT',
+  PUBLISHED = 'PUBLISHED',
+  REJECTED = 'REJECTED',
+  SHIPPED = 'SHIPPED',
 }

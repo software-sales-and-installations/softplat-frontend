@@ -76,6 +76,7 @@ const cardsSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchSortedCards.fulfilled, (state, action) => {
+        state.status = 'success';
         state.cards = action.payload;
       })
       .addCase(fetchSortedCards.rejected, state => {
