@@ -14,6 +14,7 @@ import { useAppDispatch } from '../../services/redux/store';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../services/redux/store';
 import { popupState } from '../../UI/Popup/PopupSlice';
+import { useAuthLoginMutation, useAuthRegisterMutation } from '../../utils/api/authApi';
 
 
 export const PopupForReg: FC = () => {
@@ -36,32 +37,72 @@ export const PopupForReg: FC = () => {
 	function handleExitClick(){
 		dispatch(checkBoxState(false))
 	}
-	const onSubmitResData: SubmitHandler<ISignUpFields> = () => {
-		const {email, name, password, confirmPassword, phone} = getValues();
-		dispatch(signUpUser({email, name, password, confirmPassword, role: roleForReg, phone: phone? phone.slice(2): ''} as ISignUpData))
-			.unwrap()
-			.then(()=>{
-				dispatch(signInUser({email, password}))
-				.unwrap()
-				.then((res)=>{
-					console.log(res)
-					dispatch(setUser({email: email, token: res.token, role:res.role}))
-				})
-				.catch((err) => {
-					console.log(err);
-				});
+
+	// const registerData = {
+	// 	"confirmPassword": "Buy54321!",
+	// 	"email": "buy12345@buy.ru",
+	// 	"name": "buyer",
+	// 	"password": "Buy54321!",
+	// 	"phone": "1234554321",
+	// 	"role": "BUYER",
+	// 	"status": "ACTIVE",
+	//   }
+	  const registerData = getValues();
+	  const [authLogin, {
+		// isFetching, isLoading, isError
+	  }] = useAuthLoginMutation();
+	  const [authRegister, {
+		// isFetching, isLoading, isError
+	  }] = useAuthRegisterMutation();
+	  const handleSubmitRegister = () => {
+	   authRegister(registerData).unwrap()
+		 .then((res) => {
+		  authLogin({
+			confirmPassword: registerData['password'],
+			email: res.email,
+			password: registerData['password'],
+		  }).unwrap()
+			.then((userData) => {
+		  localStorage.setItem('token', userData.token);
+		  localStorage.setItem('role', userData.role);
+		  console.log(userData)
+		})
+			.catch((error) => {
+			  console.log(error);
 			})
-			.then(()=>{
-				dispatch(popupState(false))
-				reset
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	};
+		 })
+		 .catch((error) => {
+		  console.log(error);
+		})
+	.finally()
+	  };
+	
+	// const onSubmitResData: SubmitHandler<ISignUpFields> = () => {
+	// 	const {email, name, password, confirmPassword, phone} = getValues();
+	// 	dispatch(signUpUser({email, name, password, confirmPassword, role: roleForReg, phone: phone? phone.slice(2): ''} as ISignUpData))
+	// 		.unwrap()
+	// 		.then(()=>{
+	// 			dispatch(signInUser({email, password}))
+	// 			.unwrap()
+	// 			.then((res)=>{
+	// 				console.log(res)
+	// 				dispatch(setUser({email: email, token: res.token, role:res.role}))
+	// 			})
+	// 			.catch((err) => {
+	// 				console.log(err);
+	// 			});
+	// 		})
+	// 		.then(()=>{
+	// 			dispatch(popupState(false))
+	// 			reset
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log(err);
+	// 		});
+	// };
 	return (
 		<Popup>
-			<form className={styles.form} onSubmit={handleSubmit(onSubmitResData)}>
+			<form className={styles.form} onSubmit={handleSubmit(handleSubmitRegister)}>
 				<Input
 					inputType={InputTypes.name}
 					labelText='Ваше имя'

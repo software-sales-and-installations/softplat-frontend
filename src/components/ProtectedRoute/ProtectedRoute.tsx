@@ -1,7 +1,5 @@
 import { FC, JSXElementConstructor, ReactElement } from 'react';
 import { Navigate } from 'react-router-dom';
-import { selectUser } from '../../services/redux/slices/user/user';
-import { useAppSelector } from '../../services/redux/store';
 
 interface IProtectedRoute {
 	children: ReactElement<string | JSXElementConstructor<unknown>> | null;
@@ -9,8 +7,8 @@ interface IProtectedRoute {
 
 
 export const ProtectedRouteForBuyer: FC<IProtectedRoute> = ({ children }) => {
-	const user = useAppSelector(selectUser);
-	return user.role==='BUYER' ? (
+	const role = localStorage.getItem('role');
+	return role==='BUYER' ? (
 		children
 	) : (
 		<>
@@ -19,8 +17,8 @@ export const ProtectedRouteForBuyer: FC<IProtectedRoute> = ({ children }) => {
 	);
 };
 export const ProtectedRouteForSeller: FC<IProtectedRoute> = ({ children }) => {
-	const user = useAppSelector(selectUser);
-	return user.role==='SELLER' ? (
+	const role = localStorage.getItem('role');
+	return role==='SELLER' ? (
 		children
 	) : (
 		<>
@@ -29,8 +27,8 @@ export const ProtectedRouteForSeller: FC<IProtectedRoute> = ({ children }) => {
 	);
 };
 export const ProtectedRouteForAdmin: FC<IProtectedRoute> = ({ children }) => {
-	const user = useAppSelector(selectUser);
-	return user.role==='ADMIN' ? (
+	const role = localStorage.getItem('role');
+	return role==='ADMIN' ? (
 		children
 	) : (
 		<>
