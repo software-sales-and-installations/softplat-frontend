@@ -64,10 +64,10 @@ import React from 'react';
 
 
 export const DemoApi = () => {
-  const adminToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjJAYWRtaW4ucnUiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MDEyMTMyNzIsImV4cCI6MTcwMTIxNTA3Mn0.Cvfs1fjSYgNv0vUSP0SYKrjCQGBcN1bJ_EH-pVH_TDQ"
-  localStorage.setItem('token', adminToken)
-  // const buyerToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwdXBhQHB1cGEucnUiLCJyb2xlIjoiQlVZRVIiLCJpYXQiOjE3MDEyMTIyMjksImV4cCI6MTcwMTIxNDAyOX0.3PJ0ioVAkJbt3gy_9Gz_ESVgfgvLgVbUImF_FHIUNOo'
-  // localStorage.setItem('token', buyerToken)
+  // const adminToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjJAYWRtaW4ucnUiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MDEyNDc3NDcsImV4cCI6MTcwMTI0OTU0N30.1_pz8vJ0wpx3zfD1ccIkl2Bfe9rLkqoLLl9UCvq6TBE"
+  // localStorage.setItem('token', adminToken)
+  const buyerToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwdXBhQHB1cGEucnUiLCJyb2xlIjoiQlVZRVIiLCJpYXQiOjE3MDEyNDk3MDcsImV4cCI6MTcwMTI1MTUwN30.yR-9oMye-JI88T9ocdsubFNLgIE7shfBG4IiSYV0qGA'
+  localStorage.setItem('token', buyerToken)
 
 
 /////////////////////////Admin
@@ -171,13 +171,36 @@ export const DemoApi = () => {
 
 ///////////////////////////////////Buyer
 // @ts-ignore
-  const { data: buyerAllData, isFetching: isBuyerAllFetching,isLoading: isBuyerAllLoading, error: buyerAllError } = useBuyerAllMembersQuery();
-  console.log('buyerAllData:')
-  console.log(buyerAllData)
+  const limit = 10;
+  const start = 0;
+  const { data: buyerAllData = [],
+    // isFetching: isBuyerAllFetching,isLoading: isBuyerAllLoading, error: buyerAllError
+  } = useBuyerAllMembersQuery({minId: start, pageSize: limit});
+  // console.log('buyerAllData:')
+  // console.log(buyerAllData)
 
-  const {} = useBuyerChangeInfoMutation();
+  const buyerNewInfo = {
+  "email": "pupa@pupa.ru",
+  "name": "pupa",
+  "phone": "9879879898"
+  }
+  const [buyerChangeInfo, {
+    // isFetching, isLoading, isError
+  }] = useBuyerChangeInfoMutation();
+  const handleBuyerChangeInfo = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+  buyerChangeInfo(buyerNewInfo).unwrap()
+    .then((userData) => {
+      console.log(userData)
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally()
+};
 
-  const id = 0
+
+  const id = 1
   const {data: buyerInfo,
     // isFetching: isBuyerInfoFetching,isLoading: isBuyerInfoLoading, error: buyerInfoError
   } = useBuyerInfoQuery(id);
@@ -189,9 +212,36 @@ export const DemoApi = () => {
   // console.log('buyerFavourite:')
   // console.log(buyerFavourite)
 
-  const {} = useBuyerAddFavoritesMutation();
+  const [buyerAddFavorite, {
+    // isFetching, isLoading, isError
+  }] = useBuyerAddFavoritesMutation();
+  const handleBuyerAddFavorite = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    buyerAddFavorite(id).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
 
-  const {} = useBuyerDeleteFavoritesMutation();
+  const [buyerDeleteFavorite, {
+    // isFetching, isLoading, isError
+  }] = useBuyerDeleteFavoritesMutation();
+  const handleBuyerDeleteFavorite = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    buyerDeleteFavorite(id).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
+
 
 //////////////////////////////////////BuyerBasket
 // @ts-ignore
@@ -199,13 +249,14 @@ export const DemoApi = () => {
   // console.log('buyerBasketInfo:')
   // console.log(buyerBasketInfo)
 
-  const addProductId = 0
+  const addProductId = 1
+  const installation = true
   const [buyerBasketAdd, {
     // isFetching, isLoading, isError
   }] = useBuyerBasketAddItemMutation();
   const handleBuyerBasketAdd = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    buyerBasketAdd(addProductId).unwrap()
+    buyerBasketAdd({productId: addProductId, installation: installation}).unwrap()
       .then((res) => {
         console.log(res)
       })
@@ -257,7 +308,7 @@ export const DemoApi = () => {
       .finally()
   };
 
-  const idOrderInfo = 0
+  const idOrderInfo = 1
   const {data: orderInfo,
     // isFetching: isOrderInfoFetching,isLoading: isOrderInfoLoading, error: orderInfoError
   } = useOrderInfoQuery(idOrderInfo);
@@ -265,28 +316,76 @@ export const DemoApi = () => {
   // console.log(orderInfo)
 
 /////////////////////////////////////////Category
-// @ts-ignore
+  // @ts-ignore
   const {data: categoryList, isFetching: isCategoryListFetching,isLoading: isCategoryListLoading, error: categoryListErr} = useCategoryListQuery();
   // console.log('categoryList:')
   // console.log(categoryList)
 
-  const {} = useCategoryAddMutation();
+
+  const category = {
+   "name": "Новая Категория"
+  }
+  const [categoryAdd, {
+    // isFetching, isLoading, isError
+  }] = useCategoryAddMutation();
+  const handleCategoryAdd = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    categoryAdd(category).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
 
 
- const catId = 0
+ const catId = 1
   const {data: categoryQuery,
     // isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllErr
   } = useCategoryQuery(catId);
   // console.log('categoryQuery:')
   // console.log(categoryQuery)
 
-  const {} = useCategoryDeleteMutation();
 
+  const [categoryDelete, {
+    // isFetching, isLoading, isError
+  }] = useCategoryDeleteMutation();
+  const handleCategoryDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    categoryDelete(catId).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
 
-  const {} = useCategoryChangeMutation();
+  const categoryChangeData =
+  {
+   "name": "Категория2"
+  }
+  const [categoryChange, {
+    // isFetching, isLoading, isError
+  }] = useCategoryChangeMutation();
+  const handleCategoryChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    categoryChange({catId: catId, body: categoryChangeData}).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
+
 
 //Image
-  const imageId = 0
+  const imageId = 1
   const { data: image,
     // isFetching,isLoading, error
   } = useImageQuery(imageId);
@@ -295,7 +394,7 @@ export const DemoApi = () => {
 
 
 /////////////////////////////////////PublicProduct
-  const productId = 0
+  const productId = 1
   const { data: product,
     // isFetching,isLoading, error
   } = usePublicProductQuery(productId);
@@ -318,7 +417,7 @@ export const DemoApi = () => {
   const {  } = useSellerDeletePhotoByAdminMutation();
 
 
-  const sellerId = 0
+  const sellerId = 1
   const { data: sellerInfo,
     // isFetching,isLoading, error
   } = useSellerInfoQuery(sellerId);
@@ -331,7 +430,7 @@ export const DemoApi = () => {
   const {  } = useSellerChangeBankMutation();
 
 
-  const sellerBankId = 0
+  const sellerBankId = 1
   const { data: sellerBank,
     // isFetching,isLoading, error
   } = useSellerGetBankQuery(sellerBankId);
@@ -360,7 +459,7 @@ export const DemoApi = () => {
   const {  } = useVendorAddMutation();
 
 
-  const vendorId = 0
+  const vendorId = 1
   const { data: vendor,
     // isFetching,isLoading, error
   } = useVendorQuery(vendorId);
@@ -384,8 +483,13 @@ export const DemoApi = () => {
     // handleSubmitChangePass(e);
     // handleBuyerBasketAdd(e);
     // handleBuyerBasketDelete(e);
+    handleBuyerChangeInfo(e);
+    handleBuyerAddFavorite(e);
+    // handleBuyerDeleteFavorite(e);
     // handleOrderMake(e);
-
+    // handleCategoryAdd(e);
+    // handleCategoryDelete(e);
+    // handleCategoryChange(e);
 
   }
   return (

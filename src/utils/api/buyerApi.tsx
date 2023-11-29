@@ -17,23 +17,26 @@ export const buyerApi = createApi({
   tagTypes: ['BuyerControl'],
   endpoints: (build) => ({
     // Получение списка покупателей, доступ для админа
-    // body {
+    // params {
     // "minId": integer,
     // "pageSize": integer,
     // }
     buyerAllMembers: build.query({
-      query: () => '/buyer/',
+      query: ({minId, pageSize}) => ({
+        url: `/buyer?minId=${minId}&pageSize=${pageSize}`,
+      }),
     }),
-    // Обновление данных о себе покупателем
+    // Обновление данных о себе покупателем.
     // body {
     // "email": "string",
     // "name": "string",
     // "phone": "string"
     // }
     buyerChangeInfo: build.mutation( {
-      query: () => ({
-        url: '/buyer/',
+      query: (body) => ({
+        url: '/buyer',
         method: 'PATCH',
+        body,
       }),
     }),
     // Получение покупателя по id, доступ для покупателя и админа
@@ -44,14 +47,14 @@ export const buyerApi = createApi({
     buyerFavorites: build.query({
       query: () => '/buyer/favorites/',
     }),
-    // Добавление товара в избранное
+    // Добавление товара в избранное. Покупатель
     buyerAddFavorites: build.mutation({
       query: (productId) => ({
         url: `/buyer/favorites/${productId}/`,
         method: 'POST',
       }),
     }),
-    // Удаление товара из избранное
+    // Удаление товара из избранное. Покупатель
     buyerDeleteFavorites: build.mutation({
       query: (productId) => ({
         url: `/buyer/favorites/${productId}/`,

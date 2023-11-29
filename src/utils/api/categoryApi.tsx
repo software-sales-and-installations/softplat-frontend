@@ -26,9 +26,10 @@ export const categoryApi = createApi({
     //  "name": "string"
     //}
     categoryAdd: build.mutation( {
-      query: () => ({
+      query: (body) => ({
         url: '/category/',
         method: 'POST',
+        body,
       }),
     }),
     // Получение категории по id
@@ -48,9 +49,10 @@ export const categoryApi = createApi({
     //  "name": "string"
     //}
     categoryChange: build.mutation({
-      query: (catId) => ({
+      query: ({catId, body}) => ({
         url: `/category/${catId}`,
         method: 'PATCH',
+        body,
       }),
     }),
   }),

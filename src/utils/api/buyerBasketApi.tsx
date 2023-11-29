@@ -25,8 +25,8 @@ export const buyerBasketApi = createApi({
 // "installation": boolean,
 // }
     buyerBasketAddItem: build.mutation( {
-      query: (productId) => ({
-        url: `/buyer/basket/${productId}/`,
+      query: ({productId, installation}) => ({
+        url: `/buyer/basket/${productId}?installation=${installation}`,
         method: 'POST',
       }),
     }),
