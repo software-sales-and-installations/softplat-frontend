@@ -30,6 +30,10 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
 
   return (
     <div className={styles.card}>
+        <Link
+          to={`/product/${card.id}`}
+          className={styles.card__link}
+        >
       <div className={styles.card__img}>
         <img src={card.image?.url} alt="Изображение продукта" />
         <button
@@ -72,13 +76,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
           )}
         </button>
       </div>
-      <Link
-        to={`/product/${card.id}`}
-        title={card.name}
-        className={styles.card__name}
-        // id={`${id}`}
-      >
-        {card.name}
+      <p className={styles.card__name} title={card.name}>{card.name}</p>
       </Link>
       <div className={styles.card__priceContainer}>
         <p className={styles.card__price}>{addSpace(card.price)} ₽</p>
