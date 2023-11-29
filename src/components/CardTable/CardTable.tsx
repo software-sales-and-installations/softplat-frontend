@@ -2,13 +2,20 @@ import {FC} from 'react';
 import styles from './CardTable.module.scss';
 import classNames from 'classnames';
 import { IProductCardPropsTable } from '../ProductCard/ProductCardTypes';
+import {  useAppSelector } from '../../services/redux/store';
+import { selectUser } from '../../services/redux/slices/user/user';
+import { useForm } from "react-hook-form";
 
 export const CardTable: FC<IProductCardPropsTable> =({products}) =>{
+	const user = useAppSelector(selectUser);
+    const { register, handleSubmit } = useForm({});
     return(
+        <form onSubmit={handleSubmit(data => console.log(data))}>
         <table>
             <thead>
                 <tr className={classNames(styles.line, styles.line_type_head)}>
-                    <th className={classNames(styles.cellLogo, styles.cell)}>Лого</th>
+                    {user.role==='ADMIN'? <th className={classNames(styles.cellLogo, styles.cell)}>Выбрать</th>: null}
+                    {user.role==='SELLER'? <th className={classNames(styles.cellLogo, styles.cell)}>Лого</th> : null}
                     <th className={classNames(styles.cellName, styles.cell)}>Название</th>
                     <th className={classNames(styles.cellVendorCategory, styles.cell)}>Вендор</th>
                     <th className={classNames(styles.cellVendorCategory, styles.cell)}>Категория</th>
@@ -18,13 +25,17 @@ export const CardTable: FC<IProductCardPropsTable> =({products}) =>{
                     <th className={classNames(styles.cellRed, styles.cell)}>Ред</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody>    
                 {products.map((item)=>{
                     return(
-                        <tr className={classNames(styles.line, styles.line_type_body)} key={item.id}>
-                            <td className={classNames(styles.cellLogo, styles.cell)}>
+                        <tr key={item.id} className={classNames(styles.line, styles.line_type_body)} >
+                            {user.role==='ADMIN'?
+                            <td className={classNames(styles.cellLogo, styles.cell, styles.cell_type_checkbox)}>
+                                <input type='checkbox' {...register("id")}  value={item.id}></input>
+                            </td> : null}
+                            {user.role==='SELLER'?<td className={classNames(styles.cellLogo, styles.cell)}>
                                 <img className={classNames(styles.cellLogo__img, styles.cell)} src={item.seller?.imageResponseDto.url} alt={item.name}/>
-                            </td>
+                            </td> : null}
                             <td className={classNames(styles.cellName, styles.cell)}>
                                 <p className={styles.cell__text}>{item.name}</p>
                             </td>
@@ -47,9 +58,14 @@ export const CardTable: FC<IProductCardPropsTable> =({products}) =>{
                                 <button className={styles.redBtn} type='button'/>
                             </td>
                         </tr>
-                    )
-                })}
+                    )})}
             </tbody>
         </table>
+        {user.role==='ADMIN'?
+        <div className={styles.cardtable__btncontainer}>
+            <button className={styles.cardtable__btn} type='submit'>Удалить</button>
+            <button className={styles.cardtable__btn} type='submit'>Отправить на доработку</button>
+        </div>: null}
+        </form>
     )
 }
