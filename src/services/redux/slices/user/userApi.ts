@@ -5,8 +5,7 @@ import {
 } from '../../../../UI/Popup/PopupTypes';
 
 const API_REG_URL = `${API_BASE_URL}/registration`;
-const API_AUTH_URL = `${API_BASE_URL}/auth/login`
-
+const API_AUTH_URL = `${API_BASE_URL}/auth/login`;
 
 const checkRes = (res: Response) => {
 	if (res.ok) {
