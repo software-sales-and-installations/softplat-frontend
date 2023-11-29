@@ -11,7 +11,6 @@ import { useAppDispatch } from '../../services/redux/store';
 import {useEffect, useState} from 'react';
 import { useAppSelector } from '../../services/redux/store';
 import { selectUser } from '../../services/redux/slices/user/user';
-import { signout } from '../SignOutPopup/SignOutPopupSlice';
 import { RootState } from '../../services/redux/store';
 
 

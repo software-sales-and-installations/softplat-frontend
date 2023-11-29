@@ -34,6 +34,7 @@ export const PopupForAuth: FC = () => {
 		.then((userData) => {
 		  localStorage.setItem('token', userData.token);
 		  localStorage.setItem('role', userData.role);
+		  localStorage.setItem('email', userData.email)
 		  console.log(userData)
 		  dispatch(popupState(false))
 		  dispatch(setUser(userData));

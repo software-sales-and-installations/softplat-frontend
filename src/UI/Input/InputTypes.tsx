@@ -9,7 +9,8 @@ export enum InputTypes {
 	orgName='orgName',
 	remember='checkbox',
 	name = 'name',
-	phone = 'phone'
+	phone = 'phone',
+	oldpassword='oldpassword'
 }
 
 export enum InputColors {

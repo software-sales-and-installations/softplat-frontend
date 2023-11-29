@@ -1,5 +1,5 @@
 export interface ISettingPassword{
     password: string;
-    newPassword: string;
+    oldpassword: string;
     confirmPassword: string;
 }
