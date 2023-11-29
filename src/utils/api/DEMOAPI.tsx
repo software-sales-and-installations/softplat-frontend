@@ -384,7 +384,7 @@ export const DemoApi = () => {
   };
 
 
-//Image
+////////////////////////////////////////Image
   const imageId = 1
   const { data: image,
     // isFetching,isLoading, error
@@ -401,44 +401,163 @@ export const DemoApi = () => {
   // console.log('product:')
   // console.log(product)
 
+  const min = 5
+  const max = 10
+  const sort = 'NEWEST'
+  const sortInfo = {
+    "categories": [
+      0
+    ],
+    "countries": [
+      "CHINA"
+    ],
+    "licenses": [
+      "DEMO"
+    ],
+    "priceMax": 0,
+    "priceMin": 0,
+    "sellerIds": [
+      0
+    ],
+    "text": "string",
+    "vendorIds": [
+      0
+    ]
+  }
   // @ts-ignore
-  const { data: productList, isFetching: isProductListFetching,isLoading: isProductListLoading, error: productListErr } = usePublicProductListQuery();
+  const { data: productList, isFetching: isProductListFetching,isLoading: isProductListLoading, error: productListErr } = usePublicProductListQuery({minId: min, pageSize: max, sort: sort, body: sortInfo});
   // console.log('productList:')
   // console.log(productList)
 
+
 ///////////////////////////////////////////////////Seller
+
+  const sellerMin = 3
+  const sellerMax = 12
   // @ts-ignore
-  // const { data: orderAll, isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllErr } = useSellerAllMembersQuery();
+  const { data: sellerAll,
+    // isFetching,isLoading, error
+  } = useSellerAllMembersQuery({minId: sellerMin, pageSize: sellerMax});
+  // console.log('productList:')
+  // console.log(productList)
 
-
-  const {  } = useSellerChangeDataMutation();
-
-
-  const {  } = useSellerDeletePhotoByAdminMutation();
+  const sellerNewData = {
+    "email": "seller2@mail.ru",
+    "name": "seller2",
+    "phone": "5556667777"
+  }
+  const [sellerChange, {
+    // isFetching, isLoading, isError
+  }] = useSellerChangeDataMutation();
+  const handleSellerChangeData = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    sellerChange(sellerNewData).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
 
 
   const sellerId = 1
+  const [sellerDeletePhotoByAdmin, {
+    // isFetching, isLoading, isError
+  }] = useSellerDeletePhotoByAdminMutation();
+  const handleSellerDeletePhotoByAdmin = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    sellerDeletePhotoByAdmin(sellerId).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
+
   const { data: sellerInfo,
     // isFetching,isLoading, error
   } = useSellerInfoQuery(sellerId);
   // console.log('sellerInfo:')
   // console.log(sellerInfo)
 
-  const {  } = useSellerAddPhotoMutation();
-  const {  } = useSellerDeletePhotoMutation();
-  const {  } = useSellerDeleteBankMutation();
-  const {  } = useSellerChangeBankMutation();
+  const imgUrl = 'https://unsplash.com/photos/a-decorated-christmas-tree-in-a-living-room-NFfBlixWJLk'
+  const [sellerAddPhoto, {
+    // isFetching, isLoading, isError
+  }] = useSellerAddPhotoMutation();
+  const handleSellerAddPhoto = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    sellerAddPhoto(imgUrl).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
 
 
-  const sellerBankId = 1
+  const [sellerDeletePhoto, {
+    // isFetching, isLoading, isError
+  }] = useSellerDeletePhotoMutation();
+  const handleSellerDeletePhoto = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    sellerDeletePhoto().unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
+
+
+  const [sellerDeleteBank, {
+    // isFetching, isLoading, isError
+  }] = useSellerDeleteBankMutation();
+  const handleSellerDeleteBank = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    sellerDeleteBank(imgUrl).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
+
+  const bank = '12345678900'
+  const [sellerChangeBank, {
+    // isFetching, isLoading, isError
+  }] = useSellerChangeBankMutation();
+  const handleSellerChangeBank = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    sellerChangeBank(bank).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
+
+
   const { data: sellerBank,
     // isFetching,isLoading, error
-  } = useSellerGetBankQuery(sellerBankId);
+  } = useSellerGetBankQuery(sellerId);
   // console.log('sellerBank:')
   // console.log(sellerBank)
 
 
 /////////////////////////////////////////UserProduct
+
   const {  } = useProductCreateMutation();
   const {  } = useProductDeleteMutation();
   const {  } = useProductDeleteImageMutation();
@@ -490,6 +609,13 @@ export const DemoApi = () => {
     // handleCategoryAdd(e);
     // handleCategoryDelete(e);
     // handleCategoryChange(e);
+    // handleSellerChangeData;
+    // handleSellerDeletePhotoByAdmin;
+    // handleSellerAddPhoto;
+    // handleSellerDeletePhoto;
+    // handleSellerDeleteBank;
+    // handleSellerDeleteBank;
+    // handleSellerChangeBank;
 
   }
   return (

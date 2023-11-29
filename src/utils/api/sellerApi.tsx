@@ -19,7 +19,7 @@ export const sellerApi = createApi({
     // Список продавцов
     // pageSize def 20
     sellerAllMembers: build.query({
-      query: () => '/seller/',
+      query: ({minId, pageSize}) => `/seller?minId=${minId}&pageSize=${pageSize}`,
       // providesTags: ['Seller'],
     }),
     // Обновление данных о себе продавцом
@@ -50,9 +50,10 @@ export const sellerApi = createApi({
     //   "image": "string",
     // }
     sellerAddPhoto: build.mutation({
-      query: () => ({
+      query: (body) => ({
         url: '/seller/account/image/',
         method: 'POST',
+        body,
       }),
     }),
     // Удаление изображения своего профиля продавцом
