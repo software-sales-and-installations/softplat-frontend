@@ -64,9 +64,9 @@ import React from 'react';
 
 
 export const DemoApi = () => {
-  const adminToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjJAYWRtaW4ucnUiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MDEyMDAzNDUsImV4cCI6MTcwMTIwMjE0NX0.YuvHQ_8iNaii_jd6rOP1z_mBWbrTCfhQO83spME8v0A"
+  const adminToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjJAYWRtaW4ucnUiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MDEyMTMyNzIsImV4cCI6MTcwMTIxNTA3Mn0.Cvfs1fjSYgNv0vUSP0SYKrjCQGBcN1bJ_EH-pVH_TDQ"
   localStorage.setItem('token', adminToken)
-  // const buyerToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJidXllckBidXllci5ydSIsInJvbGUiOiJCVVlFUiIsImlhdCI6MTcwMTE3MDk4MiwiZXhwIjoxNzAxMTcyNzgyfQ.nAqy5BNOhXoodmYgJZhB5pc78UwrW6XHXxSuOn1AkqE'
+  // const buyerToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwdXBhQHB1cGEucnUiLCJyb2xlIjoiQlVZRVIiLCJpYXQiOjE3MDEyMTIyMjksImV4cCI6MTcwMTIxNDAyOX0.3PJ0ioVAkJbt3gy_9Gz_ESVgfgvLgVbUImF_FHIUNOo'
   // localStorage.setItem('token', buyerToken)
 
 
@@ -177,17 +177,17 @@ export const DemoApi = () => {
 
   const {} = useBuyerChangeInfoMutation();
 
-  const id = 1
+  const id = 0
   const {data: buyerInfo,
     // isFetching: isBuyerInfoFetching,isLoading: isBuyerInfoLoading, error: buyerInfoError
   } = useBuyerInfoQuery(id);
-  console.log('buyerInfo:')
-  console.log(buyerInfo)
+  // console.log('buyerInfo:')
+  // console.log(buyerInfo)
 
 // @ts-ignore
   const {data: buyerFavourite, isFetching: isBuyerFavouriteFetching,isLoading: isBuyerFavouriteLoading, error: buyerFavouriteError} = useBuyerFavoritesQuery();
-  console.log('buyerFavourite:')
-  console.log(buyerFavourite)
+  // console.log('buyerFavourite:')
+  // console.log(buyerFavourite)
 
   const {} = useBuyerAddFavoritesMutation();
 
@@ -196,20 +196,46 @@ export const DemoApi = () => {
 //////////////////////////////////////BuyerBasket
 // @ts-ignore
   const {data: buyerBasketInfo, isFetching: isBuyerBasketInfoFetching,isLoading: isBuyerBasketInfoLoading, error: buyerBuyerBasketInfoError} = useBuyerBasketInfoQuery();
-  console.log('buyerBasketInfo:')
-  console.log(buyerBasketInfo)
+  // console.log('buyerBasketInfo:')
+  // console.log(buyerBasketInfo)
 
+  const addProductId = 0
+  const [buyerBasketAdd, {
+    // isFetching, isLoading, isError
+  }] = useBuyerBasketAddItemMutation();
+  const handleBuyerBasketAdd = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    buyerBasketAdd(addProductId).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
 
-  const {} = useBuyerBasketAddItemMutation();
+  const [buyerBasketDelete, {
+    // isFetching, isLoading, isError
+  }] = useBuyerBasketDeleteItemMutation();
+  const handleBuyerBasketDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    buyerBasketDelete(addProductId).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
 
-
-  const {} = useBuyerBasketDeleteItemMutation();
 
 //////////////////////////////////////BuyerOrder
 // @ts-ignore
   const {data: orderAll, isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllError} = useOrderAllQuery();
-  console.log('orderAll:')
-  console.log(orderAll)
+  // console.log('orderAll:')
+  // console.log(orderAll)
 
   const basket = {
     "basketPositionIds": [
@@ -231,28 +257,28 @@ export const DemoApi = () => {
       .finally()
   };
 
-  const idOrderInfo = 1
+  const idOrderInfo = 0
   const {data: orderInfo,
     // isFetching: isOrderInfoFetching,isLoading: isOrderInfoLoading, error: orderInfoError
   } = useOrderInfoQuery(idOrderInfo);
-  console.log('orderInfo:')
-  console.log(orderInfo)
+  // console.log('orderInfo:')
+  // console.log(orderInfo)
 
 /////////////////////////////////////////Category
 // @ts-ignore
   const {data: categoryList, isFetching: isCategoryListFetching,isLoading: isCategoryListLoading, error: categoryListErr} = useCategoryListQuery();
-  console.log('categoryList:')
-  console.log(categoryList)
+  // console.log('categoryList:')
+  // console.log(categoryList)
 
   const {} = useCategoryAddMutation();
 
 
- const catId = 1
+ const catId = 0
   const {data: categoryQuery,
     // isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllErr
   } = useCategoryQuery(catId);
-  console.log('categoryQuery:')
-  console.log(categoryQuery)
+  // console.log('categoryQuery:')
+  // console.log(categoryQuery)
 
   const {} = useCategoryDeleteMutation();
 
@@ -260,26 +286,26 @@ export const DemoApi = () => {
   const {} = useCategoryChangeMutation();
 
 //Image
-  const imageId = 1
+  const imageId = 0
   const { data: image,
     // isFetching,isLoading, error
   } = useImageQuery(imageId);
-  console.log('image:')
-  console.log(image)
+  // console.log('image:')
+  // console.log(image)
 
 
 /////////////////////////////////////PublicProduct
-  const productId = 1
+  const productId = 0
   const { data: product,
     // isFetching,isLoading, error
   } = usePublicProductQuery(productId);
-  console.log('product:')
-  console.log(product)
+  // console.log('product:')
+  // console.log(product)
 
   // @ts-ignore
   const { data: productList, isFetching: isProductListFetching,isLoading: isProductListLoading, error: productListErr } = usePublicProductListQuery();
-  console.log('productList:')
-  console.log(productList)
+  // console.log('productList:')
+  // console.log(productList)
 
 ///////////////////////////////////////////////////Seller
   // @ts-ignore
@@ -292,12 +318,12 @@ export const DemoApi = () => {
   const {  } = useSellerDeletePhotoByAdminMutation();
 
 
-  const sellerId = 1
+  const sellerId = 0
   const { data: sellerInfo,
     // isFetching,isLoading, error
   } = useSellerInfoQuery(sellerId);
-  console.log('sellerInfo:')
-  console.log(sellerInfo)
+  // console.log('sellerInfo:')
+  // console.log(sellerInfo)
 
   const {  } = useSellerAddPhotoMutation();
   const {  } = useSellerDeletePhotoMutation();
@@ -305,12 +331,12 @@ export const DemoApi = () => {
   const {  } = useSellerChangeBankMutation();
 
 
-  const sellerBankId = 1
+  const sellerBankId = 0
   const { data: sellerBank,
     // isFetching,isLoading, error
   } = useSellerGetBankQuery(sellerBankId);
-  console.log('sellerBank:')
-  console.log(sellerBank)
+  // console.log('sellerBank:')
+  // console.log(sellerBank)
 
 
 /////////////////////////////////////////UserProduct
@@ -334,12 +360,12 @@ export const DemoApi = () => {
   const {  } = useVendorAddMutation();
 
 
-  const vendorId = 1
+  const vendorId = 0
   const { data: vendor,
     // isFetching,isLoading, error
   } = useVendorQuery(vendorId);
-  console.log('vendor:')
-  console.log(vendor)
+  // console.log('vendor:')
+  // console.log(vendor)
 
   const {  } = useVendorDeleteMutation();
   const {  } = useVendorChangeMutation();
@@ -356,9 +382,12 @@ export const DemoApi = () => {
     // handleSubmitRegister(e);
     // handleSubmitLogout(e);
     // handleSubmitChangePass(e);
-    handleOrderMake(e);
+    // handleBuyerBasketAdd(e);
+    // handleBuyerBasketDelete(e);
+    // handleOrderMake(e);
 
-   }
+
+  }
   return (
   <div>
     <h1>DEMO API</h1>

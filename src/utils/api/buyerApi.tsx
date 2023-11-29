@@ -23,7 +23,6 @@ export const buyerApi = createApi({
     // }
     buyerAllMembers: build.query({
       query: () => '/buyer/',
-      // providesTags: ['BuyerControl'],
     }),
     // Обновление данных о себе покупателем
     // body {

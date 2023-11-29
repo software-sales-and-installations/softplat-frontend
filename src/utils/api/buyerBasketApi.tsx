@@ -19,7 +19,6 @@ export const buyerBasketApi = createApi({
   // Просмотр своей корзины
   buyerBasketInfo: build.query({
   query: () => '/buyer/basket/',
-  // providesTags: ['BuyerBasket'],
 }),
 // Добавление продукта в свою карзину
 // Body {
