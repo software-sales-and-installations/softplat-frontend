@@ -13,6 +13,7 @@ import { Producers } from './pages/Producers/Producers.tsx';
 import { ShoppingCart } from './pages/ShoppingCart/ShoppingCart.tsx';
 import Search from './pages/Search/Search.tsx';
 import { Seller } from './pages/Seller/Seller.tsx';
+import { Admin } from './pages/Admin/Admin.tsx';
 // import { ProtectedRouteForAdmin, ProtectedRouteForBuyer, ProtectedRouteForSeller } from './components/ProtectedRoute/ProtectedRoute.tsx';
 
 function App() {
@@ -63,14 +64,14 @@ function App() {
             path="/admin/*" 
             element={
               //<ProtectedRouteForAdmin>
-                <></>
+                <Admin/>
               //</ProtectedRouteForAdmin>
             } />
           <Route 
             path="/admin" 
             element={
               //<ProtectedRouteForAdmin>
-                <Navigate to="/admin/product-cards" />
+                <Navigate to="/admin/products" />
               //</ProtectedRouteForAdmin>
             } />
         </Routes>

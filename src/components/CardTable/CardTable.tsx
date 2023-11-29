@@ -1,10 +1,10 @@
 import {FC} from 'react';
-import styles from './SellerExistingCardTable.module.scss';
+import styles from './CardTable.module.scss';
 import { SellerExistingCard } from '../../utils/constants';
 import classNames from 'classnames';
+import { CardsGridProps } from '../CardsGrid/CardsGridTypes';
 
-
-export const SellerExistingCardTable: FC =() =>{
+export const CardTable: FC<CardsGridProps> =(SellerExistingCard) =>{
     return(
         <table>
             <thead>
