@@ -747,8 +747,25 @@ export const DemoApi = () => {
 
 //////////////////////////////////////////////////////////////Vendor///////////////////////////////
 
-  const {  } = useVendorAddMutation();
-
+  const vendor = {
+    "country": "CHINA",
+    "description": "good vendor",
+    "name": "CatWife"
+  }
+  const [vendorAdd, {
+    // isFetching, isLoading, isError
+  }] = useVendorAddMutation();
+  const handleVendorAdd = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    vendorAdd(vendor).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
 
   const vendorId = 1
   const { data: vendor,
@@ -757,26 +774,79 @@ export const DemoApi = () => {
   // console.log('vendor:')
   // console.log(vendor)
 
-  const [sellerChangeBank, {
+  const [vendorDelete, {
     // isFetching, isLoading, isError
   }] = useVendorDeleteMutation();
+  const handleVendorDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    vendorDelete(vendorId).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
 
-  const [sellerChangeBank, {
+  const vendorNew = {
+    "country": "Japan",
+    "description": "good quality",
+    "name": "Really good"
+  }
+  const [vendorChange, {
     // isFetching, isLoading, isError
   }] = useVendorChangeMutation();
+  const handleVendorChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    vendorChange({vendorId: vendorId, body: vendorNew}).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
 
-  const [sellerChangeBank, {
+  const vendorImg = {
+  "image": 'https://unsplash.com/photos/an-empty-road-in-the-middle-of-nowhere-5It7Ibn1fT0',
+  }
+  const [vendorAddImage, {
     // isFetching, isLoading, isError
   }] = useVendorAddImageMutation();
+  const handleVendorChangeImage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    vendorAddImage({vendorId: vendorId, body: vendorImg}).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
 
-  const [sellerChangeBank, {
+  const [vendorDeleteImage, {
     // isFetching, isLoading, isError
   }] = useVendorDeleteImageMutation();
+  const handleVendorDeleteImage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    vendorDeleteImage(vendorId).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
 
-
-  // @ts-ignore
-  // const { data: orderAll, isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllErr } = useVendorListQuery();
-
+  const { data: vendorAll,
+    // isFetching,isLoading, error
+  } = useVendorListQuery(vendorId);
+  // console.log('vendorAll:')
+  // console.log(vendorAll)
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     // handleSubmitLogin(e);
@@ -807,8 +877,12 @@ export const DemoApi = () => {
     // handleProductUpdate;
     // handleProductDeleteOwnCard;
     // handleProductDeleteOwnCardImage;
-
+    // handleVendorAdd;
+    // handleVendorDelete;
+    // handleVendorChange;
+    // handleVendorChangeImage;
   }
+
   return (
   <div>
     <h1>DEMO API</h1>

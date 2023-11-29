@@ -22,9 +22,10 @@ export const vendorApi = createApi({
     //   "name": "string"
     // }
     vendorAdd: build.mutation({
-      query: () => ({
+      query: (body) => ({
         url: '/vendor/',
         method: 'POST',
+        body,
       }),
     }),
     // Получение вендора по Id
@@ -46,9 +47,10 @@ export const vendorApi = createApi({
     //   "name": "string"
     // }
     vendorChange: build.mutation({
-      query: (vendorId) => ({
+      query: ({vendorId, body}) => ({
         url: `/vendor/${vendorId}/`,
         method: 'PATCH',
+        body,
       }),
     }),
     // Добавление/обновление изображения вендора. Для админа
@@ -56,9 +58,10 @@ export const vendorApi = createApi({
     // "image": string
     // }
     vendorAddImage: build.mutation({
-      query: (vendorId) => ({
+      query: ({vendorId, body}) => ({
         url: `/vendor/${vendorId}/image/`,
         method: 'POST',
+        body,
       }),
     }),
     // Удаление изображения вендора. Для админа
