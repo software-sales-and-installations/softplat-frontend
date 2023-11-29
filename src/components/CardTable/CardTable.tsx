@@ -1,10 +1,9 @@
 import {FC} from 'react';
 import styles from './CardTable.module.scss';
-import { SellerExistingCard } from '../../utils/constants';
 import classNames from 'classnames';
-import { CardsGridProps } from '../CardsGrid/CardsGridTypes';
+import { IProductCardPropsTable } from '../ProductCard/ProductCardTypes';
 
-export const CardTable: FC<CardsGridProps> =(SellerExistingCard) =>{
+export const CardTable: FC<IProductCardPropsTable> =({products}) =>{
     return(
         <table>
             <thead>
@@ -20,29 +19,29 @@ export const CardTable: FC<CardsGridProps> =(SellerExistingCard) =>{
                 </tr>
             </thead>
             <tbody>
-                {SellerExistingCard.map((card)=>{
+                {products.map((item)=>{
                     return(
-                        <tr className={classNames(styles.line, styles.line_type_body)} key={card.id}>
+                        <tr className={classNames(styles.line, styles.line_type_body)} key={item.id}>
                             <td className={classNames(styles.cellLogo, styles.cell)}>
-                                <img className={classNames(styles.cellLogo__img, styles.cell)} src={card.logo} alt={card.name}/>
+                                <img className={classNames(styles.cellLogo__img, styles.cell)} src={item.seller?.imageResponseDto.url} alt={item.name}/>
                             </td>
                             <td className={classNames(styles.cellName, styles.cell)}>
-                                <p className={styles.cell__text}>{card.name}</p>
+                                <p className={styles.cell__text}>{item.name}</p>
                             </td>
                             <td className={classNames(styles.cellVendorCategory, styles.cell)}>
-                                <p className={styles.cell__text}>{card.vendor}</p>
+                                <p className={styles.cell__text}>{item.vendor?.name? item.vendor.name: ''}</p>
                             </td>
                             <td className={classNames(styles.cellVendorCategory, styles.cell)}>
-                                <p className={styles.cell__text}>{card.category}</p>
+                                <p className={styles.cell__text}>{item.category?.name? item.category.name : ''}</p>
                             </td>
                             <td className={classNames(styles.cellArt, styles.cell)}>
-                                <p className={styles.cell__text}>{card.art}</p>
+                                <p className={styles.cell__text}>{item.id}</p>
                             </td>
                             <td className={classNames(styles.cellDescription, styles.cell)}>
-                                <p className={styles.cell__text}>{card.description}</p>
+                                <p className={styles.cell__text}>{item.description}</p>
                             </td>
                             <td className={classNames(styles.cellData, styles.cell)}>
-                                <p className={styles.cell__text}>{card.data}</p>
+                                <p className={styles.cell__text}>{item.date}</p>
                             </td>
                             <td className={classNames(styles.cellRed, styles.cell)}>
                                 <button className={styles.redBtn} type='button'/>

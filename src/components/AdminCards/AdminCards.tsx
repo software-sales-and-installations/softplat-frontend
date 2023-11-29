@@ -3,6 +3,7 @@ import {FC} from 'react';
 import { useState } from 'react';
 import classNames from 'classnames';
 import { CardTable } from '../CardTable/CardTable';
+import { SellerExistingCard } from '../../utils/constants';
 
 export const AdminCards: FC = () =>{
     const [activeBtn, setActiveBtn] = useState('productCards');
@@ -42,7 +43,7 @@ export const AdminCards: FC = () =>{
                 Статус
                 </button>
         </nav>
-        {activeBtn === 'productCards' ? <CardTable/>: null}
+        {activeBtn === 'productCards' ? <CardTable products={SellerExistingCard.products}/>: null}
         </section>
     )
 }
