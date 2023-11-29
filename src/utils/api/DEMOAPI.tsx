@@ -70,11 +70,14 @@ export const DemoApi = () => {
   localStorage.setItem('token', buyerToken)
 
 
-/////////////////////////Admin
+///////////////////////////////////////////Admin//////////////////////////////////////////////////
+
 // @ts-ignore
   const { data: adminData, isFetching: isAdminFetching,isLoading: isAdminLoading, error: adminError } = useAdminInfoQuery();
 
-//////////////////////////Auth
+
+/////////////////////////////////////////////Auth/////////////////////////////////////////////////
+
   const loginData = {
     confirmPassword: "Pupa321!",
     email: "pupa@pupa.ru",
@@ -169,7 +172,9 @@ export const DemoApi = () => {
 .finally()
   };
 
-///////////////////////////////////Buyer
+
+////////////////////////////////////////////Buyer////////////////////////////////////////////////////
+
 // @ts-ignore
   const limit = 10;
   const start = 0;
@@ -243,7 +248,8 @@ export const DemoApi = () => {
   };
 
 
-//////////////////////////////////////BuyerBasket
+//////////////////////////////////////BuyerBasket//////////////////////////////////////////////
+
 // @ts-ignore
   const {data: buyerBasketInfo, isFetching: isBuyerBasketInfoFetching,isLoading: isBuyerBasketInfoLoading, error: buyerBuyerBasketInfoError} = useBuyerBasketInfoQuery();
   // console.log('buyerBasketInfo:')
@@ -282,7 +288,8 @@ export const DemoApi = () => {
   };
 
 
-//////////////////////////////////////BuyerOrder
+//////////////////////////////////////BuyerOrder///////////////////////////////////////////////
+
 // @ts-ignore
   const {data: orderAll, isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllError} = useOrderAllQuery();
   // console.log('orderAll:')
@@ -315,7 +322,9 @@ export const DemoApi = () => {
   // console.log('orderInfo:')
   // console.log(orderInfo)
 
-/////////////////////////////////////////Category
+
+/////////////////////////////////////////Category/////////////////////////////////////////////
+
   // @ts-ignore
   const {data: categoryList, isFetching: isCategoryListFetching,isLoading: isCategoryListLoading, error: categoryListErr} = useCategoryListQuery();
   // console.log('categoryList:')
@@ -384,7 +393,8 @@ export const DemoApi = () => {
   };
 
 
-////////////////////////////////////////Image
+////////////////////////////////////////Image////////////////////////////////////////////////////////
+
   const imageId = 1
   const { data: image,
     // isFetching,isLoading, error
@@ -393,7 +403,8 @@ export const DemoApi = () => {
   // console.log(image)
 
 
-/////////////////////////////////////PublicProduct
+/////////////////////////////////////PublicProduct//////////////////////////////////////////////////
+
   const productId = 1
   const { data: product,
     // isFetching,isLoading, error
@@ -430,7 +441,7 @@ export const DemoApi = () => {
   // console.log(productList)
 
 
-///////////////////////////////////////////////////Seller
+///////////////////////////////////////////////////Seller//////////////////////////////////////////////
 
   const sellerMin = 3
   const sellerMax = 12
@@ -484,7 +495,9 @@ export const DemoApi = () => {
   // console.log('sellerInfo:')
   // console.log(sellerInfo)
 
-  const imgUrl = 'https://unsplash.com/photos/a-decorated-christmas-tree-in-a-living-room-NFfBlixWJLk'
+  const imgUrl = {
+    image: 'https://unsplash.com/photos/a-decorated-christmas-tree-in-a-living-room-NFfBlixWJLk'
+  }
   const [sellerAddPhoto, {
     // isFetching, isLoading, isError
   }] = useSellerAddPhotoMutation();
@@ -556,25 +569,184 @@ export const DemoApi = () => {
   // console.log(sellerBank)
 
 
-/////////////////////////////////////////UserProduct
+/////////////////////////////////////////UserProduct////////////////////////////////////////////////////
 
-  const {  } = useProductCreateMutation();
-  const {  } = useProductDeleteMutation();
-  const {  } = useProductDeleteImageMutation();
-  const {  } = useProductAddImageMutation();
-  const {  } = useProductModerateMutation();
-  const {  } = useProductSendToModerationMutation();
-  const {  } = useProductUpdateMutation();
-  const {  } = useProductDeleteOwnCardMutation();
-  const {  } = useProductDeleteOwnCardImageMutation();
+  const productData = {
+      "category": 0,
+      "description": "Вау",
+      "installation": true,
+      "installationPrice": 0,
+      "license": "DEMO",
+      "name": "Чудоштука",
+      "price": 0,
+      "quantity": 0,
+      "vendor": 0,
+      "version": "3"
+    }
+  const [productCreate, {
+    // isFetching, isLoading, isError
+  }] = useProductCreateMutation();
+  const handleProductCreate = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    productCreate(productData).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
+
+  const product2Id = 1
+  const [productDelete, {
+    // isFetching, isLoading, isError
+  }] = useProductDeleteMutation();
+  const handleProductDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    productDelete(product2Id).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
+
+  const [productDeleteImage, {
+    // isFetching, isLoading, isError
+  }] = useProductDeleteImageMutation();
+  const handleProductDeleteImage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    productDeleteImage(product2Id).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
+
+  const productNewImg = {
+    image: 'https://unsplash.com/photos/a-couple-of-tall-buildings-with-lots-of-windows-duj9YsiNKvM'
+  }
+  const [productAddImage, {
+    // isFetching, isLoading, isError
+  }] = useProductAddImageMutation();
+  const handleProductAddImage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    productAddImage({productId: product2Id, body: productNewImg}).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
+
+  const status = "DRAFT"
+  const [productModerate, {
+    // isFetching, isLoading, isError
+  }] = useProductModerateMutation();
+  const handleProductModerate = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    productModerate({productId: product2Id, status: status}).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
+
+  const [productSendToModeration, {
+    // isFetching, isLoading, isError
+  }] = useProductSendToModerationMutation();
+  const handleProductSendToModeration = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    productSendToModeration(product2Id).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
+
+  const updatedProd = {
+      "category": 0,
+      "description": "test description",
+      "installation": true,
+      "installationPrice": 0,
+      "license": "DEMO",
+      "name": "Test Prod Name",
+      "price": 7,
+      "quantity": 10000,
+      "vendor": 0,
+      "version": "string"
+  }
+  const [productUpdate, {
+    // isFetching, isLoading, isError
+  }] = useProductUpdateMutation();
+  const handleProductUpdate = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    productUpdate({productId: product2Id, body: updatedProd}).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
+
+  const [productDeleteOwnCard, {
+    // isFetching, isLoading, isError
+  }] = useProductDeleteOwnCardMutation();
+  const handleProductDeleteOwnCard = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    productDeleteOwnCard(productId).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
+
+  const [productDeleteOwnCardImage, {
+    // isFetching, isLoading, isError
+  }] = useProductDeleteOwnCardImageMutation();
+  const handleProductDeleteOwnCardImage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    productDeleteOwnCardImage(product2Id).unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
 
 
+  const minShipped = 0
+  const maxShipped = 30
   // @ts-ignore
-  // const { data: orderAll, isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllErr } = useProductListQuery();
+  const { data: orderAll,
+    // isFetching,isLoading, error
+  } = useProductListQuery({minId: minShipped, pageSize: maxShipped});
 
 
 
-/////////////////////////////////////////////Vendor
+//////////////////////////////////////////////////////////////Vendor///////////////////////////////
+
   const {  } = useVendorAddMutation();
 
 
@@ -585,10 +757,21 @@ export const DemoApi = () => {
   // console.log('vendor:')
   // console.log(vendor)
 
-  const {  } = useVendorDeleteMutation();
-  const {  } = useVendorChangeMutation();
-  const {  } = useVendorAddImageMutation();
-  const {  } = useVendorDeleteImageMutation();
+  const [sellerChangeBank, {
+    // isFetching, isLoading, isError
+  }] = useVendorDeleteMutation();
+
+  const [sellerChangeBank, {
+    // isFetching, isLoading, isError
+  }] = useVendorChangeMutation();
+
+  const [sellerChangeBank, {
+    // isFetching, isLoading, isError
+  }] = useVendorAddImageMutation();
+
+  const [sellerChangeBank, {
+    // isFetching, isLoading, isError
+  }] = useVendorDeleteImageMutation();
 
 
   // @ts-ignore
@@ -616,6 +799,14 @@ export const DemoApi = () => {
     // handleSellerDeleteBank;
     // handleSellerDeleteBank;
     // handleSellerChangeBank;
+    // handleProductDelete;
+    // handleProductDeleteImage;
+    // handleProductAddImage;
+    // handleProductModerate;
+    // handleProductSendToModeration;
+    // handleProductUpdate;
+    // handleProductDeleteOwnCard;
+    // handleProductDeleteOwnCardImage;
 
   }
   return (

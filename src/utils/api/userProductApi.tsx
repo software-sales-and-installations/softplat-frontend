@@ -55,9 +55,10 @@ export const userProductApi = createApi({
     // "image" : "string"
     // }
     productAddImage: build.mutation({
-      query: (productId) => ({
+      query: ({productId, body}) => ({
         url: `/product/${productId}/image/create`,
         method: 'POST',
+        body,
       }),
     }),
     // Отклонение/одобрение изображения карточки товара. Доступ для админа
@@ -65,8 +66,8 @@ export const userProductApi = createApi({
     // "status" : DRAFT/PUBLISHED/REJECTED/SHIPPED
     // }
     productModerate: build.mutation({
-      query: (productId) => ({
-        url: `/product/${productId}/moderation`,
+      query: ({productId, status}) => ({
+        url: `/product/${productId}/moderation?status=${status}`,
         method: 'PATCH',
       }),
     }),
@@ -91,9 +92,10 @@ export const userProductApi = createApi({
     //   "version": "string"
     // }
     productUpdate: build.mutation({
-      query: (productId) => ({
+      query: ({productId, body}) => ({
         url: `/product/${productId}/update`,
         method: 'PATCH',
+        body,
       }),
     }),
     // Удаление своей карточки товара
@@ -113,8 +115,8 @@ export const userProductApi = createApi({
     // Получение списка товаров на модерацию. Для админа
     // pageSize def 20
     productList: build.query({
-      query: () => ({
-        url: `/product/shipped/`,
+      query: ({minId, pageSize}) => ({
+        url: `/product/shipped?minId=${minId}&pageSize=${pageSize}`,
       }),
     }),
   }),
