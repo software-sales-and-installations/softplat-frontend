@@ -352,7 +352,7 @@ export const DemoApi = () => {
 
  const catId = 1
   const {data: categoryQuery,
-    // isFetching: isOrderAllFetching,isLoading: isOrderAllLoading, error: orderAllErr
+    // isFetching, isLoading , error
   } = useCategoryQuery(catId);
   // console.log('categoryQuery:')
   // console.log(categoryQuery)
@@ -739,7 +739,7 @@ export const DemoApi = () => {
   const minShipped = 0
   const maxShipped = 30
   // @ts-ignore
-  const { data: orderAll,
+  const { data: productList,
     // isFetching,isLoading, error
   } = useProductListQuery({minId: minShipped, pageSize: maxShipped});
 
