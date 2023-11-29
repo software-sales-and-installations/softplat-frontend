@@ -436,9 +436,9 @@ export const DemoApi = () => {
     ]
   }
   // @ts-ignore
-  const { data: productList, isFetching: isProductListFetching,isLoading: isProductListLoading, error: productListErr } = usePublicProductListQuery({minId: min, pageSize: max, sort: sort, body: sortInfo});
-  // console.log('productList:')
-  // console.log(productList)
+  const { data: publicProductList, isFetching: isPublicProductListFetching,isLoading: isPublicProductListLoading, error: publicProductListErr } = usePublicProductListQuery({minId: min, pageSize: max, sort: sort, body: sortInfo});
+  // console.log('publicProductList:')
+  // console.log(publicProductList)
 
 
 ///////////////////////////////////////////////////Seller//////////////////////////////////////////////
@@ -449,8 +449,8 @@ export const DemoApi = () => {
   const { data: sellerAll,
     // isFetching,isLoading, error
   } = useSellerAllMembersQuery({minId: sellerMin, pageSize: sellerMax});
-  // console.log('productList:')
-  // console.log(productList)
+  // console.log('sellerAll:')
+  // console.log(sellerAll)
 
   const sellerNewData = {
     "email": "seller2@mail.ru",
@@ -742,12 +742,13 @@ export const DemoApi = () => {
   const { data: productList,
     // isFetching,isLoading, error
   } = useProductListQuery({minId: minShipped, pageSize: maxShipped});
-
+  // console.log('productList:')
+  // console.log(productList)
 
 
 //////////////////////////////////////////////////////////////Vendor///////////////////////////////
 
-  const vendor = {
+  const vendorData = {
     "country": "CHINA",
     "description": "good vendor",
     "name": "CatWife"
@@ -757,7 +758,7 @@ export const DemoApi = () => {
   }] = useVendorAddMutation();
   const handleVendorAdd = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    vendorAdd(vendor).unwrap()
+    vendorAdd(vendorData).unwrap()
       .then((res) => {
         console.log(res)
       })
