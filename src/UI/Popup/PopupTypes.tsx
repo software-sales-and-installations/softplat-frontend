@@ -46,7 +46,8 @@ export interface IUser {
 export interface IPayFields{
 	cardNumber: string;
 	validDate: string;
-	cvv: number;
-	name: string;
+	cvv: string;
+	cardName: string;
+	remember?: any
 
 }

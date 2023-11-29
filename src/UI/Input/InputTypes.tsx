@@ -10,7 +10,7 @@ export enum InputTypes {
 	remember='checkbox',
 	name = 'name',
 	phone = 'phone',
-	cardNumber = 'cardNumber'
+	cardName = 'cardName'
 }
 export interface IInput {
 	inputType: InputTypes;
