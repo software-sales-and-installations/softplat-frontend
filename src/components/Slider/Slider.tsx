@@ -1,12 +1,9 @@
-import './Slider.scss'
-
-// import 'swiper/css';
-// import 'swiper/css/pagination';
-
+import { FC } from 'react';
+import './Slider.scss';
 import 'swiper/scss';
 import 'swiper/scss/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 
 type Slider = {
   text: string;
@@ -30,31 +27,28 @@ const slides: Slider = [
 
 // type Props = {};
 
-const Slider = () => {
-
+const Slider: FC = () => {
   return (
-
     <Swiper
       spaceBetween={40}
       slidesPerView={'auto'}
-      modules={[Pagination]}
+      modules={[Pagination, Autoplay]}
+      autoplay={{ delay: 5000, disableOnInteraction: false }}
       loop={true}
       grabCursor={true}
-      pagination={{clickable: true}}
-      className='swiper'
+      pagination={{ clickable: true }}
+      className="swiper"
     >
       {slides?.map(i => (
-        <SwiperSlide className='swiper-slide' key={i.text}>
-          <div
-            className='swiper-slide__content'
-          >
+        <SwiperSlide className="swiper-slide" key={i.text}>
+          <div className="swiper-slide__content">
             <img
-              className='swiper-slide__img'
+              className="swiper-slide__img"
               src={i.img}
               alt="Картинка слайдера"
             />
-            <div className='swiper-slide__text-container'>
-              <p className='swiper-slide__text'>{i.text}</p>
+            <div className="swiper-slide__text-container">
+              <p className="swiper-slide__text">{i.text}</p>
             </div>
           </div>
         </SwiperSlide>
