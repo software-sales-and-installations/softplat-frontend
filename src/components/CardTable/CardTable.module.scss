@@ -1,4 +1,5 @@
 @import '../../styles/abstract/mixins.scss';
+@import '../../styles/abstract/constants.scss';
 
 .line{
     display: flex;
@@ -25,6 +26,10 @@
         max-height: 75px;
         text-overflow: ellipsis;
         overflow: hidden;
+    }
+    &_type_checkbox{
+        display: flex;
+        justify-content: center;
     }
 }
 .cellLogo{
@@ -66,5 +71,19 @@ width: 140px;
     cursor: pointer;
     &:hover{
         opacity: .8;
+    }
+}
+.cardtable__btncontainer{
+    display: flex;
+    gap: 20px;
+}
+.cardtable__btn{
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid ;
+    cursor: pointer;
+    color:  $dark-grey;
+    &:hover{
+        opacity: .7;
     }
 }

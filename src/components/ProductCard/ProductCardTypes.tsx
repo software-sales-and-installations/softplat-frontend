@@ -17,12 +17,15 @@ export interface IProductCard {
   version?: string;
   isLiked?: boolean;
   cartQuantity?: number;
+  date?:string;
 }
 
 export interface IProductCardProps {
   card: IProductCard;
 }
-
+export interface IProductCardPropsTable{
+  products: IProductCard[]
+}
 type ProductCardCategory = {
   id: number;
   name: string;

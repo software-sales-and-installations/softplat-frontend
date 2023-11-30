@@ -4,8 +4,9 @@ import styles from '../../UI/Popup/Popup.module.scss'
 import { Button } from '../../UI/Button/Button';
 import { useAppDispatch } from '../../services/redux/store';
 import { popupState } from '../../UI/Popup/PopupSlice';
-import { signOut } from '../../services/redux/slices/user/user';
 import { useNavigate } from 'react-router-dom';
+import { useAuthLogoutMutation } from '../../utils/api/authApi';
+import { signout } from './SignOutPopupSlice';
 
 export const SignOutPopup: FC = () => {
     const navigate = useNavigate();
@@ -13,17 +14,31 @@ export const SignOutPopup: FC = () => {
     function handlePopupClose(){
 		dispatch(popupState(false));
     }
-    function logOut (){
-        dispatch(signOut())
-        navigate('/', {replace: true})
+    const [ authLogout,{
+        // isFetching, isLoading, isError
+      }] = useAuthLogoutMutation();
+      const handleSubmitLogout = () => {
+     // @ts-ignore
+        authLogout().unwrap()
+          .then((userData) => {
+          localStorage.clear();
+          navigate('/', {replace: true})
         dispatch(popupState(false));
-    }
+        dispatch(signout(true))
+          console.log(userData)
+        })
+          .catch((error) => {
+          console.log(error);
+        })
+          .finally()
+      };
+
     return (
         <Popup>
             <h2 className={styles.popup__role}>Выход</h2>
             <p className={styles.popup__exittext}>Вы действительно хотите выйти из аккаунта?</p>
             <div className={styles.popup__exitcontainerbtn}>
-                <Button mode='primary' onClick={logOut} >Да</Button>
+                <Button mode='primary' onClick={handleSubmitLogout} >Да</Button>
                 <Button onClick={handlePopupClose} mode='secondary' type='button'>Нет</Button>
             </div>
         </Popup>

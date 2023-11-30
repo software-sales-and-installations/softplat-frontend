@@ -7,28 +7,36 @@ import {FaRegUser} from 'react-icons/fa';
 import { Link } from "react-router-dom";
 import { popupState } from "../../UI/Popup/PopupSlice";
 import { ResultPopup } from "../ResultPopup/ResultPopup";
-import { useAppDispatch, useAppSelector } from '../../services/redux/store';
+import { useAppDispatch } from '../../services/redux/store';
+import {useEffect, useState} from 'react';
+import { useAppSelector } from '../../services/redux/store';
 import { selectUser } from '../../services/redux/slices/user/user';
-
+import { RootState } from '../../services/redux/store';
 
 
 export const Header: FC = () => {
     const dispatch = useAppDispatch();
+    const [token, setToken] = useState(localStorage.getItem('token'))
+    const role = localStorage.getItem('role');
 	const user = useAppSelector(selectUser);
+    const signout = useAppSelector((state: RootState) => state.signout.signout);
+    useEffect(()=>{
+        setToken(localStorage.getItem('token'))
+    },[signout, user])
+    useEffect(()=>{},[token])
     return (
         <header className={styles.header}>
             <Link to='/catalog' className={styles.header__logo}>Logo</Link>
             <HeaderNavbar/>
             <HeaderSearchForm/>
             <div className={styles.btncontainer}>
-            {user.role==='BUYER'? (<><Link to='personal/favorites' className={styles.btncontainer__likebtn}/>
-                <Link to='/cart' className={styles.btncontainer__shopbtn}/> </>) : null}
-                {user.token? (
-                    <Link to={user.role==='BUYER'? '/personal' : '/seller'} className={styles.btncontainer__profile}><FaRegUser className={styles.btncontainer__profileicon}/></Link>
+            {(role)==='BUYER'? (<><Link to='personal/favorites' className={styles.btncontainer__likebtn}/> 
+                <Link to='/cart' className={styles.btncontainer__shopbtn}/> </>) : (!token? <Link to='/cart' className={styles.btncontainer__shopbtn}/> : null)}
+                {(token)? (
+                    <Link to={role==='BUYER'? '/personal' : (role==='ADMIN')? '/admin':'/seller'} className={styles.btncontainer__profile}><FaRegUser className={styles.btncontainer__profileicon}/></Link>
                 ) : (
                     <button type='button' onClick={()=>{
                         dispatch(popupState(true))
-                        console.log(user)
                     }} className={styles.btncontainer__profileenter}>Войти</button>
                 )}
             </div>
