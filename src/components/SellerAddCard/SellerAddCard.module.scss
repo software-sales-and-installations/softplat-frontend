@@ -18,6 +18,7 @@
     cursor: pointer;
   }
   &__title {
+    max-width: 440px;
     width: 100%;
     padding-left: 12px;
     @include font-CTAbody-regular;
@@ -25,7 +26,6 @@
     text-align: left;
     padding-bottom: 10px;
     &_first {
-      width: 100%;
       padding-left: 12px;
       @include font-CTAbody-regular;
       color: $dark-grey;
@@ -52,8 +52,10 @@
     flex-direction: column;
     align-items: center;
     min-height: 119px;
+    padding: 30px;
     &_logo {
       display: flex;
+      flex-direction: column;
     }
   }
   &__label {
@@ -70,4 +72,101 @@
     gap: 40px;
     max-width: 580px;
   }
+  &__dropdown {
+    user-select: none;
+  }
+  &__button {
+    width: 100%;
+    box-sizing: border-box;
+    @include font-body-card;
+    border-radius: 20px;
+    border: 1px solid $border-input;
+    color: $dark-grey;
+    cursor: pointer;
+    text-align: start;
+    position: relative;
+    min-height: 47px;
+    padding-left: 30px;
+    font-weight: 800;
+    background-color: $light-grey;
+    &_aktive {
+      background-color: $light-grey;
+      width: 100%;
+      box-sizing: border-box;
+      @include font-body-card;
+      border-radius: 20px;
+      border: 1px solid $border-input;
+      color: $dark-grey;
+      padding-left: 30px;
+      cursor: pointer;
+      text-align: start;
+      position: relative;
+      min-height: 47px;
+      border-bottom: none !important;
+      border-bottom-left-radius: 0px !important;
+      border-bottom-right-radius: 0px !important;
+    }
+  }
+  &__menu {
+    position: absolute;
+    right: 10px;
+    width: 220px;
+    padding: 25px;
+    background-color: #fff;
+    opacity: 0;
+    transform: translateY(-10px);
+    visibility: hidden;
+  }
+  &__list {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    width: 590px;
+    cursor: pointer;
+    text-align: start;
+    z-index: 1;
+  }
+  &__item {
+    box-sizing: border-box;
+    @include font-CTAbody-regular;
+    padding: 9px 30px;
+    color: $dark-grey;
+    background-color: $light-grey;
+    cursor: pointer;
+  }
+  &__item:last-child {
+    border-bottom-left-radius: 30px !important;
+    border-bottom-right-radius: 30px !important;
+  }
+  &__item:hover {
+    background-color: $light-grey;
+  }
+  &__down {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    &_up {
+      transform: rotate(180deg);
+      position: absolute;
+      right: 10px;
+      top: 17px;
+    }
+  }
+}
+
+.description {
+  box-sizing: border-box;
+  @include font-CTAbody-regular;
+  padding: 10px 12px;
+  border-radius: 20px;
+  border: 1px solid $border-input;
+  color: $dark-grey;
+  background-color: $light-grey;
+  resize: none;
+  display: flex;
+  min-height: 150px;
+  max-width: 590px;
+  width: 100%;
+  margin-bottom: 35px;
 }

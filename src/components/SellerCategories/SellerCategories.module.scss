@@ -6,7 +6,6 @@
   list-style: none;
   display: flex;
   width: 100%;
-
   flex-wrap: wrap;
   row-gap: 10px;
 }
@@ -24,4 +23,5 @@
     background-color: $accent-lime-button;
     color: $black-standart-text;
   }
+  
 }

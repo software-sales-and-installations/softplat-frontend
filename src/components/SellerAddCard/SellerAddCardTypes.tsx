@@ -1,26 +1,22 @@
-export enum InputTypes {
-  email = 'email',
-  password = 'password',
-  confirmPassword = 'confirmPassword',
-  enteredEmail = 'enteredEmail',
-  text = 'text',
-  date = 'date',
-  INN = 'INN',
-  orgName = 'orgName',
-  remember = 'checkbox',
-  name = 'name',
-  phone = 'phone',
-  link = 'link',
-  price = 'price',
-  priceInstall = 'priceInstall',
-  description = 'description',
-}
+import { InputTypes } from '../../UI/Input/InputTypes';
+
 export interface ICreateProductFields {
   inputType: InputTypes;
   name?: string;
   link?: string;
-  description?: string;
+  producer?: string;
+  category?: string;
+  programm?: string;
   price?: number;
   priceInstall?: number;
+  loadFile?: string;
+  loadLogo?: string;
+  textField?: string;
+  keyWord?: string;
   error?: string;
+}
+
+export interface IOption {
+  value: string;
+  label: string;
 }

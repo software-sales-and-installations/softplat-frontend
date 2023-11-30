@@ -109,47 +109,39 @@ export const VALIDATION_SETTINGS = {
       invalid: 'Введите ссылку в правильном формате',
     },
   },
-  description: {
-    pattern: /^[a-zа-яё\s]+$/iu,
-    messages: {
-      minLength: 10,
-      invalid: 'Введите описание продукта',
-      tooShort: 'Слишком короткое описание',
-    },
-  },
   price: {
     pattern: /[0-9]+(\\.[0-9][0-9]?)?/,
     messages: {
       invalid: 'Введите стоимость продукта',
+      noPrice: 'Необходимо ввести стоимость продукта',
     },
   },
   priceInstall: {
     pattern: /[0-9]+(\\.[0-9][0-9]?)?/,
     messages: {
-      invalid: 'Введите стоимость установки',
+      invalid: 'Введите стоимость установки продукта',
+      noPrice: 'Необходимо ввести стоимость установки',
     },
   },
 };
 export const PRICE_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.price.messages.noPrice,
+  },
   pattern: {
     value: VALIDATION_SETTINGS.price.pattern,
     message: VALIDATION_SETTINGS.price.messages.invalid,
   },
 };
 export const PRICE_INSTALL_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.priceInstall.messages.noPrice,
+  },
   pattern: {
     value: VALIDATION_SETTINGS.priceInstall.pattern,
     message: VALIDATION_SETTINGS.priceInstall.messages.invalid,
-  },
-};
-export const DESCRIPTION_VALIDATION_CONFIG = {
-  pattern: {
-    value: VALIDATION_SETTINGS.description.pattern,
-    message: VALIDATION_SETTINGS.description.messages.invalid,
-  },
-  minLength: {
-    value: VALIDATION_SETTINGS.description.messages.minLength,
-    message: VALIDATION_SETTINGS.description.messages.tooShort,
   },
 };
 export const LINK_VALIDATION_CONFIG = {

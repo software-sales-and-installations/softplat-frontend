@@ -13,7 +13,9 @@ export enum InputTypes {
   link = 'link',
   price = 'price',
   priceInstall = 'priceInstall',
-  description = 'description',
+  producer = 'producer',
+  loadFile = 'loadFile',
+  keyWord = 'keyWord',
 }
 
 export enum InputColors {
@@ -35,4 +37,5 @@ export interface IInput {
 	onChange?: any;
 	max?: string;
 	defaultValue?: any;
+	helpText?: string;
 }

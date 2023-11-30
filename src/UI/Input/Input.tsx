@@ -4,17 +4,17 @@ import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
 
 export const Input: FC<IInput> = ({
-  inputType,
-  labelText,
-  value,
-  readOnly = false,
-  showPasswordButton = false,
-  validation,
-  error = '',
-  onChange,
-  max,
-  defaultValue,
-  helpText,
+	inputType,
+	labelText,
+	value,
+	readOnly = false,
+	showPasswordButton = false,
+	validation,
+	error = '',
+	onChange,
+	max,
+	defaultValue,
+	helpText
 }) => {
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   useEffect(() => {
@@ -31,7 +31,7 @@ export const Input: FC<IInput> = ({
       ? 'password'
       : inputType;
 
-  return (
+	return (
     <div className={styles.input__container}>
       <div className={styles.input__hints}>
         {labelText ? (
@@ -63,7 +63,11 @@ export const Input: FC<IInput> = ({
       <span className={styles.input__error}>
         {error ? (
           error
-        ) : inputType === 'password' ? (
+        ) : inputType === 'password' ||
+          inputType === 'name' ||
+          inputType === 'link' ||
+          inputType === 'price' ||
+          inputType === 'priceInstall' ? (
           <p className={styles.input__help}>{helpText}</p>
         ) : (
           ''

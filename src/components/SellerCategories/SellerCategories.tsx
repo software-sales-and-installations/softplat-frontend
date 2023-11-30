@@ -8,7 +8,9 @@ export const SellerCategories: FC = () => {
         {SELLER_CATEGORIZED_TEXT.map(btn => {
           return (
             <li className={styles.item} key={btn.id}>
-              <button className={styles.btn}>{btn.text}</button>
+              <button className={styles.btn} type="button">
+                {btn.text}
+              </button>
             </li>
           );
         })}
