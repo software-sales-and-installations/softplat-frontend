@@ -11,6 +11,7 @@ import { SelectorType } from '../../UI/DropDown/DropDownTypes';
 import { ProductStatus } from '../../components/ProductCard/ProductCardTypes';
 import { fetchSingleVendor } from '../../services/redux/slices/vendors/vendors';
 import Preloader from '../../components/Preloader/Preloader';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 // type Props = {};
 
@@ -37,34 +38,39 @@ const VendorPage: FC = () => {
   );
 
   return (
-    <section className={styles.vendorPage}>
-      <VendorInfo
-        title={currentVendor.name}
-        description={currentVendor.description || ''}
-        img={currentVendor.image?.url || ''}
-      />
-      <ul className={styles.vendorPage__categories}>
-        {CATEGORIZED_TEXT_VENDOR.map(btn => {
-          return (
-            <li className={styles.item} key={btn.id}>
-              <button className={styles.vendorPage__categoriesBtn}>
-                {btn.text}
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-      <div className={styles.vendorPage__selectForm}>
-        <DropDown type={SelectorType.BASE} options={SELECT_OPTIONS} />
+    <>
+      <div className={styles.breadcrumbs}>
+        <Breadcrumbs pageName={currentVendor.name} />
       </div>
-      <div className={styles.vendorPage__products}>
-        {status === 'loading' ? (
-          <Preloader />
-        ) : (
-          <CardsGrid cards={{ products: vendorCards }} />
-        )}
-      </div>
-    </section>
+      <section className={styles.vendorPage}>
+        <VendorInfo
+          title={currentVendor.name}
+          description={currentVendor.description || ''}
+          img={currentVendor.image?.url || ''}
+        />
+        <ul className={styles.vendorPage__categories}>
+          {CATEGORIZED_TEXT_VENDOR.map(btn => {
+            return (
+              <li className={styles.item} key={btn.id}>
+                <button className={styles.vendorPage__categoriesBtn}>
+                  {btn.text}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+        <div className={styles.vendorPage__selectForm}>
+          <DropDown type={SelectorType.BASE} options={SELECT_OPTIONS} />
+        </div>
+        <div className={styles.vendorPage__products}>
+          {status === 'loading' ? (
+            <Preloader />
+          ) : (
+            <CardsGrid cards={{ products: vendorCards }} />
+          )}
+        </div>
+      </section>
+    </>
   );
 };
 
