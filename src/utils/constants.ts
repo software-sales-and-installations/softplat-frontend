@@ -555,11 +555,12 @@ export const PRODUCT_ITEMS_LIKED: {
     price: 19898,
     img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
     installationPrice: 0
-  },
+  }
 ];
 
-  export const SellerExistingCard = [
-	{id: 1, logo: PhotoShopImg, name: 'Adobe Photoshop', vendor: 'Adobe', category: 'Мультимедиа', art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023'},
-	{id: 2, logo: Acrobat, name: 'Adobe Acrobat', vendor: 'Adobe', category: 'Мультимедиа', art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023'},
-	{id: 3, logo: Illustrator, name: 'Adobe Illustrator', vendor: 'Adobe', category: 'Мультимедиа', art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023'}
-  ]
+
+  export const SellerExistingCard = {products:[
+	{id: 1, logo: PhotoShopImg, name: 'Adobe Photoshop', vendor: {id: 1,country: 'iuh', description: 'df', image: {url:''}, name: 'Adobe'}, category: {id: 1, name:'Мультимедиа'}, art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023', price: 0, installationPrice: 0},
+	{id: 2, logo: Acrobat, name: 'Adobe Acrobat', vendor: {id: 1,country: 'iuh', description: 'df', image: {url:''}, name: 'Adobe'}, category: {id: 1, name:'Мультимедиа'}, art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023', price: 0, installationPrice: 0},
+	{id: 3, logo: Illustrator, name: 'Adobe Illustrator', vendor: {id: 1,country: 'iuh', description: 'df', image: {url:''}, name: 'Adobe'}, category: {id: 1, name:'Мультимедиа'}, art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023', price: 0, installationPrice: 0}
+  ]}

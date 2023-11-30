@@ -18,16 +18,18 @@ const CabinetMenu: React.FC = () => {
       <nav className={styles.personalTitles}>
         <Link
           to={user.role==='BUYER'? "purchases" : 'products'}
-          className={classNames(styles.personalTitles__titles, (location.pathname==='/personal/purchases' || location.pathname==='/seller/products') ? styles.personalTitles__titles_active : '')}
+          className={classNames(styles.personalTitles__titles, (location.pathname==='/personal/purchases' || location.pathname==='/seller/products' || location.pathname==='/admin/products') ? styles.personalTitles__titles_active : '')}
         >
-          {user.role==='BUYER'? 'Мои покупки' : 'Мои товары'}
+          {user.role==='BUYER'? 'Мои покупки' : (user.role==='SELLER' ? 'Мои товары' : 'Карточки товаров')}
         </Link>
+        {user.role==='ADMIN'? <Link to='vendors' className={classNames(styles.personalTitles__titles, (location.pathname==='/admin/vendors') ? styles.personalTitles__titles_active : '')} >Вендоры</Link>: null}
         <Link to={user.role==='BUYER'?"favorites":'analytics'} className={classNames(styles.personalTitles__titles, (location.pathname==='/personal/favorites' || location.pathname==='seller/analytics') ? styles.personalTitles__titles_active : '')}>
           {user.role==='BUYER'?'Избранное': 'Аналитика'}
         </Link>
-        <Link to="settings" className={classNames(styles.personalTitles__titles, (location.pathname===('/personal/settings' || '/seller/settings')) ? styles.personalTitles__titles_active : '')}>
+        <Link to="settings" className={classNames(styles.personalTitles__titles, (location.pathname===('/personal/settings' || '/seller/settings' || '/admin/settings')) ? styles.personalTitles__titles_active : '')}>
           Настройки
         </Link>
+        {user.role==='ADMIN'? <Link to='vendors' className={classNames(styles.personalTitles__titles, (location.pathname==='/admin/contacts') ? styles.personalTitles__titles_active : '')} >Контакты</Link>: null}
         <button type='button' onClick={()=>dispatch(popupState(true))} className={styles.personalTitles__btn}>
           Выйти из профиля
         </button>
