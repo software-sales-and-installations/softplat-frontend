@@ -1,6 +1,7 @@
 import {reducer as toggleBtnReducer} from '../../UI/ToggleButton/ToggleButtonSlice';
 import {reducer as chooseRoleReducer} from '../../UI/ChooseRole/ChooseRoleSlice';
 import {reducer as popupStateReducer} from '../../UI/Popup/PopupSlice';
+import {reducer as signoutReducer} from '../../components/SignOutPopup/SignOutPopupSlice.tsx'
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import cardsReducer from './slices/cards/cards';
@@ -28,6 +29,7 @@ const reducers = combineReducers({
 	chooseRole: chooseRoleReducer,
 	popupOpen: popupStateReducer,
 	dropdown: dropDownReducer,
+  signout: signoutReducer,
 	cards: cardsReducer,
 	vendors: vendorsReducer,
 	cart: cartReducer,

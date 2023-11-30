@@ -1,20 +1,20 @@
-import { FC, useEffect} from 'react';
+import { FC, useEffect, useState} from 'react';
 import { Popup } from '../../UI/Popup/Popup';
 import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';
 import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG, VALIDATION_SETTINGS, NAME_VALIDATION_CONFIG, PHONE_VALIDATION_CONFIG } from '../../utils/constants';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import {useForm } from 'react-hook-form';
 import {  ISignUpFields } from '../../UI/Popup/PopupTypes';
 import styles from '../../UI/Popup/Popup.module.scss';
 import { Button } from '../../UI/Button/Button';
 import { checkBoxState } from '../../UI/ToggleButton/ToggleButtonSlice';
-import { signUpUser, signInUser, setUser } from '../../services/redux/slices/user/user';
-import { ISignUpData } from '../../UI/Popup/PopupTypes';
 import { useAppDispatch } from '../../services/redux/store';
+import { useAuthLoginMutation, useAuthRegisterMutation } from '../../utils/api/authApi';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../services/redux/store';
 import { popupState } from '../../UI/Popup/PopupSlice';
-import { useState } from 'react';
+import { setUser } from '../../services/redux/slices/user/user';
+import { signout } from '../SignOutPopup/SignOutPopupSlice';
 
 
 export const PopupForReg: FC = () => {
@@ -38,31 +38,42 @@ export const PopupForReg: FC = () => {
 	function handleExitClick(){
 		dispatch(checkBoxState(false))
 	}
-	const onSubmitResData: SubmitHandler<ISignUpFields> = () => {
-		const {email, name, password, confirmPassword, phone} = getValues();
-		dispatch(signUpUser({email, name, password, confirmPassword, role: roleForReg, phone: phone? phone.slice(2): ''} as ISignUpData))
-			.unwrap()
-			.then(()=>{
-				dispatch(signInUser({email, password}))
-				.unwrap()
-				.then((res)=>{
-					console.log(res)
-					dispatch(setUser({email: email, token: res.token, role:res.role}))
-				})
-				.catch((err) => {
-					console.log(err);
-				});
+
+	const {email, name, password, confirmPassword, phone} = getValues();
+	  const [authLogin, {
+		// isFetching, isLoading, isError
+	  }] = useAuthLoginMutation();
+	  const [authRegister, {
+		// isFetching, isLoading, isError
+	  }] = useAuthRegisterMutation();
+	  const handleSubmitRegister = () => {
+	   authRegister({email, name, password, confirmPassword, role: roleForReg, phone: phone? phone.slice(2): ''}).unwrap()
+		 .then((res) => {
+		  authLogin({
+			confirmPassword: confirmPassword,
+			email: res.email,
+			password:password,
+		  }).unwrap()
+			.then((userData) => {
+		  localStorage.setItem('token', userData.token);
+		  localStorage.setItem('role', userData.role);
+		  console.log(userData)
+		  dispatch(popupState(false))
+		  dispatch(setUser(userData));
+		  dispatch(signout(false))
+		  reset;
+		})
+			.catch((error) => {
+			  console.log(error);
 			})
-			.then(()=>{
-				dispatch(popupState(false))
-				reset
-			})
-			.catch((err) => {
-				console.log(err);
-				setErrorStatus(err.status)
-			});
-	};
-	useEffect(()=>{
+		 })
+		 .catch((error) => {
+			setErrorStatus(error.status)
+		  	console.log(error);
+		})
+	.finally()
+	  };
+	  useEffect(()=>{
 		if(errorStatus===400){
 			setTextError('Некорректно заполнены поля')
 		}
@@ -72,7 +83,7 @@ export const PopupForReg: FC = () => {
 	}, [errorStatus])
 	return (
 		<Popup>
-			<form className={styles.form} onSubmit={handleSubmit(onSubmitResData)}>
+			<form className={styles.form} onSubmit={handleSubmit(handleSubmitRegister)}>
 				<Input
 					inputType={InputTypes.name}
 					labelText='Ваше имя'
@@ -116,7 +127,6 @@ export const PopupForReg: FC = () => {
 						}),
 					}}
 					error={errors?.confirmPassword?.message}
-					helpText='Пароль может содержать буквы, цифры и знаки препинания'
 				/>
 				<div className={styles.checkboxcontainer}>
 					<input className={styles.checkboxcontainer__input}  id='remember' {...register("remember")} type="checkbox" value="remember"/>

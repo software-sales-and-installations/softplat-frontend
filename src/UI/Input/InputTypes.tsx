@@ -10,6 +10,7 @@ export enum InputTypes {
 	remember='checkbox',
 	name = 'name',
 	phone = 'phone',
+	oldpassword='oldpassword',
 	cardName = 'cardName'
 }
 export interface IInput {

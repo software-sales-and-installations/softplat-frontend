@@ -132,6 +132,13 @@
 		@include font-body-filters;
 	}
 }
+.errorContainer{
+	min-height: 30px;
+	&__error{
+		color: $red-alert-system;
+		@include font-body-filters;
+	}
+}
 .input__field {
 	box-sizing: border-box;
 	@include font-CTAbody-regular;

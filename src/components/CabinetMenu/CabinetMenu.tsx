@@ -4,32 +4,28 @@ import { useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 import { useAppDispatch } from '../../services/redux/store';
 import { popupState } from '../../UI/Popup/PopupSlice';
-import { useAppSelector } from '../../services/redux/store';
-import { selectUser } from '../../services/redux/slices/user/user';
-
-
 
 const CabinetMenu: React.FC = () => {
-  const user = useAppSelector(selectUser);
   const location = useLocation();
   const dispatch = useAppDispatch();
+  const role = localStorage.getItem('role');
+
   return (
     <>
       <nav className={styles.personalTitles}>
         <Link
-          to={user.role==='BUYER'? "purchases" : 'products'}
-          className={classNames(styles.personalTitles__titles, (location.pathname==='/personal/purchases' || location.pathname==='/seller/products' || location.pathname==='/admin/products') ? styles.personalTitles__titles_active : '')}
+          to={role==='BUYER'? "purchases" : 'products'}
+          className={classNames(styles.personalTitles__titles, (location.pathname==='/personal/purchases' || location.pathname==='/seller/products') ? styles.personalTitles__titles_active : '')}
         >
-          {user.role==='BUYER'? 'Мои покупки' : (user.role==='SELLER' ? 'Мои товары' : 'Карточки товаров')}
+          {role==='BUYER'? 'Мои покупки' : 'Мои товары'}
         </Link>
-        {user.role==='ADMIN'? <Link to='vendors' className={classNames(styles.personalTitles__titles, (location.pathname==='/admin/vendors') ? styles.personalTitles__titles_active : '')} >Вендоры</Link>: null}
-        <Link to={user.role==='BUYER'?"favorites":'analytics'} className={classNames(styles.personalTitles__titles, (location.pathname==='/personal/favorites' || location.pathname==='seller/analytics') ? styles.personalTitles__titles_active : '')}>
-          {user.role==='BUYER'?'Избранное': 'Аналитика'}
+        <Link to={role==='BUYER'?"favorites":'analytics'} className={classNames(styles.personalTitles__titles, (location.pathname==='/personal/favorites' || location.pathname==='seller/analytics') ? styles.personalTitles__titles_active : '')}>
+          {role==='BUYER'?'Избранное': 'Аналитика'}
         </Link>
         <Link to="settings" className={classNames(styles.personalTitles__titles, (location.pathname===('/personal/settings' || '/seller/settings' || '/admin/settings')) ? styles.personalTitles__titles_active : '')}>
           Настройки
         </Link>
-        {user.role==='ADMIN'? <Link to='vendors' className={classNames(styles.personalTitles__titles, (location.pathname==='/admin/contacts') ? styles.personalTitles__titles_active : '')} >Контакты</Link>: null}
+        {role==='ADMIN'? <Link to='vendors' className={classNames(styles.personalTitles__titles, (location.pathname==='/admin/contacts') ? styles.personalTitles__titles_active : '')} >Контакты</Link>: null}
         <button type='button' onClick={()=>dispatch(popupState(true))} className={styles.personalTitles__btn}>
           Выйти из профиля
         </button>
