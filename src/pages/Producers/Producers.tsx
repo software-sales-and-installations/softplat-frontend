@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { fetchAllVendors } from '../../services/redux/slices/vendors/vendors';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
+// import { changeCountryOption } from '../../UI/DropDown/DropDownSlice';
+
 
 export const Producers: FC = () => {
   const dispatch = useAppDispatch();
@@ -34,9 +36,8 @@ export const Producers: FC = () => {
           return (
             <Link
               key={vendor.id}
-              to={`/producers/${vendor.name.toLowerCase()}`}
+              to={`/producers/${vendor.id}`}
               className={styles.container__link}
-              state={vendor}
             >
               <img
                 className={styles.container__img}

@@ -1,4 +1,4 @@
-import { FC} from 'react';
+import { FC, useEffect} from 'react';
 import { Popup } from '../../UI/Popup/Popup';
 import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';
@@ -13,8 +13,11 @@ import { popupState } from '../../UI/Popup/PopupSlice';
 import { Button } from '../../UI/Button/Button';
 import { setUser } from '../../services/redux/slices/user/user';
 import { ISignInData } from '../../UI/Popup/PopupTypes';
+import { useState } from 'react';
 
 export const PopupForAuth: FC = () => {
+	const [authError, setAuthError] = useState(0)
+	const [errorText, setErrorText] = useState('')
 	const dispatch = useAppDispatch();
 	const {
 		register,
@@ -33,17 +36,26 @@ export const PopupForAuth: FC = () => {
 				console.log(res)
 				dispatch(setUser({ email: res.email, token: res.token, role: res.role }));
 				dispatch(popupState(false))
+				setAuthError(0)
 				reset
 			})
 			.catch((err) => {
 				console.log(err);
+				setAuthError(err.status)
 			});
 	}
 	function handlePasswordPopup(){
 		dispatch(chooseRoleState('Забыли пароль?'))
 		
 	}
-
+	useEffect(()=>{
+		if (authError===401){
+			setErrorText('Неправильный email или пароль')
+		}
+		if(authError===400){
+			setErrorText('Некорректно заполнены поля email или password')
+		}
+	}, [authError])
 	return (
 		<Popup>
 			<form className={styles.form} onSubmit={handleSubmit(onSubmitResData)}>
@@ -66,6 +78,9 @@ export const PopupForAuth: FC = () => {
 				<div className={styles.checkboxcontainer}>
 					<input className={styles.checkboxcontainer__input} id='agreement' {...register("remember")} type="checkbox" value="remember"/>
 					<label className={styles.checkboxcontainer__label} htmlFor='agreement'>Запомнить меня</label>
+				</div>
+				<div className={styles.errorContainer}>
+					<p className={styles.errorContainer__error}>{errorText}</p>
 				</div>
 				<div className={styles.btncontainer}>
 					<Button isDisabled={!isValid} type='submit' mode='primary'>Войти</Button>
