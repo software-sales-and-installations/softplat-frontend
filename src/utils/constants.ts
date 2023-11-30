@@ -86,6 +86,50 @@ export const VALIDATION_SETTINGS = {
       noName: 'Необходимо ввести номер телефона',
     },
   },
+  cardNumber: {
+    pattern: /\d{4}\s{1}\d{4}\s{1}\d{4}\s{1}\d{4}/,
+    minLength: 19,
+    maxLength: 19,
+    messages: {
+      tooShort: 'Введите еще цифры',
+      tooLong: 'Слишком много цифр',
+      invalid: 'Введите еще цифры',
+      noCardNumber: 'Введите номер карты'
+    }
+  },
+  validDate: {
+    pattern: /[0-1][0-9]\/[2-3][0-9]$/,
+    minLength: 5,
+    maxLength: 5,
+    messages: {
+      tooShort: 'Неверная дата',
+      tooLong: 'Неверная дата',
+      invalid: 'Неверный формат даты',
+      novalidDate: 'Введите дату'
+    }
+  },
+  cvv: {
+    pattern: /[0-9]{3}$/,
+    minLength: 3,
+    maxLength: 3,
+    messages: {
+      tooShort: 'Неверный cvv',
+      tooLong: 'Неверный cvv',
+      invalid: 'Неверный формат cvv',
+      novalidDate: 'Введите cvv'
+    }
+  },
+  cardname: {
+    pattern: /^[a-z\s]+$/iu,
+    minLength: 2,
+    maxLength: 42,
+    messages: {
+      tooShort: 'Слишком короткое имя',
+      tooLong: 'Слишком длинное имя',
+      invalid: 'Только латинские буквы',
+      noName: 'Необходимо ввести имя',
+    },
+  },
 };
 export const EMAIL_VALIDATION_CONFIG = {
   required: {
@@ -155,6 +199,68 @@ export const PHONE_VALIDATION_CONFIG = {
   maxLength: {
     value: VALIDATION_SETTINGS.phone.maxLength,
     message: VALIDATION_SETTINGS.phone.messages.tooLong,
+  },
+};
+export const CARDNUMBER_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.cardNumber.messages.noCardNumber,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.cardNumber.pattern,
+    message: VALIDATION_SETTINGS.cardNumber.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.cardNumber.maxLength,
+    message: VALIDATION_SETTINGS.cardNumber.messages.tooLong,
+  },
+};
+export const VALIDDATE_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.validDate.messages.novalidDate,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.validDate.pattern,
+    message: VALIDATION_SETTINGS.validDate.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.validDate.maxLength,
+    message: VALIDATION_SETTINGS.validDate.messages.tooLong,
+  },
+
+}
+export const CVV_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.cvv.messages.novalidDate,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.cvv.pattern,
+    message: VALIDATION_SETTINGS.cvv.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.cvv.maxLength,
+    message: VALIDATION_SETTINGS.cvv.messages.tooLong,
+  },
+  
+}
+export const CARDNAME_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.cardname.messages.noName,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.cardname.pattern,
+    message: VALIDATION_SETTINGS.cardname.messages.invalid,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.cardname.minLength,
+    message: VALIDATION_SETTINGS.cardname.messages.tooShort,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.cardname.maxLength,
+    message: VALIDATION_SETTINGS.cardname.messages.tooLong,
   },
 };
 export const CHOOSE_ROLE: {
@@ -449,11 +555,12 @@ export const PRODUCT_ITEMS_LIKED: {
     price: 19898,
     img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
     installationPrice: 0
-  },
+  }
 ];
 
-  export const SellerExistingCard = [
-	{id: 1, logo: PhotoShopImg, name: 'Adobe Photoshop', vendor: 'Adobe', category: 'Мультимедиа', art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023'},
-	{id: 2, logo: Acrobat, name: 'Adobe Acrobat', vendor: 'Adobe', category: 'Мультимедиа', art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023'},
-	{id: 3, logo: Illustrator, name: 'Adobe Illustrator', vendor: 'Adobe', category: 'Мультимедиа', art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023'}
-  ]
+
+  export const SellerExistingCard = {products:[
+	{id: 1, logo: PhotoShopImg, name: 'Adobe Photoshop', vendor: {id: 1,country: 'iuh', description: 'df', image: {url:''}, name: 'Adobe'}, category: {id: 1, name:'Мультимедиа'}, art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023', price: 0, installationPrice: 0},
+	{id: 2, logo: Acrobat, name: 'Adobe Acrobat', vendor: {id: 1,country: 'iuh', description: 'df', image: {url:''}, name: 'Adobe'}, category: {id: 1, name:'Мультимедиа'}, art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023', price: 0, installationPrice: 0},
+	{id: 3, logo: Illustrator, name: 'Adobe Illustrator', vendor: {id: 1,country: 'iuh', description: 'df', image: {url:''}, name: 'Adobe'}, category: {id: 1, name:'Мультимедиа'}, art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023', price: 0, installationPrice: 0}
+  ]}

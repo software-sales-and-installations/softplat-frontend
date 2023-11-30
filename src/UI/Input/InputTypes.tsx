@@ -10,22 +10,15 @@ export enum InputTypes {
 	remember='checkbox',
 	name = 'name',
 	phone = 'phone',
-	oldpassword='oldpassword'
+	oldpassword='oldpassword',
+	cardName = 'cardName'
 }
-
-export enum InputColors {
-	black = 'black',
-	white = 'white',
-	grey = 'grey',
-}
-
 export interface IInput {
 	inputType: InputTypes;
 	readOnly?: boolean;
 	value?: any;
 	labelText?: string;
 	showPasswordButton?: boolean;
-	color?: InputColors;
 	validation?: any;
 	rules?: any;
 	error?: string;

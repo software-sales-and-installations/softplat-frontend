@@ -1,5 +1,5 @@
 import { IProductCard } from "../ProductCard/ProductCardTypes";
-interface ICards{
+export interface ICards{
   products: IProductCard[]
 }
 export interface CardsGridProps {
