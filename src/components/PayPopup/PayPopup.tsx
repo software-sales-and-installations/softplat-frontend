@@ -8,15 +8,17 @@ import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';
 import { CARDNUMBER_VALIDATION_CONFIG, VALIDDATE_VALIDATION_CONFIG, CVV_VALIDATION_CONFIG, CARDNAME_VALIDATION_CONFIG } from '../../utils/constants';
 import styles from '../../UI/Popup/Popup.module.scss';
-import {useState, useEffect} from 'react';
+import { useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../services/redux/store';
 import InputMask from "react-input-mask";
 import classNames from 'classnames';
+import { isSuccessPay } from './PayPopupSlice';
+import { useDispatch } from 'react-redux';
 
 export const PayPopup: FC = ()=>{
     const popupState = useSelector((state: RootState) => state.popupOpen.setIsOpened);
-    const [textSubmit, setTextSubmit] = useState('')
+    const dispatch = useDispatch();
     const {
 		register,
 		handleSubmit,
@@ -27,12 +29,11 @@ export const PayPopup: FC = ()=>{
 	} = useForm<IPayFields>({ mode: 'onChange' });
 
     const onSubmitResData: SubmitHandler<IPayFields> = () => {
+        dispatch(isSuccessPay(true))
         const formValue = getValues();
         console.log(formValue)
-        setTextSubmit('Простите, мы еще не научились это делать. А пока Вы можете перечислить эти деньги в фонд помощи дикой природы')
     }
     useEffect(()=>{
-        setTextSubmit('')
         reset();
         setValue('cardNumber', '', { shouldValidate: true })
         setValue('cvv', '', { shouldValidate: true })
@@ -93,9 +94,6 @@ export const PayPopup: FC = ()=>{
                 <div className={styles.checkboxcontainer}>
 					<input className={styles.checkboxcontainer__input}  id='remember' {...register("remember")} type="checkbox" value="remember"/>
 					<label className={styles.checkboxcontainer__label} htmlFor='remember'>Запомнить карту</label>
-				</div>
-                <div className={styles.errorContainer}>
-					<p className={styles.errorContainer__error}>{textSubmit}</p>
 				</div>	
                 <Button isDisabled={!isValid} type='submit' mode='primary'>Оплатить заказ</Button>
             </form>
