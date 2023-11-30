@@ -102,52 +102,49 @@ export const VALIDATION_SETTINGS = {
       noName: 'Необходимо ввести номер телефона',
     },
   },
-  link: {
-    pattern:
-      /http[s]?:\/(?:\/[^\/]+){1,}(?:\/[А-Яа-яёЁ\w ]+\.[a-z]{3,5}(?![\/]|[\wА-Яа-яёЁ]))/,
+  cardNumber: {
+    pattern: /\d{4}\s{1}\d{4}\s{1}\d{4}\s{1}\d{4}/,
+    minLength: 19,
+    maxLength: 19,
     messages: {
-      invalid: 'Введите ссылку в правильном формате',
-    },
+      tooShort: 'Введите еще цифры',
+      tooLong: 'Слишком много цифр',
+      invalid: 'Введите еще цифры',
+      noCardNumber: 'Введите номер карты'
+    }
   },
-  price: {
-    pattern: /[0-9]+(\\.[0-9][0-9]?)?/,
+  validDate: {
+    pattern: /[0-1][0-9]\/[2-3][0-9]$/,
+    minLength: 5,
+    maxLength: 5,
     messages: {
-      invalid: 'Введите стоимость продукта',
-      noPrice: 'Необходимо ввести стоимость продукта',
-    },
+      tooShort: 'Неверная дата',
+      tooLong: 'Неверная дата',
+      invalid: 'Неверный формат даты',
+      novalidDate: 'Введите дату'
+    }
   },
-  priceInstall: {
-    pattern: /[0-9]+(\\.[0-9][0-9]?)?/,
+  cvv: {
+    pattern: /[0-9]{3}$/,
+    minLength: 3,
+    maxLength: 3,
     messages: {
-      invalid: 'Введите стоимость установки продукта',
-      noPrice: 'Необходимо ввести стоимость установки',
+      tooShort: 'Неверный cvv',
+      tooLong: 'Неверный cvv',
+      invalid: 'Неверный формат cvv',
+      novalidDate: 'Введите cvv'
+    }
+  },
+  cardname: {
+    pattern: /^[a-z\s]+$/iu,
+    minLength: 2,
+    maxLength: 42,
+    messages: {
+      tooShort: 'Слишком короткое имя',
+      tooLong: 'Слишком длинное имя',
+      invalid: 'Только латинские буквы',
+      noName: 'Необходимо ввести имя',
     },
-  },
-};
-export const PRICE_VALIDATION_CONFIG = {
-  required: {
-    value: true,
-    message: VALIDATION_SETTINGS.price.messages.noPrice,
-  },
-  pattern: {
-    value: VALIDATION_SETTINGS.price.pattern,
-    message: VALIDATION_SETTINGS.price.messages.invalid,
-  },
-};
-export const PRICE_INSTALL_VALIDATION_CONFIG = {
-  required: {
-    value: true,
-    message: VALIDATION_SETTINGS.priceInstall.messages.noPrice,
-  },
-  pattern: {
-    value: VALIDATION_SETTINGS.priceInstall.pattern,
-    message: VALIDATION_SETTINGS.priceInstall.messages.invalid,
-  },
-};
-export const LINK_VALIDATION_CONFIG = {
-  pattern: {
-    value: VALIDATION_SETTINGS.link.pattern,
-    message: VALIDATION_SETTINGS.link.messages.invalid,
   },
 };
 export const EMAIL_VALIDATION_CONFIG = {
@@ -218,6 +215,68 @@ export const PHONE_VALIDATION_CONFIG = {
   maxLength: {
     value: VALIDATION_SETTINGS.phone.maxLength,
     message: VALIDATION_SETTINGS.phone.messages.tooLong,
+  },
+};
+export const CARDNUMBER_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.cardNumber.messages.noCardNumber,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.cardNumber.pattern,
+    message: VALIDATION_SETTINGS.cardNumber.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.cardNumber.maxLength,
+    message: VALIDATION_SETTINGS.cardNumber.messages.tooLong,
+  },
+};
+export const VALIDDATE_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.validDate.messages.novalidDate,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.validDate.pattern,
+    message: VALIDATION_SETTINGS.validDate.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.validDate.maxLength,
+    message: VALIDATION_SETTINGS.validDate.messages.tooLong,
+  },
+
+}
+export const CVV_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.cvv.messages.novalidDate,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.cvv.pattern,
+    message: VALIDATION_SETTINGS.cvv.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.cvv.maxLength,
+    message: VALIDATION_SETTINGS.cvv.messages.tooLong,
+  },
+  
+}
+export const CARDNAME_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.cardname.messages.noName,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.cardname.pattern,
+    message: VALIDATION_SETTINGS.cardname.messages.invalid,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.cardname.minLength,
+    message: VALIDATION_SETTINGS.cardname.messages.tooShort,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.cardname.maxLength,
+    message: VALIDATION_SETTINGS.cardname.messages.tooLong,
   },
 };
 export const CHOOSE_ROLE: {
@@ -512,11 +571,12 @@ export const PRODUCT_ITEMS_LIKED: {
     price: 19898,
     img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
     installationPrice: 0
-  },
+  }
 ];
 
-  export const SellerExistingCard = [
-	{id: 1, logo: PhotoShopImg, name: 'Adobe Photoshop', vendor: 'Adobe', category: 'Мультимедиа', art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023'},
-	{id: 2, logo: Acrobat, name: 'Adobe Acrobat', vendor: 'Adobe', category: 'Мультимедиа', art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023'},
-	{id: 3, logo: Illustrator, name: 'Adobe Illustrator', vendor: 'Adobe', category: 'Мультимедиа', art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023'}
-  ]
+
+  export const SellerExistingCard = {products:[
+	{id: 1, logo: PhotoShopImg, name: 'Adobe Photoshop', vendor: {id: 1,country: 'iuh', description: 'df', image: {url:''}, name: 'Adobe'}, category: {id: 1, name:'Мультимедиа'}, art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023', price: 0, installationPrice: 0},
+	{id: 2, logo: Acrobat, name: 'Adobe Acrobat', vendor: {id: 1,country: 'iuh', description: 'df', image: {url:''}, name: 'Adobe'}, category: {id: 1, name:'Мультимедиа'}, art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023', price: 0, installationPrice: 0},
+	{id: 3, logo: Illustrator, name: 'Adobe Illustrator', vendor: {id: 1,country: 'iuh', description: 'df', image: {url:''}, name: 'Adobe'}, category: {id: 1, name:'Мультимедиа'}, art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023', price: 0, installationPrice: 0}
+  ]}

@@ -12,7 +12,9 @@ import Personal from './pages/Personal/Personal.tsx';
 import { Producers } from './pages/Producers/Producers.tsx';
 import { ShoppingCart } from './pages/ShoppingCart/ShoppingCart.tsx';
 import Search from './pages/Search/Search.tsx';
+import { DemoApi } from './utils/api/DEMOAPI.tsx';
 import { Seller } from './pages/Seller/Seller.tsx';
+import { Admin } from './pages/Admin/Admin.tsx';
 // import { ProtectedRouteForAdmin, ProtectedRouteForBuyer, ProtectedRouteForSeller } from './components/ProtectedRoute/ProtectedRoute.tsx';
 
 function App() {
@@ -42,12 +44,13 @@ function App() {
               // </ProtectedRouteForBuyer>
             } />
           <Route path='/producers' element ={<Producers/>}/>
-          <Route path='/producers/:vendor' element={<VendorPage/>}/>
+          <Route path='/producers/:id' element={<VendorPage/>}/>
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/seller/*" element={<Seller />} />
           <Route path="/seller" element={<Navigate to="/seller/products" />} />
           <Route path="/search" element={<Search />} />
-          <Route 
+          <Route path="/demoapi" element={<DemoApi />} />
+          <Route
             path="/seller/*" 
             element={
               // <ProtectedRouteForSeller>
@@ -65,14 +68,14 @@ function App() {
             path="/admin/*" 
             element={
               //<ProtectedRouteForAdmin>
-                <></>
+                <Admin/>
               //</ProtectedRouteForAdmin>
             } />
           <Route 
             path="/admin" 
             element={
               //<ProtectedRouteForAdmin>
-                <Navigate to="/admin/product-cards" />
+                <Navigate to="/admin/products" />
               //</ProtectedRouteForAdmin>
             } />
         </Routes>
