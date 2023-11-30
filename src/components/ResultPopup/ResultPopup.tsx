@@ -11,8 +11,11 @@ import { PopupForAuth } from '../AuthPopup/AuthPopup';
 import { RecoverPasswordPopup } from '../RecoverPasswordPopup/RecoverPasswordPopup';
 import { PopupForReg } from '../RegPopup/RegPopup';
 import { SignOutPopup } from '../SignOutPopup/SignOutPopup';
+import { PayPopup } from '../PayPopup/PayPopup';
+import { useLocation } from 'react-router';
 
 export const ResultPopup : FC = () =>{
+    const location = useLocation;
     const token = localStorage.getItem('token')
     const toggleState = useSelector((state: RootState) => state.toggleBtn.value);
     const MyRole = useSelector((state: RootState) => state.chooseRole.title);

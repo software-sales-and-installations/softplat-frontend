@@ -25,7 +25,7 @@ const CabinetMenu: React.FC = () => {
         <Link to="settings" className={classNames(styles.personalTitles__titles, (location.pathname===('/personal/settings' || '/seller/settings' || '/admin/settings')) ? styles.personalTitles__titles_active : '')}>
           Настройки
         </Link>
-        {user.role==='ADMIN'? <Link to='vendors' className={classNames(styles.personalTitles__titles, (location.pathname==='/admin/contacts') ? styles.personalTitles__titles_active : '')} >Контакты</Link>: null}
+        {role==='ADMIN'? <Link to='vendors' className={classNames(styles.personalTitles__titles, (location.pathname==='/admin/contacts') ? styles.personalTitles__titles_active : '')} >Контакты</Link>: null}
         <button type='button' onClick={()=>dispatch(popupState(true))} className={styles.personalTitles__btn}>
           Выйти из профиля
         </button>
