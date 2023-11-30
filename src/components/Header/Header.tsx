@@ -21,8 +21,9 @@ export const Header: FC = () => {
             <HeaderNavbar/>
             <HeaderSearchForm/>
             <div className={styles.btncontainer}>
-            {user.role==='BUYER'? (<><Link to='personal/favorites' className={styles.btncontainer__likebtn}/>
-                <Link to='/cart' className={styles.btncontainer__shopbtn}/> </>) : null}
+            {user.role==='BUYER'? <Link to='personal/favorites' className={styles.btncontainer__likebtn}/> : 
+            null}
+            {user.token? (user.role === 'BUYER' ? <Link to='/cart' className={styles.btncontainer__shopbtn}/>: null):<Link to='/cart' className={styles.btncontainer__shopbtn}/>}
                 {user.token? (
                     <Link to={user.role==='BUYER'? '/personal' : '/seller'} className={styles.btncontainer__profile}><FaRegUser className={styles.btncontainer__profileicon}/></Link>
                 ) : (

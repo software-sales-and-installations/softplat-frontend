@@ -9,8 +9,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../services/redux/store';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { selectUser } from '../../services/redux/slices/user/user';
+import { useLocation } from 'react-router-dom';
 
 export const Popup: FC<IPopup> = ({ children}) => {
+	const location = useLocation();
 	const dispatch = useAppDispatch();
 	const user = useAppSelector(selectUser);
 	function handlePopupClose(){
@@ -22,8 +24,8 @@ export const Popup: FC<IPopup> = ({ children}) => {
 		<>
 			<button onClick={()=>handlePopupClose()} className={styles.popup__closebtn}/>
 			{children}
-			{!user.token ? (
-				MyRole==='Забыли пароль?'? null : 
+			{(!user.token) ? (
+				(MyRole==='Забыли пароль?' || location.pathname==='/cart')? null : 
 			<div className={styles.popup__btncontainer}>
 				{CHOOSE_ROLE.map((i)=>{
 					return(
