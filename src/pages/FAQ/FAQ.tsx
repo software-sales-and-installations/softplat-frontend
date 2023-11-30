@@ -7,7 +7,9 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 export const FAQ: FC = () => {
   return (
     <>
-      <Breadcrumbs />
+      <div className={styles.breadcrumbs}>
+        <Breadcrumbs />
+      </div>
       <h1 className={styles.title}>FAQ</h1>
       <ul className={styles.list}>
         {FAQ_INFO.map(i => {

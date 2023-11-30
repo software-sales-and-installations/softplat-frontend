@@ -9,7 +9,9 @@ const Contacts = () => {
   return (
     <section>
       <Slider />
-      <Breadcrumbs />
+      <div className={styles.breadcrumbs}>
+        <Breadcrumbs />
+      </div>
       <div className={styles.contacts__container}>
         <ul className={styles.contacts__titles}>
           <li className={styles.contacts__item}>

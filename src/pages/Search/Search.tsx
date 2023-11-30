@@ -15,7 +15,9 @@ const Search: FC = () => {
   });
   return (
     <>
-      <Breadcrumbs />
+      <div className={styles.breadcrumbs}>
+        <Breadcrumbs />
+      </div>
       <section className={styles.search}>
         <h2 className={styles.search__title}>Результаты поиска: {state}</h2>
         {!searchedCountries.length && (

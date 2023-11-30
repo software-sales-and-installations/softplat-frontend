@@ -10,7 +10,9 @@ const Personal: React.FC = () => {
   return (
     <section className={styles.personal}>
       <div className={styles.personal__titles}>
-        <Breadcrumbs />
+        <div className={styles.personal__breadcrumbs}>
+          <Breadcrumbs />
+        </div>
         <CabinetMenu />
       </div>
       <Routes>

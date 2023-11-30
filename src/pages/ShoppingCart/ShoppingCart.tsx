@@ -7,7 +7,9 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 export const ShoppingCart: FC = () => {
   return (
     <>
-      <Breadcrumbs />
+      <div className={style.breadcrumbs}>
+        <Breadcrumbs />
+      </div>
       <section className={style.cart}>
         <h1 className={style.cart__header}>Корзина</h1>
         <div className={style.cart__content}>

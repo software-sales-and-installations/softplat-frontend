@@ -24,7 +24,9 @@ export const Producers: FC = () => {
   );
   return (
     <>
-      <Breadcrumbs />
+      <div className={styles.breadcrumbs}>
+        <Breadcrumbs />
+      </div>
       <h1 className={styles.title}>Производители</h1>
       <div className={styles.ddcontainer}>
         <DropDown

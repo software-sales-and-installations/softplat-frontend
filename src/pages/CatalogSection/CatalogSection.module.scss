@@ -1,10 +1,15 @@
 @import '../../styles/abstract/constants.scss';
 @import '../../styles/abstract/mixins.scss';
 
+.breadcrumbs {
+  margin: 70px 0;
+  padding: 0 80px;
+}
+
 .catalogSection {
   &__title {
     padding: 0 80px;
-    margin: 75px 0 0;
+    margin: 70px 0 0;
     text-align: start;
     @include font-h1-bold;
   }

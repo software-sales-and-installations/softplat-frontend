@@ -3,6 +3,7 @@
 
 .breadcrumbs {
   @include font-body-filters;
+  text-align: left;
 
   &__crumb {
     display: inline-block;

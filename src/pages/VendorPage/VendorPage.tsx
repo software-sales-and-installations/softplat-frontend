@@ -39,7 +39,9 @@ const VendorPage: FC = () => {
 
   return (
     <>
-      <Breadcrumbs pageName={currentVendor.name} />
+      <div className={styles.breadcrumbs}>
+        <Breadcrumbs pageName={currentVendor.name} />
+      </div>
       <section className={styles.vendorPage}>
         <VendorInfo
           title={currentVendor.name}

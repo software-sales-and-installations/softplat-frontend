@@ -42,7 +42,9 @@ const CatalogSection: FC = () => {
 
   return (
     <>
-      <Breadcrumbs />
+      <div className={styles.breadcrumbs}>
+        <Breadcrumbs />
+      </div>
       <section className={styles.catalogSection}>
         <h2 className={styles.catalogSection__title}>{currentCatalog?.name}</h2>
         <div className={styles.catalogSection__categories}>

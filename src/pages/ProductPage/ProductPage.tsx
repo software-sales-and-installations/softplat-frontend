@@ -54,7 +54,9 @@ export const ProductPage: FC = () => {
 
   return (
     <>
-      <Breadcrumbs vendor={cardData.vendor!} />
+      <div className={style.breadcrumbs}>
+        <Breadcrumbs vendor={cardData.vendor!} />
+      </div>
       <section className={style.product}>
         <div className={style.product__imageContainer}>
           <img
