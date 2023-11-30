@@ -14,7 +14,7 @@ export const Input: FC<IInput> = ({
 	onChange,
 	max,
 	defaultValue,
-	helpText
+	helpText,
 }) => {
 	const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 	useEffect(() => {

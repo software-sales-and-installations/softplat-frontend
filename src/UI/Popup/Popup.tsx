@@ -7,12 +7,11 @@ import { popupState } from './PopupSlice';
 import { chooseRoleState } from '../ChooseRole/ChooseRoleSlice';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../services/redux/store';
-import { useAppDispatch, useAppSelector } from '../../services/redux/store';
-import { selectUser } from '../../services/redux/slices/user/user';
+import { useAppDispatch } from '../../services/redux/store';
 
 export const Popup: FC<IPopup> = ({ children}) => {
+	const token = localStorage.getItem('token')
 	const dispatch = useAppDispatch();
-	const user = useAppSelector(selectUser);
 	function handlePopupClose(){
 		dispatch(popupState(false));
 		dispatch(chooseRoleState('Я покупатель'))
@@ -22,7 +21,7 @@ export const Popup: FC<IPopup> = ({ children}) => {
 		<>
 			<button onClick={()=>handlePopupClose()} className={styles.popup__closebtn}/>
 			{children}
-			{!user.token ? (
+			{!token ? (
 				MyRole==='Забыли пароль?'? null : 
 			<div className={styles.popup__btncontainer}>
 				{CHOOSE_ROLE.map((i)=>{
