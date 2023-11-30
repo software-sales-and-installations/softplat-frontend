@@ -102,6 +102,97 @@ export const VALIDATION_SETTINGS = {
       noName: 'Необходимо ввести номер телефона',
     },
   },
+  link: {
+    pattern:
+      /http[s]?:\/(?:\/[^\/]+){1,}(?:\/[А-Яа-яёЁ\w ]+\.[a-z]{3,5}(?![\/]|[\wА-Яа-яёЁ]))/,
+    messages: {
+      invalid: 'Введите ссылку в правильном формате',
+    },
+  },
+  price: {
+    pattern: /[0-9]+(\\.[0-9][0-9]?)?/,
+    messages: {
+      invalid: 'Введите стоимость продукта',
+      noPrice: 'Необходимо ввести стоимость продукта',
+    },
+  },
+  priceInstall: {
+    pattern: /[0-9]+(\\.[0-9][0-9]?)?/,
+    messages: {
+      invalid: 'Введите стоимость установки продукта',
+      noPrice: 'Необходимо ввести стоимость установки',
+    },
+  },
+  cardname: {
+    pattern: /^[a-z\s]+$/iu,
+    minLength: 2,
+    maxLength: 42,
+    messages: {
+      tooShort: 'Слишком короткое имя',
+      tooLong: 'Слишком длинное имя',
+      invalid: 'Только латинские буквы',
+      noName: 'Необходимо ввести имя',
+    },
+  },
+  cardNumber: {
+    pattern: /\d{4}\s{1}\d{4}\s{1}\d{4}\s{1}\d{4}/,
+    minLength: 19,
+    maxLength: 19,
+    messages: {
+      tooShort: 'Введите еще цифры',
+      tooLong: 'Слишком много цифр',
+      invalid: 'Введите еще цифры',
+      noCardNumber: 'Введите номер карты',
+    },
+  },
+  validDate: {
+    pattern: /[0-1][0-9]\/[2-3][0-9]$/,
+    minLength: 5,
+    maxLength: 5,
+    messages: {
+      tooShort: 'Неверная дата',
+      tooLong: 'Неверная дата',
+      invalid: 'Неверный формат даты',
+      novalidDate: 'Введите дату',
+    },
+  },
+  cvv: {
+    pattern: /[0-9]{3}$/,
+    minLength: 3,
+    maxLength: 3,
+    messages: {
+      tooShort: 'Неверный cvv',
+      tooLong: 'Неверный cvv',
+      invalid: 'Неверный формат cvv',
+      novalidDate: 'Введите cvv',
+    },
+  },
+};
+export const PRICE_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.price.messages.noPrice,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.price.pattern,
+    message: VALIDATION_SETTINGS.price.messages.invalid,
+  },
+};
+export const PRICE_INSTALL_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.priceInstall.messages.noPrice,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.priceInstall.pattern,
+    message: VALIDATION_SETTINGS.priceInstall.messages.invalid,
+  },
+};
+export const LINK_VALIDATION_CONFIG = {
+  pattern: {
+    value: VALIDATION_SETTINGS.link.pattern,
+    message: VALIDATION_SETTINGS.link.messages.invalid,
+  },
   cardNumber: {
     pattern: /\d{4}\s{1}\d{4}\s{1}\d{4}\s{1}\d{4}/,
     minLength: 19,

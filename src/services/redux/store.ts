@@ -1,14 +1,8 @@
-<<<<<<< HEAD
-import { reducer as toggleBtnReducer } from '../../UI/ToggleButton/ToggleButtonSlice';
-import { reducer as chooseRoleReducer } from '../../UI/ChooseRole/ChooseRoleSlice';
-import { reducer as popupStateReducer } from '../../UI/Popup/PopupSlice';
-=======
 import {reducer as toggleBtnReducer} from '../../UI/ToggleButton/ToggleButtonSlice';
 import {reducer as chooseRoleReducer} from '../../UI/ChooseRole/ChooseRoleSlice';
 import {reducer as popupStateReducer} from '../../UI/Popup/PopupSlice';
 import {reducer as signoutReducer} from '../../components/SignOutPopup/SignOutPopupSlice.tsx'
 import { setupListeners } from '@reduxjs/toolkit/query';
->>>>>>> aec90f31c23be28b8890f9f0a36271e89c088797
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import cardsReducer from './slices/cards/cards';
 import vendorsReducer from './slices/vendors/vendors'
@@ -53,9 +47,6 @@ const reducers = combineReducers({
 });
 
 export const store = configureStore({
-<<<<<<< HEAD
-  reducer: reducers,
-=======
 	reducer: reducers,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
     adminApi.middleware,
@@ -70,7 +61,6 @@ export const store = configureStore({
     userProductApi.middleware,
     vendorApi.middleware,
     )
->>>>>>> aec90f31c23be28b8890f9f0a36271e89c088797
 });
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -79,7 +69,4 @@ export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-<<<<<<< HEAD
-=======
 setupListeners(store.dispatch);
->>>>>>> aec90f31c23be28b8890f9f0a36271e89c088797

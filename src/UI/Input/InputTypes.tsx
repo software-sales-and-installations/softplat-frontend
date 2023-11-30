@@ -1,24 +1,36 @@
 export enum InputTypes {
-	email = 'email',
-	password = 'password',
-	confirmPassword = 'confirmPassword',
-	enteredEmail = 'enteredEmail',
-	text = 'text',
-	date = 'date',
-	INN ='INN',
-	orgName='orgName',
-	remember='checkbox',
-	name = 'name',
-	phone = 'phone',
-	oldpassword='oldpassword',
-	cardName = 'cardName'
+  email = 'email',
+  password = 'password',
+  confirmPassword = 'confirmPassword',
+  enteredEmail = 'enteredEmail',
+  text = 'text',
+  date = 'date',
+  INN = 'INN',
+  orgName = 'orgName',
+  remember = 'checkbox',
+  name = 'name',
+  phone = 'phone',
+  link = 'link',
+  price = 'price',
+  priceInstall = 'priceInstall',
+  producer = 'producer',
+  loadFile = 'loadFile',
+  keyWord = 'keyWord'
 }
+
+export enum InputColors {
+	black = 'black',
+	white = 'white',
+	grey = 'grey',
+}
+
 export interface IInput {
 	inputType: InputTypes;
 	readOnly?: boolean;
 	value?: any;
 	labelText?: string;
 	showPasswordButton?: boolean;
+	color?: InputColors;
 	validation?: any;
 	rules?: any;
 	error?: string;

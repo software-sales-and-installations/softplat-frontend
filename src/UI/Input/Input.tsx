@@ -32,61 +32,6 @@ export const Input: FC<IInput> = ({
       : inputType;
 
 	return (
-<<<<<<< HEAD
-    <div className={styles.input__container}>
-      <div className={styles.input__hints}>
-        {labelText ? (
-          <label className={styles.input__label} htmlFor={inputType}>
-            {labelText}
-          </label>
-        ) : null}
-      </div>
-      <input
-        {...validation}
-        onChange={
-          onChange
-            ? onChange
-            : e => {
-                validation.onChange(e);
-              }
-        }
-        className={styles.input__field}
-        type={inputTextType}
-        name={inputType}
-        id={inputType}
-        readOnly={readOnly}
-        max={max}
-        defaultValue={defaultValue}
-        maxLength={inputTextType === 'date' ? 8 : undefined}
-        value={readOnly && value ? value : undefined}
-      />
-      {/* )} */}
-      <span className={styles.input__error}>
-        {error ? (
-          error
-        ) : inputType === 'password' ||
-          inputType === 'name' ||
-          inputType === 'link' ||
-          inputType === 'price' ||
-          inputType === 'priceInstall' ? (
-          <p className={styles.input__help}>{helpText}</p>
-        ) : (
-          ''
-        )}
-      </span>
-      {showPasswordButton ? (
-        <button
-          className={classNames(
-            styles.input__button,
-            !isPasswordHidden ? styles.input__button_clicked : '',
-          )}
-          type="button"
-          onClick={togglePassword}
-        />
-      ) : null}
-    </div>
-  );
-=======
 		<div className={styles.input__container}>
 			<div className={styles.input__hints}>
 						{labelText ? (
@@ -128,5 +73,4 @@ export const Input: FC<IInput> = ({
 					) : null}
 		</div>
 	);
->>>>>>> aec90f31c23be28b8890f9f0a36271e89c088797
 };
