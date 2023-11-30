@@ -1,4 +1,4 @@
-import { FC, useEffect} from 'react';
+import { FC, useEffect, useState} from 'react';
 import { Popup } from '../../UI/Popup/Popup';
 import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';
@@ -10,11 +10,19 @@ import { Button } from '../../UI/Button/Button';
 import { checkBoxState } from '../../UI/ToggleButton/ToggleButtonSlice';
 import { useAppDispatch } from '../../services/redux/store';
 import { useAuthLoginMutation, useAuthRegisterMutation } from '../../utils/api/authApi';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../services/redux/store';
+import { popupState } from '../../UI/Popup/PopupSlice';
+import { setUser } from '../../services/redux/slices/user/user';
+import { signout } from '../SignOutPopup/SignOutPopupSlice';
 
 
 export const PopupForReg: FC = () => {
-	
+	const [errorStatus, setErrorStatus] = useState(0);
+	const [textError, setTextError] = useState('')
 	const dispatch = useAppDispatch();
+	const MyRole = useSelector((state: RootState) => state.chooseRole.title);
+	const roleForReg = MyRole==='Я покупатель'? 'BUYER' : (MyRole==='Я продавец'? 'SELLER': null)
 	const {
 		register,
 		handleSubmit,
@@ -31,7 +39,7 @@ export const PopupForReg: FC = () => {
 		dispatch(checkBoxState(false))
 	}
 
-	  const registerData = getValues();
+	const {email, name, password, confirmPassword, phone} = getValues();
 	  const [authLogin, {
 		// isFetching, isLoading, isError
 	  }] = useAuthLoginMutation();
@@ -39,28 +47,40 @@ export const PopupForReg: FC = () => {
 		// isFetching, isLoading, isError
 	  }] = useAuthRegisterMutation();
 	  const handleSubmitRegister = () => {
-	   authRegister(registerData).unwrap()
+	   authRegister({email, name, password, confirmPassword, role: roleForReg, phone: phone? phone.slice(2): ''}).unwrap()
 		 .then((res) => {
 		  authLogin({
-			confirmPassword: registerData['password'],
+			confirmPassword: confirmPassword,
 			email: res.email,
-			password: registerData['password'],
+			password:password,
 		  }).unwrap()
 			.then((userData) => {
 		  localStorage.setItem('token', userData.token);
 		  localStorage.setItem('role', userData.role);
 		  console.log(userData)
+		  dispatch(popupState(false))
+		  dispatch(setUser(userData));
+		  dispatch(signout(false))
+		  reset;
 		})
 			.catch((error) => {
 			  console.log(error);
 			})
 		 })
 		 .catch((error) => {
-		  console.log(error);
+			setErrorStatus(error.status)
+		  	console.log(error);
 		})
 	.finally()
 	  };
-
+	  useEffect(()=>{
+		if(errorStatus===400){
+			setTextError('Некорректно заполнены поля')
+		}
+		if(errorStatus===409){
+			setTextError('Такой пользователь уже существует')
+		}
+	}, [errorStatus])
 	return (
 		<Popup>
 			<form className={styles.form} onSubmit={handleSubmit(handleSubmitRegister)}>
@@ -115,7 +135,10 @@ export const PopupForReg: FC = () => {
 				<div className={styles.checkboxcontainer}>
 					<input id='agreement' className={styles.checkboxcontainer__input} {...register("agree", { required: true })} type="checkbox" value="agree"/>
 					<label className={styles.checkboxcontainer__label} htmlFor='agreement'>Я соглашаюсь с политикой обработки персональных данных</label>
-				</div>				
+				</div>
+				<div className={styles.errorContainer}>
+					<p className={styles.errorContainer__error}>{textError}</p>
+				</div>		
 				<div className={styles.btncontainer}>
 					<Button isDisabled={!isValid} type='submit' mode='primary'>Зарегистрироваться</Button>
 					<Button onClick={handleExitClick} mode='secondary' type='button'>Отмена</Button>

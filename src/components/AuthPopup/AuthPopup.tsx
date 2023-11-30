@@ -1,4 +1,4 @@
-import { FC} from 'react';
+import { FC, useEffect, useState} from 'react';
 import { Popup } from '../../UI/Popup/Popup';
 import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';
@@ -15,6 +15,8 @@ import { useAuthLoginMutation } from '../../utils/api/authApi';
 import { signout } from '../SignOutPopup/SignOutPopupSlice';
 
 export const PopupForAuth: FC = () => {
+	const [authError, setAuthError] = useState(0)
+	const [errorText, setErrorText] = useState('')
 	const dispatch = useAppDispatch();
 	const {
 		register,
@@ -42,7 +44,8 @@ export const PopupForAuth: FC = () => {
 		  reset;
 		})
 		  .catch((error) => {
-		  console.log(error);
+			setAuthError(error.status)
+		  	console.log(error);
 		})
 		  .finally()
 		};
@@ -51,7 +54,14 @@ export const PopupForAuth: FC = () => {
 		dispatch(chooseRoleState('Забыли пароль?'))
 		
 	}
-
+	useEffect(()=>{
+		if (authError===401){
+			setErrorText('Неправильный email или пароль')
+		}
+		if(authError===400){
+			setErrorText('Некорректно заполнены поля email или password')
+		}
+	}, [authError])
 	return (
 		<Popup>
 			<form className={styles.form} onSubmit={handleSubmit(handleSubmitLogin)}>
@@ -74,6 +84,9 @@ export const PopupForAuth: FC = () => {
 				<div className={styles.checkboxcontainer}>
 					<input className={styles.checkboxcontainer__input} id='agreement' {...register("remember")} type="checkbox" value="remember"/>
 					<label className={styles.checkboxcontainer__label} htmlFor='agreement'>Запомнить меня</label>
+				</div>
+				<div className={styles.errorContainer}>
+					<p className={styles.errorContainer__error}>{errorText}</p>
 				</div>
 				<div className={styles.btncontainer}>
 					<Button isDisabled={!isValid} type='submit' mode='primary'>Войти</Button>
