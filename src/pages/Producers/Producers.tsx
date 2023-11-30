@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { fetchAllVendors } from '../../services/redux/slices/vendors/vendors';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 // import { changeCountryOption } from '../../UI/DropDown/DropDownSlice';
-
 
 export const Producers: FC = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +24,7 @@ export const Producers: FC = () => {
   );
   return (
     <>
+      <Breadcrumbs />
       <h1 className={styles.title}>Производители</h1>
       <div className={styles.ddcontainer}>
         <DropDown

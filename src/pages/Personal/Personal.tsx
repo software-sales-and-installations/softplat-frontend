@@ -3,14 +3,14 @@ import PersonalPurchases from '../../components/PersonalPurchases/PersonalPurcha
 import CabinetMenu from '../../components/CabinetMenu/CabinetMenu';
 import styles from './Personal.module.scss';
 import { Routes, Route } from 'react-router-dom';
-import MuiBreadcrumbs from '../../components/MuiBreadcrumbs/MuiBreadcrumbs';
 import PersonalSettings from '../../components/PersonalSettings/PersonalSettings';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 const Personal: React.FC = () => {
   return (
     <section className={styles.personal}>
       <div className={styles.personal__titles}>
-        <MuiBreadcrumbs />
+        <Breadcrumbs />
         <CabinetMenu />
       </div>
       <Routes>
