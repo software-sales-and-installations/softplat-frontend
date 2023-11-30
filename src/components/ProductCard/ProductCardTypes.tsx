@@ -50,7 +50,7 @@ type ProductCardSeller = {
   };
 };
 
-type ProductCardVendor = {
+export type ProductCardVendor = {
   country: string;
   description: string;
   id: number;

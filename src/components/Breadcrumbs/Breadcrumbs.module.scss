@@ -1,0 +1,36 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.breadcrumbs {
+  @include font-body-filters;
+
+  &__crumb {
+    display: inline-block;
+    margin-right: 4px;
+
+    &:last-child {
+      a {
+        cursor: text;
+      }
+    }
+
+    &:after {
+      content: '>';
+      margin-left: 5px;
+    }
+
+    &:last-child:after {
+      display: none;
+    }
+
+    a {
+      color: $dark-grey;
+      text-decoration: none;
+    }
+
+    p {
+      color: $dark-grey;
+      margin: 0;
+    }
+  }
+}
