@@ -30,10 +30,10 @@ export const Header: FC = () => {
             <HeaderNavbar/>
             <HeaderSearchForm/>
             <div className={styles.btncontainer}>
-            {(role)==='BUYER'? (<><Link to='personal/favorites' className={styles.btncontainer__likebtn}/>
-                <Link to='/cart' className={styles.btncontainer__shopbtn}/> </>) : null}
+            {(role)==='BUYER'? (<><Link to='personal/favorites' className={styles.btncontainer__likebtn}/> 
+                <Link to='/cart' className={styles.btncontainer__shopbtn}/> </>) : (!token? <Link to='/cart' className={styles.btncontainer__shopbtn}/> : null)}
                 {(token)? (
-                    <Link to={role==='BUYER'? '/personal' : '/seller'} className={styles.btncontainer__profile}><FaRegUser className={styles.btncontainer__profileicon}/></Link>
+                    <Link to={role==='BUYER'? '/personal' : (role==='ADMIN')? '/admin':'/seller'} className={styles.btncontainer__profile}><FaRegUser className={styles.btncontainer__profileicon}/></Link>
                 ) : (
                     <button type='button' onClick={()=>{
                         dispatch(popupState(true))
