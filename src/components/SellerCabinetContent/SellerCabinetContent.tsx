@@ -13,7 +13,7 @@ const SellerProduct: React.FC = () => {
 
   const { data, error, isLoading } = usePublicProductListQuery({
     minId: 0,
-    pageSize: 10,
+    pageSize: '',
     sort: 'NEWEST',
   });
 
