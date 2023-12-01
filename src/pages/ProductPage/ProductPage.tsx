@@ -89,37 +89,38 @@ export const ProductPage: FC = () => {
             <p className={style.product__price}>{totalPrice} ₽</p>
             <p className={style.product__seller}>Продавец</p>
 
-          <button className={style.product__btn}>Скачать демо</button>
-        </div>
-        <p className={style.product__description}>{cardData.description}</p>
-        <div className={style.product__checkboxContainer}>
-          <Checkbox
-            label={`Добавить установку ${cardData.installationPrice} ₽`}
-            onCheck={handleCheckboxChange}
-          />
-          <div
-            className={style.product__question}
-            onMouseEnter={() =>
-              setTooltipText(
-                'Наш специалист установит ПО на ваше устройство в удобное время',
-              )
-            }
-            onMouseLeave={() => setTooltipText('')}
-          >
-            ?
+            <button className={style.product__btn}>Скачать демо</button>
           </div>
-          {tooltipText && <Tooltip text={tooltipText} />}
+          <p className={style.product__description}>{cardData.description}</p>
+          <div className={style.product__checkboxContainer}>
+            <Checkbox
+              label={`Добавить установку ${cardData.installationPrice} ₽`}
+              onCheck={handleCheckboxChange}
+            />
+            <div
+              className={style.product__question}
+              onMouseEnter={() =>
+                setTooltipText(
+                  'Наш специалист установит ПО на ваше устройство в удобное время',
+                )
+              }
+              onMouseLeave={() => setTooltipText('')}
+            >
+              ?
+            </div>
+            {tooltipText && <Tooltip text={tooltipText} />}
+          </div>
+          <div className={style.product__buyButtonBlock}>
+            <Button
+              mode="primary"
+              onClick={handleAddToCart}
+              isDisabled={addItemError.isError}
+            >
+              Добавить в корзину
+            </Button>
+          </div>
         </div>
-        <div className={style.product__buyButtonBlock}>
-          <Button
-            mode="primary"
-            onClick={handleAddToCart}
-            isDisabled={addItemError.isError}
-          >
-            Добавить в корзину
-          </Button>
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
