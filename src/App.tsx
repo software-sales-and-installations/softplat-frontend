@@ -12,7 +12,7 @@ import Personal from './pages/Personal/Personal.tsx';
 import { Producers } from './pages/Producers/Producers.tsx';
 import { ShoppingCart } from './pages/ShoppingCart/ShoppingCart.tsx';
 import Search from './pages/Search/Search.tsx';
-import { DemoApi } from './utils/api/DEMOAPI.tsx';
+// import { DemoApi } from './utils/api/DEMOAPI.tsx';
 import { Seller } from './pages/Seller/Seller.tsx';
 import { Admin } from './pages/Admin/Admin.tsx';
 import { useLoadFavorites } from './services/favoritesService/favoritesService.ts';
@@ -49,7 +49,7 @@ function App() {
           <Route path='/producers/:id' element={<VendorPage/>}/>
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/demoapi" element={<DemoApi />} />
+          {/* <Route path="/demoapi" element={<DemoApi />} /> */}
           <Route
             path="/seller/*" 
             element={

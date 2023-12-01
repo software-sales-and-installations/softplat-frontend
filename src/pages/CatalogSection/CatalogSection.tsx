@@ -14,6 +14,7 @@ import DropDown from '../../UI/DropDown/DropDown';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
 import { ProductStatus } from '../../components/ProductCard/ProductCardTypes';
 import Preloader from '../../components/Preloader/Preloader';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 const CatalogSection: FC = () => {
   const { section } = useParams();
@@ -40,26 +41,31 @@ const CatalogSection: FC = () => {
   const productsCards = { products: categorizedCards };
 
   return (
-    <section className={styles.catalogSection}>
-      <h2 className={styles.catalogSection__title}>{currentCatalog?.name}</h2>
-      <div className={styles.catalogSection__categories}>
-        <Categories />
+    <>
+      <div className={styles.breadcrumbs}>
+        <Breadcrumbs />
       </div>
-      <div className={styles.catalogSection__selectContainer}>
-        <DropDown type={SelectorType.BASE} options={SELECT_OPTIONS} />
-        <DropDown
-          type={SelectorType.COUNTRY}
-          options={SELECT_COUNTRIES_OPTIONS}
-        />
-      </div>
-      <div className={styles.catalogSection__items}>
-        {status === 'loading' ? (
-          <Preloader />
-        ) : (
-          <CardsGrid cards={productsCards} />
-        )}
-      </div>
-    </section>
+      <section className={styles.catalogSection}>
+        <h2 className={styles.catalogSection__title}>{currentCatalog?.name}</h2>
+        <div className={styles.catalogSection__categories}>
+          <Categories />
+        </div>
+        <div className={styles.catalogSection__selectContainer}>
+          <DropDown type={SelectorType.BASE} options={SELECT_OPTIONS} />
+          <DropDown
+            type={SelectorType.COUNTRY}
+            options={SELECT_COUNTRIES_OPTIONS}
+          />
+        </div>
+        <div className={styles.catalogSection__items}>
+          {status === 'loading' ? (
+            <Preloader />
+          ) : (
+            <CardsGrid cards={productsCards} />
+          )}
+        </div>
+      </section>
+    </>
   );
 };
 

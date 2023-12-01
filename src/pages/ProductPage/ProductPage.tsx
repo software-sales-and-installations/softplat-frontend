@@ -11,6 +11,7 @@ import {
   useBuyerBasketAddItemMutation,
   useBuyerBasketInfoQuery,
 } from '../../utils/api/buyerBasketApi';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 export const ProductPage: FC = () => {
   const { id } = useParams();
@@ -63,26 +64,30 @@ export const ProductPage: FC = () => {
   };
 
   return (
-    <section className={style.product}>
-      <div className={style.product__imageContainer}>
-        <img
-          src={cardData.image?.url}
-          alt="Фотография товара"
-          className={style.product__image}
-        />
+    <>
+      <div className={style.breadcrumbs}>
+        <Breadcrumbs vendor={cardData.vendor!} />
       </div>
+      <section className={style.product}>
+        <div className={style.product__imageContainer}>
+          <img
+            src={cardData.image?.url}
+            alt="Фотография товара"
+            className={style.product__image}
+          />
+        </div>
 
-      <div className={style.product__info}>
-        <span className={style.product__category}>
-          {cardData.category?.name}
-        </span>
+        <div className={style.product__info}>
+          <span className={style.product__category}>
+            {cardData.category?.name}
+          </span>
 
-        <h2 className={style.product__name}>{cardData.name}</h2>
-        <span className={style.product__vendor}>{cardData.vendor?.name}</span>
-        <span className={style.product__number}>{cardData.id}</span>
-        <div className={style.product__details}>
-          <p className={style.product__price}>{totalPrice} ₽</p>
-          <p className={style.product__seller}>Продавец</p>
+          <h2 className={style.product__name}>{cardData.name}</h2>
+          <span className={style.product__vendor}>{cardData.vendor?.name}</span>
+          <span className={style.product__number}>{cardData.id}</span>
+          <div className={style.product__details}>
+            <p className={style.product__price}>{totalPrice} ₽</p>
+            <p className={style.product__seller}>Продавец</p>
 
           <button className={style.product__btn}>Скачать демо</button>
         </div>
