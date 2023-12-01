@@ -1,22 +1,24 @@
 import { FC } from 'react';
 import style from './CartSummary.module.scss';
 import { Button } from '../../UI/Button/Button';
-import { useAppSelector } from '../../services/redux/store';
+import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { popupState } from '../../UI/Popup/PopupSlice';
-import { useDispatch } from 'react-redux';
 
 export const CartSummary: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const cartItems = useAppSelector(store => store.cart.items);
-
-  const totalAmount = cartItems.reduce((total, item) => {
-    const installationPrice = item.installation ? item.installationPrice : 0;
-    const cartQuantity = item.cartQuantity || 1;
-    return total + (item.price + installationPrice) * cartQuantity;
+  // console.log('cartItemsSumm', cartItems);
+  const checkedCartItems = cartItems.filter(item => item.isChecked);
+  console.log(checkedCartItems);
+  
+  const totalAmount = checkedCartItems.reduce((total, item) => {
+    const installationPrice = item.installation ? item.productResponseDto.installationPrice : 0;
+    const cartQuantity = item.quantity || 1;
+    return total + (item.productResponseDto.price + installationPrice) * cartQuantity;
   }, 0);
 
-  const totalItems = cartItems.reduce((total, item) => {
-    const cartQuantity = item.cartQuantity || 1;
+  const totalItems = checkedCartItems.reduce((total, item) => {
+    const cartQuantity = item.quantity || 1;
     return total + cartQuantity;
   }, 0);
 

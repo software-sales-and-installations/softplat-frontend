@@ -1,32 +1,48 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './ProductCard.module.scss';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../../UI/Button/Button';
 import { IProductCardProps } from './ProductCardTypes';
-import { useAppSelector } from '../../services/redux/store';
-import { useDispatch } from 'react-redux';
-import { addItem } from '../../services/redux/slices/cart/cart';
+import { useAppDispatch, useAppSelector } from '../../services/redux/store';
+import { addItem, setCartItems } from '../../services/redux/slices/cart/cart';
+import { useBuyerBasketAddItemMutation, useBuyerBasketInfoQuery } from '../../utils/api/buyerBasketApi';
 
 const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const addSpace = (price: number): string => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   };
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [buyerBasketAddItem] = useBuyerBasketAddItemMutation();
+  //@ts-ignore
+  const basketInfoQuery = useBuyerBasketInfoQuery();
+  const cart = useAppSelector(store => store.cart.items);
 
-  const cart = useAppSelector(store => store.cart);
+  useEffect(() => {
+    if (basketInfoQuery.data) {
+      dispatch(setCartItems(basketInfoQuery.data.productsInBasket));
+    }
+  }, [basketInfoQuery.data, dispatch]);
 
-  const isItemInCart = cart?.items.some(item => item.id === card.id);
+  const handleAddToCart = async () => {
+    try {
+      const response = await buyerBasketAddItem({
+        productId: card.id,
+        installation: false,
+      }).unwrap();
 
-  const handleAddToCart = () => {
-    dispatch(addItem(card));
+      // dispatch(setCartItems(response.productsInBasket));
+
+      console.log(response);
+      
+      basketInfoQuery.refetch();
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+    }
   };
 
-  const handleLinkToCart = () => {
-    navigate('/cart');
-  };
+
 
   return (
     <div className={styles.card}>
@@ -92,15 +108,11 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
           </div>
         </div>
       </Link>
-      {isItemInCart ? (
-        <Button mode="primary" onClick={handleLinkToCart}>
-          Уже в корзине
-        </Button>
-      ) : (
+
         <Button mode="primary" onClick={handleAddToCart}>
           Добавить в корзину
         </Button>
-      )}
+
     </div>
   );
 };

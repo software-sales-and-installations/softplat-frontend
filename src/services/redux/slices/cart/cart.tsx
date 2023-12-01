@@ -1,67 +1,97 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IProductCard } from '../../../../components/ProductCard/ProductCardTypes';
+import { buyerBasketApi } from '../../../../utils/api/buyerBasketApi';
+import { ICartItem } from '../../../../components/ProductListCart/ProductListTypes';
+
+
 
 interface ICartState {
-  items: IProductCard[];
-  itemsToRemove: IProductCard[];
+  items: ICartItem[];
 }
 
 const initialCartState: ICartState = {
   items: [],
-  itemsToRemove: [],
 };
+
+
+
+
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState: initialCartState,
   reducers: {
-    addItem: (state, action) => {
+    setCartItems: (state, action: PayloadAction<ICartItem[]>) => {
+      const newItems = action.payload.map(item => ({ ...item, isChecked: true }));
+      state.items = newItems;
+    },
+    addItem: (state, action: PayloadAction<ICartItem>) => {
       state.items.push(action.payload);
     },
-    removeItem: (state, action) => {
-      state.items = state.items.filter(item => item.id !== action.payload.id);
+    removeItemById: (state, action: PayloadAction<number>) => {
+      const itemId = action.payload;
+
+      state.items = state.items.filter((item) => item.productResponseDto.id !== itemId);
+      // state.itemsToBuy = state.itemsToBuy.filter((item) => item.productResponseDto.id !== itemId);
     },
-    clearCart: state => {
+
+    clearCart: (state) => {
       state.items = [];
     },
-    updateCartItem: (state, action) => {
-      const index = state.items.findIndex(
-        item => item.id === action.payload.id,
+    updateCartItem: (state, action: PayloadAction<ICartItem>) => {
+      const cartItem = action.payload;
+      const index = state.items.findIndex((item) => 
+        item.productResponseDto.id === cartItem.productResponseDto.id
       );
+    
       if (index !== -1) {
-        state.items[index] = action.payload;
+        // Создаем новый массив, чтобы не изменять оригинальный
+        const updatedItems = [...state.items];
+    
+        // Обновляем поля quantity и isChecked
+        updatedItems[index] = { 
+          ...updatedItems[index], 
+          quantity: cartItem.quantity !== undefined ? cartItem.quantity : updatedItems[index].quantity,
+          isChecked: cartItem.isChecked !== undefined ? cartItem.isChecked : updatedItems[index].isChecked,
+        };
+    
+        // Присваиваем обновленный массив items
+        state.items = updatedItems;
       }
     },
-    addToRemovalList: (state, action) => {
-      state.itemsToRemove.push(action.payload);
+    addToBuyList: (state, action: PayloadAction<ICartItem>) => {
+      const itemToBuy = action.payload;
+      const index = state.items.findIndex(item => item.id === itemToBuy.id);
+    
+      if (index !== -1) {
+        state.items[index].isChecked = !state.items[index].isChecked;
+      }
     },
-    removeFromRemovalList: (state, action) => {
-      state.itemsToRemove = state.itemsToRemove.filter(
-        item => item.id !== action.payload.id,
-      );
+    removeFromBuyList: (state, action: PayloadAction<ICartItem>) => {
+      state.itemsToBuy = state.itemsToBuy.filter((item) => item.productResponseDto.id !== action.payload.id);
     },
-    clearRemovalList: state => {
-      state.itemsToRemove = [];
-    },
-    removeSelectedItems: state => {
-      state.items = state.items.filter(
-        item =>
-          !state.itemsToRemove.some(removeItem => removeItem.id === item.id),
-      );
-      state.itemsToRemove = [];
-    },
+    // clearRemovalList: (state) => {
+    //   state.itemsToBuy = [];
+    // },
+    // removeSelectedItems: (state) => {
+    //   state.items = state.items.filter(
+    //     (item) => !state.itemsToBuy.some((removeItem) => removeItem.id === item.id)
+    //   );
+    //   state.itemsToBuy = [];
+    // },
   },
 });
 
 export const {
+  setCartItems,
   addItem,
-  removeItem,
   clearCart,
   updateCartItem,
-  addToRemovalList,
-  removeFromRemovalList,
-  clearRemovalList,
-  removeSelectedItems,
+  addToBuyList,
+  removeFromBuyList,
+  // clearRemovalList,
+  // removeSelectedItems,
+  removeItemById,
 } = cartSlice.actions;
 
 export const cartReducer = cartSlice.reducer;

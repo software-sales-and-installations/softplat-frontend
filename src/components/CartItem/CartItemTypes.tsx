@@ -1,5 +1,5 @@
-import { IProductCard } from "../ProductCard/ProductCardTypes";
+import { ICartItem } from "../ProductListCart/ProductListTypes";
 
 export interface ICartItemProps {
-  product: IProductCard;
+  item: ICartItem;
 }

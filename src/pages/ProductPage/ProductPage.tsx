@@ -6,7 +6,8 @@ import { Tooltip } from '../../components/Tooltip/Tooltip';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { fetchSingleCard } from '../../services/redux/slices/cards/cards';
-import { addItem } from '../../services/redux/slices/cart/cart';
+import { addItem, setCartItems } from '../../services/redux/slices/cart/cart';
+import { useBuyerBasketAddItemMutation, useBuyerBasketInfoQuery } from '../../utils/api/buyerBasketApi';
 
 export const ProductPage: FC = () => {
   const { id } = useParams();
@@ -19,9 +20,11 @@ export const ProductPage: FC = () => {
   const cart = useAppSelector(store => store.cart);
 
   const navigate = useNavigate();
-
-  const isItemInCart = cart.items.some(item => item.id === cardData.id);
-  console.log(isItemInCart);
+  const [buyerBasketAddItem] = useBuyerBasketAddItemMutation();
+  const basketInfoQuery = useBuyerBasketInfoQuery();
+  // const isItemInCart = cart.items.some(item => item.id === cardData.id);
+  console.log(cardData.id);
+  
 
   useEffect(() => {
     dispatch(fetchSingleCard(Number(id)));
@@ -31,8 +34,19 @@ export const ProductPage: FC = () => {
     setTotalPrice(cardData.price);
   }, [cardData.price]);
 
-  const handleAddToCart = () => {
-    dispatch(addItem(cardData));
+  const handleAddToCart = async () => {
+    try {
+      const response = await buyerBasketAddItem({
+        productId: cardData.id,
+        installation: isInstallationSelected,
+      }).unwrap();
+
+      dispatch(setCartItems(response.productsInBasket));
+
+      basketInfoQuery.refetch();
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+    }
   };
 
   const handleLinkToCart = () => {
@@ -96,15 +110,11 @@ export const ProductPage: FC = () => {
           {tooltipText && <Tooltip text={tooltipText} />}
         </div>
         <div className={style.product__buyButtonBlock}>
-          {isItemInCart ? (
-            <Button mode="primary" onClick={handleLinkToCart}>
-              Уже в корзине
-            </Button>
-          ) : (
+
             <Button mode="primary" onClick={handleAddToCart}>
               Добавить в корзину
             </Button>
-          )}
+
         </div>
       </div>
     </section>
