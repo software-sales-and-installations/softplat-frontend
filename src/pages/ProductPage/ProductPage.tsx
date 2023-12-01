@@ -3,11 +3,14 @@ import style from './ProductPage.module.scss';
 import { Button } from '../../UI/Button/Button';
 import { Checkbox } from '../../UI/Checkbox/Checkbox';
 import { Tooltip } from '../../components/Tooltip/Tooltip';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { fetchSingleCard } from '../../services/redux/slices/cards/cards';
-import { addItem, setCartItems } from '../../services/redux/slices/cart/cart';
-import { useBuyerBasketAddItemMutation, useBuyerBasketInfoQuery } from '../../utils/api/buyerBasketApi';
+import { setCartItems } from '../../services/redux/slices/cart/cart';
+import {
+  useBuyerBasketAddItemMutation,
+  useBuyerBasketInfoQuery,
+} from '../../utils/api/buyerBasketApi';
 
 export const ProductPage: FC = () => {
   const { id } = useParams();
@@ -17,14 +20,11 @@ export const ProductPage: FC = () => {
   const [totalPrice, setTotalPrice] = useState(cardData.price);
   const [tooltipText, setTooltipText] = useState('');
 
-  const cart = useAppSelector(store => store.cart);
-
-  const navigate = useNavigate();
-  const [buyerBasketAddItem] = useBuyerBasketAddItemMutation();
+  const [buyerBasketAddItem, addItemError] = useBuyerBasketAddItemMutation();
+  //@ts-ignore
   const basketInfoQuery = useBuyerBasketInfoQuery();
   // const isItemInCart = cart.items.some(item => item.id === cardData.id);
   console.log(cardData.id);
-  
 
   useEffect(() => {
     dispatch(fetchSingleCard(Number(id)));
@@ -47,10 +47,6 @@ export const ProductPage: FC = () => {
     } catch (error) {
       console.error('Error adding item to cart:', error);
     }
-  };
-
-  const handleLinkToCart = () => {
-    navigate('/cart');
   };
 
   const handleCheckboxChange = () => {
@@ -110,11 +106,13 @@ export const ProductPage: FC = () => {
           {tooltipText && <Tooltip text={tooltipText} />}
         </div>
         <div className={style.product__buyButtonBlock}>
-
-            <Button mode="primary" onClick={handleAddToCart}>
-              Добавить в корзину
-            </Button>
-
+          <Button
+            mode="primary"
+            onClick={handleAddToCart}
+            isDisabled={addItemError.isError}
+          >
+            Добавить в корзину
+          </Button>
         </div>
       </div>
     </section>

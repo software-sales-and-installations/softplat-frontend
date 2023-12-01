@@ -2,8 +2,6 @@
 @import '../../styles/abstract/mixins.scss';
 
 .cartItem {
-
-
   display: grid;
   grid-template-columns: 30px 100px 487px 140px 90px;
   height: 114px;
@@ -13,16 +11,12 @@
   text-decoration: none;
   list-style: none;
 
-width: 1010px;
+  width: 1010px;
 
-
-
-  
   &__img {
     width: 100px;
     height: 100px;
     cursor: pointer;
-
   }
 
   &__name {
@@ -89,6 +83,17 @@ width: 1010px;
     color: $black-standart-text;
   }
 
+  &__like {
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  &__like:hover {
+    opacity: 1;
+  }
 
   &__like:active {
     color: $black-standart-text;
@@ -96,11 +101,10 @@ width: 1010px;
 
   &__quantity {
     display: flex;
-    justify-content: space-between ;
+    justify-content: space-between;
     color: $black-standart-text;
     @include font-body-card;
     align-items: center;
-
   }
 
   &__quantityButton {
@@ -113,7 +117,6 @@ width: 1010px;
     border-radius: 3px;
     box-sizing: border-box;
     border: 2px solid $dark-grey;
-
   }
 
   &__quantityButton:disabled {

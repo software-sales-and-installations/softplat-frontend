@@ -3,6 +3,7 @@ import style from './ProductListCart.module.scss';
 import { CartItem } from '../CartItem/CartItem';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import {
+  // clearCart,
   // clearRemovalList,
   // removeSelectedItems,
   setCartItems,
@@ -26,19 +27,26 @@ export const ProductListCart: FC = () => {
 
   const cartItems = useAppSelector(store => store.cart.items) || [];
 
-  // console.log('cartItems', cartItems);
-  // console.log(basketInfo?.productsInBasket);
+  const sortedCartItems = [...cartItems].sort((a, b) => b.productResponseDto.id - a.productResponseDto.id);
+
+  // console.log('sortedCartItems', sortedCartItems);
   
+
+  const handleClearCart = () => {
+    // API логика очистки корзины
+    // dispatch(clearCart())
+  }
+
   return (
     <div className={style.productList}>
       {cartItems.length > 0 && (
-        <button className={style.productList__cleanCart}>
+        <button className={style.productList__cleanCart} onClick={handleClearCart}>
           Очистить корзину
         </button>
       )}
 
       <ul className={style.list}>
-        {cartItems?.map(product => (
+        {sortedCartItems?.map(product => (
           <CartItem
             item={product}
             key={product.id}
