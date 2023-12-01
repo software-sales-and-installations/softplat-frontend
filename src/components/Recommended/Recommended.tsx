@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import CardsGrid from '../CardsGrid/CardsGrid';
 import styles from './Recommended.module.scss';
-import { ProductStatus } from '../ProductCard/ProductCardTypes';
+import { IProductCard, ProductStatus } from '../ProductCard/ProductCardTypes';
 import Preloader from '../Preloader/Preloader';
 import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 
@@ -15,7 +15,7 @@ const Recommended: FC = () => {
   });
 
   const recommendedCards = data?.products.filter(
-    (card: { productStatus: ProductStatus }) =>
+    (card: IProductCard) =>
       card.productStatus === ProductStatus.PUBLISHED,
   );
 
