@@ -34,14 +34,14 @@ const VendorPage: FC = () => {
 
   const vendorCards = data?.products?.filter(
     (card: IProductCard) =>
-      card.vendor?.id === vendor.id &&
+      card.vendor?.id === vendor?.id &&
       card.productStatus === ProductStatus.PUBLISHED,
   );
 
   return (
     <section className={styles.vendorPage}>
       <VendorInfo
-        title={vendor?.name}
+        title={vendor?.name || ''}
         description={vendor?.description || ''}
         img={vendor?.image?.url || ''}
       />

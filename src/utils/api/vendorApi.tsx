@@ -29,7 +29,7 @@ export const vendorApi = createApi({
       }),
     }),
     // Получение вендора по Id
-    vendor: build.query({
+    vendor: build.query<IVendor, string>({
       query: (vendorId) => `/vendor/${vendorId}/`,
       // providesTags: ['Vendor'],
     }),

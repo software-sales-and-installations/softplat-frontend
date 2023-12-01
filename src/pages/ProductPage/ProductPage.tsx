@@ -7,32 +7,31 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { fetchSingleCard } from '../../services/redux/slices/cards/cards';
 import { addItem } from '../../services/redux/slices/cart/cart';
+import { usePublicProductQuery } from '../../utils/api/publicProductApi';
 
 export const ProductPage: FC = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const cardData = useAppSelector(state => state.cards.card);
   const [isInstallationSelected, setIsInstallationSelected] = useState(false);
-  const [totalPrice, setTotalPrice] = useState(cardData.price);
+  const { data: product } = usePublicProductQuery(id);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    if (product) {
+      setTotalPrice(product.price);
+    }
+  }, [product]);
+
   const [tooltipText, setTooltipText] = useState('');
 
   const cart = useAppSelector(store => store.cart);
 
   const navigate = useNavigate();
 
-  const isItemInCart = cart.items.some(item => item.id === cardData.id);
-  console.log(isItemInCart);
-
-  useEffect(() => {
-    dispatch(fetchSingleCard(Number(id)));
-  }, [id]);
-
-  useEffect(() => {
-    setTotalPrice(cardData.price);
-  }, [cardData.price]);
+  const isItemInCart = cart.items.some(item => item.id === product?.id);
 
   const handleAddToCart = () => {
-    dispatch(addItem(cardData));
+    dispatch(addItem(product));
   };
 
   const handleLinkToCart = () => {
@@ -45,18 +44,20 @@ export const ProductPage: FC = () => {
   };
 
   const updateTotalPrice = (wasInstallationSelected: boolean) => {
-    setTotalPrice(prev =>
-      wasInstallationSelected
-        ? prev - cardData.installationPrice
-        : prev + cardData.installationPrice,
-    );
+    if (product) {
+      setTotalPrice(prev =>
+        wasInstallationSelected
+          ? prev - product.installationPrice
+          : prev + product.installationPrice,
+      );
+    }
   };
 
   return (
     <section className={style.product}>
       <div className={style.product__imageContainer}>
         <img
-          src={cardData.image?.url}
+          src={product?.image?.url}
           alt="Фотография товара"
           className={style.product__image}
         />
@@ -64,22 +65,22 @@ export const ProductPage: FC = () => {
 
       <div className={style.product__info}>
         <span className={style.product__category}>
-          {cardData.category?.name}
+          {product?.category?.name}
         </span>
 
-        <h2 className={style.product__name}>{cardData.name}</h2>
-        <span className={style.product__vendor}>{cardData.vendor?.name}</span>
-        <span className={style.product__number}>{cardData.id}</span>
+        <h2 className={style.product__name}>{product?.name}</h2>
+        <span className={style.product__vendor}>{product?.vendor?.name}</span>
+        <span className={style.product__number}>{product?.id}</span>
         <div className={style.product__details}>
           <p className={style.product__price}>{totalPrice} ₽</p>
           <p className={style.product__seller}>Продавец</p>
 
           <button className={style.product__btn}>Скачать демо</button>
         </div>
-        <p className={style.product__description}>{cardData.description}</p>
+        <p className={style.product__description}>{product?.description}</p>
         <div className={style.product__checkboxContainer}>
           <Checkbox
-            label={`Добавить установку ${cardData.installationPrice} ₽`}
+            label={`Добавить установку ${product?.installationPrice} ₽`}
             onCheck={handleCheckboxChange}
           />
           <div
