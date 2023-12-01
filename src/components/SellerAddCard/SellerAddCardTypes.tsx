@@ -9,4 +9,6 @@
     vendor: string;
     category: string;
     install: string;
+    file: any;
+    logo: any;
   }

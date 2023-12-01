@@ -62,8 +62,8 @@ export const SellerAddCard: FC = () => {
         <p className={styles.selectContainer__label}>Загрузите ПО</p>
           <input
             type="file"
-            name="file"
             id="file"
+            {...register('file')}
             className={styles.sellerAddCard__loadImg}
           />
           <div className={styles.containerForFile__img}>
@@ -101,9 +101,9 @@ export const SellerAddCard: FC = () => {
         <label className={styles.sellerAddCard__load_logo}>
           <input
             type="file"
-            name="file"
-            id="file"
+            id="logo"
             className={styles.sellerAddCard__loadImg}
+            {...register('logo')}
           />
           <svg
             xmlns="http://www.w3.org/2000/svg"
