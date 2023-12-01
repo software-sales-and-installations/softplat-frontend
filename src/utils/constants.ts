@@ -377,14 +377,22 @@ export const FAQ_INFO: {
   },
 ];
 
-export const TITLE_FOR_BREADCRUMBS: {
-  id: number;
-  title: string;
-  url: string;
-}[] = [
-  { id: 1, title: 'Главная', url: '' },
-  { id: 2, title: 'FAQ', url: 'faq' },
-];
+export const TITLES_FOR_BREADCRUMBS: {
+  [key: string]: string;
+} = {
+  catalog: 'Каталог',
+  contacts: 'Контакты',
+  faq: 'FAQ',
+  producers: 'Производители',
+  search: 'Поиск',
+  personal: 'Личный кабинет',
+  seller: 'Личный кабинет',
+  purchases: 'Мои покупки',
+  products: 'Мои товары',
+  analytics: 'Аналитика',
+  settings: 'Настройки',
+  favorites: 'Избранное',
+};
 
 export const CATEGORIZED_TEXT_VENDOR: {
   id: number;
@@ -418,13 +426,13 @@ export const SELECT_OPTIONS: {
   },
 ];
 
-  export const SELECT_COUNTRIES_OPTIONS: {label: string; value: string}[] = [
-	{value: 'RUSSIA', label: 'Россия'},
-	{value: 'CHINA', label: 'Китай'},
-	{value: 'INDIA', label: 'Индия'},
-	{value: 'UK', label: 'Великобритания'},
-	{value: 'USA', label: 'США'},
-  ]
+export const SELECT_COUNTRIES_OPTIONS: { label: string; value: string }[] = [
+  { value: 'RUSSIA', label: 'Россия' },
+  { value: 'CHINA', label: 'Китай' },
+  { value: 'INDIA', label: 'Индия' },
+  { value: 'UK', label: 'Великобритания' },
+  { value: 'USA', label: 'США' },
+];
 
 export const PRODUCT_ITEMS = {
   products: [
@@ -581,23 +589,24 @@ export const PRODUCT_ITEMS_LIKED: {
     name: 'Название программного обеспечения',
     price: 19898,
     img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-    installationPrice:0
+    installationPrice: 0,
   },
   {
     id: 2,
     name: 'Название программного обеспечения',
     price: 19898,
     img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-    installationPrice: 0
+    installationPrice: 0,
   },
   {
     id: 3,
     name: 'Название программного обеспечения',
     price: 19898,
     img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-    installationPrice: 0
-  }
+    installationPrice: 0,
+  },
 ];
+
 
 
   export const SellerExistingCard = {products:[

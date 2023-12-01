@@ -1,6 +1,11 @@
 @import '../../styles/abstract/constants.scss';
 @import '../../styles/abstract/mixins.scss';
 
+.breadcrumbs {
+  margin: 70px 0;
+  padding: 0 80px;
+}
+
 .vendorPage {
   padding: 0 80px;
 

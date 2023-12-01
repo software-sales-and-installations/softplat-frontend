@@ -44,7 +44,7 @@ export const PopupForAuth: FC = () => {
 		  reset;
 		})
 		  .catch((error) => {
-			setAuthError(error.status)
+			setAuthError(error.originalStatus)
 		  	console.log(error);
 		})
 		  .finally()
