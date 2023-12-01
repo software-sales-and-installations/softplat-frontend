@@ -13,7 +13,6 @@ const Recommended: FC = () => {
   useEffect(() => {
     dispatch(fetchSortedCards('NEWEST'));
   }, []);
-  // const cards = useAppSelector(state => state.cards.cards);
   const { status, cards } = useAppSelector(state => state.cards);
 
   const recommendedCards = cards.products?.filter(

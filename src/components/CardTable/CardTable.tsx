@@ -3,6 +3,7 @@ import styles from './CardTable.module.scss';
 import classNames from 'classnames';
 import { IProductCardPropsTable } from '../ProductCard/ProductCardTypes';
 import { useForm } from "react-hook-form";
+import { Link } from 'react-router-dom';
 
 export const CardTable: FC<IProductCardPropsTable> =({products}) =>{
     const role = localStorage.getItem('role')
@@ -31,8 +32,9 @@ export const CardTable: FC<IProductCardPropsTable> =({products}) =>{
                             <td className={classNames(styles.cellLogo, styles.cell, styles.cell_type_checkbox)}>
                                 <input type='checkbox' {...register("id")}  value={item.id}></input>
                             </td> : null}
+                            <Link to={`/product/${item.id}`} className={styles.link}>
                             {role==='SELLER'?<td className={classNames(styles.cellLogo, styles.cell)}>
-                                <img className={classNames(styles.cellLogo__img, styles.cell)} src={item.seller?.imageResponseDto.url} alt={item.name}/>
+                                <img className={classNames(styles.cellLogo__img, styles.cell)} src={item.seller?.imageResponseDto?.url} alt={item.name}/>
                             </td> : null}
                             <td className={classNames(styles.cellName, styles.cell)}>
                                 <p className={styles.cell__text}>{item.name}</p>
@@ -52,6 +54,7 @@ export const CardTable: FC<IProductCardPropsTable> =({products}) =>{
                             <td className={classNames(styles.cellData, styles.cell)}>
                                 <p className={styles.cell__text}>{item.date}</p>
                             </td>
+                            </Link>
                             <td className={classNames(styles.cellRed, styles.cell)}>
                                 <button className={styles.redBtn} type='button'/>
                             </td>

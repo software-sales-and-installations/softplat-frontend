@@ -1,6 +1,13 @@
 @import '../../styles/abstract/mixins.scss';
 @import '../../styles/abstract/constants.scss';
 
+.link {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    gap: 17px;
+    align-items: center;
+}
 .line{
     display: flex;
     gap: 17px;
