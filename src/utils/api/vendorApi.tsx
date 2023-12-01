@@ -79,7 +79,7 @@ export const vendorApi = createApi({
     //   ],
     //   "text": "string"
     // }
-    vendorList: build.query({
+    vendorList: build.query<VendorsList, void>({
       query: () => `/vendor/search/`,
     }),
   }),
