@@ -18,7 +18,6 @@ export const Producers: FC = () => {
     (vendor: IVendor) => vendor.country === countryOption.value,
   );
 
-  console.log(filteredVendors);
   return (
     <>
       <div className={styles.breadcrumbs}>
