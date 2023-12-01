@@ -5,9 +5,9 @@ import { Checkbox } from '../../UI/Checkbox/Checkbox';
 import { Tooltip } from '../../components/Tooltip/Tooltip';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
-import { fetchSingleCard } from '../../services/redux/slices/cards/cards';
 import { addItem } from '../../services/redux/slices/cart/cart';
 import { usePublicProductQuery } from '../../utils/api/publicProductApi';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 export const ProductPage: FC = () => {
   const { id } = useParams();
@@ -54,14 +54,18 @@ export const ProductPage: FC = () => {
   };
 
   return (
-    <section className={style.product}>
-      <div className={style.product__imageContainer}>
-        <img
-          src={product?.image?.url}
-          alt="Фотография товара"
-          className={style.product__image}
-        />
+    <>
+      <div className={style.breadcrumbs}>
+        <Breadcrumbs vendor={product?.vendor!} />
       </div>
+      <section className={style.product}>
+        <div className={style.product__imageContainer}>
+          <img
+            src={product?.image?.url}
+            alt="Фотография товара"
+            className={style.product__image}
+          />
+        </div>
 
       <div className={style.product__info}>
         <span className={style.product__category}>
@@ -109,5 +113,6 @@ export const ProductPage: FC = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };

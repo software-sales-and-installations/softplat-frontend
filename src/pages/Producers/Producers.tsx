@@ -7,6 +7,7 @@ import { useAppSelector } from '../../services/redux/store';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
 import { useVendorListQuery } from '../../utils/api/vendorApi';
 import Preloader from '../../components/Preloader/Preloader';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 export const Producers: FC = () => {
   const countryOption = useAppSelector(state => state.dropdown.countryOption);
@@ -20,6 +21,9 @@ export const Producers: FC = () => {
   console.log(filteredVendors);
   return (
     <>
+      <div className={styles.breadcrumbs}>
+        <Breadcrumbs />
+      </div>
       <h1 className={styles.title}>Производители</h1>
       <div className={styles.ddcontainer}>
         <DropDown

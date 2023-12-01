@@ -14,6 +14,7 @@ import {
 import Preloader from '../../components/Preloader/Preloader';
 import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 import { useVendorQuery } from '../../utils/api/vendorApi';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 // type Props = {};
 
@@ -39,36 +40,41 @@ const VendorPage: FC = () => {
   );
 
   return (
-    <section className={styles.vendorPage}>
-      <VendorInfo
-        title={vendor?.name || ''}
-        description={vendor?.description || ''}
-        img={vendor?.image?.url || ''}
-      />
-      <ul className={styles.vendorPage__categories}>
-        {CATEGORIZED_TEXT_VENDOR.map(btn => {
-          return (
-            <li className={styles.item} key={btn.id}>
-              <button className={styles.vendorPage__categoriesBtn}>
-                {btn.text}
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-      <div className={styles.vendorPage__selectForm}>
-        <DropDown type={SelectorType.BASE} options={SELECT_OPTIONS} />
+    <>
+      <div className={styles.breadcrumbs}>
+        <Breadcrumbs pageName={vendor?.name} />
       </div>
-      <div className={styles.vendorPage__products}>
-        {isLoading ? (
-          <Preloader />
-        ) : error ? (
+      <section className={styles.vendorPage}>
+        <VendorInfo
+          title={vendor?.name || ''}
+          description={vendor?.description || ''}
+          img={vendor?.image?.url || ''}
+        />
+        <ul className={styles.vendorPage__categories}>
+          {CATEGORIZED_TEXT_VENDOR.map(btn => {
+            return (
+              <li className={styles.item} key={btn.id}>
+                <button className={styles.vendorPage__categoriesBtn}>
+                  {btn.text}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+        <div className={styles.vendorPage__selectForm}>
+          <DropDown type={SelectorType.BASE} options={SELECT_OPTIONS} />
+        </div>
+        <div className={styles.vendorPage__products}>
+          {isLoading ? (
+            <Preloader />
+          ) : error ? (
           <p>Произошла ошибка</p>
         ) : (
-          <CardsGrid cards={{ products: vendorCards }} />
-        )}
-      </div>
-    </section>
+            <CardsGrid cards={{ products: vendorCards }} />
+          )}
+        </div>
+      </section>
+    </>
   );
 };
 

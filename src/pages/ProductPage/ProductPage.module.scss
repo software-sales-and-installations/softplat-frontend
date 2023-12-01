@@ -1,12 +1,17 @@
 @import './../../styles/abstract/constants.scss';
 @import '../../styles/abstract/mixins.scss';
 
+.breadcrumbs {
+  margin-top: 70px;
+  padding: 0 80px;
+}
+
 .product {
   display: flex;
   gap: 190px;
   max-width: 1758px;
   width: 100%;
-  margin: 60px auto 135px;
+  margin: 70px auto 135px;
   @include font-body-regular;
   color: $dark-grey;
 
@@ -152,6 +157,4 @@
     width: 150px;
     height: 35px;
   }
-
-  
 }
