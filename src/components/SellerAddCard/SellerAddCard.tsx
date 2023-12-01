@@ -38,36 +38,35 @@ export const SellerAddCard: FC = () => {
         />
         <div className={styles.selectContainer}>
           <label className={styles.selectContainer__label} htmlFor='vendor'>Выберите вендора</label>
-            <select  className={styles.selectContainer__select} {...register('vendor')}>
+            <select id='vendor'  className={styles.selectContainer__select} {...register('vendor')}>
               <option value="A">Вендор А</option>
               <option value="B">Вендор Б</option>
           </select>
         </div>
-        {/* <div className={styles.selectContainer}>
+        <div className={styles.selectContainer}>
           <label className={styles.selectContainer__label} htmlFor='category'>Выберите категорию</label>
-            <select  className={styles.selectContainer__select} {...register('category')}>
-              <option value="A">Вендор А</option>
-              <option value="B">Вендор Б</option>
+            <select id='category' className={styles.selectContainer__select} {...register('category')}>
+              <option value="A">Категория А</option>
+              <option value="B">Категория Б</option>
           </select>
-        </div> */}
-        <div>
-          <p className={styles.sellerAddCard__title}>Выберите категорию</p>
-          <DropDown type={SelectorType.COUNTRY} options={SELECT_COUNTRIES_OPTIONS} />
         </div>
-        <div>
-          <p className={styles.sellerAddCard__title}>Выберите вариант программы</p>
-          <DropDown type={SelectorType.COUNTRY} options={SELECT_COUNTRIES_OPTIONS} />
+        <div className={styles.selectContainer}>
+          <label className={styles.selectContainer__label} htmlFor='install'>Выберите категорию</label>
+            <select id='install' className={styles.selectContainer__select} {...register('install')}>
+              <option value="A">С установкой</option>
+              <option value="B">Без установки</option>
+          </select>
         </div>
       </div>
-      <div>
-        <p className={styles.sellerAddCard__title}>Загрузите ПО</p>
-        <label className={styles.sellerAddCard__load}>
+      <div className={styles.containerForFile}>
+        <p className={styles.selectContainer__label}>Загрузите ПО</p>
           <input
             type="file"
             name="file"
             id="file"
             className={styles.sellerAddCard__loadImg}
           />
+          <div className={styles.containerForFile__img}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -83,8 +82,10 @@ export const SellerAddCard: FC = () => {
               strokeLinejoin="round"
             />
           </svg>
-          <p>Перетащите сюда файлы или клините для выбора</p>
-        </label>
+          </div>
+          <label htmlFor='file' className={styles.sellerAddCard__load}>
+            <p className={styles.containerForFile__label}>Перетащите сюда файлы или клините для выбора</p>
+          </label>
       </div>
       <Input
         labelText='Или вы можете указать ссылку на файл для скачивания'

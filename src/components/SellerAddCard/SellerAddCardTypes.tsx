@@ -7,4 +7,6 @@
     priceInstall: number;
     error?: string;
     vendor: string;
+    category: string;
+    install: string;
   }
