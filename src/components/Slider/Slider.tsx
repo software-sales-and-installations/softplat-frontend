@@ -3,7 +3,8 @@ import './Slider.scss';
 import 'swiper/scss';
 import 'swiper/scss/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Link } from 'react-router-dom';
 
 type Slider = {
   text: string;
@@ -29,11 +30,14 @@ const slides: Slider = [
 
 const Slider: FC = () => {
   return (
+    <div className='swiper__wrapper'>
+
     <Swiper
       spaceBetween={40}
       slidesPerView={'auto'}
-      modules={[Pagination, Autoplay]}
-      autoplay={{ delay: 5000, disableOnInteraction: false }}
+      modules={[Pagination, Autoplay, Navigation]}
+      // autoplay={{ delay: 5000, disableOnInteraction: false }}
+      navigation={true}
       loop={true}
       grabCursor={true}
       pagination={{ clickable: true }}
@@ -42,18 +46,23 @@ const Slider: FC = () => {
       {slides?.map(i => (
         <SwiperSlide className="swiper-slide" key={i.text}>
           <div className="swiper-slide__content">
-            <img
+            <div className="swiper-slide__text-container">
+              <p className="swiper-slide__text">{i.text}</p>
+              <Link to='' className='swiper-slide__btn'>Подробнее</Link>
+            </div>
+            <div className='swiper-slide__img-container'>
+              <img
               className="swiper-slide__img"
               src={i.img}
               alt="Картинка слайдера"
             />
-            <div className="swiper-slide__text-container">
-              <p className="swiper-slide__text">{i.text}</p>
             </div>
+            
           </div>
         </SwiperSlide>
       ))}
     </Swiper>
+    </div>
   );
 };
 
