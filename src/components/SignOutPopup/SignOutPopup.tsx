@@ -7,6 +7,7 @@ import { popupState } from '../../UI/Popup/PopupSlice';
 import { useNavigate } from 'react-router-dom';
 import { useAuthLogoutMutation } from '../../utils/api/authApi';
 import { signout } from './SignOutPopupSlice';
+import { clearFavorites } from '../../services/redux/slices/favourites/favourites';
 
 export const SignOutPopup: FC = () => {
     const navigate = useNavigate();
@@ -25,6 +26,7 @@ export const SignOutPopup: FC = () => {
           navigate('/', {replace: true})
         dispatch(popupState(false));
         dispatch(signout(true))
+        dispatch(clearFavorites())
           console.log(userData)
         })
           .catch((error) => {

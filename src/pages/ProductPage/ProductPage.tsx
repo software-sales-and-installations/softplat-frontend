@@ -3,10 +3,14 @@ import style from './ProductPage.module.scss';
 import { Button } from '../../UI/Button/Button';
 import { Checkbox } from '../../UI/Checkbox/Checkbox';
 import { Tooltip } from '../../components/Tooltip/Tooltip';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
-import { addItem } from '../../services/redux/slices/cart/cart';
+import { setCartItems } from '../../services/redux/slices/cart/cart';
 import { usePublicProductQuery } from '../../utils/api/publicProductApi';
+import {
+  useBuyerBasketAddItemMutation,
+  useBuyerBasketInfoQuery,
+} from '../../utils/api/buyerBasketApi';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 export const ProductPage: FC = () => {
@@ -24,18 +28,25 @@ export const ProductPage: FC = () => {
 
   const [tooltipText, setTooltipText] = useState('');
 
-  const cart = useAppSelector(store => store.cart);
+  const [buyerBasketAddItem, addItemError] = useBuyerBasketAddItemMutation();
+  //@ts-ignore
+  const basketInfoQuery = useBuyerBasketInfoQuery();
+  // const isItemInCart = cart.items.some(item => item.id === product?.id);
+  console.log(cardData.id);
 
-  const navigate = useNavigate();
+  const handleAddToCart = async () => {
+    try {
+      const response = await buyerBasketAddItem({
+        productId: cardData.id,
+        installation: isInstallationSelected,
+      }).unwrap();
 
-  const isItemInCart = cart.items.some(item => item.id === product?.id);
+      dispatch(setCartItems(response.productsInBasket));
 
-  const handleAddToCart = () => {
-    dispatch(addItem(product));
-  };
-
-  const handleLinkToCart = () => {
-    navigate('/cart');
+      basketInfoQuery.refetch();
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+    }
   };
 
   const handleCheckboxChange = () => {
@@ -79,40 +90,38 @@ export const ProductPage: FC = () => {
           <p className={style.product__price}>{totalPrice} ₽</p>
           <p className={style.product__seller}>Продавец</p>
 
-          <button className={style.product__btn}>Скачать демо</button>
-        </div>
-        <p className={style.product__description}>{product?.description}</p>
-        <div className={style.product__checkboxContainer}>
-          <Checkbox
-            label={`Добавить установку ${product?.installationPrice} ₽`}
-            onCheck={handleCheckboxChange}
-          />
-          <div
-            className={style.product__question}
-            onMouseEnter={() =>
-              setTooltipText(
-                'Наш специалист установит ПО на ваше устройство в удобное время',
-              )
-            }
-            onMouseLeave={() => setTooltipText('')}
-          >
-            ?
+            <button className={style.product__btn}>Скачать демо</button>
           </div>
-          {tooltipText && <Tooltip text={tooltipText} />}
-        </div>
-        <div className={style.product__buyButtonBlock}>
-          {isItemInCart ? (
-            <Button mode="primary" onClick={handleLinkToCart}>
-              Уже в корзине
-            </Button>
-          ) : (
-            <Button mode="primary" onClick={handleAddToCart}>
+          <p className={style.product__description}>{cardData.description}</p>
+          <div className={style.product__checkboxContainer}>
+            <Checkbox
+              label={`Добавить установку ${cardData.installationPrice} ₽`}
+              onCheck={handleCheckboxChange}
+            />
+            <div
+              className={style.product__question}
+              onMouseEnter={() =>
+                setTooltipText(
+                  'Наш специалист установит ПО на ваше устройство в удобное время',
+                )
+              }
+              onMouseLeave={() => setTooltipText('')}
+            >
+              ?
+            </div>
+            {tooltipText && <Tooltip text={tooltipText} />}
+          </div>
+          <div className={style.product__buyButtonBlock}>
+            <Button
+              mode="primary"
+              onClick={handleAddToCart}
+              isDisabled={addItemError.isError}
+            >
               Добавить в корзину
             </Button>
-          )}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
     </>
   );
 };

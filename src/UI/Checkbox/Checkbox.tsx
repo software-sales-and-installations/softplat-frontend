@@ -2,13 +2,19 @@ import { FC, useState } from 'react';
 import { ICheckboxProps } from './CheckboxTypes';
 import style from './Checkbox.module.scss';
 
-export const Checkbox: FC<ICheckboxProps> = ({ onCheck, label }) => {
+export const Checkbox: FC<ICheckboxProps> = ({ onCheck, label, checked, readOnly  }) => {
   
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(checked);
 
   const handleChange = () => {
-    setIsChecked(prev => !prev);
-    onCheck(!isChecked);
+    if (!readOnly) {
+      const updatedValue = !isChecked;
+      setIsChecked(updatedValue);
+      if (onCheck) {
+        onCheck(updatedValue);
+      }
+
+    }
   };
 
   return (
