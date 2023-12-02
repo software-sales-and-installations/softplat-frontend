@@ -1,23 +1,27 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import styles from './Producers.module.scss';
 import DropDown from '../../UI/DropDown/DropDown';
 import { SELECT_COUNTRIES_OPTIONS } from '../../utils/constants';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../services/redux/store';
+import { useAppDispatch, useAppSelector } from '../../services/redux/store';
+import { fetchAllVendors } from '../../services/redux/slices/vendors/vendors';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
-import { useVendorListQuery } from '../../utils/api/vendorApi';
-import Preloader from '../../components/Preloader/Preloader';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+// import { changeCountryOption } from '../../UI/DropDown/DropDownSlice';
 
 export const Producers: FC = () => {
+  const dispatch = useAppDispatch();
   const countryOption = useAppSelector(state => state.dropdown.countryOption);
 
-  const { data: vendorAll, isLoading, error } = useVendorListQuery();
+  useEffect(() => {
+    dispatch(fetchAllVendors());
+  }, []);
 
-  const filteredVendors = vendorAll?.vendors.filter(
-    (vendor: IVendor) => vendor.country === countryOption.value,
+  const vendors = useAppSelector(state => state.vendors.vendors.vendors);
+
+  const filteredVendors = vendors.filter(
+    vendor => vendor.country === countryOption.value,
   );
-
   return (
     <>
       <div className={styles.breadcrumbs}>
@@ -31,28 +35,22 @@ export const Producers: FC = () => {
         />
       </div>
       <div className={styles.container}>
-        {isLoading ? (
-          <Preloader />
-        ) : error ? (
-          <p>Произошла ошибка</p>
-        ) : (
-          filteredVendors?.map((vendor: IVendor) => {
-            return (
-              <Link
-                key={vendor.id}
-                to={`/producers/${vendor.id}`}
-                className={styles.container__link}
-              >
-                <img
-                  className={styles.container__img}
-                  src={vendor.image?.url}
-                  alt={vendor.name}
-                />
-                <h2 className={styles.container__title}>{vendor.name}</h2>
-              </Link>
-            );
-          })
-        )}
+        {filteredVendors.map(vendor => {
+          return (
+            <Link
+              key={vendor.id}
+              to={`/producers/${vendor.id}`}
+              className={styles.container__link}
+            >
+              <img
+                className={styles.container__img}
+                src={vendor.image?.url}
+                alt={vendor.name}
+              />
+              <h2 className={styles.container__title}>{vendor.name}</h2>
+            </Link>
+          );
+        })}
       </div>
     </>
   );

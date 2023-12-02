@@ -6,10 +6,6 @@ interface IVendor {
   image?: VendorImage;
 }
 
-interface VendorsList {
-  vendors: IVendor[]
-}
-
 type VendorImage = {
   name?: string;
   id?: number;
