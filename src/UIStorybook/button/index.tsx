@@ -1,8 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
-import classnames from 'classnames';
 
-import styles from './styles.module.css';
-import { Loader } from '../loader';
+import './styles.css';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
@@ -25,33 +23,17 @@ export const Button = ({
   customIcon,
   ...props
 }: ButtonProps) => {
-  const isExtraLarge = size === 'extraLarge';
   return (
     <button
       // eslint-disable-next-line react/button-has-type
       type={actionType}
-      className={classnames(
-        styles.button,
-        styles[`button--${buttonType}`],
-        styles[`button--${size}`],
-        styles[`button--${buttonType}--${size}`],
-        extClassName,
-        'text',
-        'text_size_small',
-        { text_size_medium: isExtraLarge }
-      )}
+      className={`button button--${buttonType} button--${size} button--${buttonType}--${size}`}
       {...props}
     >
       <div
-        className={classnames(
-          styles.buttonContent,
-          styles[`buttonContent--${buttonType}`],
-          { [styles[`buttonContent--${size}`]]: isExtraLarge },
-          { [styles['buttonContent--withoutLabel']]: !label }
-        )}
-      >
+        className={`buttonContent buttonContent--${buttonType} buttonContent--${size} buttonContent--withoutLabel`}>
         {customIcon}
-        {isLoading ? <Loader /> : <span>{label}</span>}
+        {isLoading ? <span>IsLoading</span> : <span>{label}</span>}
       </div>
     </button>
   );

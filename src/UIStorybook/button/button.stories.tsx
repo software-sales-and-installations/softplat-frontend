@@ -30,13 +30,6 @@ export const Secondary: Story = {
   },
 };
 
-export const PartialFill: Story = {
-  args: {
-    buttonType: 'partial',
-    label: 'Подтвердить',
-  },
-};
-
 export const Disabled: Story = {
   args: {
     buttonType: 'primary',

@@ -4,25 +4,19 @@
   justify-content: center;
   height: 30px;
   background: transparent;
-  transition: var(--transition-hover);
   cursor: pointer;
-  color: var(--colors-interface-white);
+  color: red;
   border: none;
   box-sizing: border-box;
 }
 
 .button--partial {
-  background: linear-gradient(
-    to right,
-    var(--colors-interface-white) 50%,
-    var(--colors-interface-primary) 50%
-  );
-  border: 1px solid var(--colors-interface-primary);
+background-color: blue;
 }
 
 .button--partial:hover,
 .button--partial:disabled {
-  background: transparent;
+  background: yellow;
   border: none;
 }
 
