@@ -32,7 +32,8 @@ const Breadcrumbs: FC<IBreadcrumbsProps> = ({ pageName, vendor }) => {
   let currentLink = '';
 
   const crumbs = (
-    isPageCart || isPageProduct
+    // isPageCart || 
+    isPageProduct
       ? localStorage.getItem('urlPath')!
       : location.pathname
   )
