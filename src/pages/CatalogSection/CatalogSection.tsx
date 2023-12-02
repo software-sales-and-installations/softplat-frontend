@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import styles from './CatalogSection.module.scss';
 import { useParams } from 'react-router-dom';
 import CardsGrid from '../../components/CardsGrid/CardsGrid';
@@ -8,32 +8,32 @@ import {
   SELECT_OPTIONS,
 } from '../../utils/constants';
 import { Categories } from '../../components/Categories/Categories';
-import { useAppSelector } from '../../services/redux/store';
+import { fetchSortedCards } from '../../services/redux/slices/cards/cards';
+import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import DropDown from '../../UI/DropDown/DropDown';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
-import { IProductCard, ProductStatus } from '../../components/ProductCard/ProductCardTypes';
+import { ProductStatus } from '../../components/ProductCard/ProductCardTypes';
 import Preloader from '../../components/Preloader/Preloader';
-import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 const CatalogSection: FC = () => {
   const { section } = useParams();
+  const dispatch = useAppDispatch();
   const selectState = useAppSelector(state => state.dropdown.option.value);
   const countryOption = useAppSelector(
     state => state.dropdown.countryOption.value,
   );
+  const { cards, status } = useAppSelector(store => store.cards);
 
-  const { data, error, isLoading } = usePublicProductListQuery({
-    minId: 0,
-    pageSize: '',
-    sort: selectState,
-  });
+  useEffect(() => {
+    dispatch(fetchSortedCards(selectState));
+  }, [selectState]);
 
   const currentCatalog = CATALOGUE_NAMES.find(
     item => item.pathName === section,
   );
-  const categorizedCards = data?.products?.filter(
-    (    card: IProductCard) =>
+  const categorizedCards = cards?.products?.filter(
+    card =>
       card.category?.id === currentCatalog?.id &&
       card.vendor?.country === countryOption &&
       card.productStatus === ProductStatus.PUBLISHED,
@@ -58,11 +58,9 @@ const CatalogSection: FC = () => {
           />
         </div>
         <div className={styles.catalogSection__items}>
-          {isLoading ? (
+          {status === 'loading' ? (
             <Preloader />
-          ) : error ? (
-          <p>Произошла ошибка</p>
-        ) : (
+          ) : (
             <CardsGrid cards={productsCards} />
           )}
         </div>

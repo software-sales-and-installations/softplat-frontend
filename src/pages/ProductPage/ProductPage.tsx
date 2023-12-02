@@ -5,8 +5,8 @@ import { Checkbox } from '../../UI/Checkbox/Checkbox';
 import { Tooltip } from '../../components/Tooltip/Tooltip';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
+import { fetchSingleCard } from '../../services/redux/slices/cards/cards';
 import { setCartItems } from '../../services/redux/slices/cart/cart';
-import { usePublicProductQuery } from '../../utils/api/publicProductApi';
 import {
   useBuyerBasketAddItemMutation,
   useBuyerBasketInfoQuery,
@@ -16,23 +16,24 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 export const ProductPage: FC = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
+  const cardData = useAppSelector(state => state.cards.card);
   const [isInstallationSelected, setIsInstallationSelected] = useState(false);
-  const { data: product } = usePublicProductQuery(id);
-  const [totalPrice, setTotalPrice] = useState(0);
-
-  useEffect(() => {
-    if (product) {
-      setTotalPrice(product.price);
-    }
-  }, [product]);
-
+  const [totalPrice, setTotalPrice] = useState(cardData.price);
   const [tooltipText, setTooltipText] = useState('');
 
   const [buyerBasketAddItem, addItemError] = useBuyerBasketAddItemMutation();
   //@ts-ignore
   const basketInfoQuery = useBuyerBasketInfoQuery();
-  // const isItemInCart = cart.items.some(item => item.id === product?.id);
+  // const isItemInCart = cart.items.some(item => item.id === cardData.id);
   console.log(cardData.id);
+
+  useEffect(() => {
+    dispatch(fetchSingleCard(Number(id)));
+  }, [id]);
+
+  useEffect(() => {
+    setTotalPrice(cardData.price);
+  }, [cardData.price]);
 
   const handleAddToCart = async () => {
     try {
@@ -55,40 +56,38 @@ export const ProductPage: FC = () => {
   };
 
   const updateTotalPrice = (wasInstallationSelected: boolean) => {
-    if (product) {
-      setTotalPrice(prev =>
-        wasInstallationSelected
-          ? prev - product.installationPrice
-          : prev + product.installationPrice,
-      );
-    }
+    setTotalPrice(prev =>
+      wasInstallationSelected
+        ? prev - cardData.installationPrice
+        : prev + cardData.installationPrice,
+    );
   };
 
   return (
     <>
       <div className={style.breadcrumbs}>
-        <Breadcrumbs vendor={product?.vendor!} />
+        <Breadcrumbs vendor={cardData.vendor!} />
       </div>
       <section className={style.product}>
         <div className={style.product__imageContainer}>
           <img
-            src={product?.image?.url}
+            src={cardData.image?.url}
             alt="Фотография товара"
             className={style.product__image}
           />
         </div>
 
-      <div className={style.product__info}>
-        <span className={style.product__category}>
-          {product?.category?.name}
-        </span>
+        <div className={style.product__info}>
+          <span className={style.product__category}>
+            {cardData.category?.name}
+          </span>
 
-        <h2 className={style.product__name}>{product?.name}</h2>
-        <span className={style.product__vendor}>{product?.vendor?.name}</span>
-        <span className={style.product__number}>{product?.id}</span>
-        <div className={style.product__details}>
-          <p className={style.product__price}>{totalPrice} ₽</p>
-          <p className={style.product__seller}>Продавец</p>
+          <h2 className={style.product__name}>{cardData.name}</h2>
+          <span className={style.product__vendor}>{cardData.vendor?.name}</span>
+          <span className={style.product__number}>{cardData.id}</span>
+          <div className={style.product__details}>
+            <p className={style.product__price}>{totalPrice} ₽</p>
+            <p className={style.product__seller}>Продавец</p>
 
             <button className={style.product__btn}>Скачать демо</button>
           </div>
