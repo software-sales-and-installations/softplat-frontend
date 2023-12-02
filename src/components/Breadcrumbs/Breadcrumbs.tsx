@@ -11,15 +11,11 @@ const Breadcrumbs: FC<IBreadcrumbsProps> = ({ pageName, vendor }) => {
   const isPageCart = location.pathname === '/cart';
   const isPageProduct = location.pathname.includes('/product/');
 
-  if (!isPageCart && !isPageProduct) {
-    localStorage.setItem('urlPath', location.pathname);
-  }
-
   if (!isPageCart) {
     if (pageName) {
       localStorage.setItem('pageName', pageName);
     } else {
-      localStorage.setItem('pageName', '');
+      localStorage.removeItem('pageName');
     }
 
     if (vendor) {
@@ -31,37 +27,39 @@ const Breadcrumbs: FC<IBreadcrumbsProps> = ({ pageName, vendor }) => {
 
   let currentLink = '';
 
-  const crumbs = (
-    // isPageCart || 
-    isPageProduct
+  console.log(localStorage.getItem('pageName'));
+
+  const crumbs =
+    localStorage.getItem('urlPath') &&
+    (isPageCart || isPageProduct
       ? localStorage.getItem('urlPath')!
       : location.pathname
-  )
-    .split('/')
-    .filter(crumb => crumb !== '')
-    .map(crumb => {
-      currentLink += `/${crumb}`;
+    )
+      .split('/')
+      .filter(crumb => crumb !== '')
+      .map(crumb => {
+        currentLink += `/${crumb}`;
 
-      if (TITLES_FOR_BREADCRUMBS[crumb]) {
-        return (
-          <div className={style.breadcrumbs__crumb} key={crumb}>
-            <Link to={currentLink}>{TITLES_FOR_BREADCRUMBS[crumb]}</Link>
-          </div>
-        );
-      }
+        if (TITLES_FOR_BREADCRUMBS[crumb]) {
+          return (
+            <div className={style.breadcrumbs__crumb} key={crumb}>
+              <Link to={currentLink}>{TITLES_FOR_BREADCRUMBS[crumb]}</Link>
+            </div>
+          );
+        }
 
-      if (CATALOGUE_NAMES.find(item => item.pathName === crumb)) {
-        return (
-          <div className={style.breadcrumbs__crumb} key={crumb}>
-            <Link to={currentLink}>
-              {CATALOGUE_NAMES.find(item => item.pathName === crumb)?.name}
-            </Link>
-          </div>
-        );
-      }
+        if (CATALOGUE_NAMES.find(item => item.pathName === crumb)) {
+          return (
+            <div className={style.breadcrumbs__crumb} key={crumb}>
+              <Link to={currentLink}>
+                {CATALOGUE_NAMES.find(item => item.pathName === crumb)?.name}
+              </Link>
+            </div>
+          );
+        }
 
-      return;
-    });
+        return;
+      });
 
   return (
     <div className={style.breadcrumbs}>
@@ -76,7 +74,7 @@ const Breadcrumbs: FC<IBreadcrumbsProps> = ({ pageName, vendor }) => {
       )}
       {isPageCart && (
         <>
-          {localStorage.getItem('pageName') !== '' && (
+          {localStorage.getItem('pageName') && (
             <div className={style.breadcrumbs__crumb}>
               <Link to={currentLink}>{localStorage.getItem('pageName')}</Link>
             </div>
