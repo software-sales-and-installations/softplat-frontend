@@ -1,0 +1,170 @@
+@import '../../../styles/abstract/constants.scss';
+@import '../../../styles/abstract/mixins.scss';
+
+.input {
+  @include input;
+
+  &_kind {
+    &_form {
+      @include formInput;
+      padding: 20px;
+      border-radius: $radii-s;
+    }
+
+    &_password {
+      @include formInput;
+      width: 100%;
+      padding: 20px 60px 20px 20px;
+      border-radius: $radii-s;
+    }
+
+    &_info {
+      width: 408px;
+      height: 72px;
+      padding: 20px 26px;
+      border-radius: $radii-s;
+      background-color: $white;
+    }
+
+    &_profile {
+      max-width: 408px;
+      height: 80px;
+      padding: 25px 20px;
+      border-radius: $radii-s;
+      background-color: $white;
+    }
+
+    &_search {
+      width: 100%;
+      height: 48px;
+      padding: 10px 20px;
+      border-radius: $radii-s;
+      min-height: auto;
+      border: 2px solid $border-purple;
+      background-color: $white;
+
+      &::placeholder {
+        color: $button-violet;
+        opacity: 1;
+      }
+    }
+
+    &_price {
+      width: 127px;
+      height: 41px;
+      padding: 10px 12px;
+      border-radius: $radii-s;
+      border: 1.5px solid $border-lilac;
+      min-height: auto;
+      background-color: $white;
+      &::placeholder {
+        color: $border-lilac;
+        opacity: 1;
+      }
+    }
+
+    &_other {
+      width: 100%;
+      min-height: 39px;
+      border-radius: $radii-s;
+      border: 1.5px solid $border-lilac;
+      background-color: $white;
+
+      &::placeholder {
+        color: $border-lilac;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.input_invalid {
+  border: 1px solid $error;
+}
+
+// @media screen and (max-width: 768px) {
+//   .input {
+//     &_kind {
+//       &_profile {
+//         max-width: 300px;
+//         height: 52px;
+//         padding: 20px 16px;
+//       }
+@include media-medium {
+  .input {
+    &_kind {
+      &_form {
+        padding: 20px;
+      }
+
+      &_password {
+        padding: 20px 60px 20px 20px;
+      }
+
+      &_info {
+        width: 300px;
+        height: 58px;
+        padding: 20px 16px;
+      }
+
+      &_profile {
+        max-width: 300px;
+        height: 52px;
+        padding: 20px 16px;
+      }
+
+      &_search {
+        height: 44px;
+      }
+
+      &_price {
+        height: 32px;
+      }
+
+      &_other {
+        min-height: 32px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .input {
+    &_kind {
+      &_profile {
+        max-width: 288px;
+        height: 5px;
+        padding: 20px 16px;
+      }
+    }
+  }
+}
+
+@include media-mobile {
+  .input {
+    &_kind {
+      &_form {
+        @include text-xm;
+      }
+
+      &_password {
+        @include text-xm;
+      }
+
+      &_info {
+        width: 298px;
+      }
+
+      &_search {
+      }
+
+      &_price {
+        width: 115px;
+      }
+
+      &_other {
+        width: 100%;
+      }
+    }
+  }
+}

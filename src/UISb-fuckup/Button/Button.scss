@@ -1,0 +1,129 @@
+@import '../../../styles/abstract/constants.scss';
+@import '../../../styles/abstract/mixins.scss';
+@import '../../../styles/abstract/placeholders.scss';
+
+.button {
+  @include button;
+  padding: 0 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $white;
+  border-radius: $radii-m;
+  background-color: $button-violet;
+
+  &:hover {
+    background-color: $button-violet-hover;
+  }
+
+  &:active {
+    background-color: $button-violet-active;
+  }
+
+  &_size {
+    &_small {
+      min-height: 40px;
+      @include text-m($fw-semi-bold);
+      line-height: 1.25;
+
+      @include media-netbook {
+        @include text-xm($fw-semi-bold);
+      }
+    }
+
+    &_medium {
+      min-height: 56px;
+      @include text-l($fw-semi-bold);
+
+      @include media-medium {
+        min-height: 52px;
+      }
+    }
+
+    &_large {
+      min-height: 68px;
+      @include text-l($fw-semi-bold);
+
+      @include media-medium {
+        min-height: 52px;
+      }
+    }
+  }
+
+  &_variant {
+    &_link {
+      padding: 0;
+      background: transparent;
+      color: $button-blue-link;
+
+      &:hover {
+        background-color: transparent;
+        color: $button-violet-hover;
+      }
+
+      &:active {
+        background-color: transparent;
+        color: $button-violet-active;
+      }
+    }
+
+    &_square {
+      padding: 0;
+      min-width: 52px;
+      min-height: 52px;
+      background-color: $button-cyan;
+      border-radius: $radii-xs;
+      color: $title-blue;
+
+      &:hover {
+        background-color: $button-cyan-hover;
+      }
+
+      &:active {
+        background-color: $button-cyan-active;
+        color: $button-cyan;
+      }
+    }
+  }
+
+  &_color {
+    &_empty {
+      background-color: transparent;
+      border: 2px solid $button-violet;
+      color: $button-violet;
+
+      &:hover {
+        background-color: transparent;
+        opacity: 0.8;
+      }
+
+      &:active {
+        background-color: transparent;
+        border: 2px solid $button-violet-active;
+        color: $button-violet-active;
+      }
+    }
+
+    &_dis {
+      background-color: $button-violet-dis;
+      color: $button-violet-text-dis;
+      @include disabled;
+    }
+
+    &_blue-empty {
+      background-color: transparent;
+      border: 1.5px solid $button-blue;
+      color: $button-blue;
+
+      &:hover {
+        background-color: $button-blue-hover;
+      }
+
+      &:active {
+        @extend %gradient;
+        color: $button-cyan;
+        border: 2px solid $button-cyan;
+      }
+    }
+  }
+}

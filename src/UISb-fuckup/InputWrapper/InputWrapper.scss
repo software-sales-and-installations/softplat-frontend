@@ -1,0 +1,106 @@
+@import '../../../styles/abstract/constants.scss';
+@import '../../../styles/abstract/mixins.scss';
+
+.inputWrapper {
+  background-color: transparent;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  &_kind {
+    &_form {
+      margin-bottom: 2px;
+    }
+
+    &_password {
+      margin-bottom: 2px;
+    }
+
+    &_info {
+      width: 298px;
+    }
+
+    &_profile {
+      width: 408px;
+    }
+
+    &_search {
+      width: 478px;
+    }
+
+    &_price {
+      width: 115px;
+    }
+
+    &_other {
+      width: 100%;
+    }
+  }
+}
+
+.inputWrapper__label {
+  @include text-m;
+  font-weight: $fw-bold;
+  color: $black;
+  margin: 0;
+  padding: 0 0 5px 0;
+
+  @include media-medium {
+    padding-bottom: 1px;
+  }
+
+  @include media-netbook {
+    @include text-xm($fw-semi-bold);
+  }
+}
+
+.inputWrapper__error {
+  @include text-s;
+  display: block;
+  border: none;
+  color: $error;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+  padding: 5px 0 0 0;
+}
+
+@include media-medium {
+  .inputWrapper {
+    &_kind {
+      &_info {
+        width: 300px;
+      }
+
+      &_search {
+        width: 380px;
+      }
+    }
+  }
+}
+
+@include media-mobile {
+  .inputWrapper {
+    &_kind {
+      &_info {
+        width: 298px;
+      }
+
+      &_search {
+        width: 478px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .inputWrapper {
+    &_kind {
+      &_profile {
+        max-width: 300px;
+      }
+    }
+  }
+}
