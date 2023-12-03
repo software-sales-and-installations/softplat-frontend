@@ -1,67 +1,76 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { IProductCard } from '../../../../components/ProductCard/ProductCardTypes';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import { ICartItem } from '../../../../components/ProductListCart/ProductListTypes';
+
+
 
 interface ICartState {
-  items: IProductCard[];
-  itemsToRemove: IProductCard[];
+  items: ICartItem[];
+  uncheckedItemIds: number[];
 }
 
 const initialCartState: ICartState = {
   items: [],
-  itemsToRemove: [],
+  uncheckedItemIds: [],
 };
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState: initialCartState,
   reducers: {
-    addItem: (state, action) => {
+    setCartItems: (state, action: PayloadAction<ICartItem[]>) => {
+      state.items = action.payload;
+      // state.uncheckedItemIds = [];
+    },
+    addItem: (state, action: PayloadAction<ICartItem>) => {
       state.items.push(action.payload);
     },
-    removeItem: (state, action) => {
-      state.items = state.items.filter(item => item.id !== action.payload.id);
+    removeItemById: (state, action: PayloadAction<number>) => {
+      const itemId = action.payload;
+      state.items = state.items.filter((item) => item.productResponseDto.id !== itemId);
     },
-    clearCart: state => {
+    clearCart: (state) => {
       state.items = [];
+      state.uncheckedItemIds = [];
     },
-    updateCartItem: (state, action) => {
-      const index = state.items.findIndex(
-        item => item.id === action.payload.id,
-      );
+    updateCartItem: (state, action: PayloadAction<ICartItem>) => {
+      // console.log('upd');
+      const cartItem = action.payload;
+      const index = state.items.findIndex((item) => item.id === cartItem.id);
+
       if (index !== -1) {
-        state.items[index] = action.payload;
+        const updatedItems = [...state.items];
+        updatedItems[index] = {
+          ...updatedItems[index],
+          quantity:
+            cartItem.quantity !== undefined
+              ? cartItem.quantity
+              : updatedItems[index].quantity,
+        };
+
+        state.items = updatedItems;
       }
     },
-    addToRemovalList: (state, action) => {
-      state.itemsToRemove.push(action.payload);
+    addToUncheckedList: (state, action: PayloadAction<number>) => {
+      state.uncheckedItemIds.push(action.payload);
     },
-    removeFromRemovalList: (state, action) => {
-      state.itemsToRemove = state.itemsToRemove.filter(
-        item => item.id !== action.payload.id,
+
+    removeFromUncheckedList: (state, action: PayloadAction<number>) => {
+      state.uncheckedItemIds = state.uncheckedItemIds.filter(
+        (itemId) => itemId !== action.payload
       );
-    },
-    clearRemovalList: state => {
-      state.itemsToRemove = [];
-    },
-    removeSelectedItems: state => {
-      state.items = state.items.filter(
-        item =>
-          !state.itemsToRemove.some(removeItem => removeItem.id === item.id),
-      );
-      state.itemsToRemove = [];
     },
   },
 });
 
 export const {
+  setCartItems,
   addItem,
-  removeItem,
   clearCart,
   updateCartItem,
-  addToRemovalList,
-  removeFromRemovalList,
-  clearRemovalList,
-  removeSelectedItems,
+  removeItemById,
+  addToUncheckedList,
+  removeFromUncheckedList
 } = cartSlice.actions;
 
 export const cartReducer = cartSlice.reducer;

@@ -20,7 +20,7 @@ export const buyerBasketApi = createApi({
   buyerBasketInfo: build.query({
   query: () => '/buyer/basket/',
 }),
-// Добавление продукта в свою карзину
+// Добавление продукта в свою корзину
 // Body {
 // "installation": boolean,
 // }
@@ -29,6 +29,8 @@ export const buyerBasketApi = createApi({
         url: `/buyer/basket/${productId}?installation=${installation}`,
         method: 'POST',
       }),
+
+      
     }),
     // Удаление продукта из своей корзины
     // Body {
@@ -36,8 +38,8 @@ export const buyerBasketApi = createApi({
     //    Так как в корзине может лежать два одинаковых товара, но один с установкой, а второй без установки, необходимо выбрать, какой из них удалить
     // }
     buyerBasketDeleteItem: build.mutation( {
-      query: (productId) => ({
-        url: `/buyer/basket/${productId}/`,
+      query: ({productId, installation}) => ({
+        url: `/buyer/basket/${productId}?installation=${installation}`,
         method: 'DELETE',
       }),
     }),
@@ -49,3 +51,4 @@ export const {
   useBuyerBasketAddItemMutation,
   useBuyerBasketDeleteItemMutation,
 } = buyerBasketApi;
+
