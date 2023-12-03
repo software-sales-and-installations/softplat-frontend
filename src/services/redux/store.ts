@@ -23,6 +23,7 @@ import { publicProductApi } from '../../utils/api/publicProductApi.tsx';
 import { userProductApi } from '../../utils/api/userProductApi.tsx';
 import { vendorApi } from '../../utils/api/vendorApi.tsx';
 import { cartReducer } from './slices/cart/cart';
+import { favoriteReducer } from './slices/favourites/favourites.tsx';
 
 const reducers = combineReducers({
 	user: userReducer,
@@ -35,6 +36,7 @@ const reducers = combineReducers({
 	cards: cardsReducer,
 	vendors: vendorsReducer,
 	cart: cartReducer,
+  favorite: favoriteReducer,
 	[adminApi.reducerPath]: adminApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [buyerBasketApi.reducerPath]: buyerBasketApi.reducer,

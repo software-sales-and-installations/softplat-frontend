@@ -28,9 +28,10 @@ export const buyerOrderApi = createApi({
     //   ]
     // }
     orderMake: build.mutation({
-      query: () => ({
+      query: (body) => ({
         url: '/orders',
         method: 'POST',
+        body,
       }),
     }),
     // Получение конкретной покупкиюПокупатель

@@ -3,10 +3,14 @@ import style from './ProductPage.module.scss';
 import { Button } from '../../UI/Button/Button';
 import { Checkbox } from '../../UI/Checkbox/Checkbox';
 import { Tooltip } from '../../components/Tooltip/Tooltip';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { fetchSingleCard } from '../../services/redux/slices/cards/cards';
-import { addItem } from '../../services/redux/slices/cart/cart';
+import { setCartItems } from '../../services/redux/slices/cart/cart';
+import {
+  useBuyerBasketAddItemMutation,
+  useBuyerBasketInfoQuery,
+} from '../../utils/api/buyerBasketApi';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 export const ProductPage: FC = () => {
@@ -17,11 +21,11 @@ export const ProductPage: FC = () => {
   const [totalPrice, setTotalPrice] = useState(cardData.price);
   const [tooltipText, setTooltipText] = useState('');
 
-  const cart = useAppSelector(store => store.cart);
-
-  const navigate = useNavigate();
-
-  const isItemInCart = cart.items.some(item => item.id === cardData.id);
+  const [buyerBasketAddItem, addItemError] = useBuyerBasketAddItemMutation();
+  //@ts-ignore
+  const basketInfoQuery = useBuyerBasketInfoQuery();
+  // const isItemInCart = cart.items.some(item => item.id === cardData.id);
+  console.log(cardData.id);
 
   useEffect(() => {
     dispatch(fetchSingleCard(Number(id)));
@@ -31,12 +35,19 @@ export const ProductPage: FC = () => {
     setTotalPrice(cardData.price);
   }, [cardData.price]);
 
-  const handleAddToCart = () => {
-    dispatch(addItem(cardData));
-  };
+  const handleAddToCart = async () => {
+    try {
+      const response = await buyerBasketAddItem({
+        productId: cardData.id,
+        installation: isInstallationSelected,
+      }).unwrap();
 
-  const handleLinkToCart = () => {
-    navigate('/cart');
+      dispatch(setCartItems(response.productsInBasket));
+
+      basketInfoQuery.refetch();
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+    }
   };
 
   const handleCheckboxChange = () => {
@@ -100,15 +111,13 @@ export const ProductPage: FC = () => {
             {tooltipText && <Tooltip text={tooltipText} />}
           </div>
           <div className={style.product__buyButtonBlock}>
-            {isItemInCart ? (
-              <Button mode="primary" onClick={handleLinkToCart}>
-                Уже в корзине
-              </Button>
-            ) : (
-              <Button mode="primary" onClick={handleAddToCart}>
-                Добавить в корзину
-              </Button>
-            )}
+            <Button
+              mode="primary"
+              onClick={handleAddToCart}
+              isDisabled={addItemError.isError}
+            >
+              Добавить в корзину
+            </Button>
           </div>
         </div>
       </section>
