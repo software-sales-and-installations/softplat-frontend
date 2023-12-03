@@ -1,19 +1,19 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 interface IPayPopup {
-    isSuccessPay: boolean;
+    isSuccessCardData: boolean;
 }
 
-const initialState = { isSuccessPay: false } as IPayPopup;
+const initialState = { isSuccessCardData: false } as IPayPopup;
 
-export const isSuccessPaySlice = createSlice({
-	name: 'isSuccessPay',
+export const isSuccessCardDataSlice = createSlice({
+	name: 'isSuccessCardData',
 	initialState,
 	reducers: {
-		isSuccessPay: (state, action: PayloadAction<boolean>) => {
-			state.isSuccessPay= action.payload;
+		isSuccessCardData: (state, action: PayloadAction<boolean>) => {
+			state.isSuccessCardData= action.payload;
 		},
 	},
 });
 
-export const { reducer } = isSuccessPaySlice;
-export const { isSuccessPay } = isSuccessPaySlice.actions;
+export const { reducer } = isSuccessCardDataSlice;
+export const { isSuccessCardData } = isSuccessCardDataSlice.actions;

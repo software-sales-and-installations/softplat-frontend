@@ -20,8 +20,8 @@ export const ResultPopup : FC = () =>{
     const token = localStorage.getItem('token')
     const toggleState = useSelector((state: RootState) => state.toggleBtn.value);
     const MyRole = useSelector((state: RootState) => state.chooseRole.title);
+    const isSuccesCardData = useSelector((state: RootState) => state.isSuccessCardData.isSuccessCardData);
     const isSuccessPay = useSelector((state: RootState) => state.isSuccessPay.isSuccessPay);
-
     const dispatch = useDispatch();
 	const isOpened =  useSelector((state: RootState) => state.popupOpen.setIsOpened)
 	const handleOverlayClick: React.MouseEventHandler<HTMLDivElement> = (evt) => {

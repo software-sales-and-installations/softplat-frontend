@@ -3,15 +3,17 @@ import { Popup } from '../../UI/Popup/Popup';
 import styles from './SuccessPayPopup.module.scss';
 import { Button } from '../../UI/Button/Button';
 import { useNavigate } from 'react-router-dom';
-import { isSuccessPay } from '../PayPopup/PayPopupSlice';
+import { isSuccessCardData } from '../PayPopup/PayPopupSlice';
 import { useAppDispatch } from '../../services/redux/store';
 import { popupState } from '../../UI/Popup/PopupSlice';
+import { isSuccessPay } from '../CartSummary/CartSummarySlice';
 
 export const SuccessPayPopup: FC = ()=>{
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     function handleClick(){
         navigate('/personal/purchases', {replace: true})
+        dispatch(isSuccessCardData(false))
         dispatch(isSuccessPay(false))
         dispatch(popupState(false))
     }

@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../services/redux/store';
 import InputMask from "react-input-mask";
 import classNames from 'classnames';
-import { isSuccessPay } from './PayPopupSlice';
+import { isSuccessCardData } from './PayPopupSlice';
 import { useDispatch } from 'react-redux';
 
 export const PayPopup: FC = ()=>{
@@ -29,7 +29,7 @@ export const PayPopup: FC = ()=>{
 	} = useForm<IPayFields>({ mode: 'onChange' });
 
     const onSubmitResData: SubmitHandler<IPayFields> = () => {
-        dispatch(isSuccessPay(true))
+        dispatch(isSuccessCardData(true))
         const formValue = getValues();
         console.log(formValue)
     }
