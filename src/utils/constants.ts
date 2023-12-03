@@ -573,3 +573,21 @@ export const PRODUCT_ITEMS_LIKED: {
 	{id: 2, logo: Acrobat, name: 'Adobe Acrobat', vendor: {id: 1,country: 'iuh', description: 'df', image: {url:''}, name: 'Adobe'}, category: {id: 1, name:'Мультимедиа'}, art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023', price: 0, installationPrice: 0},
 	{id: 3, logo: Illustrator, name: 'Adobe Illustrator', vendor: {id: 1,country: 'iuh', description: 'df', image: {url:''}, name: 'Adobe'}, category: {id: 1, name:'Мультимедиа'}, art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023', price: 0, installationPrice: 0}
   ]}
+
+  export const slides: Slider = [
+    {
+      text: 'Быстрый и удобный процесс покупки — получите доступ к программному обеспечению всего в несколько кликов',
+      img: 'https://randomwordgenerator.com/img/picture-generator/sea-2101488_640.jpg',
+      link: '/contacts'
+    },
+    {
+      text: 'Удобные способы оплаты онлайн в любое время',
+      img: 'https://s3.pet-yes.com/articles/photos/5ca394ee4c03aec91e8d0404b6df9199.jpeg',
+      link: '/producers/1'
+    },
+    {
+      text: 'Slide 3',
+      img: 'https://sun9-48.userapi.com/impg/fycmHPAnxYdnFozjVbiaWPV1XykgTlhBwN7IzQ/zJhjSHDz0g4.jpg?size=973x728&quality=95&sign=bcd0d179da593a98c3031cf5c1198161&c_uniq_tag=eZu7nS4IBsQizITQuAr9qPIOpSpdihT0DTjdGVt7TWg&type=album',
+      link: '/catalog/media-apps'
+    },
+  ];
