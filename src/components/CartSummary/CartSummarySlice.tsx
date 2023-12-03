@@ -9,7 +9,7 @@ const initialState = {
     isNotSuccessPay: ''
  } as ISuccessPay;
 
-export const isSuccessCardDataSlice = createSlice({
+export const isSuccessPaySlice = createSlice({
 	name: 'payProcedure',
 	initialState,
 	reducers: {
@@ -22,5 +22,5 @@ export const isSuccessCardDataSlice = createSlice({
 	},
 });
 
-export const { reducer } = isSuccessCardDataSlice;
-export const { isSuccessPay, isNotSuccessPay } = isSuccessCardDataSlice.actions;
+export const { reducer } = isSuccessPaySlice;
+export const { isSuccessPay, isNotSuccessPay } = isSuccessPaySlice.actions;

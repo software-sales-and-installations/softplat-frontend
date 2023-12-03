@@ -18,6 +18,8 @@ import { useDispatch } from 'react-redux';
 
 export const PayPopup: FC = ()=>{
     const popupState = useSelector((state: RootState) => state.popupOpen.setIsOpened);
+    const isNotSuccessPay = useSelector((state: RootState) => state.isNotSuccessPay.isNotSuccessPay);
+
     const dispatch = useDispatch();
     const {
 		register,
@@ -94,7 +96,10 @@ export const PayPopup: FC = ()=>{
                 <div className={styles.checkboxcontainer}>
 					<input className={styles.checkboxcontainer__input}  id='remember' {...register("remember")} type="checkbox" value="remember"/>
 					<label className={styles.checkboxcontainer__label} htmlFor='remember'>Запомнить карту</label>
-				</div>	
+				</div>
+                <div>
+                    <p className={styles.popup__errorspan}>{isNotSuccessPay}</p>
+                </div>
                 <Button isDisabled={!isValid} type='submit' mode='primary'>Оплатить заказ</Button>
             </form>
         </Popup>
