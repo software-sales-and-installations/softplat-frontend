@@ -3,11 +3,15 @@ import styles from './contacts.module.scss';
 import { Link } from 'react-router-dom';
 import { BsTelegram } from 'react-icons/bs';
 import { SlSocialVkontakte } from 'react-icons/sl';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.tsx';
 
 const Contacts = () => {
   return (
     <section>
       <Slider />
+      <div className={styles.breadcrumbs}>
+        <Breadcrumbs />
+      </div>
       <div className={styles.contacts__container}>
         <ul className={styles.contacts__titles}>
           <li className={styles.contacts__item}>

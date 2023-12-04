@@ -1,10 +1,18 @@
 import { useState } from 'react';
 import classNames from 'classnames';
 import styles from './SellerCabinetContent.module.scss';
-import { SellerExistingCardTable } from '../SellerExistingCardTable/SellerExistingCardTable';
+import { CardTable } from '../CardTable/CardTable';
+import { SellerExistingCard } from '../../utils/constants';
+import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
+import Preloader from '../Preloader/Preloader';
 
 const SellerProduct: React.FC = () => {
   const [activeBtn, setActiveBtn] = useState('existingCards');
+  const { data, error, isLoading } = usePublicProductListQuery({
+    minId: 0,
+    pageSize: '',
+    sort: 'NEWEST',
+  });
 
   return (
     <section className={styles.sellerProduct}>
@@ -42,7 +50,14 @@ const SellerProduct: React.FC = () => {
           На модерации
         </button>
       </nav>
-      {activeBtn==='existingCards'? <SellerExistingCardTable/> : null}
+      {isLoading ? (
+        <Preloader />
+      ) : error ? (
+        <p>Произошла ошибка</p>
+      ) : (
+        <CardTable products={data.products} />
+      )}
+      {/* {activeBtn==='existingCards'? <CardTable card={SellerExistingCard.}/> : null} */}
     </section>
   );
 };

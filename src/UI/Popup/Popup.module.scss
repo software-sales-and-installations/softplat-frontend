@@ -16,11 +16,27 @@
 	opacity: 0;
 	transition: visibility 0.3s, opacity ease 0.3s;
 	overflow: auto;
-
+	&__carderror{
+		height: 10px;
+	}
+	&__errorspan{
+		padding: 0;
+		margin: 0;
+		padding-left: 12px;
+		color: $red-alert-system;
+		@include font-body-filters;
+		display: block;
+		height: 40px;
+		text-align: left;
+	}
     &_opened{
         visibility: visible;
 	    opacity: 1;
     }
+	&__title{
+		@include font-h3-regular;
+		color: $black-standart-text;
+	}
     &__container{
 		width: 70%;
         max-width: 600px;
@@ -108,4 +124,65 @@
 	padding: 0 12px;
 	color: $border-input;
 	text-align: left;
+}
+.errorContainer{
+	min-height: 30px;
+	&__error{
+		color: $red-alert-system;
+		@include font-body-filters;
+	}
+}
+.errorContainer{
+	min-height: 30px;
+	&__error{
+		color: $red-alert-system;
+		@include font-body-filters;
+	}
+}
+.input__field {
+	box-sizing: border-box;
+	@include font-CTAbody-regular;
+	padding: 10px 12px;
+	border-radius: 20px;
+	border: 1px solid $border-input;
+    color: $dark-grey;
+	background-color: $light-grey;
+}
+.input__field:focus {
+	outline: none;
+}
+
+.input__field:read-only:focus {
+	outline: none;
+}
+
+.containerPayPopup{
+	display:flex;
+	flex-direction: column;
+	width: 100%;
+	margin-bottom: 20px;
+	&__label{
+		width: 100%;
+		padding-left: 12px;
+		@include font-CTAbody-regular;
+    	color: $dark-grey;
+		text-align: left;
+		padding-bottom: 10px;
+	}
+	&_type_validData{
+		width: 48%;
+	}
+}
+.input__error {
+	padding-left: 12px;
+	color: $red-alert-system;
+	@include font-body-filters;
+	display: block;
+	height: 40px;
+	text-align: left;
+}
+.containerForDataCard{
+	display: flex;
+	gap: 20px;
+	width: 100%;
 }

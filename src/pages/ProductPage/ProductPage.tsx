@@ -3,10 +3,15 @@ import style from './ProductPage.module.scss';
 import { Button } from '../../UI/Button/Button';
 import { Checkbox } from '../../UI/Checkbox/Checkbox';
 import { Tooltip } from '../../components/Tooltip/Tooltip';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { fetchSingleCard } from '../../services/redux/slices/cards/cards';
-import { addItem } from '../../services/redux/slices/cart/cart';
+import { setCartItems } from '../../services/redux/slices/cart/cart';
+import {
+  useBuyerBasketAddItemMutation,
+  useBuyerBasketInfoQuery,
+} from '../../utils/api/buyerBasketApi';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 export const ProductPage: FC = () => {
   const { id } = useParams();
@@ -16,12 +21,11 @@ export const ProductPage: FC = () => {
   const [totalPrice, setTotalPrice] = useState(cardData.price);
   const [tooltipText, setTooltipText] = useState('');
 
-  const cart = useAppSelector(store => store.cart);
-
-  const navigate = useNavigate();
-
-  const isItemInCart = cart.items.some(item => item.id === cardData.id);
-  console.log(isItemInCart);
+  const [buyerBasketAddItem, addItemError] = useBuyerBasketAddItemMutation();
+  //@ts-ignore
+  const basketInfoQuery = useBuyerBasketInfoQuery();
+  // const isItemInCart = cart.items.some(item => item.id === cardData.id);
+  console.log(cardData.id);
 
   useEffect(() => {
     dispatch(fetchSingleCard(Number(id)));
@@ -31,12 +35,19 @@ export const ProductPage: FC = () => {
     setTotalPrice(cardData.price);
   }, [cardData.price]);
 
-  const handleAddToCart = () => {
-    dispatch(addItem(cardData));
-  };
+  const handleAddToCart = async () => {
+    try {
+      const response = await buyerBasketAddItem({
+        productId: cardData.id,
+        installation: isInstallationSelected,
+      }).unwrap();
 
-  const handleLinkToCart = () => {
-    navigate('/cart');
+      dispatch(setCartItems(response.productsInBasket));
+
+      basketInfoQuery.refetch();
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+    }
   };
 
   const handleCheckboxChange = () => {
@@ -53,60 +64,63 @@ export const ProductPage: FC = () => {
   };
 
   return (
-    <section className={style.product}>
-      <div className={style.product__imageContainer}>
-        <img
-          src={cardData.image?.url}
-          alt="Фотография товара"
-          className={style.product__image}
-        />
+    <>
+      <div className={style.breadcrumbs}>
+        <Breadcrumbs vendor={cardData.vendor!} />
       </div>
-
-      <div className={style.product__info}>
-        <span className={style.product__category}>
-          {cardData.category?.name}
-        </span>
-
-        <h2 className={style.product__name}>{cardData.name}</h2>
-        <span className={style.product__vendor}>{cardData.vendor?.name}</span>
-        <span className={style.product__number}>{cardData.id}</span>
-        <div className={style.product__details}>
-          <p className={style.product__price}>{totalPrice} ₽</p>
-          <p className={style.product__seller}>Продавец</p>
-
-          <button className={style.product__btn}>Скачать демо</button>
-        </div>
-        <p className={style.product__description}>{cardData.description}</p>
-        <div className={style.product__checkboxContainer}>
-          <Checkbox
-            label={`Добавить установку ${cardData.installationPrice} ₽`}
-            onCheck={handleCheckboxChange}
+      <section className={style.product}>
+        <div className={style.product__imageContainer}>
+          <img
+            src={cardData.image?.url}
+            alt="Фотография товара"
+            className={style.product__image}
           />
-          <div
-            className={style.product__question}
-            onMouseEnter={() =>
-              setTooltipText(
-                'Наш специалист установит ПО на ваше устройство в удобное время',
-              )
-            }
-            onMouseLeave={() => setTooltipText('')}
-          >
-            ?
-          </div>
-          {tooltipText && <Tooltip text={tooltipText} />}
         </div>
-        <div className={style.product__buyButtonBlock}>
-          {isItemInCart ? (
-            <Button mode="primary" onClick={handleLinkToCart}>
-              Уже в корзине
-            </Button>
-          ) : (
-            <Button mode="primary" onClick={handleAddToCart}>
+
+        <div className={style.product__info}>
+          <span className={style.product__category}>
+            {cardData.category?.name}
+          </span>
+
+          <h2 className={style.product__name}>{cardData.name}</h2>
+          <span className={style.product__vendor}>{cardData.vendor?.name}</span>
+          <span className={style.product__number}>{cardData.id}</span>
+          <div className={style.product__details}>
+            <p className={style.product__price}>{totalPrice} ₽</p>
+            <p className={style.product__seller}>Продавец</p>
+
+            <button className={style.product__btn}>Скачать демо</button>
+          </div>
+          <p className={style.product__description}>{cardData.description}</p>
+          <div className={style.product__checkboxContainer}>
+            <Checkbox
+              label={`Добавить установку ${cardData.installationPrice} ₽`}
+              onCheck={handleCheckboxChange}
+            />
+            <div
+              className={style.product__question}
+              onMouseEnter={() =>
+                setTooltipText(
+                  'Наш специалист установит ПО на ваше устройство в удобное время',
+                )
+              }
+              onMouseLeave={() => setTooltipText('')}
+            >
+              ?
+            </div>
+            {tooltipText && <Tooltip text={tooltipText} />}
+          </div>
+          <div className={style.product__buyButtonBlock}>
+            <Button
+              mode="primary"
+              onClick={handleAddToCart}
+              isDisabled={addItemError.isError}
+            >
               Добавить в корзину
             </Button>
-          )}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };

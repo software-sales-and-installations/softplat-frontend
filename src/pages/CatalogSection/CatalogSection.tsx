@@ -8,51 +8,66 @@ import {
   SELECT_OPTIONS,
 } from '../../utils/constants';
 import { Categories } from '../../components/Categories/Categories';
-import { fetchSortedCards } from '../../services/redux/slices/cards/cards';
-import { useAppDispatch, useAppSelector } from '../../services/redux/store';
+import {useAppSelector } from '../../services/redux/store';
 import DropDown from '../../UI/DropDown/DropDown';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
+import { IProductCard, ProductStatus } from '../../components/ProductCard/ProductCardTypes';
+import Preloader from '../../components/Preloader/Preloader';
+import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 const CatalogSection: FC = () => {
   const { section } = useParams();
-  const dispatch = useAppDispatch();
   const selectState = useAppSelector(state => state.dropdown.option.value);
   const countryOption = useAppSelector(
     state => state.dropdown.countryOption.value,
   );
-  const cards = useAppSelector(store => store.cards.cards) || [];
 
-  useEffect(() => {
-    dispatch(fetchSortedCards(selectState));
-  }, [selectState]);
+  const { data, error, isLoading } = usePublicProductListQuery({
+    minId: 0,
+    pageSize: '',
+    sort: selectState,
+  });
 
   const currentCatalog = CATALOGUE_NAMES.find(
     item => item.pathName === section,
   );
-  const categorizedCards = cards?.products?.filter(
-    card =>
+  const categorizedCards = data?.products?.filter(
+    ( card: IProductCard) =>
       card.category?.id === currentCatalog?.id &&
-      card.vendor?.country === countryOption,
+      card.vendor?.country === countryOption &&
+      card.productStatus === ProductStatus.PUBLISHED,
   );
   const productsCards = { products: categorizedCards };
 
   return (
-    <section className={styles.catalogSection}>
-      <h2 className={styles.catalogSection__title}>{currentCatalog?.name}</h2>
-      <div className={styles.catalogSection__categories}>
-        <Categories />
+    <>
+      <div className={styles.breadcrumbs}>
+        <Breadcrumbs />
       </div>
-      <div className={styles.catalogSection__selectContainer}>
-        <DropDown type={SelectorType.BASE} options={SELECT_OPTIONS} />
-        <DropDown
-          type={SelectorType.COUNTRY}
-          options={SELECT_COUNTRIES_OPTIONS}
-        />
-      </div>
-      <div className={styles.catalogSection__items}>
-        <CardsGrid cards={productsCards} />
-      </div>
-    </section>
+      <section className={styles.catalogSection}>
+        <h2 className={styles.catalogSection__title}>{currentCatalog?.name}</h2>
+        <div className={styles.catalogSection__categories}>
+          <Categories />
+        </div>
+        <div className={styles.catalogSection__selectContainer}>
+          <DropDown type={SelectorType.BASE} options={SELECT_OPTIONS} />
+          <DropDown
+            type={SelectorType.COUNTRY}
+            options={SELECT_COUNTRIES_OPTIONS}
+          />
+        </div>
+        <div className={styles.catalogSection__items}>
+        {isLoading ? (
+            <Preloader />
+          ) : error ? (
+          <p>Произошла ошибка</p>
+        ) : (
+            <CardsGrid cards={productsCards} />
+          )}
+        </div>
+      </section>
+    </>
   );
 };
 

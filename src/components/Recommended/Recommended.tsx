@@ -1,26 +1,37 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import CardsGrid from '../CardsGrid/CardsGrid';
 import styles from './Recommended.module.scss';
-import { useAppDispatch, useAppSelector } from '../../services/redux/store';
-import { fetchSortedCards } from '../../services/redux/slices/cards/cards';
+import { IProductCard, ProductStatus } from '../ProductCard/ProductCardTypes';
+import Preloader from '../Preloader/Preloader';
+import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 
 // type Props = {};
 
 const Recommended: FC = () => {
-  const dispatch = useAppDispatch()
-  useEffect(() => {
-    dispatch(fetchSortedCards('NEWEST'))
-  }, [])
-  const cards = useAppSelector(state => state.cards.cards);
+  const { data, error, isLoading } = usePublicProductListQuery({
+    minId: 0,
+    pageSize: 10,
+    sort: 'NEWEST',
+  });
+
+  const recommendedCards = data?.products.filter(
+    (card: IProductCard) =>
+      card.productStatus === ProductStatus.PUBLISHED,
+  );
 
   return (
     <section className={styles.recommended}>
       <h2 className={styles.recommended__title}>Рекомендуем к покупке</h2>
       <ul className={styles.recommended__list}>
-        <CardsGrid cards={cards} />
+        {isLoading ? (
+          <Preloader />
+        ) : error ? (
+          <p>Произошла ошибка</p>
+        ) : (
+          <CardsGrid cards={{ products: recommendedCards }} />
+        )}
       </ul>
     </section>
   );
 };
-
 export default Recommended;

@@ -7,9 +7,12 @@ interface IVendor {
 }
 
 type VendorImage = {
-  name: string;
-  id: number;
+  name?: string;
+  id?: number;
   url: string;
-  size: number;
-  contentType: string;
+  size?: number;
+  contentType?: string;
 };
+interface VendorsList {
+  vendors: IVendor[]
+}

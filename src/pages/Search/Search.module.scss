@@ -1,21 +1,26 @@
 @import '../../styles/abstract/constants.scss';
 @import '../../styles/abstract/mixins.scss';
 
+.breadcrumbs {
+  margin-top: 70px;
+  padding: 0 80px;
+}
+
 .search {
-   margin-left: 80px;
-     &__title {
-        margin-top: 75px;
-        text-align: start;
-        @include font-h1-bold
-     }
+  margin-left: 80px;
+  &__title {
+    margin-top: 70px;
+    text-align: start;
+    @include font-h1-bold;
+  }
 
-     &__notFound {
-        margin-top: 15px;
-        text-align: start;
-        @include font-body-regular
-     }
+  &__notFound {
+    margin-top: 15px;
+    text-align: start;
+    @include font-body-regular;
+  }
 
-     &__items {
-        margin-top: 75px;
-     }
+  &__items {
+    margin-top: 75px;
+  }
 }
