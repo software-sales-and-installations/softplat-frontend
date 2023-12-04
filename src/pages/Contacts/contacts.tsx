@@ -1,47 +1,70 @@
-import Slider from '../../components/Slider/Slider.tsx';
 import styles from './contacts.module.scss';
 import { Link } from 'react-router-dom';
-import { BsTelegram } from 'react-icons/bs';
-import { SlSocialVkontakte } from 'react-icons/sl';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.tsx';
 
 const Contacts = () => {
   return (
-    <section>
-      <Slider />
+    <section className={styles.contacts}>
       <div className={styles.breadcrumbs}>
         <Breadcrumbs />
       </div>
+      <h1 className={styles.contacts__title}>Контакты</h1>
       <div className={styles.contacts__container}>
-        <ul className={styles.contacts__titles}>
-          <li className={styles.contacts__item}>
-            <h1 className={styles.contacts__title}> Контакты</h1>
-          </li>
+        <ul className={styles.contacts__items}>
           <li>
-            <h2 className={styles.contacts__sunbtitle}> Адрес офиса:</h2>
+            <h2 className={styles.contacts__subtitle}>Адрес офиса</h2>
             <p className={styles.contacts__text}>
               Россия, Москва, Молодогвардейская улица, д.61 стр.36
             </p>
           </li>
-          <li className={styles.contacts__item}>
-            <h2 className={styles.contacts__sunbtitle}> Режим работы офиса</h2>
+          <li>
+            <h2 className={styles.contacts__subtitle}>Режим работы офиса</h2>
             <p className={styles.contacts__text}>пн-вс.: 10:00-18:00</p>
           </li>
-          <li className={styles.contacts__item}>
-            <h2 className={styles.contacts__sunbtitle}> Телефон </h2>
+          <li>
+            <h2 className={styles.contacts__subtitle}>Телефон</h2>
             <p className={styles.contacts__text}>+7 (499) 123-45-67</p>
           </li>
-          <li className={styles.contacts__item}>
+          <li>
+            <h2 className={styles.contacts__subtitle}>Мы в социальных сетях</h2>
             <div className={styles.contacts__socials}>
-              <h2 className={styles.contacts__sunbtitle}>
-                {' '}
-                Мы в социальных сетях
-              </h2>
               <Link to={''}>
-                <BsTelegram className={styles.contacts__social_icon} />
+                <svg
+                  className={styles.contacts__social_icon}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30"
+                  height="30"
+                  viewBox="0 0 30 30"
+                  fill="#55505C"
+                >
+                  <g clip-path="url(#clip0_1633_13970)">
+                    <path d="M14.9999 0C6.71994 0 0 6.71997 0 14.9999C0 23.2799 6.71994 29.9999 14.9999 29.9999C23.2798 29.9999 29.9997 23.2799 29.9997 14.9999C29.9997 6.71997 23.2798 0 14.9999 0ZM21.9598 10.2C21.7348 12.5699 20.7598 18.3299 20.2648 20.9849C20.0548 22.1099 19.6348 22.4849 19.2448 22.5299C18.3748 22.6049 17.7148 21.9599 16.8748 21.4049C15.5549 20.5349 14.8049 19.9949 13.5299 19.1549C12.0449 18.1799 13.0049 17.6399 13.8599 16.7699C14.0849 16.5449 17.9248 13.0499 17.9998 12.7349C18.0103 12.6872 18.0089 12.6377 17.9958 12.5907C17.9827 12.5436 17.9584 12.5005 17.9248 12.465C17.8348 12.39 17.7148 12.4199 17.6098 12.4349C17.4748 12.4649 15.3749 13.8599 11.2799 16.6199C10.6799 17.0249 10.1399 17.2349 9.65991 17.2199C9.11992 17.2049 8.09993 16.9199 7.33493 16.6649C6.38994 16.3649 5.65495 16.1999 5.71495 15.6749C5.74495 15.4049 6.11995 15.1349 6.82494 14.8499C11.2049 12.9449 14.1149 11.685 15.5699 11.085C19.7398 9.34496 20.5948 9.04496 21.1648 9.04496C21.2848 9.04496 21.5698 9.07496 21.7498 9.22496C21.8998 9.34496 21.9448 9.50996 21.9598 9.62996C21.9448 9.71996 21.9748 9.98996 21.9598 10.2Z" />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_1633_13970">
+                      <rect width="29.9997" height="29.9999" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
               </Link>
               <Link to={''}>
-                <SlSocialVkontakte className={styles.contacts__social_icon} />
+                <svg
+                  className={styles.contacts__social_icon}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30"
+                  height="30"
+                  viewBox="0 0 30 30"
+                  fill="#55505C"
+                >
+                  <g clip-path="url(#clip0_1633_13971)">
+                    <path d="M14.9999 0C6.71557 0 0 6.71551 0 14.9997C0 23.284 6.71557 29.9995 14.9999 29.9995C23.2842 29.9995 29.9997 23.284 29.9997 14.9997C29.9997 6.71551 23.2842 0 14.9999 0ZM20.7686 16.9232C20.7686 16.9232 22.0951 18.2325 22.4217 18.8403C22.4311 18.8528 22.4357 18.8653 22.4389 18.8716C22.5717 19.095 22.6029 19.2684 22.5373 19.3981C22.4279 19.6137 22.0529 19.72 21.9248 19.7294H19.5811C19.4186 19.7294 19.078 19.6872 18.6655 19.4028C18.3483 19.1809 18.0358 18.8169 17.7311 18.4622C17.2764 17.9341 16.8827 17.4778 16.4858 17.4778C16.4354 17.4777 16.3853 17.4857 16.3374 17.5013C16.0374 17.5981 15.653 18.0263 15.653 19.1669C15.653 19.5231 15.3717 19.7278 15.1733 19.7278H14.0999C13.7343 19.7278 11.8296 19.5997 10.1421 17.82C8.07649 15.6404 6.21713 11.2686 6.20151 11.2279C6.08432 10.9451 6.32651 10.7936 6.59057 10.7936H8.95773C9.27335 10.7936 9.37648 10.9858 9.44835 11.1561C9.53273 11.3545 9.8421 12.1435 10.3499 13.031C11.1733 14.4779 11.678 15.0654 12.0827 15.0654C12.1586 15.0645 12.2331 15.0452 12.2999 15.0091C12.828 14.7154 12.7296 12.8326 12.7061 12.442C12.7061 12.3685 12.7046 11.5998 12.4343 11.2311C12.2405 10.9639 11.9108 10.8623 11.7108 10.8248C11.7918 10.7131 11.8984 10.6225 12.0218 10.5608C12.3843 10.3795 13.0374 10.353 13.6858 10.353H14.0468C14.7499 10.3623 14.9311 10.4076 15.1858 10.4717C15.7014 10.5951 15.7124 10.9279 15.667 12.067C15.653 12.3904 15.6389 12.756 15.6389 13.1873C15.6389 13.281 15.6342 13.381 15.6342 13.4873C15.6186 14.067 15.5999 14.7248 16.0092 14.9951C16.0626 15.0285 16.1243 15.0464 16.1874 15.0466C16.3295 15.0466 16.7577 15.0466 17.917 13.0576C18.2746 12.4174 18.5853 11.7521 18.8467 11.067C18.8701 11.0264 18.9389 10.9014 19.0201 10.8529C19.0801 10.8224 19.1466 10.8068 19.2139 10.8076H21.9967C22.2998 10.8076 22.5076 10.8529 22.5467 10.9701C22.6154 11.1561 22.5342 11.7232 21.2639 13.4435L20.6967 14.1919C19.5451 15.7013 19.5451 15.7779 20.7686 16.9232Z" />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_1633_13971">
+                      <rect width="29.9997" height="29.9999" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
               </Link>
             </div>
           </li>
@@ -50,8 +73,8 @@ const Contacts = () => {
           <iframe
             className={styles.contacts__frame}
             src="https://yandex.ru/map-widget/v1/?um=constructor%3A50cb035aa350e601dea4586ad7eed4abc5b2e25af022307b5b0ff17e0d16bc63&amp;source=constructor"
-            width="1008"
-            height="545"
+            width="635"
+            height="360"
             frameBorder="0"
           ></iframe>
         </div>
