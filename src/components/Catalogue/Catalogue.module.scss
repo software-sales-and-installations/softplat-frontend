@@ -2,23 +2,22 @@
 @import '../../styles/abstract/mixins.scss';
 
 .catalogue {
-  // margin-top: 50px;
-  padding: 110px 80px 0;
+  padding: 75px 0 0;
 
   &__title {
     text-align: start;
     font-size: 48px;
     font-weight: 700;
-    margin: 0 0 65px 0;
-    @include font-h1-bold;
+    margin: 0 0 35px 0;
+    @include font-h3-regular;
   }
 
   &__list {
     display: grid;
-    grid-template-columns: repeat(4, 410px);
-    justify-content: space-between;
-    row-gap: 60px;
-    column-gap: 40px;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    row-gap: 18px;
+    column-gap: 20px;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -26,29 +25,32 @@
 
   &__item {
     position: relative;
-    width: 390px;
-    padding: 40px 10px;
-    height: 190px;
+    width: 255px;
+    height: 170px;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0px 4px 20px 0px rgba(57, 57, 57, 0.15);
+    border: 1px solid $light-grey;
 
     & a {
       text-decoration: none;
+
     }
   }
 
   &__itemText {
-    font-size: 28px;
-    font-weight: 700;
+    padding: 20px 0 0 15px;
     margin: 0;
+    text-align: start;
+    @include font-body-card;
     color: $black-standart-text;
   }
 
   & img {
+    width: 241px;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 0px;
+    right: 14px;
     object-fit: cover;
+    transform: rotateY(180deg);
   }
 }
