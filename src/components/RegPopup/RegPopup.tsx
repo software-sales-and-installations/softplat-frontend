@@ -129,11 +129,14 @@ export const PopupForReg: FC = () => {
 					validation={{
             ...register('password', {
               ...PASSWORD_VALIDATION_CONFIG,
-              validate: value =>
-                (value === watch('email') &&
-                  VALIDATION_SETTINGS.password.messages.sameAsEmail) ||
-                (value === watch('name') &&
-                  VALIDATION_SETTINGS.password.messages.sameAsName),
+              validate: value => {
+								if (value === watch('email') || value === watch('email').split('@')[0]) {
+                  return VALIDATION_SETTINGS.password.messages.sameAsEmail;
+                } else if (value === watch('name')) {
+                  return VALIDATION_SETTINGS.password.messages.sameAsName;
+                }
+                return;
+							}
             }),
           }}
 					error={errors?.password?.message}
