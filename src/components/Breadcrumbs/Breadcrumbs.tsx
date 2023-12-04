@@ -1,11 +1,8 @@
 import { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
 import style from './Breadcrumbs.module.scss';
-
 import { CATALOGUE_NAMES, TITLES_FOR_BREADCRUMBS } from '../../utils/constants';
 import { IBreadcrumbsProps } from './BreadcrumbsTypes';
-
 const Breadcrumbs: FC<IBreadcrumbsProps> = ({ pageName, vendor }) => {
   const location = useLocation();
   const isPageCart = location.pathname === '/cart';
@@ -103,5 +100,4 @@ const Breadcrumbs: FC<IBreadcrumbsProps> = ({ pageName, vendor }) => {
     </div>
   );
 };
-
 export default Breadcrumbs;

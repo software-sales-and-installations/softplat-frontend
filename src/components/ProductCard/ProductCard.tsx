@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from './ProductCard.module.scss';
-import { BsFillQuestionCircleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { Button } from '../../UI/Button/Button';
 import { IProductCardProps } from './ProductCardTypes';
@@ -21,6 +20,7 @@ import {
   removeFromFavorites,
 } from '../../services/redux/slices/favourites/favourites';
 import { FaHeart } from 'react-icons/fa6';
+import toolsIcon from '../../images/tools-card-icon.svg'
 
 const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const addSpace = (price: number): string => {
@@ -78,7 +78,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
         type="button"
         onClick={handleToggleFavorite}
       >
-        {isFavorite ? <FaHeart size={25} /> : <FaRegHeart size={25} />}
+        {isFavorite ? <FaHeart size={28} /> : <FaRegHeart size={28} stroke-width={0.5} />}
       </button>
       <Link to={`/product/${card.id}`} className={styles.card__link}>
         <div className={styles.card__img}>
@@ -90,16 +90,15 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
         <div className={styles.card__priceContainer}>
           <p className={styles.card__price}>{addSpace(card.price)} ₽</p>
           <div className={styles.card__installPrice}>
-            <span>с установкой </span>
-            <span>{addSpace(card.price + card.installationPrice)} ₽</span>
             <span className={styles.card__tooltip}>
               <button className={styles.card__tooltipBtn}>
-                <BsFillQuestionCircleFill size={12} />
+                <img src={toolsIcon} alt="иконка инструментов" />
               </button>
               <span className={styles.card__tooltipText}>
                 Наш специалист установит ПО на ваше устройство в удобное время
               </span>
             </span>
+            <span>{addSpace(card.price + card.installationPrice)} ₽</span>
           </div>
         </div>
       </Link>
