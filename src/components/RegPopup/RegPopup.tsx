@@ -126,7 +126,16 @@ export const PopupForReg: FC = () => {
 					inputType={InputTypes.password}
 					labelText="Придумайте пароль"
 					showPasswordButton={true}
-					validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
+					validation={{
+            ...register('password', {
+              ...PASSWORD_VALIDATION_CONFIG,
+              validate: value =>
+                (value === watch('email') &&
+                  VALIDATION_SETTINGS.password.messages.sameAsEmail) ||
+                (value === watch('name') &&
+                  VALIDATION_SETTINGS.password.messages.sameAsName),
+            }),
+          }}
 					error={errors?.password?.message}
 					helpText='Пароль может содержать буквы, цифры и знаки препинания'
 				/>
