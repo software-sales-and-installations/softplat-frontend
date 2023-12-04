@@ -62,6 +62,8 @@ export const VALIDATION_SETTINGS = {
       tooShort: 'Слишком короткий пароль',
       tooLong: 'Слишком длинный пароль',
       noMatch: 'Пароли не совпадают',
+      sameAsEmail: 'Пароль не должен совпадать с email',
+      sameAsName: 'Пароль не должен совпадать с именем',
     },
   },
   name: {

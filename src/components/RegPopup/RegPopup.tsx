@@ -1,43 +1,56 @@
-import { FC, useEffect, useState} from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Popup } from '../../UI/Popup/Popup';
 import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';
-import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG, VALIDATION_SETTINGS, NAME_VALIDATION_CONFIG, PHONE_VALIDATION_CONFIG } from '../../utils/constants';
-import {useForm } from 'react-hook-form';
-import {  ISignUpFields } from '../../UI/Popup/PopupTypes';
+import {
+  EMAIL_VALIDATION_CONFIG,
+  PASSWORD_VALIDATION_CONFIG,
+  VALIDATION_SETTINGS,
+  NAME_VALIDATION_CONFIG,
+  PHONE_VALIDATION_CONFIG,
+} from '../../utils/constants';
+import { useForm } from 'react-hook-form';
+import { ISignUpFields } from '../../UI/Popup/PopupTypes';
 import styles from '../../UI/Popup/Popup.module.scss';
 import { Button } from '../../UI/Button/Button';
 import { checkBoxState } from '../../UI/ToggleButton/ToggleButtonSlice';
 import { useAppDispatch } from '../../services/redux/store';
-import { useAuthLoginMutation, useAuthRegisterMutation } from '../../utils/api/authApi';
+import {
+  useAuthLoginMutation,
+  useAuthRegisterMutation,
+} from '../../utils/api/authApi';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../services/redux/store';
 import { popupState } from '../../UI/Popup/PopupSlice';
 import { setUser } from '../../services/redux/slices/user/user';
 import { signout } from '../SignOutPopup/SignOutPopupSlice';
 
-
 export const PopupForReg: FC = () => {
-	const [errorStatus, setErrorStatus] = useState(0);
-	const [textError, setTextError] = useState('')
-	const dispatch = useAppDispatch();
-	const MyRole = useSelector((state: RootState) => state.chooseRole.title);
-	const roleForReg = MyRole==='Я покупатель'? 'BUYER' : (MyRole==='Я продавец'? 'SELLER': null)
-	const {
-		register,
-		handleSubmit,
-		reset,
-		watch,
-		formState: { errors, isValid },
-		getValues,
-	} = useForm<ISignUpFields>({ mode: 'onChange'});
+  const [errorStatus, setErrorStatus] = useState(0);
+  const [textError, setTextError] = useState('');
+  const dispatch = useAppDispatch();
+  const MyRole = useSelector((state: RootState) => state.chooseRole.title);
+  const roleForReg =
+    MyRole === 'Я покупатель'
+      ? 'BUYER'
+      : MyRole === 'Я продавец'
+      ? 'SELLER'
+      : null;
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors, isValid },
+    getValues,
+  } = useForm<ISignUpFields>({ mode: 'onChange' });
 
-	useEffect(() => {
-		reset();
-	}, []);
-	function handleExitClick(){
-		dispatch(checkBoxState(false))
-	}
+  useEffect(() => {
+    reset();
+  }, []);
+  function handleExitClick() {
+    dispatch(checkBoxState(false));
+  }
 
 	const {email, name, password, confirmPassword, phone} = getValues();
 	  const [authLogin, {
@@ -113,7 +126,19 @@ export const PopupForReg: FC = () => {
 					inputType={InputTypes.password}
 					labelText="Придумайте пароль"
 					showPasswordButton={true}
-					validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
+					validation={{
+            ...register('password', {
+              ...PASSWORD_VALIDATION_CONFIG,
+              validate: value => {
+								if (value === watch('email') || value === watch('email').split('@')[0]) {
+                  return VALIDATION_SETTINGS.password.messages.sameAsEmail;
+                } else if (value === watch('name')) {
+                  return VALIDATION_SETTINGS.password.messages.sameAsName;
+                }
+                return;
+							}
+            }),
+          }}
 					error={errors?.password?.message}
 					helpText='Пароль может содержать буквы, цифры и знаки препинания'
 				/>
