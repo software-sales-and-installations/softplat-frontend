@@ -7,7 +7,7 @@ import itemImg from '../../images/catalogue-img.png';
 const Catalogue: React.FC = () => {
   return (
     <section className={styles.catalogue}>
-      <h2 className={styles.catalogue__title}>Каталог ПО</h2>
+      <h2 className={styles.catalogue__title}>Категории ПО</h2>
       <ul className={styles.catalogue__list}>
         {CATALOGUE_NAMES.map(i => (
           <li className={styles.catalogue__item} key={i.name}>

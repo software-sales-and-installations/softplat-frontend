@@ -13,3 +13,6 @@ type VendorImage = {
   size?: number;
   contentType?: string;
 };
+interface VendorsList {
+  vendors: IVendor[]
+}

@@ -3,10 +3,16 @@ import {FC} from 'react';
 import { useState } from 'react';
 import classNames from 'classnames';
 import { CardTable } from '../CardTable/CardTable';
-import { SellerExistingCard } from '../../utils/constants';
+import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
+import Preloader from '../Preloader/Preloader';
 
 export const AdminCards: FC = () =>{
     const [activeBtn, setActiveBtn] = useState('productCards');
+    const { data, error, isLoading } = usePublicProductListQuery({
+        minId: 0,
+        pageSize: '',
+        sort: 'NEWEST',
+      });
     return (
         <section className={styles.adminProduct}>
             <h2 className={styles.adminProduct__title}>Карточки товаров</h2>
@@ -43,7 +49,7 @@ export const AdminCards: FC = () =>{
                 Статус
                 </button>
         </nav>
-        {activeBtn === 'productCards' ? <CardTable products={SellerExistingCard.products}/>: null}
+        {activeBtn === 'productCards' ? (isLoading? (<Preloader/>) : error? (<p>Произошла ошибка</p>):(<CardTable products={data.products}/>)): null}
         </section>
     )
 }

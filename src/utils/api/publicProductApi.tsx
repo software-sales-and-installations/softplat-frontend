@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { API_BASE_URL } from '../constants';
-
+import { IProductCard } from '../../components/ProductCard/ProductCardTypes';
 export const publicProductApi = createApi({
   reducerPath: 'publicProductApi',
   baseQuery: fetchBaseQuery({
@@ -16,7 +16,7 @@ export const publicProductApi = createApi({
   }),
   endpoints: (build) => ({
     // Получение продукта по id
-    publicProduct: build.query({
+    publicProduct: build.query<IProductCard, string | undefined>({
       query: (productId) => `/product/${productId}`,
     }),
     // Получение списка продуктов/поиск/фильтрация
