@@ -18,30 +18,33 @@
 
 .input__label {
 	width: 100%;
-	padding-left: 12px;
 	@include font-CTAbody-regular;
     color: $dark-grey;
 	text-align: left;
-	padding-bottom: 10px;
+	padding-bottom: 3px;
 }
 
 .input__error {
-	padding-left: 12px;
 	color: $red-alert-system;
 	@include font-body-filters;
 	display: block;
 	height: 40px;
 	text-align: left;
+	margin-top: 5px;
 }
 
 .input__field {
 	box-sizing: border-box;
-	@include font-CTAbody-regular;
+	@include font-input-field;
 	padding: 10px 12px;
-	border-radius: 20px;
+	border-radius: 4px;
 	border: 1px solid $border-input;
-    color: $dark-grey;
-	background-color: $light-grey;
+    color: $black-standart-text;
+	background: rgba(233, 242, 255, 0.20);
+	&_type_error{
+		background: rgba(255, 233, 237, 0.20); 
+		border: 1px solid $red-alert-system;
+	}
 }
 
 .input__field:focus {
@@ -55,7 +58,7 @@
 .input__button {
 	background-image: url('../../images/eye.svg');
 	position: absolute;
-	top: 45px;
+	top: 32px;
 	right: 15px;
 	width: 24px;
 	height: 24px;
@@ -67,7 +70,7 @@
 	transition: opacity 0.2s;
 }
 .input__button_clicked{
-	background-image: url('../../images/eye-clicked.svg');
+	background-image: url('../../images/eye_clicked.svg');
 }
 
 .input__button:hover {
@@ -76,6 +79,7 @@
 .input__help{
 	margin: 0;
 	padding: 0;
-	color: $border-input;
+	color: $dark-grey;
+	@include font-body-filters;
 }
 
