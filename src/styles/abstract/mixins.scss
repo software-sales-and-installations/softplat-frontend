@@ -4,24 +4,30 @@
 @mixin font-h1-bold {
     @extend %font-display;
     font-size: 28px;
+    font-size: 28px;
     font-style: normal;
     font-weight: 700;
+    line-height: 40px;
     line-height: 40px;
 }
   
 @mixin font-h2-simibold {
     @extend %font-display;
     font-size: 24px;
+    font-size: 24px;
     font-style: normal;
     font-weight: 600;
+    line-height: 35px;
     line-height: 35px;
 }
 
 @mixin font-h3-bold {
     @extend %font-display;
     font-size: 18px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 700;
+    line-height: 22px;
     line-height: 22px;
 }
 

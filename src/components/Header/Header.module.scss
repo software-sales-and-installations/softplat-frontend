@@ -2,33 +2,37 @@
 @import './../../styles/abstract/mixins.scss';
 
 .header{
-    margin: 0;
-    padding: 30px 80px;
+    max-width: 1110px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 30px 0;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border-bottom: 2px solid $light-grey;
     &__logo{
-        width: 260px;
-        height: 80px;
+        flex-shrink: 0;
+        width: 65px;
+        height: 45px;
         border-radius: 10px;
-        background-color: $accent-lime-button;
+        background-color: $light-grey;
     }
 }
 .btncontainer{
-    margin: 0 0 0 40px;
+    margin: 0 0 0 30px;
     padding: 0;
     display: flex;
-    gap: 40px;
+    gap: 15px;
     align-items: center;
-    flex-grow: 1;
     justify-content: flex-end;
     
     &__profile{
-        margin: 0;
+        margin: 0 10px;
         padding: 0;
         width: 48px;
         border: none;
-        background-color: $accent-lime-button;
+        background-color: $light-grey;
+        color: $dark-grey;
         height: 48px;
         border-radius: 50%;
         text-decoration: none;
@@ -53,9 +57,9 @@
         background-color: transparent;
         border: none;
         cursor: pointer;
-        background-image: url('../../images/heart.svg');
-        width: 35px;
-        height: 36px;
+        background: url('../../images/heart_black.svg') no-repeat center;
+        width: 25px;
+        height: 25px;
     }
     &__shopbtn{
         margin: 0;
@@ -64,20 +68,19 @@
         background-color: transparent;
         cursor: pointer;
         object-fit: cover;
-        width: 35px;
-        height: 35px;
-        background-image: url('../../images/shopping-cart.svg');
+        width: 25px;
+        height: 25px;
+        background: url('../../images/shopping-cart.svg') no-repeat center;
     }
     &__profileenter{
         border-radius: 20px;
+        margin: 0 3px;
         border: none;
-        background-color: $accent-lime-button;
-        padding: 10px 27px;
+        background-color: transparent;
         color: $black-standart-text;
-        @include font-body-card;
+        @include font-body-regular;
         transition: all .4s;
         &:hover{
-            box-shadow: 0px 4px 20px 0px rgba(85, 80, 92, 0.50);
             cursor: pointer;
             ;
         }

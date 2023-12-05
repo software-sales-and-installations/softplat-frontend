@@ -1,0 +1,52 @@
+@import './../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.button {
+  @include font-CTAbody-regular;
+    cursor: pointer;
+    border-radius: 32px;
+    border: none;
+    width: 290px;
+    height: 55px;
+    transition: 0.3s ease-out;
+  &_type {
+    &_primary {
+      color: $black-standart-text;
+background-color: $accent-lime-button;
+      &:hover {
+        box-shadow: 0 4px 20px 0 rgba(85, 80, 92, 0.50);
+      }
+      &:active {
+        color: $white-standart;
+        background-color: $dark-grey;
+      }
+    }
+    &_secondary {
+      background-color: $white-standart;
+      border: 1px solid $border-input;
+      &:hover, &:active {
+        background-color: $light-grey;
+      }
+    }
+    &_decline {
+
+    }
+    &_agree {
+      background-color: $green-approve-system;
+      color: $white-standart;
+      &:hover, &:active {
+        background-color: $green-approve-pressed;
+      }
+    }
+    &_minor {
+
+    }
+
+    &_square {
+
+    }
+    &_link {
+
+    }
+  }
+}

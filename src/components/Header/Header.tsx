@@ -20,6 +20,7 @@ export const Header: FC = () => {
   const user = useAppSelector(selectUser);
   const signout = useAppSelector((state: RootState) => state.signout.signout);
   const location = useLocation();
+  const email = localStorage.getItem('email');
 
   if (
     location.pathname !== '/cart' &&
@@ -49,7 +50,13 @@ export const Header: FC = () => {
             <Link to="/cart" className={styles.btncontainer__shopbtn} />{' '}
           </>
         ) : !token ? (
-          <Link to="/cart" className={styles.btncontainer__shopbtn} />
+          <>
+            <Link
+              to="personal/favorites"
+              className={styles.btncontainer__likebtn}
+            />
+            <Link to="/cart" className={styles.btncontainer__shopbtn} />{' '}
+          </>
         ) : null}
         {token ? (
           <Link
@@ -62,7 +69,7 @@ export const Header: FC = () => {
             }
             className={styles.btncontainer__profile}
           >
-            <FaRegUser className={styles.btncontainer__profileicon} />
+            <p className={styles.btncontainer__profileicon} >{email? email[0].toUpperCase() : (user.email? user.email[0]: '')}</p>
           </Link>
         ) : (
           <button
