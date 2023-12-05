@@ -5,35 +5,6 @@ import { useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 
 export const HeaderNavbar: FC = () => {
-<<<<<<< HEAD
-  return (
-    <nav>
-      <ul className={styles.list}>
-        <li className={styles.item}>
-          <button type="button" className={styles.button}>
-            Каталог
-          </button>
-        </li>
-        <li className={styles.item}>
-          <button type="button" className={styles.button}>
-            Производители
-          </button>
-        </li>
-        <li className={styles.item}>
-          <Link to="/faq" className={styles.link}>
-            FAQ
-          </Link>
-        </li>
-        <li className={styles.item}>
-          <Link to="/contacts" className={styles.link}>
-            Контакты
-          </Link>
-        </li>
-      </ul>
-    </nav>
-  );
-};
-=======
     const location = useLocation();
     return (
         <nav>
@@ -54,4 +25,3 @@ export const HeaderNavbar: FC = () => {
         </nav>
     )
 }
->>>>>>> 01f67af82a573c8976c87cc333fbf83bd9547cb9
