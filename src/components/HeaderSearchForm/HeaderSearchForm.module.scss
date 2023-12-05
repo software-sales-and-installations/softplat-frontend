@@ -1,13 +1,13 @@
 @import '../../styles/abstract/constants.scss';
 
 .form {
-  margin: 0 0 0 90px;
+  margin: 0 0 0 40px;
   padding: 0 0 0 15px;
   box-sizing: border-box;
-  border-radius: 20px;
+  border-radius: 30px;
   border: 1px solid $dark-grey;
+  max-width: 380px;
   width: 45%;
-  max-width: 560px;
   opacity: 0.52;
   display: flex;
   justify-content: center;
@@ -21,7 +21,7 @@
   border: none;
   border-radius: 10px;
   width: 90%;
-  height: 43px;
+  height: 35px;
 
   &:focus {
     outline: none;
@@ -42,5 +42,6 @@
     width: 25px;
     height: 25px;
     object-fit: contain;
+    margin-right: 15px;
   }
 }

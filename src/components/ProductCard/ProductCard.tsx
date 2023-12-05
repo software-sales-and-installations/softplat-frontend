@@ -78,7 +78,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
         type="button"
         onClick={handleToggleFavorite}
       >
-        {isFavorite ? <FaHeart size={28} /> : <FaRegHeart size={28} stroke-width={0.5} />}
+        {isFavorite ? <FaHeart size={28} /> : <FaRegHeart size={28} strokeWidth={0.5} />}
       </button>
       <Link to={`/product/${card.id}`} className={styles.card__link}>
         <div className={styles.card__img}>
