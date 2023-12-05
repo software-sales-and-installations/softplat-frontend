@@ -40,6 +40,7 @@
   &__link{
     margin-left: 7px;
     @include font-body-regular;
+    text-decoration: none;
     color: $link;
   }
 }
