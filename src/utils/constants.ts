@@ -305,18 +305,24 @@ export const FAQ_INFO: {
   id: number;
   question: string;
   answer: { id: number; text: string }[];
+  textlink?: string;
+  link?: string;
 }[] = [
   {
     id: 1,
     question: 'Где найти свой оплаченный заказ?',
-    answer: [{ id: 1, text: 'Посетите личный кабинет, раздел Мои покупки.' }],
+    answer: [{ id: 1, text: 'Посетите личный кабинет, раздел ' }],
+    textlink: 'Мои покупки.',
+    link: '/personal/purchases'
   },
   {
     id: 2,
     question: 'Как с вами связаться?',
     answer: [
-      { id: 1, text: 'Все доступные способы связи на странице Контакты.' },
+      { id: 1, text: 'Все доступные способы связи на странице ' },
     ],
+    textlink: 'Контакты.',
+    link: '/contacts'
   },
   {
     id: 3,
