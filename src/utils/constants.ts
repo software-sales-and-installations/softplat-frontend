@@ -653,3 +653,117 @@ export const PRODUCT_ITEMS_LIKED: {
       link: '/catalog/media-apps'
     },
   ];
+
+export const personalMenuItems = [
+  {
+    id: 1,
+    name: 'Мои покупки',
+    link: 'purchases',
+  },
+  {
+    id: 2,
+    name: 'Избранное',
+    link: 'favorites',
+  },
+  {
+    id: 3,
+    name: 'Данные профиля',
+    link: 'settings',
+  },
+  {
+    id: 4,
+    name: 'Смена пароля',
+    link: 'password',
+  },
+];
+
+export const sellerMenuItems = [
+  {
+    id: 1,
+    name: 'Добавить карточку',
+    link: 'add-card',
+  },
+  {
+    id: 2,
+    name: 'Черновики',
+    link: 'drafts',
+  },
+  {
+    id: 3,
+    name: 'Опубликовано',
+    link: 'published',
+  },
+  {
+    id: 4,
+    name: 'На модерации',
+    link: 'on-moderation',
+  },
+  {
+    id: 5,
+    name: 'На доработке',
+    link: 'correction',
+  },
+  {
+    id: 6,
+    name: 'Отчеты продаж',
+    link: 'sales',
+  },
+  {
+    id: 7,
+    name: 'Банковские реквизиты',
+    link: 'bank-details',
+  },
+  {
+    id: 8,
+    name: 'Данные профиля',
+    link: 'settings',
+  },
+  {
+    id: 9,
+    name: 'Смена пароля',
+    link: 'password',
+  },
+];
+
+export const adminMenuItems = [
+  {
+    id: 1,
+    name: 'Опубликовано',
+    link: 'published',
+  },
+  {
+    id: 2,
+    name: 'На модерации',
+    link: 'on-moderation',
+  },
+  {
+    id: 3,
+    name: 'Отклоненные',
+    link: 'rejected',
+  },
+  {
+    id: 4,
+    name: 'Жалобы',
+    link: 'appeal',
+  },
+  {
+    id: 5,
+    name: 'Вендоры',
+    link: 'vendors',
+  },
+  {
+    id: 6,
+    name: 'Добавить вендора',
+    link: 'add-vendor',
+  },
+  {
+    id: 7,
+    name: 'Отчеты продаж',
+    link: 'sales',
+  },
+  {
+    id: 8,
+    name: 'Контакты',
+    link: 'contacts',
+  },
+];

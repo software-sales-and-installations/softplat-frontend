@@ -61,7 +61,7 @@ function App() {
             path="/seller" 
             element={
               //<ProtectedRouteForSeller>
-                <Navigate to="/seller/products" />
+                <Navigate to="/seller/published" />
               //</ProtectedRouteForSeller>
             } />
           <Route 
@@ -75,7 +75,7 @@ function App() {
             path="/admin" 
             element={
               //<ProtectedRouteForAdmin>
-                <Navigate to="/admin/products" />
+                <Navigate to="/admin/published" />
               //</ProtectedRouteForAdmin>
             } />
         </Routes>

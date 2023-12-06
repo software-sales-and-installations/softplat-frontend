@@ -1,10 +1,18 @@
+.breadcrumbs {
+  margin-top: 66px;
+}
+
 .seller {
   display: flex;
-  background-repeat: no-repeat;
-  margin: 0 0 150px 80px;
-  gap: 55px;
+  margin-top: 48px;
+  margin-bottom: 45px;
+  gap: 30px;
 
   &__titles {
-    margin-top: 50px;
+    flex: 0 0 255px;
+  }
+
+  h2 {
+    margin: 0;
   }
 }
