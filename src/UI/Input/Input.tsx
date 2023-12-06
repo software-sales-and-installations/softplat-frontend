@@ -50,7 +50,7 @@ export const Input: FC<IInput> = ({
 										validation.onChange(e) 
 								  }
 						}
-						className={styles.input__field}
+						className={classNames(styles.input__field, error? styles.input__field_type_error: '')}
 						type={inputTextType}
 						name={inputType}
 						id={inputType}
