@@ -8,19 +8,46 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 const Personal: React.FC = () => {
   return (
-    <section className={styles.personal}>
-      <div className={styles.personal__titles}>
-        <div className={styles.personal__breadcrumbs}>
-          <Breadcrumbs />
-        </div>
-        <CabinetMenu />
+    <>
+      <div className={styles.breadcrumbs}>
+        <Breadcrumbs />
       </div>
-      <Routes>
-        <Route path="/purchases" element={<PersonalPurchases />} />
-        <Route path="/favorites" element={<PersonalFavorites />} />
-        <Route path="/settings" element={<PersonalSettings />} />
-      </Routes>
-    </section>
+      <section className={styles.personal}>
+        <div className={styles.personal__titles}>
+          <CabinetMenu mode="user" />
+        </div>
+        <Routes>
+          <Route
+            path="/purchases"
+            element={
+              // <PersonalPurchases />
+              <h2>Мои покупки</h2>
+            }
+          />
+          <Route
+            path="/favorites"
+            element={
+              // <PersonalFavorites />
+              <h2>Избранное</h2>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              // <PersonalSettings />
+              <h2>Данные профиля</h2>
+            }
+          />
+          <Route
+            path="/password"
+            element={
+              // Компонент смены пароля
+              <h2>Смена пароля</h2>
+            }
+          />
+        </Routes>
+      </section>
+    </>
   );
 };
 
