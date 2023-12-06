@@ -45,7 +45,7 @@ export const VALIDATION_SETTINGS = {
     pattern:
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     maxLength: 30,
-    minLength: 4,
+    minLength: 6,
     messages: {
       noEmail: 'Необходимо ввести email',
       invalid: 'Необходимо ввести email в правильном формате',
@@ -58,9 +58,9 @@ export const VALIDATION_SETTINGS = {
     minLength: 8,
     maxLength: 40,
     messages: {
+      invalid: 'Введены недопустимые символы',
       noPassword: 'Необходимо ввести пароль',
       noconfirmPassword: 'Необходимо повторно ввести пароль',
-      invalid: 'Введены недопустимые символы',
       tooShort: 'Слишком короткий пароль',
       tooLong: 'Слишком длинный пароль',
       noMatch: 'Пароли не совпадают',
@@ -73,10 +73,21 @@ export const VALIDATION_SETTINGS = {
     minLength: 2,
     maxLength: 12,
     messages: {
+      tooShort: 'Слишком короткое имя',
+      tooLong: 'Слишком длинное имя',
+      invalid: 'Только кириллица, латиница или дефис',
+      noName: 'Необходимо ввести имя',
+    },
+  },
+  companyname: {
+    pattern: /^[a-zа-яё\s]+$/iu,
+    minLength: 2,
+    maxLength: 12,
+    messages: {
       tooShort: 'Слишком короткое название',
       tooLong: 'Слишком длинное название',
-      invalid: 'Только кириллица или латинские буквы',
-      noName: 'Необходимо ввести название',
+      invalid: 'Только кириллица, латиница или дефис',
+      noCompanyName: 'Необходимо ввести название',
     },
   },
   phone: {
@@ -86,8 +97,8 @@ export const VALIDATION_SETTINGS = {
     messages: {
       tooShort: 'Слишком короткий номер',
       tooLong: 'Слишком длинный номер',
-      invalid: 'Необходимо вводить только цифры',
-      noName: 'Необходимо ввести номер телефона',
+      invalid: 'Введены недопустимые символы',
+      noPhone: 'Необходимо ввести номер телефона',
     },
   },
   cardNumber: {
@@ -210,10 +221,28 @@ export const NAME_VALIDATION_CONFIG = {
     message: VALIDATION_SETTINGS.name.messages.tooLong,
   },
 };
+export const COMPANYNAME_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.companyname.messages.noCompanyName,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.companyname.pattern,
+    message: VALIDATION_SETTINGS.companyname.messages.invalid,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.companyname.minLength,
+    message: VALIDATION_SETTINGS.companyname.messages.tooShort,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.companyname.maxLength,
+    message: VALIDATION_SETTINGS.companyname.messages.tooLong,
+  },
+};
 export const PHONE_VALIDATION_CONFIG = {
   required: {
     value: true,
-    message: VALIDATION_SETTINGS.phone.messages.noName,
+    message: VALIDATION_SETTINGS.phone.messages.noPhone,
   },
   pattern: {
     value: VALIDATION_SETTINGS.phone.pattern,

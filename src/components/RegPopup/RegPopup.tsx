@@ -7,6 +7,7 @@ import {
   PASSWORD_VALIDATION_CONFIG,
   VALIDATION_SETTINGS,
   NAME_VALIDATION_CONFIG,
+  COMPANYNAME_VALIDATION_CONFIG,
   PHONE_VALIDATION_CONFIG,
   INN_VALIDATION_CONFIG 
 } from '../../utils/constants';
@@ -128,13 +129,22 @@ export const PopupForReg: FC = () => {
 					error={errors?.email?.message}
 				/>
 				{MyRole === 'Я продавец'? <Input
-					inputType={InputTypes.name}
+					inputType={InputTypes.companyname}
 					labelText='Название магазина'
 					validation={{
-						...register('name', NAME_VALIDATION_CONFIG),
+						...register('companyname', COMPANYNAME_VALIDATION_CONFIG),
 					}}
 					error={errors?.name?.message}
-				/>:null}	
+				/>:(
+					MyRole==='Я покупатель' ? 
+						<Input
+							inputType={InputTypes.name}
+							labelText='Ваше имя'
+							validation={{
+							...register('name', NAME_VALIDATION_CONFIG),
+							}}
+							error={errors?.name?.message}
+					/> :null)}	
 				<Input
 					inputType={InputTypes.password}
 					labelText="Пароль"
