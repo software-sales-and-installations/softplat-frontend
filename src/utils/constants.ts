@@ -60,7 +60,7 @@ export const VALIDATION_SETTINGS = {
     messages: {
       noPassword: 'Необходимо ввести пароль',
       noconfirmPassword: 'Необходимо повторно ввести пароль',
-      invalid: 'Необходимо ввести пароль в правильном формате',
+      invalid: 'Введены недопустимые символы',
       tooShort: 'Слишком короткий пароль',
       tooLong: 'Слишком длинный пароль',
       noMatch: 'Пароли не совпадают',
@@ -81,8 +81,8 @@ export const VALIDATION_SETTINGS = {
   },
   phone: {
     pattern: /^\d+$/,
-    minLength: 12,
-    maxLength: 12,
+    minLength: 10,
+    maxLength: 10,
     messages: {
       tooShort: 'Слишком короткий номер',
       tooLong: 'Слишком длинный номер',

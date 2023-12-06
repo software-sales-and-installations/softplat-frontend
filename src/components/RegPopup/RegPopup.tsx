@@ -41,6 +41,7 @@ export const PopupForReg: FC = () => {
     handleSubmit,
     reset,
     watch,
+	trigger,
     formState: { errors, isValid },
     getValues,
   } = useForm<ISignUpFields>({ mode: 'onChange' });
@@ -94,6 +95,9 @@ export const PopupForReg: FC = () => {
 			setTextError('Такой пользователь уже существует')
 		}
 	}, [errorStatus])
+	useEffect(() => {
+		trigger("confirmPassword");
+	  }, [password, trigger]);
 	return (
 		<Popup>
 			<form className={styles.form} onSubmit={handleSubmit(handleSubmitRegister)}>
@@ -149,7 +153,7 @@ export const PopupForReg: FC = () => {
             }),
           }}
 					error={errors?.password?.message}
-					helpText='Пароль может содержать буквы, цифры и знаки препинания'
+					helpText='Пароль может содержать буквы, цифры и спецсимволы'
 				/>
 				<Input
 					inputType={InputTypes.confirmPassword}
