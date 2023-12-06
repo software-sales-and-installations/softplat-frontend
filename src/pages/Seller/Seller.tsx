@@ -4,6 +4,8 @@ import CabinetMenu from '../../components/CabinetMenu/CabinetMenu';
 import { Routes, Route } from 'react-router-dom';
 import PasswordSettings from '../../components/PasswordSettings/PasswordSettings';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import { SellerSettings } from '../../components/SellerSettings/SellerSettings';
+import { SellerBankSettings } from '../../components/SellerBankSettings/SellerBankSettings';
 
 export const Seller: FC = () => {
   return (
@@ -22,8 +24,8 @@ export const Seller: FC = () => {
           <Route path="/on-moderation" element={<h2>На модерации</h2>} />
           <Route path="/correction" element={<h2>На доработке</h2>} />
           <Route path="/sales" element={<h2>Отчеты продаж</h2>} />
-          <Route path="/bank-details" element={<h2>Банковские реквизиты</h2>} />
-          <Route path="/settings" element={<h2>Данные профиля</h2>} />
+          <Route path="/bank-details" element={<SellerBankSettings/>} />
+          <Route path="/settings" element={<SellerSettings/>} />
           <Route path="/password" element={<PasswordSettings/>} />
         </Routes>
       </section>

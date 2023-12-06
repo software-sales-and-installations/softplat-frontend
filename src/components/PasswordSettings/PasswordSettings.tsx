@@ -43,10 +43,9 @@ const PasswordSettings: FC = () => {
       className={styles.personalSettingsPassword}
       onSubmit={handleSubmit(handleSubmitChangePass)}
     >
-      <div className={styles.personalSettingsPassword__inputs}>
         <Input
           inputType={InputTypes.oldpassword}
-          labelText="Старый пароль"
+          labelText="Текущий пароль"
           showPasswordButton={true}
           validation={{ ...register('oldpassword', PASSWORD_VALIDATION_CONFIG) }}
           error={errors?.oldpassword?.message}
@@ -57,7 +56,6 @@ const PasswordSettings: FC = () => {
           showPasswordButton={true}
           validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
           error={errors?.password?.message}
-          helpText='Пароль может содержать буквы, цифры и знаки препинания'
         />
         <Input
 					inputType={InputTypes.confirmPassword}
@@ -71,9 +69,7 @@ const PasswordSettings: FC = () => {
 						}),
 					}}
 					error={errors?.confirmPassword?.message}
-					helpText='Пароль может содержать буквы, цифры и знаки препинания'
 				/>
-      </div>
       <div className={styles.personalSettingsPassword__btncontainer}>
         <Button isDisabled={!isValid} type='submit' mode="primary">
           Сохранить

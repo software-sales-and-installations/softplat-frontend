@@ -1,5 +1,5 @@
 import styles from './Input.module.scss';
-import { IInput } from './InputTypes';
+import { IInput, InputTypes } from './InputTypes';
 import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
 

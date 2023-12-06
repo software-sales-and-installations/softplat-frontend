@@ -4,9 +4,10 @@ import { Input } from '../../UI/Input/Input';
 import { useForm } from 'react-hook-form';
 import { ISettingPersonalData } from './PersonalSettingTypes';
 import { PERSONALNAME_VALIDATION_CONFIG,
-        PERSONALEMAIL_VALIDATION_CONFIG
+        PERSONALEMAIL_VALIDATION_CONFIG,
+        PERSONALPHONE_VALIDATION_CONFIG
 } from '../../utils/constants';
-
+import { Button } from '../../UI/Button/Button';
 
 const PersonalSettings: React.FC = () => {
   const {
@@ -20,7 +21,6 @@ const PersonalSettings: React.FC = () => {
     console.log(getValues())
   }
   return (
-      <section className={styles.personalSettings}>
         <form className={styles.form} onSubmit={handleSubmit(handleSubmitUpdateData)}>
 				<Input
 					inputType={InputTypes.name}
@@ -38,9 +38,19 @@ const PersonalSettings: React.FC = () => {
 					}}
 					error={errors?.email?.message}
 				/>
+        <div className={styles.containerForInput}>
+					<Input
+						inputType={InputTypes.phone}
+						labelText="Телефон"
+						validation={{ ...register('phone', PERSONALPHONE_VALIDATION_CONFIG) }}
+						error={errors?.phone?.message}
+					/>
+				</div>
+        <div className={styles.btncontainer}>
+					<Button isDisabled={!isValid} type='submit' mode='primary'>Сохранить</Button>
+				</div>
         </form>
 
-      </section>
   );
 };
 

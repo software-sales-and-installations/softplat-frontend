@@ -11,7 +11,14 @@ export enum InputTypes {
 	phone = 'phone',
 	oldpassword='oldpassword',
 	cardName = 'cardName',
-	companyname = 'companyname'
+	companyname = 'companyname',
+	bik = 'bik',
+	ogrnip = 'ogrnip',
+	account = 'account',
+	kpp = 'kpp',
+	orgForm = 'orgForm',
+    shopname = 'shopname',
+    address = 'address'
 }
 export interface IInput {
 	inputType: InputTypes;

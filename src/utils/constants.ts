@@ -170,7 +170,8 @@ export const EMAIL_VALIDATION_CONFIG = {
     value: VALIDATION_SETTINGS.email.maxLength,
     message: VALIDATION_SETTINGS.email.messages.tooLong,
   },
-};export const INN_VALIDATION_CONFIG = {
+};
+export const INN_VALIDATION_CONFIG = {
   required: {
     value: true,
     message: VALIDATION_SETTINGS.INN.messages.noINN,
@@ -268,6 +269,20 @@ export const PHONE_VALIDATION_CONFIG = {
     value: true,
     message: VALIDATION_SETTINGS.phone.messages.noPhone,
   },
+  pattern: {
+    value: VALIDATION_SETTINGS.phone.pattern,
+    message: VALIDATION_SETTINGS.phone.messages.invalid,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.phone.minLength,
+    message: VALIDATION_SETTINGS.phone.messages.tooShort,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.phone.maxLength,
+    message: VALIDATION_SETTINGS.phone.messages.tooLong,
+  },
+};
+export const PERSONALPHONE_VALIDATION_CONFIG = {
   pattern: {
     value: VALIDATION_SETTINGS.phone.pattern,
     message: VALIDATION_SETTINGS.phone.messages.invalid,
