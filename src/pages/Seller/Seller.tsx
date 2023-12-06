@@ -19,12 +19,12 @@ export const Seller: FC = () => {
           <Route path="/add-card" element={<h2>Добавить карточку</h2>} />
           <Route path="/drafts" element={<h2>Черновики</h2>} />
           <Route path="/published" element={<h2>Опубликовано</h2>} />
-          <Route path="/products" element={<h2>На модерации</h2>} />
-          <Route path="/products" element={<h2>На доработке</h2>} />
-          <Route path="/products" element={<h2>Отчеты продаж</h2>} />
-          <Route path="/products" element={<h2>Банковские реквизиты</h2>} />
-          <Route path="/products" element={<h2>Данные профиля</h2>} />
-          <Route path="/products" element={<h2>Смена пароля</h2>} />
+          <Route path="/on-moderation" element={<h2>На модерации</h2>} />
+          <Route path="/correction" element={<h2>На доработке</h2>} />
+          <Route path="/sales" element={<h2>Отчеты продаж</h2>} />
+          <Route path="/bank-details" element={<h2>Банковские реквизиты</h2>} />
+          <Route path="/settings" element={<h2>Данные профиля</h2>} />
+          <Route path="/password" element={<h2>Смена пароля</h2>} />
         </Routes>
       </section>
     </>
