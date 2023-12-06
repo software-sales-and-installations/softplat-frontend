@@ -5,6 +5,7 @@ import styles from './Personal.module.scss';
 import { Routes, Route } from 'react-router-dom';
 import PersonalSettings from '../../components/PersonalSettings/PersonalSettings';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import PasswordSettings from '../../components/PasswordSettings/PasswordSettings';
 
 const Personal: React.FC = () => {
   return (
@@ -34,15 +35,13 @@ const Personal: React.FC = () => {
           <Route
             path="/settings"
             element={
-              // <PersonalSettings />
-              <h2>Данные профиля</h2>
+              <PersonalSettings />
             }
           />
           <Route
             path="/password"
             element={
-              // Компонент смены пароля
-              <h2>Смена пароля</h2>
+              <PasswordSettings/>
             }
           />
         </Routes>

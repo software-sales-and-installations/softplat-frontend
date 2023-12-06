@@ -170,7 +170,8 @@ export const EMAIL_VALIDATION_CONFIG = {
     value: VALIDATION_SETTINGS.email.maxLength,
     message: VALIDATION_SETTINGS.email.messages.tooLong,
   },
-};export const INN_VALIDATION_CONFIG = {
+};
+export const INN_VALIDATION_CONFIG = {
   required: {
     value: true,
     message: VALIDATION_SETTINGS.INN.messages.noINN,
@@ -183,7 +184,17 @@ export const EMAIL_VALIDATION_CONFIG = {
     value: VALIDATION_SETTINGS.INN.maxLength,
     message: VALIDATION_SETTINGS.INN.messages.tooLong,
   },
+};export const PERSONALEMAIL_VALIDATION_CONFIG = {
+  pattern: {
+    value: VALIDATION_SETTINGS.email.pattern,
+    message: VALIDATION_SETTINGS.email.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.email.maxLength,
+    message: VALIDATION_SETTINGS.email.messages.tooLong,
+  },
 };
+
 export const PASSWORD_VALIDATION_CONFIG = {
   required: {
     value: true,
@@ -239,11 +250,39 @@ export const COMPANYNAME_VALIDATION_CONFIG = {
     message: VALIDATION_SETTINGS.companyname.messages.tooLong,
   },
 };
+export const PERSONALNAME_VALIDATION_CONFIG = {
+  pattern: {
+    value: VALIDATION_SETTINGS.name.pattern,
+    message: VALIDATION_SETTINGS.name.messages.invalid,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.name.minLength,
+    message: VALIDATION_SETTINGS.name.messages.tooShort,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.name.maxLength,
+    message: VALIDATION_SETTINGS.name.messages.tooLong,
+  },
+};
 export const PHONE_VALIDATION_CONFIG = {
   required: {
     value: true,
     message: VALIDATION_SETTINGS.phone.messages.noPhone,
   },
+  pattern: {
+    value: VALIDATION_SETTINGS.phone.pattern,
+    message: VALIDATION_SETTINGS.phone.messages.invalid,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.phone.minLength,
+    message: VALIDATION_SETTINGS.phone.messages.tooShort,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.phone.maxLength,
+    message: VALIDATION_SETTINGS.phone.messages.tooLong,
+  },
+};
+export const PERSONALPHONE_VALIDATION_CONFIG = {
   pattern: {
     value: VALIDATION_SETTINGS.phone.pattern,
     message: VALIDATION_SETTINGS.phone.messages.invalid,
