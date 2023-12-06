@@ -7,16 +7,26 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 export const Seller: FC = () => {
   return (
-    <section className={styles.seller}>
-      <div className={styles.seller__titles}>
-        <div className={styles.seller__breadcrumbs}>
-          <Breadcrumbs />
-        </div>
-        <CabinetMenu />
+    <>
+      <div className={styles.breadcrumbs}>
+        <Breadcrumbs />
       </div>
-      <Routes>
-        <Route path="/products" element={<SellerCabinetContent />} />
-      </Routes>
-    </section>
+      <section className={styles.seller}>
+        <div className={styles.seller__titles}>
+          <CabinetMenu mode="seller" />
+        </div>
+        <Routes>
+          <Route path="/add-card" element={<h2>Добавить карточку</h2>} />
+          <Route path="/drafts" element={<h2>Черновики</h2>} />
+          <Route path="/published" element={<h2>Опубликовано</h2>} />
+          <Route path="/products" element={<h2>На модерации</h2>} />
+          <Route path="/products" element={<h2>На доработке</h2>} />
+          <Route path="/products" element={<h2>Отчеты продаж</h2>} />
+          <Route path="/products" element={<h2>Банковские реквизиты</h2>} />
+          <Route path="/products" element={<h2>Данные профиля</h2>} />
+          <Route path="/products" element={<h2>Смена пароля</h2>} />
+        </Routes>
+      </section>
+    </>
   );
 };
