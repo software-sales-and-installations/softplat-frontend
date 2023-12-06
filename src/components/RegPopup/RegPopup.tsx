@@ -8,12 +8,12 @@ import {
   VALIDATION_SETTINGS,
   NAME_VALIDATION_CONFIG,
   PHONE_VALIDATION_CONFIG,
+  INN_VALIDATION_CONFIG 
 } from '../../utils/constants';
 import { useForm } from 'react-hook-form';
 import { ISignUpFields } from '../../UI/Popup/PopupTypes';
 import styles from '../../UI/Popup/Popup.module.scss';
 import { Button } from '../../UI/Button/Button';
-import { checkBoxState } from '../../UI/ToggleButton/ToggleButtonSlice';
 import { useAppDispatch } from '../../services/redux/store';
 import {
   useAuthLoginMutation,
@@ -48,9 +48,6 @@ export const PopupForReg: FC = () => {
   useEffect(() => {
     reset();
   }, []);
-  function handleExitClick() {
-    dispatch(checkBoxState(false));
-  }
 
 	const {email, name, password, confirmPassword, phone} = getValues();
 	  const [authLogin, {
@@ -60,6 +57,7 @@ export const PopupForReg: FC = () => {
 		// isFetching, isLoading, isError
 	  }] = useAuthRegisterMutation();
 	  const handleSubmitRegister = () => {
+		console.log(getValues())
 	   authRegister({email, name, password, confirmPassword, role: roleForReg, phone: phone? phone.slice(2): ''}).unwrap()
 		 .then((res) => {
 		  authLogin({
@@ -99,32 +97,42 @@ export const PopupForReg: FC = () => {
 	return (
 		<Popup>
 			<form className={styles.form} onSubmit={handleSubmit(handleSubmitRegister)}>
-				<Input
-					inputType={InputTypes.name}
-					labelText='Ваше имя'
+				{MyRole === 'Я продавец'? 
+					<Input
+					inputType={InputTypes.INN}
+					labelText='ИНН'
 					validation={{
-						...register('name', NAME_VALIDATION_CONFIG),
+						...register('INN', INN_VALIDATION_CONFIG),
 					}}
-					error={errors?.name?.message}
+					error={errors?.INN?.message}
 				/>	
-            	<Input
+				: null}
+					<Input
+						inputType={InputTypes.phone}
+						labelText="Телефон"
+						validation={{ ...register('phone', PHONE_VALIDATION_CONFIG) }}
+						defaultValue={'+7'}
+						error={errors?.phone?.message}
+					/>
+				<Input
 					inputType={InputTypes.email}
-					labelText='e-mail'
+					labelText='E-mail'
 					validation={{
 						...register('email', EMAIL_VALIDATION_CONFIG),
 					}}
 					error={errors?.email?.message}
 				/>
-				<Input
-					inputType={InputTypes.phone}
-					labelText="Телефон"
-					validation={{ ...register('phone', PHONE_VALIDATION_CONFIG) }}
-					defaultValue={'+7'}
-					error={errors?.phone?.message}
-				/>
+				{MyRole === 'Я продавец'? <Input
+					inputType={InputTypes.name}
+					labelText='Название магазина'
+					validation={{
+						...register('name', NAME_VALIDATION_CONFIG),
+					}}
+					error={errors?.name?.message}
+				/>:null}	
 				<Input
 					inputType={InputTypes.password}
-					labelText="Придумайте пароль"
+					labelText="Пароль"
 					showPasswordButton={true}
 					validation={{
             ...register('password', {
@@ -168,7 +176,6 @@ export const PopupForReg: FC = () => {
 				</div>		
 				<div className={styles.btncontainer}>
 					<Button isDisabled={!isValid} type='submit' mode='primary'>Зарегистрироваться</Button>
-					<Button onClick={handleExitClick} mode='secondary' type='button'>Отмена</Button>
 				</div>
 			</form>
 		</Popup>

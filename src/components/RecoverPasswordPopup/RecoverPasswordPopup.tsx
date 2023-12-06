@@ -29,16 +29,16 @@ export const RecoverPasswordPopup : FC =()=>{
 	}
     return(
     <Popup>
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <form className={classNames(styles.form, styles.form_type_recoverPassword)} onSubmit={handleSubmit(onSubmit)}>
 			<Input
 				inputType={InputTypes.email}
-				labelText="Электронная почта"
+				labelText="E-mail"
 				validation={{
 					...register('email', EMAIL_VALIDATION_CONFIG),
 				}}
 				error={errors?.email?.message?.toString()}
+				helpText='Мы отправим вам ссылку на сброс пароля'
 			/>
-			<p className={styles.helpText}>Укажите ваш e-mail и мы отправим вам ссылку на сброс пароля</p>
 			<div className={classNames(styles.btncontainer, styles.btncontainer_type_recoverpassword)}>
 			   <Button type='submit' mode='primary' isDisabled={!isValid}>Отправить</Button>
 			   <Button onClick={handleExitClick} mode='secondary' type='button'>Отмена</Button>

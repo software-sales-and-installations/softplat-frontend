@@ -99,7 +99,7 @@ export const PopupForAuth: FC = () => {
 				</div>
 				<div className={styles.btncontainer}>
 					<Button isDisabled={!isValid} type='submit' mode='primary'>Войти</Button>
-					<Button type='button' mode='secondary' onClick={handlePasswordPopup}>Забыли пароль?</Button>
+					<Button type='button' mode='secondary' onClick={handlePasswordPopup}>Восстановить пароль</Button>
 				</div>
 			</form>
 		</Popup>

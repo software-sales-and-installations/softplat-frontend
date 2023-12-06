@@ -132,6 +132,17 @@ export const VALIDATION_SETTINGS = {
       noName: 'Необходимо ввести имя',
     },
   },
+  INN: {
+    pattern: /^\d+$/,
+    minLength: 10,
+    maxLength: 12,
+    messages: {
+      tooShort: 'Введите еще цифры',
+      tooLong: 'Слишком длинный ИНН',
+      invalid: 'Только цифры',
+      noINN: 'Необходимо ввести ИНН',
+    },
+  },
 };
 export const EMAIL_VALIDATION_CONFIG = {
   required: {
@@ -146,8 +157,20 @@ export const EMAIL_VALIDATION_CONFIG = {
     value: VALIDATION_SETTINGS.email.maxLength,
     message: VALIDATION_SETTINGS.email.messages.tooLong,
   },
+};export const INN_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.INN.messages.noINN,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.INN.pattern,
+    message: VALIDATION_SETTINGS.INN.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.INN.maxLength,
+    message: VALIDATION_SETTINGS.INN.messages.tooLong,
+  },
 };
-
 export const PASSWORD_VALIDATION_CONFIG = {
   required: {
     value: true,
