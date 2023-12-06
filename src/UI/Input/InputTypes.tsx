@@ -6,12 +6,12 @@ export enum InputTypes {
 	text = 'text',
 	date = 'date',
 	INN ='INN',
-	orgName='orgName',
 	remember='checkbox',
 	name = 'name',
 	phone = 'phone',
 	oldpassword='oldpassword',
-	cardName = 'cardName'
+	cardName = 'cardName',
+	companyname = 'companyname'
 }
 export interface IInput {
 	inputType: InputTypes;

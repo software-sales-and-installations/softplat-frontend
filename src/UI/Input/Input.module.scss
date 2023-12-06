@@ -1,5 +1,7 @@
 @import '../../styles/abstract/constants.scss';
 @import '../../styles/abstract/mixins.scss';
+
+
 .input__container {
 	width: 100%;
 	display: flex;
@@ -25,22 +27,34 @@
 	color: $red-alert-system;
 	@include font-body-filters;
 	display: block;
-	height: 40px;
+	height: 15px;
 	text-align: left;
-	margin-top: 5px;
+	margin: 0;
+	&_type_help{
+		margin: 5px 0 15px 0;
+	}
 }
 
 .input__field {
 	box-sizing: border-box;
 	@include font-input-field;
 	padding: 10px 12px;
-	border-radius: 4px;
+	border-radius: 8px;
 	border: 1px solid $border-input;
     color: $black-standart-text;
 	background: rgba(233, 242, 255, 0.20);
 	&_type_error{
 		background: rgba(255, 233, 237, 0.20); 
 		border: 1px solid $red-alert-system;
+	}
+	&_type_INN{
+		width: 36%;
+	}
+	&_type_phone{
+		width: 48%;
+		padding-left: 32px;
+		position: relative;
+		
 	}
 }
 

@@ -45,10 +45,12 @@ export const VALIDATION_SETTINGS = {
     pattern:
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     maxLength: 30,
+    minLength: 6,
     messages: {
       noEmail: 'Необходимо ввести email',
       invalid: 'Необходимо ввести email в правильном формате',
       tooLong: 'Слишком длинный email',
+      tooShort: 'Слишком короткий email'
     },
   },
   password: {
@@ -56,9 +58,9 @@ export const VALIDATION_SETTINGS = {
     minLength: 8,
     maxLength: 40,
     messages: {
+      invalid: 'Введены недопустимые символы',
       noPassword: 'Необходимо ввести пароль',
       noconfirmPassword: 'Необходимо повторно ввести пароль',
-      invalid: 'Необходимо ввести пароль в правильном формате',
       tooShort: 'Слишком короткий пароль',
       tooLong: 'Слишком длинный пароль',
       noMatch: 'Пароли не совпадают',
@@ -73,19 +75,30 @@ export const VALIDATION_SETTINGS = {
     messages: {
       tooShort: 'Слишком короткое имя',
       tooLong: 'Слишком длинное имя',
-      invalid: 'Только кириллица или латинские буквы',
+      invalid: 'Только кириллица, латиница или дефис',
       noName: 'Необходимо ввести имя',
     },
   },
-  phone: {
-    pattern: /\+{1}[7]{1}\d/,
-    minLength: 12,
+  companyname: {
+    pattern: /^[a-zа-яё\s]+$/iu,
+    minLength: 2,
     maxLength: 12,
+    messages: {
+      tooShort: 'Слишком короткое название',
+      tooLong: 'Слишком длинное название',
+      invalid: 'Только кириллица, латиница или дефис',
+      noCompanyName: 'Необходимо ввести название',
+    },
+  },
+  phone: {
+    pattern: /^\d+$/,
+    minLength: 10,
+    maxLength: 10,
     messages: {
       tooShort: 'Слишком короткий номер',
       tooLong: 'Слишком длинный номер',
-      invalid: 'Ваш номер должен начинаться с +7',
-      noName: 'Необходимо ввести номер телефона',
+      invalid: 'Введены недопустимые символы',
+      noPhone: 'Необходимо ввести номер телефона',
     },
   },
   cardNumber: {
@@ -132,6 +145,17 @@ export const VALIDATION_SETTINGS = {
       noName: 'Необходимо ввести имя',
     },
   },
+  INN: {
+    pattern: /^\d+$/,
+    minLength: 10,
+    maxLength: 12,
+    messages: {
+      tooShort: 'Введите еще цифры',
+      tooLong: 'Слишком длинный ИНН',
+      invalid: 'Необходимо вводить только цифры',
+      noINN: 'Необходимо ввести ИНН',
+    },
+  },
 };
 export const EMAIL_VALIDATION_CONFIG = {
   required: {
@@ -146,8 +170,20 @@ export const EMAIL_VALIDATION_CONFIG = {
     value: VALIDATION_SETTINGS.email.maxLength,
     message: VALIDATION_SETTINGS.email.messages.tooLong,
   },
-};
-export const PERSONALEMAIL_VALIDATION_CONFIG = {
+};export const INN_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.INN.messages.noINN,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.INN.pattern,
+    message: VALIDATION_SETTINGS.INN.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.INN.maxLength,
+    message: VALIDATION_SETTINGS.INN.messages.tooLong,
+  },
+};export const PERSONALEMAIL_VALIDATION_CONFIG = {
   pattern: {
     value: VALIDATION_SETTINGS.email.pattern,
     message: VALIDATION_SETTINGS.email.messages.invalid,
@@ -195,6 +231,24 @@ export const NAME_VALIDATION_CONFIG = {
     message: VALIDATION_SETTINGS.name.messages.tooLong,
   },
 };
+export const COMPANYNAME_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.companyname.messages.noCompanyName,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.companyname.pattern,
+    message: VALIDATION_SETTINGS.companyname.messages.invalid,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.companyname.minLength,
+    message: VALIDATION_SETTINGS.companyname.messages.tooShort,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.companyname.maxLength,
+    message: VALIDATION_SETTINGS.companyname.messages.tooLong,
+  },
+};
 export const PERSONALNAME_VALIDATION_CONFIG = {
   pattern: {
     value: VALIDATION_SETTINGS.name.pattern,
@@ -212,7 +266,7 @@ export const PERSONALNAME_VALIDATION_CONFIG = {
 export const PHONE_VALIDATION_CONFIG = {
   required: {
     value: true,
-    message: VALIDATION_SETTINGS.phone.messages.noName,
+    message: VALIDATION_SETTINGS.phone.messages.noPhone,
   },
   pattern: {
     value: VALIDATION_SETTINGS.phone.pattern,
