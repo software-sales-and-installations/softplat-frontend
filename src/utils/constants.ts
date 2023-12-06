@@ -147,6 +147,16 @@ export const EMAIL_VALIDATION_CONFIG = {
     message: VALIDATION_SETTINGS.email.messages.tooLong,
   },
 };
+export const PERSONALEMAIL_VALIDATION_CONFIG = {
+  pattern: {
+    value: VALIDATION_SETTINGS.email.pattern,
+    message: VALIDATION_SETTINGS.email.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.email.maxLength,
+    message: VALIDATION_SETTINGS.email.messages.tooLong,
+  },
+};
 
 export const PASSWORD_VALIDATION_CONFIG = {
   required: {
@@ -172,6 +182,20 @@ export const NAME_VALIDATION_CONFIG = {
     value: true,
     message: VALIDATION_SETTINGS.name.messages.noName,
   },
+  pattern: {
+    value: VALIDATION_SETTINGS.name.pattern,
+    message: VALIDATION_SETTINGS.name.messages.invalid,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.name.minLength,
+    message: VALIDATION_SETTINGS.name.messages.tooShort,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.name.maxLength,
+    message: VALIDATION_SETTINGS.name.messages.tooLong,
+  },
+};
+export const PERSONALNAME_VALIDATION_CONFIG = {
   pattern: {
     value: VALIDATION_SETTINGS.name.pattern,
     message: VALIDATION_SETTINGS.name.messages.invalid,

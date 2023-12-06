@@ -34,8 +34,7 @@ const Personal: React.FC = () => {
           <Route
             path="/settings"
             element={
-              // <PersonalSettings />
-              <h2>Данные профиля</h2>
+              <PersonalSettings />
             }
           />
           <Route
