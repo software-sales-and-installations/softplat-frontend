@@ -1,45 +1,45 @@
 import { FC } from 'react';
-import Select, { SingleValue } from 'react-select';
+import Select from 'react-select';
 
 import './DropDown.scss';
-import { IDropDowmProps, IOption, SelectorType } from './DropDownTypes';
+import { IDropDowmProps, SelectorType } from './DropDownTypes';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { changeCountryOption, changeOption } from './DropDownSlice';
 import classNames from 'classnames';
 
 const DropDown: FC<IDropDowmProps> = ({ options, type, isMultiOption }) => {
+  const baseSelect = type === SelectorType.BASE;
+  const countrySelect = type === SelectorType.COUNTRY;
+  const vendorSelect = type === SelectorType.VENDOR;
   const dispatch = useAppDispatch();
   const currentCountry = useAppSelector(state => state.dropdown.countryOption);
   const currentBase = useAppSelector(state => state.dropdown.option);
-  const defaultValue =
-    type === SelectorType.BASE ? currentBase : currentCountry;
-
-  const handleChange = (e: SingleValue<IOption>): void => {
-    if (type === SelectorType.BASE) {
+  // const defaultValue = baseSelect ? currentBase : currentCountry;
+  // SingleValue<IOption> | MultiValue<IOption[]>
+  const handleChange = (e: any): void => {
+    if (baseSelect) {
       dispatch(changeOption(e));
-    } else if (type === SelectorType.COUNTRY) {
+    } else if (countrySelect) {
       dispatch(changeCountryOption(e));
     }
   };
 
-  // const isMultiOption = true;
+  console.log(currentCountry);
 
   return (
     <Select
-      // classNamePrefix="multi custom-select"
       classNamePrefix={classNames(
         { multi: isMultiOption },
-        { country: isMultiOption && type === SelectorType.COUNTRY },
-        { vendor: isMultiOption && type === SelectorType.VENDOR },
+        { country: isMultiOption && countrySelect },
+        { vendor: isMultiOption && vendorSelect },
         'custom-select',
       )}
       options={options}
       isMulti={isMultiOption ? true : false}
       hideSelectedOptions={false}
       closeMenuOnSelect={false}
-      defaultValue={defaultValue}
-      // onChange={e => handleChange(e)}
-      onChange={e => console.log(e)}
+      defaultValue={baseSelect && currentBase}
+      onChange={e => handleChange(e)}
       isSearchable={false}
       // menuIsOpen
       placeholder={false}

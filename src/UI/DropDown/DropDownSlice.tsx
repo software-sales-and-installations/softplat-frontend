@@ -5,10 +5,11 @@ const initialState = {
     value: 'NEWEST',
     label: 'По новизне',
   },
-  countryOption: {
-    value: 'RUSSIA',
-    label: 'Россия',
-  },
+  // countryOption: {
+  //   value: 'RUSSIA',
+  //   label: 'Россия',
+  // },
+  countryOption: []
 };
 
 const dropDownSlice = createSlice({
