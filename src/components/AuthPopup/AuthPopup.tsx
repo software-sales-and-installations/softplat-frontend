@@ -63,14 +63,6 @@ export const PopupForAuth: FC = () => {
 			setErrorText('Некорректно заполнены поля email или password')
 		}
 	}, [authError])
-	useEffect(()=>{
-		if (authError===401){
-			setErrorText('Неправильный email или пароль')
-		}
-		if(authError===400){
-			setErrorText('Некорректно заполнены поля email или password')
-		}
-	}, [authError])
 	return (
 		<Popup>
 			<form className={styles.form} onSubmit={handleSubmit(handleSubmitLogin)}>
@@ -88,7 +80,7 @@ export const PopupForAuth: FC = () => {
 					showPasswordButton={true}
 					validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
 					error={errors?.password?.message}
-					helpText='Пароль может содержать буквы, цифры и знаки препинания'
+					helpText='Пароль может содержать буквы, цифры и спецсимволы'
 				/>
 				<div className={styles.checkboxcontainer}>
 					<input className={styles.checkboxcontainer__input} id='agreement' {...register("remember")} type="checkbox" value="remember"/>
@@ -99,7 +91,7 @@ export const PopupForAuth: FC = () => {
 				</div>
 				<div className={styles.btncontainer}>
 					<Button isDisabled={!isValid} type='submit' mode='primary'>Войти</Button>
-					<Button type='button' mode='secondary' onClick={handlePasswordPopup}>Забыли пароль?</Button>
+					<Button type='button' mode='secondary' onClick={handlePasswordPopup}>Восстановить пароль</Button>
 				</div>
 			</form>
 		</Popup>

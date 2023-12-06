@@ -12,7 +12,7 @@ export interface ISignInFields {
 export interface ISignUpFields extends ISignInFields {
 	confirmPassword: string;
 	INN?: number;
-	orgName?: string;
+	companyname?: string;
 	agree?: any;
 	name: string;
 	phone?: string;
