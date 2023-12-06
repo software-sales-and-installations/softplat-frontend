@@ -17,6 +17,7 @@ const PasswordSettings: FC = () => {
     handleSubmit,
     watch,
     getValues,
+    reset,
     formState: { errors,  isValid },
   } = useForm<ISettingPassword>({ mode: 'onChange' });
 
@@ -34,6 +35,9 @@ const PasswordSettings: FC = () => {
     })
   .finally()
   };
+  function handleResetClick(){
+    reset();
+  }
   return (
     <form
       className={styles.personalSettingsPassword}
@@ -74,7 +78,7 @@ const PasswordSettings: FC = () => {
         <Button isDisabled={!isValid} type='submit' mode="primary">
           Сохранить
         </Button>
-        <Button type="button" mode="secondary">
+        <Button onClick={handleResetClick} type="button" mode="secondary">
           Отмена
         </Button>
       </div>
