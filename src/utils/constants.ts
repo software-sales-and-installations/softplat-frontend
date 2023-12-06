@@ -45,10 +45,12 @@ export const VALIDATION_SETTINGS = {
     pattern:
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     maxLength: 30,
+    minLength: 4,
     messages: {
       noEmail: 'Необходимо ввести email',
       invalid: 'Необходимо ввести email в правильном формате',
       tooLong: 'Слишком длинный email',
+      tooShort: 'Слишком короткий email'
     },
   },
   password: {
@@ -71,10 +73,10 @@ export const VALIDATION_SETTINGS = {
     minLength: 2,
     maxLength: 12,
     messages: {
-      tooShort: 'Слишком короткое имя',
-      tooLong: 'Слишком длинное имя',
+      tooShort: 'Слишком короткое название',
+      tooLong: 'Слишком длинное название',
       invalid: 'Только кириллица или латинские буквы',
-      noName: 'Необходимо ввести имя',
+      noName: 'Необходимо ввести название',
     },
   },
   phone: {
@@ -139,7 +141,7 @@ export const VALIDATION_SETTINGS = {
     messages: {
       tooShort: 'Введите еще цифры',
       tooLong: 'Слишком длинный ИНН',
-      invalid: 'Только цифры',
+      invalid: 'Необходимо вводить только цифры',
       noINN: 'Необходимо ввести ИНН',
     },
   },
