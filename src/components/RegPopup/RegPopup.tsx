@@ -58,7 +58,7 @@ export const PopupForReg: FC = () => {
 	  }] = useAuthRegisterMutation();
 	  const handleSubmitRegister = () => {
 		console.log(getValues())
-	   authRegister({email, name, password, confirmPassword, role: roleForReg, phone: phone? phone.slice(2): ''}).unwrap()
+	   authRegister({email, name, password, confirmPassword, role: roleForReg, phone: phone}).unwrap()
 		 .then((res) => {
 		  authLogin({
 			confirmPassword: confirmPassword,
@@ -107,13 +107,14 @@ export const PopupForReg: FC = () => {
 					error={errors?.INN?.message}
 				/>	
 				: null}
+				<div className={styles.containerForInput}>
 					<Input
 						inputType={InputTypes.phone}
 						labelText="Телефон"
 						validation={{ ...register('phone', PHONE_VALIDATION_CONFIG) }}
-						defaultValue={'+7'}
 						error={errors?.phone?.message}
 					/>
+				</div>
 				<Input
 					inputType={InputTypes.email}
 					labelText='E-mail'

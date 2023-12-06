@@ -78,13 +78,13 @@ export const VALIDATION_SETTINGS = {
     },
   },
   phone: {
-    pattern: /\+{1}[7]{1}\d/,
+    pattern: /^\d+$/,
     minLength: 12,
     maxLength: 12,
     messages: {
       tooShort: 'Слишком короткий номер',
       tooLong: 'Слишком длинный номер',
-      invalid: 'Ваш номер должен начинаться с +7',
+      invalid: 'Необходимо вводить только цифры',
       noName: 'Необходимо ввести номер телефона',
     },
   },

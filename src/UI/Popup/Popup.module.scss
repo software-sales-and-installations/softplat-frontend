@@ -192,3 +192,18 @@
 	gap: 20px;
 	width: 100%;
 }
+.containerForInput{
+	position: relative;
+	&::before{
+		content: '+7';
+		position: absolute;
+		color: $dark-grey;
+		display: block;
+		height: 20px;
+		width: 20px;
+		top: 34px;
+		left:12px;
+		color: $black-standart-text;
+		@include font-input-field;
+	}
+}
