@@ -2,7 +2,7 @@ import { FC } from 'react';
 import styles from './Seller.module.scss';
 import CabinetMenu from '../../components/CabinetMenu/CabinetMenu';
 import { Routes, Route } from 'react-router-dom';
-import SellerCabinetContent from '../../components/SellerCabinetContent/SellerCabinetContent';
+import PasswordSettings from '../../components/PasswordSettings/PasswordSettings';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 export const Seller: FC = () => {
@@ -24,7 +24,7 @@ export const Seller: FC = () => {
           <Route path="/sales" element={<h2>Отчеты продаж</h2>} />
           <Route path="/bank-details" element={<h2>Банковские реквизиты</h2>} />
           <Route path="/settings" element={<h2>Данные профиля</h2>} />
-          <Route path="/password" element={<h2>Смена пароля</h2>} />
+          <Route path="/password" element={<PasswordSettings/>} />
         </Routes>
       </section>
     </>

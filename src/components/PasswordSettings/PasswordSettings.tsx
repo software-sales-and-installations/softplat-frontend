@@ -6,12 +6,12 @@ import {
   PASSWORD_VALIDATION_CONFIG,
 } from '../../utils/constants';
 import { useForm } from 'react-hook-form';
-import styles from './PersonalSettingsPassword.module.scss';
+import styles from './PasswordSettings.module.scss';
 import { Button } from '../../UI/Button/Button';
-import { ISettingPassword } from './PersonalSettingsTypes';
+import { ISettingPassword } from './PasswordSettingsTypes';
 import { useAuthChangePasswordMutation } from '../../utils/api/authApi';
 
-const PersonalSettingsPassword: FC = () => {
+const PasswordSettings: FC = () => {
   const {
     register,
     handleSubmit,
@@ -82,4 +82,4 @@ const PersonalSettingsPassword: FC = () => {
   );
 };
 
-export default PersonalSettingsPassword;
+export default PasswordSettings;
