@@ -3,18 +3,18 @@
 
 .button {
   @include font-CTAbody-regular;
-    cursor: pointer;
-    border-radius: 32px;
-    border: none;
-    width: 290px;
-    height: 55px;
-    transition: 0.3s ease-out;
+  cursor: pointer;
+  border-radius: 32px;
+  border: none;
+  width: 290px;
+  height: 55px;
+  transition: 0.3s ease-out;
   &_type {
     &_primary {
       color: $black-standart-text;
-background-color: $accent-lime-button;
+      background-color: $accent-lime-button;
       &:hover {
-        box-shadow: 0 4px 20px 0 rgba(85, 80, 92, 0.50);
+        box-shadow: 0 4px 20px 0 rgba(85, 80, 92, 0.5);
       }
       &:active {
         color: $white-standart;
@@ -24,29 +24,56 @@ background-color: $accent-lime-button;
     &_secondary {
       background-color: $white-standart;
       border: 1px solid $border-input;
-      &:hover, &:active {
+      &:hover,
+      &:active {
         background-color: $light-grey;
       }
     }
     &_decline {
-
+      background-color: $red-alert-system;
+      border: 1px solid $border-input;
+      color: $white-standart;
+      &:hover,
+      &:active {
+        background-color: $red-alert-pressed;
+      }
     }
     &_agree {
       background-color: $green-approve-system;
       color: $white-standart;
-      &:hover, &:active {
+      &:hover,
+      &:active {
         background-color: $green-approve-pressed;
       }
     }
-    &_minor {
-
+    &_minorLeft {
+      background: url('../../../src/images/minorLeft.svg');
+      width: 50px;
+      height: 50px;
+      flex-shrink: 0;
     }
-
+    &_minorRight {
+      background: url('../../../src/images/minorRight.svg');
+      width: 50px;
+      height: 50px;
+      flex-shrink: 0;
+    }
     &_square {
-
+      display: flex;
+      width: 55px;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
     }
     &_link {
-
+      background-color: $dark-grey;
+      color: $white-standart;
+      width: 128px;
+      height: 26px;
+      &:active {
+        background-color: $accent-lime-button;
+        color: $black-standart-text;
+      }
     }
   }
 }
