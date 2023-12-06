@@ -3,10 +3,10 @@
 
 .custom-select {
   &__control {
-    width: 320px !important;
+    width: 225px !important;
     background-color: transparent !important;
-    border: 1px solid $dark-grey !important;
-    border-radius: 20px !important;
+    border: 1px solid $border-input !important;
+    border-radius: 8px !important;
     cursor: pointer !important;
     box-shadow: none !important;
 
@@ -14,12 +14,18 @@
       border: none !important;
     }
 
+    &:has(.country) .custom-select__value-container::before {
+      content: 'Страна';
+    }
+
+    &:has(.vendor) .custom-select__value-container::before {
+      content: 'Производитель';
+    }
+
     &--menu-is-open {
       box-shadow: 0px 10px 20px 0px rgba(57, 57, 57, 0.05) !important;
-      border-color: $dark-grey !important;
-      border-bottom: none !important;
-      border-bottom-left-radius: 0px !important;
-      border-bottom-right-radius: 0px !important;
+      border-color: #8fa4be !important;
+      background-color: rgba(233, 242, 255, 0.2) !important;
 
       & > .custom-select__indicators > .custom-select__dropdown-indicator {
         transform: rotateZ(180deg) !important;
@@ -28,8 +34,22 @@
   }
 
   &__value-container {
+    display: flex !important;
     justify-content: start !important;
     padding: 2px 0 2px 20px !important;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    color: $dark-grey;
+  }
+
+  &__single-value {
+    color: $dark-grey !important;
+  }
+
+  &__multi-value {
+    display: none !important;
   }
 
   &__indicator-separator {
@@ -40,33 +60,83 @@
     color: $dark-grey !important;
   }
 
+  &__clear-indicator {
+    display: none !important;
+  }
+
   &__menu {
+    top: 130% !important;
     margin: 0 !important;
     width: 320px !important;
-    border: 1px solid $dark-grey !important;
-    border-top: none !important;
-    border-radius: 0 0 20px 20px !important;
+    border: 1px solid $border-input !important;
+    border-radius: 8px !important;
     box-shadow: 0px 10px 20px 0px rgba(57, 57, 57, 0.05) !important;
     text-align: start !important;
     overflow: hidden;
     cursor: pointer !important;
+
+    &:has(.multi) .custom-select__option::before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 19px;
+      border-radius: 3px;
+      width: 15px;
+      height: 15px;
+      border: 2px solid $dark-grey;
+    }
+
+    &:has(.multi) .custom-select__option {
+      padding-left: 55px !important;
+    }
+
+    &:has(.multi) .custom-select__option--is-selected::after {
+      content: '✓';
+      display: block;
+      position: absolute;
+      left: 21px;
+      top: 10px;
+      font-weight: bold;
+      color: $white-standart;
+    }
+
+    &:has(.multi) .custom-select__option--is-selected::before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 19px;
+      border-radius: 3px;
+      width: 15px;
+      height: 15px;
+      border: 2px solid $dark-grey;
+      background-color: $dark-grey;
+    }
   }
 
   &__menu-list {
-    padding: 0 !important;
+    padding: 8px 0 !important;
   }
 
   &__option {
     padding-left: 20px !important;
     cursor: pointer !important;
+    position: relative !important;
+    height: 40px;
+    display: flex !important;
+    align-items: center;
+    font-size: 16px !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    line-height: 20px !important;
+    color: $dark-grey !important;
 
     &--is-selected {
       background-color: $light-grey !important;
-      color: $black-standart-text !important;
+      color: $dark-grey !important;
 
       &.custom-select__option--is-focused {
         background-color: $light-grey !important;
-        color: $black-standart-text !important;
+        color: $dark-grey !important;
       }
     }
 

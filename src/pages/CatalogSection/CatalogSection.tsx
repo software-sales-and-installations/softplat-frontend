@@ -51,8 +51,9 @@ const CatalogSection: FC = () => {
           <Categories />
         </div>
         <div className={styles.catalogSection__selectContainer}>
-          <DropDown type={SelectorType.BASE} options={SELECT_OPTIONS} />
+          <DropDown isMultiOption={false} type={SelectorType.BASE} options={SELECT_OPTIONS} />
           <DropDown
+            isMultiOption
             type={SelectorType.COUNTRY}
             options={SELECT_COUNTRIES_OPTIONS}
           />
