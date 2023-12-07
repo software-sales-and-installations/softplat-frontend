@@ -28,7 +28,7 @@ const CatalogSection: FC = () => {
 
   const { data: vendorAll } = useVendorListQuery();
 
-  const vendorsOptions = vendorAll?.vendors.map(v => ({
+  const vendorsOptions = vendorAll?.vendors.map((v: any) => ({
     value: v.name,
     label: v.name,
   }));

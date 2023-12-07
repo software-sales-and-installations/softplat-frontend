@@ -4,17 +4,22 @@ import Select from 'react-select';
 import './DropDown.scss';
 import { IDropDowmProps, SelectorType } from './DropDownTypes';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
-import { changeCountryOption, changeOption, changeVendorOption } from './DropDownSlice';
+import {
+  changeCountryOption,
+  changeOption,
+  changeVendorOption,
+} from './DropDownSlice';
 import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 
 const DropDown: FC<IDropDowmProps> = ({ options, type, isMultiOption }) => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const baseSelect = type === SelectorType.BASE;
   const countrySelect = type === SelectorType.COUNTRY;
   const vendorSelect = type === SelectorType.VENDOR;
-  const dispatch = useAppDispatch();
-  const currentCountry = useAppSelector(state => state.dropdown.countryOption);
+  const catalogSelect = type === SelectorType.CATALOG;
   const currentBase = useAppSelector(state => state.dropdown.option);
-  // const defaultValue = baseSelect ? currentBase : currentCountry;
   // SingleValue<IOption> | MultiValue<IOption[]>
   const handleChange = (e: any): void => {
     if (baseSelect) {
@@ -22,11 +27,11 @@ const DropDown: FC<IDropDowmProps> = ({ options, type, isMultiOption }) => {
     } else if (countrySelect) {
       dispatch(changeCountryOption(e));
     } else if (vendorSelect) {
-      dispatch(changeVendorOption(e))
+      dispatch(changeVendorOption(e));
+    } else if (catalogSelect) {
+      navigate(`/catalog/${e.value}`, { replace: true });
     }
   };
-
-  console.log(currentCountry);
 
   return (
     <Select
@@ -34,17 +39,18 @@ const DropDown: FC<IDropDowmProps> = ({ options, type, isMultiOption }) => {
         { multi: isMultiOption },
         { country: isMultiOption && countrySelect },
         { vendor: isMultiOption && vendorSelect },
+        { catalog: catalogSelect },
         'custom-select',
       )}
       options={options}
       isMulti={isMultiOption ? true : false}
       hideSelectedOptions={false}
-      closeMenuOnSelect={false}
+      closeMenuOnSelect={catalogSelect && true}
       defaultValue={baseSelect && currentBase}
       onChange={e => handleChange(e)}
       isSearchable={false}
-      // menuIsOpen
       placeholder={false}
+      // menuIsOpen
     />
   );
 };
