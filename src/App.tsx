@@ -16,6 +16,7 @@ import Search from './pages/Search/Search.tsx';
 import { Seller } from './pages/Seller/Seller.tsx';
 import { Admin } from './pages/Admin/Admin.tsx';
 import { useLoadFavorites } from './services/favoritesService/favoritesService.ts';
+import { Product } from './components/Product/Product.tsx';
 // import { ProtectedRouteForAdmin, ProtectedRouteForBuyer, ProtectedRouteForSeller } from './components/ProtectedRoute/ProtectedRoute.tsx';
 
 function App() {
@@ -28,18 +29,19 @@ function App() {
           <Route path='/' element={<Navigate to='/catalog'/>}/>
           <Route path="/catalog" element={<HomePage />} />
           <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/product/demo" element={<Product />} />
           <Route path='/faq' element={<FAQ/>} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/catalog/:section" element={<CatalogSection />} />
-          <Route 
-            path="/personal/*" 
+          <Route
+            path="/personal/*"
             element={
               //<ProtectedRouteForBuyer>
                 <Personal />
               //</ProtectedRouteForBuyer>
               } />
-          <Route 
-            path="/personal" 
+          <Route
+            path="/personal"
             element={
               //<ProtectedRouteForBuyer>
                 <Navigate to='/personal/purchases' />
@@ -51,28 +53,28 @@ function App() {
           <Route path="/search" element={<Search />} />
           {/* <Route path="/demoapi" element={<DemoApi />} /> */}
           <Route
-            path="/seller/*" 
+            path="/seller/*"
             element={
               // <ProtectedRouteForSeller>
                 <Seller />
-              // </ProtectedRouteForSeller> 
+              // </ProtectedRouteForSeller>
             } />
-          <Route 
-            path="/seller" 
+          <Route
+            path="/seller"
             element={
               //<ProtectedRouteForSeller>
                 <Navigate to="/seller/published" />
               //</ProtectedRouteForSeller>
             } />
-          <Route 
-            path="/admin/*" 
+          <Route
+            path="/admin/*"
             element={
               //<ProtectedRouteForAdmin>
                 <Admin/>
               //</ProtectedRouteForAdmin>
             } />
-          <Route 
-            path="/admin" 
+          <Route
+            path="/admin"
             element={
               //<ProtectedRouteForAdmin>
                 <Navigate to="/admin/published" />

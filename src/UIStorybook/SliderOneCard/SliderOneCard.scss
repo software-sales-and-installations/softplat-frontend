@@ -1,0 +1,79 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.swiperOneCard {
+  margin-top: 0;
+  border-radius: 10px;
+  border: 0.5px solid $light-grey;
+}
+.swiperOneCard__wrapper {
+  position: relative;
+}
+
+.swiperOneCard {
+  position: unset !important;
+  margin: 0;
+  height: 316px;
+  background-color: transparent !important;
+}
+
+.swiperOneCard-slide {
+  max-width: 445px;
+  height: 316px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: $white-standart;
+  background-image: none;
+
+  &__content {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__img-container {
+    width: 445px;
+    flex-grow: 1;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+  }
+}
+
+.swiper-pagination {
+  bottom: -28px !important;
+}
+
+.swiper-pagination-bullet {
+  width: 10px !important;
+  height: 10px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: $dark-grey !important;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  border-radius: 0;
+  background-image: none;
+  background-color: transparent;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  cursor: pointer;
+  height: 100%;
+  width: 50px;
+  border: none;
+}
+
+.swiper-button-next {
+  right: 0;
+}
+
+.swiper-button-prev {
+  left: 0;
+}
