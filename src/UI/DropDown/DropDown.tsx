@@ -4,7 +4,7 @@ import Select from 'react-select';
 import './DropDown.scss';
 import { IDropDowmProps, SelectorType } from './DropDownTypes';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
-import { changeCountryOption, changeOption } from './DropDownSlice';
+import { changeCountryOption, changeOption, changeVendorOption } from './DropDownSlice';
 import classNames from 'classnames';
 
 const DropDown: FC<IDropDowmProps> = ({ options, type, isMultiOption }) => {
@@ -21,6 +21,8 @@ const DropDown: FC<IDropDowmProps> = ({ options, type, isMultiOption }) => {
       dispatch(changeOption(e));
     } else if (countrySelect) {
       dispatch(changeCountryOption(e));
+    } else if (vendorSelect) {
+      dispatch(changeVendorOption(e))
     }
   };
 

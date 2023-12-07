@@ -12,7 +12,6 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 export const Producers: FC = () => {
   const countryOption = useAppSelector(state => state.dropdown.countryOption);
   const countriesArr = countryOption.map((i:any) => i.value)
-  console.log(countriesArr)
 
   const { data: vendorAll, isLoading, error } = useVendorListQuery();
 

@@ -18,13 +18,20 @@ import {
 import Preloader from '../../components/Preloader/Preloader';
 import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import { useVendorListQuery } from '../../utils/api/vendorApi';
 
 const CatalogSection: FC = () => {
   const { section } = useParams();
   const selectState = useAppSelector(state => state.dropdown.option.value);
-  const countryOption = useAppSelector(state => state.dropdown.countryOption);
-  // @ts-ignore
-  const countriesArr = countryOption.map(i => i.value);
+  const countrySelected = useAppSelector(state => state.dropdown.countryOption);
+  const vendorSelected = useAppSelector(state => state.dropdown.vendorOption);
+
+  const { data: vendorAll } = useVendorListQuery();
+
+  const vendorsOptions = vendorAll?.vendors.map(v => ({
+    value: v.name,
+    label: v.name,
+  }));
 
   const { data, error, isLoading } = usePublicProductListQuery({
     minId: 0,
@@ -38,18 +45,30 @@ const CatalogSection: FC = () => {
   const categorizedCards = data?.products?.filter(
     (card: IProductCard) =>
       card.category?.id === currentCatalog?.id &&
-      // card.vendor?.country === countryOption &&
       card.productStatus === ProductStatus.PUBLISHED,
   );
 
-  const filteredCards = categorizedCards?.filter((i: any) => {
-    if (countriesArr.length) {
-      return countriesArr.includes(i.vendor.country);
-    }
-    return categorizedCards;
-  });
+  const filterCards = () => {
+    const filteredByCountry = categorizedCards?.filter((i: any) => {
+      if (countrySelected.length) {
+        // @ts-ignore
+        return countrySelected.map(c => c.value).includes(i.vendor.country);
+      }
+      return categorizedCards;
+    });
 
-  const productsCards = { products: filteredCards };
+    const filteredByVendor = filteredByCountry?.filter((i: any) => {
+      if (vendorSelected.length) {
+        // @ts-ignore
+        return vendorSelected.map(v => v.value).includes(i.vendor.name);
+      }
+      return categorizedCards;
+    });
+
+    return filteredByVendor;
+  };
+
+  const productsCards = { products: filterCards() };
 
   return (
     <>
@@ -67,7 +86,11 @@ const CatalogSection: FC = () => {
             type={SelectorType.BASE}
             options={SELECT_OPTIONS}
           />
-          <DropDown isMultiOption type={SelectorType.VENDOR} options={SELECT_OPTIONS}/>
+          <DropDown
+            isMultiOption
+            type={SelectorType.VENDOR}
+            options={vendorsOptions || []}
+          />
           <DropDown
             isMultiOption
             type={SelectorType.COUNTRY}
