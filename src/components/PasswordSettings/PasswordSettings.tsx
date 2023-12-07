@@ -6,17 +6,18 @@ import {
   PASSWORD_VALIDATION_CONFIG,
 } from '../../utils/constants';
 import { useForm } from 'react-hook-form';
-import styles from './PersonalSettingsPassword.module.scss';
+import styles from './PasswordSettings.module.scss';
 import { Button } from '../../UI/Button/Button';
-import { ISettingPassword } from './PersonalSettingsTypes';
+import { ISettingPassword } from './PasswordSettingsTypes';
 import { useAuthChangePasswordMutation } from '../../utils/api/authApi';
 
-const PersonalSettingsPassword: FC = () => {
+const PasswordSettings: FC = () => {
   const {
     register,
     handleSubmit,
     watch,
     getValues,
+    reset,
     formState: { errors,  isValid },
   } = useForm<ISettingPassword>({ mode: 'onChange' });
 
@@ -34,15 +35,17 @@ const PersonalSettingsPassword: FC = () => {
     })
   .finally()
   };
+  function handleResetClick(){
+    reset();
+  }
   return (
     <form
       className={styles.personalSettingsPassword}
       onSubmit={handleSubmit(handleSubmitChangePass)}
     >
-      <div className={styles.personalSettingsPassword__inputs}>
         <Input
           inputType={InputTypes.oldpassword}
-          labelText="Старый пароль"
+          labelText="Текущий пароль"
           showPasswordButton={true}
           validation={{ ...register('oldpassword', PASSWORD_VALIDATION_CONFIG) }}
           error={errors?.oldpassword?.message}
@@ -53,7 +56,6 @@ const PersonalSettingsPassword: FC = () => {
           showPasswordButton={true}
           validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
           error={errors?.password?.message}
-          helpText='Пароль может содержать буквы, цифры и знаки препинания'
         />
         <Input
 					inputType={InputTypes.confirmPassword}
@@ -67,14 +69,12 @@ const PersonalSettingsPassword: FC = () => {
 						}),
 					}}
 					error={errors?.confirmPassword?.message}
-					helpText='Пароль может содержать буквы, цифры и знаки препинания'
 				/>
-      </div>
       <div className={styles.personalSettingsPassword__btncontainer}>
         <Button isDisabled={!isValid} type='submit' mode="primary">
           Сохранить
         </Button>
-        <Button type="button" mode="secondary">
+        <Button onClick={handleResetClick} type="button" mode="secondary">
           Отмена
         </Button>
       </div>
@@ -82,4 +82,4 @@ const PersonalSettingsPassword: FC = () => {
   );
 };
 
-export default PersonalSettingsPassword;
+export default PasswordSettings;

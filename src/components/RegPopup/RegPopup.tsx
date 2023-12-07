@@ -1,43 +1,55 @@
-import { FC, useEffect, useState} from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Popup } from '../../UI/Popup/Popup';
 import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';
-import { EMAIL_VALIDATION_CONFIG, PASSWORD_VALIDATION_CONFIG, VALIDATION_SETTINGS, NAME_VALIDATION_CONFIG, PHONE_VALIDATION_CONFIG } from '../../utils/constants';
-import {useForm } from 'react-hook-form';
-import {  ISignUpFields } from '../../UI/Popup/PopupTypes';
+import {
+  EMAIL_VALIDATION_CONFIG,
+  PASSWORD_VALIDATION_CONFIG,
+  VALIDATION_SETTINGS,
+  NAME_VALIDATION_CONFIG,
+  COMPANYNAME_VALIDATION_CONFIG,
+  PHONE_VALIDATION_CONFIG,
+  INN_VALIDATION_CONFIG 
+} from '../../utils/constants';
+import { useForm } from 'react-hook-form';
+import { ISignUpFields } from '../../UI/Popup/PopupTypes';
 import styles from '../../UI/Popup/Popup.module.scss';
 import { Button } from '../../UI/Button/Button';
-import { checkBoxState } from '../../UI/ToggleButton/ToggleButtonSlice';
 import { useAppDispatch } from '../../services/redux/store';
-import { useAuthLoginMutation, useAuthRegisterMutation } from '../../utils/api/authApi';
+import {
+  useAuthLoginMutation,
+  useAuthRegisterMutation,
+} from '../../utils/api/authApi';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../services/redux/store';
 import { popupState } from '../../UI/Popup/PopupSlice';
 import { setUser } from '../../services/redux/slices/user/user';
 import { signout } from '../SignOutPopup/SignOutPopupSlice';
 
-
 export const PopupForReg: FC = () => {
-	const [errorStatus, setErrorStatus] = useState(0);
-	const [textError, setTextError] = useState('')
-	const dispatch = useAppDispatch();
-	const MyRole = useSelector((state: RootState) => state.chooseRole.title);
-	const roleForReg = MyRole==='Я покупатель'? 'BUYER' : (MyRole==='Я продавец'? 'SELLER': null)
-	const {
-		register,
-		handleSubmit,
-		reset,
-		watch,
-		formState: { errors, isValid },
-		getValues,
-	} = useForm<ISignUpFields>({ mode: 'onChange'});
+  const [errorStatus, setErrorStatus] = useState(0);
+  const [textError, setTextError] = useState('');
+  const dispatch = useAppDispatch();
+  const MyRole = useSelector((state: RootState) => state.chooseRole.title);
+  const roleForReg =
+    MyRole === 'Я покупатель'
+      ? 'BUYER'
+      : MyRole === 'Я продавец'
+      ? 'SELLER'
+      : null;
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+	trigger,
+    formState: { errors, isValid },
+    getValues,
+  } = useForm<ISignUpFields>({ mode: 'onChange' });
 
-	useEffect(() => {
-		reset();
-	}, []);
-	function handleExitClick(){
-		dispatch(checkBoxState(false))
-	}
+  useEffect(() => {
+    reset();
+  }, []);
 
 	const {email, name, password, confirmPassword, phone} = getValues();
 	  const [authLogin, {
@@ -47,7 +59,8 @@ export const PopupForReg: FC = () => {
 		// isFetching, isLoading, isError
 	  }] = useAuthRegisterMutation();
 	  const handleSubmitRegister = () => {
-	   authRegister({email, name, password, confirmPassword, role: roleForReg, phone: phone? phone.slice(2): ''}).unwrap()
+		console.log(getValues())
+	   authRegister({email, name, password, confirmPassword, role: roleForReg, phone: phone}).unwrap()
 		 .then((res) => {
 		  authLogin({
 			confirmPassword: confirmPassword,
@@ -83,39 +96,74 @@ export const PopupForReg: FC = () => {
 			setTextError('Такой пользователь уже существует')
 		}
 	}, [errorStatus])
+	useEffect(() => {
+		trigger("confirmPassword");
+	  }, [password, trigger]);
 	return (
 		<Popup>
 			<form className={styles.form} onSubmit={handleSubmit(handleSubmitRegister)}>
-				<Input
-					inputType={InputTypes.name}
-					labelText='Ваше имя'
+				{MyRole === 'Я продавец'? 
+					<Input
+					inputType={InputTypes.INN}
+					labelText='ИНН'
 					validation={{
-						...register('name', NAME_VALIDATION_CONFIG),
+						...register('INN', INN_VALIDATION_CONFIG),
 					}}
-					error={errors?.name?.message}
+					error={errors?.INN?.message}
 				/>	
-            	<Input
+				: null}
+				<div className={styles.containerForInput}>
+					<Input
+						inputType={InputTypes.phone}
+						labelText="Телефон"
+						validation={{ ...register('phone', PHONE_VALIDATION_CONFIG) }}
+						error={errors?.phone?.message}
+					/>
+				</div>
+				<Input
 					inputType={InputTypes.email}
-					labelText='e-mail'
+					labelText='E-mail'
 					validation={{
 						...register('email', EMAIL_VALIDATION_CONFIG),
 					}}
 					error={errors?.email?.message}
 				/>
-				<Input
-					inputType={InputTypes.phone}
-					labelText="Телефон"
-					validation={{ ...register('phone', PHONE_VALIDATION_CONFIG) }}
-					defaultValue={'+7'}
-					error={errors?.phone?.message}
-				/>
+				{MyRole === 'Я продавец'? <Input
+					inputType={InputTypes.companyname}
+					labelText='Название магазина'
+					validation={{
+						...register('companyname', COMPANYNAME_VALIDATION_CONFIG),
+					}}
+					error={errors?.name?.message}
+				/>:(
+					MyRole==='Я покупатель' ? 
+						<Input
+							inputType={InputTypes.name}
+							labelText='Ваше имя'
+							validation={{
+							...register('name', NAME_VALIDATION_CONFIG),
+							}}
+							error={errors?.name?.message}
+					/> :null)}	
 				<Input
 					inputType={InputTypes.password}
-					labelText="Придумайте пароль"
+					labelText="Пароль"
 					showPasswordButton={true}
-					validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
+					validation={{
+            ...register('password', {
+              ...PASSWORD_VALIDATION_CONFIG,
+              validate: value => {
+								if (value === watch('email') || value === watch('email').split('@')[0]) {
+                  return VALIDATION_SETTINGS.password.messages.sameAsEmail;
+                } else if (value === watch('name')) {
+                  return VALIDATION_SETTINGS.password.messages.sameAsName;
+                }
+                return;
+							}
+            }),
+          }}
 					error={errors?.password?.message}
-					helpText='Пароль может содержать буквы, цифры и знаки препинания'
+					helpText='Пароль может содержать буквы, цифры и спецсимволы'
 				/>
 				<Input
 					inputType={InputTypes.confirmPassword}
@@ -143,7 +191,6 @@ export const PopupForReg: FC = () => {
 				</div>		
 				<div className={styles.btncontainer}>
 					<Button isDisabled={!isValid} type='submit' mode='primary'>Зарегистрироваться</Button>
-					<Button onClick={handleExitClick} mode='secondary' type='button'>Отмена</Button>
 				</div>
 			</form>
 		</Popup>

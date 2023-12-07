@@ -1,0 +1,23 @@
+@import './../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.inputWrapper {
+  background-color: transparent;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputWrapper__label {
+
+}
+
+.inputWrapper__hint {
+
+}
+
+.inputWrapper__error {
+
+}
+
+

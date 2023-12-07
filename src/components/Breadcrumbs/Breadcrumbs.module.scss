@@ -2,26 +2,29 @@
 @import '../../styles/abstract/mixins.scss';
 
 .breadcrumbs {
-  @include font-body-filters;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
   text-align: left;
 
   &__crumb {
     display: inline-block;
-    margin-right: 4px;
+    margin-right: 9px;
 
     &:last-child {
       a {
         cursor: text;
       }
+
+      &:after {
+        display: none;
+      }
     }
 
     &:after {
-      content: '>';
-      margin-left: 5px;
-    }
-
-    &:last-child:after {
-      display: none;
+      content: url('../../images/breadcrumbs-arrow.svg');
+      margin-left: 11px;
     }
 
     a {
