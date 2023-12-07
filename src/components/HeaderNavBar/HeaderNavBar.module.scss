@@ -2,15 +2,18 @@
 @import './../../styles/abstract/mixins.scss';
 
 .list{
-    margin: 0 0 0 50px;
+    margin: 0 0 0 30px;
     padding: 0;
     list-style: none;
     display: flex;
-    gap: 28px;
+    gap: 20px;
 }
 .item{
+    display: flex;
     margin: 0;
     padding: 0;
+    justify-content: center;
+    align-items: center;
 }
 .link{
     color: $dark-grey;
@@ -20,4 +23,14 @@
         color: $black-standart-text;
         font-weight: 700; 
     }
+}
+.btn{
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }

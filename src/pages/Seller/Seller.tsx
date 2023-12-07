@@ -3,6 +3,7 @@ import styles from './Seller.module.scss';
 import CabinetMenu from '../../components/CabinetMenu/CabinetMenu';
 import { Routes, Route } from 'react-router-dom';
 import SellerCabinetContent from '../../components/SellerCabinetContent/SellerCabinetContent';
+import CabinetAnalize from '../../components/CabinetAnalize/CabinetAnalize';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 export const Seller: FC = () => {
@@ -16,6 +17,7 @@ export const Seller: FC = () => {
       </div>
       <Routes>
         <Route path="/products" element={<SellerCabinetContent />} />
+        <Route path="/analytics" element={<CabinetAnalize />} />
       </Routes>
     </section>
   );

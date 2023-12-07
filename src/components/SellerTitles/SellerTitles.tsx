@@ -23,10 +23,10 @@ const SellerTitles: React.FC = () => {
           Мои товары
         </Link>
         <Link
-          to="analysis"
+          to="analytics"
           className={classNames(
             styles.personalTitles__titles,
-            location.pathname === '/seller/analysis'
+            location.pathname === '/seller/analytics'
               ? styles.personalTitles__titles_active
               : '',
           )}

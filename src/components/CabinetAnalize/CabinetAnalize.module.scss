@@ -1,0 +1,19 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.cabinetAnalize {
+  margin-top: 65px;
+  margin-left: 60px;
+  &__title {
+    margin: 0;
+    @include font-h2-simibold;
+    text-align: start;
+  }
+  &__subtitle {
+    margin: 25px 0 0 0;
+    @include font-body-regular;
+    text-align: start;
+    max-width: 1160px;
+    background-color: $white-standart;
+  }
+}

@@ -1,8 +1,8 @@
 @import '../../styles/abstract/constants.scss';
 @import '../../styles/abstract/mixins.scss';
 .wrapper {
-	--thumb-size: 50px;
-	--track-size: 350px;
+	--thumb-size: 35px;
+	--track-size: 330px;
 	--thumb-position: 0%;
 	display: inline-flex;
 	gap: 16px;
@@ -10,7 +10,7 @@
 	user-select: none;
 	position: relative;
 	transition: all .4s ease;
-	width: 350px;
+	// width: 330px;
 
 	.textlabel{
 		width: 100%;
@@ -26,18 +26,19 @@
 		margin: 0;
 		padding: 0;
 		width: 50%;
-		@include font-CTAbody-regular;
+		@include font-input-field;
+		color: $dark-grey;
 	}
 	.toggle {
 		margin: 0;
 		appearance: none;
-		border: none;
+		border: 1px solid $light-grey;
 		box-sizing: content-box;
 		padding: 2px;
-		background:  $light-grey;
+		background:  $faint-grey;
 		height: var(--thumb-size);
 		width: var(--track-size);
-		border-radius: 20px;
+		border-radius: 30px;
 		cursor: pointer;
 		display: flex;
 		transition: all .4s ease;
@@ -46,12 +47,12 @@
 			content: "";
 			display: block;
 			transform: translateX(var(--thumb-position));
-			height: calc(var(--thumb-size) - 3px);
+			height: calc(var(--thumb-size) - 2px);
 			width: calc(var(--track-size) / 2);
 			transition: transform .4s ease;
 			background-color: $white-standart;
-			border-radius: 20px;
-			border: 2px solid  $light-grey;
+			border-radius: 30px;
+			border: 1px solid  $light-grey;
 		}
 		&:checked{
 			--thumb-position: calc(var(--track-size) - 100%);
