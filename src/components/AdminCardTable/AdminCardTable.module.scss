@@ -5,82 +5,87 @@
     text-decoration: none;
     color: black;
 }
+
 .line{
     display: flex;
-    gap: 17px;
+    gap: 18px;
     align-items: center;
+    margin-bottom: 23px;
+    padding: 8px 0;
+    transition: all .2s ease-in-out;
     &_type_head{
-        padding: 45px 0 40px 0;
-        @include font-CTAbody-regular;
+        padding: 0 0 4px 0;
+        border-bottom: 1px solid $light-grey;
     }
     &_type_body{
         padding-bottom: 25px;
     }
 }
+.line:hover{
+    cursor: pointer;
+    background-color: $light-grey;
+}
+.line:hover .cell__btn{
+    display: block;
+}
 .cell{
     text-align: start;
-    max-height: 75px;
+    max-height: 40px;
     font-size: 20px;
     font-weight: 400;
     line-height: 25px; 
     
+    &__btn{
+        display: none;
+        height: 20px;
+        width: 20px;
+        border: none;
+        background-color: transparent;
+        background: url('../../images/trash-cabinet.svg') center no-repeat;
+        cursor: pointer;
+    }
     &__text{
         padding: 0;
         margin: 0;
-        max-height: 75px;
+        max-height: 25px;
         text-overflow: ellipsis;
+        text-wrap: nowrap;
         overflow: hidden;
     }
     &_type_checkbox{
         display: flex;
         justify-content: center;
     }
+    &_type_head{
+        @include font-table-bold;
+    }
 }
 .cellSeller{
     width: 100px;
 }
 .cellName{
-    width: 200px;
+    width: 160px;
 }
-.cellVendorCategory{
-    width: 170px;
+.cellVendor{
+    width: 80px;
 }
 .cellArt{
-width: 140px;
+width: 100px;
 }
-.cellDescription{
-    width: 230px;
+.cellBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
 }
+
 .cellData{
     width: 120px;
 }
 .cellRed{
-    width: 55px;
+    width: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.redBtn{
-    width: 25px;
-    height: 25px;
-    background: url('../../images/pencil.svg') no-repeat center transparent;
-    border: none;
-    cursor: pointer;
-    &:hover{
-        opacity: .8;
-    }
-}
-.cardtable__btncontainer{
-    display: flex;
-    gap: 20px;
-}
-.cardtable__btn{
-    border: none;
-    background-color: transparent;
-    border-bottom: 1px solid ;
-    cursor: pointer;
-    color:  $dark-grey;
-    &:hover{
-        opacity: .7;
-    }
-}
+
