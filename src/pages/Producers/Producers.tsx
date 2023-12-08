@@ -11,18 +11,16 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 export const Producers: FC = () => {
   const countryOption = useAppSelector(state => state.dropdown.countryOption);
-  const countriesArr = countryOption.map((i:any) => i.value)
+  const countriesArr = countryOption.map((i: any) => i.value);
 
   const { data: vendorAll, isLoading, error } = useVendorListQuery();
 
-  const filteredVendors = vendorAll?.vendors.filter(
-    (vendor: IVendor) => {
-      if (countriesArr.length) {
-        return countriesArr.includes(vendor.country);
-      }
-      return vendorAll
-    },
-  );
+  const filteredVendors = vendorAll?.vendors.filter((vendor: IVendor) => {
+    if (countriesArr.length) {
+      return countriesArr.includes(vendor.country);
+    }
+    return vendorAll;
+  });
 
   return (
     <>
@@ -63,4 +61,4 @@ export const Producers: FC = () => {
       </div>
     </>
   );
-        }
+};
