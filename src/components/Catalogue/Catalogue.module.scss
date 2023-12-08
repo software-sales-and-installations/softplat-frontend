@@ -33,7 +33,6 @@
 
     & a {
       text-decoration: none;
-
     }
   }
 
@@ -41,7 +40,7 @@
     padding: 20px 0 0 15px;
     margin: 0;
     text-align: start;
-    @include font-body-card;
+    @include font-table-bold;
     color: $black-standart-text;
   }
 
