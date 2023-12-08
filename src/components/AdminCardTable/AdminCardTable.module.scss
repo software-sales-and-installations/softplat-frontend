@@ -36,15 +36,8 @@
         justify-content: center;
     }
 }
-.cellLogo{
-    width: 85px;
-    &__img{
-
-        width: 60px;
-        height: 60px;
-        object-fit: contain;
-        border-radius: 10px;
-    }
+.cellSeller{
+    width: 100px;
 }
 .cellName{
     width: 200px;

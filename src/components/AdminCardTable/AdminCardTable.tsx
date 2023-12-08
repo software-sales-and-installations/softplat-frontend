@@ -1,66 +1,44 @@
 import { FC } from 'react';
-import styles from './CardTable.module.scss';
+import styles from './AdminCardTable.module.scss';
 import classNames from 'classnames';
-import { IProductCardPropsTable } from '../ProductCard/ProductCardTypes';
-import { useForm } from 'react-hook-form';
+import { IProductCardPropsTable } from './AdminCardTableTypes'
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-export const CardTable: FC<IProductCardPropsTable> = ({ products }) => {
-  const role = localStorage.getItem('role');
-  const { register, handleSubmit } = useForm({});
+export const AdminCardTable: FC<IProductCardPropsTable> = ({ products , productStatus}) => {
+  const location = useLocation();
   return (
-    <form onSubmit={handleSubmit(data => console.log(data))}>
       <table>
         <thead>
           <tr className={classNames(styles.line, styles.line_type_head)}>
-            {role === 'ADMIN' ? (
-              <th className={classNames(styles.cellLogo, styles.cell)}>
-                Выбрать
-              </th>
-            ) : null}
-            {role === 'SELLER' ? (
-              <th className={classNames(styles.cellLogo, styles.cell)}>Лого</th>
-            ) : null}
             <th className={classNames(styles.cellName, styles.cell)}>
               Название
             </th>
-            <th className={classNames(styles.cellVendorCategory, styles.cell)}>
+            {location.pathname !=='/admin/appeal' ? <th className={classNames(styles.cellVendorCategory, styles.cell)}>
               Вендор
-            </th>
-            <th className={classNames(styles.cellVendorCategory, styles.cell)}>
-              Категория
+            </th> : null}
+            <th className={classNames(styles.cellSeller, styles.cell)}>
+              Продавец
             </th>
             <th className={classNames(styles.cellArt, styles.cell)}>Артикул</th>
-            <th className={classNames(styles.cellDescription, styles.cell)}>
-              Описание
+            {location.pathname ==='/admin/appeal' ?<><th className={classNames(styles.cellDescription, styles.cell)}>
+              Жалобы
             </th>
-            <th className={classNames(styles.cellData, styles.cell)}>Дата</th>
-            <th className={classNames(styles.cellRed, styles.cell)}>Ред</th>
+            <th className={classNames(styles.cellDescription, styles.cell)}>
+              Новые
+            </th></> : null}
+            {location.pathname !=='/admin/appeal' ? <th className={classNames(styles.cellData, styles.cell)}>Дата</th> : null}
           </tr>
         </thead>
         <tbody>
           {products.map(item => {
             return (
+            <>
+            {item.productStatus===productStatus ?
               <tr
                 key={item.id}
                 className={classNames(styles.line, styles.line_type_body)}
               >
-                {role === 'ADMIN' ? (
-                  <td
-                    className={classNames(
-                      styles.cellLogo,
-                      styles.cell,
-                      styles.cell_type_checkbox,
-                    )}
-                  >
-                    <input
-                      type="checkbox"
-                      {...register('id')}
-                      value={item.id}
-                    ></input>
-                  </td>
-                ) : null}
-                {role === 'SELLER' ? (
                   <td className={classNames(styles.cellLogo, styles.cell)}>
                     <Link to={`/product/${item.id}`} className={styles.link}>
                       <img
@@ -73,7 +51,6 @@ export const CardTable: FC<IProductCardPropsTable> = ({ products }) => {
                       />
                     </Link>
                   </td>
-                ) : null}
                 <td className={classNames(styles.cellName, styles.cell)}>
                   <Link to={`/product/${item.id}`} className={styles.link}>
                     <p className={styles.cell__text}>{item.name}</p>
@@ -107,29 +84,17 @@ export const CardTable: FC<IProductCardPropsTable> = ({ products }) => {
                     <p className={styles.cell__text}>{item.description}</p>
                   </Link>
                 </td>
-                <td className={classNames(styles.cellData, styles.cell)}>
+                {/* <td className={classNames(styles.cellData, styles.cell)}>
                   <Link to={`/product/${item.id}`} className={styles.link}>
                     <p className={styles.cell__text}>{item.date}</p>
                   </Link>
-                </td>
-                <td className={classNames(styles.cellRed, styles.cell)}>
-                  <button className={styles.redBtn} type="button" />
-                </td>
+                </td> */}
+
               </tr>
-            );
-          })}
+              
+             : null};
+          </>)})}
         </tbody>
       </table>
-      {role === 'ADMIN' ? (
-        <div className={styles.cardtable__btncontainer}>
-          <button className={styles.cardtable__btn} type="submit">
-            Удалить
-          </button>
-          <button className={styles.cardtable__btn} type="submit">
-            Отправить на доработку
-          </button>
-        </div>
-      ) : null}
-    </form>
   );
 };
