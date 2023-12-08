@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import styles from './CatalogSection.module.scss';
 import { useParams } from 'react-router-dom';
 import CardsGrid from '../../components/CardsGrid/CardsGrid';
@@ -8,20 +8,30 @@ import {
   SELECT_OPTIONS,
 } from '../../utils/constants';
 import { Categories } from '../../components/Categories/Categories';
-import {useAppSelector } from '../../services/redux/store';
+import { useAppSelector } from '../../services/redux/store';
 import DropDown from '../../UI/DropDown/DropDown';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
-import { IProductCard, ProductStatus } from '../../components/ProductCard/ProductCardTypes';
+import {
+  IProductCard,
+  ProductStatus,
+} from '../../components/ProductCard/ProductCardTypes';
 import Preloader from '../../components/Preloader/Preloader';
 import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import { useVendorListQuery } from '../../utils/api/vendorApi';
 
 const CatalogSection: FC = () => {
   const { section } = useParams();
   const selectState = useAppSelector(state => state.dropdown.option.value);
-  const countryOption = useAppSelector(
-    state => state.dropdown.countryOption.value,
-  );
+  const countrySelected = useAppSelector(state => state.dropdown.countryOption);
+  const vendorSelected = useAppSelector(state => state.dropdown.vendorOption);
+
+  const { data: vendorAll } = useVendorListQuery();
+
+  const vendorsOptions = vendorAll?.vendors.map((v: any) => ({
+    value: v.name,
+    label: v.name,
+  }));
 
   const { data, error, isLoading } = usePublicProductListQuery({
     minId: 0,
@@ -33,12 +43,32 @@ const CatalogSection: FC = () => {
     item => item.pathName === section,
   );
   const categorizedCards = data?.products?.filter(
-    ( card: IProductCard) =>
+    (card: IProductCard) =>
       card.category?.id === currentCatalog?.id &&
-      card.vendor?.country === countryOption &&
       card.productStatus === ProductStatus.PUBLISHED,
   );
-  const productsCards = { products: categorizedCards };
+
+  const filterCards = () => {
+    const filteredByCountry = categorizedCards?.filter((i: any) => {
+      if (countrySelected.length) {
+        // @ts-ignore
+        return countrySelected.map(c => c.value).includes(i.vendor.country);
+      }
+      return categorizedCards;
+    });
+
+    const filteredByVendor = filteredByCountry?.filter((i: any) => {
+      if (vendorSelected.length) {
+        // @ts-ignore
+        return vendorSelected.map(v => v.value).includes(i.vendor.name);
+      }
+      return categorizedCards;
+    });
+
+    return filteredByVendor;
+  };
+
+  const productsCards = { products: filterCards() };
 
   return (
     <>
@@ -51,18 +81,28 @@ const CatalogSection: FC = () => {
           <Categories />
         </div>
         <div className={styles.catalogSection__selectContainer}>
-          <DropDown type={SelectorType.BASE} options={SELECT_OPTIONS} />
           <DropDown
+            isMultiOption={false}
+            type={SelectorType.BASE}
+            options={SELECT_OPTIONS}
+          />
+          <DropDown
+            isMultiOption
+            type={SelectorType.VENDOR}
+            options={vendorsOptions || []}
+          />
+          <DropDown
+            isMultiOption
             type={SelectorType.COUNTRY}
             options={SELECT_COUNTRIES_OPTIONS}
           />
         </div>
         <div className={styles.catalogSection__items}>
-        {isLoading ? (
+          {isLoading ? (
             <Preloader />
           ) : error ? (
-          <p>Произошла ошибка</p>
-        ) : (
+            <p>Произошла ошибка</p>
+          ) : (
             <CardsGrid cards={productsCards} />
           )}
         </div>
