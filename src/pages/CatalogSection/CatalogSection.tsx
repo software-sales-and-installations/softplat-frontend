@@ -8,7 +8,6 @@ import {
   SELECT_COUNTRIES_OPTIONS,
   SELECT_OPTIONS,
 } from '../../utils/constants';
-import { Categories } from '../../components/Categories/Categories';
 import { useAppSelector } from '../../services/redux/store';
 import DropDown from '../../UI/DropDown/DropDown';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
