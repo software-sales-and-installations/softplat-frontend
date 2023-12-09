@@ -4,8 +4,15 @@ import CabinetMenu from '../../components/CabinetMenu/CabinetMenu';
 import { Routes, Route } from 'react-router-dom';
 import { AdminCards } from '../../components/AdminCards/AdminCards';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import { AdminCardTable } from '../../components/AdminCardTable/AdminCardTable';
+import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 
 export const Admin: FC = () => {
+  const { data, error, isLoading } = usePublicProductListQuery({
+    minId: 0,
+    pageSize: '',
+    sort: 'NEWEST',
+  });
   return (
     <>
       <div className={styles.breadcrumbs}>
@@ -16,10 +23,10 @@ export const Admin: FC = () => {
           <CabinetMenu mode="admin" />
         </div>
         <Routes>
-          <Route path="/published" element={<h2>Опубликовано</h2>} />
-          <Route path="/on-moderation" element={<h2>На модерации</h2>} />
-          <Route path="/rejected" element={<h2>Отклоненные</h2>} />
-          <Route path="/appeal" element={<h2>Жалобы</h2>} />
+          <Route path="/published" element={<AdminCardTable products={data?.products||[]} productStatus ={'PUBLISHED'}/>} />
+          <Route path="/on-moderation" element={<AdminCardTable products={data?.products||[]} productStatus={'MODERATION'}/>} />
+          <Route path="/rejected" element={<AdminCardTable products={data?.products||[]} productStatus={'REJECTED'} />}/>
+          <Route path="/appeal" element={<AdminCardTable products={data?.products||[]} productStatus={'APPEAL'}  />}/>
           <Route path="/vendors" element={<h2>Вендоры</h2>} />
           <Route path="/add-vendor" element={<h2>Добавить вендора</h2>} />
           <Route path="/sales" element={<h2>Отчеты продаж</h2>} />
