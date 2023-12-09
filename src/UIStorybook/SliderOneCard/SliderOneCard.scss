@@ -57,7 +57,7 @@
   background-color: $dark-grey !important;
 }
 
-.swiper-button-next, .swiper-button-prev {
+.swiperOneCard-button-next, .swiperOneCard-button-prev {
   border-radius: 0;
   background-image: none;
   background-color: transparent;
@@ -70,10 +70,10 @@
   border: none;
 }
 
-.swiper-button-next {
+.swiperOneCard-button-next {
   right: 0;
 }
 
-.swiper-button-prev {
+.swiperOneCard-button-prev {
   left: 0;
 }

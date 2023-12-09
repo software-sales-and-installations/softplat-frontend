@@ -15,7 +15,7 @@ import Search from './pages/Search/Search.tsx';
 // import { DemoApi } from './utils/api/DEMOAPI.tsx';
 import { Seller } from './pages/Seller/Seller.tsx';
 import { Admin } from './pages/Admin/Admin.tsx';
-import { useLoadFavorites } from './services/favoritesService/favoritesService.ts';
+// import { useLoadFavorites } from './services/favoritesService/favoritesService.ts';
 import { Product } from './components/Product/Product.tsx';
 // import { ProtectedRouteForAdmin, ProtectedRouteForBuyer, ProtectedRouteForSeller } from './components/ProtectedRoute/ProtectedRoute.tsx';
 

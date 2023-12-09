@@ -14,19 +14,25 @@ export const SliderOneCard: FC<SliderProps> = ({ slides }) => {
         loop={true}
         grabCursor={true}
         pagination={{ clickable: true }}
-        navigation={true}
         className="swiperOneCard"
+        navigation={{
+          nextEl: ".swiperOneCard-button-next",
+          prevEl: ".swiperOneCard-button-prev",
+          disabledClass: "swiperOneCard-button-disabled"
+        }}
       >
         {slides?.map(i => (
           <SwiperSlide className="swiperOneCard-slide" key={i.text}>
-            <div className="swiperOneCard-slide__content">
-              <div className="swiperOneCard-slide__img-container">
+            <div className='swiperOneCard-slide__content'>
+              <div className='swiperOneCard-slide__img-container'>
                 <img
-                  className="swiperOneCard-slide__img"
+                  className='swiperOneCard-slide__img'
                   src={i.img}
-                  alt="Картинка слайдера"
+                  alt='Картинка слайдера'
                 />
               </div>
+              <div className='swiperOneCard-button-prev' />
+              <div className='swiperOneCard-button-next' />
             </div>
           </SwiperSlide>
         ))}

@@ -6,6 +6,7 @@ import { Icons } from '../../../UIStorybook/Icons/Icons.tsx';
 import styles from './ProductInfo.module.scss'
 import { SliderOneCard } from '../../../UIStorybook/SliderOneCard/SliderOneCard.tsx';
 import { slides } from '../../../utils/constants.ts';
+import "swiper/css/navigation";
 
 const fakeSeller = {
   id: '1',
