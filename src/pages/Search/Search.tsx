@@ -5,8 +5,6 @@ import { useAppSelector } from '../../services/redux/store';
 import { useLocation } from 'react-router-dom';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
-// type Props = {}
-
 const Search: FC = () => {
   const { state } = useLocation();
   const cards = useAppSelector(state => state.cards.cards);
@@ -19,11 +17,15 @@ const Search: FC = () => {
         <Breadcrumbs />
       </div>
       <section className={styles.search}>
-        <h2 className={styles.search__title}>Результаты поиска: {state}</h2>
-        {!searchedCountries.length && (
-          <p className={styles.search__notFound}>
-            Ничего не найдено. Возможно, Вам понравятся эти программы
-          </p>
+        {!searchedCountries.length ? (
+          <>
+            <h2 className={styles.search__title}>Ничего не найдено</h2>
+            <p className={styles.search__notFound}>
+              Возможно, Вам понравятся эти программы
+            </p>
+          </>
+        ) : (
+          <h2 className={styles.search__title}>Лучшие совпадения</h2>
         )}
         <div className={styles.search__items}>
           <CardsGrid
