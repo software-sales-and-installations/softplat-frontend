@@ -5,17 +5,17 @@
   min-width: 165px;
   width: max-content;
   display: flex;
-  gap: 97px;
+  gap: 30px;
   align-items: flex-start;
 
   &__img {
-    width: 205px;
+    width: 255px;
     height: 180px;
     object-fit: contain;
   }
 
   &__infoContainer {
-    width: 1160px;
+    width: 730px;
     margin-bottom: 20px;
     text-align: start;
   }

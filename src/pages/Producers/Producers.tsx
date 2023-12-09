@@ -11,12 +11,16 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 
 export const Producers: FC = () => {
   const countryOption = useAppSelector(state => state.dropdown.countryOption);
+  const countriesArr = countryOption.map((i: any) => i.value);
 
   const { data: vendorAll, isLoading, error } = useVendorListQuery();
 
-  const filteredVendors = vendorAll?.vendors.filter(
-    (vendor: IVendor) => vendor.country === countryOption.value,
-  );
+  const filteredVendors = vendorAll?.vendors.filter((vendor: IVendor) => {
+    if (countriesArr.length) {
+      return countriesArr.includes(vendor.country);
+    }
+    return vendorAll;
+  });
 
   return (
     <>
@@ -26,6 +30,7 @@ export const Producers: FC = () => {
       <h1 className={styles.title}>Производители</h1>
       <div className={styles.ddcontainer}>
         <DropDown
+          isMultiOption
           type={SelectorType.COUNTRY}
           options={SELECT_COUNTRIES_OPTIONS}
         />
@@ -56,4 +61,4 @@ export const Producers: FC = () => {
       </div>
     </>
   );
-        }
+};

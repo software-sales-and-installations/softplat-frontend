@@ -6,10 +6,12 @@ export interface IOption {
 export enum SelectorType {
   BASE = 'base',
   COUNTRY = 'country',
-  VENDOR = 'vendor'
+  VENDOR = 'vendor',
+  CATALOG = 'catalog'
 }
 
 export interface IDropDowmProps {
   options: IOption[];
   type?: SelectorType;
+  isMultiOption: boolean
 }
