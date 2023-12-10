@@ -21,11 +21,10 @@ export const Admin: FC = () => {
       <section className={styles.admin}>
         <div className={styles.admin__titles}>
           <CabinetMenu mode="admin" />
-          <button onClick={()=>console.log(data.products)}>ghjkl</button>
         </div>
         <Routes>
           <Route path="/published" element={<AdminCardTable products={data?.products||[]} productStatus ={'PUBLISHED'}/>} />
-          <Route path="/on-moderation" element={<AdminCardTable products={data?.products||[]} productStatus={'MODERATION'}/>} />
+          <Route path="/on-moderation" element={<AdminCardTable products={data?.products||[]} productStatus={'SHIPPED'}/>} />
           <Route path="/rejected" element={<AdminCardTable products={data?.products||[]} productStatus={'REJECTED'} />}/>
           <Route path="/appeal" element={<AdminCardTable products={data?.products||[]} productStatus={'APPEAL'}  />}/>
           <Route path="/vendors" element={<h2>Вендоры</h2>} />
