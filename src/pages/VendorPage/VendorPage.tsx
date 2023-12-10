@@ -62,14 +62,18 @@ const VendorPage: FC = () => {
           })}
         </ul>
         <div className={styles.vendorPage__selectForm}>
-          <DropDown type={SelectorType.BASE} options={SELECT_OPTIONS} />
+          <DropDown
+            isMultiOption={false}
+            type={SelectorType.BASE}
+            options={SELECT_OPTIONS}
+          />
         </div>
         <div className={styles.vendorPage__products}>
           {isLoading ? (
             <Preloader />
           ) : error ? (
-          <p>Произошла ошибка</p>
-        ) : (
+            <p>Произошла ошибка</p>
+          ) : (
             <CardsGrid cards={{ products: vendorCards }} />
           )}
         </div>
