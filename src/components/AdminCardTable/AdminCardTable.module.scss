@@ -45,7 +45,7 @@
         margin: 0;
         max-height: 25px;
         text-overflow: ellipsis;
-        text-wrap: nowrap;
+        white-space: nowrap;
         overflow: hidden;
     }
     &_type_checkbox{
@@ -76,7 +76,7 @@ width: 100px;
 }
 
 .cellData{
-    width: 120px;
+    width: 180px;
 }
 .cellRed{
     width: 70px;

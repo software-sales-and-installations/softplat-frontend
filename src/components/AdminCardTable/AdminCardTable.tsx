@@ -66,7 +66,7 @@ export const AdminCardTable: FC<IProductCardPropsTable> = ({ products , productS
               <p>новые жалобы</p>
             </td>
             </>: null}
-            {location.pathname !=='/admin/appeal' ?<td className={classNames(styles.cellArt, styles.cell, styles.cell_type_body)}>
+            {location.pathname !=='/admin/appeal' ?<td className={classNames(styles.cellData, styles.cell, styles.cell_type_body)}>
               <Link to={`/product/${i.id}`} className={styles.link}>
                 <p className={styles.cell__text}>{`${i.productionTime? i.productionTime: ''}`}</p>
               </Link>
