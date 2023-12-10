@@ -21,6 +21,7 @@ export const Admin: FC = () => {
       <section className={styles.admin}>
         <div className={styles.admin__titles}>
           <CabinetMenu mode="admin" />
+          <button onClick={()=>console.log(data.products)}>ghjkl</button>
         </div>
         <Routes>
           <Route path="/published" element={<AdminCardTable products={data?.products||[]} productStatus ={'PUBLISHED'}/>} />

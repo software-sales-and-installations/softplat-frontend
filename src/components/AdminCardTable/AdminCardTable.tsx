@@ -8,51 +8,51 @@ import { useLocation } from 'react-router-dom';
 export const AdminCardTable: FC<IProductCardPropsTable> = ({ products , productStatus}) => {
   const location = useLocation();
   return (
-      <table>
-        <thead>
-          <tr className={classNames(styles.line, styles.line_type_head)}>
-            <th className={classNames(styles.cellName, styles.cell, styles.cell_type_head)}>
+      <table className={styles.table}>
+        <thead className={styles.thead}>
+          <tr className={classNames(styles.line)}>
+            <th className={classNames(styles.cellName, styles.cell)}>
               Название
             </th>
-            {location.pathname !=='/admin/appeal' ? <th className={classNames(styles.cellVendor, styles.cell, styles.cell_type_head)}>
+            {location.pathname !=='/admin/appeal' ? <th className={classNames(styles.cellVendor, styles.cell)}>
               Вендор
             </th> : null}
-            <th className={classNames(styles.cellSeller, styles.cell, styles.cell_type_head)}>
+            <th className={classNames(styles.cellSeller, styles.cell)}>
               Продавец
             </th>
-            <th className={classNames(styles.cellArt, styles.cell, styles.cell_type_head)}>Артикул</th>
-            {location.pathname ==='/admin/appeal' ?<><th className={classNames(styles.cellDescription, styles.cell, styles.cell_type_head)}>
+            <th className={classNames(styles.cellArt, styles.cell)}>Артикул</th>
+            {location.pathname ==='/admin/appeal' ?<><th className={classNames(styles.cellDescription, styles.cell)}>
               Жалобы
             </th>
-            <th className={classNames(styles.cellDescription, styles.cell, styles.cell_type_head)}>
+            <th className={classNames(styles.cellDescription, styles.cell)}>
               Новые
             </th></> : null}
-            {location.pathname !=='/admin/appeal' ? <th className={classNames(styles.cellData, styles.cell, styles.cell_type_head)}>Дата</th> : null}
+            {location.pathname !=='/admin/appeal' ? <th className={classNames(styles.cellData, styles.cell)}>Дата</th> : null}
           </tr>
         </thead>
         <tbody>
        {products.map((i)=>{
         return (
-        <tr className={styles.line} key={i.id}>
+        <tr className={classNames(styles.line, styles.line_type_body)} key={i.id}>
           {i.productStatus===productStatus?
           <>
-            <td className={classNames(styles.cellName, styles.cell)}>
+            <td className={classNames(styles.cellName, styles.cell, styles.cell_type_body)}>
               <Link to={`/product/${i.id}`} className={styles.link}>
                 <p className={styles.cell__text}>{i.name}</p>
               </Link>
             </td>
             {location.pathname !=='/admin/appeal' ? 
-            <td className={classNames(styles.cellVendor, styles.cell)}>
+            <td className={classNames(styles.cellVendor, styles.cell, styles.cell_type_body)}>
               <Link to={`/product/${i.id}`} className={styles.link}>
                 <p className={classNames(styles.cell__text) }>{i.vendor?.name ? i.vendor.name : ''}</p>
               </Link>
             </td> : null}
-            <td className={classNames(styles.cellSeller, styles.cell)}>
+            <td className={classNames(styles.cellSeller, styles.cell, styles.cell_type_body)}>
               <Link to={`/product/${i.id}`} className={styles.link}>
                 <p className={styles.cell__text}>{i.vendor?.name ? i.vendor.name : ''}</p>
               </Link>
             </td>
-            <td className={classNames(styles.cellArt, styles.cell)}>
+            <td className={classNames(styles.cellArt, styles.cell, styles.cell_type_body)}>
               <Link to={`/product/${i.id}`} className={styles.link}>
                 <p className={styles.cell__text}>{i.id}</p>
               </Link>
@@ -66,14 +66,11 @@ export const AdminCardTable: FC<IProductCardPropsTable> = ({ products , productS
               <p>новые жалобы</p>
             </td>
             </>: null}
-            {location.pathname !=='/admin/appeal' ?<td className={classNames(styles.cellArt, styles.cell)}>
+            {location.pathname !=='/admin/appeal' ?<td className={classNames(styles.cellArt, styles.cell, styles.cell_type_body)}>
               <Link to={`/product/${i.id}`} className={styles.link}>
                 <p className={styles.cell__text}>{`${i.productionTime? i.productionTime: ''}`}</p>
               </Link>
             </td>: null}
-            <td className={classNames(styles.cellBtn, styles.cell)}>
-              <button className={styles.cell__btn}></button>
-            </td>
             </>
           :null}
 
