@@ -4,10 +4,10 @@ import { useParams } from 'react-router-dom';
 import CardsGrid from '../../components/CardsGrid/CardsGrid';
 import {
   CATALOGUE_NAMES,
+  CATEGORIZED_TEXT_VENDOR,
   SELECT_COUNTRIES_OPTIONS,
   SELECT_OPTIONS,
 } from '../../utils/constants';
-import { Categories } from '../../components/Categories/Categories';
 import { useAppSelector } from '../../services/redux/store';
 import DropDown from '../../UI/DropDown/DropDown';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
@@ -77,9 +77,17 @@ const CatalogSection: FC = () => {
       </div>
       <section className={styles.catalogSection}>
         <h2 className={styles.catalogSection__title}>{currentCatalog?.name}</h2>
-        <div className={styles.catalogSection__categories}>
-          <Categories />
-        </div>
+        <ul className={styles.catalogSection__categories}>
+          {CATEGORIZED_TEXT_VENDOR.map(btn => {
+            return (
+              <li className={styles.item} key={btn.id}>
+                <button className={styles.catalogSection__categoriesBtn}>
+                  {btn.text}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
         <div className={styles.catalogSection__selectContainer}>
           <DropDown
             isMultiOption={false}

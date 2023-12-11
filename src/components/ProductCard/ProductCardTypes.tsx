@@ -23,9 +23,7 @@ export interface IProductCard {
 export interface IProductCardProps {
   card: IProductCard;
 }
-export interface IProductCardPropsTable{
-  products: IProductCard[]
-}
+
 type ProductCardCategory = {
   id: number;
   name: string;
