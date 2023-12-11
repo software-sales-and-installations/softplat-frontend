@@ -103,7 +103,7 @@ export const PopupForReg: FC = () => {
 	  }, [password, trigger]);
 	return (
 		<Popup>
-			<form className={styles.form} onSubmit={handleSubmit(handleSubmitRegister)}>
+			<form className={classNames(styles.form, MyRole==='Я продавец'? styles.form_type_seller: '')} onSubmit={handleSubmit(handleSubmitRegister)}>
 				{MyRole === 'Я продавец'? 
 					<Input
 					inputType={InputTypes.INN}
