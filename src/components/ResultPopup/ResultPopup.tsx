@@ -35,9 +35,7 @@ export const ResultPopup : FC = () =>{
                     (token && location.pathname ==='/cart' ) ? <PayPopup/>:
                 <>
                     <h2 className={styles.popup__role}>{MyRole==='Я покупатель'? 'Покупатель': (MyRole==='Я продавец'? 'Продавец': (MyRole==='Забыли пароль?'? 'Восстановление пароля' : 'Администратор'))}</h2>
-                    {MyRole==='Я админ'? (
-                    <p className={styles.adminBtn}>Вход</p>
-                ) : (MyRole==='Забыли пароль?'? null : <ToggleButton/>)}
+                    {MyRole==='Я админ'? null : (MyRole==='Забыли пароль?'? null : <ToggleButton/>)}
                 {!toggleState ? 
                     (MyRole==='Забыли пароль?' ? <RecoverPasswordPopup/>: <PopupForAuth/>) : 
                     (MyRole==='Забыли пароль?' ? <RecoverPasswordPopup/>: (MyRole==='Я админ'? <PopupForAuth/> : <PopupForReg/>))}
