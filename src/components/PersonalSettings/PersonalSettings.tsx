@@ -38,14 +38,12 @@ const PersonalSettings: React.FC = () => {
 					}}
 					error={errors?.email?.message}
 				/>
-        <div className={styles.containerForInput}>
 					<Input
 						inputType={InputTypes.phone}
 						labelText="Телефон"
 						validation={{ ...register('phone', PERSONALPHONE_VALIDATION_CONFIG) }}
 						error={errors?.phone?.message}
 					/>
-				</div>
         <div className={styles.btncontainer}>
 					<Button isDisabled={!isValid} type='submit' mode='primary'>Сохранить</Button>
 				</div>
