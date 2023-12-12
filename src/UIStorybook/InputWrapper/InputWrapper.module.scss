@@ -2,22 +2,26 @@
 @import '../../styles/abstract/mixins.scss';
 
 .inputWrapper {
-  background-color: transparent;
   position: relative;
   display: flex;
   flex-direction: column;
+  min-height: 85px;
 }
 
 .inputWrapper__label {
-
+@include font-CTAbody-regular;
+  color: $dark-grey;
+  padding-bottom: 5px;
 }
 
 .inputWrapper__hint {
-
+@include font-body-filters;
+  color: $dark-grey;
 }
 
 .inputWrapper__error {
-
+@include font-body-filters;
+  color: $red-alert-system;
 }
 
 

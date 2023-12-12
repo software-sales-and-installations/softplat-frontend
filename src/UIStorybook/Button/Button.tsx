@@ -11,11 +11,13 @@ export const Button = ({
   buttonType,
   actionType,
   children,
+  disabled,
   ...props
 }: ButtonProps) => {
   return (
     <button
       type={actionType}
+      disabled={disabled}
       className={[styles.button, styles[`button_type_${buttonType}`], extClassName].join(' ')}
       {...props}
     >{children}</button>
