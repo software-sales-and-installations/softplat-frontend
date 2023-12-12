@@ -1,5 +1,5 @@
-@import '../../styles/abstract/constants';
-@import '../../styles/abstract/mixins';
+@import '../../../styles/abstract/constants';
+@import '../../../styles/abstract/mixins';
 
 .swiperOneCard {
   margin-top: 0;
@@ -13,13 +13,13 @@
 .swiperOneCard {
   position: unset !important;
   margin: 0;
-  height: 316px;
+  height: 505px;
   background-color: transparent !important;
 }
 
 .swiperOneCard-slide {
-  max-width: 445px;
-  height: 316px;
+  max-width: 545px;
+  height: 505px;
   border-radius: 10px;
   overflow: hidden;
   background-color: $white-standart;
@@ -32,7 +32,7 @@
   }
 
   &__img-container {
-    width: 445px;
+    width: 545px;
     flex-grow: 1;
   }
 

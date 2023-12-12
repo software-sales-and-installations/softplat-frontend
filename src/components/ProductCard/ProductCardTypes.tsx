@@ -22,6 +22,8 @@ export interface IProductCard {
 
 export interface IProductCardProps {
   card: IProductCard;
+  key: string | number;
+
 }
 
 type ProductCardCategory = {

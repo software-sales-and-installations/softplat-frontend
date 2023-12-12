@@ -1,5 +1,5 @@
-.product {
+.similar {
   display: flex;
-  flex-direction: column;
-  gap: 45px;
+  flex-direction: row;
+  justify-content: space-between;
 }

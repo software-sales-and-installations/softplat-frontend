@@ -4,9 +4,8 @@ import { Button } from '../../../UIStorybook/Button/Button.tsx';
 import { Icons } from '../../../UIStorybook/Icons/Icons.tsx';
 
 import styles from './ProductInfo.module.scss'
-import { SliderOneCard } from '../../SliderOneCard/SliderOneCard.tsx';
+import { SliderOneCard } from '../SliderOneCard/SliderOneCard.tsx';
 import { slides } from '../../../utils/constants.ts';
-import "swiper/css/navigation";
 
 const fakeSeller = {
   id: '1',
@@ -17,24 +16,6 @@ const fakeSeller = {
   seller: 'Продавец',
   text: 'Описание товара',
 }
-
-// const fakeSlides = [
-//   {
-//   text: '1',
-//   img: 'https://unsplash.com/photos/a-pink-and-blue-object-with-a-purple-background-qt5y_qKMQ3w',
-//   link: 'violet'
-// },
-//   {
-//     text: '2',
-//     img: 'https://unsplash.com/photos/a-group-of-white-and-gold-tiles-on-a-white-surface-nPZ68nehUUo',
-//     link: 'white'
-//   },
-//   {
-//     text: '3',
-//     img: 'https://unsplash.com/photos/a-watercolor-painting-of-a-sky-and-clouds-jR3gaeRa9Ck',
-//     link: 'colors'
-//   },
-// ]
 
 const ProductInfo = ({}) => {
   const [isLiked, setIsLiked] = useState(false)
