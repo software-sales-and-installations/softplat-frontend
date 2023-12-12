@@ -32,7 +32,7 @@ export const Input: FC<IInput> = ({
 			: inputType;
 
 	return (
-		<div className={styles.input__container}>
+		<div className={classNames(styles.input__container, inputType==='phone'? styles.input__container_type_phone: '') }>
 			<div className={styles.input__hints}>
 						{labelText ? (
 							<label
@@ -60,7 +60,7 @@ export const Input: FC<IInput> = ({
 						maxLength={inputTextType === 'date' ? 8 : undefined}
 						value={readOnly && value ? value : undefined}
 					/>
-					<span className={classNames(styles.input__error, helpText? styles.input__error_type_help : '')}>{error ? error : (helpText? 
+					<span className={classNames(styles.input__error)}>{error ? error : (helpText? 
 						<p className={styles.input__help}>{helpText}</p>
 						: '')}
 					</span>
