@@ -20,12 +20,17 @@ import {
   removeFromFavorites,
 } from '../../services/redux/slices/favourites/favourites';
 import { FaHeart } from 'react-icons/fa6';
-import toolsIcon from '../../images/tools-card-icon.svg'
+import toolsIcon from '../../images/tools-icon.svg';
 
 const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const addSpace = (price: number): string => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   };
+  const cardPrice = `${addSpace(card.price)} ₽`;
+  const installationPrice = `${addSpace(
+    card.price + card.installationPrice,
+  )} ₽`;
+  
   const [addFavorites] = useBuyerAddFavoritesMutation();
   const [deleteFavorites] = useBuyerDeleteFavoritesMutation();
   //@ts-ignore
@@ -78,7 +83,11 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
         type="button"
         onClick={handleToggleFavorite}
       >
-        {isFavorite ? <FaHeart size={28} /> : <FaRegHeart size={28} strokeWidth={0.5} />}
+        {isFavorite ? (
+          <FaHeart size={28} />
+        ) : (
+          <FaRegHeart size={28} strokeWidth={0.5} />
+        )}
       </button>
       <Link to={`/product/${card.id}`} className={styles.card__link}>
         <div className={styles.card__img}>
@@ -88,8 +97,12 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
           {card.name}
         </p>
         <div className={styles.card__priceContainer}>
-          <p className={styles.card__price}>{addSpace(card.price)} ₽</p>
+          <p className={styles.card__price} title={cardPrice}>
+            {cardPrice}
+          </p>
+          <div>•</div>
           <div className={styles.card__installPrice}>
+            <span title={installationPrice}>{installationPrice}</span>
             <span className={styles.card__tooltip}>
               <button className={styles.card__tooltipBtn}>
                 <img src={toolsIcon} alt="иконка инструментов" />
@@ -98,14 +111,18 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
                 Наш специалист установит ПО на ваше устройство в удобное время
               </span>
             </span>
-            <span>{addSpace(card.price + card.installationPrice)} ₽</span>
           </div>
         </div>
       </Link>
-
-      <Button mode="primary" onClick={handleAddToCart} isDisabled={addItemError.isError}>
-        Добавить в корзину
-      </Button>
+      <div className={styles.card__addBtn}>
+        <Button
+          mode="primary"
+          onClick={handleAddToCart}
+          isDisabled={addItemError.isError}
+        >
+          Добавить в корзину
+        </Button>
+      </div>
     </div>
   );
 };

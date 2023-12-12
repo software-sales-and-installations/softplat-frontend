@@ -2,17 +2,17 @@ import { FC, useState } from 'react';
 import styles from './HeaderSearchForm.module.scss';
 import { GrSearch } from 'react-icons/gr';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../services/redux/store';
-import { fetchAllCards } from '../../services/redux/slices/cards/cards';
+// import { useAppDispatch } from '../../services/redux/store';
+// import { fetchAllCards } from '../../services/redux/slices/cards/cards';
 
 export const HeaderSearchForm: FC = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const [searchValue, setSearchValue] = useState('');
   const handleSearch = (e:any) => {
     e.preventDefault()
     if (searchValue.length) {
-      dispatch(fetchAllCards());
+      // dispatch(fetchAllCards());
       navigate('/search', {replace: true, state: searchValue});
     }
   };
