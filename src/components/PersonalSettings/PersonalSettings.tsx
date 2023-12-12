@@ -10,14 +10,17 @@ import { PERSONALNAME_VALIDATION_CONFIG,
 import { Button } from '../../UI/Button/Button';
 import { useEffect, useState } from 'react';
 import { useBuyerInfoQuery } from '../../utils/api/buyerApi';
+import { popupState } from '../../UI/Popup/PopupSlice.tsx';
+import { setUser } from '../../services/redux/slices/user/user.ts';
+import { signout } from '../SignOutPopup/SignOutPopupSlice.tsx';
 
 const PersonalSettings: React.FC = () => {
 	const userId = localStorage.getItem('userId')
-	
+
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     getValues,
 	setValue,
     formState: { errors,  isValid },
@@ -26,10 +29,13 @@ const PersonalSettings: React.FC = () => {
     console.log(getValues())
   }
 
-const {data} = useBuyerInfoQuery(userId)
+const {data: buyerInfo = []} = useBuyerInfoQuery(userId)
+  console.log(buyerInfo)
 
-	setValue('name', data.name)
 
+  useEffect(() => {
+    setValue('name', buyerInfo?.name)
+  }, [buyerInfo])
 
 
   return (
