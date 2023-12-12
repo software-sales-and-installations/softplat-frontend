@@ -1,6 +1,16 @@
 @import '../../styles/abstract/mixins.scss';
 @import '../../styles/abstract/constants.scss';
 
+.table{
+    display: flex;
+    flex-direction: column;
+}
+.thead{
+    padding-bottom: 5px;
+    border-bottom: 1px solid $light-grey;
+    margin: 8px 0 34px 0;
+    box-sizing: border-box;
+}
 .link {
     text-decoration: none;
     color: black;
@@ -8,66 +18,52 @@
 
 .line{
     display: flex;
-    gap: 18px;
+    gap: 20px;
     align-items: center;
-    margin-bottom: 23px;
-    padding: 8px 0;
     transition: all .2s ease-in-out;
     &_type_head{
         padding: 0 0 4px 0;
         border-bottom: 1px solid $light-grey;
     }
-    &_type_body{
-        padding-bottom: 25px;
-    }
+
 }
-.line:hover{
+.line_type_body:hover{
     cursor: pointer;
     background-color: $light-grey;
 }
-.line:hover .cell__btn{
-    display: block;
-}
+
 .cell{
     text-align: start;
     max-height: 40px;
     font-size: 20px;
     font-weight: 400;
-    line-height: 25px; 
-    
-    &__btn{
-        display: none;
-        height: 20px;
-        width: 20px;
-        border: none;
-        background-color: transparent;
-        background: url('../../images/trash-cabinet.svg') center no-repeat;
-        cursor: pointer;
-    }
+    line-height: 25px;
+    padding: 0;
+    @include font-body-regular;
     &__text{
         padding: 0;
         margin: 0;
         max-height: 25px;
         text-overflow: ellipsis;
-        text-wrap: nowrap;
+        white-space: nowrap;
         overflow: hidden;
     }
     &_type_checkbox{
         display: flex;
         justify-content: center;
     }
-    &_type_head{
-        @include font-table-bold;
+    &_type_body{
+        padding: 17px 0;
     }
 }
 .cellSeller{
-    width: 100px;
+    width: 150px;
 }
 .cellName{
-    width: 160px;
+    width: 200px;
 }
 .cellVendor{
-    width: 80px;
+    width: 105px;
 }
 .cellArt{
 width: 100px;
@@ -80,7 +76,7 @@ width: 100px;
 }
 
 .cellData{
-    width: 120px;
+    width: 180px;
 }
 .cellRed{
     width: 70px;

@@ -1,5 +1,5 @@
 import styles from './Input.module.scss';
-import { IInput, InputTypes } from './InputTypes';
+import { IInput } from './InputTypes';
 import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
 
@@ -32,7 +32,7 @@ export const Input: FC<IInput> = ({
 			: inputType;
 
 	return (
-		<div className={styles.input__container}>
+		<div className={classNames(styles.input__container, inputType==='phone'? styles.input__container_type_phone: '') }>
 			<div className={styles.input__hints}>
 						{labelText ? (
 							<label
@@ -42,12 +42,12 @@ export const Input: FC<IInput> = ({
 								{labelText}
 							</label>
 						) : null}
-						
+
 					</div>
 					<input
 						{...validation}
 						onChange={ onChange ? onChange: (e) => {
-										validation.onChange(e) 
+										validation.onChange(e)
 								  }
 						}
 						className={classNames(styles.input__field, error? styles.input__field_type_error: '', inputType==='INN'? styles.input__field_type_INN: '', inputType==='phone'? styles.input__field_type_phone: '')}
@@ -60,7 +60,7 @@ export const Input: FC<IInput> = ({
 						maxLength={inputTextType === 'date' ? 8 : undefined}
 						value={readOnly && value ? value : undefined}
 					/>
-					<span className={classNames(styles.input__error, helpText? styles.input__error_type_help : '')}>{error ? error : (helpText? 
+					<span className={classNames(styles.input__error)}>{error ? error : (helpText?
 						<p className={styles.input__help}>{helpText}</p>
 						: '')}
 					</span>

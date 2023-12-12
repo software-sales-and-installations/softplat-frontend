@@ -7,32 +7,19 @@ import styles from './Input.module.scss';
 export const Input = ({
                         extClassName,
                         inputId,
-                        inputVariant,
-                        name,
-                        onChange,
-                        value,
-                        placeholder,
+                        inputType,
                         type,
-                        minLength,
-                        maxLength,
                         isValid,
-                        pattern,
-                        autoFocus,
+                        width,
+                        height,
                         ...props
                       }: InputProps) => {
   return (
     <input
-      name={name}
       id={inputId}
-      onChange={(e) => onChange(e)}
-      value={value}
-      className={[styles.input, styles[`input_variant_${inputVariant}`], !isValid && styles.input_invalid, extClassName].join(' ')}
-      placeholder={placeholder}
+      className={[styles.input, styles[`input_type_${inputType}`], isValid && styles.input_invalid, extClassName].join(' ')}
       type={type}
-      minLength={minLength}
-      maxLength={maxLength}
-      pattern={pattern}
-      autoFocus={autoFocus}
+      style={{width: `${width}`, height: `${height}`}}
       {...props}
     />
   );
