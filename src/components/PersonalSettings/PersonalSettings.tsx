@@ -8,18 +8,30 @@ import { PERSONALNAME_VALIDATION_CONFIG,
         PERSONALPHONE_VALIDATION_CONFIG
 } from '../../utils/constants';
 import { Button } from '../../UI/Button/Button';
+import { useEffect, useState } from 'react';
+import { useBuyerInfoQuery } from '../../utils/api/buyerApi';
 
 const PersonalSettings: React.FC = () => {
+	const userId = localStorage.getItem('userId')
+	
   const {
     register,
     handleSubmit,
     watch,
     getValues,
+	setValue,
     formState: { errors,  isValid },
   } = useForm<ISettingPersonalData>({ mode: 'onChange' });
   function handleSubmitUpdateData(){
     console.log(getValues())
   }
+
+const {data} = useBuyerInfoQuery(userId)
+
+	setValue('name', data.name)
+
+
+
   return (
         <form className={styles.form} onSubmit={handleSubmit(handleSubmitUpdateData)}>
 				<Input
