@@ -156,6 +156,39 @@ export const VALIDATION_SETTINGS = {
       noINN: 'Необходимо ввести ИНН',
     },
   },
+  bik: {
+    pattern: /^\d+$/,
+    minLength: 9,
+    maxLength: 9,
+    messages: {
+      tooShort: 'Введите еще цифры',
+      tooLong: 'Слишком длинный БИК',
+      invalid: 'Необходимо вводить только цифры',
+      nobik: 'Необходимо ввести БИК'
+    }
+  },
+  ogrnip: {
+    pattern: /^\d+$/,
+    minLength: 15,
+    maxLength: 15,
+    messages: {
+      tooShort: 'Введите еще цифры',
+      tooLong: 'Слишком длинный ОГРНИП',
+      invalid: 'Необходимо вводить только цифры',
+      noogrnip: 'Необходимо ввести ОГРНИП'
+    }
+  },
+  account: {
+    pattern: /^\d+$/,
+    minLength: 20,
+    maxLength: 20,
+    messages: {
+      tooShort: 'Введите еще цифры',
+      tooLong: 'Слишком длинный расчетный счет',
+      invalid: 'Необходимо вводить только цифры',
+      noaccount: 'Необходимо ввести расчетный счет'
+    }
+  }
 };
 export const EMAIL_VALIDATION_CONFIG = {
   required: {
@@ -356,6 +389,48 @@ export const CARDNAME_VALIDATION_CONFIG = {
   maxLength: {
     value: VALIDATION_SETTINGS.cardname.maxLength,
     message: VALIDATION_SETTINGS.cardname.messages.tooLong,
+  },
+}
+export const BIK_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.bik.messages.nobik,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.bik.pattern,
+    message: VALIDATION_SETTINGS.bik.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.bik.maxLength,
+    message: VALIDATION_SETTINGS.bik.messages.tooLong,
+  },
+};
+export const OGRNIP_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.ogrnip.messages.noogrnip,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.ogrnip.pattern,
+    message: VALIDATION_SETTINGS.ogrnip.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.ogrnip.maxLength,
+    message: VALIDATION_SETTINGS.ogrnip.messages.tooLong,
+  },
+};
+export const ACCOUNT_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.account.messages.noaccount,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.account.pattern,
+    message: VALIDATION_SETTINGS.account.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.account.maxLength,
+    message: VALIDATION_SETTINGS.account.messages.tooLong,
   },
 };
 export const CHOOSE_ROLE: {
