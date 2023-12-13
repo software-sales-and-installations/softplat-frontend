@@ -1,0 +1,28 @@
+@import '../../../styles/abstract/mixins';
+
+.reviewPopup {
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+  align-items: flex-start;
+  width: 400px;
+  &__header {
+    @include font-h2-semibold;
+    margin: 0 0 35px 0;
+    padding: 0;
+  }
+  &__subtitle {
+    @include font-h3-bold;
+    margin: 0 0 15px 0;
+    padding: 0;
+  }
+  &__stars {
+    margin: 0 0 15px 0;
+    padding: 0;
+    text-align: left;
+  }
+  &__checkbox {
+    margin: 35px 0 10px 0;
+
+  }
+}

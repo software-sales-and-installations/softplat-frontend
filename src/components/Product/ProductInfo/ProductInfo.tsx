@@ -1,11 +1,9 @@
-import { useState } from 'react';
-
 import { Button } from '../../../UIStorybook/Button/Button.tsx';
-import { Icons } from '../../../UIStorybook/Icons/Icons.tsx';
-
 import styles from './ProductInfo.module.scss'
 import { SliderOneCard } from '../SliderOneCard/SliderOneCard.tsx';
 import { slides } from '../../../utils/constants.ts';
+import ProductButtons from '../ProductButtons/ProductButtons.tsx';
+import ProductModerationForm from '../ProductModerationForm/ProductModerationForm.tsx';
 
 const fakeSeller = {
   id: '1',
@@ -18,19 +16,14 @@ const fakeSeller = {
 }
 
 const ProductInfo = ({}) => {
-  const [isLiked, setIsLiked] = useState(false)
-
-  const handleClick = () => {
-    setIsLiked(!isLiked)
-  }
 
   return (
-    <div className={styles.productInfo}>
-<div className={styles.productInfo__slider}>
-  <SliderOneCard slides={slides}/>
-</div>
+    <section className={styles.productInfo}>
+      <div className={styles.productInfo__slider}>
+        <SliderOneCard slides={slides}/>
+      </div>
       <div className={styles.productInfo__description}>
-<p>{fakeSeller.category}</p>
+      <p className={styles.productInfo__category}>{fakeSeller.category}</p>
         <div className={styles.productInfo__name}>
           <h1>{fakeSeller.title}</h1>
           <h2>{fakeSeller.vendor}</h2>
@@ -41,19 +34,13 @@ const ProductInfo = ({}) => {
           <div>
             <p>{fakeSeller.seller}</p>
           </div>
-          <Button buttonType='link'>Скачать демо</Button>
+          <Button buttonType='minorGrey' width='136px' height='35px'>Скачать демо</Button>
         </div>
         <p className={styles.productInfo__text}>{fakeSeller.text}</p>
-        <div className={styles.productInfo__installation}>
-          checkbox
-        </div>
-        <div className={styles.productInfo__buttons}>
-          <Button buttonType='primary'>В корзину</Button>
-          <Button buttonType='square' onClick={handleClick}>{isLiked ? <Icons type='filledLike' size={35}/> :
-            <Icons type='emptyLike' size={35}/>}</Button>
-      </div>
+        <ProductButtons />
+        <ProductModerationForm />
     </div>
-    </div>
+    </section>
   );
 };
 

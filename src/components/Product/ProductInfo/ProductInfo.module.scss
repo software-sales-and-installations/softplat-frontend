@@ -1,11 +1,12 @@
 @import '../../../styles/abstract/mixins';
 
 .productInfo {
+  width: 100%;
   display: flex;
   flex-direction: row;
-  gap: 46px;
+  gap: 30px;
   &__slider {
-    width: 545px;
+    width: 540px;
     height: 540px;
   }
   &__description {
@@ -14,13 +15,13 @@
     gap: 30px;
     justify-items: flex-start;
     align-items: flex-start;
-    p {
-      @include font-body-filters;
+  }
+  &__category{
+      @include font-CTAbody-regular;
       color: $dark-grey;
       margin: 0;
       padding: 0;
     }
-  }
   &__name {
     display: flex;
     flex-direction: column;
@@ -52,22 +53,21 @@
     justify-content: flex-start;
     h3 {
       @include font-table-bold;
+      margin: 0;
     }
     div {
       max-width: 270px;
       margin: 0 75px 0 25px;
       p {
-      @include font-body-filters;
+      @include font-CTAbody-regular;
+        color: $dark-grey;
       }
     }
   }
+
   &__text {
     @include font-body-regular;
-    color: $dark-grey;
+    color: $black-standart-text;
   }
-  &__buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-  }
+
 }
