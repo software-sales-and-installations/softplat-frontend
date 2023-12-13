@@ -3,7 +3,7 @@ import { FC } from 'react';
 import styles from './Header.module.scss';
 import { HeaderNavbar } from '../HeaderNavBar/HeaderNavBar';
 import { HeaderSearchForm } from '../HeaderSearchForm/HeaderSearchForm';
-import { FaRegUser } from 'react-icons/fa';
+// import { FaRegUser } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import { popupState } from '../../UI/Popup/PopupSlice';
 import { ResultPopup } from '../ResultPopup/ResultPopup';

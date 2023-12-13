@@ -9,6 +9,8 @@ const Form = ({
                 buttonText,
                 secondButtonText,
                 onSubmit,
+                width,
+                height,
                 children,
   ...props
               }: FormProps) => {
@@ -20,9 +22,10 @@ const Form = ({
       noValidate
     >
       {children}
-      <div>
-      <Button buttonType={buttonType} type='submit' {...props}>{buttonText}</Button>
-        {secondButtonText && <Button buttonType='minorSecondary' type='submit' {...props}>{secondButtonText}</Button>}
+      <div className={[styles.form__buttonContainer, styles[`form_type_${formType}_buttonContainer`]].join(' ')}
+      >
+      <Button width={width} height={height} buttonType={buttonType} type='submit' {...props}>{buttonText}</Button>
+        {secondButtonText && <Button width={width} height={height} buttonType='minorSecondary' type='submit' {...props}>{secondButtonText}</Button>}
       </div>
     </form>
   );
