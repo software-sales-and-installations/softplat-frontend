@@ -1,0 +1,29 @@
+@import './../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.form {
+position: relative;
+  &_type {
+    &_register {
+      div {
+        margin: 0 auto;
+      }
+    }
+    &_twoButtons {
+      div {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+      }
+    }
+    &_search {
+      div {
+        position: absolute;
+        top: 5px;
+        right: 15px;
+      }
+    }
+    &_data {
+    }
+  }
+}

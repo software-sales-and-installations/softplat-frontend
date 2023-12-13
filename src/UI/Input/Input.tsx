@@ -1,5 +1,5 @@
 import styles from './Input.module.scss';
-import { IInput, InputTypes } from './InputTypes';
+import { IInput } from './InputTypes';
 import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
 
@@ -43,12 +43,12 @@ export const Input: FC<IInput> = ({
 								{labelText}
 							</label>
 						) : null}
-						
+
 					</div>
 					<input
 						{...validation}
 						onChange={ onChange ? onChange: (e) => {
-										validation.onChange(e) 
+										validation.onChange(e)
 								  }
 						}
 						className={classNames(styles.input__field, error? styles.input__field_type_error: '', inputType==='INN'? styles.input__field_type_INN: '', inputType==='phone'? styles.input__field_type_phone: '')}
