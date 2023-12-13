@@ -7,7 +7,7 @@
   justify-content: space-between;
   transition: box-shadow 0.3s ease;
   margin-bottom: 5px;
-  max-width: 1300px;
+  max-width: 800px;
   margin: 0;
   position: relative;
   z-index: 1;
@@ -15,19 +15,18 @@
     @include font-body-regular;
     text-decoration: none;
     color: $black-standart-text;
-    max-width: 130px;
+    max-width: 100px;
     display: flex;
     align-items: center;
-    text-align: start
+    text-align: start;
   }
   &__title {
     @include font-body-regular;
     max-width: 230px;
     display: flex;
     align-items: center;
-    text-align: start
   }
   &__title:last-child {
-    margin-right: 20px;
+    margin-left: 60px;
   }
 }

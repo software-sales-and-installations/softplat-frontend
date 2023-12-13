@@ -486,6 +486,24 @@ export const SELECT_OPTIONS: {
   },
 ];
 
+export const SELECT_SELLERS: {
+  label: string;
+  value: string;
+}[] = [
+  // {
+  //   value: 'popularity',
+  //   label: 'По популярности',
+  // },
+  {
+    value: 'ALL_SELLERS',
+    label: 'Все продавцы',
+  },
+  {
+    value: 'BY_PRICE',
+    label: 'По цене',
+  },
+];
+
 export const SELECT_COUNTRIES_OPTIONS: { label: string; value: string }[] = [
   { value: 'RUSSIA', label: 'Россия' },
   { value: 'CHINA', label: 'Китай' },
@@ -687,7 +705,7 @@ export const ALL_SELLERS: {
 }[] = [
   {
     id: 1,
-    data: '01/10/2023',
+    data: '01/10/23',
     name: 'Название программного обеспечения',
     vendor: 12345,
     seller: 'ИП Иванов',
@@ -697,7 +715,7 @@ export const ALL_SELLERS: {
   },
   {
     id: 2,
-    data: '01/10/2023',
+    data: '01/10/23',
     name: 'Название программного обеспечения',
     vendor: 12345,
     seller: 'ИП Иванов',
@@ -707,7 +725,7 @@ export const ALL_SELLERS: {
   },
   {
     id: 3,
-    data: '01/10/2023',
+    data: '01/10/23',
     name: 'Название программного обеспечения',
     vendor: 12345,
     seller: 'ИП Иванов',
@@ -717,7 +735,7 @@ export const ALL_SELLERS: {
   },
   {
     id: 4,
-    data: '01/10/2023',
+    data: '01/10/23',
     name: 'Название программного обеспечения',
     vendor: 12345,
     seller: 'ИП Иванов',

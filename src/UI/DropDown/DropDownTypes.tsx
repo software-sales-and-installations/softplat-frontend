@@ -7,7 +7,8 @@ export enum SelectorType {
   BASE = 'base',
   COUNTRY = 'country',
   VENDOR = 'vendor',
-  CATALOG = 'catalog'
+  CATALOG = 'catalog',
+  SELLERS = 'sellers'
 }
 
 export interface IDropDowmProps {

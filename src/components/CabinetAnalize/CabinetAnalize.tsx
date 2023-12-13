@@ -9,6 +9,7 @@ import DropDown from '../../UI/DropDown/DropDown';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
 import { ALL_SELLERS } from '../../utils/constants';
 import SellersList from '../SellersList/SellersList';
+import { SELECT_SELLERS } from '../../utils/constants';
 
 const CabinetAnalize: React.FC = () => {
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
@@ -26,10 +27,7 @@ const CabinetAnalize: React.FC = () => {
   };
 
   const calculateTotalProfit = () => {
-    const sum = ALL_SELLERS.reduce(
-      (acc, product) => acc + product.profit,
-      0,
-    );
+    const sum = ALL_SELLERS.reduce((acc, product) => acc + product.profit, 0);
     setProfit(sum);
   };
 
@@ -60,13 +58,13 @@ const CabinetAnalize: React.FC = () => {
 
   return (
     <section className={styles.cabinetAnalize}>
-      <h2 className={styles.cabinetAnalize__title}>Аналитика</h2>
+      {/*       <h2 className={styles.cabinetAnalize__title}>Отчеты продаж</h2>
       <p className={styles.cabinetAnalize__subtitle}>
         Здесь отображаются отчеты динамики продаж. Вы можете ознакомиться с
         детализацией отчета за выбранный период времени, а также выгрузить отчет
         по продажам
       </p>
-
+ */}
       <label className={styles.label}>Выберите период</label>
       <div className={styles.period}>
         <div>
@@ -96,11 +94,11 @@ const CabinetAnalize: React.FC = () => {
           )}
         </div>
         <div className={styles.dropDown}>
-          {/* <DropDown
-            type={SelectorType.COUNTRY}
-            options={SELECT_COUNTRIES_OPTIONS}
+          <DropDown
+            type={SelectorType.SELLERS}
+            options={SELECT_SELLERS}
             classNamePrefix="custom-select"
-          /> */}
+          />
         </div>
         <div className={styles.cabinetAnalize__button_form}>
           <Button type="submit" mode="primary">
@@ -114,7 +112,7 @@ const CabinetAnalize: React.FC = () => {
         <p className={styles.cabinetAnalize__subheading}>Название</p>
         <p className={styles.cabinetAnalize__subheading}>Артикул</p>
         <p className={styles.cabinetAnalize__subheading}>Продавец</p>
-        <p className={styles.cabinetAnalize__subheading}>Купили</p>
+        <p className={styles.cabinetAnalize__subheading_got}>Купили</p>
         <p className={styles.cabinetAnalize__subheading}>Сумма</p>
         <p className={styles.cabinetAnalize__subheading}>Выручка</p>
       </div>

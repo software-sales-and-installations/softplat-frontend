@@ -25,16 +25,16 @@ const SellersList: React.FC<SellersListProps> = ({
 }) => {
   return (
     <div className={styles.sellersList}>
-      <p className={styles.sellersList__title}>{id}</p>
-      <p className={styles.sellersList__title}>{data}</p>
+      <p className={styles.sellersList__title_p}>{id}</p>
+      <p className={styles.sellersList__title_p}>{data}</p>
       <Link to="/product" className={styles.sellersList__name}>
         {name}
       </Link>
-      <p className={styles.sellersList__title}>{vendor}</p>
-      <p className={styles.sellersList__title}>{seller}</p>
-      <p className={styles.sellersList__title}>{amount}</p>
-      <p className={styles.sellersList__title}>{price}</p>
-      <p className={styles.sellersList__title}>{profit}</p>
+      <p className={styles.sellersList__title_p}>{vendor}</p>
+      <p className={styles.sellersList__title_p}>{seller}</p>
+      <p className={styles.sellersList__title_p}>{amount}</p>
+      <p className={styles.sellersList__title_p}>{price}</p>
+      <p className={styles.sellersList__title_p}>{profit}</p>
     </div>
   );
 };

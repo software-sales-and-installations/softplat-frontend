@@ -6,6 +6,7 @@ import { AdminCards } from '../../components/AdminCards/AdminCards';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { AdminCardTable } from '../../components/AdminCardTable/AdminCardTable';
 import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
+import CabinetAnalize from '../../components/CabinetAnalize/CabinetAnalize'
 
 export const Admin: FC = () => {
   const { data, error, isLoading } = usePublicProductListQuery({
@@ -23,13 +24,45 @@ export const Admin: FC = () => {
           <CabinetMenu mode="admin" />
         </div>
         <Routes>
-          <Route path="/published" element={<AdminCardTable products={data?.products||[]} productStatus ={'PUBLISHED'}/>} />
-          <Route path="/on-moderation" element={<AdminCardTable products={data?.products||[]} productStatus={'SHIPPED'}/>} />
-          <Route path="/rejected" element={<AdminCardTable products={data?.products||[]} productStatus={'REJECTED'} />}/>
-          <Route path="/appeal" element={<AdminCardTable products={data?.products||[]} productStatus={'APPEAL'}  />}/>
+          <Route
+            path="/published"
+            element={
+              <AdminCardTable
+                products={data?.products || []}
+                productStatus={'PUBLISHED'}
+              />
+            }
+          />
+          <Route
+            path="/on-moderation"
+            element={
+              <AdminCardTable
+                products={data?.products || []}
+                productStatus={'SHIPPED'}
+              />
+            }
+          />
+          <Route
+            path="/rejected"
+            element={
+              <AdminCardTable
+                products={data?.products || []}
+                productStatus={'REJECTED'}
+              />
+            }
+          />
+          <Route
+            path="/appeal"
+            element={
+              <AdminCardTable
+                products={data?.products || []}
+                productStatus={'APPEAL'}
+              />
+            }
+          />
           <Route path="/vendors" element={<h2>Вендоры</h2>} />
           <Route path="/add-vendor" element={<h2>Добавить вендора</h2>} />
-          <Route path="/sales" element={<h2>Отчеты продаж</h2>} />
+          <Route path="/sales" element={<CabinetAnalize />} />
           <Route path="/contacts" element={<h2>Контакты</h2>} />
         </Routes>
       </section>
