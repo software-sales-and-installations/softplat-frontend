@@ -15,6 +15,7 @@ export const Input: FC<IInput> = ({
 	max,
 	defaultValue,
 	helpText,
+	typeError
 }) => {
 	const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 	useEffect(() => {
@@ -60,7 +61,7 @@ export const Input: FC<IInput> = ({
 						maxLength={inputTextType === 'date' ? 8 : undefined}
 						value={readOnly && value ? value : undefined}
 					/>
-					<span className={classNames(styles.input__error)}>{error ? error : (helpText? 
+					<span className={classNames(styles.input__error, typeError==='dataError'? styles.input__error_type_data: '')}>{error ? error : (helpText? 
 						<p className={styles.input__help}>{helpText}</p>
 						: '')}
 					</span>
