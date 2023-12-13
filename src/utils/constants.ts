@@ -42,8 +42,7 @@ export const TEXT_FOR_REG_CHECKBOX: {
 ];
 export const VALIDATION_SETTINGS = {
   email: {
-    pattern:
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    pattern: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     maxLength: 30,
     minLength: 6,
     messages: {
@@ -71,25 +70,15 @@ export const VALIDATION_SETTINGS = {
   name: {
     pattern: /^[a-zа-яё\s]+$/iu,
     minLength: 2,
-    maxLength: 12,
+    maxLength: 20,
     messages: {
-      tooShort: 'Слишком короткое имя',
-      tooLong: 'Слишком длинное имя',
+      tooShort: 'Слишком короткое имя/название',
+      tooLong: 'Слишком длинное имя/название',
       invalid: 'Только кириллица, латиница или дефис',
-      noName: 'Необходимо ввести имя',
+      noName: 'Необходимо ввести имя/название',
     },
   },
-  companyname: {
-    pattern: /^[a-zа-яё\s]+$/iu,
-    minLength: 2,
-    maxLength: 12,
-    messages: {
-      tooShort: 'Слишком короткое название',
-      tooLong: 'Слишком длинное название',
-      invalid: 'Только кириллица, латиница или дефис',
-      noCompanyName: 'Необходимо ввести название',
-    },
-  },
+
   phone: {
     pattern: /^\d+$/,
     minLength: 10,
@@ -232,24 +221,6 @@ export const NAME_VALIDATION_CONFIG = {
     message: VALIDATION_SETTINGS.name.messages.tooLong,
   },
 };
-export const COMPANYNAME_VALIDATION_CONFIG = {
-  required: {
-    value: true,
-    message: VALIDATION_SETTINGS.companyname.messages.noCompanyName,
-  },
-  pattern: {
-    value: VALIDATION_SETTINGS.companyname.pattern,
-    message: VALIDATION_SETTINGS.companyname.messages.invalid,
-  },
-  minLength: {
-    value: VALIDATION_SETTINGS.companyname.minLength,
-    message: VALIDATION_SETTINGS.companyname.messages.tooShort,
-  },
-  maxLength: {
-    value: VALIDATION_SETTINGS.companyname.maxLength,
-    message: VALIDATION_SETTINGS.companyname.messages.tooLong,
-  },
-};
 export const PERSONALNAME_VALIDATION_CONFIG = {
   pattern: {
     value: VALIDATION_SETTINGS.name.pattern,
@@ -363,8 +334,7 @@ export const CHOOSE_ROLE: {
   title: string;
 }[] = [
   { id: 1, title: 'Я покупатель' },
-  { id: 2, title: 'Я продавец' },
-  { id: 3, title: 'Я админ' },
+  { id: 2, title: 'Я продавец' }
 ];
 
 export const FOOTER_LINKS: {

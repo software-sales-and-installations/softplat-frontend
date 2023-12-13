@@ -7,7 +7,6 @@ import {
   PASSWORD_VALIDATION_CONFIG,
   VALIDATION_SETTINGS,
   NAME_VALIDATION_CONFIG,
-  COMPANYNAME_VALIDATION_CONFIG,
   PHONE_VALIDATION_CONFIG,
   INN_VALIDATION_CONFIG 
 } from '../../utils/constants';
@@ -132,7 +131,7 @@ export const PopupForReg: FC = () => {
 					inputType={InputTypes.name}
 					labelText='Название магазина'
 					validation={{
-						...register('name', COMPANYNAME_VALIDATION_CONFIG),
+						...register('name', NAME_VALIDATION_CONFIG),
 					}}
 					error={errors?.name?.message}
 				/>:(
