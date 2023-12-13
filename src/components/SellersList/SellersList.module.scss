@@ -1,0 +1,33 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.sellersList {
+  display: flex;
+  border-radius: 20px;
+  justify-content: space-between;
+  transition: box-shadow 0.3s ease;
+  margin-bottom: 5px;
+  max-width: 1300px;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  &__name {
+    @include font-body-regular;
+    text-decoration: none;
+    color: $black-standart-text;
+    max-width: 130px;
+    display: flex;
+    align-items: center;
+    text-align: start
+  }
+  &__title {
+    @include font-body-regular;
+    max-width: 230px;
+    display: flex;
+    align-items: center;
+    text-align: start
+  }
+  &__title:last-child {
+    margin-right: 20px;
+  }
+}

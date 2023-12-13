@@ -4,6 +4,7 @@
 .cabinetAnalize {
   margin-top: 65px;
   margin-left: 60px;
+  margin-bottom: 500px;
   &__title {
     margin: 0;
     @include font-h2-simibold;
@@ -15,5 +16,81 @@
     text-align: start;
     max-width: 1160px;
     background-color: $white-standart;
+  }
+  &__button {
+    &_form {
+      width: 200px;
+          margin-left: 40px;
+    }
+    &_unload {
+      width: 170px;
+      margin: 75px 0 0;
+      padding: 0;
+    }
+  }
+}
+.ui-datepicker-trigger {
+  margin-left: 5px;
+  position: relative;
+  top: 3px;
+  cursor: pointer;
+}
+.field {
+  width: 400px;
+  box-sizing: border-box;
+  @include font-input-field;
+  padding: 10px 12px;
+  border-radius: 20px;
+  border: 1px solid $border-input;
+  color: $black-standart-text;
+  background: url(../../images/calendar.svg) no-repeat scroll 365px 8px;
+  background-color: $light-grey;
+  display: flex;
+  margin-top: 10px;
+  cursor: pointer;
+}
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+.label {
+  width: 100%;
+  @include font-CTAbody-regular;
+  color: $dark-grey;
+  text-align: left;
+  padding-bottom: 3px;
+  margin-top: 55px;
+  display: flex;
+}
+.period {
+  display: flex;
+}
+.cabinetAnalize__subheadings {
+  display: flex;
+  margin-top: 45px;
+}
+.cabinetAnalize__subheading {
+  margin-right: 50px;
+  @include font-CTAbody-regular;
+}
+.cabinetAnalize__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.cabinetAnalize__sum {
+  display: flex;
+  justify-content: space-between;
+  @include font-h3-bold;
+  margin-top: 40px;
+}
+.cabinetAnalize__total {
+  display: flex;
+  &_profit {
+    margin-left: 20px;
+  }
+  &_text {
+    margin: 0;
   }
 }

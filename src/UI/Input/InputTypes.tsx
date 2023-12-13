@@ -1,17 +1,18 @@
 export enum InputTypes {
-	email = 'email',
-	password = 'password',
-	confirmPassword = 'confirmPassword',
-	enteredEmail = 'enteredEmail',
-	text = 'text',
-	date = 'date',
-	INN ='INN',
-	orgName='orgName',
-	remember='checkbox',
-	name = 'name',
-	phone = 'phone',
-	oldpassword='oldpassword',
-	cardName = 'cardName'
+  email = 'email',
+  password = 'password',
+  confirmPassword = 'confirmPassword',
+  enteredEmail = 'enteredEmail',
+  text = 'text',
+  date = 'date',
+  INN = 'INN',
+  orgName = 'orgName',
+  remember = 'checkbox',
+  name = 'name',
+  phone = 'phone',
+  oldpassword = 'oldpassword',
+  cardName = 'cardName',
+  calendar = 'calendar',
 }
 export interface IInput {
 	inputType: InputTypes;

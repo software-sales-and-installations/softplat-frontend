@@ -582,6 +582,58 @@ export const PRODUCT_ITEMS_LIKED: {
 	{id: 3, logo: Illustrator, name: 'Adobe Illustrator', vendor: {id: 1,country: 'iuh', description: 'df', image: {url:''}, name: 'Adobe'}, category: {id: 1, name:'Мультимедиа'}, art: '123456789', description: 'Многофункциональный растровый графический иллюстратор', data: '01.01.2023', price: 0, installationPrice: 0}
   ]}
 
+export const ALL_SELLERS: {
+  id: number;
+  data: string;
+  name: string;
+  vendor: number;
+  seller: string;
+  amount: number;
+  price: number;
+  profit: number;
+}[] = [
+  {
+    id: 1,
+    data: '01/10/2023',
+    name: 'Название программного обеспечения',
+    vendor: 12345,
+    seller: 'ИП Иванов',
+    amount: 50,
+    price: 999,
+    profit: 9999,
+  },
+  {
+    id: 2,
+    data: '01/10/2023',
+    name: 'Название программного обеспечения',
+    vendor: 12345,
+    seller: 'ИП Иванов',
+    amount: 50,
+    price: 999,
+    profit: 9999,
+  },
+  {
+    id: 3,
+    data: '01/10/2023',
+    name: 'Название программного обеспечения',
+    vendor: 12345,
+    seller: 'ИП Иванов',
+    amount: 50,
+    price: 999,
+    profit: 9999,
+  },
+  {
+    id: 4,
+    data: '01/10/2023',
+    name: 'Название программного обеспечения',
+    vendor: 12345,
+    seller: 'ИП Иванов',
+    amount: 50,
+    price: 999,
+    profit: 9999,
+  },
+];
+
   export const slides: Slider = [
     {
       text: 'Быстрый и удобный процесс покупки — получите доступ к программному обеспечению всего в несколько кликов',
