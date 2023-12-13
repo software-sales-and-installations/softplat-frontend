@@ -3,12 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './Button.tsx';
 
 const meta: Meta<typeof Button> = {
-  title: 'uikit-Button',
+  title: 'uikit-button',
   component: Button,
   tags: ['autodocs'],
-  argTypes: {
-    disabled: { type: 'boolean' },
-  },
 };
 
 export default meta;
@@ -28,34 +25,23 @@ export const Secondary: Story = {
   },
 };
 
-export const Decline: Story = {
+export const MinorPrimary: Story = {
   args: {
-    buttonType: 'decline',
-    children: 'Отправить на доработку'
+    buttonType: 'minorPrimary',
+    children: 'Text'
   },
 };
 
-export const Agree: Story = {
+export const MinorSecondary: Story = {
   args: {
-    buttonType: 'agree',
-    children: 'Одобрить'
-  },
-};
-
-export const Minor: Story = {
-  args: {
-    buttonType: 'minor',
-  },
-};
-
-export const Square: Story = {
-  args: {
-    buttonType: 'square',
+    buttonType: 'minorSecondary',
+    children: 'Text'
   },
 };
 
 export const Link: Story = {
   args: {
     buttonType: 'link',
+    children: 'Войти'
   },
 };

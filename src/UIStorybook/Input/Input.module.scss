@@ -2,16 +2,22 @@
 @import '../../styles/abstract/mixins.scss';
 
 .input {
-  @include font-CTAbody-regular;
+  @include font-input-field;
   border: 1px solid $border-input;
-  background-color: $light-grey;
-  width: 560px;
-  height: 50px;
-  border-radius: 20px;
-  padding: 12px 10px;
-&:focus {
-  outline: none;
-}
+  background-color: $input-blue;
+  border-radius: 8px;
+  padding: 10px 15px;
+  &_type {
+    &_search {
+      border: 1px solid $grey;
+      background-color: $light-grey;
+      border-radius: 30px;
+      padding: 5px 15px;
+    }
+  }
+  &:focus {
+    outline: none;
+  }
   &:invalid {
     border: 1px solid $red-alert-system;
     color: $red-alert-system;
@@ -19,10 +25,5 @@
   &_invalid {
     border: 1px solid $red-alert-system;
     color: $red-alert-system;
-  }
-  &_variant {
-    &_popup {
-      width: 560px;
-    }
   }
 }
