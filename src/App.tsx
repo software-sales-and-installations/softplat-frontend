@@ -14,7 +14,7 @@ import { ShoppingCart } from './pages/ShoppingCart/ShoppingCart.tsx';
 import Search from './pages/Search/Search.tsx';
 import { Seller } from './pages/Seller/Seller.tsx';
 import { Admin } from './pages/Admin/Admin.tsx';
-import { ProtectedRouteForAdmin, 
+import { ProtectedRouteForAdmin, ProtectedRouteForAdminAuth
   // ProtectedRouteForBuyer, ProtectedRouteForSeller 
 } from './components/ProtectedRoute/ProtectedRoute.tsx';
 
@@ -76,6 +76,13 @@ function App() {
               <ProtectedRouteForAdmin>
                 <Navigate to="/admin/published" />
               </ProtectedRouteForAdmin>
+            } />
+            <Route 
+            path="/admin-auth" 
+            element={
+              <ProtectedRouteForAdminAuth>
+                <Navigate to="/" />
+              </ProtectedRouteForAdminAuth>
             } />
         </Routes>
       </MainWrapper>

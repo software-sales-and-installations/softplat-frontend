@@ -30,6 +30,16 @@ export const ProtectedRouteForSeller: FC<IProtectedRoute> = ({ children }) => {
 	);
 };
 export const ProtectedRouteForAdmin: FC<IProtectedRoute> = ({ children }) => {
+	const role = localStorage.getItem('role');
+	return role==='ADMIN' ? (
+		children
+	) : (
+		<>
+			<Navigate to="/" />
+		</>
+	);
+};
+export const ProtectedRouteForAdminAuth: FC<IProtectedRoute> = ({ children }) => {
 	const dispatch = useAppDispatch();
 	dispatch(popupState(true));
 	dispatch(chooseRoleState('Я админ'))
@@ -42,4 +52,3 @@ export const ProtectedRouteForAdmin: FC<IProtectedRoute> = ({ children }) => {
 		</>
 	);
 };
-

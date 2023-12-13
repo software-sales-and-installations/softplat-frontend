@@ -15,7 +15,7 @@ import { RootState } from '../../services/redux/store';
 export const Header: FC = () => {
   const dispatch = useAppDispatch();
   const [token, setToken] = useState(localStorage.getItem('token'));
-  const role = localStorage.getItem('role');
+  const [role,setRole] = useState(localStorage.getItem('role'))
   const user = useAppSelector(selectUser);
   const signout = useAppSelector((state: RootState) => state.signout.signout);
   const location = useLocation();
@@ -30,6 +30,7 @@ export const Header: FC = () => {
 
   useEffect(() => {
     setToken(localStorage.getItem('token'));
+    setRole(localStorage.getItem('role'))
   }, [signout, user]);
   useEffect(() => {}, [token]);
   function handleNonAuthLikeClick(){
