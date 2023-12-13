@@ -8,8 +8,10 @@ export const sellerApi = createApi({
     baseUrl: API_BASE_URL,
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token');
+      const userId = localStorage.getItem('userId')
       if (token) {
         headers.set('authorization', `${token}`);
+        headers.set('X-Sharer-User-Id', `${userId}`)
       }
       return headers;
     },
@@ -75,15 +77,16 @@ export const sellerApi = createApi({
     //   "account": "string"
     // }
     sellerChangeBank: build.mutation({
-      query: () => ({
+      query: (body) => ({
         url: '/seller/bank/',
         method: 'PATCH',
+        body,
       }),
     }),
     // Получение банковских реквизитов продавцов по id продавца
     sellerGetBank: build.query({
-      query: (userId) => ({
-        url: `/seller/bank/${userId}/`,
+      query: () => ({
+        url: `/seller/bank/`,
       }),
     }),
   }),
