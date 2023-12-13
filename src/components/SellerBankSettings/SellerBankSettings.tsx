@@ -7,7 +7,8 @@ import { InputTypes } from '../../UI/Input/InputTypes';
 import { Button } from '../../UI/Button/Button';
 import { useSellerGetBankQuery } from '../../utils/api/sellerApi';
 import { useSellerChangeBankMutation } from '../../utils/api/sellerApi';
-import { BIK_VALIDATION_CONFIG, OGRNIP_VALIDATION_CONFIG, ACCOUNT_VALIDATION_CONFIG } from '../../utils/constants';
+import { BIK_VALIDATION_CONFIG, OGRNIP_VALIDATION_CONFIG, ACCOUNT_VALIDATION_CONFIG, VALIDATION_SETTINGS } from '../../utils/constants';
+import { useState } from 'react';
 
 export const SellerBankSettings: FC = () =>{
 	const sellerId = localStorage.getItem('userId')
@@ -22,9 +23,8 @@ export const SellerBankSettings: FC = () =>{
 	  const { data: sellerBank,
 		    // isFetching,isLoading, error
 		  } = useSellerGetBankQuery(sellerId);
-		  useEffect(()=>{
-			setValue('bik', sellerBank?.bik)
-		  },[sellerBank])
+		  const [bankData, setBankData] = useState({bik: sellerBank?.bik, ogrnip: sellerBank?.ogrnip, account: sellerBank?.account})
+		  
 	const [sellerChangeBank, {
     // isFetching, isLoading, isError
   }] = useSellerChangeBankMutation();
@@ -36,6 +36,7 @@ export const SellerBankSettings: FC = () =>{
   const handleSellerChangeBank = () => {
     sellerChangeBank(setNewData()).unwrap()
       .then((res) => {
+		setBankData({bik: res.bik, ogrnip: res.ogrnip, account: res.account})
         console.log(res)
       })
       .catch((error) => {
@@ -43,22 +44,25 @@ export const SellerBankSettings: FC = () =>{
       })
       .finally()
   };
+  useEffect(()=>{
+	setValue('bik', bankData.bik|| sellerBank?.bik)
+	setValue('ogrnip', bankData.ogrnip || sellerBank?.ogrnip )
+	setValue('account', bankData.account || sellerBank?.account)
+  },[sellerBank, bankData])
     return (
             <form className={styles.form} onSubmit={handleSubmit(handleSellerChangeBank)}>
                     <Input
 					    inputType={InputTypes.bik}
 					    labelText='БИК'
 					    validation={{
-						    ...register('bik', BIK_VALIDATION_CONFIG),
-					    }}
+						    ...register('bik', BIK_VALIDATION_CONFIG)}}
 					    error={errors?.bik?.message}
 				    />
                     <Input
 					    inputType={InputTypes.ogrnip}
 					    labelText='ОГРНИП'
 					    validation={{
-						    ...register('ogrnip', OGRNIP_VALIDATION_CONFIG),
-					    }}
+						    ...register('ogrnip', OGRNIP_VALIDATION_CONFIG)}}
 					    error={errors?.ogrnip?.message}
 				    />
                 <Input
@@ -70,7 +74,7 @@ export const SellerBankSettings: FC = () =>{
 					error={errors?.account?.message}
 				/>
                 <div className={styles.btncontainer}>
-					<Button isDisabled={!isValid} type='submit' mode='primary'>Сохранить</Button>
+					<Button isDisabled={!(isValid)} type='submit' mode='primary'>Сохранить</Button>
 				</div>
             </form>
     )

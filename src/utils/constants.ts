@@ -164,7 +164,8 @@ export const VALIDATION_SETTINGS = {
       tooShort: 'Введите еще цифры',
       tooLong: 'Слишком длинный БИК',
       invalid: 'Необходимо вводить только цифры',
-      nobik: 'Необходимо ввести БИК'
+      nobik: 'Необходимо ввести БИК',
+      sameAsNow: 'Введите новое значение'
     }
   },
   ogrnip: {
@@ -175,8 +176,9 @@ export const VALIDATION_SETTINGS = {
       tooShort: 'Введите еще цифры',
       tooLong: 'Слишком длинный ОГРНИП',
       invalid: 'Необходимо вводить только цифры',
-      noogrnip: 'Необходимо ввести ОГРНИП'
-    }
+      noogrnip: 'Необходимо ввести ОГРНИП',
+      sameAsNow: 'Введите новое значение'
+      }
   },
   account: {
     pattern: /^\d+$/,
@@ -186,7 +188,8 @@ export const VALIDATION_SETTINGS = {
       tooShort: 'Введите еще цифры',
       tooLong: 'Слишком длинный расчетный счет',
       invalid: 'Необходимо вводить только цифры',
-      noaccount: 'Необходимо ввести расчетный счет'
+      noaccount: 'Необходимо ввести расчетный счет',
+      sameAsNow: 'Введите новое значение'
     }
   }
 };
@@ -203,6 +206,10 @@ export const EMAIL_VALIDATION_CONFIG = {
     value: VALIDATION_SETTINGS.email.maxLength,
     message: VALIDATION_SETTINGS.email.messages.tooLong,
   },
+  minLength: {
+    value: VALIDATION_SETTINGS.email.minLength,
+    message: VALIDATION_SETTINGS.email.messages.tooShort,
+  },
 };
 export const INN_VALIDATION_CONFIG = {
   required: {
@@ -217,6 +224,10 @@ export const INN_VALIDATION_CONFIG = {
     value: VALIDATION_SETTINGS.INN.maxLength,
     message: VALIDATION_SETTINGS.INN.messages.tooLong,
   },
+  minLength: {
+    value: VALIDATION_SETTINGS.INN.minLength,
+    message: VALIDATION_SETTINGS.INN.messages.tooShort,
+  },
 };export const PERSONALEMAIL_VALIDATION_CONFIG = {
   pattern: {
     value: VALIDATION_SETTINGS.email.pattern,
@@ -225,6 +236,10 @@ export const INN_VALIDATION_CONFIG = {
   maxLength: {
     value: VALIDATION_SETTINGS.email.maxLength,
     message: VALIDATION_SETTINGS.email.messages.tooLong,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.email.minLength,
+    message: VALIDATION_SETTINGS.email.messages.tooShort,
   },
 };
 
@@ -404,6 +419,10 @@ export const BIK_VALIDATION_CONFIG = {
     value: VALIDATION_SETTINGS.bik.maxLength,
     message: VALIDATION_SETTINGS.bik.messages.tooLong,
   },
+  minLength: {
+    value: VALIDATION_SETTINGS.bik.minLength,
+    message: VALIDATION_SETTINGS.bik.messages.tooShort,
+  },
 };
 export const OGRNIP_VALIDATION_CONFIG = {
   required: {
@@ -418,6 +437,10 @@ export const OGRNIP_VALIDATION_CONFIG = {
     value: VALIDATION_SETTINGS.ogrnip.maxLength,
     message: VALIDATION_SETTINGS.ogrnip.messages.tooLong,
   },
+  minLength: {
+    value: VALIDATION_SETTINGS.ogrnip.minLength,
+    message: VALIDATION_SETTINGS.ogrnip.messages.tooShort,
+  },
 };
 export const ACCOUNT_VALIDATION_CONFIG = {
   required: {
@@ -431,6 +454,10 @@ export const ACCOUNT_VALIDATION_CONFIG = {
   maxLength: {
     value: VALIDATION_SETTINGS.account.maxLength,
     message: VALIDATION_SETTINGS.account.messages.tooLong,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.account.minLength,
+    message: VALIDATION_SETTINGS.account.messages.tooShort,
   },
 };
 export const CHOOSE_ROLE: {
