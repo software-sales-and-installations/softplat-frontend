@@ -32,6 +32,9 @@ export const Header: FC = () => {
     setToken(localStorage.getItem('token'));
   }, [signout, user]);
   useEffect(() => {}, [token]);
+  function handleNonAuthLikeClick(){
+    dispatch(popupState(true));
+  }
   return (
     <header className={styles.header}>
       <Link to="/catalog" className={styles.header__logo}>
@@ -50,9 +53,9 @@ export const Header: FC = () => {
           </>
         ) : !token ? (
           <>
-            <Link
-              to="personal/favorites"
+            <button
               className={styles.btncontainer__likebtn}
+              onClick={handleNonAuthLikeClick}
             />
             <Link to="/cart" className={styles.btncontainer__shopbtn} />{' '}
           </>
