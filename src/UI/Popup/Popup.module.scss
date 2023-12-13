@@ -11,7 +11,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-content: center;
-	z-index: 10;
+	z-index: 15;
 	visibility: hidden;
 	opacity: 0;
 	transition: visibility 0.3s, opacity ease 0.3s;
@@ -39,10 +39,10 @@
 	}
     &__container{
 		width: 70%;
-        max-width: 600px;
+        max-width: 510px;
 	    box-sizing: border-box;
 	    margin: 0 auto;
-	    padding: 40px;
+	    padding: 40px 40px 25px 40px;
 	    border-radius: 20px;
 	    background-color: $white-standart;
 	    display: flex;
@@ -55,8 +55,9 @@
 		align-items: center;
     }
 	&__role{
-		padding: 22px 0 0;
-		@include font-h3-regular;
+		margin: 0;
+		padding: 20px 0 17px 0;
+		@include font-h3-bold;
 	}
     &__closebtn{
         margin: 0;
@@ -65,15 +66,15 @@
         border: none;
         cursor: pointer;
 		position: absolute;
-        top: 20px;
-        right: 20px;
+        top: 13px;
+        right: 37px;
 		width: 40px;
 		height: 40px;
 		background-image: url('../../images/close-icon.svg');
     }
 	&__btncontainer{
 		display: flex;
-		margin: 60px 0 0 0;
+		margin: 15px 0 0 0;
 		width: 100%;
 		justify-content: space-between;
 		@include font-body-link;
@@ -82,59 +83,65 @@
 		display: flex;
 		margin-top: 50px;
 		gap: 30px;
-		width: 80%;
+		width: 100%;
 	}
 	&__exittext{
+		margin: 15px 0 0 0;
 		color: $dark-grey;
-		@include font-CTAbody-regular;
+		@include font-input-field;
 	}
 }
 .form{
 	width: 97%;
+	margin-top: 15px;
+	&_type_recoverPassword{
+		margin-top: 0;
+	}
+	&_type_auth{
+		margin-top: 20px;
+	}
+	&_type_admin{
+		margin: 0 0 20px 0;
+	}
+	&_type_seller{
+		margin-top: 22px;
+	}
 }
 .checkboxcontainer{
 	display: flex;
-	margin-bottom: 23px;
-	gap: 22px;
+	margin: 8px 0 15px 0;
+	align-items: center;
+	gap: 15px;
 	&__input{
+		flex-shrink: 0;
 		height: 20px;
 		width: 20px;
 	}
 	&__label{
 		text-align: left;
+		color: $dark-grey;
+		@include font-body-filters;
 	}
+	&_type_auth{
+		margin: 3px 0 0 0;
+	}
+	&_type_reg{
+		margin: 3px 0 0 0
+	}
+
 }
 .btncontainer{
 	display: flex;
-	flex-direction: column;
-	gap: 30px;
+	gap: 20px;
+	justify-content: center;
 	&_type_recoverpassword{
-		margin-top: 50px;
-	}
-}
-.adminBtn{
-	color: $dark-grey;
-	padding: 10px 40px;
-	border: 5px solid $light-grey;
-	border-radius: 20px;
-	@include font-CTAbody-regular;
-}
-.helpText{
-	margin: 0;
-	padding: 0 12px;
-	color: $border-input;
-	text-align: left;
-}
-.errorContainer{
-	min-height: 30px;
-	&__error{
-		color: $red-alert-system;
-		@include font-body-filters;
+		margin-top: 30px;
 	}
 }
 .errorContainer{
-	min-height: 30px;
+	min-height: 35px;
 	&__error{
+		margin: 0;
 		color: $red-alert-system;
 		@include font-body-filters;
 	}
@@ -186,3 +193,4 @@
 	gap: 20px;
 	width: 100%;
 }
+

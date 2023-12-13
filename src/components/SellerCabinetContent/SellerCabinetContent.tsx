@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import classNames from 'classnames';
 import styles from './SellerCabinetContent.module.scss';
-import { CardTable } from '../CardTable/CardTable';
-import { SellerExistingCard } from '../../utils/constants';
+import { CardTable } from '../AdminCardTable/AdminCardTable';
 import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 import Preloader from '../Preloader/Preloader';
 

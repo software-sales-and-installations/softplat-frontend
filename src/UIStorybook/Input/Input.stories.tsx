@@ -16,4 +16,10 @@ export const Default: Story = {
   },
 };
 
+export const Search: Story = {
+  args: {
+    inputType: 'search',
+  },
+};
+
 

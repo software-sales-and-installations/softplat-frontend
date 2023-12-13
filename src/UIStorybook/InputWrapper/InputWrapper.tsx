@@ -9,23 +9,23 @@ import { InputWrapperProps } from './InputWrapperTypes.tsx';
 export const InputWrapper = ({
                                inputId,
                                labelText,
-                               variant,
+                               inputWrapperType,
                                errorText,
                                hintText,
                                children,
                              }:InputWrapperProps) => (
-  <div className={[styles.inputWrapper, styles[`inputWrapper_variant_${variant}`]].join(' ')}>
+  <div className={[styles.inputWrapper, styles[`inputWrapper_type_${inputWrapperType}`]].join(' ')}>
     <label htmlFor={inputId} className={styles.inputWrapper__label}>
       {labelText}
     </label>
     {children}
     {!errorText ? (<span
-      className={[styles.inputWrapper__hint, styles[`inputWrapper__hint_variant_${variant}`], styles[`${inputId}-hint`]].join(' ')}
+      className={[styles.inputWrapper__hint, styles[`inputWrapper__hint_type_${inputWrapperType}`], styles[`${inputId}-hint`]].join(' ')}
     >
       {hintText}
     </span>) :
       (<span
-      className={[styles.inputWrapper__error, styles[`inputWrapper__error_variant_${variant}`], styles[`${inputId}-error`]].join(' ')}
+      className={[styles.inputWrapper__error, styles[`inputWrapper__error_type_${inputWrapperType}`], styles[`${inputId}-error`]].join(' ')}
     >
       {errorText}
     </span>)}

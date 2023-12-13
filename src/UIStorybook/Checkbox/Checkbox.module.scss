@@ -4,7 +4,7 @@
 .checkbox {
   position: relative;
   cursor: pointer;
-  @include font-body-filters;
+  @include font-input-field;
   display: flex;
   align-items: center;
   color: $dark-grey;

@@ -1,47 +1,54 @@
 import styles from './PersonalSettings.module.scss';
-import {useState} from 'react';
-import classNames from 'classnames';
-import PersonalSettingsData from '../PersonalSettingsData/PersonalSettingsData';
-import PersonalSettingsPassword from '../PersonalSettingsPassword/PersonalSettingsPassword';
+import { InputTypes } from '../../UI/Input/InputTypes';
+import { Input } from '../../UI/Input/Input';
+import { useForm } from 'react-hook-form';
+import { ISettingPersonalData } from './PersonalSettingTypes';
+import { PERSONALNAME_VALIDATION_CONFIG,
+        PERSONALEMAIL_VALIDATION_CONFIG,
+        PERSONALPHONE_VALIDATION_CONFIG
+} from '../../utils/constants';
+import { Button } from '../../UI/Button/Button';
 
 const PersonalSettings: React.FC = () => {
-  const [activeBtn, setActiveBtn] = useState('data')
+  const {
+    register,
+    handleSubmit,
+    watch,
+    getValues,
+    formState: { errors,  isValid },
+  } = useForm<ISettingPersonalData>({ mode: 'onChange' });
+  function handleSubmitUpdateData(){
+    console.log(getValues())
+  }
   return (
-    <>
-      <section className={styles.personalSettings}>
-        <h2 className={styles.personalSettings__title}>Настройки</h2>
-        <p className={styles.personalSettings__subtitle}>
-          Заполните данные профиля
-        </p>
-        <nav className={styles.personalSettings__titles}>
-          <button
-            type='button'
-            onClick={()=>setActiveBtn('data')}
-            className={classNames(
-              styles.personalSettings__data,
-              activeBtn === 'data'
-                ? styles.personalSettings__data_aktive
-                : '',
-            )}
-          >
-            Данные профиля
-          </button>
-          <button
-            onClick={()=>setActiveBtn('password')}
-            type='button'
-            className={classNames(
-              styles.personalSettings__data,
-              activeBtn === 'password'
-                ? styles.personalSettings__data_aktive
-                : '',
-            )}
-          >
-            Смена пароля
-          </button>
-        </nav>
-        {activeBtn==='data' ? <PersonalSettingsData /> : <PersonalSettingsPassword />}
-      </section>
-    </>
+        <form className={styles.form} onSubmit={handleSubmit(handleSubmitUpdateData)}>
+				<Input
+					inputType={InputTypes.name}
+					labelText='Ваше имя'
+					validation={{
+						...register('name', PERSONALNAME_VALIDATION_CONFIG),
+					}}
+					error={errors?.name?.message}
+				/>
+        <Input
+					inputType={InputTypes.email}
+					labelText='e-mail'
+					validation={{
+						...register('email', PERSONALEMAIL_VALIDATION_CONFIG),
+					}}
+					error={errors?.email?.message}
+				/>
+					<Input
+						inputType={InputTypes.phone}
+						labelText="Телефон"
+						validation={{ ...register('phone', PERSONALPHONE_VALIDATION_CONFIG) }}
+						error={errors?.phone?.message}
+					/>
+        <div className={styles.btncontainer}>
+					<Button isDisabled={!isValid} type='submit' mode='primary'>Сохранить</Button>
+				</div>
+        </form>
+
   );
 };
 

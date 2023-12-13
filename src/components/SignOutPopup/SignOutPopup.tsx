@@ -40,8 +40,8 @@ export const SignOutPopup: FC = () => {
             <h2 className={styles.popup__role}>Выход</h2>
             <p className={styles.popup__exittext}>Вы действительно хотите выйти из аккаунта?</p>
             <div className={styles.popup__exitcontainerbtn}>
-                <Button mode='primary' onClick={handleSubmitLogout} >Да</Button>
-                <Button onClick={handlePopupClose} mode='secondary' type='button'>Нет</Button>
+                <Button mode='primary' onClick={handleSubmitLogout} >Выход</Button>
+                <Button onClick={handlePopupClose} mode='secondary' type='button'>Отмена</Button>
             </div>
         </Popup>
     )

@@ -1,3 +1,5 @@
+//КОМПОНЕНТ НЕ ИСПОЛЬЗУЕТСЯ??
+
 import { FC } from 'react';
 import styles from './Catalog.module.scss';
 import { Categories } from '../../components/Categories/Categories';

@@ -14,7 +14,7 @@ export const Input: FC<IInput> = ({
 	onChange,
 	max,
 	defaultValue,
-	helpText
+	helpText,
 }) => {
 	const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 	useEffect(() => {
@@ -27,12 +27,12 @@ export const Input: FC<IInput> = ({
 	const inputTextType =
 		inputType === 'password' && isPasswordHidden === false
 			? 'text'
-			: inputType === 'confirmPassword'
+			: inputType === 'confirmPassword' && isPasswordHidden === true
 			? 'password'
 			: inputType;
 
 	return (
-		<div className={styles.input__container}>
+		<div className={classNames(styles.input__container, inputType==='phone'? styles.input__container_type_phone: '') }>
 			<div className={styles.input__hints}>
 						{labelText ? (
 							<label
@@ -42,15 +42,15 @@ export const Input: FC<IInput> = ({
 								{labelText}
 							</label>
 						) : null}
-						
+
 					</div>
 					<input
 						{...validation}
 						onChange={ onChange ? onChange: (e) => {
-										validation.onChange(e) 
+										validation.onChange(e)
 								  }
 						}
-						className={classNames(styles.input__field, error? styles.input__field_type_error: '')}
+						className={classNames(styles.input__field, error? styles.input__field_type_error: '', inputType==='INN'? styles.input__field_type_INN: '', inputType==='phone'? styles.input__field_type_phone: '')}
 						type={inputTextType}
 						name={inputType}
 						id={inputType}
@@ -60,7 +60,7 @@ export const Input: FC<IInput> = ({
 						maxLength={inputTextType === 'date' ? 8 : undefined}
 						value={readOnly && value ? value : undefined}
 					/>
-					<span className={styles.input__error}>{error ? error : (inputType === 'password'? 
+					<span className={classNames(styles.input__error)}>{error ? error : (helpText?
 						<p className={styles.input__help}>{helpText}</p>
 						: '')}
 					</span>

@@ -13,10 +13,14 @@ import { Button } from '../../UI/Button/Button';
 import { setUser } from '../../services/redux/slices/user/user';
 import { useAuthLoginMutation } from '../../utils/api/authApi';
 import { signout } from '../SignOutPopup/SignOutPopupSlice';
+import classNames from 'classnames';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../services/redux/store';
 
 export const PopupForAuth: FC = () => {
 	const [authError, setAuthError] = useState(0)
 	const [errorText, setErrorText] = useState('')
+	const MyRole = useSelector((state: RootState) => state.chooseRole.title);
 	const dispatch = useAppDispatch();
 	const {
 		register,
@@ -63,20 +67,12 @@ export const PopupForAuth: FC = () => {
 			setErrorText('Некорректно заполнены поля email или password')
 		}
 	}, [authError])
-	useEffect(()=>{
-		if (authError===401){
-			setErrorText('Неправильный email или пароль')
-		}
-		if(authError===400){
-			setErrorText('Некорректно заполнены поля email или password')
-		}
-	}, [authError])
 	return (
 		<Popup>
-			<form className={styles.form} onSubmit={handleSubmit(handleSubmitLogin)}>
+			<form className={classNames(styles.form, MyRole==='Я админ'? styles.form_type_admin : styles.form_type_auth)} onSubmit={handleSubmit(handleSubmitLogin)}>
 				<Input
 					inputType={InputTypes.email}
-					labelText='e-mail'
+					labelText='E-mail'
 					validation={{
 						...register('email', EMAIL_VALIDATION_CONFIG),
 					}}
@@ -88,9 +84,8 @@ export const PopupForAuth: FC = () => {
 					showPasswordButton={true}
 					validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
 					error={errors?.password?.message}
-					helpText='Пароль может содержать буквы, цифры и знаки препинания'
 				/>
-				<div className={styles.checkboxcontainer}>
+				<div className={classNames(styles.checkboxcontainer, styles.checkboxcontainer_type_auth)}>
 					<input className={styles.checkboxcontainer__input} id='agreement' {...register("remember")} type="checkbox" value="remember"/>
 					<label className={styles.checkboxcontainer__label} htmlFor='agreement'>Запомнить меня</label>
 				</div>
@@ -99,7 +94,7 @@ export const PopupForAuth: FC = () => {
 				</div>
 				<div className={styles.btncontainer}>
 					<Button isDisabled={!isValid} type='submit' mode='primary'>Войти</Button>
-					<Button type='button' mode='secondary' onClick={handlePasswordPopup}>Забыли пароль?</Button>
+					<Button type='button' mode='secondary' onClick={handlePasswordPopup}>Восстановить пароль</Button>
 				</div>
 			</form>
 		</Popup>
