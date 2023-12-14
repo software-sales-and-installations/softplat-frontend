@@ -830,21 +830,26 @@ export const sellerMenuItems = [
   },
   {
     id: 6,
+    name: 'Жалобы',
+    link: 'appeal',
+  },
+  {
+    id: 7,
     name: 'Отчеты продаж',
     link: 'sales',
   },
   {
-    id: 7,
+    id: 8,
     name: 'Банковские реквизиты',
     link: 'bank-details',
   },
   {
-    id: 8,
+    id: 9,
     name: 'Данные профиля',
     link: 'settings',
   },
   {
-    id: 9,
+    id: 10,
     name: 'Смена пароля',
     link: 'password',
   },
@@ -885,10 +890,5 @@ export const adminMenuItems = [
     id: 7,
     name: 'Отчеты продаж',
     link: 'sales',
-  },
-  {
-    id: 8,
-    name: 'Контакты',
-    link: 'contacts',
   },
 ];
