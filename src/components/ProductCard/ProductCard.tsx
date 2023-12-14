@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from './ProductCard.module.scss';
 import { Link } from 'react-router-dom';
-import { Button } from '../../UI/Button/Button';
+import { Button } from '../../UIStorybook/Button/Button';
 import { IProductCardProps } from './ProductCardTypes';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { setCartItems } from '../../services/redux/slices/cart/cart';
@@ -28,11 +28,11 @@ import { useState } from 'react';
 const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const signout = useAppSelector((state: RootState) => state.signout.signout);
   const [token, setToken] = useState(localStorage.getItem('token'));
-  const [role, setRole] = useState(localStorage.getItem('role'))
+  const [role, setRole] = useState(localStorage.getItem('role'));
   const user = useAppSelector(selectUser);
   useEffect(() => {
     setToken(localStorage.getItem('token'));
-    setRole(localStorage.getItem('role'))
+    setRole(localStorage.getItem('role'));
   }, [signout, user]);
   const addSpace = (price: number): string => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
@@ -41,7 +41,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const installationPrice = `${addSpace(
     card.price + card.installationPrice,
   )} ₽`;
-  
+
   const [addFavorites] = useBuyerAddFavoritesMutation();
   const [deleteFavorites] = useBuyerDeleteFavoritesMutation();
   //@ts-ignore
@@ -89,14 +89,19 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
 
   return (
     <div className={styles.card}>
-      {(token&&role==='BUYER')?
-      <button
-        className={styles.card__likeBtn}
-        type="button"
-        onClick={handleToggleFavorite}
-      >
-        {isFavorite ? <FaHeart size={28} /> : <FaRegHeart size={28} strokeWidth={0.5} />}
-      </button>: null}
+      {token && role === 'BUYER' ? (
+        <button
+          className={styles.card__likeBtn}
+          type="button"
+          onClick={handleToggleFavorite}
+        >
+          {isFavorite ? (
+            <FaHeart size={28} />
+          ) : (
+            <FaRegHeart size={28} strokeWidth={0.5} />
+          )}
+        </button>
+      ) : null}
       <Link to={`/product/${card.id}`} className={styles.card__link}>
         <div className={styles.card__img}>
           <img src={card.image?.url} alt="Изображение продукта" />
@@ -124,9 +129,11 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
       </Link>
       <div className={styles.card__addBtn}>
         <Button
-          mode="primary"
+          buttonType="primary"
+          width="100%"
+          height="35px"
           onClick={handleAddToCart}
-          isDisabled={addItemError.isError}
+          disabled={addItemError.isError}
         >
           Добавить в корзину
         </Button>
