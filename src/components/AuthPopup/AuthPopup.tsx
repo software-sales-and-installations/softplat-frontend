@@ -18,6 +18,9 @@ import { useAuthLoginMutation } from '../../utils/api/authApi';
 import { signout } from '../SignOutPopup/SignOutPopupSlice';
 import { useBuyerFavoritesQuery } from '../../utils/api/buyerApi';
 import { useBuyerBasketInfoQuery } from '../../utils/api/buyerBasketApi';
+import classNames from 'classnames';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../services/redux/store';
 
 export const PopupForAuth: FC = () => {
   const [authError, setAuthError] = useState(0);
@@ -26,6 +29,7 @@ export const PopupForAuth: FC = () => {
   const { refetch: refetchFavorites } = useBuyerFavoritesQuery(undefined);
   const { refetch: refetchBasketInfo } = useBuyerBasketInfoQuery(undefined);
 
+	const MyRole = useSelector((state: RootState) => state.chooseRole.title);
   const dispatch = useAppDispatch();
   const {
     register,

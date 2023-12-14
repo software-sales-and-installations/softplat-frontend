@@ -42,15 +42,15 @@ export const TEXT_FOR_REG_CHECKBOX: {
 ];
 export const VALIDATION_SETTINGS = {
   email: {
-    pattern:
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    pattern: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     maxLength: 30,
     minLength: 6,
     messages: {
       noEmail: 'Необходимо ввести email',
       invalid: 'Необходимо ввести email в правильном формате',
       tooLong: 'Слишком длинный email',
-      tooShort: 'Слишком короткий email'
+      tooShort: 'Слишком короткий email',
+      sameAsNow: 'Введите новый email'
     },
   },
   password: {
@@ -71,12 +71,13 @@ export const VALIDATION_SETTINGS = {
   name: {
     pattern: /^[a-zа-яё\s]+$/iu,
     minLength: 2,
-    maxLength: 12,
+    maxLength: 20,
     messages: {
-      tooShort: 'Слишком короткое имя',
-      tooLong: 'Слишком длинное имя',
+      tooShort: 'Слишком короткое имя/название',
+      tooLong: 'Слишком длинное имя/название',
       invalid: 'Только кириллица, латиница или дефис',
-      noName: 'Необходимо ввести имя',
+      noName: 'Необходимо ввести имя/название',
+      sameAsNow: 'Введите новое имя'
     },
   },
   companyname: {
@@ -90,6 +91,7 @@ export const VALIDATION_SETTINGS = {
       noCompanyName: 'Необходимо ввести название',
     },
   },
+
   phone: {
     pattern: /^\d+$/,
     minLength: 10,
@@ -99,6 +101,7 @@ export const VALIDATION_SETTINGS = {
       tooLong: 'Слишком длинный номер',
       invalid: 'Введены недопустимые символы',
       noPhone: 'Необходимо ввести номер телефона',
+      sameAsNow: 'Введите новый номер телефона'
     },
   },
   cardNumber: {
@@ -156,6 +159,42 @@ export const VALIDATION_SETTINGS = {
       noINN: 'Необходимо ввести ИНН',
     },
   },
+  bik: {
+    pattern: /^\d+$/,
+    minLength: 9,
+    maxLength: 9,
+    messages: {
+      tooShort: 'Введите еще цифры',
+      tooLong: 'Слишком длинный БИК',
+      invalid: 'Необходимо вводить только цифры',
+      nobik: 'Необходимо ввести БИК',
+      sameAsNow: 'Введите новое значение'
+    }
+  },
+  ogrnip: {
+    pattern: /^\d+$/,
+    minLength: 15,
+    maxLength: 15,
+    messages: {
+      tooShort: 'Введите еще цифры',
+      tooLong: 'Слишком длинный ОГРНИП',
+      invalid: 'Необходимо вводить только цифры',
+      noogrnip: 'Необходимо ввести ОГРНИП',
+      sameAsNow: 'Введите новое значение'
+      }
+  },
+  account: {
+    pattern: /^\d+$/,
+    minLength: 20,
+    maxLength: 20,
+    messages: {
+      tooShort: 'Введите еще цифры',
+      tooLong: 'Слишком длинный расчетный счет',
+      invalid: 'Необходимо вводить только цифры',
+      noaccount: 'Необходимо ввести расчетный счет',
+      sameAsNow: 'Введите новое значение'
+    }
+  }
 };
 export const EMAIL_VALIDATION_CONFIG = {
   required: {
@@ -169,6 +208,10 @@ export const EMAIL_VALIDATION_CONFIG = {
   maxLength: {
     value: VALIDATION_SETTINGS.email.maxLength,
     message: VALIDATION_SETTINGS.email.messages.tooLong,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.email.minLength,
+    message: VALIDATION_SETTINGS.email.messages.tooShort,
   },
 };
 export const INN_VALIDATION_CONFIG = {
@@ -184,6 +227,10 @@ export const INN_VALIDATION_CONFIG = {
     value: VALIDATION_SETTINGS.INN.maxLength,
     message: VALIDATION_SETTINGS.INN.messages.tooLong,
   },
+  minLength: {
+    value: VALIDATION_SETTINGS.INN.minLength,
+    message: VALIDATION_SETTINGS.INN.messages.tooShort,
+  },
 };export const PERSONALEMAIL_VALIDATION_CONFIG = {
   pattern: {
     value: VALIDATION_SETTINGS.email.pattern,
@@ -192,6 +239,10 @@ export const INN_VALIDATION_CONFIG = {
   maxLength: {
     value: VALIDATION_SETTINGS.email.maxLength,
     message: VALIDATION_SETTINGS.email.messages.tooLong,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.email.minLength,
+    message: VALIDATION_SETTINGS.email.messages.tooShort,
   },
 };
 
@@ -230,24 +281,6 @@ export const NAME_VALIDATION_CONFIG = {
   maxLength: {
     value: VALIDATION_SETTINGS.name.maxLength,
     message: VALIDATION_SETTINGS.name.messages.tooLong,
-  },
-};
-export const COMPANYNAME_VALIDATION_CONFIG = {
-  required: {
-    value: true,
-    message: VALIDATION_SETTINGS.companyname.messages.noCompanyName,
-  },
-  pattern: {
-    value: VALIDATION_SETTINGS.companyname.pattern,
-    message: VALIDATION_SETTINGS.companyname.messages.invalid,
-  },
-  minLength: {
-    value: VALIDATION_SETTINGS.companyname.minLength,
-    message: VALIDATION_SETTINGS.companyname.messages.tooShort,
-  },
-  maxLength: {
-    value: VALIDATION_SETTINGS.companyname.maxLength,
-    message: VALIDATION_SETTINGS.companyname.messages.tooLong,
   },
 };
 export const PERSONALNAME_VALIDATION_CONFIG = {
@@ -357,14 +390,67 @@ export const CARDNAME_VALIDATION_CONFIG = {
     value: VALIDATION_SETTINGS.cardname.maxLength,
     message: VALIDATION_SETTINGS.cardname.messages.tooLong,
   },
+}
+export const BIK_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.bik.messages.nobik,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.bik.pattern,
+    message: VALIDATION_SETTINGS.bik.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.bik.maxLength,
+    message: VALIDATION_SETTINGS.bik.messages.tooLong,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.bik.minLength,
+    message: VALIDATION_SETTINGS.bik.messages.tooShort,
+  },
+};
+export const OGRNIP_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.ogrnip.messages.noogrnip,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.ogrnip.pattern,
+    message: VALIDATION_SETTINGS.ogrnip.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.ogrnip.maxLength,
+    message: VALIDATION_SETTINGS.ogrnip.messages.tooLong,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.ogrnip.minLength,
+    message: VALIDATION_SETTINGS.ogrnip.messages.tooShort,
+  },
+};
+export const ACCOUNT_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.account.messages.noaccount,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.account.pattern,
+    message: VALIDATION_SETTINGS.account.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.account.maxLength,
+    message: VALIDATION_SETTINGS.account.messages.tooLong,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.account.minLength,
+    message: VALIDATION_SETTINGS.account.messages.tooShort,
+  },
 };
 export const CHOOSE_ROLE: {
   id: number;
   title: string;
 }[] = [
   { id: 1, title: 'Я покупатель' },
-  { id: 2, title: 'Я продавец' },
-  { id: 3, title: 'Я админ' },
+  { id: 2, title: 'Я продавец' }
 ];
 
 export const FOOTER_LINKS: {

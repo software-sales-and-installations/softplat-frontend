@@ -2,21 +2,19 @@
 @import '../../styles/abstract/mixins.scss';
 
 .button {
-  @include font-CTAbody-regular;
+  @include font-input-field;
     cursor: pointer;
     border-radius: 32px;
     border: none;
-    width: 290px;
-    height: 55px;
     transition: 0.3s ease-out;
   &_type {
     &_primary {
       color: $black-standart-text;
-background-color: $accent-lime-button;
+      background-color: $accent-lime-button;
       &:hover {
         box-shadow: 0 4px 20px 0 rgba(85, 80, 92, 0.50);
       }
-      &:active {
+      &:disabled {
         color: $white-standart;
         background-color: $dark-grey;
       }
@@ -24,29 +22,43 @@ background-color: $accent-lime-button;
     &_secondary {
       background-color: $white-standart;
       border: 1px solid $border-input;
-      &:hover, &:active {
+      &:hover, &:disabled {
         background-color: $light-grey;
       }
     }
-    &_decline {
 
-    }
-    &_agree {
-      background-color: $green-approve-system;
-      color: $white-standart;
-      &:hover, &:active {
-        background-color: $green-approve-pressed;
+    &_minorPrimary {
+      color: $black-standart-text;
+      background-color: $accent-lime-button;
+      &:hover {
+        box-shadow: 0 4px 20px 0 rgba(85, 80, 92, 0.50);
+      }
+      &:disabled {
+        color: $white-standart;
+        background-color: $dark-grey;
       }
     }
-    &_minor {
 
+    &_minorSecondary {
+      background-color: $white-standart;
+      border: 1px solid $border-input;
+      &:hover, &:disabled {
+        background-color: $light-grey;
+      }
     }
 
-    &_square {
-
+    &_minorGrey {
+      color: $white-standart;
+      background-color: $dark-grey;
+      border: 1px solid $border-input;
     }
+
     &_link {
-
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    color: $black-standart-text;
     }
+
   }
 }

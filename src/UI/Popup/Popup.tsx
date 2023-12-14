@@ -24,11 +24,12 @@ export const Popup: FC<IPopup> = ({ children}) => {
 			{!token ? (
 				MyRole==='Забыли пароль?'? null : 
 			<div className={styles.popup__btncontainer}>
-				{CHOOSE_ROLE.map((i)=>{
+				{MyRole==='Я админ'? null :
+				(CHOOSE_ROLE.map((i)=>{
 					return(
-						MyRole===i.title ? null : <ChooseRole key={i.id} title={i.title}/>
+						(MyRole===i.title) ? null : <ChooseRole key={i.id} title={i.title}/>
 					)
-				})}
+				}))}
 			</div>) : null}
 		</>
 	);

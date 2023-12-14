@@ -7,7 +7,6 @@ import {
   PASSWORD_VALIDATION_CONFIG,
   VALIDATION_SETTINGS,
   NAME_VALIDATION_CONFIG,
-  COMPANYNAME_VALIDATION_CONFIG,
   PHONE_VALIDATION_CONFIG,
   INN_VALIDATION_CONFIG 
 } from '../../utils/constants';
@@ -25,6 +24,7 @@ import { RootState } from '../../services/redux/store';
 import { popupState } from '../../UI/Popup/PopupSlice';
 import { setUser } from '../../services/redux/slices/user/user';
 import { signout } from '../SignOutPopup/SignOutPopupSlice';
+import classNames from 'classnames';
 
 export const PopupForReg: FC = () => {
   const [errorStatus, setErrorStatus] = useState(0);
@@ -49,6 +49,7 @@ export const PopupForReg: FC = () => {
 
   useEffect(() => {
     reset();
+	setTextError('')
   }, []);
 
 	const {email, name, password, confirmPassword, phone} = getValues();
@@ -101,7 +102,7 @@ export const PopupForReg: FC = () => {
 	  }, [password, trigger]);
 	return (
 		<Popup>
-			<form className={styles.form} onSubmit={handleSubmit(handleSubmitRegister)}>
+			<form className={classNames(styles.form, MyRole==='Я продавец'? styles.form_type_seller: '')} onSubmit={handleSubmit(handleSubmitRegister)}>
 				{MyRole === 'Я продавец'? 
 					<Input
 					inputType={InputTypes.INN}
@@ -112,14 +113,12 @@ export const PopupForReg: FC = () => {
 					error={errors?.INN?.message}
 				/>	
 				: null}
-				<div className={styles.containerForInput}>
 					<Input
 						inputType={InputTypes.phone}
 						labelText="Телефон"
 						validation={{ ...register('phone', PHONE_VALIDATION_CONFIG) }}
 						error={errors?.phone?.message}
 					/>
-				</div>
 				<Input
 					inputType={InputTypes.email}
 					labelText='E-mail'
@@ -129,10 +128,10 @@ export const PopupForReg: FC = () => {
 					error={errors?.email?.message}
 				/>
 				{MyRole === 'Я продавец'? <Input
-					inputType={InputTypes.companyname}
+					inputType={InputTypes.name}
 					labelText='Название магазина'
 					validation={{
-						...register('companyname', COMPANYNAME_VALIDATION_CONFIG),
+						...register('name', NAME_VALIDATION_CONFIG),
 					}}
 					error={errors?.name?.message}
 				/>:(
@@ -147,7 +146,7 @@ export const PopupForReg: FC = () => {
 					/> :null)}	
 				<Input
 					inputType={InputTypes.password}
-					labelText="Пароль"
+					labelText="Пароль (буквы, цифры и знаки препинания)"
 					showPasswordButton={true}
 					validation={{
             ...register('password', {
@@ -163,7 +162,6 @@ export const PopupForReg: FC = () => {
             }),
           }}
 					error={errors?.password?.message}
-					helpText='Пароль может содержать буквы, цифры и спецсимволы'
 				/>
 				<Input
 					inputType={InputTypes.confirmPassword}
@@ -182,7 +180,7 @@ export const PopupForReg: FC = () => {
 					<input className={styles.checkboxcontainer__input}  id='remember' {...register("remember")} type="checkbox" value="remember"/>
 					<label className={styles.checkboxcontainer__label} htmlFor='remember'>Запомнить меня</label>
 				</div>
-				<div className={styles.checkboxcontainer}>
+				<div className={classNames(styles.checkboxcontainer, styles.checkboxcontainer_type_reg)}>
 					<input id='agreement' className={styles.checkboxcontainer__input} {...register("agree", { required: true })} type="checkbox" value="agree"/>
 					<label className={styles.checkboxcontainer__label} htmlFor='agreement'>Я соглашаюсь с политикой обработки персональных данных</label>
 				</div>
@@ -190,7 +188,7 @@ export const PopupForReg: FC = () => {
 					<p className={styles.errorContainer__error}>{textError}</p>
 				</div>		
 				<div className={styles.btncontainer}>
-					<Button isDisabled={!isValid} type='submit' mode='primary'>Зарегистрироваться</Button>
+					<Button isDisabled={!isValid} mode='primary' type='submit'>Зарегистрироваться</Button>
 				</div>
 			</form>
 		</Popup>

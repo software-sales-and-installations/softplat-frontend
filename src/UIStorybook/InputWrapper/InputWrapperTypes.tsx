@@ -1,10 +1,10 @@
-import { InputHTMLAttributes, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
-export interface InputWrapperProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputWrapperProps {
   inputId: string,
   labelText?: string,
-  variant?: 'popup',
   hintText?: string,
   errorText?: string,
+  extClassName?: string,
   children?: ReactNode,
 }

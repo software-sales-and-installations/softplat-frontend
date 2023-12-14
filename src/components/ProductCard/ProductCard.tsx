@@ -12,7 +12,7 @@ import {
   useBuyerBasketAddItemMutation,
   useBuyerBasketInfoQuery,
 } from '../../utils/api/buyerBasketApi';
-import { FaRegHeart } from 'react-icons/fa';
+import { FaLowVision, FaRegHeart } from 'react-icons/fa';
 import {
   useBuyerAddFavoritesMutation,
   useBuyerDeleteFavoritesMutation,
@@ -24,9 +24,20 @@ import {
   removeFromFavorites,
 } from '../../services/redux/slices/favourites/favourites';
 import { FaHeart } from 'react-icons/fa6';
-import toolsIcon from '../../images/tools-card-icon.svg';
+import toolsIcon from '../../images/tools-card-icon.svg';;
+import { selectUser } from '../../services/redux/slices/user/user';
+import { RootState } from '../../services/redux/store';
+import { useState } from 'react';
 
 const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
+  const signout = useAppSelector((state: RootState) => state.signout.signout);
+  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [role, setRole] = useState(localStorage.getItem('role'))
+  const user = useAppSelector(selectUser);
+  useEffect(() => {
+    setToken(localStorage.getItem('token'));
+    setRole(localStorage.getItem('role'))
+  }, [signout, user]);
   const addSpace = (price: number): string => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   };
@@ -57,6 +68,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
 
   return (
     <div className={styles.card}>
+      {(token&&role==='BUYER')?
       <button
         className={styles.card__likeBtn}
         type="button"

@@ -39,10 +39,10 @@
 	}
     &__container{
 		width: 70%;
-        max-width: 470px;
+        max-width: 510px;
 	    box-sizing: border-box;
 	    margin: 0 auto;
-	    padding: 40px 40px 30px 40px;
+	    padding: 40px 40px 25px 40px;
 	    border-radius: 20px;
 	    background-color: $white-standart;
 	    display: flex;
@@ -56,7 +56,7 @@
     }
 	&__role{
 		margin: 0;
-		padding: 20px 0 20px 0;
+		padding: 20px 0 17px 0;
 		@include font-h3-bold;
 	}
     &__closebtn{
@@ -74,9 +74,9 @@
     }
 	&__btncontainer{
 		display: flex;
-		margin: 35px 0 0 0;
+		margin: 15px 0 0 0;
 		width: 100%;
-		justify-content: space-between;
+		justify-content: center;
 		@include font-body-link;
 	}
 	&__exitcontainerbtn{
@@ -86,59 +86,60 @@
 		width: 100%;
 	}
 	&__exittext{
-		margin: 10px 0 0 0;
+		margin: 15px 0 0 0;
 		color: $dark-grey;
 		@include font-input-field;
 	}
 }
 .form{
 	width: 97%;
-	margin-top: 27px;
+	margin-top: 15px;
 	&_type_recoverPassword{
-		margin-top: 5px;
+		margin-top: 0;
+	}
+	&_type_auth{
+		margin-top: 20px;
+	}
+	&_type_admin{
+		margin: 0 0 20px 0;
+	}
+	&_type_seller{
+		margin-top: 22px;
 	}
 }
 .checkboxcontainer{
 	display: flex;
+	margin: 8px 0 15px 0;
 	align-items: center;
-	margin-bottom: 7px;
-	gap: 20px;
+	gap: 15px;
 	&__input{
 		flex-shrink: 0;
 		height: 20px;
 		width: 20px;
 	}
 	&__label{
-		margin-top: 7px;
 		text-align: left;
 		color: $dark-grey;
 		@include font-body-filters;
 	}
+	&_type_auth{
+		margin: 3px 0 0 0;
+	}
+	&_type_reg{
+		margin: 3px 0 0 0
+	}
+
 }
 .btncontainer{
 	display: flex;
 	gap: 20px;
+	justify-content: center;
 	&_type_recoverpassword{
 		margin-top: 30px;
 	}
 }
-.adminBtn{
-	margin: 0;
-	color: $dark-grey;
-	padding: 8px 55px;
-	border: 5px solid $light-grey;
-	border-radius: 30px;
-	@include font-input-field;
-}
 .errorContainer{
-	min-height: 30px;
-	&__error{
-		color: $red-alert-system;
-		@include font-body-filters;
-	}
-}
-.errorContainer{
-	min-height: 30px;
+	min-height: 35px;
 	&__error{
 		margin: 0;
 		color: $red-alert-system;
@@ -192,18 +193,4 @@
 	gap: 20px;
 	width: 100%;
 }
-.containerForInput{
-	position: relative;
-	&::before{
-		content: '+7';
-		position: absolute;
-		color: $dark-grey;
-		display: block;
-		height: 20px;
-		width: 20px;
-		top: 34px;
-		left:12px;
-		color: $black-standart-text;
-		@include font-input-field;
-	}
-}
+
