@@ -735,32 +735,36 @@ export const PURCHASES_ITEMS_CABINET: {
   img: string;
   name: string;
   brand: string;
-  describe: string;
+  seller: string;
   data: string;
+  isDownloaded: boolean;
 }[] = [
   {
     id: 1,
-    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-    name: 'Название программного обеспечения',
-    brand: 'Бренд',
-    describe: 'Описание',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/2101px-Adobe_Photoshop_CC_icon.svg.png',
+    name: 'Adobe Photoshop',
+    brand: 'Adobe',
+    seller: 'Продавец',
     data: '01/10/2023',
+    isDownloaded: false,
   },
   {
     id: 2,
-    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-    name: 'Название программного обеспечения',
-    brand: 'Бренд',
-    describe: 'Описание',
+    img: 'data:image/png;base64,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',
+    name: 'Adobe Acrobat',
+    brand: 'Adobe',
+    seller: 'Продавец',
     data: '01/10/2023',
+    isDownloaded: false,
   },
   {
     id: 3,
-    img: 'http://allpcworld.com/wp-content/uploads/2017/03/Adobe-Photoshop-CC-2017-Portable-Free-Download.jpg',
-    name: 'Название программного обеспечения',
-    brand: 'Бренд',
-    describe: 'Описание',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/2101px-Adobe_Illustrator_CC_icon.svg.png',
+    name: 'Adobe Illustrator',
+    brand: 'Adobe',
+    seller: 'Продавец',
     data: '01/10/2023',
+    isDownloaded: true,
   },
 ];
 
@@ -871,21 +875,26 @@ export const sellerMenuItems = [
   },
   {
     id: 6,
+    name: 'Жалобы',
+    link: 'appeal',
+  },
+  {
+    id: 7,
     name: 'Отчеты продаж',
     link: 'sales',
   },
   {
-    id: 7,
+    id: 8,
     name: 'Банковские реквизиты',
     link: 'bank-details',
   },
   {
-    id: 8,
+    id: 9,
     name: 'Данные профиля',
     link: 'settings',
   },
   {
-    id: 9,
+    id: 10,
     name: 'Смена пароля',
     link: 'password',
   },
@@ -926,10 +935,5 @@ export const adminMenuItems = [
     id: 7,
     name: 'Отчеты продаж',
     link: 'sales',
-  },
-  {
-    id: 8,
-    name: 'Контакты',
-    link: 'contacts',
   },
 ];

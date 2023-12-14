@@ -25,6 +25,7 @@ export const Seller: FC = () => {
           <Route path="/published" element={<h2>Опубликовано</h2>} />
           <Route path="/on-moderation" element={<h2>На модерации</h2>} />
           <Route path="/correction" element={<h2>На доработке</h2>} />
+          <Route path="/appeal" element={<h2>Жалобы</h2>} />
           <Route path="/sales" element={<h2>Отчеты продаж</h2>} />
           <Route path="/bank-details" element={<SellerBankSettings/>} />
           <Route path="/settings" element={<SellerSettings/>} />

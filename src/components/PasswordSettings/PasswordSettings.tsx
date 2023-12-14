@@ -49,6 +49,7 @@ const PasswordSettings: FC = () => {
           showPasswordButton={true}
           validation={{ ...register('oldpassword', PASSWORD_VALIDATION_CONFIG) }}
           error={errors?.oldpassword?.message}
+          typeError='dataError'
         />
         <Input
           inputType={InputTypes.password}
@@ -56,6 +57,7 @@ const PasswordSettings: FC = () => {
           showPasswordButton={true}
           validation={{ ...register('password', PASSWORD_VALIDATION_CONFIG) }}
           error={errors?.password?.message}
+          typeError='dataError'
         />
         <Input
 					inputType={InputTypes.confirmPassword}
@@ -69,6 +71,7 @@ const PasswordSettings: FC = () => {
 						}),
 					}}
 					error={errors?.confirmPassword?.message}
+          typeError='dataError'
 				/>
       <div className={styles.personalSettingsPassword__btncontainer}>
         <Button isDisabled={!isValid} type='submit' mode="primary">
