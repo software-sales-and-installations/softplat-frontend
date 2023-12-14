@@ -33,4 +33,5 @@ export interface IInput {
 	max?: string;
 	defaultValue?: any;
 	helpText?: string;
+	typeError?: string
 }

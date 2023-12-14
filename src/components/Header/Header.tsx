@@ -3,7 +3,6 @@ import { FC } from 'react';
 import styles from './Header.module.scss';
 import { HeaderNavbar } from '../HeaderNavBar/HeaderNavBar';
 import { HeaderSearchForm } from '../HeaderSearchForm/HeaderSearchForm';
-import { FaRegUser } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import { popupState } from '../../UI/Popup/PopupSlice';
 import { ResultPopup } from '../ResultPopup/ResultPopup';
@@ -16,7 +15,7 @@ import { RootState } from '../../services/redux/store';
 export const Header: FC = () => {
   const dispatch = useAppDispatch();
   const [token, setToken] = useState(localStorage.getItem('token'));
-  const role = localStorage.getItem('role');
+  const [role,setRole] = useState(localStorage.getItem('role'))
   const user = useAppSelector(selectUser);
   const signout = useAppSelector((state: RootState) => state.signout.signout);
   const location = useLocation();
@@ -31,8 +30,12 @@ export const Header: FC = () => {
 
   useEffect(() => {
     setToken(localStorage.getItem('token'));
+    setRole(localStorage.getItem('role'))
   }, [signout, user]);
   useEffect(() => {}, [token]);
+  function handleNonAuthLikeClick(){
+    dispatch(popupState(true));
+  }
   return (
     <header className={styles.header}>
       <Link to="/catalog" className={styles.header__logo}>
@@ -51,9 +54,9 @@ export const Header: FC = () => {
           </>
         ) : !token ? (
           <>
-            <Link
-              to="personal/favorites"
+            <button
               className={styles.btncontainer__likebtn}
+              onClick={handleNonAuthLikeClick}
             />
             <Link to="/cart" className={styles.btncontainer__shopbtn} />{' '}
           </>

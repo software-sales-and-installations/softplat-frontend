@@ -1,0 +1,25 @@
+@import '../../../styles/abstract/mixins';
+@import '../../../styles/abstract/constants';
+.review {
+display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: flex-start;
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-items: flex-end;
+    gap: 20px;
+  }
+  &__name {
+  @include font-h3-bold;
+  padding-right: 20px;
+  margin: 0;
+  }
+  &__text {
+@include font-body-regular;
+    margin: 0;
+    padding: 0;
+  }
+
+}

@@ -8,8 +8,10 @@ export const buyerApi = createApi({
     baseUrl: API_BASE_URL,
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token');
+      const userId = localStorage.getItem('userId')
       if (token) {
         headers.set('authorization', `${token}`);
+        headers.set('X-Sharer-User-Id', `${userId}`)
       }
       return headers;
     },

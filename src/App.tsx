@@ -12,14 +12,15 @@ import Personal from './pages/Personal/Personal.tsx';
 import { Producers } from './pages/Producers/Producers.tsx';
 import { ShoppingCart } from './pages/ShoppingCart/ShoppingCart.tsx';
 import Search from './pages/Search/Search.tsx';
-// import { DemoApi } from './utils/api/DEMOAPI.tsx';
 import { Seller } from './pages/Seller/Seller.tsx';
 import { Admin } from './pages/Admin/Admin.tsx';
+import { Product } from './components/Product/Product.tsx';
 import { useLoadFavorites } from './services/favoritesService/favoritesService.ts';
-// import { ProtectedRouteForAdmin, ProtectedRouteForBuyer, ProtectedRouteForSeller } from './components/ProtectedRoute/ProtectedRoute.tsx';
+import { ProtectedRouteForAdmin, ProtectedRouteForAdminAuth
+  // ProtectedRouteForBuyer, ProtectedRouteForSeller 
+} from './components/ProtectedRoute/ProtectedRoute.tsx';
 
 function App() {
-  // useLoadFavorites()
   return (
     <>
       <Header />
@@ -28,18 +29,19 @@ function App() {
           <Route path='/' element={<Navigate to='/catalog'/>}/>
           <Route path="/catalog" element={<HomePage />} />
           <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/product/demo" element={<Product />} />
           <Route path='/faq' element={<FAQ/>} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/catalog/:section" element={<CatalogSection />} />
-          <Route 
-            path="/personal/*" 
+          <Route
+            path="/personal/*"
             element={
               //<ProtectedRouteForBuyer>
                 <Personal />
               //</ProtectedRouteForBuyer>
               } />
-          <Route 
-            path="/personal" 
+          <Route
+            path="/personal"
             element={
               //<ProtectedRouteForBuyer>
                 <Navigate to='/personal/purchases' />
@@ -51,32 +53,39 @@ function App() {
           <Route path="/search" element={<Search />} />
           {/* <Route path="/demoapi" element={<DemoApi />} /> */}
           <Route
-            path="/seller/*" 
+            path="/seller/*"
             element={
               // <ProtectedRouteForSeller>
                 <Seller />
-              // </ProtectedRouteForSeller> 
+              // </ProtectedRouteForSeller>
             } />
-          <Route 
-            path="/seller" 
+          <Route
+            path="/seller"
             element={
               //<ProtectedRouteForSeller>
                 <Navigate to="/seller/published" />
               //</ProtectedRouteForSeller>
             } />
-          <Route 
-            path="/admin/*" 
+          <Route
+            path="/admin/*"
             element={
-              //<ProtectedRouteForAdmin>
+              <ProtectedRouteForAdmin>
                 <Admin/>
-              //</ProtectedRouteForAdmin>
+              </ProtectedRouteForAdmin>
             } />
-          <Route 
-            path="/admin" 
+          <Route
+            path="/admin"
             element={
-              //<ProtectedRouteForAdmin>
+              <ProtectedRouteForAdmin>
                 <Navigate to="/admin/published" />
-              //</ProtectedRouteForAdmin>
+              </ProtectedRouteForAdmin>
+            } />
+            <Route 
+            path="/admin-auth" 
+            element={
+              <ProtectedRouteForAdminAuth>
+                <Navigate to="/" />
+              </ProtectedRouteForAdminAuth>
             } />
         </Routes>
       </MainWrapper>
