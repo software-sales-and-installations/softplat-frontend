@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   width: 190px;
-  height: 320px;
+  height: 293px;
   padding: 15px 10px;
   border: 1px solid $light-grey;
   border-radius: 20px;
@@ -58,25 +58,20 @@
 
   &__name {
     text-align: start;
-    margin: 10px 0 0 0;
+    margin: 5px 5px 0;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     color: $black-standart-text;
-    // @include font-body-bold;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 30px;
+    @include font-preview-bold;
   }
 
   &__priceContainer {
     height: 25px;
     display: flex;
     justify-content: space-between;
-    gap: 15px;
     align-items: center;
-    margin: 10px 0;
+    margin: 2px 5px 0;
   }
 
   &__price {
@@ -92,31 +87,14 @@
   }
 
   &__installPrice {
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 20px;
-    height: 20px;
-    border-radius: 16px;
-    background-color: $light-grey;
     color: $dark-grey;
     display: flex;
-    justify-content: space-around;
-    align-items: stretch;
-    gap: 7px;
+    gap: 10px;
     width: 100px;
   }
 
-  &__installPrice span {
-    @include font-body-signature;
-  }
-
-  &__installPrice span:nth-of-type(2) {
-    margin-right: 5px;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 20px;
+  &__installPrice > span:nth-of-type(1) {
+    @include font-CTAbody-regular;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -127,13 +105,12 @@
   }
 
   &__tooltipBtn {
-    width: 12px;
-    height: 12px;
+    width: 16px;
+    height: 16px;
     border: none;
     padding: 0;
     outline: none;
     background-color: transparent;
-    margin-left: 5px;
   }
 
   &__tooltipBtn svg {
@@ -160,7 +137,7 @@
     color: $dark-grey;
     position: absolute;
     bottom: 21px;
-    left: -80px;
+    right: -28px;
     z-index: 5;
     text-align: start;
     @include font-body-signature;
