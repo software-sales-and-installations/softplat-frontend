@@ -7,7 +7,7 @@ import { InputTypes } from '../../UI/Input/InputTypes';
 import { Button } from '../../UI/Button/Button';
 import { useSellerGetBankQuery } from '../../utils/api/sellerApi';
 import { useSellerChangeBankMutation } from '../../utils/api/sellerApi';
-import { BIK_VALIDATION_CONFIG, OGRNIP_VALIDATION_CONFIG, ACCOUNT_VALIDATION_CONFIG, VALIDATION_SETTINGS } from '../../utils/constants';
+import { BIK_VALIDATION_CONFIG, OGRNIP_VALIDATION_CONFIG, ACCOUNT_VALIDATION_CONFIG} from '../../utils/constants';
 import { useState } from 'react';
 
 export const SellerBankSettings: FC = () =>{
@@ -15,7 +15,6 @@ export const SellerBankSettings: FC = () =>{
     const {
         register,
         handleSubmit,
-        watch,
         getValues,
 		setValue,
         formState: { errors,  isValid },

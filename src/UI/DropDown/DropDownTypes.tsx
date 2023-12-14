@@ -13,5 +13,5 @@ export enum SelectorType {
 export interface IDropDowmProps {
   options: IOption[];
   type?: SelectorType;
-  isMultiOption: boolean
+  isMultiOption?: boolean
 }
