@@ -1,12 +1,9 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import style from './ProductListCart.module.scss';
 import { CartItem } from '../CartItem/CartItem';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
-import { clearCart, setCartItems } from '../../services/redux/slices/cart/cart';
-import {
-  useBuyerBasketClearMutation,
-  useBuyerBasketInfoQuery,
-} from '../../utils/api/buyerBasketApi';
+import { clearCart } from '../../services/redux/slices/cart/cart';
+import { useBuyerBasketClearMutation } from '../../utils/api/buyerBasketApi';
 
 export const ProductListCart: FC = () => {
   const dispatch = useAppDispatch();
@@ -16,8 +13,6 @@ export const ProductListCart: FC = () => {
   const cartItems = useAppSelector(store => store.cart.items) || [];
 
   const sortedCartItems = [...cartItems].sort((a, b) => b.id - a.id);
-
-  // console.log('basketInfo', basketInfo);
 
   const handleClearCart = async () => {
     try {

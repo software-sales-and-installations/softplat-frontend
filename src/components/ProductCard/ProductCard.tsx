@@ -13,7 +13,7 @@ import {
   useBuyerBasketDeleteItemMutation,
   useBuyerBasketInfoQuery,
 } from '../../utils/api/buyerBasketApi';
-import { FaLowVision, FaRegHeart } from 'react-icons/fa';
+import { FaRegHeart } from 'react-icons/fa';
 import {
   useBuyerAddFavoritesMutation,
   useBuyerDeleteFavoritesMutation,
@@ -36,8 +36,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const [role, setRole] = useState(localStorage.getItem('role'));
   const user = useAppSelector(selectUser);
   const userId = localStorage.getItem('userId');
-  console.log(userId);
-  
+  // console.log('userId', userId);
 
   useEffect(() => {
     setToken(localStorage.getItem('token'));
@@ -61,14 +60,11 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
     useBuyerBasketDeleteItemMutation();
   const cart = useAppSelector(store => store.cart?.items);
 
-  // const isItemOnCart = cart.some(item => item.productResponseDto.id === card.id)
-
-  // console.log(isItemOnCart);
-
   const countItemInCart = cart.filter(
-    item => item.productResponseDto.id === card.id,
+    item =>
+      item.productResponseDto.id === card.id && item.installation === false,
   );
-  // console.log('countItemInCart', countItemInCart);
+  // console.log(countItemInCart);
 
   const handleAddToCart = async () => {
     await asyncAddToCart(card, buyerBasketAddItem, basketInfo.refetch);
@@ -86,8 +82,6 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
       isFavorite ? removeFromFavorites(card.id) : addToFavorites(card.id),
     );
   };
-
-  // console.log('addItemError.isError', addItemError.isError);
 
   return (
     <div className={styles.card}>

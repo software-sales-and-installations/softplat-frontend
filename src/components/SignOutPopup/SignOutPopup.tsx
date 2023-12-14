@@ -10,6 +10,7 @@ import { signout } from './SignOutPopupSlice';
 import { clearFavorites } from '../../services/redux/slices/favourites/favourites';
 import { clearCart } from '../../services/redux/slices/cart/cart';
 import { useBuyerFavoritesQuery } from '../../utils/api/buyerApi';
+import { signOut } from '../../services/redux/slices/user/user';
 
 export const SignOutPopup: FC = () => {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ export const SignOutPopup: FC = () => {
         localStorage.clear();
         navigate('/', { replace: true });
         dispatch(popupState(false));
+        dispatch(signOut());
         dispatch(signout(true));
 
         dispatch(clearFavorites());

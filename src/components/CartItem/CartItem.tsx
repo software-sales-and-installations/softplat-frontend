@@ -4,7 +4,7 @@ import style from './CartItem.module.scss';
 import { Tooltip } from '../Tooltip/Tooltip';
 import { Checkbox } from '../../UI/Checkbox/Checkbox';
 
-import { FaTrash, FaRegHeart, FaPlus, FaMinus, FaHeart } from 'react-icons/fa';
+import { FaTrash, FaRegHeart, FaHeart } from 'react-icons/fa';
 import { ICartItemProps } from './CartItemTypes';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import {
@@ -58,7 +58,6 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
   const isChecked = useAppSelector(
     state => state.cart.uncheckedItemIds.indexOf(item.id) === -1,
   );
-  // console.log(product.quantity);
 
   const handleToggleFavorite = async () => {
     const action = isFavorite ? deleteFavorites : addFavorites;
@@ -101,7 +100,6 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
       product.quantity !== undefined &&
       quantity < product.quantity
     ) {
-      // handleQuantityChange(quantity + 1, buyerBasketAddItem);
       asyncAddToCart(product, buyerBasketAddItem, basketInfo.refetch);
       setQuantity(quantity + 1);
       updateTotalPrice(item.installation, quantity + 1);

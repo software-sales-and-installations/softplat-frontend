@@ -9,11 +9,11 @@ import { IProductCard } from '../../../../components/ProductCard/ProductCardType
 
 
 
-export const asyncAddToCart = async (card: IProductCard, buyerBasketAddItem: Function, basketInfo: Function) => {
+export const asyncAddToCart = async (card: IProductCard, buyerBasketAddItem: Function, basketInfo: Function, installation: boolean = false) => {
   try {
     const response = await buyerBasketAddItem({
       productId: card.id,
-      installation: false,
+      installation,
     }).unwrap();
     console.log(response);
     basketInfo();
@@ -23,11 +23,11 @@ export const asyncAddToCart = async (card: IProductCard, buyerBasketAddItem: Fun
 };
 
 
-export const asyncRemoveFromCart = async (card: IProductCard, buyerBasketRemoveItem: Function, basketInfo: Function) => {
+export const asyncRemoveFromCart = async (card: IProductCard, buyerBasketRemoveItem: Function, basketInfo: Function, installation: boolean = false) => {
   try {
     const response = await buyerBasketRemoveItem({
       productId: card.id,
-      installation: false,
+      installation,
     }).unwrap();
     console.log(response);
     basketInfo();
