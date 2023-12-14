@@ -80,7 +80,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
           ) : (
             <FaRegHeart size={28} strokeWidth={0.5} />
           ))}
-      </button>
+      </button> : null}
       <Link to={`/product/${card.id}`} className={styles.card__link}>
         <div className={styles.card__img}>
           <img src={card.image?.url} alt="Изображение продукта" />
