@@ -58,7 +58,7 @@ export const SellerAddNewCard: FC = () =>{
             <p className={styles.selectContainer__label}>Предоставьте ПО</p>
             <button onClick={()=>setDDActive(!DDactive)} className={styles.dropdown__label}>
                 <p className={styles.dropdown__text}>{variantSoftware}</p>
-                <button className={styles.dropdown__chevron}></button>
+                <div className={styles.dropdown__chevron}></div>
             </button>
             <div className={classNames(styles.dropdown, DDactive? styles.dropdown_active: '')}>
                 {variantSoftware==='Ссылка на файл'? <button className={styles.dropdown__btn} onClick = {()=>{
