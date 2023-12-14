@@ -21,7 +21,7 @@ export const Seller: FC = () => {
         </div>
         <Routes>
           <Route path="/add-card" element={<SellerAddNewCard/>} />
-          <Route path="/drafts" element={<SellerDrafts products={[]}/>} />
+          <Route path="/drafts" element={<SellerDrafts/>} />
           <Route path="/published" element={<h2>Опубликовано</h2>} />
           <Route path="/on-moderation" element={<h2>На модерации</h2>} />
           <Route path="/correction" element={<h2>На доработке</h2>} />
