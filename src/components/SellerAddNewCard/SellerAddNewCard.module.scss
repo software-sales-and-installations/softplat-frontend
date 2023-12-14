@@ -1,0 +1,48 @@
+@import '../../styles/abstract/mixins.scss';
+@import '../../styles/abstract/constants.scss';
+.form{
+    width: 100%;
+    max-width: 445px;
+}
+.selectContainer{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 25px;
+  &__label{
+    margin: 0;
+    @include font-CTAbody-regular;
+    color: $dark-grey;
+    text-align: start;
+    padding: 0 0 10px 12px;
+  }
+  &__select {
+    width: 100%;
+    box-sizing: border-box;
+    @include font-CTAbody-regular;
+    padding: 10px 12px;
+    border-radius: 20px;
+    border: 1px solid $border-input;
+    color: $dark-grey;
+    background-color: $light-grey;
+    border-right: 16px solid transparent;
+    cursor: pointer;
+  }
+}
+.containerForFile{
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  &__img{
+    width: 100%;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 80px;
+  }
+  &__label{
+    position: absolute;
+    top: 100px;
+  }
+}

@@ -18,7 +18,11 @@ export enum InputTypes {
 	kpp = 'kpp',
 	orgForm = 'orgForm',
     shopname = 'shopname',
-    address = 'address'
+    address = 'address',
+	link = 'link',
+	description = 'description',
+	price = 'price',
+	priceInstall = 'priceInstall'
 }
 export interface IInput {
 	inputType: InputTypes;
