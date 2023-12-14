@@ -1,7 +1,6 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styles from './Search.module.scss';
 import CardsGrid from '../../components/CardsGrid/CardsGrid';
-import { useLocation } from 'react-router-dom';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 import {
@@ -9,9 +8,14 @@ import {
   ProductStatus,
 } from '../../components/ProductCard/ProductCardTypes';
 import Preloader from '../../components/Preloader/Preloader';
+import { useLocation } from 'react-router-dom';
 
 const Search: FC = () => {
   const { state } = useLocation();
+  const [searchvalue, setSearchvalue] = useState<string>('');
+  useEffect(() => {
+    setSearchvalue(localStorage.getItem('searchValue') || '');
+  }, [state]);
 
   const { data, error, isLoading } = usePublicProductListQuery({
     minId: 0,
@@ -21,8 +25,8 @@ const Search: FC = () => {
 
   const searchedCountries = data?.products.filter((card: IProductCard) => {
     return (
-      (card.name.toLowerCase().includes(state.toLowerCase()) ||
-        card.id.toString().includes(state)) &&
+      (card.name.toLowerCase().includes(searchvalue.toLowerCase()) ||
+        card.id.toString().includes(searchvalue)) &&
       ProductStatus.PUBLISHED
     );
   });
