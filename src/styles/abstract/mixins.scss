@@ -8,8 +8,8 @@
     font-weight: 700;
     line-height: 40px;
 }
-  
-@mixin font-h2-simibold {
+
+@mixin font-h2-semibold {
     @extend %font-display;
     font-size: 24px;
     font-style: normal;
@@ -91,7 +91,7 @@
     line-height: 25px;
     cursor: pointer;
 }
-//нету в UI - надо будет удалить 
+//нету в UI - надо будет удалить
 
 @mixin font-h3-regular {
     @extend %font-display;

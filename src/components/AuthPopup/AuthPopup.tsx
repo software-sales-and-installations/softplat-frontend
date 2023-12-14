@@ -54,10 +54,10 @@ export const PopupForAuth: FC = () => {
 		})
 		  .finally()
 		};
-	
+
 	function handlePasswordPopup(){
 		dispatch(chooseRoleState('Забыли пароль?'))
-		
+
 	}
 	useEffect(()=>{
 		if (authError===401){
@@ -98,5 +98,5 @@ export const PopupForAuth: FC = () => {
 				</div>
 			</form>
 		</Popup>
-	);
+  )
 };
