@@ -5,19 +5,21 @@
 position: relative;
   &_type {
     &_register {
-      div {
-        margin: 0 auto;
+      &_buttonContainer {
+        margin: 35px auto 0;
       }
     }
     &_twoButtons {
-      div {
+      &_buttonContainer {
+        width: 100%;
         display: flex;
         flex-direction: row;
-        gap: 20px;
+        justify-content: space-between;
+        margin: 45px auto 0;
       }
     }
     &_search {
-      div {
+      &_buttonContainer {
         position: absolute;
         top: 5px;
         right: 15px;

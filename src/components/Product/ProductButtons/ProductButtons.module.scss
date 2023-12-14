@@ -1,0 +1,14 @@
+@import '../../../styles/abstract/mixins';
+
+.productInfo {
+
+  &__checkbox {
+    text-decoration: underline;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+  }
+}

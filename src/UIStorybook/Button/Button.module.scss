@@ -6,8 +6,6 @@
     cursor: pointer;
     border-radius: 32px;
     border: none;
-    width: 290px;
-    height: 55px;
     transition: 0.3s ease-out;
   &_type {
     &_primary {
@@ -30,8 +28,6 @@
     }
 
     &_minorPrimary {
-      width: 200px;
-      height: 45px;
       color: $black-standart-text;
       background-color: $accent-lime-button;
       &:hover {
@@ -44,8 +40,6 @@
     }
 
     &_minorSecondary {
-      width: 200px;
-      height: 45px;
       background-color: $white-standart;
       border: 1px solid $border-input;
       &:hover, &:disabled {
@@ -53,9 +47,13 @@
       }
     }
 
+    &_minorGrey {
+      color: $white-standart;
+      background-color: $dark-grey;
+      border: 1px solid $border-input;
+    }
+
     &_link {
-    width: auto;
-    height: auto;
     margin: 0;
     padding: 0;
     background-color: transparent;
