@@ -22,15 +22,16 @@
       content: 'Производитель';
     }
 
-    &:has(.catalog) .custom-select__value-container {
-      display: none !important;
-    }
-
     &:has(.catalog) {
       width: 20px !important;
       border: none !important;
       background-color: transparent !important;
       box-shadow: none !important;
+
+      & .custom-select__indicators {
+        position: absolute;
+        top: 3px;
+      }
     }
 
     &--menu-is-open {
