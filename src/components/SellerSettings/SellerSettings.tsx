@@ -9,9 +9,6 @@ import { InputTypes } from '../../UI/Input/InputTypes';
 export const SellerSettings: FC = () =>{
     const {
         register,
-        handleSubmit,
-        watch,
-        getValues,
         formState: { errors,  isValid },
       } = useForm<ISellerSettings>({ mode: 'onChange' });
     return (

@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import style from './CartSummary.module.scss';
 import { Button } from '../../UI/Button/Button';
-import { useAppDispatch, useAppSelector } from '../../services/redux/store';
-import { popupState } from '../../UI/Popup/PopupSlice';
+import {  useAppSelector } from '../../services/redux/store';
+// import { popupState } from '../../UI/Popup/PopupSlice';
 import { useOrderMakeMutation } from '../../utils/api/buyerOrderApi';
 import { useBuyerBasketInfoQuery } from '../../utils/api/buyerBasketApi';
 

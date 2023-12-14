@@ -6,8 +6,8 @@ import { Categories } from '../../components/Categories/Categories';
 import SelectForm from '../../components/SelectForm/SelectForm';
 import CardsGrid from '../../components/CardsGrid/CardsGrid';
 import { PRODUCT_ITEMS } from '../../utils/constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState, useAppSelector } from '../../services/redux/store';
+import { useDispatch } from 'react-redux';
+import { AppDispatch, useAppSelector } from '../../services/redux/store';
 import { fetchAllCards } from '../../services/redux/slices/cards/cards';
 
 

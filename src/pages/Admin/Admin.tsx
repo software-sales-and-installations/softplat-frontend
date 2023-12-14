@@ -2,13 +2,12 @@ import styles from './Admin.module.scss';
 import { FC } from 'react';
 import CabinetMenu from '../../components/CabinetMenu/CabinetMenu';
 import { Routes, Route } from 'react-router-dom';
-import { AdminCards } from '../../components/AdminCards/AdminCards';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { AdminCardTable } from '../../components/AdminCardTable/AdminCardTable';
 import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 
 export const Admin: FC = () => {
-  const { data, error, isLoading } = usePublicProductListQuery({
+  const { data} = usePublicProductListQuery({
     minId: 0,
     pageSize: '',
     sort: 'NEWEST',

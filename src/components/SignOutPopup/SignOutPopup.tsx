@@ -9,7 +9,6 @@ import { useAuthLogoutMutation } from '../../utils/api/authApi';
 import { signout } from './SignOutPopupSlice';
 import { clearFavorites } from '../../services/redux/slices/favourites/favourites';
 import { clearCart } from '../../services/redux/slices/cart/cart';
-import { useBuyerFavoritesQuery } from '../../utils/api/buyerApi';
 import { signOut } from '../../services/redux/slices/user/user';
 
 export const SignOutPopup: FC = () => {
