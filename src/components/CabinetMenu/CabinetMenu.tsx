@@ -11,6 +11,7 @@ import { ICabinetMenuProps } from './CabinetMenuTypes';
 
 const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
   const dispatch = useAppDispatch();
+  console.log(localStorage.getItem('role'))
 
   return (
     <>
@@ -27,7 +28,7 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
             style={
               (mode === 'seller' &&
                 (item.name === 'Черновики' ||
-                  item.name === 'На доработке' ||
+                  item.name === 'Жалобы' ||
                   item.name === 'Отчеты продаж')) ||
               (mode === 'admin' && item.name === 'Жалобы')
                 ? { marginBottom: '35px' }

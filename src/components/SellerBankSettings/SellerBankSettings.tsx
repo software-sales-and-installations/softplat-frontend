@@ -56,6 +56,7 @@ export const SellerBankSettings: FC = () =>{
 					    validation={{
 						    ...register('bik', BIK_VALIDATION_CONFIG)}}
 					    error={errors?.bik?.message}
+							typeError='dataError'
 				    />
                     <Input
 					    inputType={InputTypes.ogrnip}
@@ -63,6 +64,7 @@ export const SellerBankSettings: FC = () =>{
 					    validation={{
 						    ...register('ogrnip', OGRNIP_VALIDATION_CONFIG)}}
 					    error={errors?.ogrnip?.message}
+							typeError='dataError'
 				    />
                 <Input
 					inputType={InputTypes.account}
@@ -71,6 +73,7 @@ export const SellerBankSettings: FC = () =>{
 						...register('account', ACCOUNT_VALIDATION_CONFIG),
 					}}
 					error={errors?.account?.message}
+					typeError='dataError'
 				/>
                 <div className={styles.btncontainer}>
 					<Button isDisabled={!(isValid)} type='submit' mode='primary'>Сохранить</Button>
