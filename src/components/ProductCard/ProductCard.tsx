@@ -6,10 +6,11 @@ import { IProductCardProps } from './ProductCardTypes';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import {
   asyncAddToCart,
-  setCartItems,
+  asyncRemoveFromCart,
 } from '../../services/redux/slices/cart/cart';
 import {
   useBuyerBasketAddItemMutation,
+  useBuyerBasketDeleteItemMutation,
   useBuyerBasketInfoQuery,
 } from '../../utils/api/buyerBasketApi';
 import { FaLowVision, FaRegHeart } from 'react-icons/fa';
@@ -24,7 +25,7 @@ import {
   removeFromFavorites,
 } from '../../services/redux/slices/favourites/favourites';
 import { FaHeart } from 'react-icons/fa6';
-import toolsIcon from '../../images/tools-card-icon.svg';;
+import toolsIcon from '../../images/tools-card-icon.svg';
 import { selectUser } from '../../services/redux/slices/user/user';
 import { RootState } from '../../services/redux/store';
 import { useState } from 'react';
@@ -32,12 +33,16 @@ import { useState } from 'react';
 const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const signout = useAppSelector((state: RootState) => state.signout.signout);
   const [token, setToken] = useState(localStorage.getItem('token'));
-  const [role, setRole] = useState(localStorage.getItem('role'))
+  const [role, setRole] = useState(localStorage.getItem('role'));
   const user = useAppSelector(selectUser);
+  console.log(user);
+  
+
   useEffect(() => {
     setToken(localStorage.getItem('token'));
-    setRole(localStorage.getItem('role'))
+    setRole(localStorage.getItem('role'));
   }, [signout, user]);
+
   const addSpace = (price: number): string => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   };
@@ -52,9 +57,25 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const favorites = useAppSelector(state => state.favorite?.favorites);
   const isFavorite = favorites?.some(item => item === card.id);
   const userId = localStorage.getItem('userId');
+  const [buyerBasketDeleteItem, removeItemError] =
+    useBuyerBasketDeleteItemMutation();
+  const cart = useAppSelector(store => store.cart?.items);
+
+  // const isItemOnCart = cart.some(item => item.productResponseDto.id === card.id)
+
+  // console.log(isItemOnCart);
+
+  const countItemInCart = cart.filter(
+    item => item.productResponseDto.id === card.id,
+  );
+  // console.log('countItemInCart', countItemInCart);
 
   const handleAddToCart = async () => {
     await asyncAddToCart(card, buyerBasketAddItem, basketInfo.refetch);
+  };
+
+  const handleremoveFromCart = async () => {
+    await asyncRemoveFromCart(card, buyerBasketDeleteItem, basketInfo.refetch);
   };
 
   const handleToggleFavorite = async () => {
@@ -66,21 +87,24 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
     );
   };
 
+  // console.log('addItemError.isError', addItemError.isError);
+
   return (
     <div className={styles.card}>
-      {(token&&role==='BUYER')?
-      <button
-        className={styles.card__likeBtn}
-        type="button"
-        onClick={handleToggleFavorite}
-      >
-        {userId &&
-          (isFavorite ? (
-            <FaHeart size={28} />
-          ) : (
-            <FaRegHeart size={28} strokeWidth={0.5} />
-          ))}
-      </button> : null}
+      {token && role === 'BUYER' ? (
+        <button
+          className={styles.card__likeBtn}
+          type="button"
+          onClick={handleToggleFavorite}
+        >
+          {userId &&
+            (isFavorite ? (
+              <FaHeart size={28} />
+            ) : (
+              <FaRegHeart size={28} strokeWidth={0.5} />
+            ))}
+        </button>
+      ) : null}
       <Link to={`/product/${card.id}`} className={styles.card__link}>
         <div className={styles.card__img}>
           <img src={card.image?.url} alt="Изображение продукта" />
@@ -104,13 +128,38 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
         </div>
       </Link>
 
-      <Button
-        mode="primary"
-        onClick={handleAddToCart}
-        isDisabled={addItemError.isError}
-      >
-        {addItemError.isError ? 'Нет в наличии' : ' Добавить в корзину'}
-      </Button>
+      {countItemInCart.length > 0 ? (
+        <div className={styles.card__buttons}>
+          <button
+            className={styles.card__changeQuantity}
+            onClick={handleremoveFromCart}
+            disabled={removeItemError.isError}
+          >
+            -
+          </button>
+          <span>{countItemInCart[0].quantity}</span>
+          <button
+            className={styles.card__changeQuantity}
+            onClick={handleAddToCart}
+            disabled={
+              addItemError.isError ||
+              countItemInCart[0].quantity ===
+                countItemInCart[0].productResponseDto.quantity ||
+              countItemInCart[0].quantity > 9
+            }
+          >
+            +
+          </button>
+        </div>
+      ) : (
+        <Button
+          mode="primary"
+          onClick={handleAddToCart}
+          isDisabled={addItemError.isError}
+        >
+          {addItemError.isError ? 'Нет в наличии' : ' Добавить в корзину'}
+        </Button>
+      )}
     </div>
   );
 };

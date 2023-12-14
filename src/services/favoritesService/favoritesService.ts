@@ -15,7 +15,7 @@ export interface IFavorite {
 
 export const useLoadFavorites = () => {
   const userId = localStorage.getItem('userId');
-  console.log(1);
+  console.log(userId);
   
   const dispatch = useAppDispatch();
 

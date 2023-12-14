@@ -30,7 +30,7 @@ const PersonalFavorites: React.FC = () => {
         <ul className={styles.personalFavorites__list}>
           {favoriteCards.map(card => (
             <li key={card.id} className={styles.personalFavorites__item}>
-              <ProductCard card={card} />
+              <ProductCard card={card} key={card.id}/>
             </li>
           ))}
         </ul> 

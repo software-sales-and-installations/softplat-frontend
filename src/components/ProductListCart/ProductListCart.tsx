@@ -10,30 +10,14 @@ import {
 
 export const ProductListCart: FC = () => {
   const dispatch = useAppDispatch();
-  const { data: basketInfo } = useBuyerBasketInfoQuery(undefined);
 
   const [buyerBasketСlearCart] = useBuyerBasketClearMutation();
-
-  const userId = localStorage.getItem('userId');
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (basketInfo && userId) {
-        dispatch(setCartItems(basketInfo.productsInBasket));
-        console.log(basketInfo);
-
-        console.log('Сработала загрузка корзины из мутациии');
-      }
-    };
-
-    fetchData();
-  }, [basketInfo]);
 
   const cartItems = useAppSelector(store => store.cart.items) || [];
 
   const sortedCartItems = [...cartItems].sort((a, b) => b.id - a.id);
 
-  console.log('basketInfo', basketInfo);
+  // console.log('basketInfo', basketInfo);
 
   const handleClearCart = async () => {
     try {

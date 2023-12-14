@@ -21,8 +21,6 @@ import { ProtectedRouteForAdmin, ProtectedRouteForAdminAuth
 } from './components/ProtectedRoute/ProtectedRoute.tsx';
 
 function App() {
-  useLoadFavorites()
- 
 
   return (
     <>

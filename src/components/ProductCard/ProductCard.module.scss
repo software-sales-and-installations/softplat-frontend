@@ -187,4 +187,29 @@
     background-color: $dark-grey;
     color: $white-standart;
   }
+
+  &__buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    border-radius: 32px;
+    background-color: $light-grey;
+    height: 35px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    align-items: center;
+    @include font-input-field;
+    gap: 30px;
+  }
+
+  &__changeQuantity {
+    border: none;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 22px;
+    width: 50px;
+    padding-bottom: 3px;
+  }
 }
