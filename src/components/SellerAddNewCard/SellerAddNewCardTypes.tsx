@@ -8,7 +8,9 @@ export interface ICreateProductFields {
     vendor: string;
     category: string;
     install: string;
-    file: any;
+    file?: any;
     software: string;
     logo: any;
+    fileDemo?: any;
+    keywords?: string;
   }

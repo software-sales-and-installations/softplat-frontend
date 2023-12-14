@@ -7,9 +7,11 @@ import { ICreateProductFields } from './SellerAddNewCardTypes';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { NAME_VALIDATION_CONFIG, LINK_VALIDATION_CONFIG, PRICE_VALIDATION_CONFIG } from '../../utils/constants';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 export const SellerAddNewCard: FC = () =>{
-    const [variantSoftware, setVariantSoftware] = useState('download')
+    const [variantSoftware, setVariantSoftware] = useState('Загрузка ПО')
+    const [DDactive, setDDActive] = useState(false)
     const {
         register,
         handleSubmit,
@@ -28,6 +30,7 @@ export const SellerAddNewCard: FC = () =>{
             validation={{
               ...register('name', NAME_VALIDATION_CONFIG),
             }}
+            typeError='addCardError'
             error={errors?.name?.message}
           />
           <div className={styles.selectContainer}>
@@ -52,51 +55,73 @@ export const SellerAddNewCard: FC = () =>{
             </select>
           </div>
           <div className={styles.selectContainer}>
-                <button onClick = {()=>{setVariantSoftware('download')}}>Загрузка ПО</button>
-                <button onClick = {()=>setVariantSoftware('link')}>Ссылка на файл</button>
+            <p className={styles.selectContainer__label}>Предоставьте ПО</p>
+            <button onClick={()=>setDDActive(!DDactive)} className={styles.dropdown__label}>
+                <p className={styles.dropdown__text}>{variantSoftware}</p>
+                <button className={styles.dropdown__chevron}></button>
+            </button>
+            <div className={classNames(styles.dropdown, DDactive? styles.dropdown_active: '')}>
+                {variantSoftware==='Ссылка на файл'? <button className={styles.dropdown__btn} onClick = {()=>{
+                    setVariantSoftware('Загрузка ПО')
+                    setDDActive(!DDactive)
+                }}>Загрузка ПО</button>
+                : <button className={styles.dropdown__btn} onClick = {()=>{
+                    setVariantSoftware('Ссылка на файл')
+                    setDDActive(!DDactive)
+                    }}>Ссылка на файл</button>}
+            </div>
           </div>
-        {variantSoftware==='download'?
+        {variantSoftware==='Загрузка ПО'?<>
         <div className={styles.containerForFile}>
-          <p className={styles.selectContainer__label}>Загрузите ПО</p>
+          <p className={styles.selectContainer__label}>Загрузка ПО</p>
             <input
               type="file"
               id="file"
               {...register('file')}
               className={styles.sellerAddCard__loadImg}
             />
-            <div className={styles.containerForFile__img}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path
-                d="M4 16L4 17C4 18.6569 5.34315 20 7 20L17 20C18.6569 20 20 18.6569 20 17L20 16M16 8L12 4M12 4L8 8M12 4L12 16"
-                stroke="#545F71"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            </div>
+            <div className={styles.containerForFile__img}></div>
             <label htmlFor='file' className={styles.sellerAddCard__load}>
               <p className={styles.containerForFile__label}>Перетащите сюда файлы или клините для выбора</p>
             </label>
         </div>
-        : <Input
-        labelText='Или вы можете указать ссылку на файл для скачивания'
+        <div className={styles.containerForFile}>
+          <p className={styles.selectContainer__label}>Загрузка демо</p>
+            <input
+              type="file"
+              id="fileDemo"
+              {...register('fileDemo')}
+              className={styles.sellerAddCard__loadImg}
+            />
+            <div className={styles.containerForFile__img}></div>
+            <label htmlFor='fileDemo' className={styles.sellerAddCard__load}>
+              <p className={styles.containerForFile__label}>Перетащите сюда файлы или клините для выбора</p>
+            </label>
+        </div>
+        </>
+        : <div className={styles.linkContainer}>
+        <Input
+        labelText='Ссылка на файл ПО'
         inputType={InputTypes.link}
         validation={{
           ...register('link', LINK_VALIDATION_CONFIG),
         }}
-        helpText='Ссылка на файл'
         error={errors?.link?.message}
-      />}
+        typeError='addCardError'
+      />
+      <Input
+        labelText='Ссылка на файл Демо'
+        inputType={InputTypes.link}
+        validation={{
+          ...register('link', LINK_VALIDATION_CONFIG),
+        }}
+        error={errors?.link?.message}
+        typeError='addCardError'
+      />
+      </div>}
         
         <div>
-          <p className={styles.sellerAddCard__title}>Загрузите логотип ПО</p>
+          <p className={styles.sellerAddCard__title}>Логотип ПО</p>
           <label className={styles.sellerAddCard__load_logo}>
             <input
               type="file"
@@ -135,37 +160,40 @@ export const SellerAddNewCard: FC = () =>{
             </svg>
           </label>
         </div>
-        <Input
-          labelText='Добавьте описание'
-          inputType={InputTypes.description}
-          validation={{
-            ...register('description'),
-          }}
-        />
+        <div className={styles.textArea}>
+            <label className={styles.textArea__label} htmlFor='description'>Описание</label>
+            <textarea className={styles.textArea__input} id='description' {...register('description', {required: true})}/>
+       </div>
+       <div className={styles.priceContainer}>
         <Input
           inputType={InputTypes.price}
-          labelText="Введите стоимость"
+          labelText="Стоимость ПО в рублях"
           validation={{
             ...register('price', PRICE_VALIDATION_CONFIG),
           }}
-          helpText='В рублях'
           error={errors?.price?.message}
+          typeError='addCardError'
         />
         <Input
           inputType={InputTypes.priceInstall}
-          labelText="Стоимость установки"
+          labelText="Стоимость установки в рублях"
           validation={{
             ...register('priceInstall', PRICE_VALIDATION_CONFIG),
           }}
-          helpText='В рублях'
           error={errors?.priceInstall?.message}
+          typeError='addCardError'
         />
+        </div>
+        <div className={styles.textArea}>
+            <label className={styles.textArea__label} htmlFor='keywords'>Ключевые слова для поиска - не более 10</label>
+            <textarea className={classNames(styles.textArea__input, styles.textArea__input_type_keyword)} id='keywords' {...register('keywords', {required: true})}/>
+       </div>
         <div className={styles.sellerAddCard__btncontainer}>
           <Button type='submit' isDisabled={!isValid} mode="primary">
-            Сохранить
+            На модерацию
           </Button>
           <Button type="button" mode="secondary">
-            Отправить на модерацию
+            Сохранить
           </Button>
         </div>
       </form>
