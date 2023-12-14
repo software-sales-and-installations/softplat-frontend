@@ -49,7 +49,8 @@ export const VALIDATION_SETTINGS = {
       noEmail: 'Необходимо ввести email',
       invalid: 'Необходимо ввести email в правильном формате',
       tooLong: 'Слишком длинный email',
-      tooShort: 'Слишком короткий email'
+      tooShort: 'Слишком короткий email',
+      sameAsNow: 'Введите новый email'
     },
   },
   password: {
@@ -76,6 +77,18 @@ export const VALIDATION_SETTINGS = {
       tooLong: 'Слишком длинное имя/название',
       invalid: 'Только кириллица, латиница или дефис',
       noName: 'Необходимо ввести имя/название',
+      sameAsNow: 'Введите новое имя'
+    },
+  },
+  companyname: {
+    pattern: /^[a-zа-яё\s]+$/iu,
+    minLength: 2,
+    maxLength: 12,
+    messages: {
+      tooShort: 'Слишком короткое название',
+      tooLong: 'Слишком длинное название',
+      invalid: 'Только кириллица, латиница или дефис',
+      noCompanyName: 'Необходимо ввести название',
     },
   },
 
@@ -88,6 +101,7 @@ export const VALIDATION_SETTINGS = {
       tooLong: 'Слишком длинный номер',
       invalid: 'Введены недопустимые символы',
       noPhone: 'Необходимо ввести номер телефона',
+      sameAsNow: 'Введите новый номер телефона'
     },
   },
   cardNumber: {
