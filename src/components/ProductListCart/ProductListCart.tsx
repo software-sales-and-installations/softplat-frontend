@@ -9,9 +9,7 @@ export const ProductListCart: FC = () => {
   const dispatch = useAppDispatch();
 
   const [buyerBasketСlearCart] = useBuyerBasketClearMutation();
-
   const cartItems = useAppSelector(store => store.cart.items) || [];
-
   const sortedCartItems = [...cartItems].sort((a, b) => b.id - a.id);
 
   const handleClearCart = async () => {

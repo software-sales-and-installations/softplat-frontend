@@ -160,10 +160,6 @@
     line-height: 20px;
   }
 
-  &__addBtn:hover {
-    background-color: $dark-grey;
-    color: $white-standart;
-  }
 
   &__buttons {
     display: flex;
@@ -177,6 +173,7 @@
     align-items: center;
     @include font-input-field;
     gap: 30px;
+    margin-top: 10px;
   }
 
   &__changeQuantity {
