@@ -48,7 +48,7 @@ export const ProductPage: FC = () => {
   //@ts-ignore
   const basketInfoQuery = useBuyerBasketInfoQuery();
   // const isItemInCart = cart.items.some(item => item.id === cardData.id);
-  console.log(cardData.id);
+  // console.log(cardData.id);
 
   useEffect(() => {
     dispatch(fetchSingleCard(Number(id)));

@@ -130,8 +130,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
           </div>
         </div>
       </Link>
-      <div className={styles.card__addBtn}>
-        {countItemInCart.length > 0 ? (
+      {countItemInCart.length > 0 ? (
         <div className={styles.card__buttons}>
           <button
             className={styles.card__changeQuantity}
@@ -156,20 +155,15 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
         </div>
       ) : (
         <Button
-         
           buttonType="primary"
-         
           width="100%"
           height="35px"
           onClick={handleAddToCart}
-         
           disabled={addItemError.isError}
-        
         >
-            {addItemError.isError ? 'Нет в наличии' : ' Добавить в корзину'}
-          </Button>
+          {addItemError.isError ? 'Нет в наличии' : ' Добавить в корзину'}
+        </Button>
       )}
-      </div>
     </div>
   );
 };

@@ -94,23 +94,40 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
     }
   };
 
-  const handleIncreaseQuantity = () => {
+
+
+
+console.log(item);
+
+
+
+  const handleIncreaseQuantity = async () => {
     if (
       quantity < 10 &&
       product.quantity !== undefined &&
       quantity < product.quantity
     ) {
-      asyncAddToCart(product, buyerBasketAddItem, basketInfo.refetch);
+      await asyncAddToCart(product, buyerBasketAddItem, basketInfo.refetch, item.installation);
+
       setQuantity(quantity + 1);
       updateTotalPrice(item.installation, quantity + 1);
     }
   };
 
-  const handleDecreaseQuantity = () => {
-    asyncRemoveFromCart(product, buyerBasketDeleteItem, basketInfo.refetch);
-    setQuantity(quantity - 1);
+  const handleDecreaseQuantity = async () => {
+    await asyncRemoveFromCart(product, buyerBasketDeleteItem, basketInfo.refetch, item.installation);
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
     updateTotalPrice(item.installation, quantity - 1);
   };
+
+
+
+
+
+
+
 
   const handleRemoveItem = async () => {
     try {

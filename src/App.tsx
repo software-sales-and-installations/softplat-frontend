@@ -15,13 +15,11 @@ import Search from './pages/Search/Search.tsx';
 import { Seller } from './pages/Seller/Seller.tsx';
 import { Admin } from './pages/Admin/Admin.tsx';
 import { Product } from './components/Product/Product.tsx';
-import { useLoadFavorites } from './services/favoritesService/favoritesService.ts';
 import { ProtectedRouteForAdmin, ProtectedRouteForAdminAuth
   // ProtectedRouteForBuyer, ProtectedRouteForSeller 
 } from './components/ProtectedRoute/ProtectedRoute.tsx';
 
 function App() {
-
   return (
     <>
       <Header />
