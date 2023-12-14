@@ -34,7 +34,6 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const signout = useAppSelector((state: RootState) => state.signout.signout);
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [role, setRole] = useState(localStorage.getItem('role'));
-  const [role, setRole] = useState(localStorage.getItem('role'));
   const user = useAppSelector(selectUser);
   const userId = localStorage.getItem('userId');
   // console.log('userId', userId);
