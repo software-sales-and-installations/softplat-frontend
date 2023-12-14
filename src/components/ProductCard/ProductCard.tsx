@@ -35,7 +35,8 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [role, setRole] = useState(localStorage.getItem('role'));
   const user = useAppSelector(selectUser);
-  console.log(user);
+  const userId = localStorage.getItem('userId');
+  console.log(userId);
   
 
   useEffect(() => {
@@ -56,7 +57,6 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const [buyerBasketAddItem, addItemError] = useBuyerBasketAddItemMutation();
   const favorites = useAppSelector(state => state.favorite?.favorites);
   const isFavorite = favorites?.some(item => item === card.id);
-  const userId = localStorage.getItem('userId');
   const [buyerBasketDeleteItem, removeItemError] =
     useBuyerBasketDeleteItemMutation();
   const cart = useAppSelector(store => store.cart?.items);
