@@ -1,5 +1,4 @@
 import PersonalFavorites from '../../components/PersonalFavorites/PersonalFavorites';
-import PersonalPurchases from '../../components/PersonalPurchases/PersonalPurchases';
 import CabinetMenu from '../../components/CabinetMenu/CabinetMenu';
 import styles from './Personal.module.scss';
 import { Routes, Route } from 'react-router-dom';
@@ -28,8 +27,7 @@ const Personal: React.FC = () => {
           <Route
             path="/favorites"
             element={
-              // <PersonalFavorites />
-              <h2>Избранное</h2>
+              <PersonalFavorites />
             }
           />
           <Route

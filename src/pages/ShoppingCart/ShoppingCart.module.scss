@@ -2,21 +2,19 @@
 @import '../../styles/abstract/mixins.scss';
 
 .breadcrumbs {
-  margin-top: 70px;
-  padding: 0 80px;
+  margin-top: 65px;
 }
 
 .cart {
   text-align: start;
-  padding: 70px 40px 135px;
+  padding: 44px 0 135px;
 
   &__header {
     @include font-h1-bold;
     margin: 0;
-    margin-bottom: 30px;
-    margin-left: 40px;
   }
   &__content {
     display: flex;
+    gap: 62px;
   }
 }

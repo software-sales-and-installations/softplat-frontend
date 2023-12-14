@@ -4,9 +4,6 @@ import styles from './AdminCards.module.scss';
 import {FC} from 'react';
 import { useState } from 'react';
 import classNames from 'classnames';
-import { AdminCardTable } from '../AdminCardTable/AdminCardTable';
-import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
-import Preloader from '../Preloader/Preloader';
 
 export const AdminCards: FC = () =>{
     const [activeBtn, setActiveBtn] = useState('productCards');

@@ -1,7 +1,7 @@
 // import { useState } from 'react';
 // import classNames from 'classnames';
 // import styles from './SellerCabinetContent.module.scss';
-// import { CardTable } from '../AdminCardTable/AdminCardTable';
+// import { AdminCardTable } from '../AdminCardTable/AdminCardTable';
 // import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 // import Preloader from '../Preloader/Preloader';
 // import { IProductCard } from '../ProductCard/ProductCardTypes';
@@ -67,7 +67,7 @@
 //       ) : error ? (
 //         <p>Произошла ошибка</p>
 //       ) : sellerProducts.length ? (
-//         <CardTable products={sellerProducts} />
+//         <AdminCardTable products={sellerProducts} />
 //       ) : (
 //         <p>Нет товаров</p>
 //       )}

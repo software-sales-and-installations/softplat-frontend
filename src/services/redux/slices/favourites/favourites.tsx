@@ -3,6 +3,31 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
 
+
+
+
+
+export const ayncToggleFavorite = async (action: Function, cardId: number, buyerFavoritesRefetch: Function) => {
+  try {
+    await action(cardId);
+    buyerFavoritesRefetch();
+  } catch (error) {
+    console.error('Ошибка при изменении избранного:', error);
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 interface IFavoriteState {
   favorites: number[];
 }

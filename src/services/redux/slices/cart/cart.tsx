@@ -1,6 +1,42 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { ICartItem } from '../../../../components/ProductListCart/ProductListTypes';
+import { IProductCard } from '../../../../components/ProductCard/ProductCardTypes';
+
+
+
+
+
+
+
+export const asyncAddToCart = async (card: IProductCard, buyerBasketAddItem: Function, basketInfo: Function, installation: boolean = false) => {
+  try {
+    const response = await buyerBasketAddItem({
+      productId: card.id,
+      installation,
+    }).unwrap();
+    console.log(response);
+    basketInfo();
+  } catch (error) {
+    console.error('Ошибка добавления товара в корзину:', error);
+  }
+};
+
+
+export const asyncRemoveFromCart = async (card: IProductCard, buyerBasketRemoveItem: Function, basketInfo: Function, installation: boolean = false) => {
+  try {
+    const response = await buyerBasketRemoveItem({
+      productId: card.id,
+      installation,
+    }).unwrap();
+    console.log(response);
+    basketInfo();
+  } catch (error) {
+    console.error('Ошибка добавления товара в корзину:', error);
+  }
+};
+
+
 
 
 
@@ -34,7 +70,6 @@ const cartSlice = createSlice({
       state.uncheckedItemIds = [];
     },
     updateCartItem: (state, action: PayloadAction<ICartItem>) => {
-      // console.log('upd');
       const cartItem = action.payload;
       const index = state.items.findIndex((item) => item.id === cartItem.id);
 
