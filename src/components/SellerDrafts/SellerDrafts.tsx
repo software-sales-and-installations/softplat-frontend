@@ -19,8 +19,10 @@ export const SellerDrafts: FC = () =>{
         setDraftCards(cards)
     },[cards, draftCards])
     return (
+        <>
+        {!cards? <SellerEmptyStatus text='Черновиков пока нет'/> :
         <div className={styles.container}>
-        {/* <SellerEmptyStatus text='Черновиков пока нет'/> */}
+        
             <div className={styles.container__header}>
                 <p className={styles.container__headerNum}>№</p>
                 <p className={styles.container__headerName}>Наименование</p>
@@ -41,6 +43,7 @@ export const SellerDrafts: FC = () =>{
                     </div>
                 )
             })}
-        </div>
+        </div>}
+        </>
     )
 }
