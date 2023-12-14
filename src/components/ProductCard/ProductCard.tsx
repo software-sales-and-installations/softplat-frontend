@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 import { Button } from '../../UI/Button/Button';
 import { IProductCardProps } from './ProductCardTypes';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
-import { setCartItems } from '../../services/redux/slices/cart/cart';
+import {
+  asyncAddToCart,
+  setCartItems,
+} from '../../services/redux/slices/cart/cart';
 import {
   useBuyerBasketAddItemMutation,
   useBuyerBasketInfoQuery,
@@ -17,10 +20,11 @@ import {
 } from '../../utils/api/buyerApi';
 import {
   addToFavorites,
+  ayncToggleFavorite,
   removeFromFavorites,
 } from '../../services/redux/slices/favourites/favourites';
 import { FaHeart } from 'react-icons/fa6';
-import toolsIcon from '../../images/tools-card-icon.svg'
+import toolsIcon from '../../images/tools-card-icon.svg';
 
 const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const addSpace = (price: number): string => {
@@ -28,47 +32,27 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   };
   const [addFavorites] = useBuyerAddFavoritesMutation();
   const [deleteFavorites] = useBuyerDeleteFavoritesMutation();
-  //@ts-ignore
-  const buyerFavorites = useBuyerFavoritesQuery();
+
+  const buyerFavorites = useBuyerFavoritesQuery(undefined);
+  const basketInfo = useBuyerBasketInfoQuery(undefined);
+
   const dispatch = useAppDispatch();
   const [buyerBasketAddItem, addItemError] = useBuyerBasketAddItemMutation();
-  //@ts-ignore
-  const basketInfoQuery = useBuyerBasketInfoQuery();
   const favorites = useAppSelector(state => state.favorite?.favorites);
   const isFavorite = favorites?.some(item => item === card.id);
-
-  useEffect(() => {
-    if (basketInfoQuery.data) {
-      dispatch(setCartItems(basketInfoQuery.data.productsInBasket));
-    }
-  }, [basketInfoQuery.data, dispatch]);
+  const userId = localStorage.getItem('userId');
 
   const handleAddToCart = async () => {
-    try {
-      const response = await buyerBasketAddItem({
-        productId: card.id,
-        installation: false,
-      }).unwrap();
-      console.log(response);
-      basketInfoQuery.refetch();
-    } catch (error) {
-      console.error('Ошибка добавления товара в корзину:', error);
-    }
+    await asyncAddToCart(card, buyerBasketAddItem, basketInfo.refetch);
   };
 
   const handleToggleFavorite = async () => {
-    try {
-      if (isFavorite) {
-        await deleteFavorites(card.id);
-        dispatch(removeFromFavorites(card.id));
-      } else {
-        await addFavorites(card.id);
-        dispatch(addToFavorites(card.id));
-      }
-      await buyerFavorites.refetch();
-    } catch (error) {
-      console.error('Ошибка при изменении избранного:', error);
-    }
+    const action = isFavorite ? deleteFavorites : addFavorites;
+
+    await ayncToggleFavorite(action, card.id, buyerFavorites.refetch);
+    dispatch(
+      isFavorite ? removeFromFavorites(card.id) : addToFavorites(card.id),
+    );
   };
 
   return (
@@ -78,7 +62,12 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
         type="button"
         onClick={handleToggleFavorite}
       >
-        {isFavorite ? <FaHeart size={28} /> : <FaRegHeart size={28} strokeWidth={0.5} />}
+        {userId &&
+          (isFavorite ? (
+            <FaHeart size={28} />
+          ) : (
+            <FaRegHeart size={28} strokeWidth={0.5} />
+          ))}
       </button>
       <Link to={`/product/${card.id}`} className={styles.card__link}>
         <div className={styles.card__img}>
@@ -103,8 +92,12 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
         </div>
       </Link>
 
-      <Button mode="primary" onClick={handleAddToCart} isDisabled={addItemError.isError}>
-        Добавить в корзину
+      <Button
+        mode="primary"
+        onClick={handleAddToCart}
+        isDisabled={addItemError.isError}
+      >
+        {addItemError.isError ? 'Нет в наличии' : ' Добавить в корзину'}
       </Button>
     </div>
   );

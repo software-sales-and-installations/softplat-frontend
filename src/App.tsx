@@ -19,7 +19,9 @@ import { useLoadFavorites } from './services/favoritesService/favoritesService.t
 // import { ProtectedRouteForAdmin, ProtectedRouteForBuyer, ProtectedRouteForSeller } from './components/ProtectedRoute/ProtectedRoute.tsx';
 
 function App() {
-  // useLoadFavorites()
+  useLoadFavorites()
+ 
+
   return (
     <>
       <Header />

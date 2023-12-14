@@ -24,7 +24,7 @@ const Breadcrumbs: FC<IBreadcrumbsProps> = ({ pageName, vendor }) => {
 
   let currentLink = '';
 
-  console.log(localStorage.getItem('pageName'));
+  // console.log(localStorage.getItem('pageName'));
 
   const crumbs =
     localStorage.getItem('urlPath') &&

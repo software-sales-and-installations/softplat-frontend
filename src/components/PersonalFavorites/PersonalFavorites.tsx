@@ -15,7 +15,7 @@ const PersonalFavorites: React.FC = () => {
     const fetchData = async () => {
       await dispatch(fetchAllCards());
     };
-
+    
     fetchData();
   }, [dispatch, favoriteIds]);
 
@@ -27,14 +27,13 @@ const PersonalFavorites: React.FC = () => {
 
   return (
       <section className={styles.personalFavorites}>
-        <h2 className={styles.personalFavorites__title}>Избранное</h2>
         <ul className={styles.personalFavorites__list}>
           {favoriteCards.map(card => (
             <li key={card.id} className={styles.personalFavorites__item}>
               <ProductCard card={card} />
             </li>
           ))}
-        </ul>
+        </ul> 
       </section>
   );
 };

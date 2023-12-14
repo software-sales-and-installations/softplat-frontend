@@ -7,19 +7,22 @@ import { ICartItem } from '../../components/ProductListCart/ProductListTypes';
 
 
 
-interface IFavorite {
+export interface IFavorite {
     product: ICartItem;
     userId: number;
 }
 
 
 export const useLoadFavorites = () => {
+  const userId = localStorage.getItem('userId');
+  console.log(1);
+  
   const dispatch = useAppDispatch();
-  //@ts-ignore
-  const favoritesData = useBuyerFavoritesQuery();
+
+  const favoritesData = useBuyerFavoritesQuery(undefined);
     // console.log(favoritesData?.currentData?.favorites);
   useEffect(() => {
-    if (favoritesData && favoritesData.currentData) {
+    if (favoritesData.currentData && userId) {
       const productIds = favoritesData.currentData.favorites.map((favorite: IFavorite) => favorite.product.id);
       dispatch(setFavorites(productIds));
     }
