@@ -4,12 +4,16 @@ import { Link } from 'react-router-dom';
 import { Button } from '../../UIStorybook/Button/Button';
 import { IProductCardProps } from './ProductCardTypes';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
-import { setCartItems } from '../../services/redux/slices/cart/cart';
+import {
+  asyncAddToCart,
+  asyncRemoveFromCart,
+} from '../../services/redux/slices/cart/cart';
 import {
   useBuyerBasketAddItemMutation,
+  useBuyerBasketDeleteItemMutation,
   useBuyerBasketInfoQuery,
 } from '../../utils/api/buyerBasketApi';
-import { FaLowVision, FaRegHeart } from 'react-icons/fa';
+import { FaRegHeart } from 'react-icons/fa';
 import {
   useBuyerAddFavoritesMutation,
   useBuyerDeleteFavoritesMutation,
@@ -17,6 +21,7 @@ import {
 } from '../../utils/api/buyerApi';
 import {
   addToFavorites,
+  ayncToggleFavorite,
   removeFromFavorites,
 } from '../../services/redux/slices/favourites/favourites';
 import { FaHeart } from 'react-icons/fa6';
@@ -30,10 +35,15 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [role, setRole] = useState(localStorage.getItem('role'));
   const user = useAppSelector(selectUser);
+  const userId = localStorage.getItem('userId');
+  // console.log('userId', userId);
+
   useEffect(() => {
     setToken(localStorage.getItem('token'));
     setRole(localStorage.getItem('role'));
+    setRole(localStorage.getItem('role'));
   }, [signout, user]);
+
   const addSpace = (price: number): string => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   };
@@ -44,47 +54,39 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
 
   const [addFavorites] = useBuyerAddFavoritesMutation();
   const [deleteFavorites] = useBuyerDeleteFavoritesMutation();
-  //@ts-ignore
-  const buyerFavorites = useBuyerFavoritesQuery();
+
+  const buyerFavorites = useBuyerFavoritesQuery(undefined);
+  const basketInfo = useBuyerBasketInfoQuery(undefined);
+
   const dispatch = useAppDispatch();
   const [buyerBasketAddItem, addItemError] = useBuyerBasketAddItemMutation();
-  //@ts-ignore
-  const basketInfoQuery = useBuyerBasketInfoQuery();
   const favorites = useAppSelector(state => state.favorite?.favorites);
   const isFavorite = favorites?.some(item => item === card.id);
+  const [buyerBasketDeleteItem, removeItemError] =
+    useBuyerBasketDeleteItemMutation();
+  const cart = useAppSelector(store => store.cart?.items);
 
-  useEffect(() => {
-    if (basketInfoQuery.data) {
-      dispatch(setCartItems(basketInfoQuery.data.productsInBasket));
-    }
-  }, [basketInfoQuery.data, dispatch]);
+  const countItemInCart = cart.filter(
+    item =>
+      item.productResponseDto.id === card.id && item.installation === false,
+  );
+  // console.log(countItemInCart);
 
   const handleAddToCart = async () => {
-    try {
-      const response = await buyerBasketAddItem({
-        productId: card.id,
-        installation: false,
-      }).unwrap();
-      console.log(response);
-      basketInfoQuery.refetch();
-    } catch (error) {
-      console.error('Ошибка добавления товара в корзину:', error);
-    }
+    await asyncAddToCart(card, buyerBasketAddItem, basketInfo.refetch);
+  };
+
+  const handleremoveFromCart = async () => {
+    await asyncRemoveFromCart(card, buyerBasketDeleteItem, basketInfo.refetch);
   };
 
   const handleToggleFavorite = async () => {
-    try {
-      if (isFavorite) {
-        await deleteFavorites(card.id);
-        dispatch(removeFromFavorites(card.id));
-      } else {
-        await addFavorites(card.id);
-        dispatch(addToFavorites(card.id));
-      }
-      await buyerFavorites.refetch();
-    } catch (error) {
-      console.error('Ошибка при изменении избранного:', error);
-    }
+    const action = isFavorite ? deleteFavorites : addFavorites;
+
+    await ayncToggleFavorite(action, card.id, buyerFavorites.refetch);
+    dispatch(
+      isFavorite ? removeFromFavorites(card.id) : addToFavorites(card.id),
+    );
   };
 
   return (
@@ -95,11 +97,12 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
           type="button"
           onClick={handleToggleFavorite}
         >
-          {isFavorite ? (
-            <FaHeart size={28} />
-          ) : (
-            <FaRegHeart size={28} strokeWidth={0.5} />
-          )}
+          {userId &&
+            (isFavorite ? (
+              <FaHeart size={28} />
+            ) : (
+              <FaRegHeart size={28} strokeWidth={0.5} />
+            ))}
         </button>
       ) : null}
       <Link to={`/product/${card.id}`} className={styles.card__link}>
@@ -127,7 +130,31 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
           </div>
         </div>
       </Link>
-      <div className={styles.card__addBtn}>
+      {countItemInCart.length > 0 ? (
+        <div className={styles.card__buttons}>
+          <button
+            className={styles.card__changeQuantity}
+            onClick={handleremoveFromCart}
+            disabled={removeItemError.isError}
+          >
+            -
+          </button>
+          <span>{countItemInCart[0].quantity}</span>
+          <button
+            className={styles.card__changeQuantity}
+            onClick={handleAddToCart}
+            disabled={
+              addItemError.isError ||
+              countItemInCart[0].quantity ===
+                countItemInCart[0].productResponseDto.quantity ||
+              countItemInCart[0].quantity > 9
+            }
+          >
+            +
+          </button>
+        </div>
+      ) : (
+        <div className={styles.card__addBtn}>
         <Button
           buttonType="primary"
           width="100%"
@@ -135,9 +162,11 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
           onClick={handleAddToCart}
           disabled={addItemError.isError}
         >
-          Добавить в корзину
+          {addItemError.isError ? 'Нет в наличии' : ' Добавить в корзину'}
         </Button>
-      </div>
+        </div>
+      )}
+    
     </div>
   );
 };

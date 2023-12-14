@@ -28,8 +28,7 @@ const Personal: React.FC = () => {
           <Route
             path="/favorites"
             element={
-              // <PersonalFavorites />
-              <h2>Избранное</h2>
+              <PersonalFavorites />
             }
           />
           <Route

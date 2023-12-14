@@ -4,18 +4,20 @@ import style from './CartItem.module.scss';
 import { Tooltip } from '../Tooltip/Tooltip';
 import { Checkbox } from '../../UI/Checkbox/Checkbox';
 
-import { FaTrash, FaRegHeart, FaPlus, FaMinus, FaHeart } from 'react-icons/fa';
+import { FaTrash, FaRegHeart, FaHeart } from 'react-icons/fa';
 import { ICartItemProps } from './CartItemTypes';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import {
   addToUncheckedList,
+  asyncAddToCart,
+  asyncRemoveFromCart,
   removeFromUncheckedList,
-  removeItemById,
   updateCartItem,
 } from '../../services/redux/slices/cart/cart';
 import {
   useBuyerBasketAddItemMutation,
   useBuyerBasketDeleteItemMutation,
+  useBuyerBasketDeletePositionMutation,
   useBuyerBasketInfoQuery,
 } from '../../utils/api/buyerBasketApi';
 import { useNavigate } from 'react-router-dom';
@@ -26,6 +28,7 @@ import {
 } from '../../utils/api/buyerApi';
 import {
   addToFavorites,
+  ayncToggleFavorite,
   removeFromFavorites,
 } from '../../services/redux/slices/favourites/favourites';
 
@@ -40,12 +43,14 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
     useBuyerBasketDeleteItemMutation();
   const [addFavorites] = useBuyerAddFavoritesMutation();
   const [deleteFavorites] = useBuyerDeleteFavoritesMutation();
-  //@ts-ignore
-  const buyerFavorites = useBuyerFavoritesQuery();
-  //@ts-ignore
-  const basketInfoQuery = useBuyerBasketInfoQuery();
+
+  const buyerFavorites = useBuyerFavoritesQuery(undefined);
+
+  const basketInfo = useBuyerBasketInfoQuery(undefined);
+  const [buyerBasketСlearPosition] = useBuyerBasketDeletePositionMutation();
 
   const dispatch = useAppDispatch();
+  const userId = localStorage.getItem('userId');
 
   const favorites = useAppSelector(state => state.favorite?.favorites);
   const isFavorite = favorites?.some(item => item === product.id);
@@ -55,18 +60,11 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
   );
 
   const handleToggleFavorite = async () => {
-    try {
-      if (isFavorite) {
-        await deleteFavorites(product.id);
-        dispatch(removeFromFavorites(product.id));
-      } else {
-        await addFavorites(product.id);
-        dispatch(addToFavorites(product.id));
-      }
-      await buyerFavorites.refetch();
-    } catch (error) {
-      console.error('Ошибка при изменении избранного:', error);
-    }
+    const action = isFavorite ? deleteFavorites : addFavorites;
+    await ayncToggleFavorite(action, product.id, buyerFavorites.refetch);
+    dispatch(
+      isFavorite ? removeFromFavorites(product.id) : addToFavorites(product.id),
+    );
   };
 
   useEffect(() => {
@@ -96,64 +94,49 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
     }
   };
 
+
+
+
+console.log(item);
+
+
+
   const handleIncreaseQuantity = async () => {
-    if (quantity < 10) {
-      try {
-        const response = await buyerBasketAddItem({
-          productId: product.id,
-          installation: item.installation,
-        }).unwrap();
+    if (
+      quantity < 10 &&
+      product.quantity !== undefined &&
+      quantity < product.quantity
+    ) {
+      await asyncAddToCart(product, buyerBasketAddItem, basketInfo.refetch, item.installation);
 
-        console.log('Response:', response);
-
-        const updatedQuantity = quantity + 1;
-        setQuantity(updatedQuantity);
-        updateTotalPrice(item.installation, updatedQuantity);
-
-        basketInfoQuery.refetch();
-      } catch (error) {
-        console.error('Ошибка добавления товара в корзину:', error);
-      }
+      setQuantity(quantity + 1);
+      updateTotalPrice(item.installation, quantity + 1);
     }
   };
 
   const handleDecreaseQuantity = async () => {
-    if (quantity > 1) {
-      try {
-        const response = await buyerBasketDeleteItem({
-          productId: product.id,
-          installation: item.installation,
-        }).unwrap();
-        console.log('Response:', response);
-
-        const updatedQuantity = quantity - 1;
-        setQuantity(updatedQuantity);
-        updateTotalPrice(item.installation, updatedQuantity);
-
-        basketInfoQuery.refetch();
-      } catch (error) {
-        console.error('Ошибка добавления товара в корзину:', error);
-      }
+    await asyncRemoveFromCart(product, buyerBasketDeleteItem, basketInfo.refetch, item.installation);
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
     }
+    updateTotalPrice(item.installation, quantity - 1);
   };
 
+
+
+
+
+
+
+
   const handleRemoveItem = async () => {
-    if (quantity === 1) {
-      // Api логика удаления всей позиции, ( пока логика удаления одной копии)
-      try{
-        const response = await buyerBasketDeleteItem({
-          productId: product.id,
-          installation: item.installation,
-        }).unwrap();
-        console.log('Response:', response);
+    try {
+      const response = await buyerBasketСlearPosition(item.id).unwrap();
+      console.log('asdasdadddddddddddddddddddddddddddddddddd', response);
 
-        dispatch(removeItemById(product.id));
-        dispatch(removeFromUncheckedList(item.id))
-        basketInfoQuery.refetch();
-
-      }catch (error) {
-        console.error('Ошибка удаления из корзинЫ:', error);
-      }
+      basketInfo.refetch();
+    } catch (error) {
+      console.error('Ошибка удаления позиции:', error);
     }
   };
 
@@ -178,10 +161,10 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
         <div className={style.cartItem__parameters}>
           <span className={style.cartItem__type}>Лицензия</span>
           <Checkbox
-            label={`c установкой ${product?.installationPrice}`}
             checked={item.installation}
             readOnly
           />
+          <span className={style.cartItem__installationText}>{`c установкой ${product?.installationPrice}`}</span>
           <div
             className={style.cartItem__question}
             onMouseEnter={() =>
@@ -196,16 +179,18 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
           {tooltipText && <Tooltip text={tooltipText} />}
         </div>
         <div className={style.cartItem__buttons}>
-          <button
-            className={style.cartItem__like}
-            type="button"
-            onClick={handleToggleFavorite}
-          >
-            {isFavorite ? <FaHeart size={25} /> : <FaRegHeart size={25} />}
-          </button>
+          {userId && (
+            <button
+              className={style.cartItem__like}
+              type="button"
+              onClick={handleToggleFavorite}
+            >
+              {isFavorite ? <FaHeart size={22} /> : <FaRegHeart size={22} />}
+            </button>
+          )}
 
           <FaTrash
-            size={25}
+            size={18}
             className={style.cartItem__trash}
             onClick={handleRemoveItem}
           />
@@ -215,18 +200,22 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
       <div className={style.cartItem__quantity}>
         <button
           onClick={handleDecreaseQuantity}
-          className={style.cartItem__quantityButton}
-          disabled={removeItemError.isError || quantity === 1}
+          className={style.cartItem__decreaseQuantity}
+          disabled={removeItemError.isError}
         >
-          <FaMinus size={15} />
+    
         </button>
         <span>{quantity}</span>
         <button
           onClick={handleIncreaseQuantity}
-          className={style.cartItem__quantityButton}
-          disabled={addItemError.isError || quantity > 9}
+          className={style.cartItem__increaseQuantity}
+          disabled={
+            addItemError.isError ||
+            quantity > 9 ||
+            quantity === product.quantity
+          }
         >
-          <FaPlus size={15} />
+
         </button>
       </div>
     </li>

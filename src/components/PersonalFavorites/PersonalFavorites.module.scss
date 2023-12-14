@@ -2,22 +2,23 @@
 @import '../../styles/abstract/mixins.scss';
 
 .personalFavorites {
-    margin-top: 65px;
-    margin-left: 100px;
+    // margin-top: 65px;
+    // margin-left: 100px;
   &__title {
     margin: 0;
-    @include font-h2-simibold;
+    // @include font-h2-simibold;
     text-align: start;
   }
 
   &__list {
-    margin-top: 45px;
+    // margin-top: 45px;
     list-style: none;
-    display: grid;
-    grid-template-columns: repeat(3, 320px);
-    justify-content: space-between;
-    gap: 40px;
+    display: flex;
+    // grid-template-columns: repeat(3, 320px);
+    // justify-content: space-between;
+    gap: 50px;
     padding: 0;
+    flex-wrap: wrap;
   }
 
   &__item {
