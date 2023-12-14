@@ -115,9 +115,9 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
         </div>
       </Link>
 
-      <Button mode="primary" onClick={handleAddToCart} isDisabled={addItemError.isError}>
+      {role==='SELLER'||role==='ADMIN'? null:<Button mode="primary" onClick={handleAddToCart} isDisabled={addItemError.isError}>
         Добавить в корзину
-      </Button>
+      </Button>}
     </div>
   );
 };
