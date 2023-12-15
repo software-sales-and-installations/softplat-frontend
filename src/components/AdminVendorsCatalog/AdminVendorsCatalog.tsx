@@ -14,15 +14,15 @@ export const AdminVendorsCatalog: FC = () =>{
     return (
         <div className={styles.table}>
             <div className={styles.table__head}>
+                <p className={styles.table__logo}>ID</p>
                 <p className={styles.table__vendor}>Вендор</p>
-                <p className={styles.table__logo}>Логотип</p>
                 <p className={styles.table__country}>Страна</p>
             </div>
             {vendorData?.vendors.map((i)=>{
                 return(
                     <Link to={`/producers/${i.id}`} className={styles.table__line}>
+                        <p className={styles.table__logo}>{i.id}</p>
                         <p className={styles.table__vendor}>{i.name}</p>
-                        <p className={styles.table__logo}>{i.image?.url? i.image?.url : ''}</p>
                         <p className={styles.table__country}>{i.country}</p>
                     </Link>
                 )
