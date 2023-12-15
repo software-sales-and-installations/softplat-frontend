@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { AdminCardTable } from '../../components/AdminCardTable/AdminCardTable';
 import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
+import { AdminVendorsCatalog } from '../../components/AdminVendorsCatalog/AdminVendorsCatalog';
 
 export const Admin: FC = () => {
   const { data} = usePublicProductListQuery({
@@ -26,7 +27,7 @@ export const Admin: FC = () => {
           <Route path="/on-moderation" element={<AdminCardTable products={data?.products||[]} productStatus={'SHIPPED'}/>} />
           <Route path="/rejected" element={<AdminCardTable products={data?.products||[]} productStatus={'REJECTED'} />}/>
           <Route path="/appeal" element={<AdminCardTable products={data?.products||[]} productStatus={'APPEAL'}  />}/>
-          <Route path="/vendors" element={<h2>Вендоры</h2>} />
+          <Route path="/vendors" element={<AdminVendorsCatalog/>} />
           <Route path="/add-vendor" element={<h2>Добавить вендора</h2>} />
           <Route path="/sales" element={<h2>Отчеты продаж</h2>} />
           <Route path="/contacts" element={<h2>Контакты</h2>} />
