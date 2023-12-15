@@ -1,7 +1,7 @@
 import {reducer as toggleBtnReducer} from '../../UI/ToggleButton/ToggleButtonSlice';
 import {reducer as chooseRoleReducer} from '../../UI/ChooseRole/ChooseRoleSlice';
 import {reducer as popupStateReducer} from '../../UI/Popup/PopupSlice';
-import {reducer as signoutReducer} from '../../components/SignOutPopup/SignOutPopupSlice.tsx'
+import {reducer as signoutReducer} from '../../components/SignOutPopup/SignOutPopupSlice.tsx';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import cardsReducer from './slices/cards/cards';
@@ -18,6 +18,7 @@ import { buyerApi } from '../../utils/api/buyerApi.tsx';
 import { buyerOrderApi } from '../../utils/api/buyerOrderApi.tsx';
 import { categoryApi } from '../../utils/api/categoryApi.tsx';
 import { imageApi } from '../../utils/api/imageApi.tsx';
+import { publicCommentApi } from '../../utils/api/publicCommentApi.tsx';
 import { publicProductApi } from '../../utils/api/publicProductApi.tsx';
 import { userProductApi } from '../../utils/api/userProductApi.tsx';
 import { vendorApi } from '../../utils/api/vendorApi.tsx';
@@ -42,6 +43,7 @@ const reducers = combineReducers({
   [buyerOrderApi.reducerPath]: buyerOrderApi.reducer,
   [categoryApi.reducerPath]: categoryApi.reducer,
   [imageApi.reducerPath]: imageApi.reducer,
+  [publicCommentApi.reducerPath]: publicCommentApi.reducer,
   [publicProductApi.reducerPath]: publicProductApi.reducer,
   [sellerApi.reducerPath]: sellerApi.reducer,
   [userProductApi.reducerPath]: userProductApi.reducer,
@@ -58,6 +60,7 @@ export const store = configureStore({
     buyerOrderApi.middleware,
     categoryApi.middleware,
     imageApi.middleware,
+    publicCommentApi.middleware,
     publicProductApi.middleware,
     sellerApi.middleware,
     userProductApi.middleware,

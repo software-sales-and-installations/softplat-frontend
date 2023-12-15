@@ -1,6 +1,7 @@
 @import '../../../styles/abstract/mixins';
 
 .productInfo {
+  margin-top: 49px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -68,6 +69,7 @@
   &__text {
     @include font-body-regular;
     color: $black-standart-text;
+    text-align: left;
   }
 
 }

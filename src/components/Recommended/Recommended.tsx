@@ -5,8 +5,6 @@ import { IProductCard, ProductStatus } from '../ProductCard/ProductCardTypes';
 import Preloader from '../Preloader/Preloader';
 import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 
-// type Props = {};
-
 const Recommended: FC = () => {
   const { data, error, isLoading } = usePublicProductListQuery({
     minId: 0,

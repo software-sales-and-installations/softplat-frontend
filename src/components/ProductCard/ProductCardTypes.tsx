@@ -18,6 +18,13 @@ export interface IProductCard {
   isLiked?: boolean;
   cartQuantity?: number;
   date?:string;
+  hasDemo: boolean;
+  rating: string | number | null;
+}
+
+export interface ISimilarProducts {
+  products: [IProductCard];
+  totalProducts: number;
 }
 
 export interface IProductCardProps {
@@ -26,12 +33,12 @@ export interface IProductCardProps {
 
 }
 
-type ProductCardCategory = {
+export type ProductCardCategory = {
   id: number;
   name: string;
 };
 
-type ProductCardImage = {
+export type ProductCardImage = {
   contentType?: string;
   id?: number;
   name?: string;
@@ -50,7 +57,7 @@ type ProductCardSeller = {
   requisites: {
     account: string;
     id: number;
-  };
+  } | null;
 };
 
 export type ProductCardVendor = {

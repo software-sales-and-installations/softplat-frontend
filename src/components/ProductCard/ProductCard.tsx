@@ -9,7 +9,7 @@ import {
   useBuyerBasketAddItemMutation,
   useBuyerBasketInfoQuery,
 } from '../../utils/api/buyerBasketApi';
-import { FaLowVision, FaRegHeart } from 'react-icons/fa';
+import { FaRegHeart } from 'react-icons/fa';
 import {
   useBuyerAddFavoritesMutation,
   useBuyerDeleteFavoritesMutation,

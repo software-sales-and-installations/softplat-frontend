@@ -8,8 +8,12 @@ export const userProductApi = createApi({
     baseUrl: API_BASE_URL,
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token');
+      const userId = localStorage.userId('userId');
       if (token) {
         headers.set('authorization', `${token}`);
+      }
+      if (userId) {
+        headers.set('X-Sharer-User-Id', `${userId}`)
       }
       return headers;
     },
@@ -112,6 +116,13 @@ export const userProductApi = createApi({
         method: 'DELETE',
       }),
     }),
+    // Получение списка рекоммендованых товаров. Для зарег. пользователей
+    // pageSize def 5
+    productRecs: build.query({
+      query: ({minId, pageSize}) => ({
+        url: `/product/recommendations?minId=${minId}&pageSize=${pageSize}`,
+      }),
+    }),
     // Получение списка товаров на модерацию. Для админа
     // pageSize def 20
     productList: build.query({
@@ -132,5 +143,6 @@ export const {
   useProductUpdateMutation,
   useProductDeleteOwnCardMutation,
   useProductDeleteOwnCardImageMutation,
+  useProductRecsQuery,
   useProductListQuery,
 } = userProductApi;

@@ -1,45 +1,33 @@
 import ProductCard from '../../ProductCard/ProductCard.tsx';
 import styles from './Similar.module.scss';
+import { useSimilarProductsQuery } from '../../../utils/api/publicProductApi.tsx';
+import Preloader from '../../Preloader/Preloader.tsx';
+import { IProductCard } from '../../ProductCard/ProductCardTypes.tsx';
 
-const cardsDemo = [
-  {
-    name: 'DemoCard1',
-    price: 1000,
-    installationPrice: 1200,
-    id: 1,
-   },
-  {
-    name: 'DemoCard2',
-    price: 1000,
-    installationPrice: 1200,
-    id: 2,
-  },
-  {
-    name: 'DemoCard3',
-    price: 1000,
-    installationPrice: 1200,
-    id: 3,
-  },
-  {
-    name: 'DemoCard4',
-    price: 1000,
-    installationPrice: 1200,
-    id: 4,
-  },
-  {
-    name: 'DemoCard5',
-    price: 1000,
-    installationPrice: 1200,
-    id: 5,
-  }
-]
+interface ISimilarProps {
+  id: string;
+}
 
-function Similar() {
+function Similar({id}: ISimilarProps) {
+    const {data: similarProds, isLoading, error} = useSimilarProductsQuery({productId: id, minId: '0', pageSize: '5'});
+
   return (
-    <div className={styles.similar}>
-      {cardsDemo.map((card) => (
-      <ProductCard key={card.id} card={card}></ProductCard>))}
-    </div>
+    <section>
+    {similarProds &&
+      <div className={styles.similar}>
+      <h3 className={styles.similar__header}>Похожие</h3>
+      <div className={styles.similar__cardWrapper}>
+    {isLoading ? (
+        <Preloader />
+      ) : error ? (
+        <p>Произошла ошибка</p>
+      ) : (
+      similarProds?.products?.map((prod: IProductCard) => (
+      <ProductCard key={prod.id} card={prod}></ProductCard>))
+      )}
+      </div>
+    </div>}
+      </section>
   );
 }
 

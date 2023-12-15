@@ -3,7 +3,8 @@ import { IMainWrapperProps } from './MainWrapperTypes';
 import styles from './MainWrapper.module.scss';
 
 export const MainWrapper: FC<IMainWrapperProps> = ({ children }) => {
-    return (
+
+  return (
         <main className={styles.background}>
             {children}
         </main>
