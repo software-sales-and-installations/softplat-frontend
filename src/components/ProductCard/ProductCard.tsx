@@ -154,7 +154,9 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
           </button>
         </div>
       ) : (
+        ((role==='BUYER' || !token)? 
         <div className={styles.card__addBtn}>
+          
         <Button
           buttonType="primary"
           width="100%"
@@ -165,6 +167,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
           {addItemError.isError ? 'Нет в наличии' : ' Добавить в корзину'}
         </Button>
         </div>
+        : null)
       )}
     
     </div>

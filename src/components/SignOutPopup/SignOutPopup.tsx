@@ -30,11 +30,8 @@ export const SignOutPopup: FC = () => {
     authLogout()
       .unwrap()
       .then(userData => {
-        localStorage.clear();
-        navigate('/', { replace: true });
         dispatch(popupState(false));
         dispatch(signOut());
-        dispatch(signout(true));
 
         dispatch(clearFavorites());
         dispatch(clearCart());
@@ -44,7 +41,12 @@ export const SignOutPopup: FC = () => {
       .catch(error => {
         console.log(error);
       })
-      .finally();
+      .finally(()=>{
+        localStorage.clear();
+        navigate('/', { replace: true });
+        dispatch(signout(true));
+
+      });
   };
 
   return (
