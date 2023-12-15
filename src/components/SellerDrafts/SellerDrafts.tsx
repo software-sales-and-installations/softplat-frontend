@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 export const SellerDrafts: FC = () =>{
     let count = 0 ;
-    const { data: cards, error, isLoading } = usePublicProductListQuery({
+    const { data: cards,  } = usePublicProductListQuery({
         minId: 0,
         pageSize: '',
         sort: 'NEWEST',
@@ -22,7 +22,7 @@ export const SellerDrafts: FC = () =>{
         <>
         {!cards? <SellerEmptyStatus text='Черновиков пока нет'/> :
         <div className={styles.container}>
-        
+
             <div className={styles.container__header}>
                 <p className={styles.container__headerNum}>№</p>
                 <p className={styles.container__headerName}>Наименование</p>

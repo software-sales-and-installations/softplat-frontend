@@ -22,6 +22,7 @@
 // }
 export interface InputPasswordTypes {
 	showPasswordButton?: boolean;
+  type?: string;
   inputType: 'text' | 'password' | 'confirmPassword';
   inputId: string;
 	rules?: any;

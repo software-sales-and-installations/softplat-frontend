@@ -1,4 +1,4 @@
-import {FC, ReactNode} from 'react';
+import {FC} from 'react';
 import styles from './SellerEmptyStatus.module.scss';
 import { Button } from '../../UI/Button/Button';
 import { Link } from 'react-router-dom';
