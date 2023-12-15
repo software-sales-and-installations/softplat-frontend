@@ -22,6 +22,10 @@ import Multimedia from '../images/catalog/multimedia.png';
 import ERPCRM from '../images/catalog/erp-crm.png';
 import Archivators from '../images/catalog/archivators.png';
 
+import SliderSecurity from '../images/slider/slider-security.png'
+import SliderMicrosoft from '../images/slider/slider-microsoft.png'
+import SliderPhotoshop from '../images/slider/slider-photoshop.png'
+
 export const CATEGORIZED_TEXT: {
   id: number;
   text: string;
@@ -817,19 +821,19 @@ export const PRODUCT_ITEMS_LIKED: {
 
   export const slides: Slider = [
     {
-      text: 'Быстрый и удобный процесс покупки — получите доступ к программному обеспечению всего в несколько кликов',
-      img: 'https://randomwordgenerator.com/img/picture-generator/sea-2101488_640.jpg',
-      link: '/contacts'
+      text: 'Программы для безопасности вашего бизнеса по выгодным ценам',
+      img: SliderSecurity,
+      link: '/catalog/security'
     },
     {
-      text: 'Удобные способы оплаты онлайн в любое время',
-      img: 'https://s3.pet-yes.com/articles/photos/5ca394ee4c03aec91e8d0404b6df9199.jpeg',
-      link: '/producers/1'
+      text: 'Самые продвинутые решения для вашего офиса от Microsoft',
+      img: SliderMicrosoft,
+      link: '/producers/2'
     },
     {
-      text: 'Slide 3',
-      img: 'https://sun9-48.userapi.com/impg/fycmHPAnxYdnFozjVbiaWPV1XykgTlhBwN7IzQ/zJhjSHDz0g4.jpg?size=973x728&quality=95&sign=bcd0d179da593a98c3031cf5c1198161&c_uniq_tag=eZu7nS4IBsQizITQuAr9qPIOpSpdihT0DTjdGVt7TWg&type=album',
-      link: '/catalog/media-apps'
+      text: 'Новая версия Adobe Photoshop 2024 с использованием нейросети уже на сайте!',
+      img: SliderPhotoshop,
+      link: '/product/3'
     },
   ];
 
