@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './Catalogue.module.scss';
 import { CATALOGUE_NAMES } from '../../utils/constants';
 import { Link } from 'react-router-dom';
-import itemImg from '../../images/catalogue-img.png';
 
 const Catalogue: React.FC = () => {
   return (
