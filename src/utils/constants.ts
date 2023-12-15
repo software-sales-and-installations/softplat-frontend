@@ -194,6 +194,21 @@ export const VALIDATION_SETTINGS = {
       noaccount: 'Необходимо ввести расчетный счет',
       sameAsNow: 'Введите новое значение'
     }
+  },
+  link: {
+    pattern: /^https?:\/\/[\w\-\.\/~:\?\#\[\]@!$&'\(\)\*\+,;=]+[\-\.\/~:\?\#\[\]@!$&'\(\)\*\+,;=]{1}[\w\-\.\/~:\?\#\[\]@!$&'\(\)\*\+,;=]+[#\/]?$/,
+    messages: {
+      invalid: 'Введите ссылку'
+    }
+  },
+  price: {
+    pattern: /^\d+$/,
+    maxLength: 6,
+    messages: {
+      invalid: 'Необходимо ввести только цифры',
+      tooLong: 'Слишком большое число',
+      noPrice: 'Заполните это поле'
+    }
   }
 };
 export const EMAIL_VALIDATION_CONFIG = {
@@ -445,6 +460,32 @@ export const ACCOUNT_VALIDATION_CONFIG = {
     message: VALIDATION_SETTINGS.account.messages.tooShort,
   },
 };
+export const LINK_VALIDATION_CONFIG = {
+  pattern: {
+    value: VALIDATION_SETTINGS.link.pattern,
+    message: VALIDATION_SETTINGS.link.messages.invalid,
+  }
+}
+export const PRICE_VALIDATION_CONFIG ={
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.price.messages.noPrice,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.price.pattern,
+    message: VALIDATION_SETTINGS.price.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.price.maxLength,
+    message: VALIDATION_SETTINGS.price.messages.tooLong,
+  },
+}
+export const CARD_REQUIRED_FIELDS = {
+  required: {
+    value: true,
+    message: 'Необходимо заполнить это поле'
+  }
+}
 export const CHOOSE_ROLE: {
   id: number;
   title: string;

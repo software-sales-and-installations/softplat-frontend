@@ -61,7 +61,7 @@ export const Input: FC<IInput> = ({
 						maxLength={inputTextType === 'date' ? 8 : undefined}
 						value={readOnly && value ? value : undefined}
 					/>
-					<span className={classNames(styles.input__error, typeError==='dataError'? styles.input__error_type_data: '')}>{error ? error : (helpText? 
+					<span className={classNames(styles.input__error, typeError==='dataError'? styles.input__error_type_data: (typeError==='addCardError'?styles.input__error_type_addCardError:''))}>{error ? error : (helpText? 
 						<p className={styles.input__help}>{helpText}</p>
 						: '')}
 					</span>
