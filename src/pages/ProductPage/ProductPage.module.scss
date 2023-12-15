@@ -164,4 +164,46 @@
     width: 150px;
     height: 35px;
   }
+
+  &__buttons {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+
+  &__likeBtn {
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  &__quantityButtons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    border-radius: 32px;
+    background-color: $light-grey;
+    height: 55px;
+    padding: 0 40px;
+    box-sizing: border-box;
+    align-items: center;
+    @include font-input-field;
+    gap: 30px;
+    color: $black-standart-text;
+  }
+
+  &__changeQuantity {
+    border: none;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 22px;
+    width: 50px;
+    padding-bottom: 3px;
+  }
 }

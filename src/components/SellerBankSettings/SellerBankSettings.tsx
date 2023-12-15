@@ -7,7 +7,7 @@ import { InputTypes } from '../../UI/Input/InputTypes';
 import { Button } from '../../UI/Button/Button';
 import { useSellerGetBankQuery } from '../../utils/api/sellerApi';
 import { useSellerChangeBankMutation } from '../../utils/api/sellerApi';
-import { BIK_VALIDATION_CONFIG, OGRNIP_VALIDATION_CONFIG, ACCOUNT_VALIDATION_CONFIG, VALIDATION_SETTINGS } from '../../utils/constants';
+import { BIK_VALIDATION_CONFIG, OGRNIP_VALIDATION_CONFIG, ACCOUNT_VALIDATION_CONFIG} from '../../utils/constants';
 import { useState } from 'react';
 
 export const SellerBankSettings: FC = () =>{
@@ -15,7 +15,6 @@ export const SellerBankSettings: FC = () =>{
     const {
         register,
         handleSubmit,
-        watch,
         getValues,
 		setValue,
         formState: { errors,  isValid },
@@ -57,6 +56,7 @@ export const SellerBankSettings: FC = () =>{
 					    validation={{
 						    ...register('bik', BIK_VALIDATION_CONFIG)}}
 					    error={errors?.bik?.message}
+							typeError='dataError'
 				    />
                     <Input
 					    inputType={InputTypes.ogrnip}
@@ -64,6 +64,7 @@ export const SellerBankSettings: FC = () =>{
 					    validation={{
 						    ...register('ogrnip', OGRNIP_VALIDATION_CONFIG)}}
 					    error={errors?.ogrnip?.message}
+							typeError='dataError'
 				    />
                 <Input
 					inputType={InputTypes.account}
@@ -72,6 +73,7 @@ export const SellerBankSettings: FC = () =>{
 						...register('account', ACCOUNT_VALIDATION_CONFIG),
 					}}
 					error={errors?.account?.message}
+					typeError='dataError'
 				/>
                 <div className={styles.btncontainer}>
 					<Button isDisabled={!(isValid)} type='submit' mode='primary'>Сохранить</Button>

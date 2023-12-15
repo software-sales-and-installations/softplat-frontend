@@ -29,7 +29,7 @@ export interface ISimilarProducts {
 
 export interface IProductCardProps {
   card: IProductCard;
-  key: string | number;
+  key?: string | number;
 
 }
 

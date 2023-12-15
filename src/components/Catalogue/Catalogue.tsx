@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './Catalogue.module.scss';
 import { CATALOGUE_NAMES } from '../../utils/constants';
 import { Link } from 'react-router-dom';
-import itemImg from '../../images/catalogue-img.png';
 
 const Catalogue: React.FC = () => {
   return (
@@ -13,7 +12,7 @@ const Catalogue: React.FC = () => {
           <li className={styles.catalogue__item} key={i.name}>
             <Link to={`/catalog/${i.pathName}`}>
               <p className={styles.catalogue__itemText}>{i.name}</p>
-              <img src={itemImg} alt="Изображение раздела каталога" />
+              <img src={i.img} alt="Изображение раздела каталога" />
             </Link>
           </li>
         ))}

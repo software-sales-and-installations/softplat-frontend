@@ -4,19 +4,32 @@ import styles from './ProductPage.module.scss';
 // import { Checkbox } from '../../UI/Checkbox/Checkbox';
 // import { Tooltip } from '../../components/Tooltip/Tooltip';
 import { useParams } from 'react-router-dom';
+
 import { useAppSelector } from '../../services/redux/store';
 // import { fetchSingleCard } from '../../services/redux/slices/cards/cards';
-// import { setCartItems } from '../../services/redux/slices/cart/cart';
-// import {
-//   useBuyerBasketAddItemMutation,
-//   useBuyerBasketInfoQuery,
-// } from '../../utils/api/buyerBasketApi';
+
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import ProductInfo from '../../components/Product/ProductInfo/ProductInfo.tsx';
 import ProductButtons from '../../components/Product/ProductButtons/ProductButtons.tsx';
 import Reviews from '../../components/Product/Reviews/Reviews.tsx';
 import Similar from '../../components/Product/Similar/Similar.tsx';
 import { usePublicProductQuery } from '../../utils/api/publicProductApi.tsx';
+
+// import {
+//   asyncAddToCart,
+//   asyncRemoveFromCart,
+// } from '../../services/redux/slices/cart/cart';
+// import {
+//   useBuyerBasketAddItemMutation,
+//   useBuyerBasketDeleteItemMutation,
+//   useBuyerBasketInfoQuery,
+// } from '../../utils/api/buyerBasketApi';
+// import { FaHeart, FaRegHeart } from 'react-icons/fa';
+// import {
+//   addToFavorites,
+//   ayncToggleFavorite,
+//   removeFromFavorites,
+// } from '../../services/redux/slices/favourites/favourites';
 
 
 export const ProductPage: FC = () => {
@@ -69,8 +82,39 @@ export const ProductPage: FC = () => {
   //   );
   // };
 
+
   const { data: product, isError: productError} = usePublicProductQuery(id);
 
+  // const cart = useAppSelector(store => store.cart?.items);
+
+  // const countItemInCart = cart.filter(
+  //   item =>
+  //     item.productResponseDto.id === cardData.id &&
+  //     item.installation === isInstallationSelected,
+  // );
+
+  // const handleremoveFromCart = async () => {
+  //   await asyncRemoveFromCart(
+  //     cardData,
+  //     buyerBasketDeleteItem,
+  //     basketInfoQuery.refetch,
+  //     isInstallationSelected,
+  //   );
+  // };
+
+
+  // const handleToggleFavorite = async () => {
+  //   const action = isFavorite ? deleteFavorites : addFavorites;
+  //
+  //   await ayncToggleFavorite(action, cardData.id, buyerFavorites.refetch);
+  //   dispatch(
+  //     isFavorite
+  //       ? removeFromFavorites(cardData.id)
+  //       : addToFavorites(cardData.id),
+  //   );
+  // };
+
+  // console.log(countItemInCart, 'countItemInCart');
 
   return (
     <div className={styles.productPage}>

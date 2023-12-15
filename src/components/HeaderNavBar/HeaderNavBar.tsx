@@ -16,7 +16,7 @@ export const HeaderNavbar: FC = () => {
             <ul className={styles.list}>
                 <li className={styles.item}>
                     <Link to='/catalog' className={classNames(styles.link, location.pathname==='/catalog' ? styles.link_active : '')}>Каталог</Link>
-                    <DropDown  type={SelectorType.CATALOG} isMultiOption={false} options={catalogOptions}/>
+                    <DropDown isMultiOption={false} type={SelectorType.CATALOG} options={catalogOptions}/>
                 </li>
                 <li className={styles.item}>
                     <Link to='/producers' className={classNames(styles.link, location.pathname==='/producers' ? styles.link_active : '')}>Производители</Link>

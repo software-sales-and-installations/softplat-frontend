@@ -4,24 +4,26 @@ import { useBuyerFavoritesQuery } from '../../utils/api/buyerApi';
 import { setFavorites } from '../redux/slices/favourites/favourites';
 import { ICartItem } from '../../components/ProductListCart/ProductListTypes';
 
-
-
-
-interface IFavorite {
-    product: ICartItem;
-    userId: number;
+export interface IFavorite {
+  product: ICartItem;
+  userId: number;
 }
 
-
 export const useLoadFavorites = () => {
+  const userId = localStorage.getItem('userId');
+
   const dispatch = useAppDispatch();
-  //@ts-ignore
-  const favoritesData = useBuyerFavoritesQuery();
-    // console.log(favoritesData?.currentData?.favorites);
+
+  const favoritesData = useBuyerFavoritesQuery(undefined);
+
   useEffect(() => {
-    if (favoritesData && favoritesData.currentData) {
-      const productIds = favoritesData.currentData.favorites.map((favorite: IFavorite) => favorite.product.id);
+    if (favoritesData.currentData && userId) {
+      const productIds = favoritesData.currentData.favorites.map(
+        (favorite: IFavorite) => favorite.product.id,
+      );
       dispatch(setFavorites(productIds));
+
+      console.log('избр');
     }
   }, [favoritesData, dispatch]);
 };

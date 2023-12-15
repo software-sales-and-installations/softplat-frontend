@@ -9,9 +9,6 @@ import { InputTypes } from '../../UI/Input/InputTypes';
 export const SellerSettings: FC = () =>{
     const {
         register,
-        handleSubmit,
-        watch,
-        getValues,
         formState: { errors,  isValid },
       } = useForm<ISellerSettings>({ mode: 'onChange' });
     return (
@@ -24,6 +21,7 @@ export const SellerSettings: FC = () =>{
 						...register('inn'),
 					}}
 					error={errors?.inn?.message}
+					typeError='dataError'
 				/>
                 </div>
                 <div className={styles.containerForKPP}>
@@ -34,6 +32,7 @@ export const SellerSettings: FC = () =>{
 						...register('kpp'),
 					}}
 					error={errors?.kpp?.message}
+					typeError='dataError'
 				/>
                 </div>
                 <div className={styles.containerForPhone}>
@@ -42,6 +41,7 @@ export const SellerSettings: FC = () =>{
 						labelText="Телефон"
 						validation={{ ...register('phone') }}
 						error={errors?.phone?.message}
+						typeError='dataError'
 					/>
                 </div>
                 <Input
@@ -49,18 +49,21 @@ export const SellerSettings: FC = () =>{
 						labelText="Правовая форма организации"
 						validation={{ ...register('orgForm') }}
 						error={errors?.orgForm?.message}
+						typeError='dataError'
 					/>
                 <Input
 						inputType={InputTypes.companyname}
 						labelText="Название организации"
 						validation={{ ...register('companyname') }}
 						error={errors?.companyname?.message}
+						typeError='dataError'
 					/>
                     <Input
 						inputType={InputTypes.shopname}
 						labelText="Название магазина"
 						validation={{ ...register('shopname') }}
 						error={errors?.shopname?.message}
+						typeError='dataError'
 					/>
                     <Input
 					inputType={InputTypes.email}
@@ -69,6 +72,7 @@ export const SellerSettings: FC = () =>{
 						...register('email'),
 					}}
 					error={errors?.email?.message}
+					typeError='dataError'
 				/>
                 <Input
 					inputType={InputTypes.address}
@@ -77,6 +81,7 @@ export const SellerSettings: FC = () =>{
 						...register('address'),
 					}}
 					error={errors?.address?.message}
+					typeError='dataError'
 				/>
                 <div className={styles.btncontainer}>
 					<Button isDisabled={!isValid} type='submit' mode='primary'>Сохранить</Button>
