@@ -1,0 +1,29 @@
+@import '../../styles/abstract/constants.scss';
+.table{
+    width: 100%;
+    max-width: 730x;
+    &__head{
+        width: 100%;
+        display: flex;
+        gap: 20px;
+        text-align: start;
+    }
+    &__vendor{
+        width: 255px;
+    }
+    &__logo{
+        width: 255px;
+    }
+    &__country{
+        width: 180px;
+    }
+    &__line{
+        width: 100%;
+        display: flex;
+        gap: 20px;
+        text-align: start;
+        &:hover{
+            background-color:  $light-grey;
+        }
+    }
+}
