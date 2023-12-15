@@ -1,11 +1,11 @@
 import PersonalFavorites from '../../components/PersonalFavorites/PersonalFavorites';
-import PersonalPurchases from '../../components/PersonalPurchases/PersonalPurchases';
 import CabinetMenu from '../../components/CabinetMenu/CabinetMenu';
 import styles from './Personal.module.scss';
 import { Routes, Route } from 'react-router-dom';
 import PersonalSettings from '../../components/PersonalSettings/PersonalSettings';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import PasswordSettings from '../../components/PasswordSettings/PasswordSettings';
+import PersonalPurchases from '../../components/PersonalPurchases/PersonalPurchases';
 
 const Personal: React.FC = () => {
   return (
@@ -21,15 +21,14 @@ const Personal: React.FC = () => {
           <Route
             path="/purchases"
             element={
-              // <PersonalPurchases />
-              <h2>Мои покупки</h2>
+              <PersonalPurchases />
+              // <h2>Мои покупки</h2>
             }
           />
           <Route
             path="/favorites"
             element={
-              // <PersonalFavorites />
-              <h2>Избранное</h2>
+              <PersonalFavorites />
             }
           />
           <Route

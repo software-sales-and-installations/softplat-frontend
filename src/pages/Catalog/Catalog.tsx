@@ -1,25 +1,24 @@
 //КОМПОНЕНТ НЕ ИСПОЛЬЗУЕТСЯ??
 
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import styles from './Catalog.module.scss';
 import { Categories } from '../../components/Categories/Categories';
 import SelectForm from '../../components/SelectForm/SelectForm';
 import CardsGrid from '../../components/CardsGrid/CardsGrid';
 import { PRODUCT_ITEMS } from '../../utils/constants';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { fetchAllCards } from './CatalogSlice';
-// import { AppDispatch, RootState } from '../../services/redux/store';
+import { useDispatch } from 'react-redux';
+import { AppDispatch, useAppSelector } from '../../services/redux/store';
+import { fetchAllCards } from '../../services/redux/slices/cards/cards';
 
-// type Props = {};
 
 const Catalog: FC = () => {
-  // const dispatch = useDispatch<AppDispatch>();
-  // const cards = useSelector((state: RootState) => state.cards.cards)
-  // console.log(cards)
+  const dispatch = useDispatch<AppDispatch>();
+  const cards = useAppSelector((state) => state.cards.cards)
+  console.log(cards)
 
-  // useEffect(() => {
-  //   dispatch(fetchAllCards())
-  // }, [])
+  useEffect(() => {
+    dispatch(fetchAllCards())
+  }, [])
 
   return (
     <section className={styles.catalog}>
