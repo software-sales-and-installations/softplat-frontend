@@ -13,6 +13,15 @@ import PhotoShopImg from '../images/seller/Photoshop.png';
 import Acrobat from '../images/seller/Acrobat.png';
 import Illustrator from '../images/seller/Illustrator.png';
 
+import OfficeApps from '../images/catalog/office-apps.png';
+import SystemApps from '../images/catalog/system-apps.png';
+import Internet from '../images/catalog/internet.png';
+import Security from '../images/catalog/security.png';
+import Convectors from '../images/catalog/convectors.png';
+import Multimedia from '../images/catalog/multimedia.png';
+import ERPCRM from '../images/catalog/erp-crm.png';
+import Archivators from '../images/catalog/archivators.png';
+
 export const CATEGORIZED_TEXT: {
   id: number;
   text: string;
@@ -512,14 +521,14 @@ export const CATALOGUE_NAMES: {
   pathName: string;
   id: number;
 }[] = [
-  { name: 'Офисные приложения', img: '', pathName: 'office-apps', id: 1 },
-  { name: 'Системное ПО', img: '', pathName: 'system-apps', id: 2 },
-  { name: 'Мультимедиа', img: '', pathName: 'media-apps', id: 3 },
-  { name: 'Конвекторы', img: '', pathName: 'convectors', id: 4 },
-  { name: 'Архиваторы', img: '', pathName: 'archivers', id: 5 },
-  { name: 'Безопасность', img: '', pathName: 'security', id: 6 },
-  { name: 'Интернет', img: '', pathName: 'internet', id: 7 },
-  { name: 'ERP & CRM', img: '', pathName: 'erp-crm', id: 8 },
+  { name: 'Офисные приложения', img: OfficeApps, pathName: 'office-apps', id: 1 },
+  { name: 'Системное ПО', img: SystemApps, pathName: 'system-apps', id: 2 },
+  { name: 'Мультимедиа', img: Multimedia, pathName: 'media-apps', id: 3 },
+  { name: 'Конвекторы', img: Convectors, pathName: 'convectors', id: 4 },
+  { name: 'Архиваторы', img: Archivators, pathName: 'archivers', id: 5 },
+  { name: 'Безопасность', img: Security, pathName: 'security', id: 6 },
+  { name: 'Интернет', img: Internet, pathName: 'internet', id: 7 },
+  { name: 'ERP & CRM', img: ERPCRM, pathName: 'erp-crm', id: 8 },
 ];
 export const FAQ_INFO: {
   id: number;

@@ -13,7 +13,7 @@ const Catalogue: React.FC = () => {
           <li className={styles.catalogue__item} key={i.name}>
             <Link to={`/catalog/${i.pathName}`}>
               <p className={styles.catalogue__itemText}>{i.name}</p>
-              <img src={itemImg} alt="Изображение раздела каталога" />
+              <img src={i.img} alt="Изображение раздела каталога" />
             </Link>
           </li>
         ))}

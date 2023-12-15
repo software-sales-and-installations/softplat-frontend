@@ -37,7 +37,7 @@
   }
 
   &__itemText {
-    padding: 20px 0 0 15px;
+    padding: 15px 0 0 15px;
     margin: 0;
     text-align: start;
     @include font-table-bold;
@@ -48,8 +48,7 @@
     width: 241px;
     position: absolute;
     bottom: 0px;
-    right: 14px;
+    right: 0px;
     object-fit: cover;
-    transform: rotateY(180deg);
   }
 }
