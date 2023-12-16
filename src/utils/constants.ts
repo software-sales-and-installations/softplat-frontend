@@ -751,6 +751,7 @@ export const PURCHASES_ITEMS_CABINET: {
   seller: string;
   data: string;
   isDownloaded: boolean;
+  number: number;
 }[] = [
   {
     id: 1,
@@ -760,6 +761,7 @@ export const PURCHASES_ITEMS_CABINET: {
     seller: 'Продавец',
     data: '01/10/2023',
     isDownloaded: false,
+    number: 123456789,
   },
   {
     id: 2,
@@ -769,6 +771,7 @@ export const PURCHASES_ITEMS_CABINET: {
     seller: 'Продавец',
     data: '01/10/2023',
     isDownloaded: false,
+    number: 123456789,
   },
   {
     id: 3,
@@ -778,6 +781,7 @@ export const PURCHASES_ITEMS_CABINET: {
     seller: 'Продавец',
     data: '01/10/2023',
     isDownloaded: true,
+    number: 123456789,
   },
 ];
 
