@@ -1,0 +1,17 @@
+@import '../../styles/abstract/mixins.scss';
+@import '../../styles/abstract/constants.scss';
+
+.title{
+    margin: 25px 0 0 0;
+    @include font-h3-regular;
+    color: $black-standart-text;
+}
+.subtitle{
+    color: $dark-grey;
+    @include font-CTAbody-regular;
+    padding: 25px 0;
+    margin: 0;
+    &:last-of-type{
+        padding: 0 0 40px 0;
+    }
+}
