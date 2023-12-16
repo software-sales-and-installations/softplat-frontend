@@ -21,7 +21,7 @@ export const SuccessPayPopup: FC = ()=>{
         <Popup>
             <h2 className={styles.title}>Спасибо за покупку!</h2>
             <p className={styles.subtitle}>Оплата прошла успешно, купленное программное обеспечение доступно в личном кабинете в разделе «Мои покупки». </p>
-            <p className={styles.subtitle}>Лицензионные ключи были отправлены на Вашу почту</p>
+            <p className={styles.subtitle}>Лицензионные ключи были отправлены на Вашу&nbsp;почту</p>
             <div className={styles.containerForSubmitBtn}>
                 <Button type='button' mode='primary' onClick={handleClick}>Мои покупки</Button>
             </div>
