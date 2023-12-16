@@ -110,10 +110,16 @@ export const PayPopup: FC = ()=>{
 					<input className={styles.checkboxcontainer__input}  id='remember' {...register("remember")} type="checkbox" value="remember"/>
 					<label className={styles.checkboxcontainer__label} htmlFor='remember'>Запомнить карту</label>
 				</div>
+                <div className={classNames(styles.checkboxcontainer, styles.checkboxcontainer_type_reg)}>
+					<input id='agreement' className={styles.checkboxcontainer__input} {...register("agree", { required: true })} type="checkbox" value="agree"/>
+					<label className={styles.checkboxcontainer__label} htmlFor='agreement'>Я соглашаюсь с политикой обработки персональных данных</label>
+				</div>
                 <div>
                     <p className={styles.popup__errorspan}>{NotSuccessPay}</p>
                 </div>
-                <Button isDisabled={!isValid} onClick={handleClick} mode='primary'>Оплатить {isSuccess} ₽</Button>
+                <div className={styles.popup__containerForSubmitBtn}>
+                    <Button isDisabled={!isValid} onClick={handleClick} mode='primary'>Оплатить {isSuccess} ₽</Button>
+                </div>
             </form>
         </Popup>
     )
