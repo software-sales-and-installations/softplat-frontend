@@ -15,7 +15,7 @@ export const Popup: FC<IPopup> = ({ children}) => {
 	const token = localStorage.getItem('token')
 	const dispatch = useAppDispatch();
 	function handlePopupClose(){
-		dispatch(isSuccessPay(false))
+		dispatch(isSuccessPay(0))
 		dispatch(isNotSuccessPay(''))
 		dispatch(isSuccessCardData(false))
 		dispatch(popupState(false));

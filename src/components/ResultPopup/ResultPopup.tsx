@@ -27,7 +27,7 @@ export const ResultPopup : FC = () =>{
     const isSuccess = useSelector((state: RootState) => state.isSuccessPay.isSuccessPay);
 	const handleOverlayClick: React.MouseEventHandler<HTMLDivElement> = (evt) => {
 		if (evt.target === evt.currentTarget) {
-            dispatch(isSuccessPay(false))
+            dispatch(isSuccessPay(0))
             dispatch(isNotSuccessPay(''))
             dispatch(isSuccessCardData(false))
 			dispatch(popupState(false));
@@ -39,8 +39,8 @@ export const ResultPopup : FC = () =>{
         <div onMouseDown={handleOverlayClick} className={classNames(styles.popup, isOpened ? styles.popup_opened : '')}>
             <div className={styles.popup__container}>
             {(token && location.pathname !=='/cart'  )? <SignOutPopup/> : (
-                    (token && location.pathname ==='/cart'&& !isSuccess ) ? <PayPopup/>:
-                    (token && location.pathname ==='/cart' && isSuccess) ? <SuccessPayPopup/> :
+                    (token && location.pathname ==='/cart'&& (isSuccess>0) ) ? <PayPopup/>:
+                    (token && location.pathname ==='/cart' && (isSuccess===0)) ? <SuccessPayPopup/> :
                 <>
                     <h2 className={styles.popup__role}>{MyRole==='Я покупатель'? 'Покупатель': (MyRole==='Я продавец'? 'Продавец': (MyRole==='Забыли пароль?'? 'Восстановление пароля' : 'Администратор'))}</h2>
                     {MyRole==='Я админ'? null : (MyRole==='Забыли пароль?'? null : <ToggleButton/>)}

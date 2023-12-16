@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import style from './CartSummary.module.scss';
 import { Button } from '../../UI/Button/Button';
 import {  useAppSelector } from '../../services/redux/store';
 import { popupState } from '../../UI/Popup/PopupSlice';
 import { useBuyerBasketInfoQuery } from '../../utils/api/buyerBasketApi';
 import { useDispatch } from 'react-redux';
+import { isSuccessPay } from './CartSummarySlice';
 
 export const CartSummary: FC = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,9 @@ export const CartSummary: FC = () => {
     const cartQuantity = item.quantity || 1;
     return total + (item.productResponseDto.price + installationPrice) * cartQuantity;
   }, 0);
-
+useEffect(()=>{
+  dispatch(isSuccessPay(totalAmount))
+},[totalAmount])
   const totalItems = checkedCartItems.reduce((total, item) => {
     const cartQuantity = item.quantity || 1;
     return total + cartQuantity;

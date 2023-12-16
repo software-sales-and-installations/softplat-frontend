@@ -14,7 +14,7 @@ export const SuccessPayPopup: FC = ()=>{
     function handleClick(){
         navigate('/personal/purchases', {replace: true})
         dispatch(isSuccessCardData(false))
-        dispatch(isSuccessPay(false))
+        dispatch(isSuccessPay(0))
         dispatch(popupState(false))
     }
     return(

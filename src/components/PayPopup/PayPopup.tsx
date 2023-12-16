@@ -22,6 +22,7 @@ export const PayPopup: FC = ()=>{
     const dispatch = useDispatch();
     const popupState = useSelector((state: RootState) => state.popupOpen.setIsOpened);
     const NotSuccessPay = useSelector((state: RootState) => state.isNotSuccessPay.isNotSuccessPay);
+    const isSuccess = useSelector((state: RootState) => state.isSuccessPay.isSuccessPay);
     const cartState = useAppSelector(store => store.cart);
     const checkedCartItems = cartState.items.filter(
         item => !cartState.uncheckedItemIds.includes(item.id)
@@ -40,9 +41,8 @@ export const PayPopup: FC = ()=>{
           const basketPositionIds = checkedCartItems.map((item) => item.id);
           await makeOrder({ basketPositionIds });
           basketInfoQuery.refetch();
-          dispatch(isSuccessPay(true))
+          dispatch(isSuccessPay(0))
         } catch (err) {
-            dispatch(isSuccessPay(false))
             dispatch(isNotSuccessPay('Что-то пошло не так'))
             console.error('Error creating order:', err);
         }
@@ -113,7 +113,7 @@ export const PayPopup: FC = ()=>{
                 <div>
                     <p className={styles.popup__errorspan}>{NotSuccessPay}</p>
                 </div>
-                <Button isDisabled={!isValid} onClick={handleClick} mode='primary'>Оплатить заказ</Button>
+                <Button isDisabled={!isValid} onClick={handleClick} mode='primary'>Оплатить {isSuccess} ₽</Button>
             </form>
         </Popup>
     )
