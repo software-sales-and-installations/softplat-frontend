@@ -10,6 +10,17 @@ type TProductInfo = {
   product: IProductCard | undefined;
 }
 const ProductInfo = ({children, product}: TProductInfo) => {
+  const handleDownloadDemo = () => {
+    console.log('test')
+    // const blob = info.blob()
+    // const downloadURL = window.createObjectURL(blob)
+    // const link = document.createElement('a')
+    // link.href = downloadURL
+    // link.download = product!.name
+    // document.appendChild(link)
+    // link.click()
+    // link.remove()
+ }
 
   return (
     <section className={styles.productInfo}>
@@ -28,7 +39,7 @@ const ProductInfo = ({children, product}: TProductInfo) => {
           <div>
             <p>{product?.seller?.name}</p>
           </div>
-          { product?.hasDemo && <Button buttonType='minorGrey' width='136px' height='35px'>Скачать демо</Button>}
+          { product?.hasDemo && <Button onClick={handleDownloadDemo} buttonType='minorGrey' width='136px' height='35px'>Скачать демо</Button>}
         </div>
         <p className={styles.productInfo__text}>{product?.description}</p>
         {children}
