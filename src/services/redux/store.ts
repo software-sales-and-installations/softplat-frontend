@@ -2,6 +2,9 @@ import {reducer as toggleBtnReducer} from '../../UI/ToggleButton/ToggleButtonSli
 import {reducer as chooseRoleReducer} from '../../UI/ChooseRole/ChooseRoleSlice';
 import {reducer as popupStateReducer} from '../../UI/Popup/PopupSlice';
 import {reducer as signoutReducer} from '../../components/SignOutPopup/SignOutPopupSlice.tsx'
+import {reducer as isSuccessCardDataReducer} from '../../components/PayPopup/PayPopupSlice.tsx';
+import {reducer as isSuccessPayReducer} from '../../components/CartSummary/CartSummarySlice.tsx';
+import {reducer as isNotSuccessPayReducer} from '../../components/CartSummary/CartSummarySlice.tsx';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import cardsReducer from './slices/cards/cards';
@@ -29,6 +32,9 @@ const reducers = combineReducers({
 	toggleBtn: toggleBtnReducer,
 	chooseRole: chooseRoleReducer,
 	popupOpen: popupStateReducer,
+  isSuccessCardData: isSuccessCardDataReducer,
+  isSuccessPay: isSuccessPayReducer,
+  isNotSuccessPay: isNotSuccessPayReducer,
 	dropdown: dropDownReducer,
   signout: signoutReducer,
 	cards: cardsReducer,
