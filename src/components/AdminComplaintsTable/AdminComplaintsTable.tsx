@@ -1,29 +1,22 @@
-import { FC } from 'react';
-import styles from './AdminCardTable.module.scss';
+import {FC} from 'react';
+import styles from './AdminComplaintsTable.module.scss';
 import classNames from 'classnames';
-import { IProductCardPropsTable } from './AdminCardTableTypes'
 import { Link } from 'react-router-dom';
 
-export const AdminCardTable: FC<IProductCardPropsTable> = ({ products , productStatus}) => {
-  return (
-      <table className={styles.table}>
+export const AdminComplaintsTable: FC = () =>{
+    return (
+        <table className={styles.table}>
         <thead className={styles.thead}>
           <tr className={classNames(styles.line)}>
-            <th className={classNames(styles.cellName, styles.cell)}>
-              Название
-            </th>
-            <th className={classNames(styles.cellVendor, styles.cell)}>
-              Вендор
-            </th>
-            <th className={classNames(styles.cellSeller, styles.cell)}>
-              Продавец
-            </th>
+            <th className={classNames(styles.cellName, styles.cell)}>Название</th>
+            <th className={classNames(styles.cellVendor, styles.cell)}>Вендор</th>
+            <th className={classNames(styles.cellSeller, styles.cell)}>Продавец</th>
             <th className={classNames(styles.cellArt, styles.cell)}>Артикул</th>
-             <th className={classNames(styles.cellData, styles.cell)}>Дата</th>
+            <th className={classNames(styles.cellComplaints, styles.cell)}>Жалобы</th>
           </tr>
         </thead>
         <tbody>
-       {products.map((i)=>{
+       {/* {products.map((i)=>{
         return (
         <tr className={classNames(styles.line, styles.line_type_body)} key={i.id}>
           {i.productStatus===productStatus?
@@ -56,10 +49,8 @@ export const AdminCardTable: FC<IProductCardPropsTable> = ({ products , productS
             </>
           :null}
         </tr>)
-       })}
+       })} */}
         </tbody>
       </table>
-    );
-    };
-            
-
+    )
+}
