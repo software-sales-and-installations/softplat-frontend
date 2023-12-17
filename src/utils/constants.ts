@@ -144,19 +144,19 @@ export const VALIDATION_SETTINGS = {
     minLength: 3,
     maxLength: 3,
     messages: {
-      tooShort: 'Неверный cvv',
-      tooLong: 'Неверный cvv',
-      invalid: 'Неверный формат cvv',
+      tooShort: 'Введен некорректный CVV',
+      tooLong: 'Введен некорректный CVV',
+      invalid: 'Введен некорректный CVV',
       novalidDate: 'Введите cvv'
     }
   },
   cardname: {
-    pattern: /^[a-z\s]+$/iu,
-    minLength: 2,
-    maxLength: 42,
+    pattern: /^[a-z\s/-]+$/iu,
+    minLength: 4,
+    maxLength: 16,
     messages: {
-      tooShort: 'Слишком короткое имя',
-      tooLong: 'Слишком длинное имя',
+      tooShort: 'Проверьте имя владельца карты',
+      tooLong: 'Проверьте имя владельца карты',
       invalid: 'Только латинские буквы',
       noName: 'Необходимо ввести имя',
     },
@@ -751,6 +751,7 @@ export const PURCHASES_ITEMS_CABINET: {
   seller: string;
   data: string;
   isDownloaded: boolean;
+  number: number;
 }[] = [
   {
     id: 1,
@@ -760,6 +761,7 @@ export const PURCHASES_ITEMS_CABINET: {
     seller: 'Продавец',
     data: '01/10/2023',
     isDownloaded: false,
+    number: 123456789,
   },
   {
     id: 2,
@@ -769,6 +771,7 @@ export const PURCHASES_ITEMS_CABINET: {
     seller: 'Продавец',
     data: '01/10/2023',
     isDownloaded: false,
+    number: 123456789,
   },
   {
     id: 3,
@@ -778,6 +781,7 @@ export const PURCHASES_ITEMS_CABINET: {
     seller: 'Продавец',
     data: '01/10/2023',
     isDownloaded: true,
+    number: 123456789,
   },
 ];
 

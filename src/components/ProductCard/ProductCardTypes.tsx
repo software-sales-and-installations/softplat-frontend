@@ -11,7 +11,7 @@ export interface IProductCard {
   productAvailability?: boolean;
   productStatus?: ProductStatus;
   productionTime?: Date;
-  quantity?: number;
+  quantity: number;
   seller?: ProductCardSeller;
   vendor?: ProductCardVendor;
   version?: string;

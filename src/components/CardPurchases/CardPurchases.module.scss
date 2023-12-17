@@ -17,6 +17,9 @@
     height: 100%;
     object-fit: cover;
     border-radius: 15px;
+    @include font-body-filters;
+    font-size: 11px;
+    color: #9e9e9e;
   }
 
   &__description {
@@ -41,15 +44,25 @@
   &__name {
     @include font-body-regular;
     color: #595959;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__brand {
     margin: 5px 0 9px;
   }
 
-  &__load {
+  &__loadContainer {
     flex: 0 0 50px;
+  }
+
+  &__load {
     cursor: pointer;
+
+    &:hover {
+      stroke: #000;
+    }
 
     &_inactive {
       opacity: 0.4;
@@ -60,5 +73,7 @@
   &__data {
     @include font-CTAbody-regular;
     color: #9e9e9e;
+    text-align: start;
+    flex: 0 0 100px;
   }
 }

@@ -48,6 +48,7 @@ export interface IPayFields{
 	validDate: string;
 	cvv: string;
 	cardName: string;
-	remember?: any
+	remember?: any;
+	agree?: any;
 
 }
