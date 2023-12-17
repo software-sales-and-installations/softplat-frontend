@@ -27,9 +27,14 @@ const Search: FC = () => {
     return (
       (card.name.toLowerCase().includes(searchvalue.toLowerCase()) ||
         card.id.toString().includes(searchvalue)) &&
-      ProductStatus.PUBLISHED
+      ProductStatus.PUBLISHED &&
+      card.quantity > 0
     );
   });
+
+  const recommended = data?.products.filter(
+    (card: IProductCard) => card.quantity > 0,
+  );
 
   return (
     <>
@@ -57,7 +62,7 @@ const Search: FC = () => {
               cards={
                 searchedCountries?.length !== 0
                   ? { products: searchedCountries }
-                  : data
+                  : { products: recommended }
               }
             />
           )}
