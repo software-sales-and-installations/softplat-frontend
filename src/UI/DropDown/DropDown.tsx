@@ -48,9 +48,9 @@ const DropDown: FC<IDropDowmProps> = ({ options, type, isMultiOption }) => {
       closeMenuOnSelect={catalogSelect && true}
       defaultValue={baseSelect && currentBase}
       onChange={e => handleChange(e)}
-      isSearchable={false}
-      placeholder={false}
-      // menuIsOpen
+      isSearchable={true}
+      placeholder={true}
+      menuIsOpen
     />
   );
 };
