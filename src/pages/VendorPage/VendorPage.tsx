@@ -36,7 +36,8 @@ const VendorPage: FC = () => {
   const vendorCards = data?.products?.filter(
     (card: IProductCard) =>
       card.vendor?.id === vendor?.id &&
-      card.productStatus === ProductStatus.PUBLISHED,
+      card.productStatus === ProductStatus.PUBLISHED &&
+      card.quantity > 0,
   );
 
   return (

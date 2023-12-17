@@ -1,12 +1,14 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import style from './CartSummary.module.scss';
 import { Button } from '../../UI/Button/Button';
 import {  useAppSelector } from '../../services/redux/store';
-// import { popupState } from '../../UI/Popup/PopupSlice';
-import { useOrderMakeMutation } from '../../utils/api/buyerOrderApi';
+import { popupState } from '../../UI/Popup/PopupSlice';
 import { useBuyerBasketInfoQuery } from '../../utils/api/buyerBasketApi';
+import { useDispatch } from 'react-redux';
+import { isSuccessPay } from './CartSummarySlice';
 
 export const CartSummary: FC = () => {
+  const dispatch = useDispatch();
   const cartState = useAppSelector(store => store.cart);
   const checkedCartItems = cartState.items.filter(
     item => !cartState.uncheckedItemIds.includes(item.id)
@@ -17,7 +19,9 @@ export const CartSummary: FC = () => {
     const cartQuantity = item.quantity || 1;
     return total + (item.productResponseDto.price + installationPrice) * cartQuantity;
   }, 0);
-
+useEffect(()=>{
+  dispatch(isSuccessPay(totalAmount))
+},[totalAmount])
   const totalItems = checkedCartItems.reduce((total, item) => {
     const cartQuantity = item.quantity || 1;
     return total + cartQuantity;
@@ -26,22 +30,10 @@ export const CartSummary: FC = () => {
   //@ts-ignore
   const basketInfoQuery = useBuyerBasketInfoQuery();
 
-  const [makeOrder] = useOrderMakeMutation();
-
   const handleClick = async () => {
-    try {
-      const basketPositionIds = checkedCartItems.map((item) => item.id);
-      await makeOrder({ basketPositionIds });
-      basketInfoQuery.refetch();
-    } catch (err) {
-      console.error('Error creating order:', err);
-    }
+    dispatch(popupState(true))
   };
 
-
-  // function handleClick(){
-  //   dispatch(popupState(true));
-  // }
 
   return (
     <div className={style.cartSummary}>

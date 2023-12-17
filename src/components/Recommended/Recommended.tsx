@@ -14,7 +14,7 @@ const Recommended: FC = () => {
 
   const recommendedCards = data?.products.filter(
     (card: IProductCard) =>
-      card.productStatus === ProductStatus.PUBLISHED,
+      card.productStatus === ProductStatus.PUBLISHED && card.quantity > 0,
   );
 
   return (

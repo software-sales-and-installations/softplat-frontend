@@ -1,38 +1,54 @@
 
 import {FC} from 'react';
 import { Popup } from '../../UI/Popup/Popup';
-import { SubmitHandler, useForm} from 'react-hook-form';
+import { useForm} from 'react-hook-form';
 import { IPayFields } from '../../UI/Popup/PopupTypes';
 import { Button } from '../../UI/Button/Button';
 import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';
 import { CARDNUMBER_VALIDATION_CONFIG, VALIDDATE_VALIDATION_CONFIG, CVV_VALIDATION_CONFIG, CARDNAME_VALIDATION_CONFIG } from '../../utils/constants';
 import styles from '../../UI/Popup/Popup.module.scss';
-import {useState, useEffect} from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../services/redux/store';
 import InputMask from "react-input-mask";
 import classNames from 'classnames';
+import { useAppSelector } from '../../services/redux/store';
+import { useOrderMakeMutation } from '../../utils/api/buyerOrderApi';
+import { useBuyerBasketInfoQuery } from '../../utils/api/buyerBasketApi';
+import { isNotSuccessPay, isSuccessPay } from '../CartSummary/CartSummarySlice';
 
 export const PayPopup: FC = ()=>{
+    const dispatch = useDispatch();
     const popupState = useSelector((state: RootState) => state.popupOpen.setIsOpened);
-    const [textSubmit, setTextSubmit] = useState('')
+    const NotSuccessPay = useSelector((state: RootState) => state.isNotSuccessPay.isNotSuccessPay);
+    const isSuccess = useSelector((state: RootState) => state.isSuccessPay.isSuccessPay);
+    const cartState = useAppSelector(store => store.cart);
+    const checkedCartItems = cartState.items.filter(
+        item => !cartState.uncheckedItemIds.includes(item.id)
+      );
     const {
 		register,
-		handleSubmit,
 		reset,
 		formState: { errors, isValid },
-		getValues,
         setValue,
 	} = useForm<IPayFields>({ mode: 'onChange' });
+     //@ts-ignore
+    const basketInfoQuery = useBuyerBasketInfoQuery();
+    const [makeOrder] = useOrderMakeMutation();
+    const handleClick = async () => {
+        try {
+          const basketPositionIds = checkedCartItems.map((item) => item.id);
+          await makeOrder({ basketPositionIds });
+          basketInfoQuery.refetch();
+          dispatch(isSuccessPay(0))
+        } catch (err) {
+            dispatch(isNotSuccessPay('Что-то пошло не так'))
+            console.error('Error creating order:', err);
+        }
+      };
 
-    const onSubmitResData: SubmitHandler<IPayFields> = () => {
-        const formValue = getValues();
-        console.log(formValue)
-        setTextSubmit('Простите, мы еще не научились это делать. А пока Вы можете перечислить эти деньги в фонд помощи дикой природы')
-    }
     useEffect(()=>{
-        setTextSubmit('')
         reset();
         setValue('cardNumber', '', { shouldValidate: true })
         setValue('cvv', '', { shouldValidate: true })
@@ -41,7 +57,7 @@ export const PayPopup: FC = ()=>{
     return (
         <Popup>
             <h2 className={styles.popup__title}>Введите данные карты</h2>
-            <form className={styles.form} onSubmit={handleSubmit(onSubmitResData)}>
+            <form className={styles.form}>
                 <div className={styles.containerPayPopup}>
                     <label className={styles.containerPayPopup__label} htmlFor='cardNumber'>Номер карты</label>
                     <InputMask
@@ -94,10 +110,16 @@ export const PayPopup: FC = ()=>{
 					<input className={styles.checkboxcontainer__input}  id='remember' {...register("remember")} type="checkbox" value="remember"/>
 					<label className={styles.checkboxcontainer__label} htmlFor='remember'>Запомнить карту</label>
 				</div>
-                <div className={styles.errorContainer}>
-					<p className={styles.errorContainer__error}>{textSubmit}</p>
-				</div>	
-                <Button isDisabled={!isValid} type='submit' mode='primary'>Оплатить заказ</Button>
+                <div className={classNames(styles.checkboxcontainer, styles.checkboxcontainer_type_reg)}>
+					<input id='agreement' className={styles.checkboxcontainer__input} {...register("agree", { required: true })} type="checkbox" value="agree"/>
+					<label className={styles.checkboxcontainer__label} htmlFor='agreement'>Я соглашаюсь с политикой обработки персональных данных</label>
+				</div>
+                <div>
+                    <p className={styles.popup__errorspan}>{NotSuccessPay}</p>
+                </div>
+                <div className={styles.popup__containerForSubmitBtn}>
+                    <Button isDisabled={!isValid} onClick={handleClick} mode='primary'>Оплатить {isSuccess} ₽</Button>
+                </div>
             </form>
         </Popup>
     )
