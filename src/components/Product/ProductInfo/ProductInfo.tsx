@@ -22,6 +22,8 @@ const ProductInfo = ({children, product}: TProductInfo) => {
     // link.remove()
  }
 
+ console.log(product?.id)
+
   return (
     <section className={styles.productInfo}>
       <div className={styles.productInfo__slider}>

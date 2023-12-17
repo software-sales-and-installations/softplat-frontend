@@ -36,8 +36,6 @@ export const ProductPage: FC = () => {
   const { id } = useParams();
   // const dispatch = useAppDispatch();
   const cardData = useAppSelector(state => state.cards.card);
-  // const [isInstallationSelected, setIsInstallationSelected] = useState(false);
-  // const [totalPrice, setTotalPrice] = useState(cardData.price);
   // const [tooltipText, setTooltipText] = useState('');
 
   // const [buyerBasketAddItem, addItemError] = useBuyerBasketAddItemMutation();
@@ -67,19 +65,6 @@ export const ProductPage: FC = () => {
   //   } catch (error) {
   //     console.error('Error adding item to cart:', error);
   //   }
-  // };
-  //
-  // const handleCheckboxChange = () => {
-  //   setIsInstallationSelected(prev => !prev);
-  //   updateTotalPrice(isInstallationSelected);
-  // };
-  //
-  // const updateTotalPrice = (wasInstallationSelected: boolean) => {
-  //   setTotalPrice(prev =>
-  //     wasInstallationSelected
-  //       ? prev - cardData.installationPrice
-  //       : prev + cardData.installationPrice,
-  //   );
   // };
 
 
@@ -116,13 +101,15 @@ export const ProductPage: FC = () => {
 
   // console.log(countItemInCart, 'countItemInCart');
 
+  console.log(cardData.id)
+
   return (
     <div className={styles.productPage}>
       <div className={styles.breadcrumbs}>
         <Breadcrumbs vendor={cardData.vendor!} />
       </div>
       <ProductInfo product={product}>
-        <ProductButtons error={productError}/>
+        <ProductButtons error={productError} id={product?.id.toString()} instPrice={product?.installationPrice}/>
       </ProductInfo>
       <Reviews id={cardData.id.toString()}/>
       <Similar id={cardData.id.toString()}/>
