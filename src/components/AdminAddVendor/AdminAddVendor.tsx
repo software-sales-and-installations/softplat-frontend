@@ -9,6 +9,7 @@ import { IAdminAddVendor } from './AdminAddVendorTypes';
 import { Button } from '../../UI/Button/Button';
 import { useVendorQuery } from '../../utils/api/vendorApi';
 import { useVendorChangeMutation } from '../../utils/api/vendorApi';
+import { useVendorAddMutation } from '../../utils/api/vendorApi';
 
 export const AdminAddVendor: FC = () =>{
     const {
@@ -28,8 +29,11 @@ export const AdminAddVendor: FC = () =>{
       const [vendorChange, {
         // isFetching, isLoading, isError
     }] = useVendorChangeMutation();
+    const [vendorAdd, {
+        // isFetching, isLoading, isError
+      }] = useVendorAddMutation();
     function handleSubmitVendor(){
-        if(id){
+        if(id.id){
             vendorChange({vendorId: id.id, body: getValues()}).unwrap()
             .then((res) => {
                 console.log(res)
@@ -40,14 +44,24 @@ export const AdminAddVendor: FC = () =>{
             .finally()
 
         }
-        else console.log(getValues())
+        else {
+            vendorAdd(getValues()).unwrap()
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+            .finally()
+        }
     }
     useEffect(()=>{
+        if(id.id){
         setVendorData(vendor)
         console.log(id.id)
         setValue('country', vendor?.country)
         setValue('name', vendor?.name)
-        setValue('description', vendor?.description)
+        setValue('description', vendor?.description)}
     },[id, vendor, vendorData])
     return (
         <form className={styles.form} onSubmit={handleSubmit(handleSubmitVendor)}>
