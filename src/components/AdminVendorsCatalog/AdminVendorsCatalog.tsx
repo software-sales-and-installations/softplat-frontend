@@ -1,16 +1,19 @@
 import {FC, useEffect, useState} from 'react';
 import styles from './AdminVendorsCatalog.module.scss';
 import { useVendorListQuery } from '../../utils/api/vendorApi';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export const AdminVendorsCatalog: FC = () =>{
-    const { data: vendorAll,
-        //     // isFetching,isLoading, error
-          } = useVendorListQuery();
+    const location = useLocation();
+     //@ts-ignore
+    const { data: vendorAll} = useVendorListQuery({},{
+            refetchOnMountOrArgChange:true
+          });
     const [vendorData, setVendorData] = useState(vendorAll)
           useEffect(()=>{
             setVendorData(vendorAll)
-          },[vendorData, vendorAll])
+          },[vendorData, vendorAll, location.pathname==='/admin/vendors'])
+
     return (
         <div className={styles.table}>
             <div className={styles.table__head}>
@@ -20,13 +23,13 @@ export const AdminVendorsCatalog: FC = () =>{
             </div>
             {vendorData?.vendors.map((i)=>{
                 return(
-                    <div className={styles.table__line}>
+                    <div key={i.id} className={styles.table__line}>
                     <Link to={`/producers/${i.id}`} className={styles.table__info}>
                         <p className={styles.table__id}>{i.id}</p>
                         <p className={styles.table__vendor}>{i.name}</p>
                         <p className={styles.table__country}>{i.country}</p>
                     </Link>
-                    <Link to='/admin/add-vendor' className={styles.table__redBtn}/>
+                    <Link to={`/admin/add-vendor/${i.id}`} className={styles.table__redBtn}/>
                     </div>
                 )
             })}
