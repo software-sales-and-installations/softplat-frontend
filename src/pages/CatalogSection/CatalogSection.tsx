@@ -45,7 +45,7 @@ const CatalogSection: FC = () => {
   const categorizedCards = data?.products?.filter(
     (card: IProductCard) =>
       card.category?.id === currentCatalog?.id &&
-      card.productStatus === ProductStatus.PUBLISHED,
+      card.productStatus === ProductStatus.PUBLISHED && card.quantity > 0,
   );
 
   const filterCards = () => {
