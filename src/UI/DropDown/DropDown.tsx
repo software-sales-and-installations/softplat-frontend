@@ -48,9 +48,10 @@ const DropDown: FC<IDropDowmProps> = ({ options, type, isMultiOption }) => {
       closeMenuOnSelect={catalogSelect && true}
       defaultValue={baseSelect && currentBase}
       onChange={e => handleChange(e)}
-      isSearchable={true}
+      isSearchable={isMultiOption && true}
       placeholder={true}
-      menuIsOpen
+      noOptionsMessage={() => 'Нет подходящих вариантов'}
+      // menuIsOpen={!catalogSelect && true}
     />
   );
 };
