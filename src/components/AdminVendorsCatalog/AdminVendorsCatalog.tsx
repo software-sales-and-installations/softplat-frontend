@@ -4,7 +4,6 @@ import { useVendorListQuery } from '../../utils/api/vendorApi';
 import { Link, useLocation } from 'react-router-dom';
 
 export const AdminVendorsCatalog: FC = () =>{
-    const location = useLocation();
      //@ts-ignore
     const { data: vendorAll} = useVendorListQuery({},{
             refetchOnMountOrArgChange:true
@@ -12,7 +11,7 @@ export const AdminVendorsCatalog: FC = () =>{
     const [vendorData, setVendorData] = useState(vendorAll)
           useEffect(()=>{
             setVendorData(vendorAll)
-          },[vendorData, vendorAll, location.pathname==='/admin/vendors'])
+          },[vendorData, vendorAll])
 
     return (
         <div className={styles.table}>
