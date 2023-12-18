@@ -1,10 +1,25 @@
+@import './../../styles/abstract/constants.scss';
+@import './../../styles/abstract/mixins.scss';
+
 .personalPurchases {
-    &__list {
-        margin: 3px 0 0;
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 27px;
-        padding: 0;
-    }   
+  flex: 0 0 730px;
+
+  &__title {
+    text-align: center;
+    @include font-h1-bold;
+    margin: 0;
+  }
+
+  &__button {
+    margin-top: 45px;
+  }
+
+  &__list {
+    margin: 3px 0 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 27px;
+    padding: 0;
+  }
 }
