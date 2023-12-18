@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 import styles from './SellerDrafts.module.scss';
-import { SellerEmptyStatus } from '../SellerEmptyStatus/SellerEmptyStatus';
+import EmptyState from '../EmptyState/EmptyState';
 import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 import { IProductCard } from '../ProductCard/ProductCardTypes';
 import { useState } from 'react';
@@ -20,7 +20,12 @@ export const SellerDrafts: FC = () => {
   return (
     <section className={styles.container}>
       {!cards ? (
-        <SellerEmptyStatus text="Черновиков пока нет" />
+        <EmptyState
+          navigateTo="/seller/add-card"
+          buttonText="Добавить карточку"
+        >
+          Черновиков пока нет
+        </EmptyState>
       ) : (
         <>
           <div className={styles.container__header}>
