@@ -2,7 +2,7 @@ import {FC, useEffect, useState} from 'react';
 import styles from './AdminAddVendor.module.scss';
 import { useParams } from 'react-router-dom';
 import { Input } from '../../UI/Input/Input';
-import { PERSONALNAME_VALIDATION_CONFIG } from '../../utils/constants';
+import { VENDORDESCRIPTION_VALIDATION_CONFIG, VENDORNAME_VALIDATION_CONFIG } from '../../utils/constants';
 import { InputTypes } from '../../UI/Input/InputTypes';
 import { useForm } from 'react-hook-form';
 import { IAdminAddVendor } from './AdminAddVendorTypes';
@@ -69,8 +69,9 @@ export const AdminAddVendor: FC = () =>{
 					inputType={InputTypes.name}
 					labelText='Название'
 					validation={{
-						...register('name', PERSONALNAME_VALIDATION_CONFIG)}}
+						...register('name', VENDORNAME_VALIDATION_CONFIG)}}
                     typeError='dataError'
+                    error={errors?.name?.message}
             />
             <div className={styles.selectContainer}>
             <label className={styles.selectContainer__label} htmlFor='country'>Страна</label>
@@ -79,6 +80,7 @@ export const AdminAddVendor: FC = () =>{
                 <option value="CHINA">China</option>
                 <option value="USA">USA</option>
                 <option value="UK">UK</option>
+                <option value="INDIA">India</option>
             </select>
           </div>
             <div className={styles.containerLogo}>
@@ -100,7 +102,8 @@ export const AdminAddVendor: FC = () =>{
             </div>
             <div className={styles.textArea}>
             <label className={styles.textArea__label} htmlFor='description'>Описание</label>
-            <textarea className={styles.textArea__input} id='description' {...register('description', {required: true})}/>
+            <textarea className={styles.textArea__input} id='description' {...register('description', VENDORDESCRIPTION_VALIDATION_CONFIG)}/>
+            <span className={styles.textArea__error}>{errors.description?.message}</span>
         </div>
         <div className={styles.containerForBtn}>
             <Button isDisabled={!isValid} type="submit" mode="primary">Сохранить</Button>

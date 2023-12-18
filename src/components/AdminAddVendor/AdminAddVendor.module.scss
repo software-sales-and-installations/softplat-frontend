@@ -64,7 +64,7 @@
         border-radius: 8px;
         border: 1px solid $border-input;
         min-height: 75px;
-        margin-bottom: 15px;
+        margin: 0;
         &:focus{
             outline: none;
         }
@@ -72,9 +72,17 @@
             min-height: 80px;
         }
     }
+    &__error{
+      color: $red-alert-system;
+	    @include font-body-filters;
+	    display: block;
+	    height: 25px;
+	    text-align: left;
+	    margin: 0;
+    }
     
 }
 .containerForBtn{
-    margin-top: 150px;
+    margin-top: 140px;
     width: 83%;
 }

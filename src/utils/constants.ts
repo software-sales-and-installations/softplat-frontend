@@ -104,6 +104,29 @@ export const VALIDATION_SETTINGS = {
       noCompanyName: 'Необходимо ввести название',
     },
   },
+  vendordescription: {
+    pattern: /^[0-9a-zA-Zа-яёЁА-Я-@#$.,%^&+=?!"'«»\s]/,
+    minLength: 2,
+    maxLength: 500,
+    messages: {
+      tooShort: 'Слишком короткое описание',
+      tooLong: 'Слишком длинное описание',
+      invalid: 'Использование недопустимых символов',
+      noVendorDescription: 'Необходимо добавить описание',
+    }
+
+  },
+  vendorname: {
+    pattern: /^[a-zA-Zа-яёЁА-Я-,."'«»\s]/,
+    minLength: 2,
+    maxLength: 255,
+    messages: {
+      tooShort: 'Слишком короткое название',
+      tooLong: 'Слишком длинное название',
+      invalid: 'Использование недопустимых символов',
+      noVendorName: 'Необходимо добавить название',
+    }
+  },
 
   phone: {
     pattern: /^\d+$/,
@@ -492,7 +515,43 @@ export const PRICE_VALIDATION_CONFIG ={
     value: VALIDATION_SETTINGS.price.maxLength,
     message: VALIDATION_SETTINGS.price.messages.tooLong,
   },
-}
+};
+export const VENDORNAME_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.vendorname.messages.noVendorName,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.vendorname.pattern,
+    message: VALIDATION_SETTINGS.vendorname.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.vendorname.maxLength,
+    message: VALIDATION_SETTINGS.vendorname.messages.tooLong,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.vendorname.minLength,
+    message: VALIDATION_SETTINGS.vendorname.messages.tooShort,
+  },
+};
+export const VENDORDESCRIPTION_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.vendordescription.messages.noVendorDescription,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.vendordescription.pattern,
+    message: VALIDATION_SETTINGS.vendordescription.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.vendordescription.maxLength,
+    message: VALIDATION_SETTINGS.vendordescription.messages.tooLong,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.vendordescription.minLength,
+    message: VALIDATION_SETTINGS.vendordescription.messages.tooShort,
+  },
+};
 export const CARD_REQUIRED_FIELDS = {
   required: {
     value: true,
