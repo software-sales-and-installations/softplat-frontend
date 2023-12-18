@@ -18,6 +18,7 @@ import { Product } from './components/Product/Product.tsx';
 import { ProtectedRouteForAdmin, ProtectedRouteForAdminAuth
   // ProtectedRouteForBuyer, ProtectedRouteForSeller 
 } from './components/ProtectedRoute/ProtectedRoute.tsx';
+import NotFound from './pages/NotFound/NotFound.tsx';
 
 function App() {
   return (
@@ -86,6 +87,7 @@ function App() {
                 <Navigate to="/" />
               </ProtectedRouteForAdminAuth>
             } />
+            <Route path='*' element={<NotFound />} />
         </Routes>
       </MainWrapper>
       <Footer />
