@@ -1,0 +1,12 @@
+@import './../../styles/abstract/constants.scss';
+@import './../../styles/abstract/mixins.scss';
+
+.title {
+  text-align: center;
+  @include font-h1-bold;
+  margin: 0;
+}
+
+.button {
+  margin-top: 75px;
+}

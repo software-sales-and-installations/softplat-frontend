@@ -2,11 +2,11 @@
 @import '../../styles/abstract/mixins.scss';
 
 .published {
-  margin-top: 9px;
+  flex: 0 0 730px;
 
   &__header {
     list-style: none;
-    margin: 0;
+    margin: 9px 0 0;
     padding: 0;
     display: flex;
     gap: 20px;

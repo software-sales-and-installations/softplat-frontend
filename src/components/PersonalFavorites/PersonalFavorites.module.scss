@@ -2,8 +2,9 @@
 @import '../../styles/abstract/mixins.scss';
 
 .personalFavorites {
-    // margin-top: 65px;
-    // margin-left: 100px;
+  flex: 0 0 730px;
+  // margin-top: 65px;
+  // margin-left: 100px;
   &__title {
     margin: 0;
     // @include font-h2-simibold;

@@ -2,10 +2,14 @@ import React from 'react';
 import styles from './SellerPublished.module.scss';
 import { PURCHASES_ITEMS_CABINET } from '../../utils/constants';
 import CardPublished from '../CardPublished/CardPublished';
+import EmptyState from '../EmptyState/EmptyState';
 
 const SellerPublished: React.FC = () => {
   return (
     <section className={styles.published}>
+      {/* <EmptyState navigateTo="/seller/add-card" buttonText="Добавить карточку">
+        Вы еще ничего не опубликовали
+      </EmptyState> */}
       <ul className={styles.published__header}>
         <li className={styles.published__item}>Лого</li>
         <li className={styles.published__item}>Наименование</li>
