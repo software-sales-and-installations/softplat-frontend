@@ -9,6 +9,8 @@ import { SellerBankSettings } from '../../components/SellerBankSettings/SellerBa
 import { SellerAddNewCard } from '../../components/SellerAddNewCard/SellerAddNewCard';
 import { SellerDrafts } from '../../components/SellerDrafts/SellerDrafts';
 import SellerPublished from '../../components/SellerPublished/SellerPublished';
+import SellerModeration from '../../components/SellerModeration/SellerModeration';
+import SellerCorrection from '../../components/SellerCorrection/SellerCorrection';
 
 export const Seller: FC = () => {
   return (
@@ -24,8 +26,8 @@ export const Seller: FC = () => {
           <Route path="/add-card" element={<SellerAddNewCard />} />
           <Route path="/drafts" element={<SellerDrafts />} />
           <Route path="/published" element={<SellerPublished />} />
-          <Route path="/on-moderation" element={<h2>На модерации</h2>} />
-          <Route path="/correction" element={<h2>На доработке</h2>} />
+          <Route path="/on-moderation" element={<SellerModeration />} />
+          <Route path="/correction" element={<SellerCorrection />} />
           <Route path="/appeal" element={<h2>Жалобы</h2>} />
           <Route path="/sales" element={<h2>Отчеты продаж</h2>} />
           <Route path="/bank-details" element={<SellerBankSettings />} />
