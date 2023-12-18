@@ -37,7 +37,7 @@ const CardPurchases: React.FC<cardPurchasesProps> = ({
   const isExpired = currentDate.getTime() > expiredDate.getTime();
 
   return (
-    <div className={styles.cardPurchases}>
+    <li className={styles.cardPurchases}>
       <div className={styles.cardPurchases__imgContainer}>
         <img
           src={image}
@@ -77,7 +77,7 @@ const CardPurchases: React.FC<cardPurchasesProps> = ({
       <span className={styles.cardPurchases__data}>
         {data.split(' ')[0].split('-').join('.')}
       </span>
-    </div>
+    </li>
   );
 };
 
