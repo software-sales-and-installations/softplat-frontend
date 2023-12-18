@@ -8,7 +8,8 @@ import {
   VALIDATION_SETTINGS,
   NAME_VALIDATION_CONFIG,
   PHONE_VALIDATION_CONFIG,
-  INN_VALIDATION_CONFIG 
+  INN_VALIDATION_CONFIG, 
+	COMMON_PASSWORDS
 } from '../../utils/constants';
 import { useForm } from 'react-hook-form';
 import { ISignUpFields } from '../../UI/Popup/PopupTypes';
@@ -156,7 +157,9 @@ export const PopupForReg: FC = () => {
                   return VALIDATION_SETTINGS.password.messages.sameAsEmail;
                 } else if (value === watch('name')) {
                   return VALIDATION_SETTINGS.password.messages.sameAsName;
-                }
+                } else if (COMMON_PASSWORDS.includes(value)) {
+									return VALIDATION_SETTINGS.password.messages.unsafe;
+								}
                 return;
 							}
             }),
