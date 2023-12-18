@@ -79,6 +79,7 @@ export const VALIDATION_SETTINGS = {
       noMatch: 'Пароли не совпадают',
       sameAsEmail: 'Пароль не должен совпадать с email',
       sameAsName: 'Пароль не должен совпадать с именем',
+      unsafe: 'Введите более надежный пароль'
     },
   },
   name: {
@@ -1013,3 +1014,21 @@ export const adminMenuItems = [
     link: 'sales',
   },
 ];
+
+export const COMMON_PASSWORDS = [
+  'Password1@',
+  'Welcome123!',
+  'SecurePass12#',
+  'StrongPassword9$',
+  'SecretCode2022@',
+  'SuperSecure!23',
+  '12345678Ab@',
+  'P@ssw0rd2021!',
+  '!Qwerty12345',
+  'Qwerty123@',
+  'Asdfgh123!',
+  'Zxcvbn123@',
+  'Qwerty!123',
+  'Asdfgh!123',
+  'Zxcvbn!123'
+]
