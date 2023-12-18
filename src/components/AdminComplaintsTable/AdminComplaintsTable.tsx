@@ -1,9 +1,37 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styles from './AdminComplaintsTable.module.scss';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import { useComplaintListQuery } from '../../utils/api/complaintApi';
+import { IComplaint } from './AdminComplaintsType';
+import { INewComplaintsList } from './AdminComplaintsType';
 
 export const AdminComplaintsTable: FC = () =>{
+    const {data: complaintList=[]} = useComplaintListQuery({},{
+      refetchOnMountOrArgChange: true
+    });
+
+    let countProducts: Array<number>=[]
+    let newComplaintsList: Array<IComplaint> =[]
+
+    const [newItems, setNewItems] = useState<IComplaint[]>([])
+
+    function newList(){
+      complaintList?.complaints?.forEach((i: any)=>{
+        if(countProducts.indexOf(i.product.id)===-1){
+          console.log(newComplaintsList)
+          countProducts.push(i.product.id)
+          newComplaintsList.push(i)
+        }
+        setNewItems(newComplaintsList)
+        return newComplaintsList
+      })
+    }
+
+    useEffect(()=>{
+      newList()
+    },[complaintList])
+    
     return (
         <table className={styles.table}>
         <thead className={styles.thead}>
@@ -16,40 +44,28 @@ export const AdminComplaintsTable: FC = () =>{
           </tr>
         </thead>
         <tbody>
-       {/* {products.map((i)=>{
+       {newItems.map((i: any)=>{
         return (
         <tr className={classNames(styles.line, styles.line_type_body)} key={i.id}>
-          {i.productStatus===productStatus?
           <>
             <td className={classNames(styles.cellName, styles.cell, styles.cell_type_body)}>
-              <Link to={`/product/${i.id}`} className={styles.link}>
-                <p className={styles.cell__text}>{i.name}</p>
-              </Link>
+                <p className={styles.cell__text}>{i.product.name}</p>
             </td>
             <td className={classNames(styles.cellVendor, styles.cell, styles.cell_type_body)}>
-              <Link to={`/product/${i.id}`} className={styles.link}>
-                <p className={classNames(styles.cell__text) }>{i.vendor?.name ? i.vendor.name : ''}</p>
-              </Link>
+                <p className={classNames(styles.cell__text) }>{i.product.vendor?.name}</p>
             </td> 
             <td className={classNames(styles.cellSeller, styles.cell, styles.cell_type_body)}>
-              <Link to={`/product/${i.id}`} className={styles.link}>
-                <p className={styles.cell__text}>{i.vendor?.name ? i.vendor.name : ''}</p>
-              </Link>
+                <p className={styles.cell__text}>{i.product.seller?.name}</p>
             </td>
             <td className={classNames(styles.cellArt, styles.cell, styles.cell_type_body)}>
-              <Link to={`/product/${i.id}`} className={styles.link}>
                 <p className={styles.cell__text}>{i.id}</p>
-              </Link>
             </td>
             <td className={classNames(styles.cellData, styles.cell, styles.cell_type_body)}>
-              <Link to={`/product/${i.id}`} className={styles.link}>
-                <p className={styles.cell__text}>{`${i.productionTime? i.productionTime: ''}`}</p>
-              </Link>
+                <p className={styles.cell__text}>{}</p>
             </td>
             </>
-          :null}
         </tr>)
-       })} */}
+       })}
         </tbody>
       </table>
     )
