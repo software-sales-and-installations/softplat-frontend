@@ -6,6 +6,7 @@ import { EmptyStateProps } from './EmptyStateTypes';
 
 const EmptyState: React.FC<EmptyStateProps> = ({
   children,
+  button = true,
   navigateTo,
   buttonText,
 }) => {
@@ -14,17 +15,19 @@ const EmptyState: React.FC<EmptyStateProps> = ({
   return (
     <>
       <h2 className={styles.title}>{children}</h2>
-      <div className={styles.button}>
-        <Button
-          buttonType="primary"
-          actionType="button"
-          width="290px"
-          height="55px"
-          onClick={() => navigate(navigateTo)}
-        >
-          {buttonText}
-        </Button>
-      </div>
+      {button && (
+        <div className={styles.button}>
+          <Button
+            buttonType="primary"
+            actionType="button"
+            width="290px"
+            height="55px"
+            onClick={() => navigate(navigateTo!)}
+          >
+            {buttonText}
+          </Button>
+        </div>
+      )}
     </>
   );
 };
