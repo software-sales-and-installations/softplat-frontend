@@ -17,14 +17,18 @@ import { setUser } from '../../services/redux/slices/user/user';
 import { useAuthLoginMutation } from '../../utils/api/authApi';
 import { signout } from '../SignOutPopup/SignOutPopupSlice';
 import { useBuyerFavoritesQuery } from '../../utils/api/buyerApi';
-import { useBuyerBasketInfoQuery } from '../../utils/api/buyerBasketApi';
+import { useBuyerBasketAddItemMutation, useBuyerBasketInfoQuery } from '../../utils/api/buyerBasketApi';
+import { sendCartToServer } from '../../services/redux/slices/cart/cart';
 
 export const PopupForAuth: FC = () => {
   const [authError, setAuthError] = useState(0);
   const [errorText, setErrorText] = useState('');
 
+  const [buyerBasketAddItem] = useBuyerBasketAddItemMutation();
   const { refetch: refetchFavorites } = useBuyerFavoritesQuery(undefined);
-  const { refetch: refetchBasketInfo } = useBuyerBasketInfoQuery(undefined);
+  const {refetch: refetchBasketInfo } = useBuyerBasketInfoQuery(undefined);
+  const cartItems = JSON.parse(localStorage.getItem('cartItems') ?? '[]');
+
   const dispatch = useAppDispatch();
   const {
     register,
@@ -51,6 +55,12 @@ export const PopupForAuth: FC = () => {
         localStorage.setItem('email', userData.email);
         localStorage.setItem('userId', userData.id);
         console.log(userData);
+
+        if (cartItems.length > 0) {
+          sendCartToServer(cartItems, buyerBasketAddItem, dispatch);
+          localStorage.removeItem('cartItems');
+        }
+
         dispatch(popupState(false));
         dispatch(setUser(userData));
         dispatch(signout(false));

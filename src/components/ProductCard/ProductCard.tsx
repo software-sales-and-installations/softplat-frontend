@@ -5,8 +5,10 @@ import { Button } from '../../UIStorybook/Button/Button';
 import { IProductCardProps } from './ProductCardTypes';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import {
+  addToLocalStorage,
   asyncAddToCart,
   asyncRemoveFromCart,
+  removeFromLocalStorage,
 } from '../../services/redux/slices/cart/cart';
 import {
   useBuyerBasketAddItemMutation,
@@ -36,11 +38,9 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const [role, setRole] = useState(localStorage.getItem('role'));
   const user = useAppSelector(selectUser);
   const userId = localStorage.getItem('userId');
-  // console.log('userId', userId);
 
   useEffect(() => {
     setToken(localStorage.getItem('token'));
-    setRole(localStorage.getItem('role'));
     setRole(localStorage.getItem('role'));
   }, [signout, user]);
 
@@ -70,14 +70,25 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
     item =>
       item.productResponseDto.id === card.id && item.installation === false,
   );
-  // console.log(countItemInCart);
 
   const handleAddToCart = async () => {
-    await asyncAddToCart(card, buyerBasketAddItem, basketInfo.refetch);
+    if (userId) {
+      await asyncAddToCart(card, buyerBasketAddItem, basketInfo.refetch);
+    } else {
+      addToLocalStorage(card, dispatch);
+    }
   };
 
   const handleremoveFromCart = async () => {
-    await asyncRemoveFromCart(card, buyerBasketDeleteItem, basketInfo.refetch);
+    if (userId) {
+      await asyncRemoveFromCart(
+        card,
+        buyerBasketDeleteItem,
+        basketInfo.refetch,
+      );
+    } else {
+      removeFromLocalStorage(card.id, dispatch);
+    }
   };
 
   const handleToggleFavorite = async () => {
@@ -153,23 +164,19 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
             +
           </button>
         </div>
-      ) : (
-        ((role==='BUYER' || !token)? 
+      ) : role === 'BUYER' || !token ? (
         <div className={styles.card__addBtn}>
-          
-        <Button
-          buttonType="primary"
-          width="100%"
-          height="35px"
-          onClick={handleAddToCart}
-          disabled={addItemError.isError}
-        >
-          {addItemError.isError ? 'Нет в наличии' : ' Добавить в корзину'}
-        </Button>
+          <Button
+            buttonType="primary"
+            width="100%"
+            height="35px"
+            onClick={handleAddToCart}
+            disabled={addItemError.isError}
+          >
+            {addItemError.isError ? 'Нет в наличии' : ' Добавить в корзину'}
+          </Button>
         </div>
-        : null)
-      )}
-    
+      ) : null}
     </div>
   );
 };
