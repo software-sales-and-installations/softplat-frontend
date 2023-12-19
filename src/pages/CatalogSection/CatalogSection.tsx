@@ -19,6 +19,7 @@ import Preloader from '../../components/Preloader/Preloader';
 import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { useVendorListQuery } from '../../utils/api/vendorApi';
+import { Categories } from '../../components/Categories/Categories';
 
 const CatalogSection: FC = () => {
   const { section } = useParams();
@@ -45,7 +46,8 @@ const CatalogSection: FC = () => {
   const categorizedCards = data?.products?.filter(
     (card: IProductCard) =>
       card.category?.id === currentCatalog?.id &&
-      card.productStatus === ProductStatus.PUBLISHED && card.quantity > 0,
+      card.productStatus === ProductStatus.PUBLISHED &&
+      card.quantity > 0,
   );
 
   const filterCards = () => {
@@ -77,17 +79,7 @@ const CatalogSection: FC = () => {
       </div>
       <section className={styles.catalogSection}>
         <h2 className={styles.catalogSection__title}>{currentCatalog?.name}</h2>
-        <ul className={styles.catalogSection__categories}>
-          {CATEGORIZED_TEXT_VENDOR.map(btn => {
-            return (
-              <li className={styles.item} key={btn.id}>
-                <button className={styles.catalogSection__categoriesBtn}>
-                  {btn.text}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+        <Categories />
         <div className={styles.catalogSection__selectContainer}>
           <DropDown
             isMultiOption={false}
