@@ -9,8 +9,6 @@ export const useLoadCart = () => {
   const basketInfo = useBuyerBasketInfoQuery(undefined);
   const cartItems = JSON.parse(localStorage.getItem('cartItems') ?? '[]');
 
-  console.log('useLoadCart');
-
   useEffect(() => {
     if (userId) {
       if (basketInfo.currentData) {
