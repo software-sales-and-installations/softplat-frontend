@@ -1,0 +1,57 @@
+@import '../../styles/abstract/constants';
+@import '../../styles/abstract/mixins';
+
+
+.addToCart__countButton {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 32px;
+  background-color: $light-grey;
+  box-sizing: border-box;
+  align-items: center;
+  @include font-input-field;
+  gap: 30px;
+  margin-top: 10px;
+  &_type {
+    &_big {
+      width:255px;
+      height:55px;
+      padding: 0 45px;
+    }
+   &_small {
+       width: 100%;
+       height: 35px;
+       padding: 0 10px;
+   }
+  }
+}
+
+.addToCart__changeQuantity {
+    border: none;
+    margin: 0;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 22px;
+    padding: 0 0 3px 0;
+  &_type {
+    &_big {
+    width: 20px;
+    }
+    &_small {
+      width: 15px;
+    }
+  }
+}
+
+.addToCart__addButton {
+  &_type {
+      &_big {
+        width:255px;
+        height:55px;
+      }
+      &_small {
+        width: 100%;
+        height: 35px;
+      }
+  }
+}
