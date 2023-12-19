@@ -8,11 +8,14 @@ import {
   adminMenuItems,
 } from '../../utils/constants';
 import { ICabinetMenuProps } from './CabinetMenuTypes';
+import { useAppSelector } from '../../services/redux/store';
+import { RootState } from '../../services/redux/store';
+import { useLocation } from 'react-router-dom';
 
 const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
   const dispatch = useAppDispatch();
   console.log(localStorage.getItem('role'))
-
+  const qtyComplaintsforAdmin = useAppSelector((state: RootState) => state.qtyComplaints.qty);
   return (
     <>
       <nav className={styles.personalTitles}>
@@ -41,7 +44,9 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
             }
           >
             {item.name}
-            {/* <div className={styles.personalTitles__counter}>3</div> */}
+            <div>
+              {( mode==='admin' && item.name==='Жалобы')? <div className={styles.personalTitles__counter}>{qtyComplaintsforAdmin}</div>: null}
+            </div>
           </NavLink>
         ))}
         <button

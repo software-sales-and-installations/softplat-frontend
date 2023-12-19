@@ -5,6 +5,7 @@ import {reducer as signoutReducer} from '../../components/SignOutPopup/SignOutPo
 import {reducer as isSuccessCardDataReducer} from '../../components/PayPopup/PayPopupSlice.tsx';
 import {reducer as isSuccessPayReducer} from '../../components/CartSummary/CartSummarySlice.tsx';
 import {reducer as isNotSuccessPayReducer} from '../../components/CartSummary/CartSummarySlice.tsx';
+import {reducer as qtyComplaintsReducer} from '../../components/AdminComplaintsTable/AdminComplaintsSlice.tsx';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import cardsReducer from './slices/cards/cards';
@@ -35,6 +36,7 @@ const reducers = combineReducers({
 	popupOpen: popupStateReducer,
   isSuccessCardData: isSuccessCardDataReducer,
   isSuccessPay: isSuccessPayReducer,
+  qtyComplaints: qtyComplaintsReducer,
   isNotSuccessPay: isNotSuccessPayReducer,
 	dropdown: dropDownReducer,
   signout: signoutReducer,

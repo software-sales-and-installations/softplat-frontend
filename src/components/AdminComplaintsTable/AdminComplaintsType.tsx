@@ -13,7 +13,9 @@ export interface IComplaint{
     createdAt: Date;
     complaintStatus: string;
 }
-
+export interface INewComplaints extends IComplaint{
+    qty: number;
+}
 interface IBuyer{
     id: string;
     email: string;
@@ -28,4 +30,8 @@ export interface INewComplaintsList{
     seller: string;
     id: number;
     complaints: number;
+}
+
+export interface IQtyComplaints{
+    qty: number;
 }
