@@ -26,10 +26,17 @@ import { popupState } from '../../UI/Popup/PopupSlice';
 import { setUser } from '../../services/redux/slices/user/user';
 import { signout } from '../SignOutPopup/SignOutPopupSlice';
 import classNames from 'classnames';
+import { useBuyerBasketAddItemMutation, useBuyerBasketInfoQuery } from '../../utils/api/buyerBasketApi';
+import { sendCartToServer } from '../../services/redux/slices/cart/cart';
 
 export const PopupForReg: FC = () => {
   const [errorStatus, setErrorStatus] = useState(0);
   const [textError, setTextError] = useState('');
+
+  const [buyerBasketAddItem] = useBuyerBasketAddItemMutation();
+  const {refetch: refetchBasketInfo } = useBuyerBasketInfoQuery(undefined);
+  const cartItems = JSON.parse(localStorage.getItem('cartItems') ?? '[]');
+
   const dispatch = useAppDispatch();
   const MyRole = useSelector((state: RootState) => state.chooseRole.title);
   const roleForReg =
@@ -75,9 +82,16 @@ export const PopupForReg: FC = () => {
 		  localStorage.setItem('email', userData.email);
 		  localStorage.setItem('userId', userData.id)
 		  console.log(userData)
+
+		  if (cartItems.length > 0) {
+			sendCartToServer(cartItems, buyerBasketAddItem, dispatch);
+			localStorage.removeItem('cartItems');
+		  }
+  
 		  dispatch(popupState(false))
 		  dispatch(setUser(userData));
 		  dispatch(signout(false))
+		  refetchBasketInfo();
 		  reset;
 		})
 			.catch((error) => {

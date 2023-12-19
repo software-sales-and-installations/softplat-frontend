@@ -8,9 +8,12 @@ import { FaTrash, FaRegHeart, FaHeart } from 'react-icons/fa';
 import { ICartItemProps } from './CartItemTypes';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import {
+  addToLocalStorage,
   addToUncheckedList,
   asyncAddToCart,
   asyncRemoveFromCart,
+  removeCartPostion,
+  removeFromLocalStorage,
   removeFromUncheckedList,
   updateCartItem,
 } from '../../services/redux/slices/cart/cart';
@@ -31,9 +34,13 @@ import {
   ayncToggleFavorite,
   removeFromFavorites,
 } from '../../services/redux/slices/favourites/favourites';
+import { ICartItem } from '../ProductListCart/ProductListTypes';
 
 export const CartItem: FC<ICartItemProps> = ({ item }) => {
+  const userId = localStorage.getItem('userId');
+
   const product = item?.productResponseDto;
+
   const navigate = useNavigate();
   const [tooltipText, setTooltipText] = useState('');
   const [totalPrice, setTotalPrice] = useState(product?.price);
@@ -50,7 +57,6 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
   const [buyerBasketСlearPosition] = useBuyerBasketDeletePositionMutation();
 
   const dispatch = useAppDispatch();
-  const userId = localStorage.getItem('userId');
 
   const favorites = useAppSelector(state => state.favorite?.favorites);
   const isFavorite = favorites?.some(item => item === product.id);
@@ -94,20 +100,22 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
     }
   };
 
-
-
-
-console.log(item);
-
-
-
   const handleIncreaseQuantity = async () => {
     if (
       quantity < 10 &&
       product.quantity !== undefined &&
       quantity < product.quantity
     ) {
-      await asyncAddToCart(product, buyerBasketAddItem, basketInfo.refetch, item.installation);
+      if (userId) {
+        await asyncAddToCart(
+          product,
+          buyerBasketAddItem,
+          basketInfo.refetch,
+          item.installation,
+        );
+      } else {
+        addToLocalStorage(product, dispatch, item.installation);
+      }
 
       setQuantity(quantity + 1);
       updateTotalPrice(item.installation, quantity + 1);
@@ -115,28 +123,35 @@ console.log(item);
   };
 
   const handleDecreaseQuantity = async () => {
-    await asyncRemoveFromCart(product, buyerBasketDeleteItem, basketInfo.refetch, item.installation);
+    if (userId) {
+      await asyncRemoveFromCart(
+        product,
+        buyerBasketDeleteItem,
+        basketInfo.refetch,
+        item.installation,
+      );
+    } else {
+      removeFromLocalStorage(product.id, dispatch, item.installation);
+    }
+
     if (quantity > 0) {
       setQuantity(quantity - 1);
     }
+
     updateTotalPrice(item.installation, quantity - 1);
   };
 
-
-
-
-
-
-
-
   const handleRemoveItem = async () => {
-    try {
-      const response = await buyerBasketСlearPosition(item.id).unwrap();
-      console.log('asdasdadddddddddddddddddddddddddddddddddd', response);
-
+    if (userId) {
+      await buyerBasketСlearPosition(item.id).unwrap();
       basketInfo.refetch();
-    } catch (error) {
-      console.error('Ошибка удаления позиции:', error);
+    } else {
+      const cartItems = JSON.parse(localStorage.getItem('cartItems') ?? '[]');
+      const updatedCartItems = cartItems.filter(
+        (cartItem: ICartItem) => cartItem.id !== item.id,
+      );
+      localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+      dispatch(removeCartPostion(item.id));
     }
   };
 
@@ -160,11 +175,10 @@ console.log(item);
         </p>
         <div className={style.cartItem__parameters}>
           <span className={style.cartItem__type}>Лицензия</span>
-          <Checkbox
-            checked={item.installation}
-            readOnly
-          />
-          <span className={style.cartItem__installationText}>{`c установкой ${product?.installationPrice}`}</span>
+          <Checkbox checked={item.installation} readOnly />
+          <span
+            className={style.cartItem__installationText}
+          >{`c установкой ${product?.installationPrice}`}</span>
           <div
             className={style.cartItem__question}
             onMouseEnter={() =>
@@ -202,9 +216,7 @@ console.log(item);
           onClick={handleDecreaseQuantity}
           className={style.cartItem__decreaseQuantity}
           disabled={removeItemError.isError}
-        >
-    
-        </button>
+        ></button>
         <span>{quantity}</span>
         <button
           onClick={handleIncreaseQuantity}
@@ -214,9 +226,7 @@ console.log(item);
             quantity > 9 ||
             quantity === product.quantity
           }
-        >
-
-        </button>
+        ></button>
       </div>
     </li>
   );

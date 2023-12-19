@@ -7,12 +7,16 @@ export const useLoadCart = () => {
   const dispatch = useAppDispatch();
   const userId = localStorage.getItem('userId');
   const basketInfo = useBuyerBasketInfoQuery(undefined);
+  const cartItems = JSON.parse(localStorage.getItem('cartItems') ?? '[]');
 
   useEffect(() => {
-    if (basketInfo.currentData && userId) {
-      dispatch(setCartItems(basketInfo.currentData.productsInBasket));
-
-      console.log('корзина');
+    if (userId) {
+      if (basketInfo.currentData) {
+        dispatch(setCartItems(basketInfo.currentData.productsInBasket));
+        console.log('корзина');
+      }
+    } else {
+      dispatch(setCartItems(cartItems));
     }
-  }, [basketInfo, dispatch]);
+  }, [basketInfo, userId, dispatch]);
 };

@@ -7,8 +7,10 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { fetchSingleCard } from '../../services/redux/slices/cards/cards';
 import {
+  addToLocalStorage,
   asyncAddToCart,
   asyncRemoveFromCart,
+  removeFromLocalStorage,
 } from '../../services/redux/slices/cart/cart';
 import {
   useBuyerBasketAddItemMutation,
@@ -67,21 +69,29 @@ export const ProductPage: FC = () => {
   );
 
   const handleAddToCart = async () => {
-    await asyncAddToCart(
-      cardData,
-      buyerBasketAddItem,
-      basketInfoQuery.refetch,
-      isInstallationSelected,
-    );
+    if (userId) {
+      await asyncAddToCart(
+        cardData,
+        buyerBasketAddItem,
+        basketInfoQuery.refetch,
+        isInstallationSelected,
+      );
+    } else {
+      addToLocalStorage(cardData, dispatch, isInstallationSelected);
+    }
   };
 
   const handleremoveFromCart = async () => {
-    await asyncRemoveFromCart(
-      cardData,
-      buyerBasketDeleteItem,
-      basketInfoQuery.refetch,
-      isInstallationSelected,
-    );
+    if (userId) {
+      await asyncRemoveFromCart(
+        cardData,
+        buyerBasketDeleteItem,
+        basketInfoQuery.refetch,
+        isInstallationSelected,
+      );
+    } else {
+      removeFromLocalStorage(cardData.id, dispatch, isInstallationSelected);
+    }
   };
 
   const handleCheckboxChange = () => {

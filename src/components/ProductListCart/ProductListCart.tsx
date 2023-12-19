@@ -11,15 +11,15 @@ export const ProductListCart: FC = () => {
   const [buyerBasketСlearCart] = useBuyerBasketClearMutation();
   const cartItems = useAppSelector(store => store.cart.items) || [];
   const sortedCartItems = [...cartItems].sort((a, b) => b.id - a.id);
+  const userId = localStorage.getItem('userId');
 
   const handleClearCart = async () => {
-    try {
-      const response = await buyerBasketСlearCart(undefined).unwrap();
-      console.log('response', response);
-      dispatch(clearCart());
-    } catch (error) {
-      console.error('Ошибка очистки корзины: ', error);
+    if (userId) {
+      await buyerBasketСlearCart(undefined).unwrap();
+    } else {
+      localStorage.removeItem('cartItems');
     }
+    dispatch(clearCart());
   };
 
   return (
