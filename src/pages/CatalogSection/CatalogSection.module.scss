@@ -11,34 +11,8 @@
     @include font-h1-bold;
   }
 
-  &__categories {
-    margin: 30px 0 0 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 15px;
-  }
-
-  &__categoriesBtn {
-    margin: 0 5px;
-    padding: 5px 20px;
-    border-radius: 20px;
-    border: none;
-    background-color: $dark-grey;
-    color: $white-standart;
-    cursor: pointer;
-    @include font-body-filters;
-    transition: all 0.4s;
-    &:hover {
-      background-color: $accent-lime-button;
-      color: $black-standart-text;
-    }
-  }
-
   &__selectContainer {
-    margin-top: 35px;
+    margin-top: 30px;
     display: flex;
     gap: 40px;
   }
