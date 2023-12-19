@@ -23,12 +23,12 @@ const Contacts = () => {
           </li>
           <li>
             <h2 className={styles.contacts__subtitle}>Телефон</h2>
-            <p className={styles.contacts__text}>+7 (499) 123-45-67</p>
+            <Link to={'tel: +74991234567'} className={styles.contacts__text}>+7 (499) 123-45-67</Link>
           </li>
           <li>
             <h2 className={styles.contacts__subtitle}>Мы в социальных сетях</h2>
             <div className={styles.contacts__socials}>
-              <Link to={''}>
+              <Link to={'https://t.me/PraktikumSupportBot'} target='_blank'>
                 <svg
                   className={styles.contacts__social_icon}
                   xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +47,7 @@ const Contacts = () => {
                   </defs>
                 </svg>
               </Link>
-              <Link to={''}>
+              <Link to={'https://vk.com/yandex.practicum'} target='_blank'>
                 <svg
                   className={styles.contacts__social_icon}
                   xmlns="http://www.w3.org/2000/svg"
