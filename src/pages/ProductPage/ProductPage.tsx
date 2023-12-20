@@ -12,16 +12,12 @@ import Similar from '../../components/Product/Similar/Similar.tsx';
 
 import styles from './ProductPage.module.scss';
 
-
-
 export const ProductPage: FC = () => {
   const { id } = useParams();
   const cardData = useAppSelector(state => state.cards.card);
   // const [tooltipText, setTooltipText] = useState('');
 
   const { data: product, isError: productError} = usePublicProductQuery(id);
-
-  console.log(cardData.id)
 
   return (
     <div className={styles.productPage}>

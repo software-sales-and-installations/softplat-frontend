@@ -1,13 +1,20 @@
 import styles from './Review.module.scss'
+import { Icons } from '../../../UIStorybook/Icons/Icons.tsx';
 
-const ReviewOneCard = () => {
+interface IReviewOneCardProps {
+  author: string;
+  text: string;
+  rating: string | number | null;
+}
+
+const ReviewOneCard = ({author, text, rating}:IReviewOneCardProps) => {
   return (
     <div className={styles.review}>
 <div className={styles.review__header}>
-  <p className={styles.review__name}>Name</p>
-  <div className={styles.review__stars}>*****</div>
+  <p className={styles.review__name}>{author}</p>
+  <div className={styles.review__stars}>{[...Array(Number(rating))].map((n) => <Icons type='smallStar' size={15} key={n}/>)}</div>
 </div>
-      <p className={styles.review__text}>Review Text</p>
+      <p className={styles.review__text}>{text}</p>
     </div>
   );
 };

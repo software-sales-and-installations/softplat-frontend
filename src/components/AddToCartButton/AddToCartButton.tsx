@@ -33,16 +33,17 @@ export const AddToCartButton = ({id, isInstallationSelected, type}: IAddToCartBu
       })
   }
 
-  const [buyerBasketDelete,
-    { isError: removeItemError }
-  ] = useBuyerBasketDeleteItemMutation();
+  const [buyerBasketDelete] = useBuyerBasketDeleteItemMutation();
 
   const handleRemoveFromCart = () => {
     console.log('remove from cart')
     buyerBasketDelete({productId: id, installation: isInstallationSelected}).unwrap()
       .then((res: any) => {
+        if (totalCount === res.productsInBasket[0].quantity &&  totalCount === 1) {
+          dispatch(setCartItems([]));
+        } else {
         dispatch(setCartItems(res.productsInBasket));
-        console.log(res)
+        console.log(res.productsInBasket[0].quantity) }
       })
       .catch((error: any) => {
         console.error('Error deleting item from cart:', error);
@@ -56,7 +57,6 @@ export const AddToCartButton = ({id, isInstallationSelected, type}: IAddToCartBu
     <button
       className={[styles.addToCart__changeQuantity, styles[`addToCart__changeQuantity_type_${type}`]].join(' ')}
         onClick={handleRemoveFromCart}
-        disabled={removeItemError}
       >
         -
       </button>

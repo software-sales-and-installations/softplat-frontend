@@ -1,7 +1,7 @@
 // import styles from './InputPassword.module.scss';
 // import { InputPasswordTypes } from './InputPasswordTypes.tsx';
 // import { Button } from '../Button/Button.tsx';
-// import { Icons } from '../Icons/Icons.tsx';
+// import { IconEmptyStar } from '../IconEmptyStar/IconEmptyStar.tsx';
 // import { Input } from '../Input/Input.tsx';
 // import classNames from 'classnames';
 // import { FC, useEffect, useState } from 'react';
@@ -41,7 +41,7 @@
 // 						className={classNames(styles.input__button, !isPasswordHidden ? styles.input__button_clicked : '')}
 // 							type="button"
 // 							onClick={togglePassword}
-//             ><Icons type='emptyLike' size={35}/></Button>
+//             ><IconEmptyStar type='emptyLike' size={35}/></Button>
 // 					)}
 //       </>
 // 	);
