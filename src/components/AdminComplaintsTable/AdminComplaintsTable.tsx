@@ -14,12 +14,14 @@ export const AdminComplaintsTable: FC = () =>{
       refetchOnMountOrArgChange: true
     });
 
-    let countProducts: Array<number>=[]
-    let newComplaintsList: Array<INewComplaints> =[]
+
+    
 
     const [newItems, setNewItems] = useState<IComplaint[]>([])
 
     function newList(){
+      let newComplaintsList: Array<INewComplaints> =[]
+      let countProducts: Array<number>=[]
       dispatch(qtyComplaints(complaintList?.totalComplaints))
       complaintList?.complaints?.forEach((i: any)=>{
         let count =0;
