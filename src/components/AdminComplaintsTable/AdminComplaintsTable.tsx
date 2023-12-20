@@ -6,23 +6,16 @@ import { useComplaintListQuery } from '../../utils/api/complaintApi';
 import { IComplaint } from './AdminComplaintsType';
 import { INewComplaints} from './AdminComplaintsType';
 import { useAppDispatch } from '../../services/redux/store';
-import { qtyComplaints } from './AdminComplaintsSlice';
 
 export const AdminComplaintsTable: FC = () =>{
   const dispatch = useAppDispatch();
     const {data: complaintList=[]} = useComplaintListQuery({},{
       refetchOnMountOrArgChange: true
     });
-
-
-    
-
     const [newItems, setNewItems] = useState<IComplaint[]>([])
-
     function newList(){
       let newComplaintsList: Array<INewComplaints> =[]
       let countProducts: Array<number>=[]
-      dispatch(qtyComplaints(complaintList?.totalComplaints))
       complaintList?.complaints?.forEach((i: any)=>{
         let count =0;
         if(countProducts.indexOf(i.product.id)===-1){

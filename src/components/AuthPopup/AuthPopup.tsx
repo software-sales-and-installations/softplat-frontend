@@ -22,7 +22,6 @@ import { useBuyerBasketInfoQuery } from '../../utils/api/buyerBasketApi';
 export const PopupForAuth: FC = () => {
   const [authError, setAuthError] = useState(0);
   const [errorText, setErrorText] = useState('');
-
   const { refetch: refetchFavorites } = useBuyerFavoritesQuery(undefined);
   const { refetch: refetchBasketInfo } = useBuyerBasketInfoQuery(undefined);
   const dispatch = useAppDispatch();
@@ -62,7 +61,7 @@ export const PopupForAuth: FC = () => {
         setAuthError(error.originalStatus);
         console.log(error);
       })
-      .finally();
+      .finally()
   };
 
   function handlePasswordPopup() {

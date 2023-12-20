@@ -8,14 +8,22 @@ import {
   adminMenuItems,
 } from '../../utils/constants';
 import { ICabinetMenuProps } from './CabinetMenuTypes';
-import { useAppSelector } from '../../services/redux/store';
-import { RootState } from '../../services/redux/store';
-import { useLocation } from 'react-router-dom';
+import { useComplaintListQuery } from '../../utils/api/complaintApi';
+import { useEffect } from 'react';
 
 const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
   const dispatch = useAppDispatch();
   console.log(localStorage.getItem('role'))
-  const qtyComplaintsforAdmin = useAppSelector((state: RootState) => state.qtyComplaints.qty);
+  const role = localStorage.getItem('role')
+  const {data: complaintList=[]} = useComplaintListQuery({},{
+    refetchOnMountOrArgChange: true
+  })
+  useEffect(()=>{
+    if(role==='ADMIN'){
+      console.log(complaintList)
+      localStorage.setItem('complaints', complaintList?.totalComplaints)
+    }
+  },[ complaintList])
   return (
     <>
       <nav className={styles.personalTitles}>
@@ -45,7 +53,7 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
           >
             {item.name}
             <div>
-              {( mode==='admin' && item.name==='Жалобы')? <div className={styles.personalTitles__counter}>{qtyComplaintsforAdmin}</div>: null}
+              {( mode==='admin' && item.name==='Жалобы')? <div className={styles.personalTitles__counter}>{localStorage.getItem('complaints')}</div>: null}
             </div>
           </NavLink>
         ))}
