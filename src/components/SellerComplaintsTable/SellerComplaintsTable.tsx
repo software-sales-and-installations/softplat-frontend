@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import { useComplaintSellerListQuery } from '../../utils/api/complaintApi';
 import { INewComplaints } from './SellerComplaintsTableTypes';
 import { IComplaint } from './SellerComplaintsTableTypes';
-import { qtySellerComplaints } from './SellerComplaintsTableSlice';
 import { useAppDispatch } from '../../services/redux/store';
 
 
@@ -21,7 +20,6 @@ export const SellerComplaintsTable: FC = () => {
     function newList(){
       let countProducts: Array<number>=[]
       let newComplaintsList: Array<INewComplaints> =[]
-        dispatch(qtySellerComplaints(complaintList?.totalComplaints))
         complaintList?.complaints?.forEach((i: any)=>{
           let count =1;
           if(countProducts.indexOf(i.product.id)===-1){

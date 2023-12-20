@@ -5,7 +5,6 @@ import {reducer as signoutReducer} from '../../components/SignOutPopup/SignOutPo
 import {reducer as isSuccessCardDataReducer} from '../../components/PayPopup/PayPopupSlice.tsx';
 import {reducer as isSuccessPayReducer} from '../../components/CartSummary/CartSummarySlice.tsx';
 import {reducer as isNotSuccessPayReducer} from '../../components/CartSummary/CartSummarySlice.tsx';
-import {reducer as qtySellerComplaintsReducer} from '../../components/SellerComplaintsTable/SellerComplaintsTableSlice.tsx';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import cardsReducer from './slices/cards/cards';
@@ -37,7 +36,6 @@ const reducers = combineReducers({
   isSuccessCardData: isSuccessCardDataReducer,
   isSuccessPay: isSuccessPayReducer,
   isNotSuccessPay: isNotSuccessPayReducer,
-  qtySellerComplaints: qtySellerComplaintsReducer,
 	dropdown: dropDownReducer,
   signout: signoutReducer,
 	cards: cardsReducer,
@@ -55,7 +53,6 @@ const reducers = combineReducers({
   [sellerApi.reducerPath]: sellerApi.reducer,
   [complaintApi.reducerPath]: complaintApi.reducer,
   [userProductApi.reducerPath]: userProductApi.reducer,
-  [complaintApi.reducerPath]: complaintApi.reducer,
   [vendorApi.reducerPath]: vendorApi.reducer,
 });
 
