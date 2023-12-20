@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import style from './Footer.module.scss';
 
 import { FOOTER_LINKS } from '../../utils/constants';
+import logo from '../../images/logo.svg'
 
 export const Footer: FC = () => {
   return (
@@ -11,7 +12,7 @@ export const Footer: FC = () => {
       <div className={style.footer__content}>
         <Link to="/">
           {' '}
-          <img className={style.footer__logo} />
+          <img src={logo} className={style.footer__logo} />
         </Link>
 
         <ul className={style.footer__column}>

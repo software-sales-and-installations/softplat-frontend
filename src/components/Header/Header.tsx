@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../services/redux/store';
 import { selectUser } from '../../services/redux/slices/user/user';
 import { RootState } from '../../services/redux/store';
+import logo from '../../images/logo.svg'
 
 export const Header: FC = () => {
   const dispatch = useAppDispatch();
@@ -38,8 +39,8 @@ export const Header: FC = () => {
   }
   return (
     <header className={styles.header}>
-      <Link to="/catalog" className={styles.header__logo}>
-        Logo
+      <Link to="/catalog" >
+        <img src={logo} alt="Логотип" className={styles.header__logo} />
       </Link>
       <HeaderNavbar />
       <HeaderSearchForm />

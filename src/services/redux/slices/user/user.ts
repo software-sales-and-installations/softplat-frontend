@@ -82,8 +82,9 @@ const userSlice = createSlice({
 				(action) => action.type.endsWith('/rejected'),
 				(state, action) => {
 					state.status = 'failed';
-					state.error = action.payload.statusText;
+					state.error = action.payload.statusText;					
 				}
+				
 			);
 	},
 });
