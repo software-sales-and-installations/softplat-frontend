@@ -35,7 +35,6 @@ export const AdminComplaintsTable: FC = () =>{
           })
           console.log(count)
           newComplaintsList.forEach((el)=>{
-            console.log(count)
             el.product.id===i.product.id
             ? el.qty=count
             : el
