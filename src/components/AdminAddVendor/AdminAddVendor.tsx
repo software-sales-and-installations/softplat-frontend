@@ -70,6 +70,9 @@ export const AdminAddVendor: FC = () =>{
         if (addVendorError === 403) {
             setErrorText('Доступ запрещен');
           }
+        if (addVendorError===0){
+            setErrorText('Данные успешно обновлены/добавлены')
+        }
       }, [addVendorError]);
     useEffect(()=>{
         if(id.id){
