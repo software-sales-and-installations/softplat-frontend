@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styles from './VendorPage.module.scss';
 import VendorInfo from '../../components/VendorInfo/VendorInfo';
-import { CATEGORIZED_TEXT_VENDOR, SELECT_OPTIONS } from '../../utils/constants';
+import { SELECT_OPTIONS } from '../../utils/constants';
 import CardsGrid from '../../components/CardsGrid/CardsGrid';
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../services/redux/store';

@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import CardsGrid from '../../components/CardsGrid/CardsGrid';
 import {
   CATALOGUE_NAMES,
-  CATEGORIZED_TEXT_VENDOR,
   SELECT_COUNTRIES_OPTIONS,
   SELECT_OPTIONS,
 } from '../../utils/constants';
