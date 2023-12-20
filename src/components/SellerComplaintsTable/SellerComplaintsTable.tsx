@@ -16,13 +16,14 @@ export const SellerComplaintsTable: FC = () => {
     const {data: complaintList=[]} = useComplaintSellerListQuery({},{
         refetchOnMountOrArgChange: true
       });
-    let countProducts: Array<number>=[]
-    let newComplaintsList: Array<INewComplaints> =[]
+
     const [newItems, setNewItems] = useState<IComplaint[]>([])
     function newList(){
+      let countProducts: Array<number>=[]
+      let newComplaintsList: Array<INewComplaints> =[]
         dispatch(qtySellerComplaints(complaintList?.totalComplaints))
         complaintList?.complaints?.forEach((i: any)=>{
-          let count =0;
+          let count =1;
           if(countProducts.indexOf(i.product.id)===-1){
             console.log(newComplaintsList)
             newComplaintsList.push({...i, qty:1})
@@ -51,6 +52,7 @@ export const SellerComplaintsTable: FC = () => {
       }
   
       useEffect(()=>{
+        console.log(complaintList)
         newList()
       },[complaintList])
     return (

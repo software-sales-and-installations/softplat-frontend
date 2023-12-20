@@ -17,11 +17,10 @@ export const AdminComplaintsTable: FC = () =>{
       let newComplaintsList: Array<INewComplaints> =[]
       let countProducts: Array<number>=[]
       complaintList?.complaints?.forEach((i: any)=>{
-        let count =0;
+        let count =1;
         if(countProducts.indexOf(i.product.id)===-1){
           console.log(newComplaintsList)
           newComplaintsList.push({...i, qty:1})
-          
         }
         if(countProducts.indexOf(i.product.id)!==-1){
           countProducts.forEach((el)=>{
@@ -35,7 +34,6 @@ export const AdminComplaintsTable: FC = () =>{
             : el
             
           })
-          
         }
         countProducts.push(i.product.id)
         console.log(newComplaintsList)
@@ -43,7 +41,6 @@ export const AdminComplaintsTable: FC = () =>{
         return newComplaintsList
       })
     }
-
     useEffect(()=>{
       newList()
     },[complaintList])
