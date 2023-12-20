@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 
 const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
-  const [complaints, setComplaints] = useState(localStorage.getItem('complaintas') || '0')
+  const [complaints, setComplaints] = useState(localStorage.getItem('complaints') || '0')
   const dispatch = useAppDispatch();
   console.log(localStorage.getItem('role'))
   const role = localStorage.getItem('role')
