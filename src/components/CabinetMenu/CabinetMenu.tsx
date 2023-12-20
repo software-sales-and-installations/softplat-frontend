@@ -8,11 +8,25 @@ import {
   adminMenuItems,
 } from '../../utils/constants';
 import { ICabinetMenuProps } from './CabinetMenuTypes';
+import { useComplaintListQuery } from '../../utils/api/complaintApi';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
+  const [complaints, setComplaints] = useState(localStorage.getItem('complaints') || '0')
   const dispatch = useAppDispatch();
   console.log(localStorage.getItem('role'))
-
+  const role = localStorage.getItem('role')
+  const {data: complaintList=[]} = useComplaintListQuery({},{
+    refetchOnMountOrArgChange: true
+  })
+  useEffect(()=>{
+    if(role==='ADMIN'){
+      console.log(complaintList)
+      localStorage.setItem('complaints', complaintList?.totalComplaints)
+      setComplaints(complaintList.totalComplaints)
+    }
+  },[ complaintList])
   return (
     <>
       <nav className={styles.personalTitles}>
@@ -41,7 +55,9 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
             }
           >
             {item.name}
-            {/* <div className={styles.personalTitles__counter}>3</div> */}
+            <div>
+              {( mode==='admin' && item.name==='Жалобы')? <div className={styles.personalTitles__counter}>{complaints}</div>: null}
+            </div>
           </NavLink>
         ))}
         <button

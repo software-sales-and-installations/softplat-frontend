@@ -23,6 +23,7 @@ import { categoryApi } from '../../utils/api/categoryApi.tsx';
 import { imageApi } from '../../utils/api/imageApi.tsx';
 import { publicProductApi } from '../../utils/api/publicProductApi.tsx';
 import { userProductApi } from '../../utils/api/userProductApi.tsx';
+import { complaintApi } from '../../utils/api/complaintApi.tsx';
 import { vendorApi } from '../../utils/api/vendorApi.tsx';
 import { cartReducer } from './slices/cart/cart';
 import { favoriteReducer } from './slices/favourites/favourites.tsx';
@@ -51,6 +52,7 @@ const reducers = combineReducers({
   [publicProductApi.reducerPath]: publicProductApi.reducer,
   [sellerApi.reducerPath]: sellerApi.reducer,
   [userProductApi.reducerPath]: userProductApi.reducer,
+  [complaintApi.reducerPath]: complaintApi.reducer,
   [vendorApi.reducerPath]: vendorApi.reducer,
 });
 
@@ -67,6 +69,7 @@ export const store = configureStore({
     publicProductApi.middleware,
     sellerApi.middleware,
     userProductApi.middleware,
+    complaintApi.middleware,
     vendorApi.middleware,
     )
 });
