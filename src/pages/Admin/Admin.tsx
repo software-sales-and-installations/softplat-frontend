@@ -1,11 +1,12 @@
 import styles from './Admin.module.scss';
 import { FC } from 'react';
 import CabinetMenu from '../../components/CabinetMenu/CabinetMenu';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { AdminCardTable } from '../../components/AdminCardTable/AdminCardTable';
 import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 import { AdminVendorsCatalog } from '../../components/AdminVendorsCatalog/AdminVendorsCatalog';
+import { AdminAddVendor } from '../../components/AdminAddVendor/AdminAddVendor';
 
 export const Admin: FC = () => {
   const { data} = usePublicProductListQuery({
@@ -28,7 +29,8 @@ export const Admin: FC = () => {
           <Route path="/rejected" element={<AdminCardTable products={data?.products||[]} productStatus={'REJECTED'} />}/>
           <Route path="/appeal" element={<AdminCardTable products={data?.products||[]} productStatus={'APPEAL'}  />}/>
           <Route path="/vendors" element={<AdminVendorsCatalog/>} />
-          <Route path="/add-vendor" element={<h2>Добавить вендора</h2>} />
+          <Route path="/add-vendor" element={<AdminAddVendor/>} />
+          <Route path ='/add-vendor/:id' element={<AdminAddVendor/>} />
           <Route path="/sales" element={<h2>Отчеты продаж</h2>} />
           <Route path="/contacts" element={<h2>Контакты</h2>} />
         </Routes>
