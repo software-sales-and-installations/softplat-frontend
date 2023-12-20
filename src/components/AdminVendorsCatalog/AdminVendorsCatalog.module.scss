@@ -1,29 +1,63 @@
 @import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
 .table{
     width: 100%;
     max-width: 730x;
+    @include font-body-regular;
+    
     &__head{
+        color: $black-standart-text;
         width: 100%;
         display: flex;
         gap: 20px;
         text-align: start;
+        border-bottom: 1px solid $light-grey;
+        padding: 8px 0;
+        margin-bottom: 25px;
+        
+    }
+    &__info{
+        width: 100%;
+        display: flex;
+        gap: 20px;
+        text-align: start;
+        color: $black-standart-text;
+        text-decoration: none;
+        padding: 18px 0;
+    }
+    &__redBtn{
+        background: url('../../images/pencil.svg') no-repeat center;
+        width: 24px;
+        height: 24px;
+        padding: 18px 0;
+        display: none;
+
+
     }
     &__vendor{
         width: 255px;
+        margin: 0;
     }
-    &__logo{
-        width: 255px;
+    &__id{
+        width: 230px;
+        margin: 0;
     }
     &__country{
-        width: 180px;
+        width: 255px;
+        margin: 0;
     }
     &__line{
         width: 100%;
         display: flex;
         gap: 20px;
         text-align: start;
+        color: $black-standart-text;
+        text-decoration: none;
         &:hover{
             background-color:  $light-grey;
+        }
+        &:hover .table__redBtn{
+            display: block;
         }
     }
 }

@@ -55,6 +55,7 @@ const reducers = combineReducers({
   [sellerApi.reducerPath]: sellerApi.reducer,
   [complaintApi.reducerPath]: complaintApi.reducer,
   [userProductApi.reducerPath]: userProductApi.reducer,
+  [complaintApi.reducerPath]: complaintApi.reducer,
   [vendorApi.reducerPath]: vendorApi.reducer,
 });
 

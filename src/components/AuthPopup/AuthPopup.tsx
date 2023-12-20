@@ -75,7 +75,7 @@ export const PopupForAuth: FC = () => {
         setAuthError(error.originalStatus);
         console.log(error);
       })
-      .finally();
+      .finally()
   };
 
   function handlePasswordPopup() {
