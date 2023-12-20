@@ -5,6 +5,7 @@ import {reducer as signoutReducer} from '../../components/SignOutPopup/SignOutPo
 import {reducer as isSuccessCardDataReducer} from '../../components/PayPopup/PayPopupSlice.tsx';
 import {reducer as isSuccessPayReducer} from '../../components/CartSummary/CartSummarySlice.tsx';
 import {reducer as isNotSuccessPayReducer} from '../../components/CartSummary/CartSummarySlice.tsx';
+import {reducer as qtySellerComplaintsReducer} from '../../components/SellerComplaintsTable/SellerComplaintsTableSlice.tsx';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import cardsReducer from './slices/cards/cards';
@@ -23,6 +24,7 @@ import { categoryApi } from '../../utils/api/categoryApi.tsx';
 import { imageApi } from '../../utils/api/imageApi.tsx';
 import { publicProductApi } from '../../utils/api/publicProductApi.tsx';
 import { userProductApi } from '../../utils/api/userProductApi.tsx';
+import { complaintApi } from '../../utils/api/complaintApi.tsx';
 import { vendorApi } from '../../utils/api/vendorApi.tsx';
 import { cartReducer } from './slices/cart/cart';
 import { favoriteReducer } from './slices/favourites/favourites.tsx';
@@ -35,6 +37,7 @@ const reducers = combineReducers({
   isSuccessCardData: isSuccessCardDataReducer,
   isSuccessPay: isSuccessPayReducer,
   isNotSuccessPay: isNotSuccessPayReducer,
+  qtySellerComplaints: qtySellerComplaintsReducer,
 	dropdown: dropDownReducer,
   signout: signoutReducer,
 	cards: cardsReducer,
@@ -50,6 +53,7 @@ const reducers = combineReducers({
   [imageApi.reducerPath]: imageApi.reducer,
   [publicProductApi.reducerPath]: publicProductApi.reducer,
   [sellerApi.reducerPath]: sellerApi.reducer,
+  [complaintApi.reducerPath]: complaintApi.reducer,
   [userProductApi.reducerPath]: userProductApi.reducer,
   [vendorApi.reducerPath]: vendorApi.reducer,
 });
@@ -67,6 +71,7 @@ export const store = configureStore({
     publicProductApi.middleware,
     sellerApi.middleware,
     userProductApi.middleware,
+    complaintApi.middleware,
     vendorApi.middleware,
     )
 });
