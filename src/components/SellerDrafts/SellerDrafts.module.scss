@@ -1,73 +1,14 @@
 @import '../../styles/abstract/constants.scss';
 @import '../../styles/abstract/mixins.scss';
 
-.container {
+.draft {
   flex: 0 0 730px;
-  display: flex;
-  flex-direction: column;
-  &__header {
-    @include font-body-regular;
-    width: 100%;
+
+  &__list {
     display: flex;
-    gap: 20px;
-    text-align: start;
-    margin: 8px 0 30px;
-    padding: 0 10px;
-  }
-  &__line {
-    @include font-body-regular;
-    width: 100%;
-    display: flex;
-    gap: 20px;
-    text-align: start;
-    max-height: 25px;
-    padding: 15px 10px;
-    margin-bottom: 15px;
-    transition: all 0.3s;
-    border-radius: 8px;
-    cursor: pointer;
-    &:hover {
-      background-color: $light-grey;
-    }
-    &:hover .container__trash {
-      display: block;
-    }
-  }
-  &__headerNum {
-    margin: 0;
-    width: 80px;
-  }
-  &__headerName {
-    margin: 0;
-    width: 200px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  &__headerVendor {
-    margin: 0;
-    width: 125px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  &__headerArt {
-    margin: 0;
-    width: 140px;
-  }
-  &__headerData {
-    margin: 0;
-    width: 120px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  &__trash {
-    border: none;
-    width: 20px;
-    height: 20px;
-    background: url('../../images/trash.svg') center no-repeat;
-    cursor: pointer;
-    display: none;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+    margin-top: 25px;
   }
 }
