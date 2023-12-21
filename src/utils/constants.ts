@@ -160,9 +160,9 @@ export const VALIDATION_SETTINGS = {
       noName: 'Необходимо ввести имя',
     },
   },
-  INN: {
+  inn: {
     pattern: /^\d+$/,
-    minLength: 10,
+    minLength: 12,
     maxLength: 12,
     messages: {
       tooShort: 'Введите еще цифры',
@@ -244,19 +244,19 @@ export const EMAIL_VALIDATION_CONFIG = {
 export const INN_VALIDATION_CONFIG = {
   required: {
     value: true,
-    message: VALIDATION_SETTINGS.INN.messages.noINN,
+    message: VALIDATION_SETTINGS.inn.messages.noINN,
   },
   pattern: {
-    value: VALIDATION_SETTINGS.INN.pattern,
-    message: VALIDATION_SETTINGS.INN.messages.invalid,
+    value: VALIDATION_SETTINGS.inn.pattern,
+    message: VALIDATION_SETTINGS.inn.messages.invalid,
   },
   maxLength: {
-    value: VALIDATION_SETTINGS.INN.maxLength,
-    message: VALIDATION_SETTINGS.INN.messages.tooLong,
+    value: VALIDATION_SETTINGS.inn.maxLength,
+    message: VALIDATION_SETTINGS.inn.messages.tooLong,
   },
   minLength: {
-    value: VALIDATION_SETTINGS.INN.minLength,
-    message: VALIDATION_SETTINGS.INN.messages.tooShort,
+    value: VALIDATION_SETTINGS.inn.minLength,
+    message: VALIDATION_SETTINGS.inn.messages.tooShort,
   },
 };export const PERSONALEMAIL_VALIDATION_CONFIG = {
   pattern: {

@@ -89,6 +89,13 @@ export const sellerApi = createApi({
         url: `/seller/bank/`,
       }),
     }),
+    sellerAddBank: build.mutation({
+      query: (body) => ({
+        url: '/seller/bank/',
+        method: 'POST',
+        body
+      })
+    }),
   }),
 });
 
@@ -102,4 +109,5 @@ export const {
   useSellerDeleteBankMutation,
   useSellerChangeBankMutation,
   useSellerGetBankQuery,
+  useSellerAddBankMutation
 } = sellerApi;
