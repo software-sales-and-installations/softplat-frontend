@@ -23,7 +23,9 @@ const VendorPage: FC = () => {
   const { id } = useParams();
   const selectState = useAppSelector(state => state.dropdown.option.value);
 
-  const { data: vendor, isSuccess: isVendorFulfilled } = useVendorQuery(id);
+  const { data: vendor, isSuccess: isVendorFulfilled } = useVendorQuery(id,{
+    refetchOnMountOrArgChange: true
+  });
 
   const { data, error, isLoading } = usePublicProductListQuery(
     {

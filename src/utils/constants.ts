@@ -116,7 +116,7 @@ export const VALIDATION_SETTINGS = {
 
   },
   vendorname: {
-    pattern: /^[a-zA-Zа-яёЁА-Я-,."'«»\s]/,
+    pattern: /^[a-zа-яё\s]+$/iu,
     minLength: 2,
     maxLength: 255,
     messages: {

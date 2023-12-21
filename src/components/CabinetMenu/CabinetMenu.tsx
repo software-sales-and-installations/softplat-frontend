@@ -11,6 +11,7 @@ import { ICabinetMenuProps } from './CabinetMenuTypes';
 import { useComplaintListQuery } from '../../utils/api/complaintApi';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useComplaintSellerListQuery } from '../../utils/api/complaintApi';
 
 const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
   const totalDraft =
@@ -40,6 +41,7 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
     localStorage.getItem('complaints') || '0',
   );
   const dispatch = useAppDispatch();
+  console.log(localStorage.getItem('role'));
   const role = localStorage.getItem('role');
   const { data: complaintList = [] } = useComplaintListQuery(
     {},
@@ -47,13 +49,24 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
       refetchOnMountOrArgChange: true,
     },
   );
+  const { data: complaintSellerList = [] } = useComplaintSellerListQuery(
+    {},
+    {
+      refetchOnMountOrArgChange: true,
+    },
+  );
   useEffect(() => {
-    if (role === 'ADMIN') {
+    if (role === 'ADMIN' || 'SELLER') {
       console.log(complaintList);
-      localStorage.setItem('complaints', complaintList?.totalComplaints);
-      setComplaints(complaintList.totalComplaints);
+      localStorage.setItem(
+        'complaints',
+        complaintList?.totalComplaints || complaintSellerList?.totalComplaints,
+      );
+      setComplaints(
+        complaintList.totalComplaints || complaintSellerList.totalComplaints,
+      );
     }
-  }, [complaintList]);
+  }, [complaintList, complaintSellerList]);
   return (
     <>
       <nav className={styles.personalTitles}>
@@ -83,24 +96,10 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
           >
             {item.name}
             <div>
-              {(mode === 'admin' && item.name === 'Жалобы') ||
-              (mode === 'seller' &&
-                ((item.name === 'Черновики' && totalDraft !== 0) ||
-                  (item.name === 'Опубликовано' && totalPublished !== 0) ||
-                  (item.name === 'На модерации' && totalShipped !== 0) ||
-                  (item.name === 'На доработке' && totalRejected !== 0))) ? (
+              {(mode === 'admin' || mode === 'seller') &&
+              item.name === 'Жалобы' ? (
                 <div className={styles.personalTitles__counter}>
-                  {mode === 'admin' && item.name === 'Жалобы' ? complaints : ''}
-                  {mode === 'seller' &&
-                    (item.name === 'Черновики'
-                      ? totalDraft
-                      : item.name === 'Опубликовано'
-                      ? totalPublished
-                      : item.name === 'На модерации'
-                      ? totalShipped
-                      : item.name === 'На доработке'
-                      ? totalRejected
-                      : '')}
+                  {complaints}
                 </div>
               ) : null}
             </div>
