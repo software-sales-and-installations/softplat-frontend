@@ -8,7 +8,7 @@ export const SellerDrafts: FC = () => {
   const draftList = JSON.parse(
     localStorage.getItem('sellerDraftList')!,
   ).products;
-  console.log(draftList);
+
   return (
     <section className={styles.draft}>
       {draftList.length === 0 ? (

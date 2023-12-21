@@ -14,6 +14,7 @@ import SellerCorrection from '../../components/SellerCorrection/SellerCorrection
 import SellerSales from '../../components/SellerSales/SellerSales';
 import { SellerComplaintsTable } from '../../components/SellerComplaintsTable/SellerComplaintsTable';
 import { useSellerProductListQuery } from '../../utils/api/sellerApi';
+import { useComplaintSellerListQuery } from '../../utils/api/complaintApi';
 
 export const Seller: FC = () => {
   const { data: draftList, isSuccess: isDraftListSuccess } =
@@ -44,17 +45,21 @@ export const Seller: FC = () => {
       },
       { refetchOnMountOrArgChange: true },
     );
+  const { data: complaintList, isSuccess: isComplaintListSuccess } =
+    useComplaintSellerListQuery({}, { refetchOnMountOrArgChange: true });
 
   if (
     isDraftListSuccess &&
     isPublishedListSuccess &&
     isRejectedListSuccess &&
-    isShippedListSuccess
+    isShippedListSuccess &&
+    isComplaintListSuccess
   ) {
     localStorage.setItem('sellerDraftList', JSON.stringify(draftList));
     localStorage.setItem('sellerPublishedList', JSON.stringify(publishedList));
     localStorage.setItem('sellerRejectedList', JSON.stringify(rejectedList));
     localStorage.setItem('sellerShippedList', JSON.stringify(shippedList));
+    localStorage.setItem('sellerComplaintList', JSON.stringify(complaintList));
   }
 
   return (

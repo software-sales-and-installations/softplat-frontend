@@ -36,12 +36,16 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
     (localStorage.getItem('sellerShippedList')
       ? JSON.parse(localStorage.getItem('sellerShippedList')!).totalProducts
       : 0);
+  const totalComplaints =
+    mode === 'seller' &&
+    (localStorage.getItem('sellerComplaintList')
+      ? JSON.parse(localStorage.getItem('sellerComplaintList')!).totalComplaints
+      : 0);
 
   const [complaints, setComplaints] = useState(
     localStorage.getItem('complaints') || '0',
   );
   const dispatch = useAppDispatch();
-  console.log(localStorage.getItem('role'));
   const role = localStorage.getItem('role');
   const { data: complaintList = [] } = useComplaintListQuery(
     {},
@@ -96,10 +100,27 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
           >
             {item.name}
             <div>
-              {(mode === 'admin' || mode === 'seller') &&
-              item.name === 'Жалобы' ? (
+              {(mode === 'admin' && item.name === 'Жалобы') ||
+              (mode === 'seller' &&
+                ((item.name === 'Черновики' && totalDraft !== 0) ||
+                  (item.name === 'Опубликовано' && totalPublished !== 0) ||
+                  (item.name === 'На модерации' && totalShipped !== 0) ||
+                  (item.name === 'На доработке' && totalRejected !== 0) ||
+                  (item.name === 'Жалобы' && totalComplaints !== 0))) ? (
                 <div className={styles.personalTitles__counter}>
-                  {complaints}
+                  {mode === 'admin' && item.name === 'Жалобы' ? complaints : ''}
+                  {mode === 'seller' &&
+                    (item.name === 'Черновики'
+                      ? totalDraft
+                      : item.name === 'Опубликовано'
+                      ? totalPublished
+                      : item.name === 'На модерации'
+                      ? totalShipped
+                      : item.name === 'На доработке'
+                      ? totalRejected
+                      : item.name === 'Жалобы'
+                      ? totalComplaints
+                      : '')}
                 </div>
               ) : null}
             </div>
