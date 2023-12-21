@@ -1,27 +1,43 @@
 import React from 'react';
 import styles from './SellerPublished.module.scss';
-import { PURCHASES_ITEMS_CABINET } from '../../utils/constants';
-import CardPublished from '../CardPublished/CardPublished';
+import SellerCard from '../SellerCard/SellerCard';
 import EmptyState from '../EmptyState/EmptyState';
+import SellerTable from '../SellerTable/SellerTable';
 
 const SellerPublished: React.FC = () => {
+  const publishedList = localStorage.getItem('sellerPublishedList')
+    ? JSON.parse(localStorage.getItem('sellerPublishedList')!).products
+    : [];
+
   return (
     <section className={styles.published}>
-      {/* <EmptyState navigateTo="/seller/add-card" buttonText="Добавить карточку">
-        Вы еще ничего не опубликовали
-      </EmptyState> */}
-      <ul className={styles.published__header}>
-        <li className={styles.published__item}>Лого</li>
-        <li className={styles.published__item}>Наименование</li>
-        <li className={styles.published__item}>Вендор</li>
-        <li className={styles.published__item}>Артикул</li>
-        <li className={styles.published__item}>Дата</li>
-      </ul>
-      <ul className={styles.published__list}>
-        {PURCHASES_ITEMS_CABINET.map(item => (
-          <CardPublished key={item.id} {...item} />
-        ))}
-      </ul>
+      {publishedList.length === 0 ? (
+        <EmptyState
+          navigateTo="/seller/add-card"
+          buttonText="Добавить карточку"
+        >
+          Вы еще ничего не опубликовали
+        </EmptyState>
+      ) : (
+        <>
+          <SellerTable />
+          <ul className={styles.published__list}>
+            {publishedList.map(
+              (product: {
+                id: number;
+                image: string;
+                name: string;
+                vendor: {
+                  name: string;
+                };
+                productionTime: string;
+              }) => (
+                <SellerCard key={product.id} {...product} trash={true} />
+              ),
+            )}
+          </ul>
+        </>
+      )}
     </section>
   );
 };
