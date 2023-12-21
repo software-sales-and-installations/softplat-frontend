@@ -5,6 +5,7 @@ const Form = ({
                 name,
   formType,
                 extClassName,
+  errorText,
                 buttonType,
                 buttonText,
                 secondButtonText,
@@ -12,6 +13,7 @@ const Form = ({
                 width,
                 height,
                 children,
+  disabled,
   ...props
               }: FormProps) => {
   return (
@@ -24,8 +26,13 @@ const Form = ({
       {children}
       <div className={[styles.form__buttonContainer, styles[`form_type_${formType}_buttonContainer`]].join(' ')}
       >
-      <Button width={width} height={height} buttonType={buttonType} type='submit' {...props}>{buttonText}</Button>
-        {secondButtonText && <Button width={width} height={height} buttonType='minorSecondary' type='submit' {...props}>{secondButtonText}</Button>}
+        <div className={styles.form__errorWrapper}>
+        <span className={styles.form__error}>{errorText}</span>
+          </div>
+        <Button disabled={disabled} width={width} height={height} buttonType={buttonType}
+                type='submit' {...props}>{buttonText}</Button>
+        {secondButtonText && <Button width={width} height={height} buttonType='minorSecondary'
+                                     type='submit' {...props}>{secondButtonText}</Button>}
       </div>
     </form>
   );

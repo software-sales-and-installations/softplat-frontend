@@ -1,7 +1,10 @@
 import React from 'react';
 import styles from './CardPurchases.module.scss';
+// import { addToPurchases } from '../../services/redux/slices/purchases/purchases.ts';
+// import { useAppDispatch } from '../../services/redux/store.ts';
 
 export type cardPurchasesProps = {
+  id: number;
   image: string;
   name: string;
   vendor: {
@@ -14,12 +17,17 @@ export type cardPurchasesProps = {
 };
 
 const CardPurchases: React.FC<cardPurchasesProps> = ({
+  // id,
   image,
   name,
   vendor,
   seller,
   data,
 }) => {
+
+  // const dispatch = useAppDispatch();
+  // dispatch(addToPurchases(id));
+
   const date = new Date();
 
   const currentDate = `${date.getFullYear()}-${

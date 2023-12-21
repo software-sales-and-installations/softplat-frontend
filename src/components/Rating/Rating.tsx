@@ -11,7 +11,7 @@ const Rating = ({ rate, totalComments }: IRatingProps) => {
   return (
     <div className={styles.rating}>
       <IconEmptyStar fill={fill} />
-      <p className={styles.rating__number}>{rate}</p>
+      <p className={styles.rating__number}>{rate.toFixed(1)}</p>
       <p className={styles.rating__text}>({totalComments} {totalComments === 1
         ? 'оценка'
         : totalComments < 5 && totalComments !== 0

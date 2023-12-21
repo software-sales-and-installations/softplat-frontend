@@ -5,7 +5,7 @@ import Preloader from '../../Preloader/Preloader.tsx';
 import { IProductCard } from '../../ProductCard/ProductCardTypes.tsx';
 
 interface ISimilarProps {
-  id: string;
+  id: string | undefined;
 }
 
 function Similar({id}: ISimilarProps) {

@@ -4,7 +4,7 @@ import { API_BASE_URL } from '../constants';
 import { IComments } from '../../components/Product/Reviews/ReviewsTypes.tsx';
 
 interface IProps {
-  productId: string;
+  productId: string | undefined;
   minId: string;
   pageSize: string;
 }

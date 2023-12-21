@@ -42,7 +42,6 @@ const ProductButtons = ({error, id, instPrice}: IProductButtons) => {
   useEffect(() => {
     setToken(localStorage.getItem('token'));
     setRole(localStorage.getItem('role'));
-    setRole(localStorage.getItem('role'));
   }, [signout, user]);
 
   const handleToggleFavorite = async () => {

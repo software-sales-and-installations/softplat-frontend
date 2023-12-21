@@ -12,7 +12,7 @@ const ReviewOneCard = ({author, text, rating}:IReviewOneCardProps) => {
     <div className={styles.review}>
 <div className={styles.review__header}>
   <p className={styles.review__name}>{author}</p>
-  <div className={styles.review__stars}>{[...Array(Number(rating))].map((n) => <Icons type='smallStar' size={15} key={n}/>)}</div>
+  <div className={styles.review__stars}>{[...Array(Number(rating))].map((n, index) => <Icons type='smallStar' size={15} key={'star' + n + index}/>)}</div>
 </div>
       <p className={styles.review__text}>{text}</p>
     </div>

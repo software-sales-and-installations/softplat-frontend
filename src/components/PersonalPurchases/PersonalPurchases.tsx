@@ -7,7 +7,7 @@ import { cardPurchasesProps } from '../CardPurchases/CardPurchases';
 type Product = Omit<cardPurchasesProps, 'data'>;
 
 const PersonalPurchases: React.FC = () => {
-  const { data: purchaseItems } = useOrderAllQuery(
+  const { data: purchaseItems} = useOrderAllQuery(
     localStorage.getItem('userId'),
     { refetchOnMountOrArgChange: true },
   );
@@ -29,7 +29,7 @@ const PersonalPurchases: React.FC = () => {
                 {item.productsOrdered.map(
                   (product: { id: number; productResponseDto: Product }) => (
                     <CardPurchases
-                      key={product.id}
+                      key={'purchase' + product.id}
                       data={item.productionTime}
                       {...product.productResponseDto}
                     />

@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_BASE_URL } from '../constants';
 import { IProductCard, ISimilarProducts } from '../../components/ProductCard/ProductCardTypes';
 interface IProps {
-  productId: string;
+  productId: string | undefined;
   minId: string;
   pageSize: string;
 }

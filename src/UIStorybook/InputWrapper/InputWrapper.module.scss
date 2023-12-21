@@ -21,6 +21,7 @@
 &__error {
 @include font-body-filters;
   color: $red-alert-system;
+  text-align: left;
 }
 }
 

@@ -6,7 +6,7 @@ position: relative;
   &_type {
     &_register {
       &_buttonContainer {
-        margin: 35px auto 0;
+        margin: 5px auto 0;
       }
     }
     &_twoButtons {
@@ -15,7 +15,7 @@ position: relative;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        margin: 45px auto 0;
+        margin: 15px auto 0;
       }
     }
     &_search {
@@ -27,5 +27,13 @@ position: relative;
     }
     &_data {
     }
+  }
+  &__errorWrapper {
+    height: 20px;
+    margin-bottom: 10px;
+  }
+  &__error {
+    @include font-body-signature;
+    color: $red-alert-system;
   }
 }
