@@ -25,7 +25,6 @@ export const useLoadCart = () => {
     if (userId) {
       if (basketInfo.currentData) {
         dispatch(setCartItems(basketInfo.currentData.productsInBasket));
-        console.log('если есть юзер id в корзине');
       }
     } else {
       dispatch(setCartItems(cartItems));
@@ -52,8 +51,6 @@ export const convertCartItemsToRequest = (): {
       productId: card.productResponseDto.id,
       quantity: card.quantity,
     });
-  });
-  console.log(cartRequest);
-  
+  });  
   return cartRequest;
 };

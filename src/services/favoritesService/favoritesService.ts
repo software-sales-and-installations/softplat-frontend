@@ -31,8 +31,6 @@ export const useLoadFavorites = () => {
         (favorite: IFavorite) => favorite.product.id,
       );
       dispatch(setFavorites(productIds));
-
-      console.log('избр');
     }
   }, [favoritesData, dispatch]);
 };

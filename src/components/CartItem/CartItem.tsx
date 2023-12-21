@@ -176,8 +176,9 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
             onMouseLeave={() => setTooltipText('')}
           >
             ?
+            {tooltipText && <Tooltip text={tooltipText} />}
+
           </div>
-          {tooltipText && <Tooltip text={tooltipText} />}
         </div>
         <div className={style.cartItem__buttons}>
           {userId && (
