@@ -16,41 +16,37 @@ export const SellerComplaintsTable: FC = () => {
         refetchOnMountOrArgChange: true
       });
 
-    const [newItems, setNewItems] = useState<IComplaint[]>([])
-    function newList(){
-      let countProducts: Array<number>=[]
-      let newComplaintsList: Array<INewComplaints> =[]
+      const [newItems, setNewItems] = useState<IComplaint[]>([])
+      function productIdList(){
+        let countProducts: Array<number>=[]
         complaintList?.complaints?.forEach((i: any)=>{
-          let count =1;
-          if(countProducts.indexOf(i.product.id)===-1){
-            console.log(newComplaintsList)
-            newComplaintsList.push({...i, qty:1})
-  
-          }
-          if(countProducts.indexOf(i.product.id)!==-1){
-            countProducts.forEach((el)=>{
-              i.product.id===el;
-              count+=1;
-            })
-            console.log(count)
-            newComplaintsList.forEach((el)=>{
-              console.log(count)
-              el.product.id===i.product.id
-              ? el.qty=count
-              : el
-  
-            })
-  
-          }
           countProducts.push(i.product.id)
-          console.log(newComplaintsList)
-          setNewItems(newComplaintsList)
-          return newComplaintsList
         })
+        return countProducts
       }
   
+      function newList(){
+        let countProducts: Array<number>=[]
+        let newComplaintsList: Array<INewComplaints> =[]
+          complaintList?.complaints?.forEach((i: any)=>{
+            let count =0;
+            const newIdList = productIdList();
+            newIdList.forEach((id)=>{
+            if (i.product.id===id){
+              count+=1
+            }
+          })
+            if(countProducts.indexOf(i.product.id)===-1){
+              console.log(newComplaintsList)
+              newComplaintsList.push({...i, qty:count})
+            }
+            countProducts.push(i.product.id)
+            console.log(newComplaintsList)
+            setNewItems(newComplaintsList)
+          })
+      }
+      
       useEffect(()=>{
-        console.log(complaintList)
         newList()
       },[complaintList])
     return (
