@@ -12,6 +12,8 @@ import { useVendorChangeMutation } from '../../utils/api/vendorApi';
 import { useVendorAddMutation } from '../../utils/api/vendorApi';
 
 export const AdminAddVendor: FC = () =>{
+    const [errorText, setErrorText] = useState('')
+    const [addVendorError, setAddVendorError] = useState(0);
     const {
         register,
         handleSubmit,
@@ -37,9 +39,11 @@ export const AdminAddVendor: FC = () =>{
             vendorChange({vendorId: id.id, body: getValues()}).unwrap()
             .then((res) => {
                 console.log(res)
+                setErrorText('Данные успешно обновлены/добавлены')
             })
             .catch((error) => {
                 console.log(error);
+                setAddVendorError(error.status)
             })
             .finally()
 
@@ -47,14 +51,31 @@ export const AdminAddVendor: FC = () =>{
         else {
             vendorAdd(getValues()).unwrap()
             .then((res) => {
+                setErrorText('Данные успешно обновлены/добавлены')
                 console.log(res)
             })
             .catch((error) => {
                 console.log(error);
+                setAddVendorError(error.status)
             })
             .finally()
         }
     }
+    useEffect(() => {
+        if (addVendorError === 401) {
+          setErrorText('Пользователь не авторизован');
+        }
+        if (addVendorError === 400) {
+            console.log('ddd')
+          setErrorText('Некорректно заполнены поля');
+        }
+        if (addVendorError === 403) {
+            setErrorText('Доступ запрещен');
+          }
+        // if (addVendorError===0){
+        //     setErrorText('Данные успешно обновлены/добавлены')
+        // }
+      }, [addVendorError]);
     useEffect(()=>{
         if(id.id){
         setVendorData(vendor)
@@ -104,6 +125,9 @@ export const AdminAddVendor: FC = () =>{
             <label className={styles.textArea__label} htmlFor='description'>Описание</label>
             <textarea className={styles.textArea__input} id='description' {...register('description', VENDORDESCRIPTION_VALIDATION_CONFIG)}/>
             <span className={styles.textArea__error}>{errors.description?.message}</span>
+        </div>
+        <div className={styles.errorContainer}>
+          <p className={styles.errorContainer__error}>{errorText}</p>
         </div>
         <div className={styles.containerForBtn}>
             <Button isDisabled={!isValid} type="submit" mode="primary">Сохранить</Button>

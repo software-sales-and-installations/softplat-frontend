@@ -83,6 +83,15 @@
     
 }
 .containerForBtn{
-    margin-top: 140px;
+    margin-top: 105px;
     width: 83%;
+}
+.errorContainer{
+	min-height: 35px;
+	&__error{
+    text-align: start;
+		margin: 0;
+		color: $red-alert-system;
+		@include font-body-filters;
+	}
 }

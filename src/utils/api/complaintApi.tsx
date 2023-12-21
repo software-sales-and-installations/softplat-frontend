@@ -8,8 +8,10 @@ export const complaintApi = createApi({
       baseUrl: API_BASE_URL,
       prepareHeaders: (headers) => {
         const token = localStorage.getItem('token');
+        const userId = localStorage.getItem('userId')
         if (token) {
           headers.set('authorization', `${token}`);
+          headers.set('X-Sharer-User-Id', `${userId}`)
         }
         return headers;
       },
@@ -19,8 +21,12 @@ export const complaintApi = createApi({
         complaintList: build.query({
             query: () => '/complaint/admin',
           }),
+        complaintSellerList: build.query({
+            query: () => '/complaint/seller'
+        })
     })
 })
 export const {
-    useComplaintListQuery
+    useComplaintListQuery,
+    useComplaintSellerListQuery
 } = complaintApi
