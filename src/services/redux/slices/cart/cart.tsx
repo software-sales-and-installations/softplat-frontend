@@ -4,25 +4,6 @@ import { ICartItem } from '../../../../components/ProductListCart/ProductListTyp
 import { IProductCard } from '../../../../components/ProductCard/ProductCardTypes';
 import { AppDispatch } from '../../store';
 
-export const sendCartToServer = async (
-  cartItems: ICartItem[],
-  buyerBasketAddItem: Function,
-  dispatch: AppDispatch,
-) => {
-  for (const cartItem of cartItems) {
-    const { productResponseDto, installation, quantity } = cartItem;
-    console.log('cartItem', cartItem);
-    for (let i = 0; i < quantity; i++) {
-      const response = await buyerBasketAddItem({
-        productId: productResponseDto.id,
-        installation,
-      }).unwrap();
-      console.log('response', response);
-      dispatch(setCartItems(response.productsInBasket));
-    }
-  }
-};
-
 export const addToLocalStorage = (
   product: IProductCard,
   dispatch: AppDispatch,
@@ -85,18 +66,37 @@ export const removeFromLocalStorage = (
   }
 };
 
+export const sendCartToServer = async (
+  cartItems: { installation: boolean; productId: number; quantity: number }[],
+  buyerBasketSaveCart: Function,
+  dispatch: AppDispatch,
+) => {
+  try {
+    const basketCreateDto = {
+      productsInBasket: cartItems,
+    };
+
+    const response = await buyerBasketSaveCart(basketCreateDto).unwrap();
+    dispatch(setCartItems(response.productsInBasket));
+    console.log(response);
+  } catch (error) {
+    console.error('Ошибка слияния корзин:', error);
+  }
+};
+
 export const asyncAddToCart = async (
   card: IProductCard,
   buyerBasketAddItem: Function,
-  basketInfo: Function,
+  dispatch: AppDispatch,
   installation: boolean = false,
 ) => {
   try {
-    await buyerBasketAddItem({
+    const response = await buyerBasketAddItem({
       productId: card.id,
       installation,
     }).unwrap();
-    basketInfo();
+    console.log(response);
+    dispatch(setCartItems(response.productsInBasket));
   } catch (error) {
     console.error('Ошибка добавления товара в корзину:', error);
   }
@@ -105,17 +105,19 @@ export const asyncAddToCart = async (
 export const asyncRemoveFromCart = async (
   card: IProductCard,
   buyerBasketRemoveItem: Function,
-  basketInfo: Function,
+  dispatch: AppDispatch,
   installation: boolean = false,
 ) => {
   try {
-    await buyerBasketRemoveItem({
+    const response = await buyerBasketRemoveItem({
       productId: card.id,
       installation,
     }).unwrap();
-    basketInfo();
+    // basketInfo();
+    console.log(response);
+    dispatch(setCartItems(response.productsInBasket));
   } catch (error) {
-    console.error('Ошибка добавления товара в корзину:', error);
+    console.error('Ошибка удаления товара из корзины:', error);
   }
 };
 

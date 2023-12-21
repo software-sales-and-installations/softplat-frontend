@@ -7,6 +7,5 @@ import { useLoadCart } from '../../services/cartService/cartService';
 export const MainWrapper: FC<IMainWrapperProps> = ({ children }) => {
   useLoadFavorites();
   useLoadCart();
-
   return <main className={styles.background}>{children}</main>;
 };

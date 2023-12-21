@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useAppDispatch } from '../redux/store';
+import { useAppDispatch, useAppSelector } from '../redux/store';
 import { useBuyerFavoritesQuery } from '../../utils/api/buyerApi';
 import { setFavorites } from '../redux/slices/favourites/favourites';
 import { ICartItem } from '../../components/ProductListCart/ProductListTypes';
@@ -11,10 +11,19 @@ export interface IFavorite {
 
 export const useLoadFavorites = () => {
   const userId = localStorage.getItem('userId');
+  const userStoreId = useAppSelector(store => store.user.user.id);
+
+  const favoritesData = useBuyerFavoritesQuery(undefined, {
+    skip: !userId && !userStoreId,
+  });
+
+  useEffect(() => {
+    if (favoritesData.data) {
+      favoritesData.refetch();
+    }
+  }, [userStoreId, favoritesData.data]);
 
   const dispatch = useAppDispatch();
-
-  const favoritesData = useBuyerFavoritesQuery(undefined);
 
   useEffect(() => {
     if (favoritesData.currentData && userId) {
@@ -22,8 +31,6 @@ export const useLoadFavorites = () => {
         (favorite: IFavorite) => favorite.product.id,
       );
       dispatch(setFavorites(productIds));
-
-      console.log('избр');
     }
   }, [favoritesData, dispatch]);
 };
