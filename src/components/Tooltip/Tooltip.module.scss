@@ -4,9 +4,9 @@
 
 .tooltip {
     position: absolute;
-    top: -55px;
-    left: 290px;
-    // transform: translateX(-50%);
+    top: -85px;
+    right: -90px;
+    transform: translate(50%,50%);
     background-color: $light-grey;
     padding: 10px 14.5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

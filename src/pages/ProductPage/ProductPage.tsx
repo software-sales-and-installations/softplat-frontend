@@ -15,7 +15,6 @@ import {
 import {
   useBuyerBasketAddItemMutation,
   useBuyerBasketDeleteItemMutation,
-  useBuyerBasketInfoQuery,
 } from '../../utils/api/buyerBasketApi';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
@@ -27,7 +26,6 @@ import {
 import {
   useBuyerAddFavoritesMutation,
   useBuyerDeleteFavoritesMutation,
-  useBuyerFavoritesQuery,
 } from '../../utils/api/buyerApi';
 
 export const ProductPage: FC = () => {
@@ -41,14 +39,12 @@ export const ProductPage: FC = () => {
   const favorites = useAppSelector(state => state.favorite?.favorites);
   const isFavorite = favorites?.some(item => item === cardData.id);
 
-  const buyerFavorites = useBuyerFavoritesQuery(undefined);
   const [buyerBasketDeleteItem, removeItemError] =
     useBuyerBasketDeleteItemMutation();
   const [addFavorites] = useBuyerAddFavoritesMutation();
   const [deleteFavorites] = useBuyerDeleteFavoritesMutation();
   const [buyerBasketAddItem, addItemError] = useBuyerBasketAddItemMutation();
   //@ts-ignore
-  const basketInfoQuery = useBuyerBasketInfoQuery();
   // const isItemInCart = cart.items.some(item => item.id === cardData.id);
   // console.log(cardData.id);
 
@@ -73,7 +69,7 @@ export const ProductPage: FC = () => {
       await asyncAddToCart(
         cardData,
         buyerBasketAddItem,
-        basketInfoQuery.refetch,
+        dispatch,
         isInstallationSelected,
       );
     } else {
@@ -86,7 +82,7 @@ export const ProductPage: FC = () => {
       await asyncRemoveFromCart(
         cardData,
         buyerBasketDeleteItem,
-        basketInfoQuery.refetch,
+        dispatch,
         isInstallationSelected,
       );
     } else {
@@ -110,7 +106,7 @@ export const ProductPage: FC = () => {
   const handleToggleFavorite = async () => {
     const action = isFavorite ? deleteFavorites : addFavorites;
 
-    await ayncToggleFavorite(action, cardData.id, buyerFavorites.refetch);
+    await ayncToggleFavorite(action, cardData.id);
     dispatch(
       isFavorite
         ? removeFromFavorites(cardData.id)

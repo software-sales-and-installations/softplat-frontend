@@ -16,21 +16,17 @@ import { Button } from '../../UI/Button/Button';
 import { setUser } from '../../services/redux/slices/user/user';
 import { useAuthLoginMutation } from '../../utils/api/authApi';
 import { signout } from '../SignOutPopup/SignOutPopupSlice';
-import { useBuyerFavoritesQuery } from '../../utils/api/buyerApi';
-import {
-  useBuyerBasketAddItemMutation,
-  useBuyerBasketInfoQuery,
-} from '../../utils/api/buyerBasketApi';
+import { useBuyerBasketSaveCartMutation } from '../../utils/api/buyerBasketApi';
 import { sendCartToServer } from '../../services/redux/slices/cart/cart';
+import { convertCartItemsToRequest } from '../../services/cartService/cartService';
 
 export const PopupForAuth: FC = () => {
   const [authError, setAuthError] = useState(0);
   const [errorText, setErrorText] = useState('');
 
-  const [buyerBasketAddItem] = useBuyerBasketAddItemMutation();
-  const { refetch: refetchFavorites } = useBuyerFavoritesQuery(undefined);
-  const { refetch: refetchBasketInfo } = useBuyerBasketInfoQuery(undefined);
-  const cartItems = JSON.parse(localStorage.getItem('cartItems') ?? '[]');
+  const [buyerBasketSaveCart] = useBuyerBasketSaveCartMutation();
+
+  const cartRequest = convertCartItemsToRequest();
 
   const dispatch = useAppDispatch();
   const {
@@ -59,23 +55,20 @@ export const PopupForAuth: FC = () => {
         localStorage.setItem('userId', userData.id);
         console.log(userData);
 
-        if (cartItems.length > 0) {
-          sendCartToServer(cartItems, buyerBasketAddItem, dispatch);
-          localStorage.removeItem('cartItems');
+        if (cartRequest.length > 0) {
+          sendCartToServer(cartRequest, buyerBasketSaveCart, dispatch);
         }
 
         dispatch(popupState(false));
         dispatch(setUser(userData));
         dispatch(signout(false));
-        refetchFavorites();
-        refetchBasketInfo();
-        reset;
+        reset();
       })
       .catch(error => {
         setAuthError(error.originalStatus);
         console.log(error);
       })
-      .finally()
+      .finally();
   };
 
   function handlePasswordPopup() {
