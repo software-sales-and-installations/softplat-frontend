@@ -28,5 +28,11 @@
     &:nth-child(5) {
       flex: 0 0 120px;
     }
+
+    &_mode_inOrder {
+      &:first-child {
+        flex: 0 0 80px;
+      }
+    }
   }
 }
