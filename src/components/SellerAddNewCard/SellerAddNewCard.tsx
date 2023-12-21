@@ -5,11 +5,12 @@ import { InputTypes } from '../../UI/Input/InputTypes';
 import styles from './SellerAddNewCard.module.scss';
 import { ICreateProductFields } from './SellerAddNewCardTypes';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { NAME_VALIDATION_CONFIG, LINK_VALIDATION_CONFIG, PRICE_VALIDATION_CONFIG } from '../../utils/constants';
+import { NAME_VALIDATION_CONFIG, LINK_VALIDATION_CONFIG, PRICE_VALIDATION_CONFIG, QUANTITY_VALIDATION_CONFIG, VERSION_VALIDATION_CONFIG } from '../../utils/constants';
 import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { useVendorListQuery } from '../../utils/api/vendorApi';
 import {CATEGORIZED_TEXT }from '../../utils/constants';
+import { useProductCreateMutation } from '../../utils/api/userProductApi';
 
 export const SellerAddNewCard: FC = () =>{
     const [variantSoftware, setVariantSoftware] = useState('Загрузка ПО')
@@ -17,13 +18,14 @@ export const SellerAddNewCard: FC = () =>{
     const {
         register,
         handleSubmit,
+        getValues,
         formState: { errors, isValid },
       } = useForm<ICreateProductFields>({ mode: 'onChange' });
     
-      const onSubmit: SubmitHandler<ICreateProductFields> = data => {
-        console.log(data);
-        // reset();
-      };
+      // const onSubmit: SubmitHandler<ICreateProductFields> = data => {
+      //   console.log(data);
+      //   // reset();
+      // };
       //@ts-ignore
       const { data: vendorAll} = useVendorListQuery({},{
         refetchOnMountOrArgChange:true
@@ -32,8 +34,77 @@ export const SellerAddNewCard: FC = () =>{
           useEffect(()=>{
             setVendorData(vendorAll)
           },[vendorData, vendorAll])
+      const [productCreate, {
+        //     // isFetching, isLoading, isError
+          }] = useProductCreateMutation();
+//   const handleProductCreate = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+//     e.preventDefault();
+//     productCreate(productData).unwrap()
+//       .then((res) => {
+//         console.log(res)
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       })
+//       .finally()
+//   };
+const productData = {category: getValues().category, description: getValues().description, installation: getValues().installation, installationPrice: getValues().installationPrice, name: getValues().name, price: getValues().price, quantity: getValues().quantity, vendor: getValues().vendor, version: getValues().version}
+          function handleSubmitCard(){
+            console.log(productData)
+            productCreate(productData).unwrap()
+              .then((res) => {
+                console.log(res)
+              })
+              .catch((error) => {
+                console.log(error);
+              })
+              .finally()
+          }
+          // const id = useParams();
+          // const { data: vendor,
+          //     // isFetching,isLoading, error
+          //   } = useVendorQuery(id.id,{
+          //     refetchOnMountOrArgChange: true
+          //   });
+          //   const [vendorChange, {
+          //     // isFetching, isLoading, isError
+          // }] = useVendorChangeMutation();
+          // const [vendorAdd, {
+          //     // isFetching, isLoading, isError
+          //   }] = useVendorAddMutation();
+          // function handleSubmitVendor(){
+          //     if(id.id){
+          //         vendorChange({vendorId: id.id, body: getValues()}).unwrap()
+          //         .then((res) => {
+          //             console.log(res)
+          //         })
+          //         .catch((error) => {
+          //             console.log(error);
+          //         })
+          //         .finally()
+      
+          //     }
+          //     else {
+          //         vendorAdd(getValues()).unwrap()
+          //         .then((res) => {
+          //             console.log(res)
+          //         })
+          //         .catch((error) => {
+          //             console.log(error);
+          //         })
+          //         .finally()
+          //     }
+          // }
+          // useEffect(()=>{
+          //     if(id.id){
+          //     setVendorData(vendor)
+          //     console.log(id.id)
+          //     setValue('country', vendor?.country)
+          //     setValue('name', vendor?.name)
+          //     setValue('description', vendor?.description)}
+          // },[id, vendor, vendorData])
     return(
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <form className={styles.form} onSubmit={handleSubmit(handleSubmitCard)}>
           <Input
             inputType={InputTypes.name}
             labelText="Название ПО в соответствии с лицензией"
@@ -45,7 +116,8 @@ export const SellerAddNewCard: FC = () =>{
           />
           <div className={styles.selectContainer}>
             <label className={styles.selectContainer__label} htmlFor='vendor'>Вендор</label>
-              <select id='vendor'  className={styles.selectContainer__select} {...register('vendor')}>
+              <select id='vendor'  className={styles.selectContainer__select} {...register('vendor', {required: true})}>
+                <option value=''>Выберите вендора</option>
                 {vendorData?.vendors.map((i)=>{
                   return(
                 <option key={i.id} value={i.name}>{i.name}</option>
@@ -54,7 +126,8 @@ export const SellerAddNewCard: FC = () =>{
           </div>
           <div className={styles.selectContainer}>
             <label className={styles.selectContainer__label} htmlFor='category'>Категория</label>
-              <select id='category' className={styles.selectContainer__select} {...register('category')}>
+              <select id='category' className={styles.selectContainer__select} {...register('category',{required: true})}>
+              <option value=''>Выберите категорию</option>
                 {CATEGORIZED_TEXT.map((i)=>{
                   return(
                     <option key={i.id} value={i.text}>{i.text}</option>
@@ -63,10 +136,10 @@ export const SellerAddNewCard: FC = () =>{
             </select>
           </div>
           <div className={styles.selectContainer}>
-            <label className={styles.selectContainer__label} htmlFor='install'>Вариант продажи</label>
-              <select id='install' className={styles.selectContainer__select} {...register('install')}>
-                <option value="A">С установкой</option>
-                <option value="B">Без установки</option>
+            <label className={styles.selectContainer__label} htmlFor='installation'>Вариант продажи</label>
+              <select id='installation' className={styles.selectContainer__select} {...register('installation')}>
+                <option value="true">С установкой</option>
+                <option value="false">Без установки</option>
             </select>
           </div>
           <div className={styles.selectContainer}>
@@ -152,6 +225,15 @@ export const SellerAddNewCard: FC = () =>{
             </svg> 
           </label>
         </div>
+        <Input
+          inputType={InputTypes.version}
+          labelText="Версия ПО"
+          validation={{
+            ...register('version', VERSION_VALIDATION_CONFIG),
+          }}
+          error={errors?.version?.message}
+          typeError='addCardError'
+        />
         <div className={styles.textArea}>
             <label className={styles.textArea__label} htmlFor='description'>Описание</label>
             <textarea className={styles.textArea__input} id='description' {...register('description', {required: true})}/>
@@ -166,17 +248,26 @@ export const SellerAddNewCard: FC = () =>{
           typeError='addCardError'
         />
         <Input
-          inputType={InputTypes.priceInstall}
+          inputType={InputTypes.installationPrice}
           labelText="Стоимость установки в рублях"
           validation={{
-            ...register('priceInstall', PRICE_VALIDATION_CONFIG),
+            ...register('installationPrice', PRICE_VALIDATION_CONFIG),
           }}
-          error={errors?.priceInstall?.message}
+          error={errors?.installationPrice?.message}
+          typeError='addCardError'
+        />
+         <Input
+          inputType={InputTypes.quantity}
+          labelText="Количество"
+          validation={{
+            ...register('quantity', QUANTITY_VALIDATION_CONFIG),
+          }}
+          error={errors?.quantity?.message}
           typeError='addCardError'
         />
         <div className={styles.textArea}>
             <label className={styles.textArea__label} htmlFor='keywords'>Ключевые слова для поиска - не более 10</label>
-            <textarea className={classNames(styles.textArea__input, styles.textArea__input_type_keyword)} id='keywords' {...register('keywords', {required: true})}/>
+            <textarea className={classNames(styles.textArea__input, styles.textArea__input_type_keyword)} id='keywords' {...register('keywords')}/>
        </div>
         <div className={styles.sellerAddCard__btncontainer}>
           <Button type='submit' isDisabled={!isValid} mode="primary">

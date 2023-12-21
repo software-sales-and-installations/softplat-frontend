@@ -1,16 +1,18 @@
 export interface ICreateProductFields {
     name: string;
     link?: string;
-    description?: string;
+    description: string;
     price: number;
-    priceInstall: number;
+    installationPrice: number;
     error?: string;
     vendor: string;
     category: string;
-    install: string;
+    installation: string;
     file?: any;
     software: string;
-    logo: any;
+    logo?: any;
     fileDemo?: any;
     keywords?: string;
+    quantity: number;
+    version: string;
   }
