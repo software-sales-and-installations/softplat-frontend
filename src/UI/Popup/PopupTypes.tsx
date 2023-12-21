@@ -34,6 +34,7 @@ export interface ISignUpData extends ISignInData {
 	role: string;
 }
 export interface IUser {
+	id: number | null;
 	name: string;
 	email: string;
 	phone?: string;

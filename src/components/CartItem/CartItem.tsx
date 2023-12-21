@@ -15,19 +15,18 @@ import {
   removeCartPostion,
   removeFromLocalStorage,
   removeFromUncheckedList,
+  setCartItems,
   updateCartItem,
 } from '../../services/redux/slices/cart/cart';
 import {
   useBuyerBasketAddItemMutation,
   useBuyerBasketDeleteItemMutation,
   useBuyerBasketDeletePositionMutation,
-  useBuyerBasketInfoQuery,
 } from '../../utils/api/buyerBasketApi';
 import { useNavigate } from 'react-router-dom';
 import {
   useBuyerAddFavoritesMutation,
   useBuyerDeleteFavoritesMutation,
-  useBuyerFavoritesQuery,
 } from '../../utils/api/buyerApi';
 import {
   addToFavorites,
@@ -39,23 +38,23 @@ import { ICartItem } from '../ProductListCart/ProductListTypes';
 export const CartItem: FC<ICartItemProps> = ({ item }) => {
   const userId = localStorage.getItem('userId');
 
+  const addSpace = (price: number): string => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  };
+
   const product = item?.productResponseDto;
 
   const navigate = useNavigate();
   const [tooltipText, setTooltipText] = useState('');
   const [totalPrice, setTotalPrice] = useState(product?.price);
-  const [quantity, setQuantity] = useState(item.quantity);
+
   const [buyerBasketAddItem, addItemError] = useBuyerBasketAddItemMutation();
   const [buyerBasketDeleteItem, removeItemError] =
     useBuyerBasketDeleteItemMutation();
   const [addFavorites] = useBuyerAddFavoritesMutation();
   const [deleteFavorites] = useBuyerDeleteFavoritesMutation();
 
-  const buyerFavorites = useBuyerFavoritesQuery(undefined);
-
-  const basketInfo = useBuyerBasketInfoQuery(undefined);
   const [buyerBasketСlearPosition] = useBuyerBasketDeletePositionMutation();
-
   const dispatch = useAppDispatch();
 
   const favorites = useAppSelector(state => state.favorite?.favorites);
@@ -67,29 +66,22 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
 
   const handleToggleFavorite = async () => {
     const action = isFavorite ? deleteFavorites : addFavorites;
-    await ayncToggleFavorite(action, product.id, buyerFavorites.refetch);
+    await ayncToggleFavorite(action, product.id);
     dispatch(
       isFavorite ? removeFromFavorites(product.id) : addToFavorites(product.id),
     );
   };
 
   useEffect(() => {
-    updateTotalPrice(item.installation, quantity);
-    dispatch(
-      updateCartItem({
-        ...item,
-      }),
-    );
-  }, [quantity, dispatch]);
+    updateTotalPrice(item.installation);
+    dispatch(updateCartItem(item));
+  }, [item.quantity, dispatch]);
 
-  const updateTotalPrice = (
-    wasInstallationSelected: boolean,
-    updatedQuantity: number,
-  ) => {
+  const updateTotalPrice = (wasInstallationSelected: boolean) => {
     const installationPrice = wasInstallationSelected
       ? product?.installationPrice
       : 0;
-    setTotalPrice((product?.price + installationPrice) * updatedQuantity);
+    setTotalPrice((product?.price + installationPrice) * item.quantity);
   };
 
   const handleBuyCheckboxChange = () => {
@@ -102,23 +94,22 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
 
   const handleIncreaseQuantity = async () => {
     if (
-      quantity < 10 &&
+      item.quantity < 10 &&
       product.quantity !== undefined &&
-      quantity < product.quantity
+      item.quantity < product.quantity
     ) {
       if (userId) {
         await asyncAddToCart(
           product,
           buyerBasketAddItem,
-          basketInfo.refetch,
+          dispatch,
           item.installation,
         );
       } else {
         addToLocalStorage(product, dispatch, item.installation);
       }
 
-      setQuantity(quantity + 1);
-      updateTotalPrice(item.installation, quantity + 1);
+      updateTotalPrice(item.installation);
     }
   };
 
@@ -127,24 +118,20 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
       await asyncRemoveFromCart(
         product,
         buyerBasketDeleteItem,
-        basketInfo.refetch,
+        dispatch,
         item.installation,
       );
     } else {
       removeFromLocalStorage(product.id, dispatch, item.installation);
     }
 
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
-    }
-
-    updateTotalPrice(item.installation, quantity - 1);
+    updateTotalPrice(item.installation);
   };
 
   const handleRemoveItem = async () => {
     if (userId) {
-      await buyerBasketСlearPosition(item.id).unwrap();
-      basketInfo.refetch();
+      const response = await buyerBasketСlearPosition(item.id).unwrap();
+      dispatch(setCartItems(response.productsInBasket));
     } else {
       const cartItems = JSON.parse(localStorage.getItem('cartItems') ?? '[]');
       const updatedCartItems = cartItems.filter(
@@ -210,21 +197,21 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
           />
         </div>
       </div>
-      <span className={style.cartItem__price}>{totalPrice} ₽</span>
+      <span className={style.cartItem__price}>{addSpace(totalPrice)} ₽</span>
       <div className={style.cartItem__quantity}>
         <button
           onClick={handleDecreaseQuantity}
           className={style.cartItem__decreaseQuantity}
           disabled={removeItemError.isError}
         ></button>
-        <span>{quantity}</span>
+        <span>{item.quantity}</span>
         <button
           onClick={handleIncreaseQuantity}
           className={style.cartItem__increaseQuantity}
           disabled={
             addItemError.isError ||
-            quantity > 9 ||
-            quantity === product.quantity
+            item.quantity > 9 ||
+            item.quantity === product.quantity
           }
         ></button>
       </div>
