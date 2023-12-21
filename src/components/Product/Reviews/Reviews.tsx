@@ -12,7 +12,7 @@ import { selectUser } from '../../../services/redux/slices/user/user.ts';
 import { useEffect, useState } from 'react';
 import { useOrderAllQuery } from '../../../utils/api/buyerOrderApi.tsx';
 import { cardPurchasesProps } from '../../CardPurchases/CardPurchases.tsx';
-import { productName } from '../../../services/redux/slices/product/product.ts';
+import { productName, productId } from '../../../services/redux/slices/product/product.ts';
 
 interface IReviewProps {
   id: string | undefined;
@@ -26,15 +26,12 @@ type Product = Omit<cardPurchasesProps, 'data'>;
   const signout = useAppSelector((state: RootState) => state.signout.signout);
   const user = useAppSelector(selectUser);
   const [userId, setUserId] = useState(localStorage.getItem('userId'));
-  // const [hasReview, setHasReview] = useState (false)
-  // const [isBought, setIsBought] = useState (false)
   const {data: reviews , isLoading, error} = useProductCommentsQuery({productId: id, minId: '0', pageSize: '2'});
   const ratingArray = reviews?.comments?.map(item => item.rating) || [0];
   const totalRating = ratingArray?.length !== 0 ? (ratingArray.reduce((sum, number) => Number(sum) + Number(number)) || 0 / ratingArray?.length) : 0;
 
   const { data: purchaseItems} = useOrderAllQuery(
     localStorage.getItem('userId'),
-    // { refetchOnMountOrArgChange: true },
   );
 
   const purchased = purchaseItems?.orders.map(
@@ -56,19 +53,13 @@ type Product = Omit<cardPurchasesProps, 'data'>;
 
     useEffect(() => {
     setUserId(localStorage.getItem('userId'));
-    // setHasReview(reviews?.comments?.map(item => item.author.id).includes(Number(userId)) || false)
-    // setIsBought(purchaseIds.includes(Number(id)));
-    // console.log(!hasReview)
-    // console.log(purchaseIds)
-    console.log(id)
   }, [signout, user]);
 
-
-  console.log(purchased)
 
   const handleOpenCommentPopup = () => {
     dispatch(popupState(true));
     dispatch(productName(name || ''))
+    dispatch(productId(id || ''))
   }
 
   return (

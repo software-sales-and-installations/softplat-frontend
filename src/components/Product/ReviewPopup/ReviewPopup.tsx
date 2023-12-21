@@ -14,20 +14,15 @@ import { popupState } from '../../../UI/Popup/PopupSlice.tsx';
 import { RootState, useAppDispatch, useAppSelector } from '../../../services/redux/store.ts';
 
 import styles from './ReviewPopup.module.scss'
-// import { selectUser } from '../../../services/redux/slices/user/user.ts';
-// import { productName } from '../../../services/redux/slices/product/product.ts';
-
 
 const ReviewPopup = () => {
   const [errorText, setErrorText] = useState('')
   const [isChecked, setIsChecked] = useState(false);
   const dispatch = useAppDispatch();
-  // const signout = useAppSelector((state: RootState) => state.signout.signout);
-  // const user = useAppSelector(selectUser);
   const name = useAppSelector((state: RootState) => state.product.setName);
-  // const name = useAppSelector(productName);
+  const id = useAppSelector((state: RootState) => state.product.setId);
 
-  console.log(name)
+  console.log(id)
 
   const {
     register,
@@ -42,13 +37,12 @@ const ReviewPopup = () => {
     const [userComplaint ] = useUserComplaintMutation();
     const [userComment] = useUserCommentMutation();
 
-  const addProductId = 9
   const handleChecked = () => {
     setIsChecked(prev => !prev);
   }
   const handleSubmitReview = () => {
     if (isChecked) {
-          userComplaint({productId: addProductId, reason: 'PIRATED_SOFTWARE'}).unwrap()
+          userComplaint({productId: id, reason: 'PIRATED_SOFTWARE'}).unwrap()
             .then(() => {
               dispatch(popupState(false));
               reset()
@@ -58,7 +52,7 @@ const ReviewPopup = () => {
         setTimeout(() => {setErrorText('')}, 3000)
       })
     } else {
-      userComment({productId: addProductId, body: {
+      userComment({productId: id, body: {
               "rating": getValues('star'),
               "text": getValues('review'),
             }}).unwrap()

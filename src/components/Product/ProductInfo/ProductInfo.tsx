@@ -1,15 +1,16 @@
 import { Button } from '../../../UIStorybook/Button/Button.tsx';
 import styles from './ProductInfo.module.scss'
-// import { SliderOneCard } from '../SliderOneCard/SliderOneCard.tsx';
+import { SliderOneCard } from '../SliderOneCard/SliderOneCard.tsx';
 import { ReactNode } from 'react';
 import { IProductCard } from '../../ProductCard/ProductCardTypes.tsx';
 
 
-type TProductInfo = {
+interface IProductInfo {
   children: ReactNode;
   product: IProductCard | undefined;
+  id: string | undefined;
 }
-const ProductInfo = ({children, product}: TProductInfo) => {
+const ProductInfo = ({children, product, id}: IProductInfo) => {
   const handleDownloadDemo = () => {
     // console.log('test')
     // const blob = info.blob()
@@ -21,11 +22,13 @@ const ProductInfo = ({children, product}: TProductInfo) => {
     // link.click()
     // link.remove()
  }
+ console.log('productInfo')
+console.log(id)// import { SliderOneCard } from '../SliderOneCard/SliderOneCard.tsx';
 
   return (
     <section className={styles.productInfo}>
       <div className={styles.productInfo__slider}>
-        {/*<SliderOneCard slides={product?.image}/>*/}
+        <SliderOneCard id={id}/>
       </div>
       <div className={styles.productInfo__description}>
       <p className={styles.productInfo__category}>{product?.category?.name}</p>

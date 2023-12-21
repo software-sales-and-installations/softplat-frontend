@@ -30,7 +30,7 @@ import { favoriteReducer } from './slices/favourites/favourites.tsx';
 import { complaintApi } from '../../utils/api/complaintApi.tsx';
 import { userCommentApi } from '../../utils/api/userCommentApi.tsx';
 import { purchasesReducer } from './slices/purchases/purchases.ts';
-import { reducer as productNameReducer } from './slices/product/product.ts';
+import { productReducer } from './slices/product/product.ts';
 
 const reducers = combineReducers({
 	user: userReducer,
@@ -48,7 +48,7 @@ const reducers = combineReducers({
   favorite: favoriteReducer,
   purchases: purchasesReducer,
   purchase: purchasesReducer,
-  product: productNameReducer,
+  product: productReducer,
 	[adminApi.reducerPath]: adminApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [buyerBasketApi.reducerPath]: buyerBasketApi.reducer,

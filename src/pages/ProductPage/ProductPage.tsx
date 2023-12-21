@@ -19,12 +19,13 @@ export const ProductPage: FC = () => {
 
   const { data: product, isError: productError} = usePublicProductQuery(id);
 
+  console.log(product)
   return (
     <div className={styles.productPage}>
       <div className={styles.breadcrumbs}>
         <Breadcrumbs vendor={cardData.vendor!} />
       </div>
-      <ProductInfo product={product}>
+      <ProductInfo product={product} id={product?.image?.id.toString()}>
         <ProductButtons error={productError} id={product?.id.toString()} instPrice={product?.installationPrice}/>
       </ProductInfo>
       <Reviews id={product?.id.toString()} name={product?.name}/>
