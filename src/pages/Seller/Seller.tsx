@@ -12,6 +12,7 @@ import SellerPublished from '../../components/SellerPublished/SellerPublished';
 import SellerModeration from '../../components/SellerModeration/SellerModeration';
 import SellerCorrection from '../../components/SellerCorrection/SellerCorrection';
 import SellerSales from '../../components/SellerSales/SellerSales';
+import { SellerComplaintsTable } from '../../components/SellerComplaintsTable/SellerComplaintsTable';
 
 export const Seller: FC = () => {
   return (
@@ -29,7 +30,7 @@ export const Seller: FC = () => {
           <Route path="/published" element={<SellerPublished />} />
           <Route path="/on-moderation" element={<SellerModeration />} />
           <Route path="/correction" element={<SellerCorrection />} />
-          <Route path="/appeal" element={<h2>Жалобы</h2>} />
+          <Route path="/appeal" element={<SellerComplaintsTable/>} />
           <Route path="/sales" element={<SellerSales />} />
           <Route path="/bank-details" element={<SellerBankSettings />} />
           <Route path="/settings" element={<SellerSettings />} />
