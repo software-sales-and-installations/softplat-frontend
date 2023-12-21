@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import { useVendorListQuery } from '../../utils/api/vendorApi';
 import {CATEGORIZED_TEXT }from '../../utils/constants';
 import { useProductCreateMutation } from '../../utils/api/userProductApi';
+import { useCategoryListQuery } from '../../utils/api/categoryApi';
 
 export const SellerAddNewCard: FC = () =>{
     const [variantSoftware, setVariantSoftware] = useState('Загрузка ПО')
@@ -30,7 +31,12 @@ export const SellerAddNewCard: FC = () =>{
       const { data: vendorAll} = useVendorListQuery({},{
         refetchOnMountOrArgChange:true
       });
+      const {data: categoryList, isFetching: isCategoryListFetching,isLoading: isCategoryListLoading, error: categoryListErr} = useCategoryListQuery({});
+      const [categoryListData, setcategoryListData] = useState(categoryList)
       const [vendorData, setVendorData] = useState(vendorAll)
+      useEffect(()=>{
+        setcategoryListData(categoryList)
+      },[categoryList, categoryListData])
           useEffect(()=>{
             setVendorData(vendorAll)
           },[vendorData, vendorAll])
@@ -120,7 +126,7 @@ const productData = {category: getValues().category, description: getValues().de
                 <option value=''>Выберите вендора</option>
                 {vendorData?.vendors.map((i)=>{
                   return(
-                <option key={i.id} value={i.name}>{i.name}</option>
+                <option key={i.id} value={i.id}>{i.name}</option>
                 )})}
             </select>
           </div>
@@ -128,9 +134,9 @@ const productData = {category: getValues().category, description: getValues().de
             <label className={styles.selectContainer__label} htmlFor='category'>Категория</label>
               <select id='category' className={styles.selectContainer__select} {...register('category',{required: true})}>
               <option value=''>Выберите категорию</option>
-                {CATEGORIZED_TEXT.map((i)=>{
+                {categoryListData?.categories.map((i: any)=>{
                   return(
-                    <option key={i.id} value={i.text}>{i.text}</option>
+                    <option key={i.id} value={i.id}>{i.name}</option>
                   )
                 })}
             </select>
