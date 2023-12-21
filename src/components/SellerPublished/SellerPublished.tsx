@@ -5,9 +5,9 @@ import EmptyState from '../EmptyState/EmptyState';
 import SellerTable from '../SellerTable/SellerTable';
 
 const SellerPublished: React.FC = () => {
-  const publishedList = JSON.parse(
-    localStorage.getItem('sellerPublishedList')!,
-  ).products;
+  const publishedList = localStorage.getItem('sellerPublishedList')
+    ? JSON.parse(localStorage.getItem('sellerPublishedList')!).products
+    : [];
 
   return (
     <section className={styles.published}>

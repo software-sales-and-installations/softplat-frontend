@@ -13,18 +13,29 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 
 const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
-  const totalDraft = JSON.parse(
-    localStorage.getItem('sellerDraftList')!,
-  ).totalProducts;
-  const totalPublished = JSON.parse(
-    localStorage.getItem('sellerPublishedList')!,
-  ).totalProducts;
-  const totalRejected = JSON.parse(
-    localStorage.getItem('sellerRejectedList')!,
-  ).totalProducts;
-  const totalShipped = JSON.parse(
-    localStorage.getItem('sellerShippedList')!,
-  ).totalProducts;
+  const totalDraft =
+    mode === 'seller' &&
+    (localStorage.getItem('sellerDraftList')
+      ? JSON.parse(
+          JSON.parse(localStorage.getItem('sellerDraftList')!).totalProducts,
+        )
+      : 0);
+  const totalPublished =
+    mode === 'seller' &&
+    (localStorage.getItem('sellerPublishedList')
+      ? JSON.parse(localStorage.getItem('sellerPublishedList')!).totalProducts
+      : 0);
+  const totalRejected =
+    mode === 'seller' &&
+    (localStorage.getItem('sellerRejectedList')
+      ? JSON.parse(localStorage.getItem('sellerRejectedList')!).totalProducts
+      : 0);
+  const totalShipped =
+    mode === 'seller' &&
+    (localStorage.getItem('sellerShippedList')
+      ? JSON.parse(localStorage.getItem('sellerShippedList')!).totalProducts
+      : 0);
+
   const [complaints, setComplaints] = useState(
     localStorage.getItem('complaints') || '0',
   );
@@ -80,15 +91,16 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
                   (item.name === 'На доработке' && totalRejected !== 0))) ? (
                 <div className={styles.personalTitles__counter}>
                   {mode === 'admin' && item.name === 'Жалобы' ? complaints : ''}
-                  {item.name === 'Черновики'
-                    ? totalDraft
-                    : item.name === 'Опубликовано'
-                    ? totalPublished
-                    : item.name === 'На модерации'
-                    ? totalShipped
-                    : item.name === 'На доработке'
-                    ? totalRejected
-                    : ''}
+                  {mode === 'seller' &&
+                    (item.name === 'Черновики'
+                      ? totalDraft
+                      : item.name === 'Опубликовано'
+                      ? totalPublished
+                      : item.name === 'На модерации'
+                      ? totalShipped
+                      : item.name === 'На доработке'
+                      ? totalRejected
+                      : '')}
                 </div>
               ) : null}
             </div>
