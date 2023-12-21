@@ -46,6 +46,13 @@ export const buyerBasketApi = createApi({
         method: 'DELETE',
       }),
     }),
+    buyerBasketSaveCart: build.mutation({
+      query: body => ({
+        url: `/basket`,
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
@@ -55,4 +62,5 @@ export const {
   useBuyerBasketDeleteItemMutation,
   useBuyerBasketClearMutation,
   useBuyerBasketDeletePositionMutation,
+  useBuyerBasketSaveCartMutation,
 } = buyerBasketApi;

@@ -44,6 +44,7 @@ const initialState: IUserState = {
 	status: 'idle',
 	error: null,
 	user: {
+		id: null,
         token: '',
         email: '',
 		password: '',
