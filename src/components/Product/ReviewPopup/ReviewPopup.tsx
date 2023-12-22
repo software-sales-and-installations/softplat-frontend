@@ -81,7 +81,7 @@ const ReviewPopup = () => {
         disabled={!isValid}
       >
         <Stars register={register}/>
-        <InputWrapper inputId='review' labelText='Комментарий к оценке' errorText={errors?.review?.message}>
+        <InputWrapper inputId='review' labelText='Комментарий к оценке' errorText={errors?.review?.message?.toString()}>
           <Textarea
             extClassName={styles.reviewPopup__textarea}
             minLength={2}
