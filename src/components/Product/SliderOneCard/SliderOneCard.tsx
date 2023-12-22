@@ -28,11 +28,11 @@ export const SliderOneCard = ({id}: ISliderProps) => {
           <SwiperSlide className="swiperOneCard-slide">
             <div className='swiperOneCard-slide__content'>
               <div className='swiperOneCard-slide__img-container'>
-                <img
+                {id && <img
                   className='swiperOneCard-slide__img'
                   src={`https://api.softplat.ru/image/${id}`}
                   alt='Картинка слайдера'
-                />
+                />}
               </div>
               <div className='swiperOneCard-button-prev' />
               <div className='swiperOneCard-button-next' />

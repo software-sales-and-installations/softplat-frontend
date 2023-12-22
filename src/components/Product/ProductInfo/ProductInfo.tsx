@@ -22,8 +22,6 @@ const ProductInfo = ({children, product, id}: IProductInfo) => {
     // link.click()
     // link.remove()
  }
- console.log('productInfo')
-console.log(id)// import { SliderOneCard } from '../SliderOneCard/SliderOneCard.tsx';
 
   return (
     <section className={styles.productInfo}>

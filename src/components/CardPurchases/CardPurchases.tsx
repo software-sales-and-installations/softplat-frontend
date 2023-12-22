@@ -1,7 +1,5 @@
 import React from 'react';
 import styles from './CardPurchases.module.scss';
-// import { addToPurchases } from '../../services/redux/slices/purchases/purchases.ts';
-// import { useAppDispatch } from '../../services/redux/store.ts';
 
 export type cardPurchasesProps = {
   id: number;
@@ -24,13 +22,7 @@ const CardPurchases: React.FC<cardPurchasesProps> = ({
   seller,
   data,
 }) => {
-<<<<<<< HEAD
 
-  // const dispatch = useAppDispatch();
-  // dispatch(addToPurchases(id));
-
-  const date = new Date();
-=======
   const currentDate = new Date();
   const expiredDate = new Date(
     data
@@ -44,7 +36,6 @@ const CardPurchases: React.FC<cardPurchasesProps> = ({
       })
       .join('-'),
   );
->>>>>>> dev
 
   const isExpired = currentDate.getTime() > expiredDate.getTime();
 

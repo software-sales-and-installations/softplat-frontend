@@ -14,7 +14,6 @@ import { ShoppingCart } from './pages/ShoppingCart/ShoppingCart.tsx';
 import Search from './pages/Search/Search.tsx';
 import { Seller } from './pages/Seller/Seller.tsx';
 import { Admin } from './pages/Admin/Admin.tsx';
-import { Product } from './components/Product/Product.tsx';
 import { ProtectedRouteForAdmin, ProtectedRouteForAdminAuth
   // ProtectedRouteForBuyer, ProtectedRouteForSeller
 } from './components/ProtectedRoute/ProtectedRoute.tsx';
@@ -29,7 +28,6 @@ function App() {
           <Route path='/' element={<Navigate to='/catalog'/>}/>
           <Route path="/catalog" element={<HomePage />} />
           <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/product/demo" element={<Product />} />
           <Route path='/faq' element={<FAQ/>} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/catalog/:section" element={<CatalogSection />} />

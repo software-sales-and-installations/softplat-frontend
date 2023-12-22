@@ -28,8 +28,8 @@ export const ProductPage: FC = () => {
       <ProductInfo product={product} id={product?.image?.id.toString()}>
         <ProductButtons error={productError} id={product?.id.toString()} instPrice={product?.installationPrice}/>
       </ProductInfo>
-      <Reviews id={product?.id.toString()} name={product?.name}/>
-      <Similar id={product?.id.toString()}/>
+      {product?.id && <Reviews id={product?.id.toString()} name={product?.name}/>}
+      {product?.id && <Similar id={product?.id.toString()}/>}
       {/*      <div*/}
       {/*        className={style.product__question}*/}
       {/*        onMouseEnter={() =>*/}

@@ -8,11 +8,7 @@ import EmptyState from '../EmptyState/EmptyState';
 type Product = Omit<cardPurchasesProps, 'data'>;
 
 const PersonalPurchases: React.FC = () => {
-<<<<<<< HEAD
-  const { data: purchaseItems} = useOrderAllQuery(
-=======
   const { data: purchaseItems, isSuccess } = useOrderAllQuery(
->>>>>>> dev
     localStorage.getItem('userId'),
     { refetchOnMountOrArgChange: true },
   );
@@ -34,21 +30,19 @@ const PersonalPurchases: React.FC = () => {
                 productResponseDto: Product;
               }[];
               productionTime: string;
-<<<<<<< HEAD
-            }) => (
-              <li key={item.id}>
-                {item.productsOrdered.map(
-                  (product: { id: number; productResponseDto: Product }) => (
-                    <CardPurchases
-                      key={'purchase' + product.id}
-                      data={item.productionTime}
-                      {...product.productResponseDto}
-                    />
-                  ),
-                )}
-              </li>
-            ),
-=======
+            // }) => (
+            //   <li key={item.id}>
+            //     {item.productsOrdered.map(
+            //       (product: { id: number; productResponseDto: Product }) => (
+            //         <CardPurchases
+            //           key={'purchase' + product.id}
+            //           data={item.productionTime}
+            //           {...product.productResponseDto}
+            //         />
+            //       ),
+            //     )}
+            //   </li>
+            // ),
             }) =>
               item.productsOrdered.map(
                 (product: { id: number; productResponseDto: Product }) => (
@@ -59,7 +53,6 @@ const PersonalPurchases: React.FC = () => {
                   />
                 ),
               ),
->>>>>>> dev
           )}
       </ul>
     </section>

@@ -8,8 +8,9 @@ interface ISimilarProps {
   id: string | undefined;
 }
 
-function Similar({id}: ISimilarProps) {
-    const {data: similarProds , isLoading, error} = useSimilarProductsQuery({productId: id, minId: '0', pageSize: '5'});
+function Similar({id = '0'}: ISimilarProps) {
+
+  const {data: similarProds , isLoading, error} = useSimilarProductsQuery({productId: id, minId: '0', pageSize: '5'});
 
   return (
     <section>

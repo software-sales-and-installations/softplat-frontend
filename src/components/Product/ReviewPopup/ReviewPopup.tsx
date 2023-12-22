@@ -22,8 +22,6 @@ const ReviewPopup = () => {
   const name = useAppSelector((state: RootState) => state.product.setName);
   const id = useAppSelector((state: RootState) => state.product.setId);
 
-  console.log(id)
-
   const {
     register,
     handleSubmit,

@@ -17,7 +17,6 @@ import { SuccessPayPopup } from '../SuccessPayPopup/SuccessPayPopup';
 import { isNotSuccessPay, isSuccessPay } from '../CartSummary/CartSummarySlice';
 import { isSuccessCardData } from '../PayPopup/PayPopupSlice';
 import ReviewPopup from '../Product/ReviewPopup/ReviewPopup.tsx';
-import { useParams } from 'react-router-dom';
 
 export const ResultPopup : FC = () =>{
     const location = useLocation();
@@ -36,8 +35,6 @@ export const ResultPopup : FC = () =>{
 			dispatch(chooseRoleState('Я покупатель'))
 		}
 	};
-  const { id } = useParams();
-  console.log(id)
     return (
         <div onMouseDown={handleOverlayClick} className={classNames(styles.popup, isOpened ? styles.popup_opened : '')}>
             <div className={styles.popup__container}>
