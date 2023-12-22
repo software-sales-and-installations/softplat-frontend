@@ -14,6 +14,7 @@ import { useProductCreateMutation } from '../../utils/api/userProductApi';
 import { useCategoryListQuery } from '../../utils/api/categoryApi';
 
 export const SellerAddNewCard: FC = () =>{
+  const [errorText, setErrorText] = useState('')
     const [variantSoftware, setVariantSoftware] = useState('Загрузка ПО')
     const [DDactive, setDDActive] = useState(false)
     const {
@@ -43,23 +44,13 @@ export const SellerAddNewCard: FC = () =>{
       const [productCreate, {
         //     // isFetching, isLoading, isError
           }] = useProductCreateMutation();
-//   const handleProductCreate = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-//     e.preventDefault();
-//     productCreate(productData).unwrap()
-//       .then((res) => {
-//         console.log(res)
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       })
-//       .finally()
-//   };
 const productData = {hasDemo: true, category: getValues().category, description: getValues().description, installation: getValues().installation, installationPrice: getValues().installationPrice, name: getValues().name, price: getValues().price, quantity: getValues().quantity, vendor: getValues().vendor, version: getValues().version}
           function handleSubmitCard(){
             console.log(productData)
             productCreate(productData).unwrap()
               .then((res) => {
                 console.log(res)
+                setErrorText('Данные успешно обновлены/добавлены')
               })
               .catch((error) => {
                 console.log(error);
@@ -275,6 +266,9 @@ const productData = {hasDemo: true, category: getValues().category, description:
             <label className={styles.textArea__label} htmlFor='keywords'>Ключевые слова для поиска - не более 10</label>
             <textarea className={classNames(styles.textArea__input, styles.textArea__input_type_keyword)} id='keywords' {...register('keywords')}/>
        </div>
+       <div className={styles.errorContainer}>
+          <p className={styles.errorContainer__error}>{errorText}</p>
+        </div>
         <div className={styles.sellerAddCard__btncontainer}>
           <Button type='submit' isDisabled={!isValid} mode="primary">
             На модерацию

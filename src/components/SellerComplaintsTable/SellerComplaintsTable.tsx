@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { useComplaintSellerListQuery } from '../../utils/api/complaintApi';
 import { INewComplaints } from './SellerComplaintsTableTypes';
 import { IComplaint } from './SellerComplaintsTableTypes';
+import { Link } from 'react-router-dom';
 
 export const SellerComplaintsTable: FC = () => {
     const {data: complaintList=[]} = useComplaintSellerListQuery({},{
@@ -58,8 +59,8 @@ export const SellerComplaintsTable: FC = () => {
         <tbody>
         {newItems.map((i: any)=>{
         return (
-        <tr className={classNames(styles.line, styles.line_type_body)} key={i.id}>
-          <>
+        <tr className={styles.line} key={i.id}>
+          <Link className={classNames(styles.line, styles.line_type_body)} to={`/product/${i.product.id}`}>
             <td className={classNames(styles.cellName, styles.cell, styles.cell_type_body)}>
                 <p className={styles.cell__text}>{i.product.name}</p>
             </td>
@@ -69,10 +70,10 @@ export const SellerComplaintsTable: FC = () => {
             <td className={classNames(styles.cellArt, styles.cell, styles.cell_type_body)}>
                 <p className={styles.cell__text}>{i.product.id}</p>
             </td>
-            <td className={classNames(styles.cellQty, styles.cell, styles.cell_type_body)}>
-                <p className={styles.cell__text}>{i.qty}</p>
+            <td className={classNames(styles.cell, styles.cell_type_body, styles.cellComplaints)}>
+                <p className={classNames(styles.cellQty, styles.cell__text)}>{i.qty}</p>
             </td>
-            </>
+            </Link>
         </tr>)
        })}
         </tbody>

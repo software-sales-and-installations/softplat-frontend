@@ -3,6 +3,7 @@ import styles from './SellerPublished.module.scss';
 import SellerCard from '../SellerCard/SellerCard';
 import EmptyState from '../EmptyState/EmptyState';
 import SellerTable from '../SellerTable/SellerTable';
+import { Link } from 'react-router-dom';
 
 const SellerPublished: React.FC = () => {
   const publishedList = localStorage.getItem('sellerPublishedList')
@@ -32,7 +33,9 @@ const SellerPublished: React.FC = () => {
                 };
                 productionTime: string;
               }) => (
+                <Link className={styles.link} to ={`/product/${product.id}`}>
                 <SellerCard key={product.id} {...product} trash={true} />
+                </Link>
               ),
             )}
           </ul>
