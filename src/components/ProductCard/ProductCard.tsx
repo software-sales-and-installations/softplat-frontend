@@ -5,19 +5,19 @@ import { Button } from '../../UIStorybook/Button/Button';
 import { IProductCardProps } from './ProductCardTypes';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import {
+  addToLocalStorage,
   asyncAddToCart,
   asyncRemoveFromCart,
+  removeFromLocalStorage,
 } from '../../services/redux/slices/cart/cart';
 import {
   useBuyerBasketAddItemMutation,
   useBuyerBasketDeleteItemMutation,
-  useBuyerBasketInfoQuery,
 } from '../../utils/api/buyerBasketApi';
 import { FaRegHeart } from 'react-icons/fa';
 import {
   useBuyerAddFavoritesMutation,
   useBuyerDeleteFavoritesMutation,
-  useBuyerFavoritesQuery,
 } from '../../utils/api/buyerApi';
 import {
   addToFavorites,
@@ -36,11 +36,9 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const [role, setRole] = useState(localStorage.getItem('role'));
   const user = useAppSelector(selectUser);
   const userId = localStorage.getItem('userId');
-  // console.log('userId', userId);
 
   useEffect(() => {
     setToken(localStorage.getItem('token'));
-    setRole(localStorage.getItem('role'));
     setRole(localStorage.getItem('role'));
   }, [signout, user]);
 
@@ -54,36 +52,41 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
 
   const [addFavorites] = useBuyerAddFavoritesMutation();
   const [deleteFavorites] = useBuyerDeleteFavoritesMutation();
-
-  const buyerFavorites = useBuyerFavoritesQuery(undefined);
-  const basketInfo = useBuyerBasketInfoQuery(undefined);
-
-  const dispatch = useAppDispatch();
   const [buyerBasketAddItem, addItemError] = useBuyerBasketAddItemMutation();
-  const favorites = useAppSelector(state => state.favorite?.favorites);
-  const isFavorite = favorites?.some(item => item === card.id);
   const [buyerBasketDeleteItem, removeItemError] =
     useBuyerBasketDeleteItemMutation();
+
+  const dispatch = useAppDispatch();
+  const favorites = useAppSelector(state => state.favorite?.favorites);
+  const isFavorite = favorites?.some(item => item === card.id);
+
   const cart = useAppSelector(store => store.cart?.items);
 
   const countItemInCart = cart.filter(
     item =>
       item.productResponseDto.id === card.id && item.installation === false,
   );
-  // console.log(countItemInCart);
 
   const handleAddToCart = async () => {
-    await asyncAddToCart(card, buyerBasketAddItem, basketInfo.refetch);
+    if (userId) {
+      await asyncAddToCart(card, buyerBasketAddItem, dispatch);
+    } else {
+      addToLocalStorage(card, dispatch);
+    }
   };
 
   const handleremoveFromCart = async () => {
-    await asyncRemoveFromCart(card, buyerBasketDeleteItem, basketInfo.refetch);
+    if (userId) {
+      await asyncRemoveFromCart(card, buyerBasketDeleteItem, dispatch);
+    } else {
+      removeFromLocalStorage(card.id, dispatch);
+    }
   };
 
   const handleToggleFavorite = async () => {
     const action = isFavorite ? deleteFavorites : addFavorites;
 
-    await ayncToggleFavorite(action, card.id, buyerFavorites.refetch);
+    await ayncToggleFavorite(action, card.id);
     dispatch(
       isFavorite ? removeFromFavorites(card.id) : addToFavorites(card.id),
     );
@@ -153,23 +156,19 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
             +
           </button>
         </div>
-      ) : (
-        ((role==='BUYER' || !token)? 
+      ) : role === 'BUYER' || !token ? (
         <div className={styles.card__addBtn}>
-          
-        <Button
-          buttonType="primary"
-          width="100%"
-          height="35px"
-          onClick={handleAddToCart}
-          disabled={addItemError.isError}
-        >
-          {addItemError.isError ? 'Нет в наличии' : ' Добавить в корзину'}
-        </Button>
+          <Button
+            buttonType="primary"
+            width="100%"
+            height="35px"
+            onClick={handleAddToCart}
+            disabled={addItemError.isError}
+          >
+            {addItemError.isError ? 'Нет в наличии' : ' Добавить в корзину'}
+          </Button>
         </div>
-        : null)
-      )}
-    
+      ) : null}
     </div>
   );
 };

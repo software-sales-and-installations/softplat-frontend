@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styles from './VendorPage.module.scss';
 import VendorInfo from '../../components/VendorInfo/VendorInfo';
-import { CATEGORIZED_TEXT_VENDOR, SELECT_OPTIONS } from '../../utils/constants';
+import { SELECT_OPTIONS } from '../../utils/constants';
 import CardsGrid from '../../components/CardsGrid/CardsGrid';
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../services/redux/store';
@@ -15,6 +15,7 @@ import Preloader from '../../components/Preloader/Preloader';
 import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 import { useVendorQuery } from '../../utils/api/vendorApi';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import { Categories } from '../../components/Categories/Categories';
 
 // type Props = {};
 
@@ -22,7 +23,9 @@ const VendorPage: FC = () => {
   const { id } = useParams();
   const selectState = useAppSelector(state => state.dropdown.option.value);
 
-  const { data: vendor, isSuccess: isVendorFulfilled } = useVendorQuery(id);
+  const { data: vendor, isSuccess: isVendorFulfilled } = useVendorQuery(id,{
+    refetchOnMountOrArgChange: true
+  });
 
   const { data, error, isLoading } = usePublicProductListQuery(
     {
@@ -51,17 +54,7 @@ const VendorPage: FC = () => {
           description={vendor?.description || ''}
           img={vendor?.image?.url || ''}
         />
-        <ul className={styles.vendorPage__categories}>
-          {CATEGORIZED_TEXT_VENDOR.map(btn => {
-            return (
-              <li className={styles.item} key={btn.id}>
-                <button className={styles.vendorPage__categoriesBtn}>
-                  {btn.text}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+        <Categories />
         <div className={styles.vendorPage__selectForm}>
           <DropDown
             isMultiOption={false}

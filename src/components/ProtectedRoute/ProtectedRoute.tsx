@@ -40,6 +40,7 @@ export const ProtectedRouteForAdmin: FC<IProtectedRoute> = ({ children }) => {
 	);
 };
 export const ProtectedRouteForAdminAuth: FC<IProtectedRoute> = ({ children }) => {
+	localStorage.clear();
 	const dispatch = useAppDispatch();
 	dispatch(popupState(true));
 	dispatch(chooseRoleState('Я админ'))

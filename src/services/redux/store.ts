@@ -61,6 +61,7 @@ const reducers = combineReducers({
   [publicProductApi.reducerPath]: publicProductApi.reducer,
   [sellerApi.reducerPath]: sellerApi.reducer,
   [userCommentApi.reducerPath]: userCommentApi.reducer,
+  [complaintApi.reducerPath]: complaintApi.reducer,
   [userProductApi.reducerPath]: userProductApi.reducer,
   [vendorApi.reducerPath]: vendorApi.reducer,
 });
@@ -81,6 +82,7 @@ export const store = configureStore({
     sellerApi.middleware,
     userCommentApi.middleware,
     userProductApi.middleware,
+    complaintApi.middleware,
     vendorApi.middleware,
     )
 });

@@ -16,6 +16,7 @@ export const complaintApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ['Complaint'],
   endpoints: (build) => ({
     //Создание жалобы покупателем
     userComplaint: build.mutation({
@@ -24,9 +25,17 @@ export const complaintApi = createApi({
         method: 'POST',
       }),
     }),
+    complaintList: build.query({
+      query: () => '/complaint/admin',
+    }),
+    complaintSellerList: build.query({
+      query: () => '/complaint/seller'
+    })
   }),
 });
 
 export const {
   useUserComplaintMutation,
+  useComplaintListQuery,
+  useComplaintSellerListQuery
 } = complaintApi;

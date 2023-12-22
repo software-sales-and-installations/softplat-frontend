@@ -33,8 +33,6 @@ export const CATEGORIZED_TEXT: {
   { id: 1, text: 'Системное ПО' },
   { id: 2, text: 'Прикладное ПО' },
   { id: 3, text: 'Инструментальное ПО' },
-  { id: 4, text: 'Системное ПО' },
-  { id: 5, text: 'Системное ПО' },
   { id: 6, text: 'Windows' },
   { id: 7, text: 'Adobe' },
   { id: 8, text: 'Антивирусы' },
@@ -79,6 +77,7 @@ export const VALIDATION_SETTINGS = {
       noMatch: 'Пароли не совпадают',
       sameAsEmail: 'Пароль не должен совпадать с email',
       sameAsName: 'Пароль не должен совпадать с именем',
+      unsafe: 'Введите более надежный пароль'
     },
   },
   name: {
@@ -103,6 +102,29 @@ export const VALIDATION_SETTINGS = {
       invalid: 'Только кириллица, латиница или дефис',
       noCompanyName: 'Необходимо ввести название',
     },
+  },
+  vendordescription: {
+    pattern: /^[0-9a-zA-Zа-яёЁА-Я-@#$.,%^&+=?!"'«»\s]/,
+    minLength: 2,
+    maxLength: 500,
+    messages: {
+      tooShort: 'Слишком короткое описание',
+      tooLong: 'Слишком длинное описание',
+      invalid: 'Использование недопустимых символов',
+      noVendorDescription: 'Необходимо добавить описание',
+    }
+
+  },
+  vendorname: {
+    pattern: /^[a-zа-яё\s]+$/iu,
+    minLength: 2,
+    maxLength: 255,
+    messages: {
+      tooShort: 'Слишком короткое название',
+      tooLong: 'Слишком длинное название',
+      invalid: 'Использование недопустимых символов',
+      noVendorName: 'Необходимо добавить название',
+    }
   },
 
   phone: {
@@ -492,7 +514,43 @@ export const PRICE_VALIDATION_CONFIG ={
     value: VALIDATION_SETTINGS.price.maxLength,
     message: VALIDATION_SETTINGS.price.messages.tooLong,
   },
-}
+};
+export const VENDORNAME_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.vendorname.messages.noVendorName,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.vendorname.pattern,
+    message: VALIDATION_SETTINGS.vendorname.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.vendorname.maxLength,
+    message: VALIDATION_SETTINGS.vendorname.messages.tooLong,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.vendorname.minLength,
+    message: VALIDATION_SETTINGS.vendorname.messages.tooShort,
+  },
+};
+export const VENDORDESCRIPTION_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.vendordescription.messages.noVendorDescription,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.vendordescription.pattern,
+    message: VALIDATION_SETTINGS.vendordescription.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.vendordescription.maxLength,
+    message: VALIDATION_SETTINGS.vendordescription.messages.tooLong,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.vendordescription.minLength,
+    message: VALIDATION_SETTINGS.vendordescription.messages.tooShort,
+  },
+};
 export const CARD_REQUIRED_FIELDS = {
   required: {
     value: true,
@@ -954,3 +1012,21 @@ export const adminMenuItems = [
     link: 'sales',
   },
 ];
+
+export const COMMON_PASSWORDS = [
+  'Password1@',
+  'Welcome123!',
+  'SecurePass12#',
+  'StrongPassword9$',
+  'SecretCode2022@',
+  'SuperSecure!23',
+  '12345678Ab@',
+  'P@ssw0rd2021!',
+  '!Qwerty12345',
+  'Qwerty123@',
+  'Asdfgh123!',
+  'Zxcvbn123@',
+  'Qwerty!123',
+  'Asdfgh!123',
+  'Zxcvbn!123'
+]

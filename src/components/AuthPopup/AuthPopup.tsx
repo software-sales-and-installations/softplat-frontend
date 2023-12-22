@@ -16,15 +16,18 @@ import { Button } from '../../UI/Button/Button';
 import { setUser } from '../../services/redux/slices/user/user';
 import { useAuthLoginMutation } from '../../utils/api/authApi';
 import { signout } from '../SignOutPopup/SignOutPopupSlice';
-import { useBuyerFavoritesQuery } from '../../utils/api/buyerApi';
-import { useBuyerBasketInfoQuery } from '../../utils/api/buyerBasketApi';
+import { useBuyerBasketSaveCartMutation } from '../../utils/api/buyerBasketApi';
+import { sendCartToServer } from '../../services/redux/slices/cart/cart';
+import { convertCartItemsToRequest } from '../../services/cartService/cartService';
 
 export const PopupForAuth: FC = () => {
   const [authError, setAuthError] = useState(0);
   const [errorText, setErrorText] = useState('');
 
-  const { refetch: refetchFavorites } = useBuyerFavoritesQuery(undefined);
-  const { refetch: refetchBasketInfo } = useBuyerBasketInfoQuery(undefined);
+  const [buyerBasketSaveCart] = useBuyerBasketSaveCartMutation();
+
+  const cartRequest = convertCartItemsToRequest();
+
   const dispatch = useAppDispatch();
   const {
     register,
@@ -34,7 +37,6 @@ export const PopupForAuth: FC = () => {
     getValues,
   } = useForm<ISignInFields>({ mode: 'onChange' });
 
-  const loginData = getValues();
   const [
     authLogin,
     {
@@ -43,6 +45,7 @@ export const PopupForAuth: FC = () => {
   ] = useAuthLoginMutation();
 
   const handleSubmitLogin = () => {
+    const loginData = getValues();
     authLogin(loginData)
       .unwrap()
       .then(userData => {
@@ -51,12 +54,15 @@ export const PopupForAuth: FC = () => {
         localStorage.setItem('email', userData.email);
         localStorage.setItem('userId', userData.id);
         console.log(userData);
+
+        if (cartRequest.length > 0) {
+          sendCartToServer(cartRequest, buyerBasketSaveCart, dispatch);
+        }
+
         dispatch(popupState(false));
         dispatch(setUser(userData));
         dispatch(signout(false));
-        refetchFavorites();
-        refetchBasketInfo();
-        reset;
+        reset();
       })
       .catch(error => {
         setAuthError(error.originalStatus);

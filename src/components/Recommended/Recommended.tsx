@@ -11,7 +11,7 @@ const Recommended: FC = () => {
     pageSize: 10,
     sort: 'NEWEST',
   });
-
+  
   const recommendedCards = data?.products.filter(
     (card: IProductCard) =>
       card.productStatus === ProductStatus.PUBLISHED && card.quantity > 0,

@@ -12,6 +12,7 @@ import Similar from '../../components/Product/Similar/Similar.tsx';
 
 import styles from './ProductPage.module.scss';
 
+
 export const ProductPage: FC = () => {
   const { id } = useParams();
   const cardData = useAppSelector(state => state.cards.card);
@@ -19,7 +20,6 @@ export const ProductPage: FC = () => {
 
   const { data: product, isError: productError} = usePublicProductQuery(id);
 
-  console.log(product)
   return (
     <div className={styles.productPage}>
       <div className={styles.breadcrumbs}>

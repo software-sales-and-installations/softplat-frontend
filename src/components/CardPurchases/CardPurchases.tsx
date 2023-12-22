@@ -24,29 +24,32 @@ const CardPurchases: React.FC<cardPurchasesProps> = ({
   seller,
   data,
 }) => {
+<<<<<<< HEAD
 
   // const dispatch = useAppDispatch();
   // dispatch(addToPurchases(id));
 
   const date = new Date();
+=======
+  const currentDate = new Date();
+  const expiredDate = new Date(
+    data
+      .split(' ')[0]
+      .split('-')
+      .map((item, i) => {
+        if (i === 0) {
+          return (Number(item) + 1).toString();
+        }
+        return item;
+      })
+      .join('-'),
+  );
+>>>>>>> dev
 
-  const currentDate = `${date.getFullYear()}-${
-    date.getMonth() + 1
-  }-${date.getDate()}`;
-
-  const expiredDate = data
-    .split(' ')[0]
-    .split('-')
-    .map((item, i) => {
-      if (i === 0) {
-        return (Number(item) + 1).toString();
-      }
-      return item;
-    })
-    .join('-');
+  const isExpired = currentDate.getTime() > expiredDate.getTime();
 
   return (
-    <div className={styles.cardPurchases}>
+    <li className={styles.cardPurchases}>
       <div className={styles.cardPurchases__imgContainer}>
         <img
           src={image}
@@ -59,15 +62,14 @@ const CardPurchases: React.FC<cardPurchasesProps> = ({
         <p className={styles.cardPurchases__brand}>{vendor.name}</p>
         <p className={styles.cardPurchases__seller}>{seller.name}</p>
       </div>
-      <div
-        className={styles.cardPurchases__loadContainer}
-        title={currentDate === expiredDate ? 'Срок лицензии истёк' : ''}
+      <button
+        className={styles.cardPurchases__loadButton}
+        disabled={isExpired}
+        title={isExpired ? 'Срок лицензии истёк' : ''}
       >
         <svg
           className={`${styles.cardPurchases__load} ${
-            currentDate === expiredDate
-              ? styles.cardPurchases__load_inactive
-              : ''
+            isExpired ? styles.cardPurchases__load_inactive : ''
           }`}
           xmlns="http://www.w3.org/2000/svg"
           width="30"
@@ -83,11 +85,11 @@ const CardPurchases: React.FC<cardPurchasesProps> = ({
             strokeLinejoin="round"
           />
         </svg>
-      </div>
+      </button>
       <span className={styles.cardPurchases__data}>
         {data.split(' ')[0].split('-').join('.')}
       </span>
-    </div>
+    </li>
   );
 };
 

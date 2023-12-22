@@ -9,8 +9,59 @@ import { SellerBankSettings } from '../../components/SellerBankSettings/SellerBa
 import { SellerAddNewCard } from '../../components/SellerAddNewCard/SellerAddNewCard';
 import { SellerDrafts } from '../../components/SellerDrafts/SellerDrafts';
 import SellerPublished from '../../components/SellerPublished/SellerPublished';
+import SellerModeration from '../../components/SellerModeration/SellerModeration';
+import SellerCorrection from '../../components/SellerCorrection/SellerCorrection';
+import SellerSales from '../../components/SellerSales/SellerSales';
+import { SellerComplaintsTable } from '../../components/SellerComplaintsTable/SellerComplaintsTable';
+import { useSellerProductListQuery } from '../../utils/api/sellerApi';
+import { useComplaintSellerListQuery } from '../../utils/api/complaintApi';
 
 export const Seller: FC = () => {
+  const { data: draftList, isSuccess: isDraftListSuccess } =
+    useSellerProductListQuery(
+      {
+        status: 'DRAFT',
+      },
+      { refetchOnMountOrArgChange: true },
+    );
+  const { data: publishedList, isSuccess: isPublishedListSuccess } =
+    useSellerProductListQuery(
+      {
+        status: 'PUBLISHED',
+      },
+      { refetchOnMountOrArgChange: true },
+    );
+  const { data: rejectedList, isSuccess: isRejectedListSuccess } =
+    useSellerProductListQuery(
+      {
+        status: 'REJECTED',
+      },
+      { refetchOnMountOrArgChange: true },
+    );
+  const { data: shippedList, isSuccess: isShippedListSuccess } =
+    useSellerProductListQuery(
+      {
+        status: 'SHIPPED',
+      },
+      { refetchOnMountOrArgChange: true },
+    );
+  const { data: complaintList, isSuccess: isComplaintListSuccess } =
+    useComplaintSellerListQuery({}, { refetchOnMountOrArgChange: true });
+
+  if (
+    isDraftListSuccess &&
+    isPublishedListSuccess &&
+    isRejectedListSuccess &&
+    isShippedListSuccess &&
+    isComplaintListSuccess
+  ) {
+    localStorage.setItem('sellerDraftList', JSON.stringify(draftList));
+    localStorage.setItem('sellerPublishedList', JSON.stringify(publishedList));
+    localStorage.setItem('sellerRejectedList', JSON.stringify(rejectedList));
+    localStorage.setItem('sellerShippedList', JSON.stringify(shippedList));
+    localStorage.setItem('sellerComplaintList', JSON.stringify(complaintList));
+  }
+
   return (
     <>
       <div className={styles.breadcrumbs}>
@@ -24,10 +75,10 @@ export const Seller: FC = () => {
           <Route path="/add-card" element={<SellerAddNewCard />} />
           <Route path="/drafts" element={<SellerDrafts />} />
           <Route path="/published" element={<SellerPublished />} />
-          <Route path="/on-moderation" element={<h2>На модерации</h2>} />
-          <Route path="/correction" element={<h2>На доработке</h2>} />
-          <Route path="/appeal" element={<h2>Жалобы</h2>} />
-          <Route path="/sales" element={<h2>Отчеты продаж</h2>} />
+          <Route path="/on-moderation" element={<SellerModeration />} />
+          <Route path="/correction" element={<SellerCorrection />} />
+          <Route path="/appeal" element={<SellerComplaintsTable />} />
+          <Route path="/sales" element={<SellerSales />} />
           <Route path="/bank-details" element={<SellerBankSettings />} />
           <Route path="/settings" element={<SellerSettings />} />
           <Route path="/password" element={<PasswordSettings />} />

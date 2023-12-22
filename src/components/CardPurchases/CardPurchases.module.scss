@@ -53,7 +53,9 @@
     margin: 5px 0 9px;
   }
 
-  &__loadContainer {
+  &__loadButton {
+    border: none;
+    background-color: transparent;
     flex: 0 0 50px;
   }
 
