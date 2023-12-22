@@ -244,8 +244,39 @@ export const VALIDATION_SETTINGS = {
       tooLong: 'Слишком большое число',
       noPrice: 'Заполните это поле'
     }
+  },
+  quantity: {
+    pattern: /^\d+$/,
+    messages: {
+      invalid: 'Необходимо ввести только цифры',
+      noQty: 'Заполните это поле'
+    }
+  },
+  version: {
+    pattern: /^[0-9a-z-.,/]/,
+    minLength: 2,
+    maxLength: 30,
+    messages: {
+      tooShort: 'Введите еще символы',
+      tooLong: 'Слишком много символов',
+      invalid: 'Введены недопустимые символы',
+      noaccount: 'Заполните это поле',
   }
+}
 };
+export const VERSION_VALIDATION_CONFIG = {
+
+}
+export const QUANTITY_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.quantity.messages.noQty,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.quantity.pattern,
+    message: VALIDATION_SETTINGS.quantity.messages.invalid,
+  },
+}
 export const EMAIL_VALIDATION_CONFIG = {
   required: {
     value: true,

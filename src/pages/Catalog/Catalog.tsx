@@ -1,4 +1,4 @@
-//КОМПОНЕНТ НЕ ИСПОЛЬЗУЕТСЯ??
+// //КОМПОНЕНТ НЕ ИСПОЛЬЗУЕТСЯ??
 
 // import { FC, useEffect } from 'react';
 // import styles from './Catalog.module.scss';
@@ -9,17 +9,17 @@
 // import { useDispatch } from 'react-redux';
 // import { AppDispatch, useAppSelector } from '../../services/redux/store';
 // import { fetchAllCards } from '../../services/redux/slices/cards/cards';
-//
-//
+
+
 // const Catalog: FC = () => {
 //   const dispatch = useDispatch<AppDispatch>();
 //   const cards = useAppSelector((state) => state.cards.cards)
 //   console.log(cards)
-//
+
 //   useEffect(() => {
 //     dispatch(fetchAllCards())
 //   }, [])
-//
+
 //   return (
 //     <section className={styles.catalog}>
 //       <h2 className={styles.catalog__title}>Каталог</h2>
@@ -35,5 +35,5 @@
 //     </section>
 //   );
 // };
-//
+
 // export default Catalog;

@@ -8,9 +8,10 @@ export const userProductApi = createApi({
     baseUrl: API_BASE_URL,
     prepareHeaders: headers => {
       const token = localStorage.getItem('token');
-      const userId = localStorage.userId('userId');
+      const userId = localStorage.getItem('userId')
       if (token) {
         headers.set('authorization', `${token}`);
+        headers.set('X-Sharer-User-Id', `${userId}`);
       }
       if (userId) {
         headers.set('X-Sharer-User-Id', `${userId}`)
@@ -34,9 +35,10 @@ export const userProductApi = createApi({
     //   "version": "string"
     // }
     productCreate: build.mutation({
-      query: () => ({
-        url: '/product/',
+      query: (body) => ({
+        url: '/product',
         method: 'POST',
+        body
         // providesTags: ['UserProduct'],
       }),
     }),
@@ -104,8 +106,8 @@ export const userProductApi = createApi({
     }),
     // Удаление своей карточки товара
     productDeleteOwnCard: build.mutation({
-      query: productId => ({
-        url: `/product/products/${productId}/`,
+      query: (productId) => ({
+        url: `/product/${productId}/delete`,
         method: 'DELETE',
       }),
     }),

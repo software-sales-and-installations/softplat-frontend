@@ -8,7 +8,7 @@ import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 const Recommended: FC = () => {
   const { data, error, isLoading } = usePublicProductListQuery({
     minId: 0,
-    pageSize: 10,
+    pageSize: 30,
     sort: 'NEWEST',
   });
   
