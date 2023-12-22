@@ -54,7 +54,7 @@ export const SellerAddNewCard: FC = () =>{
 //       })
 //       .finally()
 //   };
-const productData = {category: getValues().category, description: getValues().description, installation: getValues().installation, installationPrice: getValues().installationPrice, name: getValues().name, price: getValues().price, quantity: getValues().quantity, vendor: getValues().vendor, version: getValues().version}
+const productData = {hasDemo: true, category: getValues().category, description: getValues().description, installation: getValues().installation, installationPrice: getValues().installationPrice, name: getValues().name, price: getValues().price, quantity: getValues().quantity, vendor: getValues().vendor, version: getValues().version}
           function handleSubmitCard(){
             console.log(productData)
             productCreate(productData).unwrap()
