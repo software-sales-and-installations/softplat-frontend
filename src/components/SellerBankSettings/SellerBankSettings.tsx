@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import styles from './SellerBankSettings.module.scss';
 import { Input } from '../../UI/Input/Input';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { ISellerBankData } from './SellerBankSettingsTypes';
 import { InputTypes } from '../../UI/Input/InputTypes';
 import { Button } from '../../UI/Button/Button';
@@ -15,8 +15,11 @@ import {
   OGRNIP_VALIDATION_CONFIG,
   ACCOUNT_VALIDATION_CONFIG,
   INN_VALIDATION_CONFIG,
+  ORGFORM_OPTIONS,
 } from '../../utils/constants';
 import { useState } from 'react';
+import DropDown from '../../UI/DropDown/DropDown';
+import { SelectorType } from '../../UI/DropDown/DropDownTypes';
 
 export const SellerBankSettings: FC = () => {
   const sellerId = localStorage.getItem('userId');
@@ -25,6 +28,7 @@ export const SellerBankSettings: FC = () => {
     handleSubmit,
     getValues,
     setValue,
+    control,
     formState: { errors, isValid },
   } = useForm<ISellerBankData>({ mode: 'onChange' });
 
@@ -37,6 +41,7 @@ export const SellerBankSettings: FC = () => {
   const [bankData, setBankData] = useState({
     bik: sellerBank?.bik,
     ogrnip: sellerBank?.ogrnip,
+    ogrn: sellerBank?.ogrn,
     account: sellerBank?.account,
     inn: sellerBank?.inn,
     kpp: sellerBank?.kpp,
@@ -51,16 +56,18 @@ export const SellerBankSettings: FC = () => {
     },
   ] = useSellerChangeBankMutation();
   function setNewData() {
+    const isIP = getValues().orgForm?.value === 'IP' ? 'ogrnip' : 'ogrn'
+    console.log(isIP)
     const newBankData = {
       bik: getValues().bik,
-      ogrnip: getValues().ogrnip,
+      [isIP]: getValues().ogrnip,
       account: getValues().account,
       inn: getValues().INN,
       kpp: getValues().kpp,
       address: getValues().address,
-      legalForm: getValues().orgForm,
+      legalForm: getValues().orgForm?.value,
     };
-    // console.log(newBankData);
+    console.log(newBankData);
     return newBankData;
   }
   const handleSellerAddBank = () => {
@@ -70,6 +77,7 @@ export const SellerBankSettings: FC = () => {
         setBankData({
           bik: res.bik,
           ogrnip: res.ogrnip,
+          ogrn: res.ogrn,
           account: res.account,
           inn: res.inn,
           kpp: res.kpp,
@@ -91,6 +99,7 @@ export const SellerBankSettings: FC = () => {
         setBankData({
           bik: res.bik,
           ogrnip: res.ogrnip,
+          ogrn: res.ogrn,
           account: res.account,
           inn: res.inn,
           kpp: res.kpp,
@@ -104,20 +113,27 @@ export const SellerBankSettings: FC = () => {
       })
       .finally();
   };
+
+  const orgFormDefaultValue = ORGFORM_OPTIONS.find(
+    i => i.value === sellerBank?.legalForm,
+  );
+
   useEffect(() => {
     setValue('bik', bankData.bik || sellerBank?.bik);
-    setValue('ogrnip', bankData.ogrnip || sellerBank?.ogrnip);
+    setValue('ogrnip', bankData.ogrnip || bankData.ogrn || sellerBank?.ogrnip || sellerBank?.ogrn);
     setValue('account', bankData.account || sellerBank?.account);
-	setValue('INN', bankData.inn || sellerBank?.inn);
-	setValue('address', bankData.address || sellerBank?.address);
-	setValue('kpp', bankData.kpp || sellerBank?.kpp)
+    setValue('INN', bankData.inn || sellerBank?.inn);
+    setValue('address', bankData.address || sellerBank?.address);
+    setValue('kpp', bankData.kpp || sellerBank?.kpp);
+    setValue('orgForm', orgFormDefaultValue || undefined);
   }, [sellerBank, bankData]);
 
-  console.log(`sellerBank : ${sellerBank}`);
   return (
     <form
       className={styles.form}
-      onSubmit={handleSubmit(!sellerBank?.bik ? handleSellerAddBank : handleSellerChangeBank)}
+      onSubmit={handleSubmit(
+        !sellerBank?.bik ? handleSellerAddBank : handleSellerChangeBank,
+      )}
     >
       <Input
         inputType={InputTypes.INN}
@@ -137,12 +153,21 @@ export const SellerBankSettings: FC = () => {
         error={errors?.kpp?.message}
         typeError="dataError"
       />
-      <Input
-        inputType={InputTypes.orgForm}
-        labelText="Правовая форма организации*"
-        validation={{ ...register('orgForm') }}
-        error={errors?.orgForm?.message}
-        typeError="dataError"
+      <Controller
+        control={control}
+        name="orgForm"
+        render={({ field: { onChange, value } }) => (
+          <DropDown
+            type={SelectorType.ORGFORM}
+            options={ORGFORM_OPTIONS}
+            labelText="Правовая форма организации*"
+            onChange={onChange}
+            value={value}
+            // error={errors?.orgForm?.message}
+            typeError="dataError"
+            isMultiOption={false}
+          />
+        )}
       />
       <Input
         inputType={InputTypes.ogrnip}

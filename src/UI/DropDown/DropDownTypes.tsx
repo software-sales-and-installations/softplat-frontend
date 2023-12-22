@@ -7,11 +7,17 @@ export enum SelectorType {
   BASE = 'base',
   COUNTRY = 'country',
   VENDOR = 'vendor',
-  CATALOG = 'catalog'
+  CATALOG = 'catalog',
+  ORGFORM = 'orgForm'
 }
 
 export interface IDropDowmProps {
   options: IOption[];
   type?: SelectorType;
-  isMultiOption?: boolean
+  isMultiOption?: boolean;
+  labelText?: string;
+  onChange?: any;
+  value?: any;
+  error?: string;
+  typeError?: string;
 }

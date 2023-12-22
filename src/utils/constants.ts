@@ -162,7 +162,7 @@ export const VALIDATION_SETTINGS = {
   },
   inn: {
     pattern: /^\d+$/,
-    minLength: 12,
+    minLength: 10,
     maxLength: 12,
     messages: {
       tooShort: 'Введите еще цифры',
@@ -185,7 +185,7 @@ export const VALIDATION_SETTINGS = {
   },
   ogrnip: {
     pattern: /^\d+$/,
-    minLength: 15,
+    minLength: 13,
     maxLength: 15,
     messages: {
       tooShort: 'Введите еще цифры',
@@ -632,6 +632,15 @@ export const SELECT_COUNTRIES_OPTIONS: { label: string; value: string }[] = [
   { value: 'UK', label: 'Великобритания' },
   { value: 'USA', label: 'США' },
 ];
+
+export const ORGFORM_OPTIONS: { label: string; value: string }[] = [
+  { value: 'IP', label: 'ИП' },
+  { value: 'NAO', label: 'НАО' },
+  { value: 'OOO', label: 'ООО' },
+  { value: 'OAO', label: 'ОАО' },
+  { value: 'PAO', label: 'ПАО' },
+  { value: 'ZAO', label: 'ЗАО' },
+]
 
 export const PRODUCT_ITEMS = {
   products: [

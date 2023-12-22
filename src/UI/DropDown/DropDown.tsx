@@ -7,19 +7,31 @@ import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import {
   changeCountryOption,
   changeOption,
+  changeOrgFormOption,
   changeVendorOption,
 } from './DropDownSlice';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 
-const DropDown: FC<IDropDowmProps> = ({ options, type, isMultiOption }) => {
+const DropDown: FC<IDropDowmProps> = ({
+  options,
+  type,
+  isMultiOption,
+  labelText,
+  onChange,
+  value,
+  error,
+  typeError,
+}) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const baseSelect = type === SelectorType.BASE;
   const countrySelect = type === SelectorType.COUNTRY;
   const vendorSelect = type === SelectorType.VENDOR;
   const catalogSelect = type === SelectorType.CATALOG;
+  const orgFormSelect = type === SelectorType.ORGFORM;
   const currentBase = useAppSelector(state => state.dropdown.option);
+  const orgFormOption = useAppSelector(state => state.dropdown.orgFormOption)
   // SingleValue<IOption> | MultiValue<IOption[]>
   const handleChange = (e: any): void => {
     if (baseSelect) {
@@ -30,29 +42,63 @@ const DropDown: FC<IDropDowmProps> = ({ options, type, isMultiOption }) => {
       dispatch(changeVendorOption(e));
     } else if (catalogSelect) {
       navigate(`/catalog/${e.value}`, { replace: true });
+    } else if (orgFormSelect) {
+      dispatch(changeOrgFormOption(e));
+      onChange(e);
     }
   };
 
+
+
   return (
-    <Select
-      classNamePrefix={classNames(
-        { multi: isMultiOption },
-        { country: isMultiOption && countrySelect },
-        { vendor: isMultiOption && vendorSelect },
-        { catalog: catalogSelect },
-        'custom-select',
+    <>
+      {labelText && (
+        <div className="input__hints">
+          {labelText ? (
+            <label
+              className="input__label"
+              // htmlFor={inputType}
+            >
+              {labelText}
+            </label>
+          ) : null}
+        </div>
       )}
-      options={options}
-      isMulti={isMultiOption ? true : false}
-      hideSelectedOptions={false}
-      closeMenuOnSelect={catalogSelect && true}
-      defaultValue={baseSelect && currentBase}
-      onChange={e => handleChange(e)}
-      isSearchable={isMultiOption && true}
-      placeholder={true}
-      noOptionsMessage={() => 'Нет подходящих вариантов'}
-      // menuIsOpen={!catalogSelect && true}
-    />
+      <Select
+        classNamePrefix={classNames(
+          { multi: isMultiOption },
+          { country: isMultiOption && countrySelect },
+          { vendor: isMultiOption && vendorSelect },
+          { catalog: catalogSelect },
+          'custom-select',
+        )}
+        options={options}
+        isMulti={isMultiOption ? true : false}
+        hideSelectedOptions={false}
+        closeMenuOnSelect={catalogSelect && true}
+        defaultValue={baseSelect && currentBase}
+        onChange={e => handleChange(e)}
+        isSearchable={isMultiOption && true}
+        placeholder={true}
+        noOptionsMessage={() => 'Нет подходящих вариантов'}
+        value={value}
+        // menuIsOpen={!catalogSelect && true}
+      />
+      {typeError && (
+        <span
+          className={classNames(
+            'input__error',
+            typeError === 'dataError'
+              ? 'input__error_type_data'
+              : typeError === 'addCardError'
+              ? 'input__error_type_addCardError'
+              : '',
+          )}
+        >
+          {error}
+        </span>
+      )}
+    </>
   );
 };
 
