@@ -9,11 +9,11 @@ interface ISimilarProps {
 }
 
 function Similar({id}: ISimilarProps) {
-    const {data: similarProds, isLoading, error} = useSimilarProductsQuery({productId: id, minId: '0', pageSize: '5'});
+    const {data: similarProds , isLoading, error} = useSimilarProductsQuery({productId: id, minId: '0', pageSize: '5'});
 
   return (
     <section>
-    {similarProds &&
+    {similarProds?.products?.length ? (
       <div className={styles.similar}>
       <h3 className={styles.similar__header}>Похожие</h3>
       <div className={styles.similar__cardWrapper}>
@@ -26,7 +26,7 @@ function Similar({id}: ISimilarProps) {
       <ProductCard key={prod.id} card={prod}></ProductCard>))
       )}
       </div>
-    </div>}
+    </div>) : null }
       </section>
   );
 }

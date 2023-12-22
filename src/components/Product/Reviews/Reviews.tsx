@@ -26,7 +26,8 @@ type Product = Omit<cardPurchasesProps, 'data'>;
   const signout = useAppSelector((state: RootState) => state.signout.signout);
   const user = useAppSelector(selectUser);
   const [userId, setUserId] = useState(localStorage.getItem('userId'));
-  const {data: reviews , isLoading, error} = useProductCommentsQuery({productId: id, minId: '0', pageSize: '2'});
+  const [count, setCount] = useState(2)
+  const {data: reviews , isLoading, error} = useProductCommentsQuery({productId: id, minId: '0', pageSize: count.toString()});
   const ratingArray = reviews?.comments?.map(item => item.rating) || [0];
   const totalRating = ratingArray?.length !== 0 ? (ratingArray.reduce((sum, number) => Number(sum) + Number(number)) || 0 / ratingArray?.length) : 0;
 
@@ -50,7 +51,6 @@ type Product = Omit<cardPurchasesProps, 'data'>;
 
   const reviewed = reviews?.comments?.map(item => item.author.id).includes(Number(userId)) || false
 
-
     useEffect(() => {
     setUserId(localStorage.getItem('userId'));
   }, [signout, user]);
@@ -60,6 +60,10 @@ type Product = Omit<cardPurchasesProps, 'data'>;
     dispatch(popupState(true));
     dispatch(productName(name || ''))
     dispatch(productId(id || ''))
+  }
+
+  const handleMoreClick = () => {
+    setCount( count + (reviews?.totalComments || 0))
   }
 
   return (
@@ -85,7 +89,7 @@ type Product = Omit<cardPurchasesProps, 'data'>;
           <ReviewOneCard key={'review' + review.id} author={review.author.name} text={review.text} rating={review.rating}/>
         ))
       )}
-      { reviews?.comments.length! >= 2 && <Button buttonType='link' extClassName={styles.reviews__more}>Все отзывы</Button>}
+      { reviews?.comments.length! >= 2 && count <= reviews?.totalComments! && <Button onClick={handleMoreClick} buttonType='link' extClassName={styles.reviews__more}>Все отзывы</Button>}
     </section>
 </>
 );
