@@ -8,7 +8,7 @@ import { IProductCard } from '../ProductCard/ProductCardTypes';
 
 export const SellerDrafts: FC = () => {
   let count = 0;
-  const { data: cards, isSuccess: isDraftListSuccess } =
+  const { data: cards } =
   useSellerProductListQuery(
     {
       status: 'DRAFT',

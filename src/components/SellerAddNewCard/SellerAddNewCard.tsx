@@ -4,12 +4,11 @@ import { Input } from '../../UI/Input/Input';
 import { InputTypes } from '../../UI/Input/InputTypes';
 import styles from './SellerAddNewCard.module.scss';
 import { ICreateProductFields } from './SellerAddNewCardTypes';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { NAME_VALIDATION_CONFIG, LINK_VALIDATION_CONFIG, PRICE_VALIDATION_CONFIG, QUANTITY_VALIDATION_CONFIG, VERSION_VALIDATION_CONFIG } from '../../utils/constants';
 import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { useVendorListQuery } from '../../utils/api/vendorApi';
-import {CATEGORIZED_TEXT }from '../../utils/constants';
 import { useProductCreateMutation } from '../../utils/api/userProductApi';
 import { useCategoryListQuery } from '../../utils/api/categoryApi';
 
@@ -32,7 +31,7 @@ export const SellerAddNewCard: FC = () =>{
       const { data: vendorAll} = useVendorListQuery({},{
         refetchOnMountOrArgChange:true
       });
-      const {data: categoryList, isFetching: isCategoryListFetching,isLoading: isCategoryListLoading, error: categoryListErr} = useCategoryListQuery({});
+      const {data: categoryList} = useCategoryListQuery({});
       const [categoryListData, setcategoryListData] = useState(categoryList)
       const [vendorData, setVendorData] = useState(vendorAll)
       useEffect(()=>{
