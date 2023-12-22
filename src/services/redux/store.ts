@@ -1,7 +1,7 @@
 import {reducer as toggleBtnReducer} from '../../UI/ToggleButton/ToggleButtonSlice';
 import {reducer as chooseRoleReducer} from '../../UI/ChooseRole/ChooseRoleSlice';
 import {reducer as popupStateReducer} from '../../UI/Popup/PopupSlice';
-import {reducer as signoutReducer} from '../../components/SignOutPopup/SignOutPopupSlice.tsx'
+import {reducer as signoutReducer} from '../../components/SignOutPopup/SignOutPopupSlice.tsx';
 import {reducer as isSuccessCardDataReducer} from '../../components/PayPopup/PayPopupSlice.tsx';
 import {reducer as isSuccessPayReducer} from '../../components/CartSummary/CartSummarySlice.tsx';
 import {reducer as isNotSuccessPayReducer} from '../../components/CartSummary/CartSummarySlice.tsx';

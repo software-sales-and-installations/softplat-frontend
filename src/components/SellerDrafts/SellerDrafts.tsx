@@ -18,8 +18,13 @@ export const SellerDrafts: FC = () => {
   useEffect(() => {
     setDraftCards(cards);
   }, [cards]);
+  useEffect(() => {
+    setDraftCards(draftCards);
+  }, [draftCards]);
   function deleteCard(id: number){
-    
+    console.log(draftCards)
+    console.log(draftCards?.products.filter((i: IProductCard)=>i.id!==id))
+    setDraftCards({products: draftCards?.products.filter((i: IProductCard)=>i.id!==id)})
   }
    const [productDeleteOwnCard, {
     // isFetching, isLoading, isError
