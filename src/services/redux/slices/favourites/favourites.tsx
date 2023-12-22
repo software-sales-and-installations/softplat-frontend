@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppDispatch } from '../../store';
 
 export const ayncToggleFavorite = async (
   action: Function,

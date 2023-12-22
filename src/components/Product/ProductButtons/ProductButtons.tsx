@@ -6,7 +6,6 @@ import { selectUser } from '../../../services/redux/slices/user/user.ts';
 import {
   useBuyerAddFavoritesMutation,
   useBuyerDeleteFavoritesMutation,
-  useBuyerFavoritesQuery,
 } from '../../../utils/api/buyerApi.tsx';
 import {
   addToFavorites,
@@ -37,7 +36,6 @@ const ProductButtons = ({error, id, instPrice}: IProductButtons) => {
   const [addFavorites] = useBuyerAddFavoritesMutation();
   const [deleteFavorites] = useBuyerDeleteFavoritesMutation();
   const dispatch = useAppDispatch();
-  const buyerFavorites = useBuyerFavoritesQuery(undefined);
 
   useEffect(() => {
     setToken(localStorage.getItem('token'));
@@ -46,7 +44,7 @@ const ProductButtons = ({error, id, instPrice}: IProductButtons) => {
 
   const handleToggleFavorite = async () => {
     const action = isFavorite ? deleteFavorites : addFavorites;
-    await ayncToggleFavorite(action, Number(id), buyerFavorites.refetch);
+    await ayncToggleFavorite(action, Number(id));
     dispatch(
       isFavorite ? removeFromFavorites(Number(id)) : addToFavorites(Number(id)),
     );

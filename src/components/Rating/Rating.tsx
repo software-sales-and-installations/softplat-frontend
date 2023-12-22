@@ -1,5 +1,5 @@
 import styles from './Rating.module.scss';
-import { IconEmptyStar } from '../../UIStorybook/IconEmptyStar/IconEmptyStar.tsx';
+import { IconEmptyStar } from '../../UI/IconEmptyStar/IconEmptyStar.tsx';
 
 interface IRatingProps {
   rate: number;

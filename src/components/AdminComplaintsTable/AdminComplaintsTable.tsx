@@ -1,11 +1,9 @@
 import {FC, useEffect, useState} from 'react';
 import styles from './AdminComplaintsTable.module.scss';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 import { useComplaintListQuery } from '../../utils/api/complaintApi';
 import { IComplaint } from './AdminComplaintsType';
 import { INewComplaints} from './AdminComplaintsType';
-import { useAppDispatch } from '../../services/redux/store';
 
 export const AdminComplaintsTable: FC = () =>{
     const {data: complaintList=[]} = useComplaintListQuery({},{
@@ -41,12 +39,12 @@ export const AdminComplaintsTable: FC = () =>{
           setNewItems(newComplaintsList)
         })
     }
-    
+
     useEffect(()=>{
       newList()
     },[complaintList])
 
-    
+
     return (
         <table className={styles.table}>
         <thead className={styles.thead}>
@@ -68,7 +66,7 @@ export const AdminComplaintsTable: FC = () =>{
             </td>
             <td className={classNames(styles.cellVendor, styles.cell, styles.cell_type_body)}>
                 <p className={classNames(styles.cell__text) }>{i.product.vendor?.name}</p>
-            </td> 
+            </td>
             <td className={classNames(styles.cellSeller, styles.cell, styles.cell_type_body)}>
                 <p className={styles.cell__text}>{i.product.seller?.name}</p>
             </td>

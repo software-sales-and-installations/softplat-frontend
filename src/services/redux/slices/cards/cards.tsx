@@ -63,6 +63,9 @@ const initialState: ICardsState = {
     price: 0,
     installationPrice: 0,
     image: { url: '' },
+    quantity: 0,
+    hasDemo: false,
+    rating: null,
   },
 };
 
