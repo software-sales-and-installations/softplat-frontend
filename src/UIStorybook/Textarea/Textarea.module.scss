@@ -21,4 +21,8 @@
     border: 1px solid $red-alert-system;
     color: $red-alert-system;
   }
+  &::after {
+    content: 'test';
+    color: red;
+  }
 }

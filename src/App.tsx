@@ -3,7 +3,7 @@ import { HomePage } from './pages/HomePage/HomePage';
 import { Header } from './components/Header/Header';
 import { MainWrapper } from './components/MainWrapper/MainWrapper';
 import { Footer } from './components/Footer/Footer';
-import { ProductPage } from './pages/ProductPage/ProductPage';
+import { ProductPage } from './pages/ProductPage/ProductPage.tsx';
 import {FAQ} from './pages/FAQ/FAQ';
 import VendorPage from './pages/VendorPage/VendorPage';
 import Contacts from './pages/Contacts/contacts.tsx';
@@ -14,9 +14,8 @@ import { ShoppingCart } from './pages/ShoppingCart/ShoppingCart.tsx';
 import Search from './pages/Search/Search.tsx';
 import { Seller } from './pages/Seller/Seller.tsx';
 import { Admin } from './pages/Admin/Admin.tsx';
-import { Product } from './components/Product/Product.tsx';
 import { ProtectedRouteForAdmin, ProtectedRouteForAdminAuth
-  // ProtectedRouteForBuyer, ProtectedRouteForSeller 
+  // ProtectedRouteForBuyer, ProtectedRouteForSeller
 } from './components/ProtectedRoute/ProtectedRoute.tsx';
 import NotFound from './pages/NotFound/NotFound.tsx';
 
@@ -29,7 +28,6 @@ function App() {
           <Route path='/' element={<Navigate to='/catalog'/>}/>
           <Route path="/catalog" element={<HomePage />} />
           <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/product/demo" element={<Product />} />
           <Route path='/faq' element={<FAQ/>} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/catalog/:section" element={<CatalogSection />} />
@@ -80,8 +78,8 @@ function App() {
                 <Navigate to="/admin/published" />
               </ProtectedRouteForAdmin>
             } />
-            <Route 
-            path="/admin-auth" 
+            <Route
+            path="/admin-auth"
             element={
               <ProtectedRouteForAdminAuth>
                 <Navigate to="/" />

@@ -1,7 +1,7 @@
 import Form from '../../../UIStorybook/Form/Form.tsx';
 import styles from './ProductModerationForm.module.scss';
 import { InputWrapper } from '../../../UIStorybook/InputWrapper/InputWrapper.tsx';
-import { Textarea } from '../../../UIStorybook/Textarea/Textarea.tsx';
+// import { Textarea } from '../../../UIStorybook/Textarea/Textarea.tsx';
 
 const ProductModerationForm = () => {
   return (
@@ -15,9 +15,10 @@ const ProductModerationForm = () => {
       width='255px'
       height='55px'
       onSubmit={() => {}}
+      disabled={true}
 >
   <InputWrapper inputId='moderationText' labelText='Замечания к доработке'>
-    <Textarea rows={11} cols={48}></Textarea>
+    {/*<Textarea rows={11} cols={48}></Textarea>*/}
   </InputWrapper>
 </Form>
   );

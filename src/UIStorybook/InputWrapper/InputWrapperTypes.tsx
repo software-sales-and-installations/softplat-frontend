@@ -4,7 +4,7 @@ export interface InputWrapperProps {
   inputId: string,
   labelText?: string,
   hintText?: string,
-  errorText?: string,
+  errorText?: ReactNode,
   extClassName?: string,
   children?: ReactNode,
 }

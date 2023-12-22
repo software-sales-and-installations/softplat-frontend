@@ -1,23 +1,25 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { API_BASE_URL } from '../constants';
-import { IProductCard } from '../../components/ProductCard/ProductCardTypes';
+import { IProductCard, ISimilarProducts } from '../../components/ProductCard/ProductCardTypes';
+interface IProps {
+  productId: string | undefined;
+  minId: string;
+  pageSize: string;
+}
 export const publicProductApi = createApi({
   reducerPath: 'publicProductApi',
   baseQuery: fetchBaseQuery({
     baseUrl: API_BASE_URL,
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        headers.set('authorization', `${token}`);
-      }
-      return headers;
-    },
   }),
   endpoints: (build) => ({
     // Получение продукта по id
     publicProduct: build.query<IProductCard, string | undefined>({
       query: (productId) => `/product/${productId}`,
+    }),
+    // Получение аналогичных продуктов по id продукта
+    similarProducts: build.query<ISimilarProducts, IProps>({
+      query: ({productId , minId, pageSize}) => `/product/${productId}/similar?minId=${minId}&pageSize=${pageSize}`,
     }),
     // Получение списка продуктов/поиск/фильтрация
     // body {
@@ -52,5 +54,6 @@ export const publicProductApi = createApi({
 
 export const {
   usePublicProductQuery,
+  useSimilarProductsQuery,
   usePublicProductListQuery,
 } = publicProductApi;

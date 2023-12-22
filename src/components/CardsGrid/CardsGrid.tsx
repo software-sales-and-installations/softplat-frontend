@@ -7,8 +7,8 @@ const CardsGrid: FC<CardsGridProps> = ({cards}) => {
   return (
     <ul className={styles.list}>
       {cards?.products?.map(i => (
-        <li className={styles.item} key={i.id}>
-          <ProductCard card={i}  />
+        <li key={'list' + i.id} className={styles.item}>
+          <ProductCard key={`card${i.id}`} card={i}  />
         </li>
       ))}
     </ul>

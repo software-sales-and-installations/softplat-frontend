@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 export interface FormProps {
   name: string;
+  errorText?: string | undefined | null;
   formType: 'register' | 'twoButtons' | 'search' | 'data';
   extClassName?: string;
   buttonType: 'primary' | 'secondary' | 'minorPrimary' | 'minorSecondary' | 'link';
@@ -11,4 +12,5 @@ export interface FormProps {
   width?: string,
   height?: string,
   children: ReactNode,
+  disabled: boolean,
 }

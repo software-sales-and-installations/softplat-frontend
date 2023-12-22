@@ -1,7 +1,7 @@
 import {FC, useEffect, useState} from 'react';
 import styles from './AdminVendorsCatalog.module.scss';
 import { useVendorListQuery } from '../../utils/api/vendorApi';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const AdminVendorsCatalog: FC = () =>{
      //@ts-ignore

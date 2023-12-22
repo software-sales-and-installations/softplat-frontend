@@ -3,15 +3,11 @@
 import {FC, useEffect, useState} from 'react';
 import styles from './SellerComplaintsTable.module.scss';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 import { useComplaintSellerListQuery } from '../../utils/api/complaintApi';
 import { INewComplaints } from './SellerComplaintsTableTypes';
 import { IComplaint } from './SellerComplaintsTableTypes';
-import { useAppDispatch } from '../../services/redux/store';
-
 
 export const SellerComplaintsTable: FC = () => {
-    const dispatch = useAppDispatch();
     const {data: complaintList=[]} = useComplaintSellerListQuery({},{
         refetchOnMountOrArgChange: true
       });
@@ -24,7 +20,7 @@ export const SellerComplaintsTable: FC = () => {
         })
         return countProducts
       }
-  
+
       function newList(){
         let countProducts: Array<number>=[]
         let newComplaintsList: Array<INewComplaints> =[]
@@ -45,7 +41,7 @@ export const SellerComplaintsTable: FC = () => {
             setNewItems(newComplaintsList)
           })
       }
-      
+
       useEffect(()=>{
         newList()
       },[complaintList])
@@ -69,7 +65,7 @@ export const SellerComplaintsTable: FC = () => {
             </td>
             <td className={classNames(styles.cellVendor, styles.cell, styles.cell_type_body)}>
                 <p className={classNames(styles.cell__text) }>{i.product.vendor?.name}</p>
-            </td> 
+            </td>
             <td className={classNames(styles.cellArt, styles.cell, styles.cell_type_body)}>
                 <p className={styles.cell__text}>{i.product.id}</p>
             </td>
