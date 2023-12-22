@@ -104,7 +104,7 @@ export const userProductApi = createApi({
     // Удаление своей карточки товара
     productDeleteOwnCard: build.mutation({
       query: (productId) => ({
-        url: `/product/products/${productId}/`,
+        url: `/product/${productId}/delete`,
         method: 'DELETE',
       }),
     }),

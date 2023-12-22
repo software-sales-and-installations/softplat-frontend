@@ -4,6 +4,7 @@ import EmptyState from '../EmptyState/EmptyState';
 import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 import { IProductCard } from '../ProductCard/ProductCardTypes';
 import { useState } from 'react';
+import { useProductDeleteOwnCardMutation } from '../../utils/api/userProductApi';
 
 export const SellerDrafts: FC = () => {
   let count = 0;
@@ -11,12 +12,29 @@ export const SellerDrafts: FC = () => {
     minId: 0,
     pageSize: '',
     sort: 'NEWEST',
-  });
+  },
+  {refetchOnMountOrArgChange: true});
   const [draftCards, setDraftCards] = useState(cards);
   useEffect(() => {
-    console.log(cards);
     setDraftCards(cards);
-  }, [cards, draftCards]);
+  }, [cards]);
+  function deleteCard(id: number){
+    
+  }
+   const [productDeleteOwnCard, {
+    // isFetching, isLoading, isError
+  }] = useProductDeleteOwnCardMutation();
+  const handleProductDeleteOwnCard = (productId: number) => {
+    productDeleteOwnCard(productId).unwrap()
+      .then((res) => {
+        console.log(res)
+        deleteCard(productId)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
   return (
     <section className={styles.container}>
       {!cards ? (
@@ -35,7 +53,7 @@ export const SellerDrafts: FC = () => {
             <p className={styles.container__headerArt}>Артикул</p>
             <p className={styles.container__headerData}>Дата</p>
           </div>
-          {cards?.products.map((i: IProductCard) => {
+          {draftCards?.products?.map((i: IProductCard) => {
             count = count + 1;
             return (
               <div className={styles.container__line} key={i.id}>
@@ -49,6 +67,7 @@ export const SellerDrafts: FC = () => {
                 <button
                   className={styles.container__trash}
                   type="button"
+                  onClick = {()=>handleProductDeleteOwnCard(i.id)}
                 ></button>
               </div>
             );
