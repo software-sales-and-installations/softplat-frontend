@@ -8,35 +8,69 @@ import {
   adminMenuItems,
 } from '../../utils/constants';
 import { ICabinetMenuProps } from './CabinetMenuTypes';
-import { useComplaintListQuery } from '../../utils/api/complaintApi';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useComplaintSellerListQuery } from '../../utils/api/complaintApi';
 
 const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
-  const [complaints, setComplaints] = useState(localStorage.getItem('complaints') || '0')
   const dispatch = useAppDispatch();
-  console.log(localStorage.getItem('role'))
-  const role = localStorage.getItem('role')
-  const {data: complaintList=[]} = useComplaintListQuery({},{
-    refetchOnMountOrArgChange: true
-  })
-  const {data: complaintSellerList=[]} = useComplaintSellerListQuery({},{
-    refetchOnMountOrArgChange: true
-  })
-  useEffect(()=>{
-    if(role==='ADMIN'||'SELLER'){
-      console.log(complaintList)
-      localStorage.setItem('complaints', complaintList?.totalComplaints|| complaintSellerList?.totalComplaints)
-      setComplaints(complaintList.totalComplaints||complaintSellerList.totalComplaints)
-    }
-  },[ complaintList, complaintSellerList])
+  const isSeller = mode === 'seller';
+  const isAdmin = mode === 'admin';
+  const isUser = mode === 'user';
+
+  const totalDraft = isSeller
+    ? localStorage.getItem('sellerDraftList')
+      ? JSON.parse(
+          JSON.parse(localStorage.getItem('sellerDraftList')!).totalProducts,
+        )
+      : 0
+    : isAdmin
+    ? localStorage.getItem('adminDraftList')
+      ? JSON.parse(
+          JSON.parse(localStorage.getItem('adminDraftList')!).totalProducts,
+        )
+      : 0
+    : 0;
+  const totalPublished = isSeller
+    ? localStorage.getItem('sellerPublishedList')
+      ? JSON.parse(localStorage.getItem('sellerPublishedList')!).totalProducts
+      : 0
+    : isAdmin
+    ? localStorage.getItem('adminPublishedList')
+      ? JSON.parse(localStorage.getItem('adminPublishedList')!).totalProducts
+      : 0
+    : 0;
+  const totalRejected = isSeller
+    ? localStorage.getItem('sellerRejectedList')
+      ? JSON.parse(localStorage.getItem('sellerRejectedList')!).totalProducts
+      : 0
+    : isAdmin
+    ? localStorage.getItem('adminRejectedList')
+      ? JSON.parse(localStorage.getItem('adminRejectedList')!).totalProducts
+      : 0
+    : 0;
+  const totalShipped = isSeller
+    ? localStorage.getItem('sellerShippedList')
+      ? JSON.parse(localStorage.getItem('sellerShippedList')!).totalProducts
+      : 0
+    : isAdmin
+    ? localStorage.getItem('adminShippedList')
+      ? JSON.parse(localStorage.getItem('adminShippedList')!).totalProducts
+      : 0
+    : 0;
+  const totalComplaints = isSeller
+    ? localStorage.getItem('sellerComplaintList')
+      ? JSON.parse(localStorage.getItem('sellerComplaintList')!).totalComplaints
+      : 0
+    : isAdmin
+    ? localStorage.getItem('adminComplaintList')
+      ? JSON.parse(localStorage.getItem('adminComplaintList')!).totalComplaints
+      : 0
+    : 0;
+
   return (
     <>
       <nav className={styles.personalTitles}>
-        {(mode === 'user'
+        {(isUser
           ? personalMenuItems
-          : mode === 'seller'
+          : isSeller
           ? sellerMenuItems
           : adminMenuItems
         ).map(item => (
@@ -44,11 +78,11 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
             to={item.link}
             key={item.id}
             style={
-              (mode === 'seller' &&
+              (isSeller &&
                 (item.name === 'Черновики' ||
                   item.name === 'Жалобы' ||
                   item.name === 'Отчеты продаж')) ||
-              (mode === 'admin' && item.name === 'Жалобы')
+              (isAdmin && item.name === 'Жалобы')
                 ? { marginBottom: '35px' }
                 : {}
             }
@@ -60,7 +94,29 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
           >
             {item.name}
             <div>
-              {( (mode==='admin'|| mode==='seller') && item.name==='Жалобы')? <div className={styles.personalTitles__counter}>{complaints}</div>: null}
+              {(isAdmin || isSeller) &&
+                ((item.name === 'Черновики' && totalDraft !== 0) ||
+                (item.name === 'Опубликовано' && totalPublished !== 0) ||
+                (item.name === 'На модерации' && totalShipped !== 0) ||
+                ((item.name === 'На доработке' ||
+                  item.name === 'Отклоненные') &&
+                  totalRejected !== 0) ||
+                (item.name === 'Жалобы' && totalComplaints !== 0) ? (
+                  <div className={styles.personalTitles__counter}>
+                    {item.name === 'Черновики'
+                      ? totalDraft
+                      : item.name === 'Опубликовано'
+                      ? totalPublished
+                      : item.name === 'На модерации'
+                      ? totalShipped
+                      : item.name === 'На доработке' ||
+                        item.name === 'Отклоненные'
+                      ? totalRejected
+                      : item.name === 'Жалобы'
+                      ? totalComplaints
+                      : ''}
+                  </div>
+                ) : null)}
             </div>
           </NavLink>
         ))}

@@ -10,6 +10,7 @@
     height: 540px;
   }
   &__description {
+    width: 540px;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -68,6 +69,7 @@
   &__text {
     @include font-body-regular;
     color: $black-standart-text;
+    text-align: left;
   }
 
 }

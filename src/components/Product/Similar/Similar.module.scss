@@ -1,5 +1,18 @@
+@import '../../../styles/abstract/mixins';
+
 .similar {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 29px;
+  align-items: flex-start;
 }
+.similar__cardWrapper {
+   display: flex;
+   flex-direction: row;
+   gap: 10px;
+}
+.similar__header {
+    @include font-h2-semibold;
+    padding: 0;
+    margin: 0;
+  }

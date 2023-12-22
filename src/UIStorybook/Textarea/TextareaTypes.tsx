@@ -9,4 +9,5 @@ export interface InputProps extends InputHTMLAttributes<HTMLTextAreaElement> {
   rows?: number;
   cols?: number;
   isValid?: true | false;
+  register: any,
 }

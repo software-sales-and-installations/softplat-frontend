@@ -6,18 +6,21 @@ export const userProductApi = createApi({
   reducerPath: 'userProductApi',
   baseQuery: fetchBaseQuery({
     baseUrl: API_BASE_URL,
-    prepareHeaders: (headers) => {
+    prepareHeaders: headers => {
       const token = localStorage.getItem('token');
       const userId = localStorage.getItem('userId')
       if (token) {
         headers.set('authorization', `${token}`);
         headers.set('X-Sharer-User-Id', `${userId}`);
       }
+      if (userId) {
+        headers.set('X-Sharer-User-Id', `${userId}`)
+      }
       return headers;
     },
   }),
   tagTypes: ['UserProduct'],
-  endpoints: (build) => ({
+  endpoints: build => ({
     // Создание карточки товара
     // body {
     //   "category": 0,
@@ -41,14 +44,14 @@ export const userProductApi = createApi({
     }),
     // Удаление карточки товара. Для админа
     productDelete: build.mutation({
-      query: (productId) => ({
+      query: productId => ({
         url: `/product/${productId}`,
         method: 'DELETE',
       }),
     }),
     // Удаление изображения карточки товара. Для админа
     productDeleteImage: build.mutation({
-      query: (productId) => ({
+      query: productId => ({
         url: `/product/${productId}/image`,
         method: 'DELETE',
       }),
@@ -58,7 +61,7 @@ export const userProductApi = createApi({
     // "image" : "string"
     // }
     productAddImage: build.mutation({
-      query: ({productId, body}) => ({
+      query: ({ productId, body }) => ({
         url: `/product/${productId}/image/create`,
         method: 'POST',
         body,
@@ -69,14 +72,14 @@ export const userProductApi = createApi({
     // "status" : DRAFT/PUBLISHED/REJECTED/SHIPPED
     // }
     productModerate: build.mutation({
-      query: ({productId, status}) => ({
+      query: ({ productId, status }) => ({
         url: `/product/${productId}/moderation?status=${status}`,
         method: 'PATCH',
       }),
     }),
     // Отправка своего товара на модерацию админом
     productSendToModeration: build.mutation({
-      query: (productId) => ({
+      query: productId => ({
         url: `/product/${productId}/send`,
         method: 'PATCH',
       }),
@@ -95,7 +98,7 @@ export const userProductApi = createApi({
     //   "version": "string"
     // }
     productUpdate: build.mutation({
-      query: ({productId, body}) => ({
+      query: ({ productId, body }) => ({
         url: `/product/${productId}/update`,
         method: 'PATCH',
         body,
@@ -110,16 +113,34 @@ export const userProductApi = createApi({
     }),
     // Удаление изображения своей карточки товара
     productDeleteOwnCardImage: build.mutation({
-      query: (productId) => ({
+      query: productId => ({
         url: `/product/products/${productId}/image/delete`,
         method: 'DELETE',
       }),
     }),
-    // Получение списка товаров на модерацию. Для админа
+    // Получение списка рекоммендованых товаров. Для зарег. пользователей
+    // pageSize def 5
+    productRecs: build.query({
+      query: ({minId, pageSize}) => ({
+        url: `/product/recommendations?minId=${minId}&pageSize=${pageSize}`,
+      }),
+    }),
+    // Получение списка товаров c сортировкой по статусу. Для админа
+    // minId def 0
     // pageSize def 20
     productList: build.query({
-      query: ({minId, pageSize}) => ({
-        url: `/product/shipped?minId=${minId}&pageSize=${pageSize}`,
+      query: ({
+        minId,
+        pageSize,
+        status,
+      }: {
+        minId?: number;
+        pageSize?: number;
+        status: 'DRAFT' | 'PUBLISHED' | 'REJECTED' | 'SHIPPED';
+      }) => ({
+        url: `/product/admin?${minId ? `minId=${minId}&` : ''}${
+          pageSize ? `pageSize=${pageSize}&` : ''
+        }status=${status}`,
       }),
     }),
   }),
@@ -135,5 +156,6 @@ export const {
   useProductUpdateMutation,
   useProductDeleteOwnCardMutation,
   useProductDeleteOwnCardImageMutation,
+  useProductRecsQuery,
   useProductListQuery,
 } = userProductApi;

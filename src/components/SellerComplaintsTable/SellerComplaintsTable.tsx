@@ -3,54 +3,46 @@
 import {FC, useEffect, useState} from 'react';
 import styles from './SellerComplaintsTable.module.scss';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 import { useComplaintSellerListQuery } from '../../utils/api/complaintApi';
 import { INewComplaints } from './SellerComplaintsTableTypes';
 import { IComplaint } from './SellerComplaintsTableTypes';
-import { useAppDispatch } from '../../services/redux/store';
-
 
 export const SellerComplaintsTable: FC = () => {
-    const dispatch = useAppDispatch();
     const {data: complaintList=[]} = useComplaintSellerListQuery({},{
         refetchOnMountOrArgChange: true
       });
 
-    const [newItems, setNewItems] = useState<IComplaint[]>([])
-    function newList(){
-      let countProducts: Array<number>=[]
-      let newComplaintsList: Array<INewComplaints> =[]
+      const [newItems, setNewItems] = useState<IComplaint[]>([])
+      function productIdList(){
+        let countProducts: Array<number>=[]
         complaintList?.complaints?.forEach((i: any)=>{
-          let count =1;
-          if(countProducts.indexOf(i.product.id)===-1){
-            console.log(newComplaintsList)
-            newComplaintsList.push({...i, qty:1})
-  
-          }
-          if(countProducts.indexOf(i.product.id)!==-1){
-            countProducts.forEach((el)=>{
-              i.product.id===el;
-              count+=1;
-            })
-            console.log(count)
-            newComplaintsList.forEach((el)=>{
-              console.log(count)
-              el.product.id===i.product.id
-              ? el.qty=count
-              : el
-  
-            })
-  
-          }
           countProducts.push(i.product.id)
-          console.log(newComplaintsList)
-          setNewItems(newComplaintsList)
-          return newComplaintsList
         })
+        return countProducts
       }
-  
+
+      function newList(){
+        let countProducts: Array<number>=[]
+        let newComplaintsList: Array<INewComplaints> =[]
+          complaintList?.complaints?.forEach((i: any)=>{
+            let count =0;
+            const newIdList = productIdList();
+            newIdList.forEach((id)=>{
+            if (i.product.id===id){
+              count+=1
+            }
+          })
+            if(countProducts.indexOf(i.product.id)===-1){
+              console.log(newComplaintsList)
+              newComplaintsList.push({...i, qty:count})
+            }
+            countProducts.push(i.product.id)
+            console.log(newComplaintsList)
+            setNewItems(newComplaintsList)
+          })
+      }
+
       useEffect(()=>{
-        console.log(complaintList)
         newList()
       },[complaintList])
     return (
@@ -73,7 +65,7 @@ export const SellerComplaintsTable: FC = () => {
             </td>
             <td className={classNames(styles.cellVendor, styles.cell, styles.cell_type_body)}>
                 <p className={classNames(styles.cell__text) }>{i.product.vendor?.name}</p>
-            </td> 
+            </td>
             <td className={classNames(styles.cellArt, styles.cell, styles.cell_type_body)}>
                 <p className={styles.cell__text}>{i.product.id}</p>
             </td>

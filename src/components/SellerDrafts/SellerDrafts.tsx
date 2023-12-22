@@ -1,19 +1,20 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import styles from './SellerDrafts.module.scss';
 import EmptyState from '../EmptyState/EmptyState';
-import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
-import { IProductCard } from '../ProductCard/ProductCardTypes';
-import { useState } from 'react';
 import { useProductDeleteOwnCardMutation } from '../../utils/api/userProductApi';
+import { useSellerProductListQuery } from '../../utils/api/sellerApi';
+import { useState, useEffect } from 'react';
+import { IProductCard } from '../ProductCard/ProductCardTypes';
 
 export const SellerDrafts: FC = () => {
   let count = 0;
-  const { data: cards } = usePublicProductListQuery({
-    minId: 0,
-    pageSize: '',
-    sort: 'NEWEST',
-  },
-  {refetchOnMountOrArgChange: true});
+  const { data: cards, isSuccess: isDraftListSuccess } =
+  useSellerProductListQuery(
+    {
+      status: 'DRAFT',
+    },
+    { refetchOnMountOrArgChange: true },
+  );
   const [draftCards, setDraftCards] = useState(cards);
   useEffect(() => {
     setDraftCards(cards);
@@ -41,8 +42,8 @@ export const SellerDrafts: FC = () => {
       .finally()
   };
   return (
-    <section className={styles.container}>
-      {!cards ? (
+    <section className={styles.draft}>
+      {draftCards?.products?.length === 0 ? (
         <EmptyState
           navigateTo="/seller/add-card"
           buttonText="Добавить карточку"

@@ -30,6 +30,19 @@ const PersonalPurchases: React.FC = () => {
                 productResponseDto: Product;
               }[];
               productionTime: string;
+            // }) => (
+            //   <li key={item.id}>
+            //     {item.productsOrdered.map(
+            //       (product: { id: number; productResponseDto: Product }) => (
+            //         <CardPurchases
+            //           key={'purchase' + product.id}
+            //           data={item.productionTime}
+            //           {...product.productResponseDto}
+            //         />
+            //       ),
+            //     )}
+            //   </li>
+            // ),
             }) =>
               item.productsOrdered.map(
                 (product: { id: number; productResponseDto: Product }) => (

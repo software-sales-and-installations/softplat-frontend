@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './CardPurchases.module.scss';
 
 export type cardPurchasesProps = {
+  id: number;
   image: string;
   name: string;
   vendor: {
@@ -14,12 +15,14 @@ export type cardPurchasesProps = {
 };
 
 const CardPurchases: React.FC<cardPurchasesProps> = ({
+  // id,
   image,
   name,
   vendor,
   seller,
   data,
 }) => {
+
   const currentDate = new Date();
   const expiredDate = new Date(
     data

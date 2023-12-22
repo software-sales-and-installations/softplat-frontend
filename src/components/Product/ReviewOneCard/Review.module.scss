@@ -13,8 +13,13 @@ display: flex;
   }
   &__name {
   @include font-h3-bold;
-  padding-right: 20px;
   margin: 0;
+  }
+  &__stars {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
   }
   &__text {
 @include font-body-regular;
