@@ -60,6 +60,8 @@ export const SellerSettings: FC = () => {
   }, [sellerInfo]);
 
   return (
+	<div className={styles.wrapper}>
+	<p className={styles.informText}>Поля, отмеченные звездочкой*, обязательны для заполнения</p>
     <form
       className={styles.form}
       onSubmit={handleSubmit(handleSellerChangeData)}
@@ -96,5 +98,6 @@ export const SellerSettings: FC = () => {
         </Button>
       </div>
     </form>
+	</div>
   );
 };
