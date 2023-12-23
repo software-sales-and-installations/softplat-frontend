@@ -9,7 +9,7 @@ import { NAME_VALIDATION_CONFIG, LINK_VALIDATION_CONFIG, PRICE_VALIDATION_CONFIG
 import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { useVendorListQuery } from '../../utils/api/vendorApi';
-import { useProductCreateMutation, useProductUpdateMutation } from '../../utils/api/userProductApi';
+import { useProductCreateMutation, useProductSendToModerationMutation, useProductUpdateMutation } from '../../utils/api/userProductApi';
 import { usePublicProductQuery } from '../../utils/api/publicProductApi';
 import { useCategoryListQuery } from '../../utils/api/categoryApi';
 import { useParams } from 'react-router-dom';
@@ -32,13 +32,15 @@ export const SellerAddNewCard: FC = () =>{
   const [variantSoftware, setVariantSoftware] = useState ('Загрузка ПО')
   const { data: product, isError: productError} = usePublicProductQuery(id.id);
   const [productDataCard, setProductDataCard] = useState(product)
+  const [productSendToModeration, {
+    //     // isFetching, isLoading, isError
+      }] = useProductSendToModerationMutation();
   useEffect(()=>{
     setProductDataCard(product)
   }, [product])
-
+  const [subminBtnName, setSubmitBtnName] = useState('moderation')
   const [errorText, setErrorText] = useState('')
   const [addCardError, setAddCardError] = useState(0);
-  // const[productData, setProductData] = useState
   const [DDactive, setDDActive] = useState(false)
   const {
         register,
@@ -77,7 +79,19 @@ export const SellerAddNewCard: FC = () =>{
       productCreate(productData).unwrap()
       .then((res) => {
         console.log(res)
-        setErrorText('Данные сохранены')
+        if(subminBtnName==='moderation'){
+          console.log(res.id)
+          productSendToModeration({productId: res.id}).unwrap()
+            .then((res) => {
+              console.log(res)
+              setErrorText('Данные сохранены')
+            })
+            .catch((error) => {
+              console.log(error);
+              setAddCardError(error.status)
+            })
+            .finally()
+        }
       })
       .catch((error) => {
         setAddCardError(error.status)
@@ -88,8 +102,19 @@ export const SellerAddNewCard: FC = () =>{
     else {
       productUpdate({productId: id.id, body: getValues()})
       .then((res)=>{
+        if(subminBtnName==='moderation'){
+          productSendToModeration({productId: id.id}).unwrap()
+            .then((res) => {
+              console.log(res)
+              setErrorText('Данные сохранены')
+            })
+            .catch((error) => {
+              console.log(error);
+              setAddCardError(error.status)
+            })
+            .finally()
+        }
         console.log(res)
-        setErrorText('Данные сохранены')
       })
       .catch((error)=>{
         console.log(error)
@@ -110,50 +135,18 @@ export const SellerAddNewCard: FC = () =>{
               setErrorText('Доступ запрещен');
             }
         }, [addCardError]);
-          // const id = useParams();
-          // const { data: vendor,
-          //     // isFetching,isLoading, error
-          //   } = useVendorQuery(id.id,{
-          //     refetchOnMountOrArgChange: true
-          //   });
-          //   const [vendorChange, {
-          //     // isFetching, isLoading, isError
-          // }] = useVendorChangeMutation();
-          // const [vendorAdd, {
-          //     // isFetching, isLoading, isError
-          //   }] = useVendorAddMutation();
-          // function handleSubmitVendor(){
-          //     if(id.id){
-          //         vendorChange({vendorId: id.id, body: getValues()}).unwrap()
-          //         .then((res) => {
-          //             console.log(res)
-          //         })
-          //         .catch((error) => {
-          //             console.log(error);
-          //         })
-          //         .finally()
-      
-          //     }
-          //     else {
-          //         vendorAdd(getValues()).unwrap()
-          //         .then((res) => {
-          //             console.log(res)
-          //         })
-          //         .catch((error) => {
-          //             console.log(error);
-          //         })
-          //         .finally()
-          //     }
-          // }
+
           useEffect(()=>{
               if(id.id){
-              // setVendorData(vendor)
               console.log(productDataCard)
               setValue('quantity', productDataCard?.quantity? productDataCard.quantity: 0)
               setValue('price', productDataCard?.price? productDataCard.price: 0)
               setValue('installationPrice', productDataCard?.installationPrice? productDataCard.installationPrice: 0)
               setValue('name', productDataCard?.name? productDataCard.name: '')
-              setValue('description', productDataCard?.description? productDataCard.description: '')}
+              setValue('description', productDataCard?.description? productDataCard.description: '')
+              setValue('version', productDataCard?.version? productDataCard.version:'')
+              setValue('vendor', productDataCard?.vendor?.id? productDataCard.vendor.id: 1)
+              setValue('category', productDataCard?.category?.id? productDataCard.category.id: 1)}
           },[id, product, productDataCard])
     return(
         <form className={styles.form} onSubmit={handleSubmit(handleSubmitCard)}>
@@ -325,10 +318,10 @@ export const SellerAddNewCard: FC = () =>{
           <p className={styles.errorContainer__error}>{errorText}</p>
         </div>
         <div className={styles.sellerAddCard__btncontainer}>
-          <Button type='submit' isDisabled={!isValid} mode="primary">
+          <Button onClick = {()=>setSubmitBtnName('moderation')} isDisabled={!isValid}  type="submit"  mode="primary">
             На модерацию
           </Button>
-          <Button type="button" mode="secondary">
+          <Button onClick = {()=>setSubmitBtnName('save')} type="submit" isDisabled={!isValid} mode="secondary">
             Сохранить
           </Button>
         </div>
