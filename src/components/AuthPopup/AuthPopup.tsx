@@ -19,10 +19,13 @@ import { signout } from '../SignOutPopup/SignOutPopupSlice';
 import { useBuyerBasketSaveCartMutation } from '../../utils/api/buyerBasketApi';
 import { sendCartToServer, setCartItems } from '../../services/redux/slices/cart/cart';
 import { convertCartItemsToRequest } from '../../services/cartService/cartService';
+import { useNavigate } from 'react-router-dom';
 
 export const PopupForAuth: FC = () => {
   const [authError, setAuthError] = useState(0);
   const [errorText, setErrorText] = useState('');
+
+  const navigate = useNavigate()
 
   const [buyerBasketSaveCart] = useBuyerBasketSaveCartMutation();
 
@@ -65,6 +68,8 @@ export const PopupForAuth: FC = () => {
         dispatch(popupState(false));
         dispatch(setUser(userData));
         dispatch(signout(false));
+        navigate('/')
+
         reset();
       })
       .catch(error => {

@@ -32,8 +32,10 @@ import {
   setCartItems,
 } from '../../services/redux/slices/cart/cart';
 import { convertCartItemsToRequest } from '../../services/cartService/cartService';
+import { useNavigate } from 'react-router-dom';
 
 export const PopupForReg: FC = () => {
+  const navigate = useNavigate()
   const [errorStatus, setErrorStatus] = useState(0);
   const [textError, setTextError] = useState('');
 
@@ -105,6 +107,7 @@ export const PopupForReg: FC = () => {
             dispatch(popupState(false));
             dispatch(setUser(userData));
             dispatch(signout(false));
+            navigate('/')
 
             if (
               cartRequest.length > 0 &&
