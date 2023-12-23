@@ -71,7 +71,9 @@
 		width: 43%;
 		padding-left: 32px;
 		position: relative;
-		
+	}
+	&_disabled {
+		background: $light-grey;
 	}
 }
 

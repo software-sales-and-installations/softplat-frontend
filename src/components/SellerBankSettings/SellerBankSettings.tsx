@@ -17,6 +17,7 @@ import {
   INN_VALIDATION_CONFIG,
   ORGFORM_OPTIONS,
   KPP_VALIDATION_CONFIG,
+  ADDRESS_VALIDATION_CONFIG,
 } from '../../utils/constants';
 import { useState } from 'react';
 import DropDown from '../../UI/DropDown/DropDown';
@@ -39,6 +40,8 @@ export const SellerBankSettings: FC = () => {
     data: sellerBank,
     // isFetching,isLoading, error
   } = useSellerGetBankQuery(sellerId);
+
+  console.log(sellerBank)
 
   const [bankData, setBankData] = useState({
     bik: sellerBank?.bik,
@@ -175,7 +178,6 @@ export const SellerBankSettings: FC = () => {
             labelText="Правовая форма организации*"
             onChange={onChange}
             value={value}
-            // error={errors?.orgForm?.message}
             typeError="dataError"
             isMultiOption={false}
             formSize
@@ -195,7 +197,7 @@ export const SellerBankSettings: FC = () => {
         inputType={InputTypes.address}
         labelText="Юридический адрес*"
         validation={{
-          ...register('address'),
+          ...register('address', ADDRESS_VALIDATION_CONFIG),
         }}
         error={errors?.address?.message}
         typeError="dataError"

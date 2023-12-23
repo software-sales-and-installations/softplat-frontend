@@ -92,6 +92,18 @@ export const VALIDATION_SETTINGS = {
       sameAsNow: 'Введите новое имя'
     },
   },
+  address: {
+    pattern: /^[a-zа-яё0-9\s]+$/iu,
+    minLength: 5,
+    maxLength: 500,
+    messages: {
+      tooShort: 'Слишком короткий адрес',
+      tooLong: 'Слишком длинный адрес',
+      invalid: 'Только кириллица, латиница, цифры или дефис',
+      noName: 'Необходимо ввести фдрес',
+      sameAsNow: 'Введите новый адрес'
+    },
+  },
   companyname: {
     pattern: /^[a-zа-яё\s]+$/iu,
     minLength: 2,
@@ -252,7 +264,7 @@ export const EMAIL_VALIDATION_CONFIG = {
     message: VALIDATION_SETTINGS.email.messages.tooShort,
   },
 };
-export const INN_VALIDATION_CONFIG = {
+export const KPP_VALIDATION_CONFIG = {
   required: {
     value: true,
     message: VALIDATION_SETTINGS.kpp.messages.noKPP,
@@ -270,7 +282,7 @@ export const INN_VALIDATION_CONFIG = {
     message: VALIDATION_SETTINGS.kpp.messages.tooShort,
   },
 };
-export const KPP_VALIDATION_CONFIG = {
+export const INN_VALIDATION_CONFIG = {
   required: {
     value: true,
     message: VALIDATION_SETTINGS.inn.messages.noINN,
@@ -338,6 +350,24 @@ export const NAME_VALIDATION_CONFIG = {
   maxLength: {
     value: VALIDATION_SETTINGS.name.maxLength,
     message: VALIDATION_SETTINGS.name.messages.tooLong,
+  },
+};
+export const ADDRESS_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.address.messages.noName,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.address.pattern,
+    message: VALIDATION_SETTINGS.address.messages.invalid,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.address.minLength,
+    message: VALIDATION_SETTINGS.address.messages.tooShort,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.address.maxLength,
+    message: VALIDATION_SETTINGS.address.messages.tooLong,
   },
 };
 export const PERSONALNAME_VALIDATION_CONFIG = {

@@ -32,7 +32,7 @@ const DropDown: FC<IDropDowmProps> = ({
   const catalogSelect = type === SelectorType.CATALOG;
   const orgFormSelect = type === SelectorType.ORGFORM;
   const currentBase = useAppSelector(state => state.dropdown.option);
-  const orgFormOption = useAppSelector(state => state.dropdown.orgFormOption)
+  // const orgFormOption = useAppSelector(state => state.dropdown.orgFormOption)
   // SingleValue<IOption> | MultiValue<IOption[]>
   const handleChange = (e: any): void => {
     if (baseSelect) {
@@ -44,7 +44,7 @@ const DropDown: FC<IDropDowmProps> = ({
     } else if (catalogSelect) {
       navigate(`/catalog/${e.value}`, { replace: true });
     } else if (orgFormSelect) {
-      dispatch(changeOrgFormOption(e));
+      // dispatch(changeOrgFormOption(e));
       onChange(e);
     }
   };
@@ -77,7 +77,7 @@ const DropDown: FC<IDropDowmProps> = ({
         options={options}
         isMulti={isMultiOption ? true : false}
         hideSelectedOptions={false}
-        closeMenuOnSelect={catalogSelect && true}
+        closeMenuOnSelect={formSize || catalogSelect && true}
         defaultValue={baseSelect && currentBase}
         onChange={e => handleChange(e)}
         isSearchable={isMultiOption && true}
