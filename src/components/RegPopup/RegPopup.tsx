@@ -27,7 +27,10 @@ import { setUser } from '../../services/redux/slices/user/user';
 import { signout } from '../SignOutPopup/SignOutPopupSlice';
 import classNames from 'classnames';
 import { useBuyerBasketSaveCartMutation } from '../../utils/api/buyerBasketApi';
-import { sendCartToServer } from '../../services/redux/slices/cart/cart';
+import {
+  sendCartToServer,
+  setCartItems,
+} from '../../services/redux/slices/cart/cart';
 import { convertCartItemsToRequest } from '../../services/cartService/cartService';
 
 export const PopupForReg: FC = () => {
@@ -61,6 +64,7 @@ export const PopupForReg: FC = () => {
   }, []);
 
   const { email, name, password, confirmPassword, phone } = getValues();
+
   const [
     authLogin,
     {
@@ -102,8 +106,14 @@ export const PopupForReg: FC = () => {
             dispatch(setUser(userData));
             dispatch(signout(false));
 
-            if (cartRequest.length > 0) {
+            if (
+              cartRequest.length > 0 &&
+              localStorage.getItem('role') === 'BUYER'
+            ) {
               sendCartToServer(cartRequest, buyerBasketSaveCart, dispatch);
+            } else if (localStorage.getItem('role') !== 'BUYER') {
+              localStorage.removeItem('cartItems');
+              dispatch(setCartItems([]));
             }
 
             reset();
