@@ -10,69 +10,106 @@ import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { useVendorListQuery } from '../../utils/api/vendorApi';
 import { useProductCreateMutation, useProductUpdateMutation } from '../../utils/api/userProductApi';
+import { usePublicProductQuery } from '../../utils/api/publicProductApi';
 import { useCategoryListQuery } from '../../utils/api/categoryApi';
 import { useParams } from 'react-router-dom';
 
 export const SellerAddNewCard: FC = () =>{
+  const [productCreate, {
+    //     // isFetching, isLoading, isError
+      }] = useProductCreateMutation();
+  const [productUpdate,{
+    // isFetching, isLoading, isError
+  }] = useProductUpdateMutation()
+  
+  //@ts-ignore
+  const { data: vendorAll} = useVendorListQuery({},{
+    refetchOnMountOrArgChange:true
+  });
+  const {data: categoryList} = useCategoryListQuery({});
+
   const id = useParams();
-    const [errorText, setErrorText] = useState('')
-    const [variantSoftware, setVariantSoftware] = useState('Загрузка ПО')
-    const [DDactive, setDDActive] = useState(false)
-    const {
+  const [variantSoftware, setVariantSoftware] = useState ('Загрузка ПО')
+  const { data: product, isError: productError} = usePublicProductQuery(id.id);
+  const [productDataCard, setProductDataCard] = useState(product)
+  useEffect(()=>{
+    setProductDataCard(product)
+  }, [product])
+
+  const [errorText, setErrorText] = useState('')
+  const [addCardError, setAddCardError] = useState(0);
+  // const[productData, setProductData] = useState
+  const [DDactive, setDDActive] = useState(false)
+  const {
         register,
         handleSubmit,
         getValues,
+        setValue,
         formState: { errors, isValid },
       } = useForm<ICreateProductFields>({ mode: 'onChange' });
-    
-      //@ts-ignore
-      const { data: vendorAll} = useVendorListQuery({},{
-        refetchOnMountOrArgChange:true
-      });
-      const {data: categoryList} = useCategoryListQuery({});
-      const [categoryListData, setcategoryListData] = useState(categoryList)
-      const [vendorData, setVendorData] = useState(vendorAll)
-      useEffect(()=>{
-        setcategoryListData(categoryList)
-      },[categoryList, categoryListData])
-          useEffect(()=>{
-            setVendorData(vendorAll)
-          },[vendorData, vendorAll])
-      const [productCreate, {
-        //     // isFetching, isLoading, isError
-          }] = useProductCreateMutation();
-      const [productUpdate,{
-        // isFetching, isLoading, isError
-      }] = useProductUpdateMutation()
-      const productData = {
-        hasDemo: true, 
-        category: getValues().category, 
-        description: getValues().description, 
-        installation: getValues().installation, 
-        installationPrice: getValues().installationPrice, 
-        name: getValues().name, 
-        price: getValues().price, 
-        quantity: getValues().quantity, 
-        vendor: getValues().vendor, 
-        version: getValues().version
-      }
-          function handleSubmitCard(){
-            console.log(productData)
-            if(!id.id){
-            productCreate(productData).unwrap()
-              .then((res) => {
-                console.log(res)
-                setErrorText('Данные сохранены')
-              })
-              .catch((error) => {
-                console.log(error);
-              })
-              .finally()
+
+  const [categoryListData, setcategoryListData] = useState(categoryList)
+  const [vendorData, setVendorData] = useState(vendorAll)
+  const productData = {
+    hasDemo: true, 
+    category: getValues().category, 
+    description: getValues().description, 
+    installation: getValues().installation, 
+    installationPrice: getValues().installationPrice, 
+    name: getValues().name, 
+    price: getValues().price, 
+    quantity: getValues().quantity, 
+    vendor: getValues().vendor, 
+    version: getValues().version
+  }
+  useEffect(()=>{
+    setcategoryListData(categoryList)
+  },[categoryList, categoryListData])
+
+  useEffect(()=>{
+    setVendorData(vendorAll)
+  },[vendorData, vendorAll])
+
+      
+  function handleSubmitCard(){
+  console.log(productData)
+    if(!id.id){
+      productCreate(productData).unwrap()
+      .then((res) => {
+        console.log(res)
+        setErrorText('Данные сохранены')
+      })
+      .catch((error) => {
+        setAddCardError(error.status)
+        console.log(error);
+      })
+      .finally()
+    }
+    else {
+      productUpdate({productId: id.id, body: getValues()})
+      .then((res)=>{
+        console.log(res)
+        setErrorText('Данные сохранены')
+      })
+      .catch((error)=>{
+        console.log(error)
+        setAddCardError(error.status)
+      })
+      .finally()
+    }
+    }
+        useEffect(() => {
+          if (addCardError === 401) {
+            setErrorText('Пользователь не авторизован');
           }
-          else {
-            productUpdate({productId: id.id, body: getValues()})
+          if (addCardError === 400) {
+              console.log('ddd')
+            setErrorText('Некорректно заполнены поля');
           }
-        }
+          if (addCardError === 403) {
+              setErrorText('Доступ запрещен');
+            }
+        }, [addCardError]);
           // const id = useParams();
           // const { data: vendor,
           //     // isFetching,isLoading, error
@@ -108,14 +145,16 @@ export const SellerAddNewCard: FC = () =>{
           //         .finally()
           //     }
           // }
-          // useEffect(()=>{
-          //     if(id.id){
-          //     setVendorData(vendor)
-          //     console.log(id.id)
-          //     setValue('country', vendor?.country)
-          //     setValue('name', vendor?.name)
-          //     setValue('description', vendor?.description)}
-          // },[id, vendor, vendorData])
+          useEffect(()=>{
+              if(id.id){
+              // setVendorData(vendor)
+              console.log(productDataCard)
+              setValue('quantity', productDataCard?.quantity? productDataCard.quantity: 0)
+              setValue('price', productDataCard?.price? productDataCard.price: 0)
+              setValue('installationPrice', productDataCard?.installationPrice? productDataCard.installationPrice: 0)
+              setValue('name', productDataCard?.name? productDataCard.name: '')
+              setValue('description', productDataCard?.description? productDataCard.description: '')}
+          },[id, product, productDataCard])
     return(
         <form className={styles.form} onSubmit={handleSubmit(handleSubmitCard)}>
           <Input
