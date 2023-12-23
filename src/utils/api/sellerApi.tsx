@@ -31,9 +31,10 @@ export const sellerApi = createApi({
     //   "phone": "string"
     // }
         sellerChangeData: build.mutation( {
-      query: () => ({
+      query: (body) => ({
         url: '/seller/',
         method: 'PATCH',
+        body
       }),
     }),
     // Удаление изображения профиля продавца админом

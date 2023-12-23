@@ -81,9 +81,9 @@ export const VALIDATION_SETTINGS = {
     },
   },
   name: {
-    pattern: /^[a-zа-яё\s]+$/iu,
+    pattern: /^[a-zа-яё0-9\s]+$/iu,
     minLength: 2,
-    maxLength: 20,
+    maxLength: 100,
     messages: {
       tooShort: 'Слишком короткое имя/название',
       tooLong: 'Слишком длинное имя/название',

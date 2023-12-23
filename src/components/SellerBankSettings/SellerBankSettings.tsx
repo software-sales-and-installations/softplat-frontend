@@ -38,6 +38,7 @@ export const SellerBankSettings: FC = () => {
     data: sellerBank,
     // isFetching,isLoading, error
   } = useSellerGetBankQuery(sellerId);
+
   const [bankData, setBankData] = useState({
     bik: sellerBank?.bik,
     ogrnip: sellerBank?.ogrnip,
@@ -55,9 +56,10 @@ export const SellerBankSettings: FC = () => {
       // isFetching, isLoading, isError
     },
   ] = useSellerChangeBankMutation();
+
+  const isIP = getValues().orgForm?.value === 'IP' ? 'ogrnip' : 'ogrn';
+
   function setNewData() {
-    const isIP = getValues().orgForm?.value === 'IP' ? 'ogrnip' : 'ogrn'
-    console.log(isIP)
     const newBankData = {
       bik: getValues().bik,
       [isIP]: getValues().ogrnip,
@@ -70,6 +72,7 @@ export const SellerBankSettings: FC = () => {
     console.log(newBankData);
     return newBankData;
   }
+
   const handleSellerAddBank = () => {
     sellerAddBank(setNewData())
       .unwrap()
@@ -120,7 +123,13 @@ export const SellerBankSettings: FC = () => {
 
   useEffect(() => {
     setValue('bik', bankData.bik || sellerBank?.bik);
-    setValue('ogrnip', bankData.ogrnip || bankData.ogrn || sellerBank?.ogrnip || sellerBank?.ogrn);
+    setValue(
+      'ogrnip',
+      bankData.ogrnip ||
+        bankData.ogrn ||
+        sellerBank?.ogrnip ||
+        sellerBank?.ogrn,
+    );
     setValue('account', bankData.account || sellerBank?.account);
     setValue('INN', bankData.inn || sellerBank?.inn);
     setValue('address', bankData.address || sellerBank?.address);
