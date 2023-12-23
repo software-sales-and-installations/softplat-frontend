@@ -8,4 +8,5 @@ export interface ISellerCardProps {
   productionTime: string;
   trash: boolean;
   count?: number;
+  id?: number;
 }

@@ -39,7 +39,7 @@ export const AdminAddVendor: FC = () =>{
             vendorChange({vendorId: id.id, body: getValues()}).unwrap()
             .then((res) => {
                 console.log(res)
-                setErrorText('Данные успешно обновлены/добавлены')
+                setErrorText('Данные сохранены')
             })
             .catch((error) => {
                 console.log(error);
@@ -51,7 +51,7 @@ export const AdminAddVendor: FC = () =>{
         else {
             vendorAdd(getValues()).unwrap()
             .then((res) => {
-                setErrorText('Данные успешно обновлены/добавлены')
+                setErrorText('Данные сохранены')
                 console.log(res)
             })
             .catch((error) => {

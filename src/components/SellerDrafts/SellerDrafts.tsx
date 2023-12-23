@@ -5,6 +5,7 @@ import { useProductDeleteOwnCardMutation } from '../../utils/api/userProductApi'
 import { useSellerProductListQuery } from '../../utils/api/sellerApi';
 import { useState, useEffect } from 'react';
 import { IProductCard } from '../ProductCard/ProductCardTypes';
+import { Link } from 'react-router-dom';
 
 export const SellerDrafts: FC = () => {
   let count = 0;
@@ -62,14 +63,22 @@ export const SellerDrafts: FC = () => {
           {draftCards?.products?.map((i: IProductCard) => {
             count = count + 1;
             return (
+              
               <div className={styles.container__line} key={i.id}>
-                <p className={styles.container__headerNum}>{count}</p>
-                <p className={styles.container__headerName}>{i.name}</p>
-                <p className={styles.container__headerVendor}>
-                  {i.vendor?.name || '-'}
-                </p>
-                <p className={styles.container__headerArt}>{i.id}</p>
-                <p className={styles.container__headerData}>{''}</p>
+                <Link to={`/seller/add-card/${i.id}`} className={styles.container__link}>
+                  <p className={styles.container__headerNum}>{count}</p>
+                  <p className={styles.container__headerName}>{i.name}</p>
+                  <p className={styles.container__headerVendor}>
+                    {i.vendor?.name || '-'}
+                  </p>
+                  <p className={styles.container__headerArt}>{i.id}</p>
+                  <p className={styles.container__headerData}>
+                    {i.productionTime
+                      ? i.productionTime.toString().split(' ')[0].split('-').join('.')
+                      : '—'
+                    }
+                  </p>
+                </Link>
                 <button
                   className={styles.container__trash}
                   type="button"

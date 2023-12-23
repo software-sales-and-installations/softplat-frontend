@@ -9,11 +9,13 @@ import { NAME_VALIDATION_CONFIG, LINK_VALIDATION_CONFIG, PRICE_VALIDATION_CONFIG
 import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { useVendorListQuery } from '../../utils/api/vendorApi';
-import { useProductCreateMutation } from '../../utils/api/userProductApi';
+import { useProductCreateMutation, useProductUpdateMutation } from '../../utils/api/userProductApi';
 import { useCategoryListQuery } from '../../utils/api/categoryApi';
+import { useParams } from 'react-router-dom';
 
 export const SellerAddNewCard: FC = () =>{
-  const [errorText, setErrorText] = useState('')
+  const id = useParams();
+    const [errorText, setErrorText] = useState('')
     const [variantSoftware, setVariantSoftware] = useState('Загрузка ПО')
     const [DDactive, setDDActive] = useState(false)
     const {
@@ -23,10 +25,6 @@ export const SellerAddNewCard: FC = () =>{
         formState: { errors, isValid },
       } = useForm<ICreateProductFields>({ mode: 'onChange' });
     
-      // const onSubmit: SubmitHandler<ICreateProductFields> = data => {
-      //   console.log(data);
-      //   // reset();
-      // };
       //@ts-ignore
       const { data: vendorAll} = useVendorListQuery({},{
         refetchOnMountOrArgChange:true
@@ -43,19 +41,38 @@ export const SellerAddNewCard: FC = () =>{
       const [productCreate, {
         //     // isFetching, isLoading, isError
           }] = useProductCreateMutation();
-const productData = {hasDemo: true, category: getValues().category, description: getValues().description, installation: getValues().installation, installationPrice: getValues().installationPrice, name: getValues().name, price: getValues().price, quantity: getValues().quantity, vendor: getValues().vendor, version: getValues().version}
+      const [productUpdate,{
+        // isFetching, isLoading, isError
+      }] = useProductUpdateMutation()
+      const productData = {
+        hasDemo: true, 
+        category: getValues().category, 
+        description: getValues().description, 
+        installation: getValues().installation, 
+        installationPrice: getValues().installationPrice, 
+        name: getValues().name, 
+        price: getValues().price, 
+        quantity: getValues().quantity, 
+        vendor: getValues().vendor, 
+        version: getValues().version
+      }
           function handleSubmitCard(){
             console.log(productData)
+            if(!id.id){
             productCreate(productData).unwrap()
               .then((res) => {
                 console.log(res)
-                setErrorText('Данные успешно обновлены/добавлены')
+                setErrorText('Данные сохранены')
               })
               .catch((error) => {
                 console.log(error);
               })
               .finally()
           }
+          else {
+            productUpdate({productId: id.id, body: getValues()})
+          }
+        }
           // const id = useParams();
           // const { data: vendor,
           //     // isFetching,isLoading, error
