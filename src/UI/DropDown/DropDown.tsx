@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import {
   changeCountryOption,
   changeOption,
-  changeOrgFormOption,
   changeVendorOption,
 } from './DropDownSlice';
 import classNames from 'classnames';
@@ -44,7 +43,6 @@ const DropDown: FC<IDropDowmProps> = ({
     } else if (catalogSelect) {
       navigate(`/catalog/${e.value}`, { replace: true });
     } else if (orgFormSelect) {
-      // dispatch(changeOrgFormOption(e));
       onChange(e);
     }
   };
