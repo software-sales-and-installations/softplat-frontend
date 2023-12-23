@@ -43,7 +43,6 @@
   &__parameters {
     display: flex;
     align-items: center;
-    position: relative;
     
   }
 
@@ -63,6 +62,8 @@
     border-radius: 100%;
     margin-left: 15px;
     cursor: pointer;
+    position: relative;
+
   }
 
   &__question:hover {
@@ -119,6 +120,7 @@
     color: $black-standart-text;
     @include font-h3-bold;
     align-items: center;
+
   }
 
 

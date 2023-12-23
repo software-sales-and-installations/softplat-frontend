@@ -1,25 +1,49 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import styles from './SellerDrafts.module.scss';
 import EmptyState from '../EmptyState/EmptyState';
-import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
+import { useProductDeleteOwnCardMutation } from '../../utils/api/userProductApi';
+import { useSellerProductListQuery } from '../../utils/api/sellerApi';
+import { useState, useEffect } from 'react';
 import { IProductCard } from '../ProductCard/ProductCardTypes';
-import { useState } from 'react';
 
 export const SellerDrafts: FC = () => {
   let count = 0;
-  const { data: cards } = usePublicProductListQuery({
-    minId: 0,
-    pageSize: '',
-    sort: 'NEWEST',
-  });
+  const { data: cards } =
+  useSellerProductListQuery(
+    {
+      status: 'DRAFT',
+    },
+    { refetchOnMountOrArgChange: true },
+  );
   const [draftCards, setDraftCards] = useState(cards);
   useEffect(() => {
-    console.log(cards);
     setDraftCards(cards);
-  }, [cards, draftCards]);
+  }, [cards]);
+  useEffect(() => {
+    setDraftCards(draftCards);
+  }, [draftCards]);
+  function deleteCard(id: number){
+    console.log(draftCards)
+    console.log(draftCards?.products.filter((i: IProductCard)=>i.id!==id))
+    setDraftCards({products: draftCards?.products.filter((i: IProductCard)=>i.id!==id)})
+  }
+   const [productDeleteOwnCard, {
+    // isFetching, isLoading, isError
+  }] = useProductDeleteOwnCardMutation();
+  const handleProductDeleteOwnCard = (productId: number) => {
+    productDeleteOwnCard(productId).unwrap()
+      .then((res) => {
+        console.log(res)
+        deleteCard(productId)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally()
+  };
   return (
-    <section className={styles.container}>
-      {!cards ? (
+    <section className={styles.draft}>
+      {draftCards?.products?.length === 0 ? (
         <EmptyState
           navigateTo="/seller/add-card"
           buttonText="Добавить карточку"
@@ -35,7 +59,7 @@ export const SellerDrafts: FC = () => {
             <p className={styles.container__headerArt}>Артикул</p>
             <p className={styles.container__headerData}>Дата</p>
           </div>
-          {cards?.products.map((i: IProductCard) => {
+          {draftCards?.products?.map((i: IProductCard) => {
             count = count + 1;
             return (
               <div className={styles.container__line} key={i.id}>
@@ -49,6 +73,7 @@ export const SellerDrafts: FC = () => {
                 <button
                   className={styles.container__trash}
                   type="button"
+                  onClick = {()=>handleProductDeleteOwnCard(i.id)}
                 ></button>
               </div>
             );

@@ -22,7 +22,9 @@ export enum InputTypes {
 	link = 'link',
 	description = 'description',
 	price = 'price',
-	priceInstall = 'priceInstall',
+	installationPrice = 'installationPrice',
+	quantity = 'quantity',
+	version = 'version',
 }
 export interface IInput {
 	inputType: InputTypes;

@@ -1,9 +1,8 @@
 import { FC, useEffect } from 'react';
 import style from './CartSummary.module.scss';
 import { Button } from '../../UI/Button/Button';
-import {  useAppSelector } from '../../services/redux/store';
+import { useAppSelector } from '../../services/redux/store';
 import { popupState } from '../../UI/Popup/PopupSlice';
-import { useBuyerBasketInfoQuery } from '../../utils/api/buyerBasketApi';
 import { useDispatch } from 'react-redux';
 import { isSuccessPay } from './CartSummarySlice';
 
@@ -11,29 +10,29 @@ export const CartSummary: FC = () => {
   const dispatch = useDispatch();
   const cartState = useAppSelector(store => store.cart);
   const checkedCartItems = cartState.items.filter(
-    item => !cartState.uncheckedItemIds.includes(item.id)
+    item => !cartState.uncheckedItemIds.includes(item.id),
   );
-  
+
   const totalAmount = checkedCartItems.reduce((total, item) => {
-    const installationPrice = item.installation ? item.productResponseDto.installationPrice : 0;
+    const installationPrice = item.installation
+      ? item.productResponseDto.installationPrice
+      : 0;
     const cartQuantity = item.quantity || 1;
-    return total + (item.productResponseDto.price + installationPrice) * cartQuantity;
+    return (
+      total + (item.productResponseDto.price + installationPrice) * cartQuantity
+    );
   }, 0);
-useEffect(()=>{
-  dispatch(isSuccessPay(totalAmount))
-},[totalAmount])
+  useEffect(() => {
+    dispatch(isSuccessPay(totalAmount));
+  }, [totalAmount]);
   const totalItems = checkedCartItems.reduce((total, item) => {
     const cartQuantity = item.quantity || 1;
     return total + cartQuantity;
   }, 0);
 
-  //@ts-ignore
-  const basketInfoQuery = useBuyerBasketInfoQuery();
-
   const handleClick = async () => {
-    dispatch(popupState(true))
+    dispatch(popupState(true));
   };
-
 
   return (
     <div className={style.cartSummary}>
@@ -46,7 +45,11 @@ useEffect(()=>{
           Товары {`(${totalItems})`}
         </span>
         <div className={style.cartSummary__ButtonBlock}>
-          <Button onClick={handleClick} mode={'primary'} isDisabled={checkedCartItems.length < 1 && true}>
+          <Button
+            onClick={handleClick}
+            mode={'primary'}
+            isDisabled={checkedCartItems.length < 1 && true}
+          >
             Оформить заказ
           </Button>
         </div>

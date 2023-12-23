@@ -41,11 +41,10 @@ export const SignOutPopup: FC = () => {
       .catch(error => {
         console.log(error);
       })
-      .finally(()=>{
+      .finally(() => {
         localStorage.clear();
         navigate('/', { replace: true });
         dispatch(signout(true));
-
       });
   };
 

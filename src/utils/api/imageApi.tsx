@@ -17,7 +17,7 @@ export const imageApi = createApi({
   tagTypes: ['Image'],
   endpoints: (build) => ({
     // Получение изображения по id
-    image: build.query({
+    image: build.query<string | undefined, string>({
       query: (id) => `/image/${id}`,
     }),
   }),

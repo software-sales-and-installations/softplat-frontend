@@ -6,22 +6,23 @@ export const sellerApi = createApi({
   reducerPath: 'sellerApi',
   baseQuery: fetchBaseQuery({
     baseUrl: API_BASE_URL,
-    prepareHeaders: (headers) => {
+    prepareHeaders: headers => {
       const token = localStorage.getItem('token');
-      const userId = localStorage.getItem('userId')
+      const userId = localStorage.getItem('userId');
       if (token) {
         headers.set('authorization', `${token}`);
-        headers.set('X-Sharer-User-Id', `${userId}`)
+        headers.set('X-Sharer-User-Id', `${userId}`);
       }
       return headers;
     },
   }),
   tagTypes: ['Seller'],
-  endpoints: (build) => ({
+  endpoints: build => ({
     // Список продавцов
     // pageSize def 20
     sellerAllMembers: build.query({
-      query: ({minId, pageSize}) => `/seller?minId=${minId}&pageSize=${pageSize}`,
+      query: ({ minId, pageSize }) =>
+        `/seller?minId=${minId}&pageSize=${pageSize}`,
       // providesTags: ['Seller'],
     }),
     // Обновление данных о себе продавцом
@@ -38,22 +39,22 @@ export const sellerApi = createApi({
       }),
     }),
     // Удаление изображения профиля продавца админом
-    sellerDeletePhotoByAdmin: build.mutation( {
-      query: (sellerId) => ({
+    sellerDeletePhotoByAdmin: build.mutation({
+      query: sellerId => ({
         url: `/seller/${sellerId}/image/`,
         method: 'DELETE',
       }),
     }),
     // Получение продавца по Id
-    sellerInfo: build.query( {
-      query: (userId) => `/seller/${userId}/`,
+    sellerInfo: build.query({
+      query: userId => `/seller/${userId}/`,
     }),
     // Добавление/обновление изображения своего профиля продавцом
     // body {
     //   "image": "string",
     // }
     sellerAddPhoto: build.mutation({
-      query: (body) => ({
+      query: body => ({
         url: '/seller/account/image/',
         method: 'POST',
         body,
@@ -78,7 +79,7 @@ export const sellerApi = createApi({
     //   "account": "string"
     // }
     sellerChangeBank: build.mutation({
-      query: (body) => ({
+      query: body => ({
         url: '/seller/bank/',
         method: 'PATCH',
         body,
@@ -88,6 +89,24 @@ export const sellerApi = createApi({
     sellerGetBank: build.query({
       query: () => ({
         url: `/seller/bank/`,
+      }),
+    }),
+    // Получение списка товаров c сортировкой по статусу
+    // minId def 0
+    // pageSize def 20
+    sellerProductList: build.query({
+      query: ({
+        minId,
+        pageSize,
+        status,
+      }: {
+        minId?: number;
+        pageSize?: number;
+        status: 'DRAFT' | 'PUBLISHED' | 'REJECTED' | 'SHIPPED';
+      }) => ({
+        url: `/product/seller?${minId ? `minId=${minId}&` : ''}${
+          pageSize ? `pageSize=${pageSize}&` : ''
+        }status=${status}`,
       }),
     }),
     sellerAddBank: build.mutation({
@@ -110,5 +129,6 @@ export const {
   useSellerDeleteBankMutation,
   useSellerChangeBankMutation,
   useSellerGetBankQuery,
+  useSellerProductListQuery,
   useSellerAddBankMutation
 } = sellerApi;

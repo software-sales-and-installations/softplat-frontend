@@ -2,7 +2,7 @@
 @import '../../styles/abstract/mixins.scss';
 
 .card {
-  width: 825px;
+  width: 750px;
   padding: 5px 0;
   border-radius: 8px;
   display: flex;
@@ -10,6 +10,10 @@
   text-align: start;
   gap: 20px;
   @include font-body-regular;
+
+  &_wide {
+    width: 825px;
+  }
 
   &:hover {
     background-color: $light-grey;
@@ -21,10 +25,17 @@
     margin: 0;
   }
 
-  &__imgContainer {
+  &__container {
     padding: 0 5px 0 10px;
     flex: 0 0 60px;
     height: 60px;
+    display: flex;
+    align-items: center;
+
+    &_mode_inOrder {
+      height: 50px;
+      flex: 0 0 75px;
+    }
   }
 
   &__img {
@@ -32,6 +43,8 @@
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
+    @include font-body-filters;
+    font-size: 11px;
   }
 
   &__name,
@@ -54,15 +67,22 @@
     flex: 0 0 139px;
   }
 
+  &__date {
+    flex: 0 0 100px;
+  }
+
   &__trash {
     display: none;
     padding: 5px;
-    margin-left: auto;
-    margin-right: 30px;
+    margin-left: 30px;
     align-self: center;
 
     &_shown {
       display: block;
+    }
+
+    &_mode_inOrder {
+      margin-left: 15px;
     }
 
     &:hover {

@@ -13,13 +13,11 @@ import {
 import {
   useBuyerBasketAddItemMutation,
   useBuyerBasketDeleteItemMutation,
-  useBuyerBasketInfoQuery,
 } from '../../utils/api/buyerBasketApi';
 import { FaRegHeart } from 'react-icons/fa';
 import {
   useBuyerAddFavoritesMutation,
   useBuyerDeleteFavoritesMutation,
-  useBuyerFavoritesQuery,
 } from '../../utils/api/buyerApi';
 import {
   addToFavorites,
@@ -54,16 +52,14 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
 
   const [addFavorites] = useBuyerAddFavoritesMutation();
   const [deleteFavorites] = useBuyerDeleteFavoritesMutation();
-
-  const buyerFavorites = useBuyerFavoritesQuery(undefined);
-  const basketInfo = useBuyerBasketInfoQuery(undefined);
-
-  const dispatch = useAppDispatch();
   const [buyerBasketAddItem, addItemError] = useBuyerBasketAddItemMutation();
-  const favorites = useAppSelector(state => state.favorite?.favorites);
-  const isFavorite = favorites?.some(item => item === card.id);
   const [buyerBasketDeleteItem, removeItemError] =
     useBuyerBasketDeleteItemMutation();
+
+  const dispatch = useAppDispatch();
+  const favorites = useAppSelector(state => state.favorite?.favorites);
+  const isFavorite = favorites?.some(item => item === card.id);
+
   const cart = useAppSelector(store => store.cart?.items);
 
   const countItemInCart = cart.filter(
@@ -73,7 +69,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
 
   const handleAddToCart = async () => {
     if (userId) {
-      await asyncAddToCart(card, buyerBasketAddItem, basketInfo.refetch);
+      await asyncAddToCart(card, buyerBasketAddItem, dispatch);
     } else {
       addToLocalStorage(card, dispatch);
     }
@@ -81,11 +77,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
 
   const handleremoveFromCart = async () => {
     if (userId) {
-      await asyncRemoveFromCart(
-        card,
-        buyerBasketDeleteItem,
-        basketInfo.refetch,
-      );
+      await asyncRemoveFromCart(card, buyerBasketDeleteItem, dispatch);
     } else {
       removeFromLocalStorage(card.id, dispatch);
     }
@@ -94,7 +86,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const handleToggleFavorite = async () => {
     const action = isFavorite ? deleteFavorites : addFavorites;
 
-    await ayncToggleFavorite(action, card.id, buyerFavorites.refetch);
+    await ayncToggleFavorite(action, card.id);
     dispatch(
       isFavorite ? removeFromFavorites(card.id) : addToFavorites(card.id),
     );
@@ -118,7 +110,8 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
       ) : null}
       <Link to={`/product/${card.id}`} className={styles.card__link}>
         <div className={styles.card__img}>
-          <img src={card.image?.url} alt="Изображение продукта" />
+          
+          <img src={`https://api.softplat.ru/image/${card?.image?.id}`} alt="Изображение продукта" />
         </div>
         <p className={styles.card__name} title={card.name}>
           {card.name}
