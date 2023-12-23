@@ -171,6 +171,17 @@ export const VALIDATION_SETTINGS = {
       noINN: 'Необходимо ввести ИНН',
     },
   },
+  kpp: {
+    pattern: /^\d+$/,
+    minLength: 10,
+    maxLength: 10,
+    messages: {
+      tooShort: 'Введите еще цифры',
+      tooLong: 'Слишком длинный КПП',
+      invalid: 'Необходимо вводить только цифры',
+      noKPP: 'Необходимо ввести ИНН',
+    }
+  },
   bik: {
     pattern: /^\d+$/,
     minLength: 9,
@@ -244,6 +255,24 @@ export const EMAIL_VALIDATION_CONFIG = {
 export const INN_VALIDATION_CONFIG = {
   required: {
     value: true,
+    message: VALIDATION_SETTINGS.kpp.messages.noKPP,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.kpp.pattern,
+    message: VALIDATION_SETTINGS.kpp.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.kpp.maxLength,
+    message: VALIDATION_SETTINGS.kpp.messages.tooLong,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.kpp.minLength,
+    message: VALIDATION_SETTINGS.kpp.messages.tooShort,
+  },
+};
+export const KPP_VALIDATION_CONFIG = {
+  required: {
+    value: true,
     message: VALIDATION_SETTINGS.inn.messages.noINN,
   },
   pattern: {
@@ -258,7 +287,8 @@ export const INN_VALIDATION_CONFIG = {
     value: VALIDATION_SETTINGS.inn.minLength,
     message: VALIDATION_SETTINGS.inn.messages.tooShort,
   },
-};export const PERSONALEMAIL_VALIDATION_CONFIG = {
+}
+export const PERSONALEMAIL_VALIDATION_CONFIG = {
   pattern: {
     value: VALIDATION_SETTINGS.email.pattern,
     message: VALIDATION_SETTINGS.email.messages.invalid,

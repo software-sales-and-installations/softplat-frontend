@@ -20,4 +20,5 @@ export interface IDropDowmProps {
   value?: any;
   error?: string;
   typeError?: string;
+  formSize?: boolean
 }

@@ -46,6 +46,11 @@
     cursor: pointer !important;
     box-shadow: none !important;
 
+    &:has(.form) {
+      width: 255px !important;
+      background-color: rgba(233, 242, 255, 0.2) !important;
+    }
+
     &:focus {
       border: none !important;
     }

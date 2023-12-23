@@ -19,7 +19,7 @@ export const SellerSettings: FC = () => {
     register,
     handleSubmit,
     setValue,
-	getValues,
+    getValues,
     formState: { errors, isValid },
   } = useForm<ISellerSettings>({ mode: 'onChange' });
 
@@ -27,15 +27,15 @@ export const SellerSettings: FC = () => {
     localStorage.getItem('userId'),
   );
 
-//   console.log(sellerInfo)
+  //   console.log(sellerInfo)
 
   const [sellerChangeData, {}] = useSellerChangeDataMutation();
 
   function setNewData() {
     const newBankData = {
       phone: getValues().phone,
-	  email: getValues().email,
-	  name: getValues().name
+      email: getValues().email,
+      name: getValues().name,
     };
     console.log(newBankData);
     return newBankData;
@@ -60,7 +60,10 @@ export const SellerSettings: FC = () => {
   }, [sellerInfo]);
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(handleSellerChangeData)}>
+    <form
+      className={styles.form}
+      onSubmit={handleSubmit(handleSellerChangeData)}
+    >
       <div className={styles.containerForPhone}>
         <Input
           inputType={InputTypes.phone}
@@ -72,7 +75,7 @@ export const SellerSettings: FC = () => {
       </div>
       <Input
         inputType={InputTypes.email}
-		readOnly
+        readOnly
         labelText="E-mail (Логин)*"
         validation={{
           ...register('email'),
@@ -87,13 +90,6 @@ export const SellerSettings: FC = () => {
         error={errors?.name?.message}
         typeError="dataError"
       />
-      {/* <Input
-						inputType={InputTypes.shopname}
-						labelText="Название магазина"
-						validation={{ ...register('shopname') }}
-						error={errors?.shopname?.message}
-						typeError='dataError'
-					/> */}
       <div className={styles.btncontainer}>
         <Button isDisabled={!isValid} type="submit" mode="primary">
           Сохранить

@@ -16,6 +16,7 @@ import {
   ACCOUNT_VALIDATION_CONFIG,
   INN_VALIDATION_CONFIG,
   ORGFORM_OPTIONS,
+  KPP_VALIDATION_CONFIG,
 } from '../../utils/constants';
 import { useState } from 'react';
 import DropDown from '../../UI/DropDown/DropDown';
@@ -157,7 +158,7 @@ export const SellerBankSettings: FC = () => {
         inputType={InputTypes.kpp}
         labelText="КПП*"
         validation={{
-          ...register('kpp'),
+          ...register('kpp', KPP_VALIDATION_CONFIG),
         }}
         error={errors?.kpp?.message}
         typeError="dataError"
@@ -175,6 +176,7 @@ export const SellerBankSettings: FC = () => {
             // error={errors?.orgForm?.message}
             typeError="dataError"
             isMultiOption={false}
+            formSize
           />
         )}
       />

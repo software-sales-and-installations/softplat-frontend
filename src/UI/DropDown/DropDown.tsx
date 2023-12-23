@@ -22,6 +22,7 @@ const DropDown: FC<IDropDowmProps> = ({
   value,
   error,
   typeError,
+  formSize
 }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -70,6 +71,7 @@ const DropDown: FC<IDropDowmProps> = ({
           { country: isMultiOption && countrySelect },
           { vendor: isMultiOption && vendorSelect },
           { catalog: catalogSelect },
+          { form: formSize},
           'custom-select',
         )}
         options={options}
