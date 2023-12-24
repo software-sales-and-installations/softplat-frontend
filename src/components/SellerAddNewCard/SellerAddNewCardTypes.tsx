@@ -5,8 +5,8 @@ export interface ICreateProductFields {
     price: number;
     installationPrice: number;
     error?: string;
-    vendor: string;
-    category: string;
+    vendor: number;
+    category: number;
     installation: string;
     file?: any;
     software: string;

@@ -13,9 +13,6 @@ export const userProductApi = createApi({
         headers.set('authorization', `${token}`);
         headers.set('X-Sharer-User-Id', `${userId}`);
       }
-      if (userId) {
-        headers.set('X-Sharer-User-Id', `${userId}`)
-      }
       return headers;
     },
   }),
@@ -79,7 +76,7 @@ export const userProductApi = createApi({
     }),
     // Отправка своего товара на модерацию админом
     productSendToModeration: build.mutation({
-      query: productId => ({
+      query: ({productId}) => ({
         url: `/product/${productId}/send`,
         method: 'PATCH',
       }),
@@ -143,6 +140,22 @@ export const userProductApi = createApi({
         }status=${status}`,
       }),
     }),
+    //список товаров для продавца с сортировкой
+    productSellerList: build.query({
+      query: ({
+        minId,
+        pageSize,
+        status,
+      }: {
+        minId?: number;
+        pageSize?: number;
+        status: 'DRAFT' | 'PUBLISHED' | 'REJECTED' | 'SHIPPED';
+      }) => ({
+        url: `/product/seller?${minId ? `minId=${minId}&` : ''}${
+          pageSize ? `pageSize=${pageSize}&` : ''
+        }status=${status}`,
+      }),
+    }),
   }),
 });
 
@@ -158,4 +171,5 @@ export const {
   useProductDeleteOwnCardImageMutation,
   useProductRecsQuery,
   useProductListQuery,
+  useProductSellerListQuery
 } = userProductApi;

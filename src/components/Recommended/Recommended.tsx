@@ -11,11 +11,13 @@ const Recommended: FC = () => {
     pageSize: 30,
     sort: 'NEWEST',
   });
-  
+
   const recommendedCards = data?.products.filter(
     (card: IProductCard) =>
       card.productStatus === ProductStatus.PUBLISHED && card.quantity > 0,
   );
+
+  console.log(recommendedCards);
 
   return (
     <section className={styles.recommended}>

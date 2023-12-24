@@ -38,7 +38,7 @@ export const AddToCartButton = ({id, isInstallationSelected, type, card}: IAddTo
     }
   }
 
-  const [buyerBasketDelete, { isError: removeItemError }] = useBuyerBasketDeleteItemMutation();
+  const [buyerBasketDelete ] = useBuyerBasketDeleteItemMutation();
 
   const handleRemoveFromCart = () => {
     buyerBasketDelete({productId: id, installation: isInstallationSelected}).unwrap()
@@ -61,9 +61,6 @@ export const AddToCartButton = ({id, isInstallationSelected, type, card}: IAddTo
     <button
       className={[styles.addToCart__changeQuantity, styles[`addToCart__changeQuantity_type_${type}`]].join(' ')}
         onClick={handleRemoveFromCart}
-      disabled={
-        removeItemError
-      }
       >
         -
       </button>
