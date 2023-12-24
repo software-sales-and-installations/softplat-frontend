@@ -88,7 +88,7 @@ export const SellerAddNewCard: FC = () =>{
             })
             .catch((error) => {
               console.log(error);
-              setAddCardError(error.status)
+              setErrorText('При отправке товара на модерацию произошла ошибка, товар сохранен во вкладке Черновики')
             })
             .finally()
         }
@@ -110,7 +110,7 @@ export const SellerAddNewCard: FC = () =>{
             })
             .catch((error) => {
               console.log(error);
-              setAddCardError(error.status)
+              setErrorText('При отправке товара на модерацию произошла ошибка')
             })
             .finally()
         }
