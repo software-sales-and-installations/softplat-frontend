@@ -24,7 +24,7 @@ export enum InputTypes {
 	price = 'price',
 	installationPrice = 'installationPrice',
 	quantity = 'quantity',
-	version = 'version'
+	version = 'version',
 }
 export interface IInput {
 	inputType: InputTypes;
