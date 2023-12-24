@@ -1,26 +1,36 @@
 import { useEffect } from 'react';
-import { useAppDispatch } from '../redux/store';
+import { useAppDispatch, useAppSelector } from '../redux/store';
 import { useBuyerFavoritesQuery } from '../../utils/api/buyerApi';
 import { setFavorites } from '../redux/slices/favourites/favourites';
 import { ICartItem } from '../../components/ProductListCart/ProductListTypes';
 
-
-
-
-interface IFavorite {
-    product: ICartItem;
-    userId: number;
+export interface IFavorite {
+  product: ICartItem;
+  userId: number;
 }
 
-
 export const useLoadFavorites = () => {
-  const dispatch = useAppDispatch();
-  //@ts-ignore
-  const favoritesData = useBuyerFavoritesQuery();
-    // console.log(favoritesData?.currentData?.favorites);
+  const userId = localStorage.getItem('userId');
+  const userStoreId = useAppSelector(store => store.user.user.id);
+  const userRole = localStorage.getItem('role');
+
+  const favoritesData = useBuyerFavoritesQuery(undefined, {
+    skip: !userId && !userStoreId || userRole !== 'BUYER',
+  });
+
   useEffect(() => {
-    if (favoritesData && favoritesData.currentData) {
-      const productIds = favoritesData.currentData.favorites.map((favorite: IFavorite) => favorite.product.id);
+    if (favoritesData.data) {
+      favoritesData.refetch();
+    }
+  }, [userStoreId, favoritesData.data]);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (favoritesData.currentData && userId) {
+      const productIds = favoritesData.currentData.favorites.map(
+        (favorite: IFavorite) => favorite.product.id,
+      );
       dispatch(setFavorites(productIds));
     }
   }, [favoritesData, dispatch]);

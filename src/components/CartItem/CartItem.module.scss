@@ -3,19 +3,20 @@
 
 .cartItem {
   display: grid;
-  grid-template-columns: 30px 100px 487px 140px 90px;
-  height: 114px;
+  grid-template-columns: 20px 110px 349px 90px 89px;
+  height: 105px;
   color: $black-standart-text;
   align-items: center;
   justify-content: space-between;
   text-decoration: none;
   list-style: none;
 
-  width: 1010px;
+  width: 762px;
+
 
   &__img {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     cursor: pointer;
   }
 
@@ -23,6 +24,7 @@
     @include font-body-regular;
     margin: 0;
     cursor: pointer;
+    margin-top: 5px;
   }
 
   &__info {
@@ -33,16 +35,19 @@
   }
 
   &__type {
-    @include font-body-filters;
+    @include font-body-regular;
     color: #9e9e9e;
-    margin-right: 25px;
+    margin-right: 10px;
   }
 
   &__parameters {
     display: flex;
     align-items: center;
-    position: relative;
-    gap: 10px;
+    
+  }
+
+  &__installationText {
+    margin-left: 15px;
   }
 
   &__question {
@@ -57,6 +62,8 @@
     border-radius: 100%;
     margin-left: 15px;
     cursor: pointer;
+    position: relative;
+
   }
 
   &__question:hover {
@@ -65,7 +72,7 @@
   }
 
   &__price {
-    @include font-body-card;
+    @include font-h3-bold;
     text-wrap: nowrap;
     text-align: end;
     text-overflow: ellipsis;
@@ -74,9 +81,11 @@
   }
 
   &__buttons {
+    margin-top: 5px;
     display: flex;
-    gap: 10px;
+    gap: 15px;
     color: $dark-grey;
+    
   }
 
   &__trash:hover {
@@ -86,6 +95,7 @@
   &__like {
     opacity: 0.5;
     transition: opacity 0.2s ease;
+    padding: 0;
 
     border: none;
     background-color: transparent;
@@ -99,28 +109,60 @@
     color: $black-standart-text;
   }
 
+
+
+
+
+
   &__quantity {
     display: flex;
     justify-content: space-between;
     color: $black-standart-text;
-    @include font-body-card;
+    @include font-h3-bold;
     align-items: center;
+
   }
 
-  &__quantityButton {
-    width: 23px;
-    height: 23px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: $dark-grey;
-    border-radius: 3px;
-    box-sizing: border-box;
-    border: 2px solid $dark-grey;
+
+  &__increaseQuantity {
+    width: 21px;
+    height: 21px;
+    background-image: url('../../images/plus.svg');
+    border: none;
+    background-position: center;
   }
 
-  &__quantityButton:disabled {
+  &__decreaseQuantity {
+    width: 21px;
+    height: 21px;
+    background-image: url('../../images/minus.svg');
+    border: none;
+    background-position: center;
+    cursor: pointer;
+  }
+
+
+  &__increaseQuantity:hover {
+    background-image: url('../../images/plus_hovered.svg');
+
+  }
+
+  &__decreaseQuantity:hover {
+    background-image: url('../../images/minus_hovered.svg');
+
+  }
+
+  &__decreaseQuantity:disabled {
     color: $light-grey;
-    border: 2px solid $light-grey;
+    pointer-events: none;
+    opacity: 0.5;
+
   }
+
+  &__increaseQuantity:disabled {
+    color: $light-grey;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
 }

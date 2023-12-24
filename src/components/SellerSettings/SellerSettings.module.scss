@@ -1,0 +1,31 @@
+@import '../../styles/abstract/mixins.scss';
+@import '../../styles/abstract/constants.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.informText {
+  margin: 0 0 15px;
+  @include font-CTAbody-regular;
+}
+
+.form {
+  width: 100%;
+  max-width: 450px;
+}
+.containerForPhone {
+  width: 75%;
+  position: relative;
+}
+.containerForINN {
+  width: 85%;
+}
+.containerForKPP {
+  width: 31%;
+}
+
+.btncontainer {
+  margin-top: 30px;
+}

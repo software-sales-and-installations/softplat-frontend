@@ -6,49 +6,61 @@ export const buyerBasketApi = createApi({
   reducerPath: 'buyerBasketApi',
   baseQuery: fetchBaseQuery({
     baseUrl: API_BASE_URL,
-    prepareHeaders: (headers) => {
+    prepareHeaders: headers => {
       const token = localStorage.getItem('token');
-      if (token) {
+      const userId = localStorage.getItem('userId');
+
+      if (token && userId) {
         headers.set('authorization', `${token}`);
+        headers.set('X-Sharer-User-Id', `${userId}`);
       }
       return headers;
     },
   }),
   tagTypes: ['BuyerBasket'],
-  endpoints: (build) => ({
-  // Просмотр своей корзины
-  buyerBasketInfo: build.query({
-  query: () => '/buyer/basket/',
-}),
-// Добавление продукта в свою корзину
-// Body {
-// "installation": boolean,
-// }
-    buyerBasketAddItem: build.mutation( {
-      query: ({productId, installation}) => ({
-        url: `/buyer/basket/${productId}?installation=${installation}`,
+  endpoints: build => ({
+    buyerBasketInfo: build.query({
+      query: () => '/basket',
+    }),
+    buyerBasketAddItem: build.mutation({
+      query: ({ productId, installation }) => ({
+        url: `/basket/${productId}?installation=${installation}`,
         method: 'POST',
       }),
-
-      
     }),
-    // Удаление продукта из своей корзины
-    // Body {
-    // "installation": boolean,
-    //    Так как в корзине может лежать два одинаковых товара, но один с установкой, а второй без установки, необходимо выбрать, какой из них удалить
-    // }
-    buyerBasketDeleteItem: build.mutation( {
-      query: ({productId, installation}) => ({
-        url: `/buyer/basket/${productId}?installation=${installation}`,
+    buyerBasketDeleteItem: build.mutation({
+      query: ({ productId, installation }) => ({
+        url: `/basket/product/${productId}?installation=${installation}`,
         method: 'DELETE',
       }),
     }),
-   }),
+    buyerBasketClear: build.mutation({
+      query: () => ({
+        url: `/basket`,
+        method: 'DELETE',
+      }),
+    }),
+    buyerBasketDeletePosition: build.mutation({
+      query: position => ({
+        url: `/basket/${position}`,
+        method: 'DELETE',
+      }),
+    }),
+    buyerBasketSaveCart: build.mutation({
+      query: body => ({
+        url: `/basket`,
+        method: 'POST',
+        body,
+      }),
+    }),
+  }),
 });
 
 export const {
   useBuyerBasketInfoQuery,
   useBuyerBasketAddItemMutation,
   useBuyerBasketDeleteItemMutation,
+  useBuyerBasketClearMutation,
+  useBuyerBasketDeletePositionMutation,
+  useBuyerBasketSaveCartMutation,
 } = buyerBasketApi;
-

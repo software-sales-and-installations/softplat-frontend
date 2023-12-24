@@ -2,25 +2,23 @@
 @import '../../styles/abstract/mixins.scss';
 
 .breadcrumbs {
-  margin-top: 70px;
-  padding: 0 80px;
+  margin-top: 65px;
 }
 
 .search {
-  margin-left: 80px;
   &__title {
-    margin-top: 70px;
+    margin-top: 45px;
     text-align: start;
     @include font-h1-bold;
   }
 
   &__notFound {
-    margin-top: 15px;
+    margin: 50px 0 0;
     text-align: start;
     @include font-body-regular;
   }
 
   &__items {
-    margin-top: 75px;
+    margin-top: 43px;
   }
 }

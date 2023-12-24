@@ -1,7 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-
-
+export const ayncToggleFavorite = async (
+  action: Function,
+  cardId: number,
+) => {
+  try {
+    await action(cardId);
+  } catch (error) {
+    console.error('Ошибка при изменении избранного:', error);
+  }
+};
 
 interface IFavoriteState {
   favorites: number[];
@@ -26,12 +34,16 @@ const favoriteSlice = createSlice({
     setFavorites: (state, action: PayloadAction<number[]>) => {
       state.favorites = action.payload;
     },
-    clearFavorites: (state) => {
-        state.favorites = [];
-      },
-
+    clearFavorites: state => {
+      state.favorites = [];
+    },
   },
 });
 
-export const { addToFavorites, removeFromFavorites, setFavorites, clearFavorites } = favoriteSlice.actions;
+export const {
+  addToFavorites,
+  removeFromFavorites,
+  setFavorites,
+  clearFavorites,
+} = favoriteSlice.actions;
 export const favoriteReducer = favoriteSlice.reducer;

@@ -1,5 +1,5 @@
 export interface IButtonProps {
-    children?: string;
+    children?: any;
     mode: 'primary' | 'secondary';
     type?: 'button' | 'submit';
     isDisabled?: boolean;

@@ -5,18 +5,16 @@ import { IProductCard, ProductStatus } from '../ProductCard/ProductCardTypes';
 import Preloader from '../Preloader/Preloader';
 import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 
-// type Props = {};
-
 const Recommended: FC = () => {
   const { data, error, isLoading } = usePublicProductListQuery({
     minId: 0,
-    pageSize: 10,
+    pageSize: 30,
     sort: 'NEWEST',
   });
-
+  
   const recommendedCards = data?.products.filter(
     (card: IProductCard) =>
-      card.productStatus === ProductStatus.PUBLISHED,
+      card.productStatus === ProductStatus.PUBLISHED && card.quantity > 0,
   );
 
   return (

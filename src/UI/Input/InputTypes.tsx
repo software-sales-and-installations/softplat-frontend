@@ -6,12 +6,25 @@ export enum InputTypes {
 	text = 'text',
 	date = 'date',
 	INN ='INN',
-	orgName='orgName',
 	remember='checkbox',
 	name = 'name',
 	phone = 'phone',
 	oldpassword='oldpassword',
-	cardName = 'cardName'
+	cardName = 'cardName',
+	companyname = 'companyname',
+	bik = 'bik',
+	ogrnip = 'ogrnip',
+	account = 'account',
+	kpp = 'kpp',
+	orgForm = 'orgForm',
+    shopname = 'shopname',
+    address = 'address',
+	link = 'link',
+	description = 'description',
+	price = 'price',
+	installationPrice = 'installationPrice',
+	quantity = 'quantity',
+	version = 'version',
 }
 export interface IInput {
 	inputType: InputTypes;
@@ -26,4 +39,5 @@ export interface IInput {
 	max?: string;
 	defaultValue?: any;
 	helpText?: string;
+	typeError?: string
 }

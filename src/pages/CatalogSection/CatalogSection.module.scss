@@ -2,31 +2,22 @@
 @import '../../styles/abstract/mixins.scss';
 
 .breadcrumbs {
-  margin: 70px 0;
-  padding: 0 80px;
+  margin: 66px 0 48px;
 }
 
 .catalogSection {
   &__title {
-    padding: 0 80px;
-    margin: 70px 0 0;
     text-align: start;
     @include font-h1-bold;
   }
 
-  &__categories {
-    margin-top: 75px;
-  }
-
   &__selectContainer {
-    padding: 0 80px;
-    margin-top: 35px;
+    margin-top: 30px;
     display: flex;
     gap: 40px;
   }
 
   &__items {
-    padding: 0 80px;
     margin-top: 40px;
   }
 }

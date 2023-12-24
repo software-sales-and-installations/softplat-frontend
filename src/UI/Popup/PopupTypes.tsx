@@ -12,7 +12,7 @@ export interface ISignInFields {
 export interface ISignUpFields extends ISignInFields {
 	confirmPassword: string;
 	INN?: number;
-	orgName?: string;
+	companyname?: string;
 	agree?: any;
 	name: string;
 	phone?: string;
@@ -34,6 +34,7 @@ export interface ISignUpData extends ISignInData {
 	role: string;
 }
 export interface IUser {
+	id: number | null;
 	name: string;
 	email: string;
 	phone?: string;
@@ -48,6 +49,7 @@ export interface IPayFields{
 	validDate: string;
 	cvv: string;
 	cardName: string;
-	remember?: any
+	remember?: any;
+	agree?: any;
 
 }

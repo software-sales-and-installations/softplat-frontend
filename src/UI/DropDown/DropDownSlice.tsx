@@ -5,10 +5,12 @@ const initialState = {
     value: 'NEWEST',
     label: 'По новизне',
   },
-  countryOption: {
-    value: 'RUSSIA',
-    label: 'Россия',
-  },
+  countryOption: [],
+  vendorOption: [],
+  orgFormOption: {
+    value: '',
+    label: ''
+  }
 };
 
 const dropDownSlice = createSlice({
@@ -20,9 +22,15 @@ const dropDownSlice = createSlice({
     },
     changeCountryOption: (state, action) => {
       state.countryOption = action.payload
+    },
+    changeVendorOption: (state, action) => {
+      state.vendorOption = action.payload
+    },
+    changeOrgFormOption: (state, action) => {
+      state.orgFormOption = action.payload
     }
   },
 });
 
-export const { changeOption, changeCountryOption } = dropDownSlice.actions;
+export const { changeOption, changeCountryOption, changeVendorOption, changeOrgFormOption } = dropDownSlice.actions;
 export const dropDownReducer = dropDownSlice.reducer;

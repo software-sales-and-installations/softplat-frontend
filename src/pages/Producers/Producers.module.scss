@@ -3,41 +3,40 @@
 
 .breadcrumbs {
   margin-top: 70px;
-  padding: 0 80px;
 }
 
 .title {
   color: $black-standart-text;
   @include font-h1-bold;
   text-align: start;
-  margin: 70px 0 0 80px;
+  margin: 48px 0 0;
 }
 .ddcontainer {
-  margin: 75px 0 63px 80px;
+  margin: 40px 0 35px;
 }
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 323px);
-  column-gap: 75px;
-  row-gap: 55px;
-  max-width: 1520px;
-  margin: 0 0 126px 80px;
+  grid-template-columns: repeat(auto-fit, 189px);
+  column-gap: 45px;
+  row-gap: 35px;
+  max-width: 1110px;
+  margin: 0 0 126px;
   &__link {
     display: flex;
-    gap: 50px;
+    gap: 25px;
     align-items: center;
     text-decoration: none;
     color: $dark-grey;
   }
   &__img {
-    width: 98px;
-    height: 98px;
+    width: 65px;
+    height: 65px;
     object-fit: contain;
-    border-radius: 20px;
   }
   &__title {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    @include font-table-bold;
   }
 }

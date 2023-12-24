@@ -1,23 +1,59 @@
+import React from 'react';
 import styles from './PersonalPurchases.module.scss';
 import CardPurchases from '../CardPurchases/CardPurchases';
-import { PURCHASES_ITEMS_CABINET } from '../../utils/constants';
+import { useOrderAllQuery } from '../../utils/api/buyerOrderApi';
+import { cardPurchasesProps } from '../CardPurchases/CardPurchases';
+import EmptyState from '../EmptyState/EmptyState';
+
+type Product = Omit<cardPurchasesProps, 'data'>;
 
 const PersonalPurchases: React.FC = () => {
+  const { data: purchaseItems, isSuccess } = useOrderAllQuery(
+    localStorage.getItem('userId'),
+    { refetchOnMountOrArgChange: true },
+  );
+
   return (
     <section className={styles.personalPurchases}>
-      <h2 className={styles.personalPurchases__title}>Мои покупки</h2>
+      {isSuccess && purchaseItems.orders.length === 0 && (
+        <EmptyState navigateTo="/catalog" buttonText="Каталог">
+          Покупок пока нет
+        </EmptyState>
+      )}
       <ul className={styles.personalPurchases__list}>
-        {PURCHASES_ITEMS_CABINET.map(i => (
-          <li key={i.id} className={styles.personalPurchases__item}>
-            <CardPurchases
-              img={i.img}
-              name={i.name}
-              brand={i.brand}
-              describe={i.describe}
-              data={i.data}
-            />
-          </li>
-        ))}
+        {purchaseItems &&
+          purchaseItems.orders.toReversed().map(
+            (item: {
+              id: number;
+              productsOrdered: {
+                id: number;
+                productResponseDto: Product;
+              }[];
+              productionTime: string;
+            // }) => (
+            //   <li key={item.id}>
+            //     {item.productsOrdered.map(
+            //       (product: { id: number; productResponseDto: Product }) => (
+            //         <CardPurchases
+            //           key={'purchase' + product.id}
+            //           data={item.productionTime}
+            //           {...product.productResponseDto}
+            //         />
+            //       ),
+            //     )}
+            //   </li>
+            // ),
+            }) =>
+              item.productsOrdered.map(
+                (product: { id: number; productResponseDto: Product }) => (
+                  <CardPurchases
+                    key={product.id}
+                    data={item.productionTime}
+                    {...product.productResponseDto}
+                  />
+                ),
+              ),
+          )}
       </ul>
     </section>
   );

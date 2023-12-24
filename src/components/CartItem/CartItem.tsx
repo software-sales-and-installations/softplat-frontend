@@ -4,47 +4,57 @@ import style from './CartItem.module.scss';
 import { Tooltip } from '../Tooltip/Tooltip';
 import { Checkbox } from '../../UI/Checkbox/Checkbox';
 
-import { FaTrash, FaRegHeart, FaPlus, FaMinus, FaHeart } from 'react-icons/fa';
+import { FaTrash, FaRegHeart, FaHeart } from 'react-icons/fa';
 import { ICartItemProps } from './CartItemTypes';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import {
+  addToLocalStorage,
   addToUncheckedList,
+  asyncAddToCart,
+  asyncRemoveFromCart,
+  removeCartPostion,
+  removeFromLocalStorage,
   removeFromUncheckedList,
-  removeItemById,
+  setCartItems,
   updateCartItem,
 } from '../../services/redux/slices/cart/cart';
 import {
   useBuyerBasketAddItemMutation,
   useBuyerBasketDeleteItemMutation,
-  useBuyerBasketInfoQuery,
+  useBuyerBasketDeletePositionMutation,
 } from '../../utils/api/buyerBasketApi';
 import { useNavigate } from 'react-router-dom';
 import {
   useBuyerAddFavoritesMutation,
   useBuyerDeleteFavoritesMutation,
-  useBuyerFavoritesQuery,
 } from '../../utils/api/buyerApi';
 import {
   addToFavorites,
+  ayncToggleFavorite,
   removeFromFavorites,
 } from '../../services/redux/slices/favourites/favourites';
+import { ICartItem } from '../ProductListCart/ProductListTypes';
 
 export const CartItem: FC<ICartItemProps> = ({ item }) => {
+  const userId = localStorage.getItem('userId');
+
+  const addSpace = (price: number): string => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  };
+
   const product = item?.productResponseDto;
+
   const navigate = useNavigate();
   const [tooltipText, setTooltipText] = useState('');
   const [totalPrice, setTotalPrice] = useState(product?.price);
-  const [quantity, setQuantity] = useState(item.quantity);
+
   const [buyerBasketAddItem, addItemError] = useBuyerBasketAddItemMutation();
   const [buyerBasketDeleteItem, removeItemError] =
     useBuyerBasketDeleteItemMutation();
   const [addFavorites] = useBuyerAddFavoritesMutation();
   const [deleteFavorites] = useBuyerDeleteFavoritesMutation();
-  //@ts-ignore
-  const buyerFavorites = useBuyerFavoritesQuery();
-  //@ts-ignore
-  const basketInfoQuery = useBuyerBasketInfoQuery();
 
+  const [buyerBasketСlearPosition] = useBuyerBasketDeletePositionMutation();
   const dispatch = useAppDispatch();
 
   const favorites = useAppSelector(state => state.favorite?.favorites);
@@ -55,37 +65,23 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
   );
 
   const handleToggleFavorite = async () => {
-    try {
-      if (isFavorite) {
-        await deleteFavorites(product.id);
-        dispatch(removeFromFavorites(product.id));
-      } else {
-        await addFavorites(product.id);
-        dispatch(addToFavorites(product.id));
-      }
-      await buyerFavorites.refetch();
-    } catch (error) {
-      console.error('Ошибка при изменении избранного:', error);
-    }
+    const action = isFavorite ? deleteFavorites : addFavorites;
+    await ayncToggleFavorite(action, product.id);
+    dispatch(
+      isFavorite ? removeFromFavorites(product.id) : addToFavorites(product.id),
+    );
   };
 
   useEffect(() => {
-    updateTotalPrice(item.installation, quantity);
-    dispatch(
-      updateCartItem({
-        ...item,
-      }),
-    );
-  }, [quantity, dispatch]);
+    updateTotalPrice(item.installation);
+    dispatch(updateCartItem(item));
+  }, [item.quantity, dispatch]);
 
-  const updateTotalPrice = (
-    wasInstallationSelected: boolean,
-    updatedQuantity: number,
-  ) => {
+  const updateTotalPrice = (wasInstallationSelected: boolean) => {
     const installationPrice = wasInstallationSelected
       ? product?.installationPrice
       : 0;
-    setTotalPrice((product?.price + installationPrice) * updatedQuantity);
+    setTotalPrice((product?.price + installationPrice) * item.quantity);
   };
 
   const handleBuyCheckboxChange = () => {
@@ -97,63 +93,52 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
   };
 
   const handleIncreaseQuantity = async () => {
-    if (quantity < 10) {
-      try {
-        const response = await buyerBasketAddItem({
-          productId: product.id,
-          installation: item.installation,
-        }).unwrap();
-
-        console.log('Response:', response);
-
-        const updatedQuantity = quantity + 1;
-        setQuantity(updatedQuantity);
-        updateTotalPrice(item.installation, updatedQuantity);
-
-        basketInfoQuery.refetch();
-      } catch (error) {
-        console.error('Ошибка добавления товара в корзину:', error);
+    if (
+      item.quantity < 10 &&
+      product.quantity !== undefined &&
+      item.quantity < product.quantity
+    ) {
+      if (userId) {
+        await asyncAddToCart(
+          product,
+          buyerBasketAddItem,
+          dispatch,
+          item.installation,
+        );
+      } else {
+        addToLocalStorage(product, dispatch, item.installation);
       }
+
+      updateTotalPrice(item.installation);
     }
   };
 
   const handleDecreaseQuantity = async () => {
-    if (quantity > 1) {
-      try {
-        const response = await buyerBasketDeleteItem({
-          productId: product.id,
-          installation: item.installation,
-        }).unwrap();
-        console.log('Response:', response);
-
-        const updatedQuantity = quantity - 1;
-        setQuantity(updatedQuantity);
-        updateTotalPrice(item.installation, updatedQuantity);
-
-        basketInfoQuery.refetch();
-      } catch (error) {
-        console.error('Ошибка добавления товара в корзину:', error);
-      }
+    if (userId) {
+      await asyncRemoveFromCart(
+        product,
+        buyerBasketDeleteItem,
+        dispatch,
+        item.installation,
+      );
+    } else {
+      removeFromLocalStorage(product.id, dispatch, item.installation);
     }
+
+    updateTotalPrice(item.installation);
   };
 
   const handleRemoveItem = async () => {
-    if (quantity === 1) {
-      // Api логика удаления всей позиции, ( пока логика удаления одной копии)
-      try{
-        const response = await buyerBasketDeleteItem({
-          productId: product.id,
-          installation: item.installation,
-        }).unwrap();
-        console.log('Response:', response);
-
-        dispatch(removeItemById(product.id));
-        dispatch(removeFromUncheckedList(item.id))
-        basketInfoQuery.refetch();
-
-      }catch (error) {
-        console.error('Ошибка удаления из корзинЫ:', error);
-      }
+    if (userId) {
+      const response = await buyerBasketСlearPosition(item.id).unwrap();
+      dispatch(setCartItems(response.productsInBasket));
+    } else {
+      const cartItems = JSON.parse(localStorage.getItem('cartItems') ?? '[]');
+      const updatedCartItems = cartItems.filter(
+        (cartItem: ICartItem) => cartItem.id !== item.id,
+      );
+      localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+      dispatch(removeCartPostion(item.id));
     }
   };
 
@@ -177,11 +162,10 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
         </p>
         <div className={style.cartItem__parameters}>
           <span className={style.cartItem__type}>Лицензия</span>
-          <Checkbox
-            label={`c установкой ${product?.installationPrice}`}
-            checked={item.installation}
-            readOnly
-          />
+          <Checkbox checked={item.installation} readOnly />
+          <span
+            className={style.cartItem__installationText}
+          >{`c установкой ${product?.installationPrice}`}</span>
           <div
             className={style.cartItem__question}
             onMouseEnter={() =>
@@ -192,42 +176,45 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
             onMouseLeave={() => setTooltipText('')}
           >
             ?
+            {tooltipText && <Tooltip text={tooltipText} />}
+
           </div>
-          {tooltipText && <Tooltip text={tooltipText} />}
         </div>
         <div className={style.cartItem__buttons}>
-          <button
-            className={style.cartItem__like}
-            type="button"
-            onClick={handleToggleFavorite}
-          >
-            {isFavorite ? <FaHeart size={25} /> : <FaRegHeart size={25} />}
-          </button>
+          {userId && (
+            <button
+              className={style.cartItem__like}
+              type="button"
+              onClick={handleToggleFavorite}
+            >
+              {isFavorite ? <FaHeart size={22} /> : <FaRegHeart size={22} />}
+            </button>
+          )}
 
           <FaTrash
-            size={25}
+            size={18}
             className={style.cartItem__trash}
             onClick={handleRemoveItem}
           />
         </div>
       </div>
-      <span className={style.cartItem__price}>{totalPrice} ₽</span>
+      <span className={style.cartItem__price}>{addSpace(totalPrice)} ₽</span>
       <div className={style.cartItem__quantity}>
         <button
           onClick={handleDecreaseQuantity}
-          className={style.cartItem__quantityButton}
-          disabled={removeItemError.isError || quantity === 1}
-        >
-          <FaMinus size={15} />
-        </button>
-        <span>{quantity}</span>
+          className={style.cartItem__decreaseQuantity}
+          disabled={removeItemError.isError}
+        ></button>
+        <span>{item.quantity}</span>
         <button
           onClick={handleIncreaseQuantity}
-          className={style.cartItem__quantityButton}
-          disabled={addItemError.isError || quantity > 9}
-        >
-          <FaPlus size={15} />
-        </button>
+          className={style.cartItem__increaseQuantity}
+          disabled={
+            addItemError.isError ||
+            item.quantity > 9 ||
+            item.quantity === product.quantity
+          }
+        ></button>
       </div>
     </li>
   );

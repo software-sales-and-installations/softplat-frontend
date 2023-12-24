@@ -11,27 +11,34 @@ export interface IProductCard {
   productAvailability?: boolean;
   productStatus?: ProductStatus;
   productionTime?: Date;
-  quantity?: number;
+  quantity: number;
   seller?: ProductCardSeller;
   vendor?: ProductCardVendor;
   version?: string;
   isLiked?: boolean;
   cartQuantity?: number;
   date?:string;
+  hasDemo: boolean;
+  rating: string | number | null;
+}
+
+export interface ISimilarProducts {
+  products: [IProductCard];
+  totalProducts: number;
 }
 
 export interface IProductCardProps {
   card: IProductCard;
+  key?: string | number;
+
 }
-export interface IProductCardPropsTable{
-  products: IProductCard[]
-}
-type ProductCardCategory = {
+
+export type ProductCardCategory = {
   id: number;
   name: string;
 };
 
-type ProductCardImage = {
+export type ProductCardImage = {
   contentType?: string;
   id?: number;
   name?: string;
@@ -50,7 +57,7 @@ type ProductCardSeller = {
   requisites: {
     account: string;
     id: number;
-  };
+  } | null;
 };
 
 export type ProductCardVendor = {
