@@ -7,10 +7,12 @@ import { ICartItem } from '../../components/ProductListCart/ProductListTypes';
 export const useLoadCart = () => {
   const dispatch = useAppDispatch();
   const userId = localStorage.getItem('userId');
+  const userRole = localStorage.getItem('role');
+
   const userStoreId = useAppSelector(store => store.user.user.id);
 
   const basketInfo = useBuyerBasketInfoQuery(undefined, {
-    skip: !userId && !userStoreId,
+    skip: (!userId && !userStoreId) || userRole !== 'BUYER',
   });
 
   useEffect(() => {
@@ -51,6 +53,6 @@ export const convertCartItemsToRequest = (): {
       productId: card.productResponseDto.id,
       quantity: card.quantity,
     });
-  });  
+  });
   return cartRequest;
 };

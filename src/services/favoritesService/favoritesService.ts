@@ -12,9 +12,10 @@ export interface IFavorite {
 export const useLoadFavorites = () => {
   const userId = localStorage.getItem('userId');
   const userStoreId = useAppSelector(store => store.user.user.id);
+  const userRole = localStorage.getItem('role');
 
   const favoritesData = useBuyerFavoritesQuery(undefined, {
-    skip: !userId && !userStoreId,
+    skip: !userId && !userStoreId || userRole !== 'BUYER',
   });
 
   useEffect(() => {
