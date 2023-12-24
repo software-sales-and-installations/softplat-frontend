@@ -11,9 +11,9 @@
     justify-content: space-between;
     border-bottom: 2px solid $light-grey;
     &__logo{
-        flex-shrink: 0;
         width: 65px;
         height: 45px;
+        transform: translateY(4px);
     }
 }
 .btncontainer{
