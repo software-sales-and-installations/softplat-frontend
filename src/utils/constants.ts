@@ -81,15 +81,27 @@ export const VALIDATION_SETTINGS = {
     },
   },
   name: {
-    pattern: /^[a-zа-яё\s]+$/iu,
+    pattern: /^[a-zа-яё0-9\s]+$/iu,
     minLength: 2,
-    maxLength: 20,
+    maxLength: 100,
     messages: {
       tooShort: 'Слишком короткое имя/название',
       tooLong: 'Слишком длинное имя/название',
       invalid: 'Только кириллица, латиница или дефис',
       noName: 'Необходимо ввести имя/название',
       sameAsNow: 'Введите новое имя'
+    },
+  },
+  address: {
+    pattern: /^[a-zа-яё0-9\s]+$/iu,
+    minLength: 5,
+    maxLength: 500,
+    messages: {
+      tooShort: 'Слишком короткий адрес',
+      tooLong: 'Слишком длинный адрес',
+      invalid: 'Только кириллица, латиница, цифры или дефис',
+      noName: 'Необходимо ввести фдрес',
+      sameAsNow: 'Введите новый адрес'
     },
   },
   companyname: {
@@ -183,7 +195,7 @@ export const VALIDATION_SETTINGS = {
       noName: 'Необходимо ввести имя',
     },
   },
-  INN: {
+  inn: {
     pattern: /^\d+$/,
     minLength: 10,
     maxLength: 12,
@@ -193,6 +205,17 @@ export const VALIDATION_SETTINGS = {
       invalid: 'Необходимо вводить только цифры',
       noINN: 'Необходимо ввести ИНН',
     },
+  },
+  kpp: {
+    pattern: /^\d+$/,
+    minLength: 10,
+    maxLength: 10,
+    messages: {
+      tooShort: 'Введите еще цифры',
+      tooLong: 'Слишком длинный КПП',
+      invalid: 'Необходимо вводить только цифры',
+      noKPP: 'Необходимо ввести ИНН',
+    }
   },
   bik: {
     pattern: /^\d+$/,
@@ -208,7 +231,7 @@ export const VALIDATION_SETTINGS = {
   },
   ogrnip: {
     pattern: /^\d+$/,
-    minLength: 15,
+    minLength: 13,
     maxLength: 15,
     messages: {
       tooShort: 'Введите еще цифры',
@@ -295,24 +318,43 @@ export const EMAIL_VALIDATION_CONFIG = {
     message: VALIDATION_SETTINGS.email.messages.tooShort,
   },
 };
+export const KPP_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.kpp.messages.noKPP,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.kpp.pattern,
+    message: VALIDATION_SETTINGS.kpp.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.kpp.maxLength,
+    message: VALIDATION_SETTINGS.kpp.messages.tooLong,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.kpp.minLength,
+    message: VALIDATION_SETTINGS.kpp.messages.tooShort,
+  },
+};
 export const INN_VALIDATION_CONFIG = {
   required: {
     value: true,
-    message: VALIDATION_SETTINGS.INN.messages.noINN,
+    message: VALIDATION_SETTINGS.inn.messages.noINN,
   },
   pattern: {
-    value: VALIDATION_SETTINGS.INN.pattern,
-    message: VALIDATION_SETTINGS.INN.messages.invalid,
+    value: VALIDATION_SETTINGS.inn.pattern,
+    message: VALIDATION_SETTINGS.inn.messages.invalid,
   },
   maxLength: {
-    value: VALIDATION_SETTINGS.INN.maxLength,
-    message: VALIDATION_SETTINGS.INN.messages.tooLong,
+    value: VALIDATION_SETTINGS.inn.maxLength,
+    message: VALIDATION_SETTINGS.inn.messages.tooLong,
   },
   minLength: {
-    value: VALIDATION_SETTINGS.INN.minLength,
-    message: VALIDATION_SETTINGS.INN.messages.tooShort,
+    value: VALIDATION_SETTINGS.inn.minLength,
+    message: VALIDATION_SETTINGS.inn.messages.tooShort,
   },
-};export const PERSONALEMAIL_VALIDATION_CONFIG = {
+}
+export const PERSONALEMAIL_VALIDATION_CONFIG = {
   pattern: {
     value: VALIDATION_SETTINGS.email.pattern,
     message: VALIDATION_SETTINGS.email.messages.invalid,
@@ -362,6 +404,24 @@ export const NAME_VALIDATION_CONFIG = {
   maxLength: {
     value: VALIDATION_SETTINGS.name.maxLength,
     message: VALIDATION_SETTINGS.name.messages.tooLong,
+  },
+};
+export const ADDRESS_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.address.messages.noName,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.address.pattern,
+    message: VALIDATION_SETTINGS.address.messages.invalid,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.address.minLength,
+    message: VALIDATION_SETTINGS.address.messages.tooShort,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.address.maxLength,
+    message: VALIDATION_SETTINGS.address.messages.tooLong,
   },
 };
 export const PERSONALNAME_VALIDATION_CONFIG = {
@@ -729,6 +789,14 @@ export const SELECT_COMPLAINT_OPTIONS: { label: string; value: string }[] = [
   { value: 'SOFTWARE_NOT_WORKING', label: 'ПО не работает' },
 
 ];
+export const ORGFORM_OPTIONS: { label: string; value: string }[] = [
+  { value: 'IP', label: 'ИП' },
+  { value: 'NAO', label: 'НАО' },
+  { value: 'OOO', label: 'ООО' },
+  { value: 'OAO', label: 'ОАО' },
+  { value: 'PAO', label: 'ПАО' },
+  { value: 'ZAO', label: 'ЗАО' },
+]
 
 export const PRODUCT_ITEMS = {
   products: [
@@ -998,7 +1066,7 @@ export const sellerMenuItems = [
   },
   {
     id: 8,
-    name: 'Банковские реквизиты',
+    name: 'Реквизиты',
     link: 'bank-details',
   },
   {

@@ -39,7 +39,7 @@ export const Header: FC = () => {
   }
   return (
     <header className={styles.header}>
-      <Link to="/catalog" >
+      <Link className={styles.header__logoLink} to="/catalog" >
         <img src={logo} alt="Логотип" className={styles.header__logo} />
       </Link>
       <HeaderNavbar />

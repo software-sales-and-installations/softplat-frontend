@@ -29,8 +29,11 @@ type Product = Omit<cardPurchasesProps, 'data'>;
   const [userId, setUserId] = useState(localStorage.getItem('userId'));
   const [count, setCount] = useState(2)
   const {data: reviews , isLoading, error} = useProductCommentsQuery({productId: id, minId: '0', pageSize: count.toString()});
-  const ratingArray = reviews?.comments?.map(item => item.rating) || [0];
-  const totalRating = ratingArray?.length !== 0 ? (ratingArray.reduce((sum, number) => Number(sum) + Number(number)) || 0 / ratingArray?.length) : 0;
+  const ratingArray = reviews?.comments?.map(item => Number(item.rating)) || [0];
+  const totalRating = ratingArray?.length !== 0 ? (((ratingArray.reduce((sum, number) => Number(sum) + Number(number)) || 0) / ratingArray?.length)) : 0;
+  console.log (ratingArray)
+    console.log(ratingArray.length)
+    console.log(totalRating)
 
   const { data: purchaseItems} = useOrderAllQuery(
     localStorage.getItem('userId'),
@@ -91,7 +94,7 @@ type Product = Omit<cardPurchasesProps, 'data'>;
           <ReviewOneCard key={'review' + review.id} author={review.author.name} text={review.text} rating={review.rating}/>
         ))
       )}
-      { reviews?.comments.length! >= 2 && count <= reviews?.totalComments! && <Button onClick={handleMoreClick} buttonType='link' extClassName={styles.reviews__more}>Все отзывы</Button>}
+      { reviews?.comments.length! > 2 && count <= reviews?.totalComments! && <Button onClick={handleMoreClick} buttonType='link' extClassName={styles.reviews__more}>Все отзывы</Button>}
     </section>
 </>
 );

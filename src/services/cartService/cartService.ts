@@ -14,10 +14,12 @@ export const useLoadCart = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const userId = localStorage.getItem('userId');
+  const userRole = localStorage.getItem('role');
+
   const userStoreId = useAppSelector(store => store.user.user.id);
 
   const {data: basketInfo, error: basketError} = useBuyerBasketInfoQuery(undefined, {
-    skip: !userId && !userStoreId,
+    skip: (!userId && !userStoreId) || userRole !== 'BUYER',
   });
 
   const [ authLogout] = useAuthLogoutMutation();
@@ -26,14 +28,12 @@ export const useLoadCart = () => {
     // @ts-ignore
     authLogout()
       .unwrap()
-      .then((userData: any) => {
+      .then(() => {
         dispatch(popupState(false));
         dispatch(signOut());
 
         dispatch(clearFavorites());
         dispatch(clearCart());
-
-        console.log(userData);
       })
       .catch((error: any) => {
         console.log(error);
@@ -46,15 +46,12 @@ export const useLoadCart = () => {
   };
 
   // @ts-ignore
-  if (basketError?.originalStatus === 401) {handleSubmitLogout()}
+  if (basketError?.originalStatus === 401 && userRole === 'BUYER') {handleSubmitLogout()}
 
 
   useEffect(() => {
     if (basketInfo?.data) {
       basketInfo.refetch();
-    // } else if (basketError?.originalStatus === 401) {
-    //   console.log(basketError)
-    //   handleSubmitLogout()
     }
   }, [userStoreId, basketInfo?.data]);
 

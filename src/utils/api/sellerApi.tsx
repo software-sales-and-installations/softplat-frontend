@@ -31,10 +31,11 @@ export const sellerApi = createApi({
     //   "name": "string",
     //   "phone": "string"
     // }
-    sellerChangeData: build.mutation({
-      query: () => ({
+        sellerChangeData: build.mutation( {
+      query: (body) => ({
         url: '/seller/',
         method: 'PATCH',
+        body
       }),
     }),
     // Удаление изображения профиля продавца админом
@@ -108,6 +109,13 @@ export const sellerApi = createApi({
         }status=${status}`,
       }),
     }),
+    sellerAddBank: build.mutation({
+      query: (body) => ({
+        url: '/seller/bank/',
+        method: 'POST',
+        body
+      })
+    }),
   }),
 });
 
@@ -122,4 +130,5 @@ export const {
   useSellerChangeBankMutation,
   useSellerGetBankQuery,
   useSellerProductListQuery,
+  useSellerAddBankMutation
 } = sellerApi;

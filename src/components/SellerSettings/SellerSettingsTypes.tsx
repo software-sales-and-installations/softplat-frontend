@@ -7,4 +7,5 @@ export interface ISellerSettings{
     shopname?: string;
     email?: string;
     address?: string;
+    name?: string;
 }

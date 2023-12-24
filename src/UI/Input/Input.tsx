@@ -51,7 +51,7 @@ export const Input: FC<IInput> = ({
 										validation.onChange(e)
 								  }
 						}
-						className={classNames(styles.input__field, error? styles.input__field_type_error: '', inputType==='INN'? styles.input__field_type_INN: '', inputType==='phone'? styles.input__field_type_phone: '')}
+						className={classNames(styles.input__field, error? styles.input__field_type_error: '', inputType==='phone'? styles.input__field_type_phone: '', readOnly ? styles.input__field_disabled : '')}
 						type={inputTextType}
 						name={inputType}
 						id={inputType}

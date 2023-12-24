@@ -9,11 +9,18 @@ export enum SelectorType {
   VENDOR = 'vendor',
   CATALOG = 'catalog',
   COMPLAINT = 'complaint',
+  ORGFORM = 'orgForm'
 }
 
 export interface IDropDownProps {
   options: IOption[];
   type?: SelectorType;
-  isMultiOption?: boolean
   id?: string;
+  isMultiOption?: boolean;
+  labelText?: string;
+  onChange?: any;
+  value?: any;
+  error?: string;
+  typeError?: string;
+  formSize?: boolean;
 }
