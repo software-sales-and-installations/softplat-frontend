@@ -18,6 +18,7 @@ import { ProtectedRouteForAdmin, ProtectedRouteForAdminAuth
   // ProtectedRouteForBuyer, ProtectedRouteForSeller
 } from './components/ProtectedRoute/ProtectedRoute.tsx';
 import NotFound from './pages/NotFound/NotFound.tsx';
+import { SellerPage } from './pages/SellerPage/SellerPage.tsx';
 
 function App() {
   return (
@@ -85,6 +86,7 @@ function App() {
                 <Navigate to="/" />
               </ProtectedRouteForAdminAuth>
             } />
+            <Route path='/seller-page/:id' element={<SellerPage/>}/>
             <Route path='*' element={<NotFound />} />
         </Routes>
       </MainWrapper>
