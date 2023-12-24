@@ -81,7 +81,7 @@ const ReviewPopup = () => {
         height='55px'
         buttonText='Отправить отзыв'
         onSubmit={handleSubmit(handleSubmitReview)}
-        disabled={!isValid}
+        disabled={!isValid || (isChecked && complaintReason === '')}
       >
         <Stars register={register}/>
         <InputWrapper inputId='review' labelText='Комментарий к оценке' errorText={errors?.review?.message?.toString()}>
@@ -94,7 +94,7 @@ const ReviewPopup = () => {
             cols={35}
             placeholder='От 2 до 600 символов'
             register={register}
-            options={`required: "Заполните это поле"`}
+            options={"Заполните это поле"}
           />
         </InputWrapper>
         <Checkbox
@@ -105,7 +105,7 @@ const ReviewPopup = () => {
         {isChecked &&
           <InputWrapper labelText='Причина жалобы' inputId='complaint'>
           <DropDown
-          id='complaint'
+            id='complaint'
             isMultiOption={false}
             type={SelectorType.COMPLAINT}
             options={SELECT_COMPLAINT_OPTIONS}

@@ -22,7 +22,7 @@ export const Textarea = ({
       cols={cols}
       className={[styles.textarea, isValid && styles.textarea_invalid, extClassName].join(' ')}
       style={{width: `${width}`, height: `${height}`}}
-      {...register('review', {options})}
+      {...register('review', { required: options })}
       {...props}>
     </textarea>
   );
