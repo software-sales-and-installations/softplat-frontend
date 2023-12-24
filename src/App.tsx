@@ -18,6 +18,7 @@ import { ProtectedRouteForAdmin, ProtectedRouteForAdminAuth
   // ProtectedRouteForBuyer, ProtectedRouteForSeller
 } from './components/ProtectedRoute/ProtectedRoute.tsx';
 import NotFound from './pages/NotFound/NotFound.tsx';
+import { ModerationPage } from './pages/ModerationPage/ModerationPage.tsx';
 
 function App() {
   return (
@@ -76,6 +77,13 @@ function App() {
             element={
               <ProtectedRouteForAdmin>
                 <Navigate to="/admin/published" />
+              </ProtectedRouteForAdmin>
+            } />
+          <Route
+            path="/admin/on-moderation/:id"
+            element={
+              <ProtectedRouteForAdmin>
+                <ModerationPage/>
               </ProtectedRouteForAdmin>
             } />
             <Route

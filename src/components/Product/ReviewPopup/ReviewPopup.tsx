@@ -25,7 +25,6 @@ const ReviewPopup = () => {
   const name = useAppSelector((state: RootState) => state.product.setName);
   const id = useAppSelector((state: RootState) => state.product.setId);
   const complaintReason = useAppSelector(state => state.dropdown.complaintOption.value);
-  console.log(complaintReason)
   const {
     register,
     handleSubmit,
@@ -87,13 +86,16 @@ const ReviewPopup = () => {
         <Stars register={register}/>
         <InputWrapper inputId='review' labelText='Комментарий к оценке' errorText={errors?.review?.message?.toString()}>
           <Textarea
+            id='review'
             extClassName={styles.reviewPopup__textarea}
             minLength={2}
             maxLength={600}
             rows={3}
             cols={35}
             placeholder='От 2 до 600 символов'
-            register={register} />
+            register={register}
+            options={`required: "Заполните это поле"`}
+          />
         </InputWrapper>
         <Checkbox
           extClassName={styles.reviewPopup__checkbox}
