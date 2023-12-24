@@ -46,6 +46,7 @@ export const Input: FC<IInput> = ({
 
 					</div>
 					<input
+						autoComplete='off'
 						{...validation}
 						onChange={ onChange ? onChange: (e) => {
 										validation.onChange(e)
