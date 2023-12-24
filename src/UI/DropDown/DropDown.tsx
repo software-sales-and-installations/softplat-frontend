@@ -8,7 +8,7 @@ import { changeCountryOption, changeOption, changeVendorOption, changeComplaintO
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 
-const DropDown: FC<IDropDowmProps> = ({
+const DropDown: FC<IDropDownProps> = ({
   id,
   options,
   type,
