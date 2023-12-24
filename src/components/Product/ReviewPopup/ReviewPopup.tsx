@@ -14,6 +14,9 @@ import { popupState } from '../../../UI/Popup/PopupSlice.tsx';
 import { RootState, useAppDispatch, useAppSelector } from '../../../services/redux/store.ts';
 
 import styles from './ReviewPopup.module.scss'
+import DropDown from '../../../UI/DropDown/DropDown.tsx';
+import { SelectorType } from '../../../UI/DropDown/DropDownTypes.tsx';
+import { SELECT_COMPLAINT_OPTIONS } from '../../../utils/constants.ts';
 
 const ReviewPopup = () => {
   const [errorText, setErrorText] = useState('')
@@ -21,7 +24,8 @@ const ReviewPopup = () => {
   const dispatch = useAppDispatch();
   const name = useAppSelector((state: RootState) => state.product.setName);
   const id = useAppSelector((state: RootState) => state.product.setId);
-
+  const complaintReason = useAppSelector(state => state.dropdown.complaintOption.value);
+  console.log(complaintReason)
   const {
     register,
     handleSubmit,
@@ -40,7 +44,7 @@ const ReviewPopup = () => {
   }
   const handleSubmitReview = () => {
     if (isChecked) {
-          userComplaint({productId: id, reason: 'PIRATED_SOFTWARE'}).unwrap()
+          userComplaint({productId: id, reason: complaintReason}).unwrap()
             .then(() => {
               dispatch(popupState(false));
               reset()
@@ -96,7 +100,17 @@ const ReviewPopup = () => {
           onCheck={handleChecked}
           label='Пожаловаться на товар'
         />
-      </Form>
+        {isChecked &&
+          <InputWrapper labelText='Причина жалобы' inputId='complaint'>
+          <DropDown
+          id='complaint'
+            isMultiOption={false}
+            type={SelectorType.COMPLAINT}
+            options={SELECT_COMPLAINT_OPTIONS}
+          />
+          </InputWrapper>
+        }
+        </Form>
     </div>
   );
 };

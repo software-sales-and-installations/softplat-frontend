@@ -2,17 +2,14 @@ import { FC } from 'react';
 import Select from 'react-select';
 
 import './DropDown.scss';
-import { IDropDowmProps, SelectorType } from './DropDownTypes';
+import { IDropDownProps, SelectorType } from './DropDownTypes';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
-import {
-  changeCountryOption,
-  changeOption,
-  changeVendorOption,
-} from './DropDownSlice';
+import { changeCountryOption, changeOption, changeVendorOption, changeComplaintOption } from './DropDownSlice';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 
-const DropDown: FC<IDropDowmProps> = ({
+const DropDown: FC<IDropDownProps> = ({
+  id,
   options,
   type,
   isMultiOption,
@@ -29,6 +26,7 @@ const DropDown: FC<IDropDowmProps> = ({
   const countrySelect = type === SelectorType.COUNTRY;
   const vendorSelect = type === SelectorType.VENDOR;
   const catalogSelect = type === SelectorType.CATALOG;
+  const complaintSelect = type === SelectorType.COMPLAINT;
   const orgFormSelect = type === SelectorType.ORGFORM;
   const currentBase = useAppSelector(state => state.dropdown.option);
   // const orgFormOption = useAppSelector(state => state.dropdown.orgFormOption)
@@ -42,6 +40,8 @@ const DropDown: FC<IDropDowmProps> = ({
       dispatch(changeVendorOption(e));
     } else if (catalogSelect) {
       navigate(`/catalog/${e.value}`, { replace: true });
+    } else if (complaintSelect) {
+      dispatch(changeComplaintOption(e));
     } else if (orgFormSelect) {
       onChange(e);
     }
@@ -69,9 +69,11 @@ const DropDown: FC<IDropDowmProps> = ({
           { country: isMultiOption && countrySelect },
           { vendor: isMultiOption && vendorSelect },
           { catalog: catalogSelect },
-          { form: formSize},
+          { complaint: complaintSelect },
+           { form: formSize},
           'custom-select',
         )}
+        id={id}
         options={options}
         isMulti={isMultiOption ? true : false}
         hideSelectedOptions={false}
