@@ -26,7 +26,7 @@ export const ProductPage: FC = () => {
         <Breadcrumbs vendor={cardData.vendor!} />
       </div>
       <ProductInfo product={product} id={product?.image?.id.toString()}>
-        <ProductButtons error={productError} id={product?.id.toString()} instPrice={product?.installationPrice}/>
+        {product && <ProductButtons card={product} error={productError} id={product?.id.toString()} instPrice={product?.installationPrice}/>}
       </ProductInfo>
       {product?.id && <Reviews id={product?.id.toString()} name={product?.name}/>}
       {product?.id && <Similar id={product?.id.toString()}/>}
