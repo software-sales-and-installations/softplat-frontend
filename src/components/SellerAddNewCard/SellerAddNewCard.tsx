@@ -13,6 +13,7 @@ import { useProductCreateMutation, useProductSendToModerationMutation, useProduc
 import { usePublicProductQuery } from '../../utils/api/publicProductApi';
 import { useCategoryListQuery } from '../../utils/api/categoryApi';
 import { useParams } from 'react-router-dom';
+import { useProductSubmitImageMutation } from '../../utils/api/submitImageApi';
 
 export const SellerAddNewCard: FC = () =>{
   const [productCreate, {
@@ -30,11 +31,11 @@ export const SellerAddNewCard: FC = () =>{
 
   const id = useParams();
   const [variantSoftware, setVariantSoftware] = useState ('Загрузка ПО')
-  const { data: product, isError: productError} = usePublicProductQuery(id.id);
+  const { data: product} = usePublicProductQuery(id.id);
   const [productDataCard, setProductDataCard] = useState(product)
-  const [productSendToModeration, {
-    //     // isFetching, isLoading, isError
-      }] = useProductSendToModerationMutation();
+  const [productSendToModeration, {}] = useProductSendToModerationMutation();
+    const [productAddImage, {}] = useProductSubmitImageMutation();
+
   useEffect(()=>{
     setProductDataCard(product)
   }, [product])
@@ -62,7 +63,8 @@ export const SellerAddNewCard: FC = () =>{
     price: getValues().price, 
     quantity: getValues().quantity, 
     vendor: getValues().vendor, 
-    version: getValues().version
+    version: getValues().version,
+    logo: getValues().logo
   }
   useEffect(()=>{
     setcategoryListData(categoryList)
@@ -78,20 +80,32 @@ export const SellerAddNewCard: FC = () =>{
     if(!id.id){
       productCreate(productData).unwrap()
       .then((res) => {
-        console.log(res)
-        if(subminBtnName==='moderation'){
-          console.log(res.id)
-          productSendToModeration({productId: res.id}).unwrap()
+          const newData = new FormData();
+          newData.append('image', productData.logo[0]);
+          productAddImage({productId: res.id, body: newData}).unwrap()
             .then((res) => {
-              console.log(res)
-              setErrorText('Данные сохранены')
+            console.log(res)
             })
             .catch((error) => {
-              console.log(error);
-              setErrorText('При отправке товара на модерацию произошла ошибка, товар сохранен во вкладке Черновики')
-            })
-            .finally()
-        }
+            console.log(error);
+            setErrorText('При загрузке картинки произошла ошибка')
+          })
+            .finally(()=>{
+              if(subminBtnName==='moderation'){
+              console.log(res.id)
+              productSendToModeration({productId: res.id}).unwrap()
+                .then((res) => {
+                  console.log(res)
+                  setErrorText('Данные сохранены')
+                })
+                .catch((error) => {
+                  console.log(error);
+                  setErrorText('При отправке товара на модерацию произошла ошибка, товар сохранен во вкладке Черновики')
+                })
+                .finally()
+          }
+        })
+        
       })
       .catch((error) => {
         setAddCardError(error.status)
@@ -102,19 +116,30 @@ export const SellerAddNewCard: FC = () =>{
     else {
       productUpdate({productId: id.id, body: getValues()})
       .then((res)=>{
-        if(subminBtnName==='moderation'){
-          productSendToModeration({productId: id.id}).unwrap()
-            .then((res) => {
-              console.log(res)
-              setErrorText('Данные сохранены')
-            })
-            .catch((error) => {
-              console.log(error);
-              setErrorText('При отправке товара на модерацию произошла ошибка')
-            })
-            .finally()
-        }
-        console.log(res)
+        const newData = new FormData();
+        newData.append('image', productData.logo[0]);
+        productAddImage({productId: id.id, body: newData}).unwrap()
+          .then((res) => {
+          console.log(res)
+          })
+          .catch((error) => {
+          console.log(error);
+          setErrorText('При загрузке картинки произошла ошибка')
+        })
+        .finally(()=>{
+          if(subminBtnName==='moderation'){
+            productSendToModeration({productId: id.id}).unwrap()
+              .then((res) => {
+                console.log(res)
+                setErrorText('Данные сохранены')
+              })
+              .catch((error) => {
+                console.log(error);
+                setErrorText('При отправке товара на модерацию произошла ошибка')
+              })
+              .finally()
+          }
+        })
       })
       .catch((error)=>{
         console.log(error)

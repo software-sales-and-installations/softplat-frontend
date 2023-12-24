@@ -13,9 +13,6 @@ export const userProductApi = createApi({
         headers.set('authorization', `${token}`);
         headers.set('X-Sharer-User-Id', `${userId}`);
       }
-      if (userId) {
-        headers.set('X-Sharer-User-Id', `${userId}`)
-      }
       return headers;
     },
   }),

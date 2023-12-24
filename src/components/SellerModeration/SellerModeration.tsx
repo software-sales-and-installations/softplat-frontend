@@ -36,7 +36,7 @@ useEffect(()=>{
             {publishListData?.products.map(
               (product: {
                 id: number;
-                image: string;
+                image: any;
                 name: string;
                 vendor: {
                   name: string;
