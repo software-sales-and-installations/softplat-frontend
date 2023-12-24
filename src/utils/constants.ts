@@ -1060,7 +1060,7 @@ export const sellerMenuItems = [
   },
   {
     id: 8,
-    name: 'Банковские реквизиты',
+    name: 'Реквизиты',
     link: 'bank-details',
   },
   {
