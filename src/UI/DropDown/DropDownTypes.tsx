@@ -8,17 +8,19 @@ export enum SelectorType {
   COUNTRY = 'country',
   VENDOR = 'vendor',
   CATALOG = 'catalog',
+  COMPLAINT = 'complaint',
   ORGFORM = 'orgForm'
 }
 
-export interface IDropDowmProps {
+export interface IDropDownProps {
   options: IOption[];
   type?: SelectorType;
+  id?: string;
   isMultiOption?: boolean;
   labelText?: string;
   onChange?: any;
   value?: any;
   error?: string;
   typeError?: string;
-  formSize?: boolean
+  formSize?: boolean;
 }

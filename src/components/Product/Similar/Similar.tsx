@@ -5,7 +5,7 @@ import Preloader from '../../Preloader/Preloader.tsx';
 import { IProductCard } from '../../ProductCard/ProductCardTypes.tsx';
 
 interface ISimilarProps {
-  id: string | undefined;
+  id: string;
 }
 
 function Similar({id = '0'}: ISimilarProps) {
@@ -14,7 +14,7 @@ function Similar({id = '0'}: ISimilarProps) {
 
   return (
     <section>
-    {similarProds?.products?.length ? (
+    {(similarProds && (similarProds?.products?.filter(prod => prod.quantity !== 0).length > 0)) ? (
       <div className={styles.similar}>
       <h3 className={styles.similar__header}>Похожие</h3>
       <div className={styles.similar__cardWrapper}>
@@ -23,7 +23,7 @@ function Similar({id = '0'}: ISimilarProps) {
       ) : error ? (
         <p>Произошла ошибка</p>
       ) : (
-      similarProds?.products?.map((prod: IProductCard) => (
+      similarProds?.products?.filter(prod => prod.quantity !== 0).map((prod: IProductCard) => (
       <ProductCard key={prod.id} card={prod}></ProductCard>))
       )}
       </div>
