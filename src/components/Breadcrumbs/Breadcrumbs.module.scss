@@ -13,8 +13,10 @@
     margin-right: 9px;
 
     &:last-child {
-      a {
-        cursor: text;
+      a,
+      p {
+        pointer-events: none;
+        cursor: default;
       }
 
       &:after {

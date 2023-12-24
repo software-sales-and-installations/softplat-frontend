@@ -1,9 +1,16 @@
 import { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import style from './Breadcrumbs.module.scss';
-import { CATALOGUE_NAMES, TITLES_FOR_BREADCRUMBS } from '../../utils/constants';
+import {
+  CATALOGUE_NAMES,
+  TITLES_FOR_BREADCRUMBS,
+  adminMenuItems,
+  personalMenuItems,
+  sellerMenuItems,
+} from '../../utils/constants';
 import { IBreadcrumbsProps } from './BreadcrumbsTypes';
-const Breadcrumbs: FC<IBreadcrumbsProps> = ({ pageName, vendor }) => {
+
+const Breadcrumbs: FC<IBreadcrumbsProps> = ({ pageName, product }) => {
   const location = useLocation();
   const isPageCart = location.pathname === '/cart';
   const isPageProduct = location.pathname.includes('/product/');
@@ -15,16 +22,14 @@ const Breadcrumbs: FC<IBreadcrumbsProps> = ({ pageName, vendor }) => {
       localStorage.removeItem('pageName');
     }
 
-    if (vendor) {
-      localStorage.setItem('productVendor', JSON.stringify(vendor));
+    if (product) {
+      localStorage.setItem('product', JSON.stringify(product));
     } else {
-      localStorage.removeItem('productVendor');
+      localStorage.removeItem('product');
     }
   }
 
   let currentLink = '';
-
-  // console.log(localStorage.getItem('pageName'));
 
   const crumbs =
     localStorage.getItem('urlPath') &&
@@ -55,6 +60,44 @@ const Breadcrumbs: FC<IBreadcrumbsProps> = ({ pageName, vendor }) => {
           );
         }
 
+        if (
+          isPageProduct &&
+          localStorage.getItem('urlPath')!.includes('producers/') &&
+          localStorage.getItem('product')
+        ) {
+          return (
+            <div className={style.breadcrumbs__crumb} key={crumb}>
+              <Link
+                to={`/producers/${
+                  JSON.parse(localStorage.getItem('product')!).vendor.id
+                }`}
+              >
+                {JSON.parse(localStorage.getItem('product')!).vendor.name}
+              </Link>
+            </div>
+          );
+        }
+
+        if (
+          personalMenuItems.find(item => item.link === crumb) ||
+          sellerMenuItems.find(item => item.link === crumb) ||
+          adminMenuItems.find(item => item.link === crumb)
+        ) {
+          return (
+            <div className={style.breadcrumbs__crumb} key={crumb}>
+              <Link to={currentLink}>
+                {
+                  (
+                    personalMenuItems.find(item => item.link === crumb) ||
+                    sellerMenuItems.find(item => item.link === crumb) ||
+                    adminMenuItems.find(item => item.link === crumb)
+                  )?.name
+                }
+              </Link>
+            </div>
+          );
+        }
+
         return;
       });
 
@@ -76,14 +119,25 @@ const Breadcrumbs: FC<IBreadcrumbsProps> = ({ pageName, vendor }) => {
               <Link to={currentLink}>{localStorage.getItem('pageName')}</Link>
             </div>
           )}
-          {localStorage.getItem('productVendor') && (
+          {localStorage.getItem('urlPath')!.includes('producers/') && (
             <div className={style.breadcrumbs__crumb}>
               <Link
                 to={`/producers/${
-                  JSON.parse(localStorage.getItem('productVendor')!).id
+                  JSON.parse(localStorage.getItem('product')!).vendor.id
                 }`}
               >
-                {JSON.parse(localStorage.getItem('productVendor')!).name}
+                {JSON.parse(localStorage.getItem('product')!).vendor.name}
+              </Link>
+            </div>
+          )}
+          {localStorage.getItem('product') && (
+            <div className={style.breadcrumbs__crumb}>
+              <Link
+                to={`/product/${
+                  JSON.parse(localStorage.getItem('product')!).id
+                }`}
+              >
+                {JSON.parse(localStorage.getItem('product')!).name}
               </Link>
             </div>
           )}
@@ -92,9 +146,9 @@ const Breadcrumbs: FC<IBreadcrumbsProps> = ({ pageName, vendor }) => {
           </div>
         </>
       )}
-      {isPageProduct && vendor && (
+      {isPageProduct && product && (
         <div className={style.breadcrumbs__crumb}>
-          <p>{vendor.name}</p>
+          <p>{product.name}</p>
         </div>
       )}
     </div>

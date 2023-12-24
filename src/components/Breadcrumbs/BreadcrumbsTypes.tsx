@@ -1,6 +1,6 @@
-import { ProductCardVendor } from '../ProductCard/ProductCardTypes';
+import { IProductCard } from '../ProductCard/ProductCardTypes';
 
 export interface IBreadcrumbsProps {
   pageName?: string;
-  vendor?: ProductCardVendor;
+  product?: IProductCard;
 }
