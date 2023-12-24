@@ -1,6 +1,8 @@
 export interface ISellerCardProps {
   mode?: 'inOrder';
-  image: string;
+  image?: {
+    id: number;
+  };
   name: string;
   vendor: {
     name: string;
@@ -8,4 +10,5 @@ export interface ISellerCardProps {
   productionTime: string;
   trash: boolean;
   count?: number;
+  id?: number;
 }

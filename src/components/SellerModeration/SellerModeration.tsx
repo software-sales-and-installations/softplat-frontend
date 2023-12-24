@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './SellerModeration.module.scss';
 import EmptyState from '../EmptyState/EmptyState';
 import SellerTable from '../SellerTable/SellerTable';
 import SellerCard from '../SellerCard/SellerCard';
+import { useProductSellerListQuery } from '../../utils/api/userProductApi';
+import { useState } from 'react';
 
 const SellerModeration: React.FC = () => {
-  const shippedList = JSON.parse(
-    localStorage.getItem('sellerShippedList')!,
-  ).products;
+  const { data: publishedList, isSuccess: isPublishedListSuccess } =
+  useProductSellerListQuery(
+      {
+        status: 'SHIPPED',
+      },
+      { refetchOnMountOrArgChange: true },
+    );
+const [publishListData, setPublishListData] = useState(publishedList)
+useEffect(()=>{
+  setPublishListData(publishedList)
+  console.log(publishedList)
+},[publishedList])
 
   return (
     <section className={styles.moderation}>
-      {shippedList.length === 0 ? (
+      {publishListData?.products.length === 0 ? (
         <EmptyState
           navigateTo="/seller/add-card"
           buttonText="Добавить карточку"
@@ -22,10 +33,10 @@ const SellerModeration: React.FC = () => {
         <>
           <SellerTable />
           <ul className={styles.moderation__list}>
-            {shippedList.map(
+            {publishListData?.products.map(
               (product: {
                 id: number;
-                image: string;
+                image: any;
                 name: string;
                 vendor: {
                   name: string;
