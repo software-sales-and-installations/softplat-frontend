@@ -50,7 +50,7 @@ export const Producers: FC = () => {
               >
                 <img
                   className={styles.container__img}
-                  src={vendor.image?.url}
+                  src={`https://api.softplat.ru/image/${vendor?.image?.id}`}
                   alt={vendor.name}
                 />
                 <h2 className={styles.container__title}>{vendor.name}</h2>
