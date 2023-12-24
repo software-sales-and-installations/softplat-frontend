@@ -10,7 +10,8 @@ type Product = Omit<cardPurchasesProps, 'data'>;
 const PersonalPurchases: React.FC = () => {
   const { data: purchaseItems, isSuccess } = useOrderAllQuery(
     localStorage.getItem('userId'),
-    { refetchOnMountOrArgChange: true },
+    { refetchOnMountOrArgChange: true ,
+     skip: localStorage.getItem('role') !== 'BUYER'}
   );
 
   return (
