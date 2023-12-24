@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { useOrderAllQuery } from '../../../utils/api/buyerOrderApi.tsx';
 import { cardPurchasesProps } from '../../CardPurchases/CardPurchases.tsx';
 import { productName, productId } from '../../../services/redux/slices/product/product.ts';
+import { setIsReview } from '../../../services/redux/slices/reviews/reviews.ts';
 
 interface IReviewProps {
   id: string | undefined;
@@ -60,6 +61,7 @@ type Product = Omit<cardPurchasesProps, 'data'>;
     dispatch(popupState(true));
     dispatch(productName(name || ''))
     dispatch(productId(id || ''))
+    dispatch(setIsReview(true));
   }
 
   const handleMoreClick = () => {

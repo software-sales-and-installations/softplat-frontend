@@ -7,11 +7,13 @@ export enum SelectorType {
   BASE = 'base',
   COUNTRY = 'country',
   VENDOR = 'vendor',
-  CATALOG = 'catalog'
+  CATALOG = 'catalog',
+  COMPLAINT = 'complaint',
 }
 
-export interface IDropDowmProps {
+export interface IDropDownProps {
   options: IOption[];
   type?: SelectorType;
   isMultiOption?: boolean
+  id?: string;
 }

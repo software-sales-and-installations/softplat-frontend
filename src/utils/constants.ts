@@ -452,7 +452,7 @@ export const CVV_VALIDATION_CONFIG = {
     value: VALIDATION_SETTINGS.cvv.maxLength,
     message: VALIDATION_SETTINGS.cvv.messages.tooLong,
   },
-  
+
 }
 export const CARDNAME_VALIDATION_CONFIG = {
   required: {
@@ -721,6 +721,13 @@ export const SELECT_COUNTRIES_OPTIONS: { label: string; value: string }[] = [
   { value: 'INDIA', label: 'Индия' },
   { value: 'UK', label: 'Великобритания' },
   { value: 'USA', label: 'США' },
+];
+
+export const SELECT_COMPLAINT_OPTIONS: { label: string; value: string }[] = [
+  { value: 'PIRATED_SOFTWARE', label: 'Пиратская копия' },
+  { value: 'SELLER_FRAUD', label: 'Мошенничество' },
+  { value: 'SOFTWARE_NOT_WORKING', label: 'ПО не работает' },
+
 ];
 
 export const PRODUCT_ITEMS = {

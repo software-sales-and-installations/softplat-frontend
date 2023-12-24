@@ -7,6 +7,10 @@ const initialState = {
   },
   countryOption: [],
   vendorOption: [],
+  complaintOption: {
+    value: '',
+    label: '',
+  },
 };
 
 const dropDownSlice = createSlice({
@@ -22,8 +26,11 @@ const dropDownSlice = createSlice({
     changeVendorOption: (state, action) => {
       state.vendorOption = action.payload
     },
+    changeComplaintOption: (state, action ) => {
+      state.complaintOption = action.payload;
+    }
   },
 });
 
-export const { changeOption, changeCountryOption, changeVendorOption } = dropDownSlice.actions;
+export const { changeOption, changeCountryOption, changeVendorOption, changeComplaintOption } = dropDownSlice.actions;
 export const dropDownReducer = dropDownSlice.reducer;

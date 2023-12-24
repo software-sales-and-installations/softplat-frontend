@@ -19,15 +19,16 @@ import { Button } from '../../../UIStorybook/Button/Button.tsx';
 import { Icons } from '../../../UIStorybook/Icons/Icons.tsx';
 
 import styles from './ProductButtons.module.scss'
+import { IProductCard } from '../../ProductCard/ProductCardTypes.tsx';
 
 interface IProductButtons {
   error: boolean;
   id: string | undefined;
   instPrice: number | undefined;
+  card: IProductCard;
 }
-const ProductButtons = ({error, id, instPrice}: IProductButtons) => {
+const ProductButtons = ({error, id, instPrice, card}: IProductButtons) => {
   const signout = useAppSelector((state: RootState) => state.signout.signout);
-  const [token, setToken] = useState(localStorage.getItem('token'));
   const [role, setRole] = useState(localStorage.getItem('role'));
   const [isInstallationSelected, setIsInstallationSelected] = useState(false);
   const user = useAppSelector(selectUser);
@@ -38,7 +39,6 @@ const ProductButtons = ({error, id, instPrice}: IProductButtons) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setToken(localStorage.getItem('token'));
     setRole(localStorage.getItem('role'));
   }, [signout, user]);
 
@@ -60,8 +60,8 @@ const ProductButtons = ({error, id, instPrice}: IProductButtons) => {
           <Checkbox onCheck={handleCheckboxChange} extClassName={styles.productInfo__checkbox} label={`Добавить установку ${instPrice} ₽`} />
       </div>
   <div className={styles.productInfo__buttons}>
-  <AddToCartButton id={id} isInstallationSelected={isInstallationSelected} type='big' />
-      {(role==='BUYER' || !token)?  <Button buttonType='link' onClick={handleToggleFavorite} disabled={error}>{isFavorite ? <Icons type='filledLike' size={35}/> :
+  <AddToCartButton card={card} id={id} isInstallationSelected={isInstallationSelected} type='big' />
+      {(role==='BUYER')?  <Button buttonType='link' onClick={handleToggleFavorite} disabled={error}>{isFavorite ? <Icons type='filledLike' size={35}/> :
             <Icons type='emptyLike' size={35}/>}</Button> : null}
   </div>
   </>
