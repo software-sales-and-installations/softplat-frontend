@@ -11,6 +11,7 @@ const SellerCard: React.FC<ISellerCardProps> = ({
   productionTime,
   trash,
   count,
+  id
 }) => {
   const [isHovered, setIsHovered] = React.useState(false);
 
@@ -29,7 +30,7 @@ const SellerCard: React.FC<ISellerCardProps> = ({
           count
         ) : (
           <img
-            src={image}
+            src={`https://api.softplat.ru/image/${image?.id}`}
             alt="Логотип продукта"
             className={styles.card__img}
           />
@@ -37,7 +38,7 @@ const SellerCard: React.FC<ISellerCardProps> = ({
       </div>
       <h2 className={styles.card__name}>{name ? name : '—'}</h2>
       <p className={styles.card__vendor}>{vendor.name ? vendor.name : '—'}</p>
-      <p className={styles.card__number}>123456789</p>
+      <p className={styles.card__number}>{id}</p>
       <p className={styles.card__date}>
         {productionTime
           ? productionTime.split(' ')[0].split('-').join('.')

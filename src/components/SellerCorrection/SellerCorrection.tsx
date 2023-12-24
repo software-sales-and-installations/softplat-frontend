@@ -3,16 +3,24 @@ import styles from './SellerCorrection.module.scss';
 import EmptyState from '../EmptyState/EmptyState';
 import SellerCard from '../SellerCard/SellerCard';
 import SellerTable from '../SellerTable/SellerTable';
+import { useSellerProductListQuery } from '../../utils/api/sellerApi';
+import { Link } from 'react-router-dom';
 
 const SellerCorrection: React.FC = () => {
-  const rejectedList = JSON.parse(
-    localStorage.getItem('sellerRejectedList')!,
-  ).products;
-  console.log(rejectedList);
+  const { data: rejectedList } =
+  useSellerProductListQuery(
+    {
+      status: 'REJECTED',
+    },
+    { refetchOnMountOrArgChange: true },
+  );
+  // const rejectedList = JSON.parse(
+  //   localStorage.getItem('sellerRejectedList')!,
+  // ).products;
 
   return (
     <section className={styles.correction}>
-      {rejectedList.length === 0 ? (
+      {rejectedList?.products.length === 0 ? (
         <EmptyState
           navigateTo="/seller/add-card"
           buttonText="Добавить карточку"
@@ -23,17 +31,19 @@ const SellerCorrection: React.FC = () => {
         <>
           <SellerTable />
           <ul className={styles.correction__list}>
-            {rejectedList.map(
+          {rejectedList?.products.map(
               (product: {
                 id: number;
-                image: string;
+                image: any;
                 name: string;
                 vendor: {
                   name: string;
                 };
                 productionTime: string;
               }) => (
-                <SellerCard key={product.id} {...product} trash={true} />
+                <Link key={product.id} className={styles.link} to ={`/product/${product.id}`}>
+                  <SellerCard key={product.id} {...product} trash={true} />
+                </Link>
               ),
             )}
           </ul>

@@ -3,15 +3,24 @@ import styles from './SellerModeration.module.scss';
 import EmptyState from '../EmptyState/EmptyState';
 import SellerTable from '../SellerTable/SellerTable';
 import SellerCard from '../SellerCard/SellerCard';
+import { useSellerProductListQuery } from '../../utils/api/sellerApi';
+import { Link } from 'react-router-dom';
 
 const SellerModeration: React.FC = () => {
-  const shippedList = JSON.parse(
-    localStorage.getItem('sellerShippedList')!,
-  ).products;
+  const { data: shippedList } =
+  useSellerProductListQuery(
+    {
+      status: 'SHIPPED',
+    },
+    { refetchOnMountOrArgChange: true },
+  );
+  // const shippedList = JSON.parse(
+  //   localStorage.getItem('sellerShippedList')!,
+  // ).products;
 
   return (
     <section className={styles.moderation}>
-      {shippedList.length === 0 ? (
+      {shippedList?.products.length === 0 ? (
         <EmptyState
           navigateTo="/seller/add-card"
           buttonText="Добавить карточку"
@@ -22,7 +31,7 @@ const SellerModeration: React.FC = () => {
         <>
           <SellerTable />
           <ul className={styles.moderation__list}>
-            {shippedList.map(
+            {shippedList?.products.map(
               (product: {
                 id: number;
                 image: string;
@@ -32,7 +41,9 @@ const SellerModeration: React.FC = () => {
                 };
                 productionTime: string;
               }) => (
-                <SellerCard key={product.id} {...product} trash={false} />
+                <Link key={product.id} className={styles.link} to ={`/product/${product.id}`}>
+                  <SellerCard key={product.id} {...product} trash={false} />
+                </Link>
               ),
             )}
           </ul>
