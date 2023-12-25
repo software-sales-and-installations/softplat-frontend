@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useComplaintListQuery } from '../../utils/api/complaintApi';
 import { IComplaint } from './AdminComplaintsType';
 import { INewComplaints} from './AdminComplaintsType';
+import { Link } from 'react-router-dom';
 
 export const AdminComplaintsTable: FC = () =>{
     const {data: complaintList=[]} = useComplaintListQuery({},{
@@ -60,7 +61,7 @@ export const AdminComplaintsTable: FC = () =>{
        {newItems.map((i: any)=>{
         return (
         <tr className={classNames(styles.line, styles.line_type_body)} key={i.id}>
-          <>
+          <Link className={classNames(styles.line, styles.line_type_body)} to={`/admin/appeal/${i.product.id}`}>
             <td className={classNames(styles.cellName, styles.cell, styles.cell_type_body)}>
                 <p className={styles.cell__text}>{i.product.name}</p>
             </td>
@@ -76,7 +77,7 @@ export const AdminComplaintsTable: FC = () =>{
             <td className={classNames(styles.cellQty, styles.cell, styles.cell_type_body)}>
                 <p className={styles.cell__text}>{i.qty}</p>
             </td>
-            </>
+            </Link>
         </tr>)
        })}
         </tbody>

@@ -11,4 +11,5 @@ export interface InputProps extends InputHTMLAttributes<HTMLTextAreaElement> {
   isValid?: true | false;
   register: any,
   options?: string,
+  name?: string,
 }

@@ -8,4 +8,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   width: string;
   height: string;
   isValid?: true | false;
+  register?: any,
+  name?: string,
+  options?: string,
 }

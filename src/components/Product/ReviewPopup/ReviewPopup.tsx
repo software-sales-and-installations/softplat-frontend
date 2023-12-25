@@ -43,7 +43,9 @@ const ReviewPopup = () => {
   }
   const handleSubmitReview = () => {
     if (isChecked) {
-          userComplaint({productId: id, reason: complaintReason}).unwrap()
+          userComplaint({productId: id, reason: complaintReason, body: {
+              "text": getValues('review'),
+            }}).unwrap()
             .then(() => {
               dispatch(popupState(false));
               reset()
@@ -94,7 +96,8 @@ const ReviewPopup = () => {
             cols={35}
             placeholder='От 2 до 600 символов'
             register={register}
-            options={`required: "Заполните это поле"`}
+            options='Заполните это поле'
+            name='review'
           />
         </InputWrapper>
         <Checkbox
