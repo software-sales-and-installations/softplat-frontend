@@ -29,11 +29,11 @@ const SellerCard: React.FC<ISellerCardProps> = ({
         {mode === 'inOrder' ? (
           count
         ) : (
-          <img
+          image && (<img
             src={`https://api.softplat.ru/image/${image?.id}`}
             alt="Логотип продукта"
             className={styles.card__img}
-          />
+          />)
         )}
       </div>
       <h2 className={styles.card__name}>{name ? name : '—'}</h2>
