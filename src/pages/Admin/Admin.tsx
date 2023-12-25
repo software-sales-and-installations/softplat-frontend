@@ -68,7 +68,7 @@ export const Admin: FC = () => {
             path="/published"
             element={
               <AdminCardTable
-                products={data?.products || []}
+                products={publishedList?.products || []}
                 productStatus={'PUBLISHED'}
               />
             }
@@ -77,7 +77,7 @@ export const Admin: FC = () => {
             path="/on-moderation"
             element={
               <AdminCardTable
-                products={data?.products || []}
+                products={shippedList?.products || []}
                 productStatus={'SHIPPED'}
               />
             }
@@ -86,7 +86,7 @@ export const Admin: FC = () => {
             path="/rejected"
             element={
               <AdminCardTable
-                products={data?.products || []}
+                products={rejectedList?.products || []}
                 productStatus={'REJECTED'}
               />
             }
@@ -96,7 +96,7 @@ export const Admin: FC = () => {
           <Route path="/add-vendor" element={<AdminAddVendor />} />
           <Route path="/add-vendor/:id" element={<AdminAddVendor />} />
           <Route path="/sales" element={<h2>Отчеты продаж</h2>} />
-          <Route path="/contacts" element={<h2>Контакты</h2>} />
+          {/* <Route path="/contacts" element={<h2>Контакты</h2>} /> */}
         </Routes>
       </section>
     </>

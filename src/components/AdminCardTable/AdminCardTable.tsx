@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom';
 
 export const AdminCardTable: FC<IProductCardPropsTable> = ({ products , productStatus}) => {
   return (
+    <>
+    {products.length===0?
+      <p className={styles.empty}>Здесь еще нет товаров</p>
+        :(
       <table className={styles.table}>
         <thead className={styles.thead}>
           <tr className={classNames(styles.line)}>
@@ -50,7 +54,7 @@ export const AdminCardTable: FC<IProductCardPropsTable> = ({ products , productS
             </td>
             <td className={classNames(styles.cellData, styles.cell, styles.cell_type_body)}>
               <Link to={`/admin/on-moderation/${i.id}`} className={styles.link}>
-                <p className={styles.cell__text}>{`${i.productionTime? i.productionTime: ''}`}</p>
+                <p className={styles.cell__text}>{`${i.productionTime? i.productionTime.toString().split(' ')[0].split('-').join('.'): ''}`}</p>
               </Link>
             </td>
             </>
@@ -58,8 +62,9 @@ export const AdminCardTable: FC<IProductCardPropsTable> = ({ products , productS
         </tr>)
        })}
         </tbody>
-      </table>
-    );
+      </table>)}
+      </>
+      );
     };
 
 

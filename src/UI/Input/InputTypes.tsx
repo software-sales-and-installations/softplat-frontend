@@ -9,7 +9,7 @@ export enum InputTypes {
 	remember='checkbox',
 	name = 'name',
 	phone = 'phone',
-	oldpassword='oldpassword',
+	oldPass='oldPass',
 	cardName = 'cardName',
 	companyname = 'companyname',
 	bik = 'bik',

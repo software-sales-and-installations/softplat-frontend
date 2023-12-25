@@ -30,6 +30,8 @@ export const Input: FC<IInput> = ({
 			? 'text'
 			: inputType === 'confirmPassword' && isPasswordHidden === true
 			? 'password'
+			: inputType==='oldPass' && isPasswordHidden===true
+			? 'password'
 			: inputType;
 
 	return (
