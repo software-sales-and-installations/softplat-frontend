@@ -5,9 +5,14 @@ import { useProductDeleteOwnCardMutation } from '../../utils/api/userProductApi'
 import { useSellerProductListQuery } from '../../utils/api/sellerApi';
 import { useState, useEffect } from 'react';
 import { IProductCard } from '../ProductCard/ProductCardTypes';
+import { useAppSelector, useAppDispatch } from '../../services/redux/store';
+import { RootState } from '../../services/redux/store';
+import { sellerDraftList } from '../../pages/Seller/SellerSlice';
 import { Link } from 'react-router-dom';
 
 export const SellerDrafts: FC = () => {
+  const dispatch = useAppDispatch();
+  const sellerDraft = useAppSelector((state: RootState) => state.sellerTotalProducts.sellerDraftList)
   let count = 0;
   const { data: cards } =
   useSellerProductListQuery(
@@ -16,6 +21,7 @@ export const SellerDrafts: FC = () => {
     },
     { refetchOnMountOrArgChange: true },
   );
+  
   const [draftCards, setDraftCards] = useState(cards);
   useEffect(() => {
     setDraftCards(cards);
@@ -34,6 +40,7 @@ export const SellerDrafts: FC = () => {
   const handleProductDeleteOwnCard = (productId: number) => {
     productDeleteOwnCard(productId).unwrap()
       .then((res) => {
+        dispatch(sellerDraftList(sellerDraft-1))
         console.log(res)
         deleteCard(productId)
       })
