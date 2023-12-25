@@ -3,6 +3,7 @@ import styles from './SellerModeration.module.scss';
 import EmptyState from '../EmptyState/EmptyState';
 import SellerTable from '../SellerTable/SellerTable';
 import SellerCard from '../SellerCard/SellerCard';
+import { Link } from 'react-router-dom';
 
 const SellerModeration: React.FC = () => {
   const shippedList = JSON.parse(
@@ -25,14 +26,18 @@ const SellerModeration: React.FC = () => {
             {shippedList.map(
               (product: {
                 id: number;
-                image: string;
+                image: {
+                  id: number;
+                };
                 name: string;
                 vendor: {
                   name: string;
                 };
                 productionTime: string;
               }) => (
-                <SellerCard key={product.id} {...product} trash={false} />
+                <Link key={product.id} className={styles.link} to ={`/product/${product.id}`}>
+                <SellerCard {...product} trash={false} />
+                </Link>
               ),
             )}
           </ul>

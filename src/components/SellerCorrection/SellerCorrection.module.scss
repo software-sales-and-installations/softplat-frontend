@@ -1,3 +1,5 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
 .correction {
   flex: 0 0 730px;
 
@@ -5,4 +7,8 @@
     padding: 0;
     margin-top: 25px;
   }
+}
+.link{
+  text-decoration: none;
+  color: $black-standart-text;
 }
