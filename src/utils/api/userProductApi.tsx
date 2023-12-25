@@ -111,7 +111,7 @@ export const userProductApi = createApi({
     // Удаление изображения своей карточки товара
     productDeleteOwnCardImage: build.mutation({
       query: productId => ({
-        url: `/product/products/${productId}/image/delete`,
+        url: `/product/${productId}/image/delete`,
         method: 'DELETE',
       }),
     }),

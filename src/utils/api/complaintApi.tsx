@@ -20,13 +20,27 @@ export const complaintApi = createApi({
   endpoints: (build) => ({
     //Создание жалобы покупателем
     userComplaint: build.mutation({
-      query: ({productId, reason}) => ({
+      query: ({productId, reason, body}) => ({
         url: `/complaint/${productId}?reason=${reason}`,
         method: 'POST',
+        body,
       }),
     }),
     complaintList: build.query({
       query: () => '/complaint/admin',
+    }),
+    complaintProductAdmin: build.query({
+      query: ({productId, minId, pageSize}) => `/complaint/admin/${productId}/product?minId=${minId}&pageSize=${pageSize}`,
+    }),
+    complaintProductSeller: build.query({
+      query: ({productId, minId, pageSize}) => `/complaint/seller/${productId}/product?minId=${minId}&pageSize=${pageSize}`,
+    }),
+    complaintModeration: build.mutation({
+      query: ({complaintId, body}) => ({
+        url: `/complaint/admin/${complaintId}`,
+        method: 'PATCH',
+        body,
+      })
     }),
     complaintSellerList: build.query({
       query: () => '/complaint/seller'
@@ -37,5 +51,8 @@ export const complaintApi = createApi({
 export const {
   useUserComplaintMutation,
   useComplaintListQuery,
+  useComplaintProductAdminQuery,
+  useComplaintProductSellerQuery,
+  useComplaintModerationMutation,
   useComplaintSellerListQuery
 } = complaintApi;

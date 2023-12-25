@@ -10,10 +10,12 @@ import { Button } from '../../UI/Button/Button';
 import { useVendorQuery } from '../../utils/api/vendorApi';
 import { useVendorChangeMutation } from '../../utils/api/vendorApi';
 import { useVendorAddMutation } from '../../utils/api/vendorApi';
+import { useVendorSubmitImageMutation } from '../../utils/api/submitImageApi';
 
 export const AdminAddVendor: FC = () =>{
     const [errorText, setErrorText] = useState('')
     const [addVendorError, setAddVendorError] = useState(0);
+    const [vendorAddImage, {}] = useVendorSubmitImageMutation();
     const {
         register,
         handleSubmit,
@@ -34,13 +36,33 @@ export const AdminAddVendor: FC = () =>{
     const [vendorAdd, {
         // isFetching, isLoading, isError
       }] = useVendorAddMutation();
+      const newVendorData = {
+        description: getValues().description, 
+        country: getValues().country,
+        logo: getValues().logo,
+        name: getValues().name
+      }
     function handleSubmitVendor(){
         if(id.id){
-            vendorChange({vendorId: id.id, body: getValues()}).unwrap()
+            vendorChange({vendorId: id.id, body: newVendorData}).unwrap()
             .then((res) => {
+              const newData = new FormData();
+              newData.append('image', newVendorData.logo[0])
+              if(newData){
+                vendorAddImage({vendorId: res.id, body: newData}).unwrap()
+                  .then((res) => {
+                    console.log(res)
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                    setErrorText('При загрузке картинки произошла ошибка')
+                })
+              
                 console.log(res)
                 setErrorText('Данные сохранены')
+              }
             })
+          
             .catch((error) => {
                 console.log(error);
                 setAddVendorError(error.status)
@@ -53,6 +75,21 @@ export const AdminAddVendor: FC = () =>{
             .then((res) => {
                 setErrorText('Данные сохранены')
                 console.log(res)
+                const newData = new FormData();
+                newData.append('image', newVendorData.logo[0])
+                if(newData){
+                  vendorAddImage({vendorId: res.id, body: newData}).unwrap()
+                    .then((res) => {
+                      console.log(res)
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                      setErrorText('При загрузке картинки произошла ошибка')
+                  })
+                
+                  console.log(res)
+                  setErrorText('Данные сохранены')
+                }
             })
             .catch((error) => {
                 console.log(error);

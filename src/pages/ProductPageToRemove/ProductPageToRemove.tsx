@@ -66,7 +66,7 @@ export const ProductPageToRemove: FC = () => {
   return (
     <>
       <div className={style.breadcrumbs}>
-        <Breadcrumbs vendor={cardData.vendor!} />
+        <Breadcrumbs product={cardData} />
       </div>
       <section className={style.product}>
         <div className={style.product__imageContainer}>

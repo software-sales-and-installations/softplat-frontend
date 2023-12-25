@@ -2,6 +2,7 @@ import {reducer as toggleBtnReducer} from '../../UI/ToggleButton/ToggleButtonSli
 import {reducer as chooseRoleReducer} from '../../UI/ChooseRole/ChooseRoleSlice';
 import {reducer as popupStateReducer} from '../../UI/Popup/PopupSlice';
 import {reducer as signoutReducer} from '../../components/SignOutPopup/SignOutPopupSlice.tsx';
+import {reducer as sellerTotalProductsReducer} from '../../pages/Seller/SellerSlice.tsx';
 import {reducer as isSuccessCardDataReducer} from '../../components/PayPopup/PayPopupSlice.tsx';
 import {reducer as isSuccessPayReducer} from '../../components/CartSummary/CartSummarySlice.tsx';
 import {reducer as isNotSuccessPayReducer} from '../../components/CartSummary/CartSummarySlice.tsx';
@@ -33,6 +34,7 @@ import { userCommentApi } from '../../utils/api/userCommentApi.tsx';
 import { purchasesReducer } from './slices/purchases/purchases.ts';
 import { productReducer } from './slices/product/product.ts';
 import { reviewsReducer } from './slices/reviews/reviews.ts';
+import { complaintsReducer } from './slices/complaints/complaints.ts';
 
 const reducers = combineReducers({
 	user: userReducer,
@@ -44,6 +46,7 @@ const reducers = combineReducers({
   isNotSuccessPay: isNotSuccessPayReducer,
 	dropdown: dropDownReducer,
   signout: signoutReducer,
+  sellerTotalProducts: sellerTotalProductsReducer,
 	cards: cardsReducer,
 	vendors: vendorsReducer,
 	cart: cartReducer,
@@ -52,7 +55,8 @@ const reducers = combineReducers({
   purchase: purchasesReducer,
   product: productReducer,
   reviews: reviewsReducer,
-	[adminApi.reducerPath]: adminApi.reducer,
+  complaints: complaintsReducer,
+  [adminApi.reducerPath]: adminApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [buyerBasketApi.reducerPath]: buyerBasketApi.reducer,
   [buyerApi.reducerPath]: buyerApi.reducer,

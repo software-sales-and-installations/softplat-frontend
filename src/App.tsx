@@ -20,6 +20,7 @@ import { ProtectedRouteForAdmin, ProtectedRouteForAdminAuth
 import NotFound from './pages/NotFound/NotFound.tsx';
 import { SellerPage } from './pages/SellerPage/SellerPage.tsx';
 import { ModerationPage } from './pages/ModerationPage/ModerationPage.tsx';
+import { SellerComplaintsPage } from './pages/SellerComplaintsPage/SellerComplaintsPage.tsx';
 
 function App() {
   return (
@@ -60,9 +61,16 @@ function App() {
               // </ProtectedRouteForSeller>
             } />
           <Route
+            path="/seller/appeal/:id"
+            element={
+              // <ProtectedRouteForSeller>
+                 <SellerComplaintsPage/>
+              // </ProtectedRouteForSeller>
+            } />
+          <Route
             path="/seller"
             element={
-              //<ProtectedRouteForSeller>
+              // <ProtectedRouteForSeller>
                 <Navigate to="/seller/published" />
               //</ProtectedRouteForSeller>
             } />
@@ -85,6 +93,13 @@ function App() {
             element={
               <ProtectedRouteForAdmin>
                 <ModerationPage/>
+              </ProtectedRouteForAdmin>
+            } />
+          <Route
+            path="/admin/appeal/:id"
+            element={
+              <ProtectedRouteForAdmin>
+                <SellerComplaintsPage/>
               </ProtectedRouteForAdmin>
             } />
             <Route

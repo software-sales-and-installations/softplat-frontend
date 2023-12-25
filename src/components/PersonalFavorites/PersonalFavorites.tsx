@@ -11,7 +11,6 @@ import { usePublicProductListQuery } from '../../utils/api/publicProductApi.tsx'
 const PersonalFavorites: React.FC = () => {
   const dispatch = useAppDispatch();
   const favoriteIds = useAppSelector(store => store?.favorite?.favorites);
-  const cards = useAppSelector(store => store?.cards?.cards?.products);
 
   useLoadFavorites();
   useEffect(() => {
@@ -33,12 +32,7 @@ const PersonalFavorites: React.FC = () => {
       card.productStatus === ProductStatus.PUBLISHED && card.quantity > 0,
   );
 
-
   const favoriteCards = recommendedCards?.filter((card: { id: number; }) => favoriteIds.includes(card.id)) || [];
-
-  console.log(favoriteIds);
-  console.log(cards);
-  console.log(favoriteCards);
 
   return (
     <section className={styles.personalFavorites}>

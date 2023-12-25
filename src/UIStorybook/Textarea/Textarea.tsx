@@ -11,6 +11,7 @@ export const Textarea = ({
                         height,
                         rows,
                         cols,
+  name,
   options,
   register,
   ...props
@@ -22,7 +23,7 @@ export const Textarea = ({
       cols={cols}
       className={[styles.textarea, isValid && styles.textarea_invalid, extClassName].join(' ')}
       style={{width: `${width}`, height: `${height}`}}
-      {...register('review', {options})}
+      {...register( name, {required: options})}
       {...props}>
     </textarea>
   );

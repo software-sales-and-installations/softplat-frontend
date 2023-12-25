@@ -6,10 +6,13 @@ import SellerCard from '../SellerCard/SellerCard';
 import { useProductSellerListQuery } from '../../utils/api/userProductApi';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../services/redux/store';
+import { sellerShippedList } from '../../pages/Seller/SellerSlice';
 
 const SellerModeration: React.FC = () => {
-  const { data: publishedList, isSuccess: isPublishedListSuccess } =
-  useProductSellerListQuery(
+  const dispatch = useAppDispatch();
+  const { data: publishedList, } =
+    useProductSellerListQuery(
       {
         status: 'SHIPPED',
       },
@@ -18,7 +21,8 @@ const SellerModeration: React.FC = () => {
 const [publishListData, setPublishListData] = useState(publishedList)
 useEffect(()=>{
   setPublishListData(publishedList)
-  console.log(publishedList)
+  dispatch(sellerShippedList(publishedList?.totalProducts))
+
 },[publishedList])
 
   return (
@@ -47,7 +51,7 @@ useEffect(()=>{
                 productionTime: string;
               }) => (
                 <Link key={product.id} className={styles.link} to ={`/product/${product.id}`}>
-                <SellerCard {...product} trash={false} />
+                  <SellerCard {...product} trash={false} />
                 </Link>
               ),
             )}

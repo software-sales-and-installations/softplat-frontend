@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import styles from './VendorPage.module.scss';
 import VendorInfo from '../../components/VendorInfo/VendorInfo';
 import { SELECT_OPTIONS } from '../../utils/constants';
@@ -30,7 +30,7 @@ const VendorPage: FC = () => {
   const { data, error, isLoading } = usePublicProductListQuery(
     {
       minId: 0,
-      pageSize: '',
+      pageSize: '30',
       sort: selectState,
     },
     { skip: !isVendorFulfilled },
@@ -42,7 +42,9 @@ const VendorPage: FC = () => {
       card.productStatus === ProductStatus.PUBLISHED &&
       card.quantity > 0,
   );
-
+    useEffect(()=>{
+      console.log(data)
+    },[data])
   return (
     <>
       <div className={styles.breadcrumbs}>

@@ -75,7 +75,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
     }
   };
 
-  const handleremoveFromCart = async () => {
+  const handleRemoveFromCart = async () => {
     if (userId) {
       await asyncRemoveFromCart(card, buyerBasketDeleteItem, dispatch);
     } else {
@@ -110,8 +110,8 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
       ) : null}
       <Link to={`/product/${card.id}`} className={styles.card__link}>
         <div className={styles.card__img}>
-          
-          <img src={`https://api.softplat.ru/image/${card?.image?.id}`} alt="Изображение продукта" />
+
+          {card?.image?.id &&  <img src={`https://api.softplat.ru/image/${card?.image?.id}`} alt="Изображение продукта" />}
         </div>
         <p className={styles.card__name} title={card.name}>
           {card.name}
@@ -138,7 +138,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
         <div className={styles.card__buttons}>
           <button
             className={styles.card__changeQuantity}
-            onClick={handleremoveFromCart}
+            onClick={handleRemoveFromCart}
             disabled={removeItemError.isError}
           >
             -
