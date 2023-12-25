@@ -9,10 +9,10 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../services/redux/store';
 import { sellerShippedList } from '../../pages/Seller/SellerSlice';
 
+const SellerModeration: React.FC = () => {
+  const { data: publishedList, } =
 const SellerModeration: React.FC = () => {  
   const dispatch = useAppDispatch();
-  
-  const { data: publishedList, isSuccess: isPublishedListSuccess } =
   useProductSellerListQuery(
       {
         status: 'SHIPPED',
@@ -23,7 +23,7 @@ const [publishListData, setPublishListData] = useState(publishedList)
 useEffect(()=>{
   setPublishListData(publishedList)
   dispatch(sellerShippedList(publishedList?.totalProducts))
-  console.log(publishedList)
+
 },[publishedList])
 
   return (

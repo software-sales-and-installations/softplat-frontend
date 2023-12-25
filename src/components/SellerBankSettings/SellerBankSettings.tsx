@@ -24,7 +24,6 @@ import DropDown from '../../UI/DropDown/DropDown';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
 
 export const SellerBankSettings: FC = () => {
-  const sellerId = localStorage.getItem('userId');
   const {
     register,
     handleSubmit,
@@ -36,12 +35,8 @@ export const SellerBankSettings: FC = () => {
 
   const [sellerAddBank, {}] = useSellerAddBankMutation();
 
-  const {
-    data: sellerBank,
-    // isFetching,isLoading, error
-  } = useSellerGetBankQuery(sellerId);
-
-  console.log(sellerBank)
+  // @ts-ignore
+  const {data: sellerBank} = useSellerGetBankQuery();
 
   const [bankData, setBankData] = useState({
     bik: sellerBank?.bik,

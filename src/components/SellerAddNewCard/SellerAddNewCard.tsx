@@ -31,7 +31,7 @@ export const SellerAddNewCard: FC = () =>{
   const [productUpdate,{
     // isFetching, isLoading, isError
   }] = useProductUpdateMutation()
-  
+
   //@ts-ignore
   const { data: vendorAll} = useVendorListQuery({},{
     refetchOnMountOrArgChange:true
@@ -40,7 +40,7 @@ export const SellerAddNewCard: FC = () =>{
 
   
   const [variantSoftware, setVariantSoftware] = useState ('Загрузка ПО')
-  const { data: product} = usePublicProductQuery(id.id);
+  const { data: product} = usePublicProductQuery(id.id, {skip: id.id === undefined});
   const [productDataCard, setProductDataCard] = useState(product)
   const [productSendToModeration, {}] = useProductSendToModerationMutation();
     const [productAddImage, {}] = useProductSubmitImageMutation();
@@ -64,15 +64,15 @@ export const SellerAddNewCard: FC = () =>{
   const [categoryListData, setcategoryListData] = useState(categoryList)
   const [vendorData, setVendorData] = useState(vendorAll)
   const productData = {
-    hasDemo: true, 
-    category: getValues().category, 
-    description: getValues().description, 
-    installation: getValues().installation, 
-    installationPrice: getValues().installationPrice, 
-    name: getValues().name, 
-    price: getValues().price, 
-    quantity: getValues().quantity, 
-    vendor: getValues().vendor, 
+    hasDemo: true,
+    category: getValues().category,
+    description: getValues().description,
+    installation: getValues().installation,
+    installationPrice: getValues().installationPrice,
+    name: getValues().name,
+    price: getValues().price,
+    quantity: getValues().quantity,
+    vendor: getValues().vendor,
     version: getValues().version,
     logo: getValues().logo
   }
@@ -84,7 +84,7 @@ export const SellerAddNewCard: FC = () =>{
     setVendorData(vendorAll)
   },[vendorData, vendorAll])
 
-      
+
   function handleSubmitCard(){
   console.log(productData)
     if(!id.id){
@@ -121,6 +121,7 @@ export const SellerAddNewCard: FC = () =>{
             })
             .finally()
       }
+
       })
       .catch((error) => {
         setAddCardError(error.status)
@@ -130,7 +131,7 @@ export const SellerAddNewCard: FC = () =>{
     }
     else {
       productUpdate({productId: id.id, body: getValues()})
-      .then((res)=>{
+      .then(()=>{
         dispatch(sellerDraftList(sellerDraft+1))
         const newData = new FormData();
         newData.append('image', productData.logo[0]);
@@ -295,7 +296,7 @@ export const SellerAddNewCard: FC = () =>{
         typeError='addCardError'
       />
       </>}
-        
+
         <div>
           <p className={styles.sellerAddCard__title}>Логотип ПО</p>
           <label className={styles.sellerAddCard__load_logo}>
@@ -310,7 +311,7 @@ export const SellerAddNewCard: FC = () =>{
               <path fillRule="evenodd" clipRule="evenodd" d="M44.127 38.375H72.877C74.4019 38.375 75.8645 38.9814 76.9428 40.0609C78.0212 41.1403 78.627 42.6043 78.627 44.1309V72.9103C78.627 74.4368 78.0212 75.9009 76.9428 76.9803C75.8645 78.0597 74.4019 78.6661 72.877 78.6661H44.127C42.602 78.6661 41.1394 78.0597 40.0611 76.9803C38.9828 75.9009 38.377 74.4368 38.377 72.9103V44.1309C38.377 42.6043 38.9828 41.1403 40.0611 40.0609C41.1394 38.9814 42.602 38.375 44.127 38.375Z" stroke="#C1C2C2" strokeWidth="2.94328" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M78.627 67.1543L70.002 58.5205L61.377 67.1112M72.877 78.6661L47.002 52.7646L38.377 61.3985" stroke="#C1C2C2" strokeWidth="2.94328" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M68.5645 51.3252C70.1523 51.3252 71.4395 50.0367 71.4395 48.4473C71.4395 46.8578 70.1523 45.5693 68.5645 45.5693C66.9766 45.5693 65.6895 46.8578 65.6895 48.4473C65.6895 50.0367 66.9766 51.3252 68.5645 51.3252Z" fill="#C1C2C2"/>
-            </svg> 
+            </svg>
           </label>
         </div>
         <Input

@@ -2,6 +2,7 @@
 @import '../../styles/abstract/mixins.scss';
 
 .personalFavorites {
+  width: 100%;
   flex: 0 0 730px;
   // margin-top: 65px;
   // margin-left: 100px;
@@ -15,8 +16,8 @@
     // margin-top: 45px;
     list-style: none;
     display: flex;
-    row-gap: 45px;
-    column-gap: 45px;
+    justify-content: flex-start;
+    gap: 45px;
     // grid-template-columns: repeat(3, 320px);
     // justify-content: space-between;
     padding: 0;
