@@ -16,7 +16,7 @@ import { SellerComplaintsTable } from '../../components/SellerComplaintsTable/Se
 import { useSellerProductListQuery } from '../../utils/api/sellerApi';
 import { useComplaintSellerListQuery } from '../../utils/api/complaintApi';
 import { useDispatch } from 'react-redux';
-import { setSellerTotalProducts } from './SellerSlice';
+import { sellerComplaintList, sellerDraftList, sellerPublishedList, sellerRejectedList, sellerShippedList } from './SellerSlice';
 
 export const Seller: FC = () => {
   const dispatch = useDispatch();
@@ -58,18 +58,11 @@ useEffect(()=>{
     isShippedListSuccess &&
     isComplaintListSuccess
   ) {
-    dispatch(setSellerTotalProducts({
-      sellerDraftList: draftList.totalProducts, 
-      sellerPublishedList: publishedList.totalProducts,
-      sellerRejectedList: rejectedList.totalProducts,
-      sellerShippedList: shippedList.totalProducts,
-      sellerComplaintList: complaintList.totalComplaints
-    }))
-    // dispatch(setSellerTotalProducts({sellerPublishedList: publishedList.totalProducts}))
-    // dispatch(setSellerTotalProducts({sellerRejectedList: rejectedList.totalProducts}))
-    // dispatch(setSellerTotalProducts({sellerShippedList: shippedList.totalProducts}))
-    // dispatch(setSellerTotalProducts({sellerComplaintList: complaintList.totalProducts}))
-    console.log(draftList.totalProducts)
+   dispatch(sellerDraftList(draftList.totalProducts))
+   dispatch(sellerPublishedList(publishedList.totalProducts))
+   dispatch(sellerRejectedList(rejectedList.totalProducts))
+   dispatch(sellerShippedList(shippedList.totalProducts))
+   dispatch(sellerComplaintList(complaintList.totalComplaints))
     // localStorage.setItem('sellerDraftList', JSON.stringify(draftList));
     // localStorage.setItem('sellerPublishedList', JSON.stringify(publishedList));
     // localStorage.setItem('sellerRejectedList', JSON.stringify(rejectedList));

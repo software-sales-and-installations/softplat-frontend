@@ -1,35 +1,44 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface ISellerTotalProducts{
-    sellerTotalProducts: ISellerProducts
-}
-interface ISellerProducts{
-        sellerDraftList: number;
+    sellerDraftList: number;
         sellerPublishedList: number;
         sellerRejectedList: number;
         sellerShippedList: number;
         sellerComplaintList: number;
-    
 }
+
 const initialState: ISellerTotalProducts = {
-	sellerTotalProducts: {
+
         sellerDraftList: 0,
         sellerPublishedList: 0,
         sellerRejectedList: 0,
         sellerShippedList: 0,
         sellerComplaintList: 0
-    }
+    
 };
 
 export const sellerTotalProductsSlice = createSlice({
 	name: 'sellerTotalProducts',
 	initialState,
 	reducers: {
-		setSellerTotalProducts: (state, action: PayloadAction<any>) => {
-			state.sellerTotalProducts = action.payload;
+		sellerDraftList: (state, action: PayloadAction<any>) => {
+			state.sellerDraftList = action.payload;
+		},
+        sellerPublishedList: (state, action: PayloadAction<any>) => {
+			state.sellerPublishedList = action.payload;
+		},
+        sellerRejectedList: (state, action: PayloadAction<any>) => {
+			state.sellerRejectedList = action.payload;
+		},
+        sellerShippedList: (state, action: PayloadAction<any>) => {
+			state.sellerShippedList = action.payload;
+		},
+        sellerComplaintList: (state, action: PayloadAction<any>) => {
+			state.sellerComplaintList = action.payload;
 		},
 	},
 });
 
 export const { reducer } = sellerTotalProductsSlice;
-export const { setSellerTotalProducts } = sellerTotalProductsSlice.actions;
+export const { sellerDraftList, sellerPublishedList,sellerRejectedList,sellerShippedList, sellerComplaintList} = sellerTotalProductsSlice.actions;

@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './SellerCorrection.module.scss';
 import EmptyState from '../EmptyState/EmptyState';
 import SellerCard from '../SellerCard/SellerCard';
 import SellerTable from '../SellerTable/SellerTable';
 import { useSellerProductListQuery } from '../../utils/api/sellerApi';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../services/redux/store';
+import { sellerRejectedList } from '../../pages/Seller/SellerSlice';
 
 const SellerCorrection: React.FC = () => {
+  const dispatch = useAppDispatch();
   const { data: rejectedList } =
   useSellerProductListQuery(
     {
@@ -17,7 +20,9 @@ const SellerCorrection: React.FC = () => {
   // const rejectedList = JSON.parse(
   //   localStorage.getItem('sellerRejectedList')!,
   // ).products;
-
+useEffect(()=>{
+  dispatch(sellerRejectedList(rejectedList?.totalProducts))
+}, [rejectedList])
   return (
     <section className={styles.correction}>
       {rejectedList?.products.length === 0 ? (

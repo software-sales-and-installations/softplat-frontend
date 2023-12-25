@@ -13,15 +13,20 @@ import { useEffect } from 'react';
 import { BsChevronCompactLeft } from 'react-icons/bs';
 
 const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
+
   const dispatch = useAppDispatch();
-  const sellerTotalProducts = useAppSelector((state: RootState) => state.sellerTotalProducts.sellerTotalProducts);
+  const sellerDraftList = useAppSelector((state: RootState) => state.sellerTotalProducts.sellerDraftList)
+  const sellerPublishedList = useAppSelector((state: RootState) => state.sellerTotalProducts.sellerPublishedList)
+  const sellerRejectedList = useAppSelector((state: RootState) => state.sellerTotalProducts.sellerRejectedList)
+  const sellerShippedList = useAppSelector((state: RootState) => state.sellerTotalProducts.sellerShippedList)
+  const sellerComplaintList = useAppSelector((state: RootState) => state.sellerTotalProducts.sellerComplaintList)
   const isSeller = mode === 'seller';
   const isAdmin = mode === 'admin';
   const isUser = mode === 'user';
 
 
   const totalDraft = isSeller
-    ? sellerTotalProducts.sellerDraftList
+    ? sellerDraftList
     // localStorage.getItem('sellerDraftList')
     //   ? JSON.parse(
     //       JSON.parse(localStorage.getItem('sellerDraftList')!).totalProducts,
@@ -35,7 +40,7 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
       : 0
     : 0;
   const totalPublished = isSeller
-    ? sellerTotalProducts.sellerPublishedList
+    ? sellerPublishedList
     // localStorage.getItem('sellerPublishedList')
     //   ? JSON.parse(localStorage.getItem('sellerPublishedList')!).totalProducts
     //   : 0
@@ -45,7 +50,7 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
       : 0
     : 0;
   const totalRejected = isSeller
-    ? sellerTotalProducts.sellerRejectedList
+    ? sellerRejectedList
     // localStorage.getItem('sellerRejectedList')
     //   ? JSON.parse(localStorage.getItem('sellerRejectedList')!).totalProducts
     //   : 0
@@ -55,16 +60,17 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
       : 0
     : 0;
   const totalShipped = isSeller
-    ? localStorage.getItem('sellerShippedList')
-      ? JSON.parse(localStorage.getItem('sellerShippedList')!).totalProducts
-      : 0
+    ? sellerShippedList
+    // localStorage.getItem('sellerShippedList')
+    //   ? JSON.parse(localStorage.getItem('sellerShippedList')!).totalProducts
+    //   : 0
     : isAdmin
     ? localStorage.getItem('adminShippedList')
       ? JSON.parse(localStorage.getItem('adminShippedList')!).totalProducts
       : 0
     : 0;
   const totalComplaints = isSeller
-    ? sellerTotalProducts.sellerComplaintList
+    ? sellerComplaintList
     // localStorage.getItem('sellerComplaintList')
     //   ? JSON.parse(localStorage.getItem('sellerComplaintList')!).totalComplaints
     //   : 0
@@ -73,9 +79,7 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
       ? JSON.parse(localStorage.getItem('adminComplaintList')!).totalComplaints
       : 0
     : 0;
-    useEffect(()=>{
-      console.log(sellerTotalProducts)
-    },[totalDraft])
+
   return (
     <>
       <nav className={styles.personalTitles}>

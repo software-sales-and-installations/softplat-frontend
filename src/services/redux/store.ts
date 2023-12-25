@@ -25,6 +25,7 @@ import { imageApi } from '../../utils/api/imageApi.tsx';
 import { publicCommentApi } from '../../utils/api/publicCommentApi.tsx';
 import { publicProductApi } from '../../utils/api/publicProductApi.tsx';
 import { userProductApi } from '../../utils/api/userProductApi.tsx';
+import { submitImageApi } from '../../utils/api/submitImageApi.tsx';
 import { vendorApi } from '../../utils/api/vendorApi.tsx';
 import { cartReducer } from './slices/cart/cart';
 import { favoriteReducer } from './slices/favourites/favourites.tsx';
@@ -66,6 +67,7 @@ const reducers = combineReducers({
   [sellerApi.reducerPath]: sellerApi.reducer,
   [userCommentApi.reducerPath]: userCommentApi.reducer,
   [userProductApi.reducerPath]: userProductApi.reducer,
+  [submitImageApi.reducerPath]: submitImageApi.reducer,
   [vendorApi.reducerPath]: vendorApi.reducer,
 });
 
@@ -85,6 +87,7 @@ export const store = configureStore({
     sellerApi.middleware,
     userCommentApi.middleware,
     userProductApi.middleware,
+    submitImageApi.middleware,
     complaintApi.middleware,
     vendorApi.middleware,
     )

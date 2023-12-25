@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+import {  useEffect } from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import styles from './PersonalFavorites.module.scss';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { fetchAllCards } from '../../services/redux/slices/cards/cards';
 import { useLoadFavorites } from '../../services/favoritesService/favoritesService';
 import EmptyState from '../EmptyState/EmptyState';
+import { IProductCard, ProductStatus } from '../ProductCard/ProductCardTypes.tsx';
+import { usePublicProductListQuery } from '../../utils/api/publicProductApi.tsx';
 
 const PersonalFavorites: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -20,11 +22,23 @@ const PersonalFavorites: React.FC = () => {
     fetchData();
   }, [dispatch, favoriteIds]);
 
-  const favoriteCards = cards.filter(card => favoriteIds.includes(card.id));
+    const { data } = usePublicProductListQuery({
+      minId: 0,
+      pageSize: 30,
+      sort: 'NEWEST',
+    });
 
-  // console.log(favoriteIds);
-  // console.log(cards);
-  // console.log(favoriteCards);
+  const recommendedCards = data?.products.filter(
+    (card: IProductCard) =>
+      card.productStatus === ProductStatus.PUBLISHED && card.quantity > 0,
+  );
+
+
+  const favoriteCards = recommendedCards?.filter((card: { id: number; }) => favoriteIds.includes(card.id)) || [];
+
+  console.log(favoriteIds);
+  console.log(cards);
+  console.log(favoriteCards);
 
   return (
     <section className={styles.personalFavorites}>
@@ -34,7 +48,7 @@ const PersonalFavorites: React.FC = () => {
         </EmptyState>
       )}
       <ul className={styles.personalFavorites__list}>
-        {favoriteCards.map(card => (
+        {favoriteCards.map((card: IProductCard) => (
           <li key={card.id} className={styles.personalFavorites__item}>
             <ProductCard card={card} key={card.id} />
           </li>

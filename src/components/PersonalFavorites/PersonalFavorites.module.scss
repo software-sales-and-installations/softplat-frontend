@@ -15,9 +15,10 @@
     // margin-top: 45px;
     list-style: none;
     display: flex;
+    justify-content: space-between;
+    row-gap: 50px;
     // grid-template-columns: repeat(3, 320px);
     // justify-content: space-between;
-    gap: 50px;
     padding: 0;
     flex-wrap: wrap;
   }

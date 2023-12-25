@@ -1,6 +1,8 @@
 export interface ISellerCardProps {
   mode?: 'inOrder';
-  image: any;
+  image: {
+    id: number;
+  };
   name: string;
   vendor: {
     name: string;

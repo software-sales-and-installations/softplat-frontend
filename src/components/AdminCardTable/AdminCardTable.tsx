@@ -29,27 +29,27 @@ export const AdminCardTable: FC<IProductCardPropsTable> = ({ products , productS
           {i.productStatus===productStatus?
           <>
             <td className={classNames(styles.cellName, styles.cell, styles.cell_type_body)}>
-              <Link to={`/product/${i.id}`} className={styles.link}>
+              <Link to={`/admin/on-moderation/${i.id}`} className={styles.link}>
                 <p className={styles.cell__text}>{i.name}</p>
               </Link>
             </td>
             <td className={classNames(styles.cellVendor, styles.cell, styles.cell_type_body)}>
-              <Link to={`/product/${i.id}`} className={styles.link}>
+              <Link to={`/admin/on-moderation/${i.id}`} className={styles.link}>
                 <p className={classNames(styles.cell__text) }>{i.vendor?.name ? i.vendor.name : ''}</p>
               </Link>
-            </td> 
+            </td>
             <td className={classNames(styles.cellSeller, styles.cell, styles.cell_type_body)}>
-              <Link to={`/product/${i.id}`} className={styles.link}>
+              <Link to={`/admin/on-moderation/${i.id}`} className={styles.link}>
                 <p className={styles.cell__text}>{i.vendor?.name ? i.vendor.name : ''}</p>
               </Link>
             </td>
             <td className={classNames(styles.cellArt, styles.cell, styles.cell_type_body)}>
-              <Link to={`/product/${i.id}`} className={styles.link}>
+              <Link to={`/admin/on-moderation/${i.id}`} className={styles.link}>
                 <p className={styles.cell__text}>{i.id}</p>
               </Link>
             </td>
             <td className={classNames(styles.cellData, styles.cell, styles.cell_type_body)}>
-              <Link to={`/product/${i.id}`} className={styles.link}>
+              <Link to={`/admin/on-moderation/${i.id}`} className={styles.link}>
                 <p className={styles.cell__text}>{`${i.productionTime? i.productionTime: ''}`}</p>
               </Link>
             </td>
@@ -61,5 +61,5 @@ export const AdminCardTable: FC<IProductCardPropsTable> = ({ products , productS
       </table>
     );
     };
-            
+
 

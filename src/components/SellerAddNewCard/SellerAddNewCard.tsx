@@ -9,96 +9,182 @@ import { NAME_VALIDATION_CONFIG, LINK_VALIDATION_CONFIG, PRICE_VALIDATION_CONFIG
 import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { useVendorListQuery } from '../../utils/api/vendorApi';
-import { useProductCreateMutation } from '../../utils/api/userProductApi';
+import { useProductCreateMutation, useProductSendToModerationMutation, useProductUpdateMutation } from '../../utils/api/userProductApi';
+import { usePublicProductQuery } from '../../utils/api/publicProductApi';
 import { useCategoryListQuery } from '../../utils/api/categoryApi';
+import { useParams } from 'react-router-dom';
+import { useProductSubmitImageMutation } from '../../utils/api/submitImageApi';
+import { useAppDispatch } from '../../services/redux/store';
+import { useAppSelector } from '../../services/redux/store';
+import { RootState } from '../../services/redux/store';
+import { sellerDraftList, sellerShippedList } from '../../pages/Seller/SellerSlice';
+
 
 export const SellerAddNewCard: FC = () =>{
+  const dispatch = useAppDispatch();
+  const sellerShipped = useAppSelector((state: RootState) => state.sellerTotalProducts.sellerShippedList)
+  const sellerDraft = useAppSelector((state: RootState) => state.sellerTotalProducts.sellerDraftList)
+  const [productCreate, {
+    //     // isFetching, isLoading, isError
+      }] = useProductCreateMutation();
+  const [productUpdate,{
+    // isFetching, isLoading, isError
+  }] = useProductUpdateMutation()
+  
+  //@ts-ignore
+  const { data: vendorAll} = useVendorListQuery({},{
+    refetchOnMountOrArgChange:true
+  });
+  const {data: categoryList} = useCategoryListQuery({});
+
+  const id = useParams();
+  const [variantSoftware, setVariantSoftware] = useState ('Загрузка ПО')
+  const { data: product} = usePublicProductQuery(id.id);
+  const [productDataCard, setProductDataCard] = useState(product)
+  const [productSendToModeration, {}] = useProductSendToModerationMutation();
+    const [productAddImage, {}] = useProductSubmitImageMutation();
+
+  useEffect(()=>{
+    setProductDataCard(product)
+  }, [product])
+  const [subminBtnName, setSubmitBtnName] = useState('moderation')
   const [errorText, setErrorText] = useState('')
-    const [variantSoftware, setVariantSoftware] = useState('Загрузка ПО')
-    const [DDactive, setDDActive] = useState(false)
-    const {
+  const [addCardError, setAddCardError] = useState(0);
+  const [DDactive, setDDActive] = useState(false)
+  const {
         register,
         handleSubmit,
         getValues,
+        setValue,
         formState: { errors, isValid },
       } = useForm<ICreateProductFields>({ mode: 'onChange' });
-    
-      // const onSubmit: SubmitHandler<ICreateProductFields> = data => {
-      //   console.log(data);
-      //   // reset();
-      // };
-      //@ts-ignore
-      const { data: vendorAll} = useVendorListQuery({},{
-        refetchOnMountOrArgChange:true
-      });
-      const {data: categoryList} = useCategoryListQuery({});
-      const [categoryListData, setcategoryListData] = useState(categoryList)
-      const [vendorData, setVendorData] = useState(vendorAll)
-      useEffect(()=>{
-        setcategoryListData(categoryList)
-      },[categoryList, categoryListData])
-          useEffect(()=>{
-            setVendorData(vendorAll)
-          },[vendorData, vendorAll])
-      const [productCreate, {
-        //     // isFetching, isLoading, isError
-          }] = useProductCreateMutation();
-const productData = {hasDemo: true, category: getValues().category, description: getValues().description, installation: getValues().installation, installationPrice: getValues().installationPrice, name: getValues().name, price: getValues().price, quantity: getValues().quantity, vendor: getValues().vendor, version: getValues().version}
-          function handleSubmitCard(){
-            console.log(productData)
-            productCreate(productData).unwrap()
+
+  const [categoryListData, setcategoryListData] = useState(categoryList)
+  const [vendorData, setVendorData] = useState(vendorAll)
+  const productData = {
+    hasDemo: true, 
+    category: getValues().category, 
+    description: getValues().description, 
+    installation: getValues().installation, 
+    installationPrice: getValues().installationPrice, 
+    name: getValues().name, 
+    price: getValues().price, 
+    quantity: getValues().quantity, 
+    vendor: getValues().vendor, 
+    version: getValues().version,
+    logo: getValues().logo
+  }
+  useEffect(()=>{
+    setcategoryListData(categoryList)
+  },[categoryList, categoryListData])
+
+  useEffect(()=>{
+    setVendorData(vendorAll)
+  },[vendorData, vendorAll])
+
+      
+  function handleSubmitCard(){
+  console.log(productData)
+    if(!id.id){
+      productCreate(productData).unwrap()
+      .then((res) => {
+        dispatch(sellerDraftList(sellerDraft+1))
+          const newData = new FormData();
+          newData.append('image', productData.logo[0]);
+          productAddImage({productId: res.id, body: newData}).unwrap()
+            .then((res) => {
+            console.log(res)
+            
+            })
+            .catch((error) => {
+            console.log(error);
+            setErrorText('При загрузке картинки произошла ошибка')
+          })
+            .finally(()=>{
+              if(subminBtnName==='moderation'){
+              console.log(res.id)
+              productSendToModeration({productId: res.id}).unwrap()
+                .then((res) => {
+                  console.log(res)
+                  setErrorText('Данные сохранены')
+                  dispatch(sellerShippedList(sellerShipped+1))
+                  dispatch(sellerDraftList(sellerDraft))
+                })
+                .catch((error) => {
+                  console.log(error);
+                  setErrorText('При отправке товара на модерацию произошла ошибка, товар сохранен во вкладке Черновики')
+                })
+                .finally()
+          }
+        })
+        
+      })
+      .catch((error) => {
+        setAddCardError(error.status)
+        console.log(error);
+      })
+      .finally()
+    }
+    else {
+      productUpdate({productId: id.id, body: getValues()})
+      .then((res)=>{
+        const newData = new FormData();
+        newData.append('image', productData.logo[0]);
+        productAddImage({productId: id.id, body: newData}).unwrap()
+          .then((res) => {
+          console.log(res)
+          })
+          .catch((error) => {
+          console.log(error);
+          setErrorText('При загрузке картинки произошла ошибка')
+        })
+        .finally(()=>{
+          if(subminBtnName==='moderation'){
+            productSendToModeration({productId: id.id}).unwrap()
               .then((res) => {
                 console.log(res)
-                setErrorText('Данные успешно обновлены/добавлены')
+                setErrorText('Данные сохранены')
               })
               .catch((error) => {
                 console.log(error);
+                setErrorText('При отправке товара на модерацию произошла ошибка')
               })
               .finally()
           }
-          // const id = useParams();
-          // const { data: vendor,
-          //     // isFetching,isLoading, error
-          //   } = useVendorQuery(id.id,{
-          //     refetchOnMountOrArgChange: true
-          //   });
-          //   const [vendorChange, {
-          //     // isFetching, isLoading, isError
-          // }] = useVendorChangeMutation();
-          // const [vendorAdd, {
-          //     // isFetching, isLoading, isError
-          //   }] = useVendorAddMutation();
-          // function handleSubmitVendor(){
-          //     if(id.id){
-          //         vendorChange({vendorId: id.id, body: getValues()}).unwrap()
-          //         .then((res) => {
-          //             console.log(res)
-          //         })
-          //         .catch((error) => {
-          //             console.log(error);
-          //         })
-          //         .finally()
-      
-          //     }
-          //     else {
-          //         vendorAdd(getValues()).unwrap()
-          //         .then((res) => {
-          //             console.log(res)
-          //         })
-          //         .catch((error) => {
-          //             console.log(error);
-          //         })
-          //         .finally()
-          //     }
-          // }
-          // useEffect(()=>{
-          //     if(id.id){
-          //     setVendorData(vendor)
-          //     console.log(id.id)
-          //     setValue('country', vendor?.country)
-          //     setValue('name', vendor?.name)
-          //     setValue('description', vendor?.description)}
-          // },[id, vendor, vendorData])
+        })
+      })
+      .catch((error)=>{
+        console.log(error)
+        setAddCardError(error.status)
+      })
+      .finally()
+    }
+    }
+        useEffect(() => {
+          if (addCardError === 401) {
+            setErrorText('Пользователь не авторизован');
+          }
+          if (addCardError === 400) {
+              console.log('ddd')
+            setErrorText('Некорректно заполнены поля');
+          }
+          if (addCardError === 403) {
+              setErrorText('Доступ запрещен');
+            }
+        }, [addCardError]);
+
+          useEffect(()=>{
+              if(id.id){
+              console.log(productDataCard)
+              setValue('quantity', productDataCard?.quantity? productDataCard.quantity: 0)
+              setValue('price', productDataCard?.price? productDataCard.price: 0)
+              setValue('installationPrice', productDataCard?.installationPrice? productDataCard.installationPrice: 0)
+              setValue('name', productDataCard?.name? productDataCard.name: '')
+              setValue('description', productDataCard?.description? productDataCard.description: '')
+              setValue('version', productDataCard?.version? productDataCard.version:'')
+              setValue('vendor', productDataCard?.vendor?.id? productDataCard.vendor.id: 1)
+              setValue('category', productDataCard?.category?.id? productDataCard.category.id: 1)}
+          },[id, product, productDataCard])
     return(
         <form className={styles.form} onSubmit={handleSubmit(handleSubmitCard)}>
           <Input
@@ -269,10 +355,10 @@ const productData = {hasDemo: true, category: getValues().category, description:
           <p className={styles.errorContainer__error}>{errorText}</p>
         </div>
         <div className={styles.sellerAddCard__btncontainer}>
-          <Button type='submit' isDisabled={!isValid} mode="primary">
+          <Button onClick = {()=>setSubmitBtnName('moderation')} isDisabled={!isValid}  type="submit"  mode="primary">
             На модерацию
           </Button>
-          <Button type="button" mode="secondary">
+          <Button onClick = {()=>setSubmitBtnName('save')} type="submit" isDisabled={!isValid} mode="secondary">
             Сохранить
           </Button>
         </div>

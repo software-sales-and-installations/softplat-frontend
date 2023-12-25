@@ -1,9 +1,12 @@
 import React from 'react';
 import styles from './CardPurchases.module.scss';
+import { Link } from 'react-router-dom';
 
 export type cardPurchasesProps = {
   id: number;
-  image: string;
+  image: {
+    id: number;
+  };
   name: string;
   vendor: {
     name: string;
@@ -15,7 +18,7 @@ export type cardPurchasesProps = {
 };
 
 const CardPurchases: React.FC<cardPurchasesProps> = ({
-  // id,
+  id,
   image,
   name,
   vendor,
@@ -40,10 +43,11 @@ const CardPurchases: React.FC<cardPurchasesProps> = ({
   const isExpired = currentDate.getTime() > expiredDate.getTime();
 
   return (
+    <Link to={`/product/${id}`} className={styles.link}>
     <li className={styles.cardPurchases}>
       <div className={styles.cardPurchases__imgContainer}>
         <img
-          src={image}
+          src={`https://api.softplat.ru/image/${image?.id}`}
           alt="Изображение продукта"
           className={styles.cardPurchases__img}
         />
@@ -81,6 +85,7 @@ const CardPurchases: React.FC<cardPurchasesProps> = ({
         {data.split(' ')[0].split('-').join('.')}
       </span>
     </li>
+    </Link>
   );
 };
 
