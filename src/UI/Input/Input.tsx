@@ -15,7 +15,8 @@ export const Input: FC<IInput> = ({
 	max,
 	defaultValue,
 	helpText,
-	typeError
+	typeError,
+                                    isPhone,
 }) => {
 	const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 	useEffect(() => {
@@ -33,7 +34,7 @@ export const Input: FC<IInput> = ({
 			: inputType;
 
 	return (
-		<div className={classNames(styles.input__container, inputType==='phone'? styles.input__container_type_phone: '') }>
+		<div className={classNames(styles.input__container, isPhone ? styles.input__container_type_phone: '') }>
 			<div className={styles.input__hints}>
 						{labelText ? (
 							<label
@@ -46,13 +47,13 @@ export const Input: FC<IInput> = ({
 
 					</div>
 					<input
-						autoComplete='off'
+						autoComplete='new-password'
 						{...validation}
 						onChange={ onChange ? onChange: (e) => {
 										validation.onChange(e)
 								  }
 						}
-						className={classNames(styles.input__field, error? styles.input__field_type_error: '', inputType==='phone'? styles.input__field_type_phone: '', readOnly ? styles.input__field_disabled : '')}
+						className={classNames(styles.input__field, error? styles.input__field_type_error: '', isPhone ? styles.input__field_type_phone: '', readOnly ? styles.input__field_disabled : '')}
 						type={inputTextType}
 						name={inputType}
 						id={inputType}
@@ -62,7 +63,7 @@ export const Input: FC<IInput> = ({
 						maxLength={inputTextType === 'date' ? 8 : undefined}
 						value={readOnly && value ? value : undefined}
 					/>
-					<span className={classNames(styles.input__error, typeError==='dataError'? styles.input__error_type_data: (typeError==='addCardError'?styles.input__error_type_addCardError:''))}>{error ? error : (helpText? 
+					<span className={classNames(styles.input__error, typeError==='dataError'? styles.input__error_type_data: (typeError==='addCardError'?styles.input__error_type_addCardError:''))}>{error ? error : (helpText?
 						<p className={styles.input__help}>{helpText}</p>
 						: '')}
 					</span>
