@@ -9,8 +9,7 @@ import {
 } from '../../utils/constants';
 import { ICabinetMenuProps } from './CabinetMenuTypes';
 import { RootState } from '../../services/redux/store';
-import { useEffect } from 'react';
-import { BsChevronCompactLeft } from 'react-icons/bs';
+
 
 const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
 
