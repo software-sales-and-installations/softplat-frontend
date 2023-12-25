@@ -54,7 +54,6 @@ const Breadcrumbs: FC<IBreadcrumbsProps> = ({ pageName, product }) => {
         if (
           !isPageProduct &&
           !isPageSeller &&
-          !isPageCart &&
           CATALOGUE_NAMES.find(item => item.pathName === crumb)
         ) {
           return (
@@ -85,7 +84,7 @@ const Breadcrumbs: FC<IBreadcrumbsProps> = ({ pageName, product }) => {
         }
 
         if (
-          (isPageProduct || isPageSeller || isPageCart) &&
+          (isPageProduct || isPageSeller) &&
           localStorage
             .getItem('urlPath')!
             .includes(
@@ -159,17 +158,18 @@ const Breadcrumbs: FC<IBreadcrumbsProps> = ({ pageName, product }) => {
               <Link to={currentLink}>{localStorage.getItem('pageName')}</Link>
             </div>
           )}
-          {localStorage.getItem('urlPath')!.includes('producers/') && (
-            <div className={style.breadcrumbs__crumb}>
-              <Link
-                to={`/producers/${
-                  JSON.parse(localStorage.getItem('product')!).vendor.id
-                }`}
-              >
-                {JSON.parse(localStorage.getItem('product')!).vendor.name}
-              </Link>
-            </div>
-          )}
+          {localStorage.getItem('urlPath')!.includes('producers/') &&
+            localStorage.getItem('product') && (
+              <div className={style.breadcrumbs__crumb}>
+                <Link
+                  to={`/producers/${
+                    JSON.parse(localStorage.getItem('product')!).vendor.id
+                  }`}
+                >
+                  {JSON.parse(localStorage.getItem('product')!).vendor.name}
+                </Link>
+              </div>
+            )}
           {localStorage.getItem('product') && (
             <div className={style.breadcrumbs__crumb}>
               <Link
