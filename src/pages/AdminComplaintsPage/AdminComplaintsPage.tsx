@@ -21,7 +21,7 @@ export const AdminComplaintsPage: FC = () => {
         <Breadcrumbs pageName='Карточка' />
       </div>
       <ProductInfo product={product} id={product?.image?.id.toString()} />
-      {product?.id && <Complaints id={product?.id.toString()} name={product?.name}/>}
+      {product?.id && <Complaints id={product?.id.toString()} isAdmin={true}/>}
       <AdminComplaintsForm />
     </div>
   );
