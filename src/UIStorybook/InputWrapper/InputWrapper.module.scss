@@ -16,6 +16,7 @@
 &__hint {
 @include font-body-filters;
   color: $dark-grey;
+  height: 15px;
 }
 
 &__error {
