@@ -20,7 +20,7 @@ import { ProtectedRouteForAdmin, ProtectedRouteForAdminAuth
 import NotFound from './pages/NotFound/NotFound.tsx';
 import { SellerPage } from './pages/SellerPage/SellerPage.tsx';
 import { ModerationPage } from './pages/ModerationPage/ModerationPage.tsx';
-import { SellerComplaintsPage } from './pages/AdminComplaintsPage/SellerComplaintsPage.tsx';
+import { SellerComplaintsPage } from './pages/SellerComplaintsPage/SellerComplaintsPage.tsx';
 
 function App() {
   return (
