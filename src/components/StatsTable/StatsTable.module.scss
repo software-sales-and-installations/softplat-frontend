@@ -1,0 +1,55 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.statsTable{
+    &__header{
+    display: flex;
+    gap: 20px;
+}
+&__cell{
+    text-align: start;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    overflow: hidden;
+    @include font-body-regular;
+    &_type_span{
+        @include font-CTAbody-regular;
+    }
+    &_type_number{
+        width: 45px;
+    }
+    &_type_name{
+        width: 155px;
+    }
+    &_type_art{
+        width: 100px;
+    }
+    &_type_demo{
+        width: 60px;
+    }
+   &_type_qty{
+    width: 70px;
+   }
+   &_type_sum{
+    width: 90px;
+   }
+   &_type_proceeds{
+    width: 90px;
+   }
+}
+&__containerforBtn{
+    width: 27%;
+}
+&__sum{
+    display: flex;
+    justify-content: space-between;
+}
+&__sumResult{
+    margin-right: 42px;
+    @include font-table-bold;
+}
+&__sumContainer{
+    display: flex;
+
+}
+}
