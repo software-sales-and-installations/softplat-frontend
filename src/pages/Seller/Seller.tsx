@@ -83,6 +83,7 @@ useEffect(()=>{
         </div>
         <Routes>
           <Route path="/add-card" element={<SellerAddNewCard />} />
+          <Route path="/add-card/:id" element={<SellerAddNewCard />} />
           <Route path="/drafts" element={<SellerDrafts />} />
           <Route path="/published" element={<SellerPublished />} />
           <Route path="/on-moderation" element={<SellerModeration />} />

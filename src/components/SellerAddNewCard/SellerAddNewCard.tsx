@@ -21,6 +21,7 @@ import { sellerDraftList, sellerShippedList } from '../../pages/Seller/SellerSli
 
 
 export const SellerAddNewCard: FC = () =>{
+  const id = useParams();
   const dispatch = useAppDispatch();
   const sellerShipped = useAppSelector((state: RootState) => state.sellerTotalProducts.sellerShippedList)
   const sellerDraft = useAppSelector((state: RootState) => state.sellerTotalProducts.sellerDraftList)
@@ -37,7 +38,7 @@ export const SellerAddNewCard: FC = () =>{
   });
   const {data: categoryList} = useCategoryListQuery({});
 
-  const id = useParams();
+  
   const [variantSoftware, setVariantSoftware] = useState ('Загрузка ПО')
   const { data: product} = usePublicProductQuery(id.id);
   const [productDataCard, setProductDataCard] = useState(product)
@@ -45,6 +46,7 @@ export const SellerAddNewCard: FC = () =>{
     const [productAddImage, {}] = useProductSubmitImageMutation();
 
   useEffect(()=>{
+    console.log(id.id)
     setProductDataCard(product)
   }, [product])
   const [subminBtnName, setSubmitBtnName] = useState('moderation')
