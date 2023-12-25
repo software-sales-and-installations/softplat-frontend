@@ -13,6 +13,9 @@ const Form = ({
                 width,
                 height,
                 children,
+                successText,
+  onClick,
+  onSecondaryClick,
   disabled,
   ...props
               }: FormProps) => {
@@ -27,12 +30,14 @@ const Form = ({
       <div className={[styles.form__buttonContainer, styles[`form_type_${formType}_buttonContainer`]].join(' ')}
       >
         <div className={styles.form__errorWrapper}>
-        <span className={styles.form__error}>{errorText}</span>
+          {formType !== 'search' && errorText ? (<span className={styles.form__error}>{errorText}</span>) : (<span className={styles.form__success}>{successText}</span>)}
           </div>
+        <div className={[styles.form__buttons, styles[`form_type_${formType}_buttons`]].join(' ')}>
         <Button disabled={disabled} width={width} height={height} buttonType={buttonType}
-                type='submit' {...props}>{buttonText}</Button>
-        {secondButtonText && <Button width={width} height={height} buttonType='minorSecondary'
+                type='submit' onClick={onClick} {...props}>{buttonText}</Button>
+        {secondButtonText && <Button onClick={onSecondaryClick} width={width} height={height} buttonType='minorSecondary'
                                      type='submit' {...props}>{secondButtonText}</Button>}
+      </div>
       </div>
     </form>
   );

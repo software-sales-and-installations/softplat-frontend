@@ -3,6 +3,7 @@ import styles from './ProductInfo.module.scss'
 import { SliderOneCard } from '../SliderOneCard/SliderOneCard.tsx';
 import { ReactNode } from 'react';
 import { IProductCard } from '../../ProductCard/ProductCardTypes.tsx';
+import { Link } from 'react-router-dom';
 
 
 interface IProductInfo {
@@ -38,7 +39,9 @@ const ProductInfo = ({children, product, id}: IProductInfo) => {
         <div className={styles.productInfo__priceInfo}>
           <h3>{product?.price} &#8381;</h3>
           <div>
-            <p>{product?.seller?.name}</p>
+            <Link className={styles.productInfo__link} to={`/seller-page/${product?.seller?.id}`}>
+              <p>{product?.seller?.name}</p>
+            </Link>
           </div>
           { product?.hasDemo && <Button onClick={handleDownloadDemo} buttonType='minorGrey' width='136px' height='35px'>Скачать демо</Button>}
         </div>

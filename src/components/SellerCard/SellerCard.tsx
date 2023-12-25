@@ -30,7 +30,7 @@ const SellerCard: React.FC<ISellerCardProps> = ({
           count
         ) : (
           <img
-          src={`https://api.softplat.ru/image/${image?.id}`} 
+            src={`https://api.softplat.ru/image/${image?.id}`}
             alt="Логотип продукта"
             className={styles.card__img}
           />

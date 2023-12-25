@@ -3,7 +3,7 @@ import styles from './VendorInfo.module.scss';
 import { VendorInfoProps } from './VendorInfoTypes';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 
-const VendorInfo: FC<VendorInfoProps> = ({ title, description, img }) => {
+const VendorInfo: FC<VendorInfoProps> = ({ title, description, image }) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const isShortText = description.length < 280 ? true : false;
   const resultText = isExpanded && !isShortText
@@ -15,7 +15,7 @@ const VendorInfo: FC<VendorInfoProps> = ({ title, description, img }) => {
     <div className={styles.vendorInfo}>
       <img
         className={styles.vendorInfo__img}
-        src={img}
+        src={`https://api.softplat.ru/image/${image?.id}`}
         alt="Логотип поставщика"
       />
       <div className={styles.vendorInfo__infoContainer}>

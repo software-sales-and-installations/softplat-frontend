@@ -52,7 +52,7 @@ const VendorPage: FC = () => {
         <VendorInfo
           title={vendor?.name || ''}
           description={vendor?.description || ''}
-          img={vendor?.image?.url || ''}
+          image={vendor?.image || ''}
         />
         <Categories />
         <div className={styles.vendorPage__selectForm}>

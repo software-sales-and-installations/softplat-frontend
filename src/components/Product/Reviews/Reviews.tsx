@@ -31,12 +31,9 @@ type Product = Omit<cardPurchasesProps, 'data'>;
   const {data: reviews , isLoading, error} = useProductCommentsQuery({productId: id, minId: '0', pageSize: count.toString()});
   const ratingArray = reviews?.comments?.map(item => Number(item.rating)) || [0];
   const totalRating = ratingArray?.length !== 0 ? (((ratingArray.reduce((sum, number) => Number(sum) + Number(number)) || 0) / ratingArray?.length)) : 0;
-  console.log (ratingArray)
-    console.log(ratingArray.length)
-    console.log(totalRating)
 
-  const { data: purchaseItems} = useOrderAllQuery(
-    localStorage.getItem('userId'),
+   const { data: purchaseItems} = useOrderAllQuery(
+    localStorage.getItem('userId'), { skip: localStorage.getItem('role') !== 'BUYER' }
   );
 
   const purchased = purchaseItems?.orders.map(
