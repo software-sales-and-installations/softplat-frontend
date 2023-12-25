@@ -14,7 +14,7 @@ import { useComplaintListQuery } from '../../utils/api/complaintApi';
 export const Admin: FC = () => {
   const { data } = usePublicProductListQuery({
     minId: 0,
-    pageSize: '',
+    pageSize: '30',
     sort: 'NEWEST',
   });
 
