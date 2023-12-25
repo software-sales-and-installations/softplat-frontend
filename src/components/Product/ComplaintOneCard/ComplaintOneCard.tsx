@@ -5,9 +5,10 @@ interface IReviewOneCardProps {
   author: string;
   text: string;
   id: number;
+  isAdmin: boolean;
 }
 
-const ComplaintOneCard = ({author, text, id}:IReviewOneCardProps) => {
+const ComplaintOneCard = ({author, text, id, isAdmin}:IReviewOneCardProps) => {
 
 
   const handleDecline = () => {
@@ -21,11 +22,11 @@ const ComplaintOneCard = ({author, text, id}:IReviewOneCardProps) => {
         <p className={styles.complaint__id}>Id {id}</p>
       <p className={styles.complaint__text}>{text}</p>
       </div>
-    <Button
+      {isAdmin && <Button
       buttonType='link'
       extClassName={styles.complaint__button}
       onClick={handleDecline}
-    >Отклонить</Button>
+    >Отклонить</Button>}
     </section>
   );
 };

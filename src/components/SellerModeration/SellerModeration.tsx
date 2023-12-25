@@ -10,10 +10,9 @@ import { useAppDispatch } from '../../services/redux/store';
 import { sellerShippedList } from '../../pages/Seller/SellerSlice';
 
 const SellerModeration: React.FC = () => {
-  const { data: publishedList, } =
-const SellerModeration: React.FC = () => {  
   const dispatch = useAppDispatch();
-  useProductSellerListQuery(
+  const { data: publishedList, } =
+    useProductSellerListQuery(
       {
         status: 'SHIPPED',
       },

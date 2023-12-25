@@ -34,6 +34,7 @@ import { userCommentApi } from '../../utils/api/userCommentApi.tsx';
 import { purchasesReducer } from './slices/purchases/purchases.ts';
 import { productReducer } from './slices/product/product.ts';
 import { reviewsReducer } from './slices/reviews/reviews.ts';
+import { complaintsReducer } from './slices/complaints/complaints.ts';
 
 const reducers = combineReducers({
 	user: userReducer,
@@ -54,7 +55,8 @@ const reducers = combineReducers({
   purchase: purchasesReducer,
   product: productReducer,
   reviews: reviewsReducer,
-	[adminApi.reducerPath]: adminApi.reducer,
+  complaints: complaintsReducer,
+  [adminApi.reducerPath]: adminApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [buyerBasketApi.reducerPath]: buyerBasketApi.reducer,
   [buyerApi.reducerPath]: buyerApi.reducer,
