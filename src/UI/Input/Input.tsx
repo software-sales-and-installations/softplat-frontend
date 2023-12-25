@@ -48,6 +48,7 @@ export const Input: FC<IInput> = ({
 					</div>
 					<input
 						autoComplete='new-password'
+            aria-autocomplete='none'
 						{...validation}
 						onChange={ onChange ? onChange: (e) => {
 										validation.onChange(e)
