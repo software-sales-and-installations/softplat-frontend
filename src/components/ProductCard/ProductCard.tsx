@@ -75,7 +75,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
     }
   };
 
-  const handleremoveFromCart = async () => {
+  const handleRemoveFromCart = async () => {
     if (userId) {
       await asyncRemoveFromCart(card, buyerBasketDeleteItem, dispatch);
     } else {
@@ -138,7 +138,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
         <div className={styles.card__buttons}>
           <button
             className={styles.card__changeQuantity}
-            onClick={handleremoveFromCart}
+            onClick={handleRemoveFromCart}
             disabled={removeItemError.isError}
           >
             -
