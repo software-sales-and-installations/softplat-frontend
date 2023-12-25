@@ -16,7 +16,7 @@ export const SellerComplaintsTable: FC = () => {
         refetchOnMountOrArgChange: true
       });
       useEffect(()=>{
-        dispatch(sellerComplaintList(complaintList?.totalProducts))
+        dispatch(sellerComplaintList(complaintList?.totalComplaints))
       }, [complaintList])
 
       const [newItems, setNewItems] = useState<IComplaint[]>([])
