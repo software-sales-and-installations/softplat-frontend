@@ -92,7 +92,7 @@ export const PopupForAuth: FC = () => {
   }, [authError]);
   return (
     <Popup>
-      <form className={styles.form} onSubmit={handleSubmit(handleSubmitLogin)}>
+      <form className={styles.form} onSubmit={handleSubmit(handleSubmitLogin)} autoComplete="off">
         <Input
           inputType={InputTypes.email}
           labelText="e-mail"
