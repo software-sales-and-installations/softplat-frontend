@@ -69,6 +69,7 @@ const ProductModerationForm = () => {
       register={register}
       rows={11}
       cols={48}
+      options='false'
       name='moderation'
     />
   </InputWrapper>
