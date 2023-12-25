@@ -60,7 +60,7 @@ export const SellerComplaintsTable: FC = () => {
         {newItems.map((i: any)=>{
         return (
         <tr className={styles.line} key={i.id}>
-          <Link className={classNames(styles.line, styles.line_type_body)} to={`/product/${i.product.id}`}>
+          <Link className={classNames(styles.line, styles.line_type_body)} to={`/seller/appeal/${i.product.id}`}>
             <td className={classNames(styles.cellName, styles.cell, styles.cell_type_body)}>
                 <p className={styles.cell__text}>{i.product.name}</p>
             </td>

@@ -18,14 +18,14 @@ position: relative;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        margin: 15px auto 0;
+        margin: 0 auto;
       }
       &_buttons {
         width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        margin: 15px auto 0;
+        margin: 0 auto;
       }
     }
     &_search {

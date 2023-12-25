@@ -17,8 +17,6 @@ const Recommended: FC = () => {
       card.productStatus === ProductStatus.PUBLISHED && card.quantity > 0,
   );
 
-  console.log(recommendedCards);
-
   return (
     <section className={styles.recommended}>
       <h2 className={styles.recommended__title}>Рекомендуем к покупке</h2>
