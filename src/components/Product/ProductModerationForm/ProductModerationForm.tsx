@@ -63,12 +63,14 @@ const ProductModerationForm = () => {
   <InputWrapper
     inputId='moderationText'
     labelText='Замечания к доработке'
-    errorText={errors?.review?.message?.toString()}>
+    errorText={errors?.moderation?.message?.toString()}>
     <Textarea
       id='moderationText'
       register={register}
       rows={11}
       cols={48}
+      options='false'
+      name='moderation'
     />
   </InputWrapper>
 </Form>

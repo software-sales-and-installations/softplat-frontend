@@ -12,6 +12,9 @@ export const Input = ({
                         isValid,
                         width,
                         height,
+  register,
+  options,
+  name,
                         ...props
                       }: InputProps) => {
   return (
@@ -20,6 +23,7 @@ export const Input = ({
       className={[styles.input, styles[`input_type_${inputType}`], isValid && styles.input_invalid, extClassName].join(' ')}
       type={type}
       style={{width: `${width}`, height: `${height}`}}
+      {...register( name, {required: options})}
       {...props}
     />
   );

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 
 interface IProductInfo {
-  children: ReactNode;
+  children?: ReactNode;
   product: IProductCard | undefined;
   id: string | undefined;
 }
