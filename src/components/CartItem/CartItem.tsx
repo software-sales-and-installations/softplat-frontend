@@ -151,7 +151,7 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
       <Checkbox onCheck={handleBuyCheckboxChange} checked={isChecked} />
 
       <img
-        src={`https://api.softplat.ru/image/${product.image.id}`}
+        src={`https://api.softplat.ru/image/${product.image?.id}`}
         alt="Фотография товара"
         className={style.cartItem__img}
         onClick={linkToPage}
