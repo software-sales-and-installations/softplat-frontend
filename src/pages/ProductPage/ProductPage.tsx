@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppSelector } from '../../services/redux/store';
 import { usePublicProductQuery } from '../../utils/api/publicProductApi.tsx';
 
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
@@ -15,7 +14,6 @@ import styles from './ProductPage.module.scss';
 
 export const ProductPage: FC = () => {
   const { id } = useParams();
-  const cardData = useAppSelector(state => state.cards.card);
   // const [tooltipText, setTooltipText] = useState('');
 
   const { data: product, isError: productError} = usePublicProductQuery(id);
@@ -23,10 +21,10 @@ export const ProductPage: FC = () => {
   return (
     <div className={styles.productPage}>
       <div className={styles.breadcrumbs}>
-        <Breadcrumbs vendor={cardData.vendor!} />
+        <Breadcrumbs product={product} />
       </div>
       <ProductInfo product={product} id={product?.image?.id.toString()}>
-        <ProductButtons error={productError} id={product?.id.toString()} instPrice={product?.installationPrice}/>
+        {product && <ProductButtons card={product} error={productError} id={product?.id.toString()} instPrice={product?.installationPrice}/>}
       </ProductInfo>
       {product?.id && <Reviews id={product?.id.toString()} name={product?.name}/>}
       {product?.id && <Similar id={product?.id.toString()}/>}

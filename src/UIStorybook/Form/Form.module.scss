@@ -8,14 +8,24 @@ position: relative;
       &_buttonContainer {
         margin: 5px auto 0;
       }
+      &_buttons {
+        margin: 5px auto 0;
+      }
     }
     &_twoButtons {
       &_buttonContainer {
         width: 100%;
         display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 0 auto;
+      }
+      &_buttons {
+        width: 100%;
+        display: flex;
         flex-direction: row;
         justify-content: space-between;
-        margin: 15px auto 0;
+        margin: 0 auto;
       }
     }
     &_search {
@@ -35,5 +45,9 @@ position: relative;
   &__error {
     @include font-body-signature;
     color: $red-alert-system;
+  }
+  &__success {
+    @include font-body-signature;
+    color: $green-approve-system;
   }
 }

@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { useOrderAllQuery } from '../../../utils/api/buyerOrderApi.tsx';
 import { cardPurchasesProps } from '../../CardPurchases/CardPurchases.tsx';
 import { productName, productId } from '../../../services/redux/slices/product/product.ts';
+import { setIsReview } from '../../../services/redux/slices/reviews/reviews.ts';
 
 interface IReviewProps {
   id: string | undefined;
@@ -28,11 +29,11 @@ type Product = Omit<cardPurchasesProps, 'data'>;
   const [userId, setUserId] = useState(localStorage.getItem('userId'));
   const [count, setCount] = useState(2)
   const {data: reviews , isLoading, error} = useProductCommentsQuery({productId: id, minId: '0', pageSize: count.toString()});
-  const ratingArray = reviews?.comments?.map(item => item.rating) || [0];
-  const totalRating = ratingArray?.length !== 0 ? (ratingArray.reduce((sum, number) => Number(sum) + Number(number)) || 0 / ratingArray?.length) : 0;
+  const ratingArray = reviews?.comments?.map(item => Number(item.rating)) || [0];
+  const totalRating = ratingArray?.length !== 0 ? (((ratingArray.reduce((sum, number) => Number(sum) + Number(number)) || 0) / ratingArray?.length)) : 0;
 
-  const { data: purchaseItems} = useOrderAllQuery(
-    localStorage.getItem('userId'),
+   const { data: purchaseItems} = useOrderAllQuery(
+    localStorage.getItem('userId'), { skip: localStorage.getItem('role') !== 'BUYER' }
   );
 
   const purchased = purchaseItems?.orders.map(
@@ -60,6 +61,7 @@ type Product = Omit<cardPurchasesProps, 'data'>;
     dispatch(popupState(true));
     dispatch(productName(name || ''))
     dispatch(productId(id || ''))
+    dispatch(setIsReview(true));
   }
 
   const handleMoreClick = () => {
@@ -89,7 +91,7 @@ type Product = Omit<cardPurchasesProps, 'data'>;
           <ReviewOneCard key={'review' + review.id} author={review.author.name} text={review.text} rating={review.rating}/>
         ))
       )}
-      { reviews?.comments.length! >= 2 && count <= reviews?.totalComments! && <Button onClick={handleMoreClick} buttonType='link' extClassName={styles.reviews__more}>Все отзывы</Button>}
+      { reviews?.comments.length! > 2 && count <= reviews?.totalComments! && <Button onClick={handleMoreClick} buttonType='link' extClassName={styles.reviews__more}>Все отзывы</Button>}
     </section>
 </>
 );

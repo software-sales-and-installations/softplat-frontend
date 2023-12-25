@@ -2,16 +2,19 @@ import styles from '../AddToCartButton/AddToCartButton.module.scss';
 import { Button } from '../../UIStorybook/Button/Button.tsx';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store.ts';
 import { useBuyerBasketAddItemMutation, useBuyerBasketDeleteItemMutation } from '../../utils/api/buyerBasketApi.tsx';
-import { setCartItems } from '../../services/redux/slices/cart/cart.tsx';
+import { addToLocalStorage, setCartItems } from '../../services/redux/slices/cart/cart.tsx';
+import { IProductCard } from '../ProductCard/ProductCardTypes.tsx';
 
 interface IAddToCartButton {
   id: string | undefined;
   isInstallationSelected: boolean;
   type: 'big' | 'small';
+  card: IProductCard;
 }
 
-export const AddToCartButton = ({id, isInstallationSelected, type}: IAddToCartButton) => {
+export const AddToCartButton = ({id, isInstallationSelected, type, card}: IAddToCartButton) => {
   const dispatch = useAppDispatch();
+  const userId = localStorage.getItem('userId');
   const cart = useAppSelector(store => store.cart?.items);
   const countItemInCart = cart.filter(
     item =>
@@ -22,6 +25,7 @@ export const AddToCartButton = ({id, isInstallationSelected, type}: IAddToCartBu
   const [buyerBasketAdd, { isError: addItemError }] = useBuyerBasketAddItemMutation();
 
   const handleAddToCart = () => {
+    if (userId) {
     buyerBasketAdd({productId: id, installation: isInstallationSelected}).unwrap()
   .then((res: any) => {
     dispatch(setCartItems(res.productsInBasket));
@@ -29,9 +33,12 @@ export const AddToCartButton = ({id, isInstallationSelected, type}: IAddToCartBu
       .catch((error: any) => {
     console.error('Error adding item to cart:', error);
       })
+  } else {
+      addToLocalStorage(card, dispatch);
+    }
   }
 
-  const [buyerBasketDelete] = useBuyerBasketDeleteItemMutation();
+  const [buyerBasketDelete ] = useBuyerBasketDeleteItemMutation();
 
   const handleRemoveFromCart = () => {
     buyerBasketDelete({productId: id, installation: isInstallationSelected}).unwrap()

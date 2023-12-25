@@ -18,6 +18,9 @@ import { ProtectedRouteForAdmin, ProtectedRouteForAdminAuth
   // ProtectedRouteForBuyer, ProtectedRouteForSeller
 } from './components/ProtectedRoute/ProtectedRoute.tsx';
 import NotFound from './pages/NotFound/NotFound.tsx';
+import { SellerPage } from './pages/SellerPage/SellerPage.tsx';
+import { ModerationPage } from './pages/ModerationPage/ModerationPage.tsx';
+import { AdminComplaintsPage } from './pages/AdminComplaintsPage/AdminComplaintsPage.tsx';
 
 function App() {
   return (
@@ -57,10 +60,17 @@ function App() {
                 <Seller />
               // </ProtectedRouteForSeller>
             } />
+          {/*<Route*/}
+          {/*  path="/seller/appeal/:id"*/}
+          {/*  element={*/}
+          {/*    <ProtectedRouteForSeller>*/}
+          {/*       <SellerComplaintsPage/>*/}
+          {/*    </ProtectedRouteForSeller>*/}
+          {/*  } />*/}
           <Route
             path="/seller"
             element={
-              //<ProtectedRouteForSeller>
+              // <ProtectedRouteForSeller>
                 <Navigate to="/seller/published" />
               //</ProtectedRouteForSeller>
             } />
@@ -78,6 +88,20 @@ function App() {
                 <Navigate to="/admin/published" />
               </ProtectedRouteForAdmin>
             } />
+          <Route
+            path="/admin/on-moderation/:id"
+            element={
+              <ProtectedRouteForAdmin>
+                <ModerationPage/>
+              </ProtectedRouteForAdmin>
+            } />
+          <Route
+            path="/admin/appeal/:id"
+            element={
+              <ProtectedRouteForAdmin>
+                <AdminComplaintsPage/>
+              </ProtectedRouteForAdmin>
+            } />
             <Route
             path="/admin-auth"
             element={
@@ -85,6 +109,7 @@ function App() {
                 <Navigate to="/" />
               </ProtectedRouteForAdminAuth>
             } />
+            <Route path='/seller-page/:id' element={<SellerPage/>}/>
             <Route path='*' element={<NotFound />} />
         </Routes>
       </MainWrapper>

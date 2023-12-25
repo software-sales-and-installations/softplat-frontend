@@ -3,8 +3,8 @@
 
 .textarea {
   @include font-input-field;
-  background-color: $light-grey;
-  border: none;
+  border: 1px solid $border-input;
+  background-color: $input-blue;
   border-radius: 10px;
   padding: 15px;
   display: block;

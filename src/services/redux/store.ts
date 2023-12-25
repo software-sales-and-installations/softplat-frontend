@@ -2,6 +2,7 @@ import {reducer as toggleBtnReducer} from '../../UI/ToggleButton/ToggleButtonSli
 import {reducer as chooseRoleReducer} from '../../UI/ChooseRole/ChooseRoleSlice';
 import {reducer as popupStateReducer} from '../../UI/Popup/PopupSlice';
 import {reducer as signoutReducer} from '../../components/SignOutPopup/SignOutPopupSlice.tsx';
+import {reducer as sellerTotalProductsReducer} from '../../pages/Seller/SellerSlice.tsx';
 import {reducer as isSuccessCardDataReducer} from '../../components/PayPopup/PayPopupSlice.tsx';
 import {reducer as isSuccessPayReducer} from '../../components/CartSummary/CartSummarySlice.tsx';
 import {reducer as isNotSuccessPayReducer} from '../../components/CartSummary/CartSummarySlice.tsx';
@@ -24,6 +25,7 @@ import { imageApi } from '../../utils/api/imageApi.tsx';
 import { publicCommentApi } from '../../utils/api/publicCommentApi.tsx';
 import { publicProductApi } from '../../utils/api/publicProductApi.tsx';
 import { userProductApi } from '../../utils/api/userProductApi.tsx';
+import { submitImageApi } from '../../utils/api/submitImageApi.tsx';
 import { vendorApi } from '../../utils/api/vendorApi.tsx';
 import { cartReducer } from './slices/cart/cart';
 import { favoriteReducer } from './slices/favourites/favourites.tsx';
@@ -31,6 +33,7 @@ import { complaintApi } from '../../utils/api/complaintApi.tsx';
 import { userCommentApi } from '../../utils/api/userCommentApi.tsx';
 import { purchasesReducer } from './slices/purchases/purchases.ts';
 import { productReducer } from './slices/product/product.ts';
+import { reviewsReducer } from './slices/reviews/reviews.ts';
 
 const reducers = combineReducers({
 	user: userReducer,
@@ -42,6 +45,7 @@ const reducers = combineReducers({
   isNotSuccessPay: isNotSuccessPayReducer,
 	dropdown: dropDownReducer,
   signout: signoutReducer,
+  sellerTotalProducts: sellerTotalProductsReducer,
 	cards: cardsReducer,
 	vendors: vendorsReducer,
 	cart: cartReducer,
@@ -49,6 +53,7 @@ const reducers = combineReducers({
   purchases: purchasesReducer,
   purchase: purchasesReducer,
   product: productReducer,
+  reviews: reviewsReducer,
 	[adminApi.reducerPath]: adminApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [buyerBasketApi.reducerPath]: buyerBasketApi.reducer,
@@ -62,6 +67,7 @@ const reducers = combineReducers({
   [sellerApi.reducerPath]: sellerApi.reducer,
   [userCommentApi.reducerPath]: userCommentApi.reducer,
   [userProductApi.reducerPath]: userProductApi.reducer,
+  [submitImageApi.reducerPath]: submitImageApi.reducer,
   [vendorApi.reducerPath]: vendorApi.reducer,
 });
 
@@ -81,6 +87,7 @@ export const store = configureStore({
     sellerApi.middleware,
     userCommentApi.middleware,
     userProductApi.middleware,
+    submitImageApi.middleware,
     complaintApi.middleware,
     vendorApi.middleware,
     )

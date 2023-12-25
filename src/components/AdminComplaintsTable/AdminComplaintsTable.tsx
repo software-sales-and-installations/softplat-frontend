@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useComplaintListQuery } from '../../utils/api/complaintApi';
 import { IComplaint } from './AdminComplaintsType';
 import { INewComplaints} from './AdminComplaintsType';
+import { Link } from 'react-router-dom';
 
 export const AdminComplaintsTable: FC = () =>{
     const {data: complaintList=[]} = useComplaintListQuery({},{
@@ -60,23 +61,33 @@ export const AdminComplaintsTable: FC = () =>{
        {newItems.map((i: any)=>{
         return (
         <tr className={classNames(styles.line, styles.line_type_body)} key={i.id}>
-          <>
+          
             <td className={classNames(styles.cellName, styles.cell, styles.cell_type_body)}>
+            <Link className={classNames(styles.link, styles.line, styles.line_type_body)} to={`/admin/appeal/${i.product.id}`}>
                 <p className={styles.cell__text}>{i.product.name}</p>
+              </Link>
             </td>
             <td className={classNames(styles.cellVendor, styles.cell, styles.cell_type_body)}>
+            <Link className={classNames(styles.link, styles.line, styles.line_type_body)} to={`/admin/appeal/${i.product.id}`}>
                 <p className={classNames(styles.cell__text) }>{i.product.vendor?.name}</p>
+                </Link>
             </td>
             <td className={classNames(styles.cellSeller, styles.cell, styles.cell_type_body)}>
+            <Link className={classNames(styles.link, styles.line, styles.line_type_body)} to={`/admin/appeal/${i.product.id}`}>
                 <p className={styles.cell__text}>{i.product.seller?.name}</p>
+                </Link>
             </td>
             <td className={classNames(styles.cellArt, styles.cell, styles.cell_type_body)}>
+            <Link className={classNames(styles.link, styles.line, styles.line_type_body)} to={`/admin/appeal/${i.product.id}`}>
                 <p className={styles.cell__text}>{i.product.id}</p>
+                </Link>
             </td>
             <td className={classNames(styles.cellQty, styles.cell, styles.cell_type_body)}>
+            <Link className={classNames(styles.link, styles.line, styles.line_type_body)} to={`/admin/appeal/${i.product.id}`}>
                 <p className={styles.cell__text}>{i.qty}</p>
+                </Link>
             </td>
-            </>
+            
         </tr>)
        })}
         </tbody>

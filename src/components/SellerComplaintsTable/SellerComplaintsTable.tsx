@@ -7,11 +7,17 @@ import { useComplaintSellerListQuery } from '../../utils/api/complaintApi';
 import { INewComplaints } from './SellerComplaintsTableTypes';
 import { IComplaint } from './SellerComplaintsTableTypes';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../services/redux/store';
+import { sellerComplaintList } from '../../pages/Seller/SellerSlice';
 
 export const SellerComplaintsTable: FC = () => {
+  const dispatch = useAppDispatch();
     const {data: complaintList=[]} = useComplaintSellerListQuery({},{
         refetchOnMountOrArgChange: true
       });
+      useEffect(()=>{
+        dispatch(sellerComplaintList(complaintList?.totalComplaints))
+      }, [complaintList])
 
       const [newItems, setNewItems] = useState<IComplaint[]>([])
       function productIdList(){
@@ -60,7 +66,7 @@ export const SellerComplaintsTable: FC = () => {
         {newItems.map((i: any)=>{
         return (
         <tr className={styles.line} key={i.id}>
-          <Link className={classNames(styles.line, styles.line_type_body)} to={`/product/${i.product.id}`}>
+          <Link className={classNames(styles.line, styles.line_type_body)} to={`/seller/appeal/${i.product.id}`}>
             <td className={classNames(styles.cellName, styles.cell, styles.cell_type_body)}>
                 <p className={styles.cell__text}>{i.product.name}</p>
             </td>
