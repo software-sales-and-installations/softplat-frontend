@@ -35,7 +35,7 @@ const CatalogSection: FC = () => {
 
   const { data, error, isLoading } = usePublicProductListQuery({
     minId: 0,
-    pageSize: '',
+    pageSize: '30',
     sort: selectState,
   });
 
