@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import styles from './Seller.module.scss';
 import CabinetMenu from '../../components/CabinetMenu/CabinetMenu';
 import { Routes, Route } from 'react-router-dom';
@@ -15,8 +15,11 @@ import SellerSales from '../../components/SellerSales/SellerSales';
 import { SellerComplaintsTable } from '../../components/SellerComplaintsTable/SellerComplaintsTable';
 import { useSellerProductListQuery } from '../../utils/api/sellerApi';
 import { useComplaintSellerListQuery } from '../../utils/api/complaintApi';
+import { useDispatch } from 'react-redux';
+import { setSellerTotalProducts } from './SellerSlice';
 
 export const Seller: FC = () => {
+  const dispatch = useDispatch();
   const { data: draftList, isSuccess: isDraftListSuccess } =
     useSellerProductListQuery(
       {
@@ -47,7 +50,7 @@ export const Seller: FC = () => {
     );
   const { data: complaintList, isSuccess: isComplaintListSuccess } =
     useComplaintSellerListQuery({}, { refetchOnMountOrArgChange: true });
-
+useEffect(()=>{
   if (
     isDraftListSuccess &&
     isPublishedListSuccess &&
@@ -55,12 +58,26 @@ export const Seller: FC = () => {
     isShippedListSuccess &&
     isComplaintListSuccess
   ) {
-    localStorage.setItem('sellerDraftList', JSON.stringify(draftList));
-    localStorage.setItem('sellerPublishedList', JSON.stringify(publishedList));
-    localStorage.setItem('sellerRejectedList', JSON.stringify(rejectedList));
-    localStorage.setItem('sellerShippedList', JSON.stringify(shippedList));
-    localStorage.setItem('sellerComplaintList', JSON.stringify(complaintList));
+    dispatch(setSellerTotalProducts({
+      sellerDraftList: draftList.totalProducts, 
+      sellerPublishedList: publishedList.totalProducts,
+      sellerRejectedList: rejectedList.totalProducts,
+      sellerShippedList: shippedList.totalProducts,
+      sellerComplaintList: complaintList.totalComplaints
+    }))
+    // dispatch(setSellerTotalProducts({sellerPublishedList: publishedList.totalProducts}))
+    // dispatch(setSellerTotalProducts({sellerRejectedList: rejectedList.totalProducts}))
+    // dispatch(setSellerTotalProducts({sellerShippedList: shippedList.totalProducts}))
+    // dispatch(setSellerTotalProducts({sellerComplaintList: complaintList.totalProducts}))
+    console.log(draftList.totalProducts)
+    // localStorage.setItem('sellerDraftList', JSON.stringify(draftList));
+    // localStorage.setItem('sellerPublishedList', JSON.stringify(publishedList));
+    // localStorage.setItem('sellerRejectedList', JSON.stringify(rejectedList));
+    // localStorage.setItem('sellerShippedList', JSON.stringify(shippedList));
+    // localStorage.setItem('sellerComplaintList', JSON.stringify(complaintList));
   }
+
+},[draftList,publishedList,rejectedList,shippedList,complaintList])
 
   return (
     <>

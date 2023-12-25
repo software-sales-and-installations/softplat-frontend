@@ -1,6 +1,6 @@
 import styles from './CabinetMenu.module.scss';
 import { NavLink } from 'react-router-dom';
-import { useAppDispatch } from '../../services/redux/store';
+import { useAppDispatch, useAppSelector } from '../../services/redux/store';
 import { popupState } from '../../UI/Popup/PopupSlice';
 import {
   personalMenuItems,
@@ -8,19 +8,25 @@ import {
   adminMenuItems,
 } from '../../utils/constants';
 import { ICabinetMenuProps } from './CabinetMenuTypes';
+import { RootState } from '../../services/redux/store';
+import { useEffect } from 'react';
+import { BsChevronCompactLeft } from 'react-icons/bs';
 
 const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
   const dispatch = useAppDispatch();
+  const sellerTotalProducts = useAppSelector((state: RootState) => state.sellerTotalProducts.sellerTotalProducts);
   const isSeller = mode === 'seller';
   const isAdmin = mode === 'admin';
   const isUser = mode === 'user';
 
+
   const totalDraft = isSeller
-    ? localStorage.getItem('sellerDraftList')
-      ? JSON.parse(
-          JSON.parse(localStorage.getItem('sellerDraftList')!).totalProducts,
-        )
-      : 0
+    ? sellerTotalProducts.sellerDraftList
+    // localStorage.getItem('sellerDraftList')
+    //   ? JSON.parse(
+    //       JSON.parse(localStorage.getItem('sellerDraftList')!).totalProducts,
+    //     )
+    //   : 0
     : isAdmin
     ? localStorage.getItem('adminDraftList')
       ? JSON.parse(
@@ -29,18 +35,20 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
       : 0
     : 0;
   const totalPublished = isSeller
-    ? localStorage.getItem('sellerPublishedList')
-      ? JSON.parse(localStorage.getItem('sellerPublishedList')!).totalProducts
-      : 0
+    ? sellerTotalProducts.sellerPublishedList
+    // localStorage.getItem('sellerPublishedList')
+    //   ? JSON.parse(localStorage.getItem('sellerPublishedList')!).totalProducts
+    //   : 0
     : isAdmin
     ? localStorage.getItem('adminPublishedList')
       ? JSON.parse(localStorage.getItem('adminPublishedList')!).totalProducts
       : 0
     : 0;
   const totalRejected = isSeller
-    ? localStorage.getItem('sellerRejectedList')
-      ? JSON.parse(localStorage.getItem('sellerRejectedList')!).totalProducts
-      : 0
+    ? sellerTotalProducts.sellerRejectedList
+    // localStorage.getItem('sellerRejectedList')
+    //   ? JSON.parse(localStorage.getItem('sellerRejectedList')!).totalProducts
+    //   : 0
     : isAdmin
     ? localStorage.getItem('adminRejectedList')
       ? JSON.parse(localStorage.getItem('adminRejectedList')!).totalProducts
@@ -56,15 +64,18 @@ const CabinetMenu: React.FC<ICabinetMenuProps> = ({ mode }) => {
       : 0
     : 0;
   const totalComplaints = isSeller
-    ? localStorage.getItem('sellerComplaintList')
-      ? JSON.parse(localStorage.getItem('sellerComplaintList')!).totalComplaints
-      : 0
+    ? sellerTotalProducts.sellerComplaintList
+    // localStorage.getItem('sellerComplaintList')
+    //   ? JSON.parse(localStorage.getItem('sellerComplaintList')!).totalComplaints
+    //   : 0
     : isAdmin
     ? localStorage.getItem('adminComplaintList')
       ? JSON.parse(localStorage.getItem('adminComplaintList')!).totalComplaints
       : 0
     : 0;
-
+    useEffect(()=>{
+      console.log(sellerTotalProducts)
+    },[totalDraft])
   return (
     <>
       <nav className={styles.personalTitles}>
