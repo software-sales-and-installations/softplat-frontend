@@ -31,7 +31,7 @@
   &__img {
     width: 65px;
     height: 65px;
-    object-fit: cover;
+    object-fit: contain;
   }
   &__title {
     text-overflow: ellipsis;

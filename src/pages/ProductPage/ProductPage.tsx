@@ -14,6 +14,7 @@ import styles from './ProductPage.module.scss';
 
 export const ProductPage: FC = () => {
   const { id } = useParams();
+  const role = localStorage.getItem('role')
   // const [tooltipText, setTooltipText] = useState('');
 
   const { data: product, isError: productError} = usePublicProductQuery(id);
@@ -24,7 +25,7 @@ export const ProductPage: FC = () => {
         <Breadcrumbs product={product} />
       </div>
       <ProductInfo product={product} id={product?.image?.id.toString()}>
-        {product && <ProductButtons card={product} error={productError} id={product?.id.toString()} instPrice={product?.installationPrice}/>}
+        {product && (role==='ADMIN'|| role==='SELLER'? null :<ProductButtons card={product} error={productError} id={product?.id.toString()} instPrice={product?.installationPrice}/>)}
       </ProductInfo>
       {product?.id && <Reviews id={product?.id.toString()} name={product?.name}/>}
       {product?.id && <Similar id={product?.id.toString()}/>}
