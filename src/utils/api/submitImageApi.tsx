@@ -26,9 +26,17 @@ export const submitImageApi = createApi({
               body
             }),
           }),
+        vendorSubmitImage: build.mutation({
+            query: ({ vendorId, body }) => ({
+              url: `/vendor/${vendorId}/image`,
+              method: 'POST',
+              body
+            }),
+          }),
     })
 
 })
 export const {
-    useProductSubmitImageMutation
+    useProductSubmitImageMutation,
+    useVendorSubmitImageMutation
 } = submitImageApi
