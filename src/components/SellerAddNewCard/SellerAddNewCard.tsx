@@ -91,7 +91,11 @@ export const SellerAddNewCard: FC = () =>{
       productCreate(productData).unwrap()
       .then((res) => {
         dispatch(sellerDraftList(sellerDraft+1))
-          const newData = new FormData();
+        if(subminBtnName==='moderation'){
+          console.log(res.id)
+          productSendToModeration({productId: res.id}).unwrap()
+            .then((res) => {
+              const newData = new FormData();
           newData.append('image', productData.logo[0]);
           productAddImage({productId: res.id, body: newData}).unwrap()
             .then((res) => {
@@ -103,23 +107,20 @@ export const SellerAddNewCard: FC = () =>{
             setErrorText('При загрузке картинки произошла ошибка')
           })
             .finally(()=>{
-              if(subminBtnName==='moderation'){
-              console.log(res.id)
-              productSendToModeration({productId: res.id}).unwrap()
-                .then((res) => {
-                  console.log(res)
-                  setErrorText('Данные сохранены')
-                  dispatch(sellerShippedList(sellerShipped+1))
-                  dispatch(sellerDraftList(sellerDraft))
-                })
-                .catch((error) => {
-                  console.log(error);
-                  setErrorText('При отправке товара на модерацию произошла ошибка, товар сохранен во вкладке Черновики')
-                })
-                .finally()
-          }
+              
         })
         
+              console.log(res)
+              setErrorText('Данные сохранены')
+              dispatch(sellerShippedList(sellerShipped+1))
+              dispatch(sellerDraftList(sellerDraft))
+            })
+            .catch((error) => {
+              console.log(error);
+              setErrorText('При отправке товара на модерацию произошла ошибка, товар сохранен во вкладке Черновики')
+            })
+            .finally()
+      }
       })
       .catch((error) => {
         setAddCardError(error.status)
