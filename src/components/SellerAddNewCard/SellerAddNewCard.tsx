@@ -14,8 +14,17 @@ import { usePublicProductQuery } from '../../utils/api/publicProductApi';
 import { useCategoryListQuery } from '../../utils/api/categoryApi';
 import { useParams } from 'react-router-dom';
 import { useProductSubmitImageMutation } from '../../utils/api/submitImageApi';
+import { useAppDispatch } from '../../services/redux/store';
+import { useAppSelector } from '../../services/redux/store';
+import { RootState } from '../../services/redux/store';
+import { sellerDraftList, sellerShippedList } from '../../pages/Seller/SellerSlice';
+
 
 export const SellerAddNewCard: FC = () =>{
+  const id = useParams();
+  const dispatch = useAppDispatch();
+  const sellerShipped = useAppSelector((state: RootState) => state.sellerTotalProducts.sellerShippedList)
+  const sellerDraft = useAppSelector((state: RootState) => state.sellerTotalProducts.sellerDraftList)
   const [productCreate, {
     //     // isFetching, isLoading, isError
       }] = useProductCreateMutation();
@@ -29,7 +38,7 @@ export const SellerAddNewCard: FC = () =>{
   });
   const {data: categoryList} = useCategoryListQuery({});
 
-  const id = useParams();
+  
   const [variantSoftware, setVariantSoftware] = useState ('Загрузка ПО')
   const { data: product} = usePublicProductQuery(id.id);
   const [productDataCard, setProductDataCard] = useState(product)
@@ -37,6 +46,7 @@ export const SellerAddNewCard: FC = () =>{
     const [productAddImage, {}] = useProductSubmitImageMutation();
 
   useEffect(()=>{
+    console.log(id.id)
     setProductDataCard(product)
   }, [product])
   const [subminBtnName, setSubmitBtnName] = useState('moderation')
@@ -80,11 +90,13 @@ export const SellerAddNewCard: FC = () =>{
     if(!id.id){
       productCreate(productData).unwrap()
       .then((res) => {
+        dispatch(sellerDraftList(sellerDraft+1))
           const newData = new FormData();
           newData.append('image', productData.logo[0]);
           productAddImage({productId: res.id, body: newData}).unwrap()
             .then((res) => {
             console.log(res)
+            
             })
             .catch((error) => {
             console.log(error);
@@ -97,6 +109,8 @@ export const SellerAddNewCard: FC = () =>{
                 .then((res) => {
                   console.log(res)
                   setErrorText('Данные сохранены')
+                  dispatch(sellerShippedList(sellerShipped+1))
+                  dispatch(sellerDraftList(sellerDraft))
                 })
                 .catch((error) => {
                   console.log(error);
@@ -116,6 +130,7 @@ export const SellerAddNewCard: FC = () =>{
     else {
       productUpdate({productId: id.id, body: getValues()})
       .then((res)=>{
+        dispatch(sellerDraftList(sellerDraft+1))
         const newData = new FormData();
         newData.append('image', productData.logo[0]);
         productAddImage({productId: id.id, body: newData}).unwrap()
@@ -130,6 +145,8 @@ export const SellerAddNewCard: FC = () =>{
           if(subminBtnName==='moderation'){
             productSendToModeration({productId: id.id}).unwrap()
               .then((res) => {
+                dispatch(sellerShippedList(sellerShipped+1))
+                dispatch(sellerDraftList(sellerDraft))
                 console.log(res)
                 setErrorText('Данные сохранены')
               })
