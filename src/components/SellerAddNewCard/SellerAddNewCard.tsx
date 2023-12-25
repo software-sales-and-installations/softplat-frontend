@@ -130,6 +130,7 @@ export const SellerAddNewCard: FC = () =>{
     else {
       productUpdate({productId: id.id, body: getValues()})
       .then((res)=>{
+        dispatch(sellerDraftList(sellerDraft+1))
         const newData = new FormData();
         newData.append('image', productData.logo[0]);
         productAddImage({productId: id.id, body: newData}).unwrap()
@@ -144,6 +145,8 @@ export const SellerAddNewCard: FC = () =>{
           if(subminBtnName==='moderation'){
             productSendToModeration({productId: id.id}).unwrap()
               .then((res) => {
+                dispatch(sellerShippedList(sellerShipped+1))
+                dispatch(sellerDraftList(sellerDraft))
                 console.log(res)
                 setErrorText('Данные сохранены')
               })
