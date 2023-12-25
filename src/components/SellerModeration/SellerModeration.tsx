@@ -7,7 +7,7 @@ import { useProductSellerListQuery } from '../../utils/api/userProductApi';
 import { useState } from 'react';
 
 const SellerModeration: React.FC = () => {
-  const { data: publishedList, isSuccess: isPublishedListSuccess } =
+  const { data: publishedList, } =
   useProductSellerListQuery(
       {
         status: 'SHIPPED',
@@ -17,7 +17,6 @@ const SellerModeration: React.FC = () => {
 const [publishListData, setPublishListData] = useState(publishedList)
 useEffect(()=>{
   setPublishListData(publishedList)
-  console.log(publishedList)
 },[publishedList])
 
   return (

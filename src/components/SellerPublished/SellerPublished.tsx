@@ -26,15 +26,17 @@ const SellerPublished: React.FC = () => {
             {publishedList.map(
               (product: {
                 id: number;
-                image: string;
+                image?: {
+                  id: number;
+                };
                 name: string;
                 vendor: {
                   name: string;
                 };
                 productionTime: string;
               }) => (
-                <Link className={styles.link} to ={`/product/${product.id}`}>
-                <SellerCard key={product.id} {...product} trash={true} />
+                <Link key={'sellerCard' + product.id} className={styles.link} to ={`/product/${product.id}`}>
+                <SellerCard {...product} trash={true} />
                 </Link>
               ),
             )}
