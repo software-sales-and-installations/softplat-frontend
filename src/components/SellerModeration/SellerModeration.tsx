@@ -11,9 +11,8 @@ import { sellerShippedList } from '../../pages/Seller/SellerSlice';
 
 const SellerModeration: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { data: publishedList } =
-  
-  useProductSellerListQuery(
+  const { data: publishedList, } =
+    useProductSellerListQuery(
       {
         status: 'SHIPPED',
       },
