@@ -57,7 +57,7 @@ const ProductButtons = ({error, id, instPrice, card}: IProductButtons) => {
   return (
 <>
       <div className={styles.productInfo__installation}>
-          <Checkbox onCheck={handleCheckboxChange} extClassName={styles.productInfo__checkbox} label={`Добавить установку ${instPrice} ₽`} />
+          {instPrice?<Checkbox onCheck={handleCheckboxChange} extClassName={styles.productInfo__checkbox} label={`Добавить установку ${instPrice} ₽`}/>: null} 
       </div>
   <div className={styles.productInfo__buttons}>
   <AddToCartButton card={card} id={id} isInstallationSelected={isInstallationSelected} type='big' />

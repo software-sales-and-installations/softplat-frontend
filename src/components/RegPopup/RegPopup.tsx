@@ -145,6 +145,7 @@ export const PopupForReg: FC = () => {
   return (
     <Popup>
       <form
+      autoComplete="off"
         className={classNames(
           styles.form,
           MyRole === 'Я продавец' ? styles.form_type_seller : '',

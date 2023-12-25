@@ -18,11 +18,15 @@ export const useLoadCart = () => {
 
   const userStoreId = useAppSelector(store => store.user.user.id);
 
-  const {data: basketInfo, error: basketError} = useBuyerBasketInfoQuery(undefined, {
+  const basketInfo = useBuyerBasketInfoQuery(undefined, {
     skip: (!userId && !userStoreId) || userRole !== 'BUYER',
   });
 
-  const [ authLogout] = useAuthLogoutMutation();
+  const { error: basketError } = useBuyerBasketInfoQuery(undefined, {
+    skip: (!userId && !userStoreId) || userRole !== 'BUYER',
+  });
+
+  const [authLogout] = useAuthLogoutMutation();
 
   const handleSubmitLogout = () => {
     // @ts-ignore
@@ -46,26 +50,27 @@ export const useLoadCart = () => {
   };
 
   // @ts-ignore
-  if (basketError?.originalStatus === 401 && userRole === 'BUYER') {handleSubmitLogout()}
-
+  if (basketError?.originalStatus === 401 && userRole === 'BUYER') {
+    handleSubmitLogout();
+  }
 
   useEffect(() => {
-    if (basketInfo?.data) {
+    if (basketInfo.data) {
       basketInfo.refetch();
     }
-  }, [userStoreId, basketInfo?.data]);
+  }, [userStoreId, basketInfo.data]);
 
   const cartItems = JSON.parse(localStorage.getItem('cartItems') ?? '[]');
 
   useEffect(() => {
     if (userId) {
-      if (basketInfo?.currentData) {
-        dispatch(setCartItems(basketInfo.productsInBasket));
+      if (basketInfo.currentData) {
+        dispatch(setCartItems(basketInfo.currentData.productsInBasket));
       }
     } else {
       dispatch(setCartItems(cartItems));
     }
-  }, [basketInfo?.currentData, userId, dispatch]);
+  }, [basketInfo, userId, dispatch]);
 };
 
 export const convertCartItemsToRequest = (): {
