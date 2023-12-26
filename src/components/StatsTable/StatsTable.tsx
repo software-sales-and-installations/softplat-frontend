@@ -3,6 +3,7 @@ import styles from './StatsTable.module.scss';
 import classNames from 'classnames';
 import { Button } from '../../UI/Button/Button';
 import { useSellerStatsDataQuery } from '../../utils/api/sellerApi';
+// import EmptyState from '../EmptyState/EmptyState';
 
 export const StatsTable: FC = () =>{
     const {data} = useSellerStatsDataQuery({body: {
@@ -13,7 +14,8 @@ export const StatsTable: FC = () =>{
         console.log(data)
       }, [data])
     return (
-        <section>
+        <section className={styles.statsTable}>
+        {/* <EmptyState button={false}>Продаж пока нет</EmptyState> */}
         <div className={styles.statsTable__header}>
             <p className={classNames(styles.statsTable__cell, styles.statsTable__cell_type_number)}>№</p>
             <p className={classNames(styles.statsTable__cell, styles.statsTable__cell_type_name)}>Название</p>
@@ -34,8 +36,8 @@ export const StatsTable: FC = () =>{
         <div className={styles.statsTable__sum}>
             <h3 className={styles.statsTable__sumResult}>Итого</h3>
             <div className={styles.statsTable__sumContainer}>
-                <p className={styles.statsTable__sumResult}>22222</p>
-                <p className={styles.statsTable__sumResult}>22222</p>
+                <p className={styles.statsTable__sumResult}>0</p>
+                <p className={styles.statsTable__sumResult}>0</p>
             </div>
         </div>
         <div className={styles.statsTable__containerforBtn}>

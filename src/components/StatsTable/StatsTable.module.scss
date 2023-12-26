@@ -2,6 +2,7 @@
 @import '../../styles/abstract/mixins.scss';
 
 .statsTable{
+    margin-top: 45px;
     &__header{
     display: flex;
     gap: 20px;

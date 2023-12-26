@@ -89,7 +89,7 @@ useEffect(()=>{
           <Route path="/on-moderation" element={<SellerModeration />} />
           <Route path="/correction" element={<SellerCorrection />} />
           <Route path="/appeal" element={<SellerComplaintsTable />} />
-          <Route path="/sales" element={<SellerSales />} />
+          <Route path="/sales" element={<SellerSales/>} />
           <Route path="/bank-details" element={<SellerBankSettings />} />
           <Route path="/settings" element={<SellerSettings />} />
           <Route path="/password" element={<PasswordSettings />} />

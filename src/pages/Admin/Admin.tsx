@@ -10,6 +10,7 @@ import { AdminComplaintsTable } from '../../components/AdminComplaintsTable/Admi
 import { AdminAddVendor } from '../../components/AdminAddVendor/AdminAddVendor';
 import { useProductListQuery } from '../../utils/api/userProductApi';
 import { useComplaintListQuery } from '../../utils/api/complaintApi';
+import SellerSales from '../../components/SellerSales/SellerSales';
 
 export const Admin: FC = () => {
   const { data } = usePublicProductListQuery({
@@ -95,7 +96,7 @@ export const Admin: FC = () => {
           <Route path="/vendors" element={<AdminVendorsCatalog />} />
           <Route path="/add-vendor" element={<AdminAddVendor />} />
           <Route path="/add-vendor/:id" element={<AdminAddVendor />} />
-          <Route path="/sales" element={<h2>Отчеты продаж</h2>} />
+          <Route path="/sales" element={<SellerSales/>} />
           {/* <Route path="/contacts" element={<h2>Контакты</h2>} /> */}
         </Routes>
       </section>

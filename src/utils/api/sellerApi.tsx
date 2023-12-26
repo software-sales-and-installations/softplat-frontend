@@ -119,6 +119,7 @@ export const sellerApi = createApi({
     sellerStatsData: build.query({
       query: ({body}) => ({
         url: `/stats/seller`,
+        // method: 'POST',
         body
       }),
     }),
