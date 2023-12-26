@@ -145,28 +145,30 @@ export const PopupForReg: FC = () => {
   return (
     <Popup>
       <form
-      autoComplete="off"
+        autoComplete="off"
         className={classNames(
           styles.form,
           MyRole === 'Я продавец' ? styles.form_type_seller : '',
         )}
         onSubmit={handleSubmit(handleSubmitRegister)}
       >
-        {MyRole === 'Я продавец' ? (
-          <Input
-            inputType={InputTypes.INN}
-            labelText="ИНН"
-            validation={{
-              ...register('INN', INN_VALIDATION_CONFIG),
-            }}
-            error={errors?.INN?.message}
-          />
-        ) : null}
+        <input type='hidden' value='something'/>
+          {MyRole === 'Я продавец' ? (
+            <Input
+              inputType={InputTypes.INN}
+              labelText="ИНН"
+              validation={{
+                ...register('INN', INN_VALIDATION_CONFIG),
+              }}
+              error={errors?.INN?.message}
+            />
+          ) : null}
         <Input
-          inputType={InputTypes.phone}
+          inputType={InputTypes.text}
           labelText="Телефон"
           validation={{ ...register('phone', PHONE_VALIDATION_CONFIG) }}
           error={errors?.phone?.message}
+          isPhone={true}
         />
         <Input
           inputType={InputTypes.email}
@@ -176,25 +178,25 @@ export const PopupForReg: FC = () => {
           }}
           error={errors?.email?.message}
         />
-        {MyRole === 'Я продавец' ? (
-          <Input
-            inputType={InputTypes.name}
-            labelText="Название магазина"
-            validation={{
-              ...register('name', NAME_VALIDATION_CONFIG),
-            }}
-            error={errors?.name?.message}
-          />
-        ) : MyRole === 'Я покупатель' ? (
-          <Input
-            inputType={InputTypes.name}
-            labelText="Ваше имя"
-            validation={{
-              ...register('name', NAME_VALIDATION_CONFIG),
-            }}
-            error={errors?.name?.message}
-          />
-        ) : null}
+          {MyRole === 'Я продавец' ? (
+            <Input
+              inputType={InputTypes.name}
+              labelText="Название магазина"
+              validation={{
+                ...register('name', NAME_VALIDATION_CONFIG),
+              }}
+              error={errors?.name?.message}
+            />
+          ) : MyRole === 'Я покупатель' ? (
+            <Input
+              inputType={InputTypes.name}
+              labelText="Ваше имя"
+              validation={{
+                ...register('name', NAME_VALIDATION_CONFIG),
+              }}
+              error={errors?.name?.message}
+            />
+          ) : null}
         <Input
           inputType={InputTypes.password}
           labelText="Пароль (буквы, цифры и знаки препинания)"

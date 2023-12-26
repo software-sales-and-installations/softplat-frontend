@@ -9,7 +9,7 @@ export enum InputTypes {
 	remember='checkbox',
 	name = 'name',
 	phone = 'phone',
-	oldpassword='oldpassword',
+	oldPass='oldPass',
 	cardName = 'cardName',
 	companyname = 'companyname',
 	bik = 'bik',
@@ -27,6 +27,7 @@ export enum InputTypes {
 	version = 'version',
 }
 export interface IInput {
+  isPhone?: boolean;
 	inputType: InputTypes;
 	readOnly?: boolean;
 	value?: any;

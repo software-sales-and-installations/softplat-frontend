@@ -1,6 +1,6 @@
 import {FC, useEffect} from 'react';
 import styles from './SellerPage.module.scss';
-import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+// import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { Categories } from '../../components/Categories/Categories';
 import DropDown from '../../UI/DropDown/DropDown';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
@@ -13,6 +13,7 @@ import { IProductCard, ProductStatus } from '../../components/ProductCard/Produc
 import { useParams } from 'react-router';
 import { useAppSelector } from '../../services/redux/store';
 import { useSellerInfoQuery } from '../../utils/api/sellerApi';
+import { Link } from 'react-router-dom';
 
 export const SellerPage: FC = () =>{
     const { id } = useParams();
@@ -63,7 +64,10 @@ export const SellerPage: FC = () =>{
     return (
     <>
         <div className={styles.breadcrumbs}>
-            <Breadcrumbs />
+        <Link className={styles.breadcrumbs__crumb} to="/">Главная</Link>
+        <p className={styles.breadcrumbs__text}>{sellerInfo?.name}</p>
+
+            {/* <Breadcrumbs /> */}
         </div>
         <div className={styles.sellerPage}>
             <div className={styles.sellerPage__titleContainer}>

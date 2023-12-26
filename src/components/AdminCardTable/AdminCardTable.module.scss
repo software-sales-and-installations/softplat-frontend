@@ -1,6 +1,8 @@
 @import '../../styles/abstract/mixins.scss';
 @import '../../styles/abstract/constants.scss';
-
+.empty{
+    @include font-h1-bold;
+}
 .table{
     display: flex;
     flex-direction: column;
