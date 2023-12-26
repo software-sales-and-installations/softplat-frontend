@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './SellerSales.module.scss';
 import EmptyState from '../EmptyState/EmptyState';
+import Calendar from '../Calendar/Calendar.tsx';
 import { StatsTable } from '../StatsTable/StatsTable';
 
 const SellerSales: React.FC = () => {
@@ -8,6 +9,7 @@ const SellerSales: React.FC = () => {
     <section className={styles.sales}>
       <EmptyState button={false}>Продаж пока нет</EmptyState>
       <StatsTable/>
+      <Calendar />
     </section>
   );
 };
