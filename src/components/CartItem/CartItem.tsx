@@ -47,6 +47,7 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
   const navigate = useNavigate();
   // const [tooltipText, setTooltipText] = useState('');
   const [totalPrice, setTotalPrice] = useState(product?.price);
+  const [quantity, setQuantity] = useState(item.quantity);
 
   const [buyerBasketAddItem, addItemError] = useBuyerBasketAddItemMutation();
   const [buyerBasketDeleteItem, removeItemError] =
@@ -73,15 +74,18 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
   };
 
   useEffect(() => {
-    updateTotalPrice(item.installation);
+    updateTotalPrice(item.installation, quantity);
     dispatch(updateCartItem(item));
   }, [item.quantity, dispatch]);
 
-  const updateTotalPrice = (wasInstallationSelected: boolean) => {
+  const updateTotalPrice = (
+    wasInstallationSelected: boolean,
+    updatedQuantity: number,
+  ) => {
     const installationPrice = wasInstallationSelected
       ? product?.installationPrice
       : 0;
-    setTotalPrice((product?.price + installationPrice) * item.quantity);
+    setTotalPrice((product?.price + installationPrice) * updatedQuantity);
   };
 
   const handleBuyCheckboxChange = () => {
@@ -109,7 +113,8 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
         addToLocalStorage(product, dispatch, item.installation);
       }
 
-      updateTotalPrice(item.installation);
+      setQuantity(quantity + 1);
+      updateTotalPrice(item.installation, quantity + 1);
     }
   };
 
@@ -125,7 +130,8 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
       removeFromLocalStorage(product.id, dispatch, item.installation);
     }
 
-    updateTotalPrice(item.installation);
+    setQuantity(quantity - 1);
+    updateTotalPrice(item.installation, quantity - 1);
   };
 
   const handleRemoveItem = async () => {
@@ -205,7 +211,7 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
           className={style.cartItem__decreaseQuantity}
           disabled={removeItemError.isError}
         ></button>
-        <span>{item.quantity}</span>
+        <span>{quantity}</span>
         <button
           onClick={handleIncreaseQuantity}
           className={style.cartItem__increaseQuantity}

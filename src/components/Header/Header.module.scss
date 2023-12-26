@@ -70,7 +70,23 @@
         width: 25px;
         height: 25px;
         background: url('../../images/shopping-cart.svg') no-repeat center;
+        position: relative;
     }
+    &__basketCount {
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        height: 17px;
+        width: 17px;
+        background-color: $accent-lime-button;
+        border-radius: 50%;
+        @include font-body-filters;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $black-standart-text;
+    }
+
     &__profileenter{
         border-radius: 20px;
         margin: 0 3px;
