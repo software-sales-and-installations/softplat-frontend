@@ -815,16 +815,16 @@ export const SELECT_OPTIONS: {
   label: string;
   value: string;
 }[] = [
-  // {
-  //   value: 'popularity',
-  //   label: 'По популярности',
-  // },
+  {
+    value: 'RATING',
+    label: 'По популярности',
+  },
   {
     value: 'NEWEST',
     label: 'По новизне',
   },
   {
-    value: 'BY_PRICE',
+    value: 'PRICE',
     label: 'По цене',
   },
 ];
