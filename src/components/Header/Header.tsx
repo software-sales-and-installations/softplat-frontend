@@ -21,6 +21,11 @@ export const Header: FC = () => {
   const signout = useAppSelector((state: RootState) => state.signout.signout);
   const location = useLocation();
   const email = localStorage.getItem('email');
+  const countBasketItems = useAppSelector(store => store.cart.items).reduce(
+    (summ, item) => summ + item.quantity,
+    0,
+  );
+  console.log(countBasketItems);
 
   if (
     location.pathname !== '/cart' &&
@@ -60,7 +65,14 @@ export const Header: FC = () => {
               to="personal/favorites"
               className={styles.btncontainer__likebtn}
             />
-            <Link to="/cart" className={styles.btncontainer__shopbtn} />{' '}
+
+            <Link to="/cart" className={styles.btncontainer__shopbtn}>
+              {countBasketItems > 0 && (
+                <span className={styles.btncontainer__basketCount}>
+                  {countBasketItems}
+                </span>
+              )}
+            </Link>
           </>
         ) : !token ? (
           <>
@@ -68,7 +80,13 @@ export const Header: FC = () => {
               className={styles.btncontainer__likebtn}
               onClick={handleNonAuthLikeClick}
             />
-            <Link to="/cart" className={styles.btncontainer__shopbtn} />{' '}
+            <Link to="/cart" className={styles.btncontainer__shopbtn}>
+              {countBasketItems > 0 && (
+                <span className={styles.btncontainer__basketCount}>
+                  {countBasketItems}
+                </span>
+              )}
+            </Link>{' '}
           </>
         ) : null}
         {token ? (
