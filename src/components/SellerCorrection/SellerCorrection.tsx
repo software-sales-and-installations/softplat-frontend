@@ -39,7 +39,9 @@ useEffect(()=>{
           {rejectedList?.products.map(
               (product: {
                 id: number;
-                image: any;
+                image: {
+                  id: number;
+                };
                 name: string;
                 vendor: {
                   name: string;

@@ -4,3 +4,12 @@
 .sales {
   flex: 0 0 730px;
 }
+.containerForCalendar{
+  display: flex;
+  gap: 40px;
+  &__btn{
+    width: 30%;
+    margin-top: 20px;
+  }
+
+}
