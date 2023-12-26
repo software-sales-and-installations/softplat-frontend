@@ -116,6 +116,12 @@ export const sellerApi = createApi({
         body
       })
     }),
+    sellerStatsData: build.query({
+      query: ({body}) => ({
+        url: `/stats/seller`,
+        body
+      }),
+    }),
   }),
 });
 
@@ -130,5 +136,6 @@ export const {
   useSellerChangeBankMutation,
   useSellerGetBankQuery,
   useSellerProductListQuery,
-  useSellerAddBankMutation
+  useSellerAddBankMutation,
+  useSellerStatsDataQuery
 } = sellerApi;

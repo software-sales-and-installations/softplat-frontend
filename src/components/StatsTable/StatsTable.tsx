@@ -1,9 +1,17 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import styles from './StatsTable.module.scss';
 import classNames from 'classnames';
 import { Button } from '../../UI/Button/Button';
+import { useSellerStatsDataQuery } from '../../utils/api/sellerApi';
 
 export const StatsTable: FC = () =>{
+    const {data} = useSellerStatsDataQuery({body: {
+        end: "2023-12-26",
+        start: "2023-12-26"
+      }});
+      useEffect(()=>{
+        console.log(data)
+      }, [data])
     return (
         <section>
         <div className={styles.statsTable__header}>
