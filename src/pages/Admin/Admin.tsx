@@ -4,7 +4,7 @@ import CabinetMenu from '../../components/CabinetMenu/CabinetMenu';
 import { Routes, Route } from 'react-router-dom';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { AdminCardTable } from '../../components/AdminCardTable/AdminCardTable';
-import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
+// import { usePublicProductListQuery } from '../../utils/api/publicProductApi';
 import { AdminVendorsCatalog } from '../../components/AdminVendorsCatalog/AdminVendorsCatalog';
 import { AdminComplaintsTable } from '../../components/AdminComplaintsTable/AdminComplaintsTable';
 import { AdminAddVendor } from '../../components/AdminAddVendor/AdminAddVendor';
@@ -13,11 +13,11 @@ import { useComplaintListQuery } from '../../utils/api/complaintApi';
 import SellerSales from '../../components/SellerSales/SellerSales';
 
 export const Admin: FC = () => {
-  const { data } = usePublicProductListQuery({
-    minId: 0,
-    pageSize: '30',
-    sort: 'NEWEST',
-  });
+  // const { data } = usePublicProductListQuery({
+  //   minId: 0,
+  //   pageSize: '30',
+  //   sort: 'NEWEST',
+  // });
 
   const { data: publishedList, isSuccess: isPublishedListSuccess } =
     useProductListQuery(

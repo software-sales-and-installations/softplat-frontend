@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './SellerCard.module.scss';
 import trashIcon from '../../images/trash.svg';
+import CONST_IMG from '../../images/underfined-image.jpg'
 import { ISellerCardProps } from './SellerCardTypes';
 
 const SellerCard: React.FC<ISellerCardProps> = ({
@@ -29,8 +30,8 @@ const SellerCard: React.FC<ISellerCardProps> = ({
         {mode === 'inOrder' ? (
           count
         ) : (
-          image && (<img
-            src={`https://api.softplat.ru/image/${image?.id}`}
+         (<img
+            src={image?.id? `https://api.softplat.ru/image/${image?.id}`: CONST_IMG}
             alt="Логотип продукта"
             className={styles.card__img}
           />)

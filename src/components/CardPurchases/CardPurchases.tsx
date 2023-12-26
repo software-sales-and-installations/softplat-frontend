@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './CardPurchases.module.scss';
 import { Link } from 'react-router-dom';
+import CONST_IMG from '../../images/underfined-image.jpg'
 
 export type cardPurchasesProps = {
   id: number;
@@ -47,7 +48,7 @@ const CardPurchases: React.FC<cardPurchasesProps> = ({
     <li className={styles.cardPurchases}>
       <div className={styles.cardPurchases__imgContainer}>
         <img
-          src={`https://api.softplat.ru/image/${image?.id}`}
+          src={(image?.id ? `https://api.softplat.ru/image/${image?.id}` : CONST_IMG)}
           alt="Изображение продукта"
           className={styles.cardPurchases__img}
         />
