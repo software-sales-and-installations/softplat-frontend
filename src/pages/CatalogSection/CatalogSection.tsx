@@ -23,7 +23,6 @@ import { Categories } from '../../components/Categories/Categories';
 const CatalogSection: FC = () => {
   const { section } = useParams();
   const selectState = useAppSelector(state => state.dropdown.option.value);
-  console.log(selectState)
   const countrySelected = useAppSelector(state => state.dropdown.countryOption);
   const vendorSelected = useAppSelector(state => state.dropdown.vendorOption);
 
