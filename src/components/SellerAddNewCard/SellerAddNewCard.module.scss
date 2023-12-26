@@ -162,6 +162,7 @@
         padding-bottom: 5px;
     }
     &__input{
+      resize: none;
         border-radius: 8px;
         border: 1px solid $border-input;
         min-height: 195px;

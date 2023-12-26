@@ -168,11 +168,11 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
         </p>
         <div className={style.cartItem__parameters}>
           <span className={style.cartItem__type}>Лицензия</span>
-          <Checkbox checked={item.installation} readOnly />
+          {/* <Checkbox checked={item.installation} readOnly /> */}
           <span
             className={style.cartItem__installationText}
-          >{`c установкой ${product?.installationPrice}`}</span>
-          <div
+          >{item.installation? `С установкой (+${product?.installationPrice} ₽)`: `Без установки`}</span>
+          {/* <div
             className={style.cartItem__question}
             onMouseEnter={() =>
               setTooltipText(
@@ -181,8 +181,10 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
             }
             onMouseLeave={() => setTooltipText('')}
           >
-            ?{tooltipText && <Tooltip text={tooltipText} />}
-          </div>
+            ?
+            {tooltipText && <Tooltip text={tooltipText} />}
+
+          </div> */}
         </div>
         <div className={style.cartItem__buttons}>
           {userId && (
