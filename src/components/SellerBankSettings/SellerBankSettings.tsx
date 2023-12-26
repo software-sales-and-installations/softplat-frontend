@@ -192,7 +192,7 @@ export const SellerBankSettings: FC = () => {
               typeError="dataError"
               isMultiOption={false}
               formSize
-              trigger={trigger}
+              trigger={triggerFunc}
             />
           )}
         />
