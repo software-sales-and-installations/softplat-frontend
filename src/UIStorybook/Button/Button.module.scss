@@ -1,0 +1,64 @@
+@import './../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.button {
+  @include font-input-field;
+    cursor: pointer;
+    border-radius: 32px;
+    border: none;
+    transition: 0.3s ease-out;
+  &_type {
+    &_primary {
+      color: $black-standart-text;
+      background-color: $accent-lime-button;
+      &:hover {
+        box-shadow: 0 4px 20px 0 rgba(85, 80, 92, 0.50);
+      }
+      &:disabled {
+        color: $white-standart;
+        background-color: $dark-grey;
+      }
+    }
+    &_secondary {
+      background-color: $white-standart;
+      border: 1px solid $border-input;
+      &:hover, &:disabled {
+        background-color: $light-grey;
+      }
+    }
+
+    &_minorPrimary {
+      color: $black-standart-text;
+      background-color: $accent-lime-button;
+      &:hover {
+        box-shadow: 0 4px 20px 0 rgba(85, 80, 92, 0.50);
+      }
+      &:disabled {
+        color: $white-standart;
+        background-color: $dark-grey;
+      }
+    }
+
+    &_minorSecondary {
+      background-color: $white-standart;
+      border: 1px solid $border-input;
+      &:hover, &:disabled {
+        background-color: $light-grey;
+      }
+    }
+
+    &_minorGrey {
+      color: $white-standart;
+      background-color: $dark-grey;
+      border: 1px solid $border-input;
+    }
+
+    &_link {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    color: $black-standart-text;
+    }
+
+  }
+}

@@ -1,0 +1,42 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.breadcrumbs {
+  margin-top: 70px;
+}
+
+.title {
+  color: $black-standart-text;
+  @include font-h1-bold;
+  text-align: start;
+  margin: 48px 0 0;
+}
+.ddcontainer {
+  margin: 40px 0 35px;
+}
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 189px);
+  column-gap: 45px;
+  row-gap: 35px;
+  max-width: 1110px;
+  margin: 0 0 126px;
+  &__link {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    text-decoration: none;
+    color: $dark-grey;
+  }
+  &__img {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+  }
+  &__title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    @include font-table-bold;
+  }
+}

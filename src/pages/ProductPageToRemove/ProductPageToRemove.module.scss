@@ -1,0 +1,160 @@
+@import './../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.breadcrumbs {
+  margin-top: 70px;
+  padding: 0 80px;
+}
+
+.product {
+  display: flex;
+  gap: 190px;
+  max-width: 1758px;
+  width: 100%;
+  margin: 70px auto 135px;
+  @include font-body-regular;
+  color: $dark-grey;
+
+  &__imageContainer {
+    position: relative;
+    width: 860px;
+    height: 612px;
+  }
+
+  &__image {
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 1px solid $light-grey;
+    background-color: $white-standart;
+  }
+
+  &__category {
+    @include font-body-filters;
+    margin-bottom: 25px;
+  }
+
+  &__likeButton {
+    border: none;
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  &__info {
+    // color: #9fa4af;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    line-height: 35px;
+    max-width: 708px;
+    width: 100%;
+  }
+  &__name {
+    margin: 0;
+    @include font-h2-semibold;
+    color: $black-standart-text;
+  }
+
+  &__vendor {
+    margin-bottom: 10px;
+  }
+
+  &__details {
+    display: flex;
+    max-width: 455px;
+    align-items: center;
+    margin-bottom: 30px;
+    align-items: center;
+  }
+
+  &__number {
+    @include font-body-filters;
+    margin-bottom: 28px;
+  }
+
+  &__price {
+    @include font-h3-regular;
+    margin: 0;
+    color: $black-standart-text;
+    min-width: 124px;
+  }
+
+  &__seller {
+    margin: 0;
+    @include font-body-filters;
+    margin-right: 50px;
+  }
+
+  &__btn {
+    margin: 0 5px;
+    padding: 3.5px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: $dark-grey;
+    color: $white-standart;
+    cursor: pointer;
+    @include font-body-filters;
+    transition: all 0.4s;
+
+    &:hover {
+      background-color: $accent-lime-button;
+      color: $black-standart-text;
+    }
+  }
+
+  &__description {
+    margin: 0;
+    margin-bottom: 30px;
+    flex: 1;
+  }
+
+  &__checkboxContainer {
+    display: flex;
+    margin-bottom: 30px;
+    height: 24px;
+    position: relative;
+  }
+
+  &__checkbox {
+    margin-right: 12px;
+    cursor: pointer;
+  }
+
+  &__additionalOption {
+    @include font-body-filters;
+  }
+
+  &__question {
+    font-size: 8px;
+    background-color: $light-grey;
+    color: $dark-grey;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    margin-left: 15px;
+    cursor: pointer;
+  }
+
+  &__question:hover {
+    background-color: $dark-grey;
+    color: $white-standart;
+  }
+
+  &__buyButtonBlock {
+    width: 290px;
+  }
+
+  &__loadDemoButton {
+    width: 150px;
+    height: 35px;
+  }
+}

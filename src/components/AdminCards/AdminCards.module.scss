@@ -1,0 +1,39 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.adminProduct{
+    margin-top: 65px;
+    margin-left: 60px;
+    &__title {
+        margin: 0;
+        @include font-h2-simibold;
+        text-align: start;
+    }
+    &__titles {
+        margin-top: 45px;
+        text-align: start;
+      }
+      &__subtitle {
+        margin: 25px 0 0 0;
+        @include font-body-regular;
+        text-align: start;
+        max-width: 1160px;
+        background-color: $white-standart;
+      }
+      &__data {
+        @include font-body-regular;
+        text-align: center;
+        text-decoration: none;
+        color: $black-standart-text;
+        width: 276px;
+        padding: 5px 25px;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        border-bottom: 2px solid $dark-grey;
+        &_active {
+          background-color: $accent-lime-yellow;
+          border-bottom: 2px solid $dark-grey;
+        }
+      }
+}

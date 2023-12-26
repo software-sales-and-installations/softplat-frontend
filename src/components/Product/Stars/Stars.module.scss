@@ -1,0 +1,35 @@
+@import '../../../styles/abstract/constants';
+
+.stars {
+  margin-bottom: 15px;
+  display: flex;
+  align-self: flex-start;
+
+  &__widget {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 3px;
+  }
+
+  input {
+    display: none;
+  }
+
+  label {
+  transition: all 0.2s ease;
+  text-shadow: 0 0 1px $dark-grey;
+  color: white;
+    font-size: 20px;
+  }
+
+  input:not(:checked) ~ label:hover,
+  input:not(:checked) ~ label:hover ~ label {
+  color: $accent-lime-button;
+  text-shadow: 0 0 1px $accent-lime-button;
+  }
+
+  input:checked ~ label {
+    color: $accent-lime-button;
+    text-shadow: 0 0 1px $accent-lime-button;
+  }
+}

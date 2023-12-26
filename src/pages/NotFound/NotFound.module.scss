@@ -1,0 +1,21 @@
+@import './../../styles/abstract/constants.scss';
+@import './../../styles/abstract/mixins.scss';
+
+.notFound {
+  text-align: start;
+
+  &__title {
+    margin: 64px 0 15px;
+    @include font-h1-bold;
+  }
+
+  &__subtitle {
+    margin: 0;
+    @include font-body-regular;
+  }
+
+  &__img {
+    display: block;
+    margin: 73px auto 48px;
+  }
+}

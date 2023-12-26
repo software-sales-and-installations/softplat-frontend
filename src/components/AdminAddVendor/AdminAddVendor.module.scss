@@ -1,0 +1,97 @@
+
+@import '../../styles/abstract/mixins.scss';
+@import '../../styles/abstract/constants.scss';
+.form{
+    width: 100%;
+    max-width: 350px;
+}
+.addVendor {
+    &__title {
+      width: 100%;
+      padding:0;
+      @include font-CTAbody-regular;
+      color: $dark-grey;
+      text-align: left;
+      padding-bottom: 10px;
+      margin: 0;
+        
+    }
+    &__loadImg {
+        display: none;
+      }}
+      .selectContainer{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 15px;
+        position: relative;
+        &__label{
+          margin: 0;
+          @include font-CTAbody-regular;
+          color: $dark-grey;
+          text-align: start;
+          padding: 0 0 4px 0;
+        }
+        &__select {
+          width: 100%;
+          box-sizing: border-box;
+          @include font-input-field;
+          padding: 10px 12px;
+          border-radius: 8px;
+          border: 1px solid $border-input;
+          color: $black-standart-text;
+          background-color: rgba(233, 242, 255, 0.2);;
+          cursor: pointer;
+        }
+      }
+.containerLogo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+.textArea{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    &__label{
+        @include font-CTAbody-regular;
+        color: $dark-grey;
+        text-align: start;
+        padding-bottom: 5px;
+    }
+    &__input{
+        border-radius: 8px;
+        border: 1px solid $border-input;
+        min-height: 75px;
+        margin: 0;
+        &:focus{
+            outline: none;
+        }
+        &_type_keyword{
+            min-height: 80px;
+        }
+    }
+    &__error{
+      color: $red-alert-system;
+	    @include font-body-filters;
+	    display: block;
+	    height: 25px;
+	    text-align: left;
+	    margin: 0;
+    }
+    
+}
+.containerForBtn{
+    margin-top: 105px;
+    width: 83%;
+}
+.errorContainer{
+	min-height: 35px;
+	&__error{
+    text-align: start;
+		margin: 0;
+		color: $red-alert-system;
+		@include font-body-filters;
+	}
+}

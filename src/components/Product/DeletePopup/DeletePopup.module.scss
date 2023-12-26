@@ -1,0 +1,41 @@
+@import '../../../styles/abstract/mixins';
+@import '../../../styles/abstract/constants';
+
+.delete {
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  &__header {
+    @include font-h3-bold;
+    margin: 0 0 30px 0;
+    padding: 0;
+  }
+  &__subtitle {
+    @include font-input-field;
+    margin: 0 0 30px 0;
+    padding: 0;
+  }
+  &__buttonsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+  &__buttonsWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: space-between;
+    margin: 0 auto;
+  }
+  &__errorWrapper {
+    height: 20px;
+    margin-bottom: 10px;
+  }
+  &__error {
+    @include font-body-signature;
+    color: $red-alert-system;
+  }
+}
