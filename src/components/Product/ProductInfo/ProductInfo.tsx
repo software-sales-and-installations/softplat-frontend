@@ -34,7 +34,7 @@ const ProductInfo = ({children, product, id}: IProductInfo) => {
         <div className={styles.productInfo__name}>
           <h1>{product?.name}</h1>
           <h2>{product?.vendor?.name}</h2>
-          <p>{product?.version}</p>
+          <p>{product?.id}</p>
         </div>
         <div className={styles.productInfo__priceInfo}>
           <h3>{product?.price} &#8381;</h3>

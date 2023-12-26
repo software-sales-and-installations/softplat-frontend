@@ -11,23 +11,23 @@ import { sellerShippedList } from '../../pages/Seller/SellerSlice';
 
 const SellerModeration: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { data: publishedList, } =
+  const { data: shippedList, } =
     useProductSellerListQuery(
       {
         status: 'SHIPPED',
       },
       { refetchOnMountOrArgChange: true },
     );
-const [publishListData, setPublishListData] = useState(publishedList)
+const [shippedListData, setshippedListData] = useState(shippedList)
 useEffect(()=>{
-  setPublishListData(publishedList)
-  dispatch(sellerShippedList(publishedList?.totalProducts))
-
-},[publishedList])
+  setshippedListData(shippedList)
+  dispatch(sellerShippedList(shippedList?.totalProducts))
+  console.log(shippedList)
+},[shippedList])
 
   return (
     <section className={styles.moderation}>
-      {publishListData?.products.length === 0 ? (
+      {shippedListData?.totalProducts === 0 ? (
         <EmptyState
           navigateTo="/seller/add-card"
           buttonText="Добавить карточку"
@@ -38,7 +38,7 @@ useEffect(()=>{
         <>
           <SellerTable />
           <ul className={styles.moderation__list}>
-            {publishListData?.products.map(
+            {shippedListData?.products.map(
               (product: {
                 id: number;
                 image: any;

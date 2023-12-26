@@ -21,19 +21,21 @@ const PasswordSettings: FC = () => {
     formState: { errors,  isValid },
   } = useForm<ISettingPassword>({ mode: 'onChange' });
 
-  const {password, confirmPassword}= getValues();
+  const {password, confirmPassword, oldPass}= getValues();
   const [authChangePass, {
     // isFetching, isLoading, isError
   }] = useAuthChangePasswordMutation();
   const handleSubmitChangePass = () => {
-    authChangePass({password, confirmPassword, email:localStorage.getItem('email')}).unwrap()
+    authChangePass({password, oldPass, confirmPassword, email:localStorage.getItem('email')}).unwrap()
       .then((userData) => {
         console.log(userData)
     })
       .catch((error) => {
       console.log(error);
     })
-  .finally()
+  .finally(()=>{
+    reset();
+  })
   };
   function handleResetClick(){
     reset();
@@ -44,11 +46,11 @@ const PasswordSettings: FC = () => {
       onSubmit={handleSubmit(handleSubmitChangePass)}
     >
         <Input
-          inputType={InputTypes.oldpassword}
+          inputType={InputTypes.oldPass}
           labelText="Текущий пароль"
           showPasswordButton={true}
-          validation={{ ...register('oldpassword', PASSWORD_VALIDATION_CONFIG) }}
-          error={errors?.oldpassword?.message}
+          validation={{ ...register('oldPass', PASSWORD_VALIDATION_CONFIG) }}
+          error={errors?.oldPass?.message}
           typeError='dataError'
         />
         <Input
