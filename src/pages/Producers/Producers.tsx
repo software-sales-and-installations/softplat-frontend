@@ -8,6 +8,7 @@ import { SelectorType } from '../../UI/DropDown/DropDownTypes';
 import { useVendorListQuery } from '../../utils/api/vendorApi';
 import Preloader from '../../components/Preloader/Preloader';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import CONST__IMG from '../../images/underfined-image.jpg';
 
 export const Producers: FC = () => {
   const countryOption = useAppSelector(state => state.dropdown.countryOption);
@@ -50,7 +51,7 @@ export const Producers: FC = () => {
               >
                 <img
                   className={styles.container__img}
-                  src={`https://api.softplat.ru/image/${vendor?.image?.id}`}
+                  src={vendor?.image?.id? `https://api.softplat.ru/image/${vendor?.image?.id}`: CONST__IMG}
                   alt={vendor.name}
                 />
                 <h2 className={styles.container__title}>{vendor.name}</h2>

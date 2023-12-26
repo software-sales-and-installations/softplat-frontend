@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 
 import style from './CartItem.module.scss';
-import { Tooltip } from '../Tooltip/Tooltip';
+// import { Tooltip } from '../Tooltip/Tooltip';
 import { Checkbox } from '../../UI/Checkbox/Checkbox';
-
+import CONST_IMG from '../../images/underfined-image.jpg';
 import { FaTrash, FaRegHeart, FaHeart } from 'react-icons/fa';
 import { ICartItemProps } from './CartItemTypes';
 import { useAppDispatch, useAppSelector } from '../../services/redux/store';
@@ -45,7 +45,7 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
   const product = item?.productResponseDto;
 
   const navigate = useNavigate();
-  const [tooltipText, setTooltipText] = useState('');
+  // const [tooltipText, setTooltipText] = useState('');
   const [totalPrice, setTotalPrice] = useState(product?.price);
 
   const [buyerBasketAddItem, addItemError] = useBuyerBasketAddItemMutation();
@@ -151,7 +151,7 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
       <Checkbox onCheck={handleBuyCheckboxChange} checked={isChecked} />
 
       <img
-        src={`https://api.softplat.ru/image/${product.image?.id}`}
+        src={product.image?.id? `https://api.softplat.ru/image/${product.image?.id}` : CONST_IMG}
         alt="Фотография товара"
         className={style.cartItem__img}
         onClick={linkToPage}

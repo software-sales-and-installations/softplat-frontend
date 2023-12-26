@@ -25,6 +25,9 @@
     height: 195px;
     background-color: $light-grey;
     object-fit: contain;
+    &_type_undefined{
+      object-fit: cover;
+    }
   }
 
   &__img img {
