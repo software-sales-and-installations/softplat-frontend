@@ -27,6 +27,7 @@ export enum InputTypes {
 	version = 'version',
 }
 export interface IInput {
+  isPhone?: boolean;
 	inputType: InputTypes;
 	readOnly?: boolean;
 	value?: any;
