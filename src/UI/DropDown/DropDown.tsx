@@ -18,7 +18,8 @@ const DropDown: FC<IDropDownProps> = ({
   value,
   error,
   typeError,
-  formSize
+  formSize,
+  trigger
 }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -44,6 +45,9 @@ const DropDown: FC<IDropDownProps> = ({
       dispatch(changeComplaintOption(e));
     } else if (orgFormSelect) {
       onChange(e);
+      if (trigger) {
+        trigger()
+      }
     }
   };
 

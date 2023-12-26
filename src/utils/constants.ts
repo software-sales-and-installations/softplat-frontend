@@ -198,6 +198,17 @@ export const VALIDATION_SETTINGS = {
   inn: {
     pattern: /^\d+$/,
     minLength: 10,
+    maxLength: 10,
+    messages: {
+      tooShort: 'Введите еще цифры',
+      tooLong: 'Слишком длинный ИНН',
+      invalid: 'Необходимо вводить только цифры',
+      noINN: 'Необходимо ввести ИНН',
+    },
+  },
+  innIP: {
+    pattern: /^\d+$/,
+    minLength: 12,
     maxLength: 12,
     messages: {
       tooShort: 'Введите еще цифры',
@@ -231,7 +242,7 @@ export const VALIDATION_SETTINGS = {
   },
   ogrnip: {
     pattern: /^\d+$/,
-    minLength: 13,
+    minLength: 15,
     maxLength: 15,
     messages: {
       tooShort: 'Введите еще цифры',
@@ -240,6 +251,18 @@ export const VALIDATION_SETTINGS = {
       noogrnip: 'Необходимо ввести ОГРНИП',
       sameAsNow: 'Введите новое значение'
       }
+  },
+  ogrn: {
+    pattern: /^\d+$/,
+    minLength: 13,
+    maxLength: 13,
+    messages: {
+      tooShort: 'Введите еще цифры',
+      tooLong: 'Слишком длинный ОГРН',
+      invalid: 'Необходимо вводить только цифры',
+      noogrnip: 'Необходимо ввести ОГРН',
+      sameAsNow: 'Введите новое значение'
+    }
   },
   account: {
     pattern: /^\d+$/,
@@ -352,6 +375,24 @@ export const INN_VALIDATION_CONFIG = {
   minLength: {
     value: VALIDATION_SETTINGS.inn.minLength,
     message: VALIDATION_SETTINGS.inn.messages.tooShort,
+  },
+};
+export const INNIP_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.innIP.messages.noINN,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.innIP.pattern,
+    message: VALIDATION_SETTINGS.innIP.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.innIP.maxLength,
+    message: VALIDATION_SETTINGS.innIP.messages.tooLong,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.innIP.minLength,
+    message: VALIDATION_SETTINGS.innIP.messages.tooShort,
   },
 }
 export const PERSONALEMAIL_VALIDATION_CONFIG = {
@@ -566,6 +607,24 @@ export const OGRNIP_VALIDATION_CONFIG = {
   minLength: {
     value: VALIDATION_SETTINGS.ogrnip.minLength,
     message: VALIDATION_SETTINGS.ogrnip.messages.tooShort,
+  },
+};
+export const OGRN_VALIDATION_CONFIG = {
+  required: {
+    value: true,
+    message: VALIDATION_SETTINGS.ogrn.messages.noogrnip,
+  },
+  pattern: {
+    value: VALIDATION_SETTINGS.ogrn.pattern,
+    message: VALIDATION_SETTINGS.ogrn.messages.invalid,
+  },
+  maxLength: {
+    value: VALIDATION_SETTINGS.ogrn.maxLength,
+    message: VALIDATION_SETTINGS.ogrn.messages.tooLong,
+  },
+  minLength: {
+    value: VALIDATION_SETTINGS.ogrn.minLength,
+    message: VALIDATION_SETTINGS.ogrn.messages.tooShort,
   },
 };
 export const ACCOUNT_VALIDATION_CONFIG = {

@@ -18,6 +18,8 @@ import {
   ORGFORM_OPTIONS,
   KPP_VALIDATION_CONFIG,
   ADDRESS_VALIDATION_CONFIG,
+  INNIP_VALIDATION_CONFIG,
+  OGRN_VALIDATION_CONFIG,
 } from '../../utils/constants';
 import { useState } from 'react';
 import DropDown from '../../UI/DropDown/DropDown';
@@ -30,13 +32,21 @@ export const SellerBankSettings: FC = () => {
     getValues,
     setValue,
     control,
+    watch,
+    trigger,
     formState: { errors, isValid },
   } = useForm<ISellerBankData>({ mode: 'onChange' });
 
   const [sellerAddBank, {}] = useSellerAddBankMutation();
 
   // @ts-ignore
-  const {data: sellerBank} = useSellerGetBankQuery();
+  const { data: sellerBank } = useSellerGetBankQuery();
+
+  const watchOrgForm = watch('orgForm.value');
+
+  const triggerFunc = () => {
+    trigger(['ogrnip', 'INN']);
+  };
 
   const [bankData, setBankData] = useState({
     bik: sellerBank?.bik,
@@ -116,11 +126,10 @@ export const SellerBankSettings: FC = () => {
       .finally();
   };
 
-  const orgFormDefaultValue = ORGFORM_OPTIONS.find(
-    i => i.value === sellerBank?.legalForm,
-  );
-
   useEffect(() => {
+    const orgFormDefaultValue = ORGFORM_OPTIONS.find(
+      i => i.value === bankData.legalForm || i.value === sellerBank?.legalForm,
+    );
     setValue('bik', bankData.bik || sellerBank?.bik);
     setValue(
       'ogrnip',
@@ -138,90 +147,103 @@ export const SellerBankSettings: FC = () => {
 
   return (
     <div className={styles.wrapper}>
-    <p className={styles.informText}>Поля, отмеченные звездочкой*, обязательны для заполнения</p>
-    <form
-      className={styles.form}
-      onSubmit={handleSubmit(
-        !sellerBank?.bik ? handleSellerAddBank : handleSellerChangeBank,
-      )}
-    >
-      <Input
-        inputType={InputTypes.INN}
-        labelText="ИНН*"
-        validation={{
-          ...register('INN', INN_VALIDATION_CONFIG),
-        }}
-        error={errors?.INN?.message}
-        typeError="dataError"
-      />
-      <Input
-        inputType={InputTypes.kpp}
-        labelText="КПП*"
-        validation={{
-          ...register('kpp', KPP_VALIDATION_CONFIG),
-        }}
-        error={errors?.kpp?.message}
-        typeError="dataError"
-      />
-      <Controller
-        control={control}
-        name="orgForm"
-        render={({ field: { onChange, value } }) => (
-          <DropDown
-            type={SelectorType.ORGFORM}
-            options={ORGFORM_OPTIONS}
-            labelText="Правовая форма организации*"
-            onChange={onChange}
-            value={value}
-            typeError="dataError"
-            isMultiOption={false}
-            formSize
-          />
+      <p className={styles.informText}>
+        Поля, отмеченные звездочкой*, обязательны для заполнения
+      </p>
+      <form
+        className={styles.form}
+        onSubmit={handleSubmit(
+          !sellerBank?.bik ? handleSellerAddBank : handleSellerChangeBank,
         )}
-      />
-      <Input
-        inputType={InputTypes.ogrnip}
-        labelText="ОГРН/ОГРНИП*"
-        validation={{
-          ...register('ogrnip', OGRNIP_VALIDATION_CONFIG),
-        }}
-        error={errors?.ogrnip?.message}
-        typeError="dataError"
-      />
-      <Input
-        inputType={InputTypes.address}
-        labelText="Юридический адрес*"
-        validation={{
-          ...register('address', ADDRESS_VALIDATION_CONFIG),
-        }}
-        error={errors?.address?.message}
-        typeError="dataError"
-      />
-      <Input
-        inputType={InputTypes.bik}
-        labelText="БИК*"
-        validation={{
-          ...register('bik', BIK_VALIDATION_CONFIG),
-        }}
-        error={errors?.bik?.message}
-        typeError="dataError"
-      />
+      >
+        <Input
+          inputType={InputTypes.INN}
+          labelText="ИНН*"
+          validation={{
+            ...register(
+              'INN',
+              watchOrgForm === 'IP'
+                ? INNIP_VALIDATION_CONFIG
+                : INN_VALIDATION_CONFIG,
+            ),
+          }}
+          error={errors?.INN?.message}
+          typeError="dataError"
+        />
+        <Input
+          inputType={InputTypes.kpp}
+          labelText="КПП*"
+          validation={{
+            ...register('kpp', KPP_VALIDATION_CONFIG),
+          }}
+          error={errors?.kpp?.message}
+          typeError="dataError"
+        />
+        <Controller
+          control={control}
+          name="orgForm"
+          render={({ field: { onChange, value } }) => (
+            <DropDown
+              type={SelectorType.ORGFORM}
+              options={ORGFORM_OPTIONS}
+              labelText="Правовая форма организации*"
+              onChange={onChange}
+              value={value}
+              typeError="dataError"
+              isMultiOption={false}
+              formSize
+              trigger={trigger}
+            />
+          )}
+        />
+        <Input
+          inputType={InputTypes.ogrnip}
+          labelText="ОГРН/ОГРНИП*"
+          validation={{
+            ...register(
+              'ogrnip',
+              watchOrgForm === 'IP'
+                ? OGRNIP_VALIDATION_CONFIG
+                : OGRN_VALIDATION_CONFIG,
+            ),
+          }}
+          error={errors?.ogrnip?.message}
+          typeError="dataError"
+        />
+        <Input
+          inputType={InputTypes.address}
+          labelText="Юридический адрес*"
+          validation={{
+            ...register('address', ADDRESS_VALIDATION_CONFIG),
+          }}
+          error={errors?.address?.message}
+          typeError="dataError"
+        />
+        <Input
+          inputType={InputTypes.bik}
+          labelText="БИК*"
+          validation={{
+            ...register('bik', BIK_VALIDATION_CONFIG),
+          }}
+          error={errors?.bik?.message}
+          typeError="dataError"
+        />
 
-      <Input
-        inputType={InputTypes.account}
-        labelText="Расчетный счет*"
-        validation={{
-          ...register('account', ACCOUNT_VALIDATION_CONFIG),
-        }}
-        error={errors?.account?.message}
-        typeError="dataError"
-      />
-      <div className={styles.btncontainer}>
-        <Button isDisabled={!isValid} type="submit" mode="primary">
-          Сохранить
-        </Button>
-      </div>
-    </form>
+        <Input
+          inputType={InputTypes.account}
+          labelText="Расчетный счет*"
+          validation={{
+            ...register('account', ACCOUNT_VALIDATION_CONFIG),
+          }}
+          error={errors?.account?.message}
+          typeError="dataError"
+        />
+        <div className={styles.btncontainer}>
+          <Button isDisabled={!isValid} type="submit" mode="primary">
+            Сохранить
+          </Button>
+        </div>
+      </form>
     </div>
   );
 };
