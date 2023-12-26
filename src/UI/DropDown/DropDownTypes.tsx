@@ -23,4 +23,5 @@ export interface IDropDownProps {
   error?: string;
   typeError?: string;
   formSize?: boolean;
+  trigger?: any;
 }
