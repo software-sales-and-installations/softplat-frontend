@@ -4,6 +4,7 @@ import 'swiper/scss/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper/modules';
 import CONST_IMG from '../../../images/underfined-image.jpg';
+import { API_BASE_URL } from '../../../utils/constants.ts';
 
 interface ISliderProps {
   id: string | undefined;
@@ -31,7 +32,7 @@ export const SliderOneCard = ({id}: ISliderProps) => {
               <div className='swiperOneCard-slide__img-container'>
                 <img
                   className='swiperOneCard-slide__img'
-                  src={id? `https://api.softplat.ru/image/${id}`: CONST_IMG}
+                  src={id? `${API_BASE_URL}/image/${id}`: CONST_IMG}
                   alt='Картинка слайдера'
                 />
               </div>

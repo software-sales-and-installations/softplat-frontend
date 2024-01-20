@@ -34,6 +34,7 @@ import {
   removeFromFavorites,
 } from '../../services/redux/slices/favourites/favourites';
 import { ICartItem } from '../ProductListCart/ProductListTypes';
+import { API_BASE_URL } from '../../utils/constants.ts';
 
 export const CartItem: FC<ICartItemProps> = ({ item }) => {
   const userId = localStorage.getItem('userId');
@@ -157,7 +158,7 @@ export const CartItem: FC<ICartItemProps> = ({ item }) => {
       <Checkbox onCheck={handleBuyCheckboxChange} checked={isChecked} />
 
       <img
-        src={product.image?.id? `https://api.softplat.ru/image/${product.image?.id}` : CONST_IMG}
+        src={product.image?.id? `${API_BASE_URL}/image/${product.image?.id}` : CONST_IMG}
         alt="Фотография товара"
         className={style.cartItem__img}
         onClick={linkToPage}

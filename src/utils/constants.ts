@@ -736,7 +736,7 @@ export const CATALOGUE_NAMES: {
   { name: 'Офисные приложения', img: OfficeApps, pathName: 'office-apps', id: 1 },
   { name: 'Системное ПО', img: SystemApps, pathName: 'system-apps', id: 2 },
   { name: 'Мультимедиа', img: Multimedia, pathName: 'media-apps', id: 3 },
-  { name: 'Конвекторы', img: Convectors, pathName: 'convectors', id: 4 },
+  { name: 'Конвертеры', img: Convectors, pathName: 'converters', id: 4 },
   { name: 'Архиваторы', img: Archivators, pathName: 'archivers', id: 5 },
   { name: 'Безопасность', img: Security, pathName: 'security', id: 6 },
   { name: 'Интернет', img: Internet, pathName: 'internet', id: 7 },

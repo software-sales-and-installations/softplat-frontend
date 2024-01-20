@@ -31,6 +31,7 @@ import { RootState } from '../../services/redux/store';
 import { useState } from 'react';
 import CONST_IMG from '../../images/underfined-image.jpg';
 import classNames from 'classnames';
+import { API_BASE_URL } from '../../utils/constants.ts';
 
 const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
   const signout = useAppSelector((state: RootState) => state.signout.signout);
@@ -111,7 +112,7 @@ const ProductCard: React.FC<IProductCardProps> = ({ card }) => {
         </button>
       ) : null}
       <Link to={`/product/${card.id}`} className={styles.card__link}>
-        {card?.image?.id? <img className={styles.card__img} src={`https://api.softplat.ru/image/${card?.image?.id}`} alt="Изображение продукта" />: <img className={classNames(styles.card__img, styles.card__img_type_undefined)} src={CONST_IMG} alt="Изображение продукта" />}
+        {card?.image?.id? <img className={styles.card__img} src={`${API_BASE_URL}/image/${card?.image?.id}`} alt="Изображение продукта" />: <img className={classNames(styles.card__img, styles.card__img_type_undefined)} src={CONST_IMG} alt="Изображение продукта" />}
         <p className={styles.card__name} title={card.name}>
           {card.name}
         </p>
