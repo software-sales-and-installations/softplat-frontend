@@ -44,7 +44,6 @@
 - React
 - Redux Toolkit
 - TypeScript
-- Axios
 - Storybook
 - Vite
 
@@ -54,4 +53,4 @@
 
 ### Сайт
 
- https://softplat.ru
+ https://softplat24.ru

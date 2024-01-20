@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styles from './Producers.module.scss';
 import DropDown from '../../UI/DropDown/DropDown';
-import { SELECT_COUNTRIES_OPTIONS } from '../../utils/constants';
+import { API_BASE_URL, SELECT_COUNTRIES_OPTIONS } from '../../utils/constants';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../services/redux/store';
 import { SelectorType } from '../../UI/DropDown/DropDownTypes';
@@ -51,7 +51,7 @@ export const Producers: FC = () => {
               >
                 <img
                   className={styles.container__img}
-                  src={vendor?.image?.id? `https://api.softplat.ru/image/${vendor?.image?.id}`: CONST__IMG}
+                  src={vendor?.image?.id? `${API_BASE_URL}/image/${vendor?.image?.id}`: CONST__IMG}
                   alt={vendor.name}
                 />
                 <h2 className={styles.container__title}>{vendor.name}</h2>
