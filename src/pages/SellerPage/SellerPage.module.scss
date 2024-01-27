@@ -1,0 +1,51 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.breadcrumbs {
+    margin-top: 66px;
+  }
+.sellerPage{
+    margin-top: 47px;
+    &__selectContainer {
+        margin-top: 30px;
+        display: flex;
+        gap: 25px;
+      }
+      &__titleContainer{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      &__title{
+        margin: 0 0 10px 0;
+        @include font-h1-bold;
+      }
+      &__subtitle{
+        @include font-body-regular;
+        text-align: start;
+        margin: 0;
+        padding-top: 10px;
+      }
+      &__items{
+        margin-top: 30px;
+      }
+}
+.breadcrumbs {
+  text-align: left;
+  @include font-input-field;
+  display: flex;
+  &__text{
+    color: $dark-grey;
+    margin: 0;
+  }
+  &__crumb {
+    display: inline-block;
+    margin-right: 9px;
+    color: $dark-grey;
+    text-decoration: none;
+    &:after {
+      content: url('../../images/breadcrumbs-arrow.svg');
+      margin-left: 11px;
+    }
+  }
+}

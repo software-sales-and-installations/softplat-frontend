@@ -1,0 +1,42 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.breadcrumbs {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
+
+  &__crumb {
+    display: inline-block;
+    margin-right: 9px;
+
+    &:last-child {
+      a,
+      p {
+        pointer-events: none;
+        cursor: default;
+      }
+
+      &:after {
+        display: none;
+      }
+    }
+
+    &:after {
+      content: url('../../images/breadcrumbs-arrow.svg');
+      margin-left: 11px;
+    }
+
+    a {
+      color: $dark-grey;
+      text-decoration: none;
+    }
+
+    p {
+      color: $dark-grey;
+      margin: 0;
+    }
+  }
+}

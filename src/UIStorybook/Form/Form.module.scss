@@ -1,0 +1,53 @@
+@import './../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.form {
+position: relative;
+  &_type {
+    &_register {
+      &_buttonContainer {
+        margin: 5px auto 0;
+      }
+      &_buttons {
+        margin: 5px auto 0;
+      }
+    }
+    &_twoButtons {
+      &_buttonContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 0 auto;
+      }
+      &_buttons {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0 auto;
+      }
+    }
+    &_search {
+      &_buttonContainer {
+        position: absolute;
+        top: 5px;
+        right: 15px;
+      }
+    }
+    &_data {
+    }
+  }
+  &__errorWrapper {
+    height: 20px;
+    margin-bottom: 10px;
+  }
+  &__error {
+    @include font-body-signature;
+    color: $red-alert-system;
+  }
+  &__success {
+    @include font-body-signature;
+    color: $green-approve-system;
+  }
+}

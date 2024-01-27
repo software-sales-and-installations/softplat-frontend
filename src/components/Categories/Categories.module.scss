@@ -1,0 +1,27 @@
+@import './../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.categories{
+    margin: 35px 0 25px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    row-gap: 10px;
+}
+.btn{
+    padding: 5px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: $light-grey;
+    color: $black-standart-text;
+    white-space: nowrap;
+    cursor: pointer;
+    @include font-body-filters;
+    transition: all .4s;
+    &:hover{
+        background-color: $accent-lime-button;
+        color: $black-standart-text;
+    }
+}

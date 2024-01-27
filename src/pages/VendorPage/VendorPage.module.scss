@@ -1,0 +1,30 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.breadcrumbs {
+  margin: 66px 0 95px;
+}
+
+.vendorPage {
+
+  &:first-child {
+    margin-top: 75px;
+  }
+
+  &__products {
+    margin-top: 30px;
+  }
+
+  &__selectForm {
+    margin-top: 30px;
+  }
+
+  &__list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(5, 320px);
+    justify-content: space-between;
+    gap: 40px;
+    padding: 0;
+  }
+}

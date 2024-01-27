@@ -1,0 +1,29 @@
+@import './../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.input {
+  @include font-input-field;
+  border: 1px solid $border-input;
+  background-color: $input-blue;
+  border-radius: 8px;
+  padding: 10px 15px;
+  &_type {
+    &_search {
+      border: 1px solid $grey;
+      background-color: $light-grey;
+      border-radius: 30px;
+      padding: 5px 15px;
+    }
+  }
+  &:focus {
+    outline: none;
+  }
+  &:invalid {
+    border: 1px solid $red-alert-system;
+    color: $red-alert-system;
+  }
+  &_invalid {
+    border: 1px solid $red-alert-system;
+    color: $red-alert-system;
+  }
+}

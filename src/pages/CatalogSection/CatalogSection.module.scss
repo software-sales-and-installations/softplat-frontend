@@ -1,0 +1,23 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.breadcrumbs {
+  margin: 66px 0 48px;
+}
+
+.catalogSection {
+  &__title {
+    text-align: start;
+    @include font-h1-bold;
+  }
+
+  &__selectContainer {
+    margin-top: 30px;
+    display: flex;
+    gap: 40px;
+  }
+
+  &__items {
+    margin-top: 40px;
+  }
+}

@@ -1,0 +1,30 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.personalFavorites {
+  width: 100%;
+  flex: 0 0 730px;
+  // margin-top: 65px;
+  // margin-left: 100px;
+  &__title {
+    margin: 0;
+    // @include font-h2-simibold;
+    text-align: start;
+  }
+
+  &__list {
+    // margin-top: 45px;
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    gap: 45px;
+    // grid-template-columns: repeat(3, 320px);
+    // justify-content: space-between;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    background-color: $white-standart;
+  }
+}

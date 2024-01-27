@@ -1,0 +1,19 @@
+.breadcrumbs {
+  margin-top: 66px;
+}
+
+.seller {
+  display: flex;
+  margin-top: 48px;
+  margin-bottom: 45px;
+  gap: 55px;
+
+  &__titles {
+    margin-left: -25px;
+    flex: 0 0 255px;
+  }
+
+  h2 {
+    margin: 0;
+  }
+}

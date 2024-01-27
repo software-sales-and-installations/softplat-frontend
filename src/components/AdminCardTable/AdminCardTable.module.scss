@@ -1,0 +1,89 @@
+@import '../../styles/abstract/mixins.scss';
+@import '../../styles/abstract/constants.scss';
+.empty{
+    @include font-h1-bold;
+}
+.table{
+    display: flex;
+    flex-direction: column;
+}
+.thead{
+    padding-bottom: 5px;
+    border-bottom: 1px solid $light-grey;
+    margin: 8px 0 34px 0;
+    box-sizing: border-box;
+}
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.line{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    transition: all .2s ease-in-out;
+    &_type_head{
+        padding: 0 0 4px 0;
+        border-bottom: 1px solid $light-grey;
+    }
+
+}
+.line_type_body:hover{
+    cursor: pointer;
+    background-color: $light-grey;
+}
+
+.cell{
+    text-align: start;
+    max-height: 40px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 25px;
+    padding: 0;
+    @include font-body-regular;
+    &__text{
+        padding: 0;
+        margin: 0;
+        max-height: 25px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    &_type_checkbox{
+        display: flex;
+        justify-content: center;
+    }
+    &_type_body{
+        padding: 17px 0;
+    }
+}
+.cellSeller{
+    width: 150px;
+}
+.cellName{
+    width: 200px;
+}
+.cellVendor{
+    width: 105px;
+}
+.cellArt{
+width: 100px;
+}
+.cellBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+}
+
+.cellData{
+    width: 180px;
+}
+.cellRed{
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

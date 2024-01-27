@@ -1,0 +1,284 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.input__hints {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.input__label {
+	width: 100%;
+	@include font-CTAbody-regular;
+    color: $dark-grey;
+	text-align: left;
+	padding-bottom: 6px;
+}
+
+.input__error {
+	color: $red-alert-system;
+	@include font-body-filters;
+	display: block;
+	height: 25px;
+	text-align: left;
+	margin: 0;
+	&_type_data{
+		height: 14px;
+	}
+	&_type_addCardError{
+		height: 12px;
+	}
+}
+
+.input__help{
+	margin: 0;
+	padding: 0;
+	color: $dark-grey;
+	@include font-body-filters;
+}
+
+.custom-select {
+  &__control {
+    width: 225px !important;
+    background-color: transparent !important;
+    border: 1px solid $border-input !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    box-shadow: none !important;
+
+    &:has(.form) {
+      width: 255px !important;
+      background-color: rgba(233, 242, 255, 0.2) !important;
+
+      .custom-select__value-container {
+        padding: 2px 0 2px 10px !important;
+      }
+    }
+
+    &:focus {
+      border: none !important;
+    }
+
+    &:has(.country)::before {
+      content: 'Страна';
+      padding-left: 20px;
+    }
+
+    &:has(.vendor)::before {
+      content: 'Производитель';
+      padding-left: 20px;
+    }
+
+    &:has(.multi):not(:has(.catalog)) .custom-select__input {
+      caret-color: transparent;
+    }
+
+    &:has(.catalog) {
+      width: 20px !important;
+      border: none !important;
+      background-color: transparent !important;
+      box-shadow: none !important;
+
+      & .custom-select__indicators {
+        position: absolute;
+        top: 3px;
+      }
+    }
+
+    &:has(.complaint) {
+      width: 400px !important;
+    }
+
+    //&:has(.complaint) .custom-select__input-container {
+    //  margin-bottom: 100px !important;
+    //  background-color: red !important;
+    //}
+
+    &--menu-is-open {
+      box-shadow: 0px 10px 20px 0px rgba(57, 57, 57, 0.05) !important;
+      border-color: #8fa4be !important;
+      background-color: rgba(233, 242, 255, 0.2) !important;
+
+      & > .custom-select__indicators > .custom-select__dropdown-indicator svg {
+        transform: rotateZ(180deg) !important;
+      }
+
+      &:has(.multi):not(:has(.catalog)) .custom-select__value-container {
+        position: absolute !important;
+        width: 287px;
+        height: 35px;
+        bottom: -54px;
+        left: 16px;
+        padding: 0 !important;
+        z-index: 3;
+        border-radius: 30px;
+        border: 1px solid rgba(85, 80, 92, 0.52);
+        background-color: #fbfbfb;
+        &::after {
+          content: url(../../images/search.svg);
+          position: absolute;
+          right: 10px;
+          top: 4px;
+          pointer-events: none;
+        }
+      }
+
+      &:has(.multi):not(:has(.catalog)) .custom-select__input-container {
+        max-width: 281px;
+        padding-left: 3px !important;
+        margin: 0 !important;
+        padding: 0 0 0 5px !important;
+        height: 33px;
+      }
+
+      &:has(.multi):not(:has(.catalog)) .custom-select__input {
+        max-width: 273px;
+        width: 273px !important;
+        caret-color: black !important;
+
+        &::after {
+          max-width: 242px;
+        }
+
+      }
+    }
+  }
+
+  &__indicator {
+    padding-left: 2px !important;
+    & svg {
+      fill: #808080;
+    }
+  }
+
+  &__value-container {
+    display: flex !important;
+    justify-content: start !important;
+    padding: 2px 0 2px 20px !important;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    color: $dark-grey;
+  }
+
+  &__single-value {
+    color: $dark-grey !important;
+  }
+
+  &__multi-value {
+    display: none !important;
+  }
+
+  &__indicator-separator {
+    display: none !important;
+  }
+
+  &__indicator {
+    color: $dark-grey !important;
+  }
+
+  &__clear-indicator {
+    display: none !important;
+  }
+
+  &__menu {
+    top: 130% !important;
+    margin: 0 !important;
+    width: 320px !important;
+    border: 1px solid $border-input !important;
+    border-radius: 8px !important;
+    box-shadow: 0px 10px 20px 0px rgba(57, 57, 57, 0.05) !important;
+    text-align: start !important;
+    overflow: hidden;
+    cursor: pointer !important;
+    z-index: 2 !important;
+
+    &:has(.catalog) {
+      left: -75px !important;
+    }
+
+    &:has(.complaint) {
+      width: 400px !important;
+      top: 110% !important;
+    }
+
+    &:has(.multi) .custom-select__option::before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 19px;
+      border-radius: 3px;
+      width: 15px;
+      height: 15px;
+      border: 2px solid $dark-grey;
+    }
+
+    &:has(.multi) .custom-select__option {
+      padding-left: 55px !important;
+    }
+
+    &:has(.multi) .custom-select__option--is-selected::after {
+      content: '✓';
+      display: block;
+      position: absolute;
+      left: 21px;
+      top: 10px;
+      font-weight: bold;
+      color: $white-standart;
+    }
+
+    &:has(.multi) .custom-select__option--is-selected::before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 19px;
+      border-radius: 3px;
+      width: 15px;
+      height: 15px;
+      border: 2px solid $dark-grey;
+      background-color: $dark-grey;
+    }
+  }
+
+  &__menu-list {
+    padding: 8px 0 !important;
+
+    &:has(.multi) {
+      padding: 45px 0 8px !important;
+    }
+
+    &:has(.complaint) {
+      padding: 0 !important;
+    }
+  }
+
+  &__option {
+    padding-left: 20px !important;
+    cursor: pointer !important;
+    position: relative !important;
+    height: 40px;
+    display: flex !important;
+    align-items: center;
+    font-size: 16px !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    line-height: 20px !important;
+    color: $dark-grey !important;
+
+    &--is-selected {
+      background-color: $light-grey !important;
+      color: $dark-grey !important;
+
+      &.custom-select__option--is-focused {
+        background-color: $light-grey !important;
+        color: $dark-grey !important;
+      }
+    }
+
+    &--is-focused {
+      background-color: $light-grey !important;
+    }
+  }
+}
+

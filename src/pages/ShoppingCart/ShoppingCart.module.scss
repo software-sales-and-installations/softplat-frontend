@@ -1,0 +1,20 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.breadcrumbs {
+  margin-top: 65px;
+}
+
+.cart {
+  text-align: start;
+  padding: 44px 0 135px;
+
+  &__header {
+    @include font-h1-bold;
+    margin: 0;
+  }
+  &__content {
+    display: flex;
+    gap: 62px;
+  }
+}

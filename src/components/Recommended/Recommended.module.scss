@@ -1,0 +1,17 @@
+@import '../../styles/abstract/constants.scss';
+@import '../../styles/abstract/mixins.scss';
+
+.recommended {
+  padding: 50px 0 0;
+  &__title {
+    margin: 0;
+    text-align: start;
+    @include font-h3-regular;
+  }
+
+  &__list {
+    margin-top: 35px;
+    list-style: none;
+    padding: 0;
+  }
+}
